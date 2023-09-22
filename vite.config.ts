@@ -1,8 +1,10 @@
 import type {UserConfig} from 'vite';
 import {sveltekit} from '@sveltejs/kit/vite';
 
+import {fuz_code_vite_plugins} from '$lib/fuz_code_vite_plugins';
+
 const config: UserConfig = {
-	plugins: [sveltekit()],
+	plugins: [sveltekit(), ...fuz_code_vite_plugins],
 	ssr: {noExternal: ['@fuz.dev/fuz']},
 };
 
