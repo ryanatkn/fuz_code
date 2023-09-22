@@ -3,8 +3,6 @@
 	import Prism from 'prismjs';
 	import 'prism-svelte';
 
-	// TODO BLOCK extract this too
-
 	/**
 	 * Users are expected to import `@fuz.dev/fuz/prism.css`, like in the main `+layout.svelte`.
 	 */

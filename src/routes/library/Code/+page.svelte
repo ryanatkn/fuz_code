@@ -4,7 +4,6 @@
 
 	import Code from '$lib/Code.svelte';
 
-	// TODO BLOCK extract Code
 	const LIBRARY_ITEM_NAME = 'Code';
 </script>
 
