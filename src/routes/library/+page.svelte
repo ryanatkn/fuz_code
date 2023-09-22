@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Library from '$routes/library/Library.svelte';
+	import Library from '@fuz.dev/library/Library.svelte';
 </script>
 
 <Library />

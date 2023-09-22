@@ -1,13 +1,12 @@
 <script lang="ts">
-	import {page} from '$app/stores';
-	import 'prismjs/themes/prism.min.css';
-	import {setContext} from 'svelte';
+	import 'prismjs/themes/prism.min.css'; // TODO BLOCK does this belong in `Code`?
 
-	import LibraryMenu from '$routes/library/LibraryMenu.svelte';
-	import {library_items_by_name, library_items} from '$routes/library/items';
-	import FuzFooter from '$routes/FuzFooter.svelte';
-	import Breadcrumbs from '$lib/Breadcrumbs.svelte';
-	import LibraryPanel from '$routes/library/LibraryPanel.svelte';
+	import {page} from '$app/stores';
+	import {setContext} from 'svelte';
+	import LibraryPanel from '@fuz.dev/library/LibraryPanel.svelte';
+	import LibraryMenu from '@fuz.dev/library/LibraryMenu.svelte';
+	import {library_items_by_name, library_items} from '@fuz.dev/library/library_items';
+	import Breadcrumbs from '@fuz.dev/fuz/Breadcrumbs.svelte';
 
 	$: selected_item = library_items.find((c) => c.pathname === $page.url.pathname);
 	$: items_related_to_selected = selected_item?.related?.map((r) => library_items_by_name.get(r)!);

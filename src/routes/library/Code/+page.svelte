@@ -1,7 +1,8 @@
 <script lang="ts">
+	import LibraryItem from '@fuz.dev/library/LibraryItem.svelte';
+	import LibraryVocab from '@fuz.dev/library/LibraryVocab.svelte';
+
 	import Code from '$lib/Code.svelte';
-	import LibraryItem from '$routes/library/LibraryItem.svelte';
-	import LibraryVocab from '../LibraryVocab.svelte';
 
 	// TODO BLOCK extract Code
 	const LIBRARY_ITEM_NAME = 'Code';
