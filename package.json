@@ -68,5 +68,11 @@
         }
       }
     ]
+  },
+  "exports": {
+    "./Code.svelte": {
+      "svelte": "./dist/Code.svelte",
+      "types": "./dist/Code.svelte.d.ts"
+    }
   }
 }
