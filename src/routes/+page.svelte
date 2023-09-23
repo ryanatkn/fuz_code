@@ -1,9 +1,12 @@
 <script lang="ts">
-	import {base} from '$app/paths';
+	import CodeExample from '$routes/CodeExample.svelte';
 </script>
 
-<main class="prose">
-	<section class="box"><a href="{base}/library">library</a></section>
+<main class="width_md">
+	<section class="prose">
+		<h2>@fuz.dev/code</h2>
+	</section>
+	<CodeExample></CodeExample>
 </main>
 
 <style>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '@fuz.dev/fuz/style.css';
 	import '@fuz.dev/fuz/theme.css';
+	import '$lib/prism.css'; // TODO move to `Code`?
 
 	import Themed from '@fuz.dev/fuz/Themed.svelte';
 </script>
