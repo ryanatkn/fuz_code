@@ -1,5 +1,6 @@
 <script lang="ts">
-	import 'prismjs/themes/prism.min.css'; // TODO BLOCK does this belong in `Code`?
+	// TODO BLOCK does this belong in `Code`?
+	import 'prismjs/themes/prism.min.css'; // see fuz_code_vite_plugins
 
 	import {page} from '$app/stores';
 	import {setContext} from 'svelte';
