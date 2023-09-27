@@ -10,7 +10,9 @@
 		</div>
 		<PackageSummary />
 	</header>
-	<Tome />
+	<section>
+		<Tome />
+	</section>
 	<footer class="box">
 		<PackageSummary />
 	</footer>
@@ -22,5 +24,10 @@
 		flex-direction: column;
 		align-items: center;
 		margin: 0 auto;
+	}
+	section,
+	header,
+	footer {
+		margin-bottom: var(--spacing_xl5);
 	}
 </style>

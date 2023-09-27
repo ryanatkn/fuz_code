@@ -18,9 +18,10 @@
 			The
 			<LibraryVocab name="Code" />
 			component supports syntax highlighting with
-			<a href="https://prismjs.com/">Prism</a>. It depends on two packages that you must install
-			yourself:
+			<a href="https://prismjs.com/">Prism</a> (<a href="https://github.com/PrismJS/prism">source</a
+			>).
 		</p>
+		<p>It depends on two packages that you must install yourself:</p>
 		<Code content="npm i -D prismjs prism-svelte" lang={null} />
 		<p>Then import the styles:</p>
 		<Code

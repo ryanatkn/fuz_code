@@ -1,5 +1,5 @@
 <script lang="ts">
-	// TODO ideally we do syntax highlighting at compile-time in the normal case, and don't even import this runtime
+	// TODO do syntax highlighting at compile-time in the normal case, and don't import these at runtime
 	import Prism from 'prismjs';
 	import 'prismjs/components/prism-typescript.js';
 	import 'prism-svelte';
