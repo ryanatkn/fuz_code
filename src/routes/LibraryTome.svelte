@@ -29,8 +29,8 @@
 			content="// +layout.svelte
 import '@fuz.dev/fuz/style.css';
 import '@fuz.dev/fuz/theme.css'; // or your own
-// add these:
-import '@fuz.dev/fuz_code/prism.css';"
+// add this:
+import '@fuz.dev/fuz_code/prism.css'; // add this"
 		/>
 		<p>then use <LibraryVocab name="Code" />:</p>
 		<Code

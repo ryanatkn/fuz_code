@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Tome from '$routes/LibraryTome.svelte';
+	import LibraryTome from '$routes/LibraryTome.svelte';
 	import PackageSummary from '$routes/PackageSummary.svelte';
 </script>
 
@@ -11,7 +11,7 @@
 		<PackageSummary />
 	</header>
 	<section>
-		<Tome />
+		<LibraryTome />
 	</section>
 	<footer class="box">
 		<PackageSummary />
