@@ -1,10 +1,10 @@
 import type {UserConfig} from 'vite';
 import {sveltekit} from '@sveltejs/kit/vite';
 
-import {fuz_code_vite_plugins} from './src/lib/fuz_code_vite_plugins';
+import {remove_prism_css} from './src/lib/remove_prism_css_vite_plugin';
 
 const config: UserConfig = {
-	plugins: [sveltekit(), ...fuz_code_vite_plugins],
+	plugins: [sveltekit(), remove_prism_css()],
 	ssr: {noExternal: ['@fuz.dev/fuz']},
 };
 

@@ -75,12 +75,12 @@
       "svelte": "./dist/Code.svelte",
       "types": "./dist/Code.svelte.d.ts"
     },
-    "./fuz_code_vite_plugins.js": {
-      "default": "./dist/fuz_code_vite_plugins.js",
-      "types": "./dist/fuz_code_vite_plugins.d.ts"
-    },
     "./prism.css": {
       "default": "./dist/prism.css"
+    },
+    "./remove_prism_css_vite_plugin.js": {
+      "default": "./dist/remove_prism_css_vite_plugin.js",
+      "types": "./dist/remove_prism_css_vite_plugin.d.ts"
     }
   }
 }

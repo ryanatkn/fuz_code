@@ -1,9 +1,12 @@
 <script lang="ts">
-	// import LibraryItem from '@fuz.dev/library/LibraryItem.svelte';
-	// import LibraryVocab from '@fuz.dev/library/LibraryVocab.svelte';
+	// import Tome from '@fuz.dev/fuz_library/Tome.svelte';
+	// import LibraryItem from '@fuz.dev/fuz_library/LibraryItem.svelte';
+	// import LibraryVocab from '@fuz.dev/fuz_library/LibraryVocab.svelte';
 	import LibraryVocab from '$routes/LibraryVocab.svelte';
 
 	import Code from '$lib/Code.svelte';
+
+	// TODO is this the right convention? `LibraryTome`? Maybe just `Tome`? `/tomes`? both?
 
 	// const LIBRARY_ITEM_NAME = 'Code';
 </script>
@@ -26,12 +29,12 @@
 import '@fuz.dev/fuz/style.css';
 import '@fuz.dev/fuz/theme.css';
 // add this:
-import '@fuz.dev/fuz_code/prism.css';"
+import '@fuz.dev/fuz_code/prism.css'; // <--"
 		/>
 		<p>And then use it:</p>
 		<Code
 			content={'<!-- Something.svelte -->\n<' +
-				`script>\n\timport Code from '@fuz.dev/fuz/Code.svelte';\n</script>\n\n<Code content="<header>hello world</header>" />`}
+				`script>\n\timport Code from '@fuz.dev/fuz_code/Code.svelte';\n</script>\n\n<Code content="<header>hello world</header>" />`}
 		/>
 		<p>outputs:</p>
 		<Code content="<header>hello world</header>" />
@@ -107,18 +110,18 @@ import '@fuz.dev/fuz_code/prism.css';"
 	</section>
 	<section>
 		<p>
-			The <code>fuz_code_vite_plugins</code> import optimizes your bundle by excluding the builtin
-			Prism theme so you can use <code>@fuz.dev/fuz_code/prism.css</code> or some other version:
+			The <code>remove_prism_css</code> import optimizes your bundle by excluding the builtin Prism
+			theme so you can use <code>@fuz.dev/fuz_code/prism.css</code> or some other version:
 		</p>
 		<div>
 			<Code
 				lang="ts"
 				content={`import type {UserConfig} from 'vite';
 import {sveltekit} from '@sveltejs/kit/vite';
-import {fuz_code_vite_plugins} from '@fuz.dev/fuz_code/fuz_code_vite_plugins';
+import {remove_prism_css} from '@fuz.dev/fuz_code/remove_prism_css_vite_plugin.js';
 
 const config: UserConfig = {
-	plugins: [sveltekit(), ...fuz_code_vite_plugins],
+	plugins: [sveltekit(), remove_prism_css()],
 	ssr: {noExternal: ['@fuz.dev/fuz']},
 };
 

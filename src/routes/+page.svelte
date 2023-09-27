@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CodeExample from '$routes/CodeExample.svelte';
+	import Tome from '$routes/LibraryTome.svelte';
 </script>
 
 <main class="width_md">
@@ -11,7 +11,7 @@
 		>
 		<blockquote><a href="https://github.com/fuz-dev/fuz_code">source code</a></blockquote>
 	</section>
-	<CodeExample />
+	<Tome />
 </main>
 
 <style>
