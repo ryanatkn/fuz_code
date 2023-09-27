@@ -29,9 +29,9 @@
 import '@fuz.dev/fuz/style.css';
 import '@fuz.dev/fuz/theme.css';
 // add this:
-import '@fuz.dev/fuz_code/prism.css'; // <--"
+import '@fuz.dev/fuz_code/prism.css'; // <-- add this"
 		/>
-		<p>And then use it:</p>
+		<p>then use <LibraryVocab name="Code" />:</p>
 		<Code
 			content={'<!-- Something.svelte -->\n<' +
 				`script>\n\timport Code from '@fuz.dev/fuz_code/Code.svelte';\n</script>\n\n<Code content="<header>hello world</header>" />`}
@@ -43,11 +43,12 @@ import '@fuz.dev/fuz_code/prism.css'; // <--"
 		<p>
 			<LibraryVocab name="Code" /> highlights
 			<a href="https://svelte.dev/">Svelte</a>
-			by default
+			by default:
 		</p>
 		<div class="spaced">
 			<Code content={'<Code content="<scr..."'} />
 		</div>
+		<p>highlighted:</p>
 		<div>
 			<Code
 				content={'<' +
