@@ -76,11 +76,9 @@ import '@fuz.dev/fuz_code/prism.css'; // <-- add this"
 	</section>
 	<section>
 		<p>
-			Passing <code>lang={'{'}null}</code> disables syntax highlighting: <Code
-				lang={null}
-				content={`<aside>all is gray</aside>`}
-			/>
+			Passing <code>lang={'{'}null}</code> disables syntax highlighting:
 		</p>
+		<Code lang={null} content={`<aside>all is gray</aside>`} />
 		<div class="spaced">
 			<Code content={'<Code lang={null} content="..." />'} />
 		</div>
@@ -93,21 +91,18 @@ import '@fuz.dev/fuz_code/prism.css'; // <-- add this"
 	</section>
 	<section>
 		<p>
-			<LibraryVocab name="Code" /> is a block by default: <Code
-				content={`this Code is a block element`}
-			/>
+			<LibraryVocab name="Code" /> is a block by default:
 		</p>
-		<div>
-			<Code content={'<Code content="..." />'} />
-		</div>
+		<p>ab<Code content="c" /></p>
+		<Code content={'<p>ab<Code content="c" /></p>'} />
 	</section>
 	<section>
 		<p>
-			<LibraryVocab name="Code" /> can be inline: <Code inline content="this Code is inline" />
+			<LibraryVocab name="Code" /> can be inlined with <Code
+				inline
+				content={`<Code inline content="..." />`}
+			/>
 		</p>
-		<div>
-			<Code content={'<Code inline content="..." />'} />
-		</div>
 	</section>
 	<section>
 		<p>
