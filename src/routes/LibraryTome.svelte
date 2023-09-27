@@ -6,7 +6,7 @@
 
 	import Code from '$lib/Code.svelte';
 
-	// TODO is this the right convention? `LibraryTome`? Maybe just `Tome`? `/tomes`? both?
+	// TODO what convention? `LibraryTome`? Maybe just `Tome`? `/tomes`? both? what other options?
 
 	// const LIBRARY_ITEM_NAME = 'Code';
 </script>
