@@ -6,7 +6,7 @@
 > [SvelteKit](https://github.com/sveltejs/kit),
 > and [Fuz](https://github.com/fuz-dev/fuz)
 
-deployed:
+docs:
 [code.fuz.dev](https://code.fuz.dev/)
 
 see [the Fuz template](https://github.com/fuz-dev/template) for more
