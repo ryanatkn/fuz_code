@@ -4,6 +4,7 @@
 > [prismjs](https://github.com/PrismJS/prism) for
 > [Svelte](https://github.com/sveltejs/svelte),
 > [SvelteKit](https://github.com/sveltejs/kit),
+> [TypeScript](https://github.com/microsoft/typescript),
 > and [Fuz](https://github.com/fuz-dev/fuz)
 
 docs:

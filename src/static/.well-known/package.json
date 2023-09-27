@@ -1,6 +1,6 @@
 {
   "name": "@fuz.dev/fuz_code",
-  "description": "code blocks with syntax highlighting using prismjs for Svelte, SvelteKit, and Fuz",
+  "description": "code blocks with syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz",
   "version": "0.1.0",
   "license": "MIT",
   "type": "module",
@@ -12,7 +12,7 @@
     "url": "https://www.ryanatkn.com/"
   },
   "engines": {
-    "node": ">=20.5"
+    "node": ">=20.7"
   },
   "scripts": {
     "start": "gro dev",
