@@ -54,7 +54,7 @@ import '@fuz.dev/fuz_code/prism.css'; // add this"
 			by default:
 		</p>
 		<div class="spaced">
-			<Code content={'<Code content="<scr..."'} />
+			<Code content={'<Code content="<scr..." />'} />
 		</div>
 		<p>highlighted:</p>
 		<div>
