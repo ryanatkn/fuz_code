@@ -26,7 +26,7 @@
 import '@fuz.dev/fuz/style.css';
 import '@fuz.dev/fuz/theme.css';
 // add this:
-import '@fuz.dev/fuz/prism.css';"
+import '@fuz.dev/fuz-code/prism.css';"
 		/>
 		<p>And then use it:</p>
 		<Code
@@ -40,20 +40,34 @@ import '@fuz.dev/fuz/prism.css';"
 		<p>
 			<LibraryVocab name="Code" /> highlights
 			<a href="https://svelte.dev/">Svelte</a>
-			by default: <Code
+			by default
+		</p>
+		<div class="spaced">
+			<Code content={'<Code content="<scr..."'} />
+		</div>
+		<div>
+			<Code
 				content={'<' +
 					`script>
-  import Card from '@fuz.dev/fuz/Card.svelte';
-  console.log('hello Card', Card);
+	import Card from '@fuz.dev/fuz-library/Card.svelte';
+	console.log('hello Card', Card);
 </script>
 
 <Card>
-  <div class="greeting">hi {friend}</div>
+	<div class="greeting">hi {friend}</div>
 </Card>`}
 			/>
+		</div>
+	</section>
+	<section>
+		<p>
+			<LibraryVocab name="Code" /> supports TypeScript with <code>lang="ts"</code>:
 		</p>
+		<div class="spaced">
+			<Code content={`<Code lang="ts" content="export type A<T> = ('b' | 3) & T;" />`} />
+		</div>
 		<div>
-			<Code content={'<Code content="..." />'} />
+			<Code lang="ts" content={`export type A<T> = ('b' | 3) & T;`} />
 		</div>
 	</section>
 	<section>
@@ -89,6 +103,24 @@ import '@fuz.dev/fuz/prism.css';"
 		</p>
 		<div>
 			<Code content={'<Code inline content="..." />'} />
+		</div>
+	</section>
+	<section>
+		<div>
+			<Code
+				lang="ts"
+				content={`import type {UserConfig} from 'vite';
+import {sveltekit} from '@sveltejs/kit/vite';
+
+import {fuz_code_vite_plugins} from './src/lib/fuz_code_vite_plugins';
+
+const config: UserConfig = {
+	plugins: [sveltekit(), ...fuz_code_vite_plugins],
+	ssr: {noExternal: ['@fuz.dev/fuz']},
+};
+
+export default config;`}
+			/>
 		</div>
 	</section>
 </div>

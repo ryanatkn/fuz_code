@@ -3,10 +3,15 @@
 </script>
 
 <main class="width_md">
-	<section class="prose">
-		<h2>@fuz.dev/code</h2>
+	<section class="prose box">
+		<h2>@fuz.dev/fuz-code</h2>
+		<code class="padded_md panel spaced"
+			>npm i -D <a href="https://www.npmjs.com/package/@fuz.dev/fuz-code">@fuz.dev/fuz-code</a
+			></code
+		>
+		<blockquote><a href="https://github.com/fuz-dev/fuz-code">source code</a></blockquote>
 	</section>
-	<CodeExample></CodeExample>
+	<CodeExample />
 </main>
 
 <style>

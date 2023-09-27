@@ -1,6 +1,7 @@
 <script lang="ts">
 	// TODO ideally we do syntax highlighting at compile-time in the normal case, and don't even import this runtime
 	import Prism from 'prismjs';
+	import 'prismjs/components/prism-typescript.js';
 	import 'prism-svelte';
 
 	/**
@@ -24,8 +25,8 @@
 		| 'rss'
 		| 'css'
 		| 'clike'
-		| 'javascript'
 		| 'js'
+		| 'ts'
 		| 'svelte';
 
 	export let content: string;

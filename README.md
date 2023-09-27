@@ -1,4 +1,4 @@
-# @fuz.dev/code
+# @fuz.dev/fuz-code
 
 > code blocks with syntax highlighting using
 > [prismjs](https://github.com/PrismJS/prism) for
