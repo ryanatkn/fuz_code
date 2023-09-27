@@ -28,9 +28,9 @@
 			lang="js"
 			content="// +layout.svelte
 import '@fuz.dev/fuz/style.css';
-import '@fuz.dev/fuz/theme.css';
-// add this:
-import '@fuz.dev/fuz_code/prism.css'; // <-- add this"
+import '@fuz.dev/fuz/theme.css'; // or your own
+// add these:
+import '@fuz.dev/fuz_code/prism.css';"
 		/>
 		<p>then use <LibraryVocab name="Code" />:</p>
 		<Code
@@ -39,6 +39,11 @@ import '@fuz.dev/fuz_code/prism.css'; // <-- add this"
 		/>
 		<p>outputs:</p>
 		<Code content="<header>hello world</header>" />
+		<aside>
+			⚠️ performing syntax highlighting at runtime like this does is wasteful, the API is a
+			work-in-progress for efficiency - you can use <code>lang={'{'}null}</code> with pre-highligted
+			text to avoid the imports above (you just need a <code>prism.css</code>)
+		</aside>
 	</section>
 	<section>
 		<p>
@@ -83,12 +88,6 @@ import '@fuz.dev/fuz_code/prism.css'; // <-- add this"
 		<div class="spaced">
 			<Code content={'<Code lang={null} content="..." />'} />
 		</div>
-		<aside>
-			please note: performing syntax highlighting at runtime like this does is wasteful, and the API
-			is a work-in-progress for efficiency - you can use <code>lang={'{'}null}</code> with
-			pre-highligted text, but <LibraryVocab name="Code" /> still imports <code>prismjs</code> and
-			<code>prism-svelte</code>
-		</aside>
 	</section>
 	<section>
 		<p>

@@ -1,17 +1,10 @@
 import type {PluginOption} from 'vite';
 
-// TODO avoid flashing the original Prism theme during dev
-
 /**
  * Ignores the default prismjs theme.
  */
-export const remove_prism_css = (): PluginOption => ({
+export const remove_prism_css = (matcher = /node_modules\/prismjs\/.+\.css$/u): PluginOption => ({
 	name: 'remove_prism_css',
 	enforce: 'pre',
-	load: (id: string): string | undefined => {
-		if (id.endsWith('node_modules/prismjs/themes/prism.min.css')) {
-			return '';
-		}
-		return undefined;
-	},
+	load: (id: string): string | undefined => (matcher.test(id) ? '' : undefined),
 });
