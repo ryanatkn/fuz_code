@@ -106,8 +106,14 @@ import '@fuz.dev/fuz_code/prism.css'; // <-- add this"
 	</section>
 	<section>
 		<p>
-			The <code>remove_prism_css</code> import optimizes your bundle by excluding the builtin Prism
-			theme so you can use <code>@fuz.dev/fuz_code/prism.css</code> or some other version:
+			The <code
+				><a
+					href="https://github.com/fuz-dev/fuz_code/blob/main/src/lib/remove_prism_css_vite_plugin.ts"
+					>remove_prism_css</a
+				></code
+			>
+			import optimizes your bundle by excluding the builtin Prism theme so you can use
+			<code>@fuz.dev/fuz_code/prism.css</code> or some other version:
 		</p>
 		<div>
 			<Code
