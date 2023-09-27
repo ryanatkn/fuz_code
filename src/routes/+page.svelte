@@ -1,28 +1,21 @@
 <script lang="ts">
-	import Alert from '@fuz.dev/fuz/Alert.svelte';
-	import {base} from '$app/paths';
-
-	import Header from '$routes/Header.svelte';
-	import Mreows from '$routes/Mreows.svelte';
-
-	let mreows: Array<{icon: string}> | undefined;
+	import LibraryTome from '$routes/LibraryTome.svelte';
+	import PackageSummary from '$routes/PackageSummary.svelte';
 </script>
 
-<main class="prose">
-	<section class="box">
-		<Header />
-		<Alert>
-			<span slot="icon"
-				>{#if mreows}{mreows[0].icon}{:else}✨{/if}</span
-			><span
-				>hello, welcome to <a href="https://github.com/fuz-dev/template">@fuz.dev/template</a></span
-			>
-		</Alert>
-		<p>
-			here's an <a href="{base}/route">example route</a>
-		</p>
+<main class="width_md">
+	<header class="box">
+		<div class="prose">
+			<h2>@fuz.dev/fuz_code</h2>
+		</div>
+		<PackageSummary />
+	</header>
+	<section>
+		<LibraryTome />
 	</section>
-	<Mreows bind:mreows />
+	<footer class="box">
+		<PackageSummary />
+	</footer>
 </main>
 
 <style>
@@ -31,5 +24,11 @@
 		flex-direction: column;
 		align-items: center;
 		margin: 0 auto;
+	}
+	section,
+	header,
+	footer {
+		/* TODO shouldn't be needed, probably use `Card` once it's published */
+		margin-bottom: var(--spacing_xl5);
 	}
 </style>
