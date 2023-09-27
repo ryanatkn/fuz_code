@@ -28,6 +28,7 @@
 	section,
 	header,
 	footer {
+		/* TODO shouldn't be needed, probably use `Card` once it's published */
 		margin-bottom: var(--spacing_xl5);
 	}
 </style>
