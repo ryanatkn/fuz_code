@@ -5,36 +5,15 @@
 	import 'prism-svelte';
 
 	/**
-	 * Users are expected to import `@fuz.dev/fuz/prism.css`, like in the main `+layout.svelte`.
+	 * Users are expected to import `@fuz.dev/fuz_code/prism.css`, like in the main `+layout.svelte`.
 	 */
-
-	// TODO move this
-	type PrismLang =
-		| 'plain'
-		| 'plaintext'
-		| 'text'
-		| 'txt'
-		| 'DFS'
-		| 'markup'
-		| 'html'
-		| 'mathml'
-		| 'svg'
-		| 'xml'
-		| 'ssml'
-		| 'atom'
-		| 'rss'
-		| 'css'
-		| 'clike'
-		| 'js'
-		| 'ts'
-		| 'svelte';
 
 	export let content: string;
 
 	export let pre_attrs: any = undefined;
 	export let code_attrs: any = undefined;
 
-	export let lang: PrismLang | null = 'svelte';
+	export let lang: string | null = 'svelte';
 
 	export let inline = false;
 
