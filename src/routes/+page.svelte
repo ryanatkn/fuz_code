@@ -4,12 +4,12 @@
 
 <main class="width_md">
 	<section class="prose box">
-		<h2>@fuz.dev/fuz-code</h2>
+		<h2>@fuz.dev/fuz_code</h2>
 		<code class="padded_md panel spaced"
-			>npm i -D <a href="https://www.npmjs.com/package/@fuz.dev/fuz-code">@fuz.dev/fuz-code</a
+			>npm i -D <a href="https://www.npmjs.com/package/@fuz.dev/fuz_code">@fuz.dev/fuz_code</a
 			></code
 		>
-		<blockquote><a href="https://github.com/fuz-dev/fuz-code">source code</a></blockquote>
+		<blockquote><a href="https://github.com/fuz-dev/fuz_code">source code</a></blockquote>
 	</section>
 	<CodeExample />
 </main>

@@ -26,7 +26,7 @@
 import '@fuz.dev/fuz/style.css';
 import '@fuz.dev/fuz/theme.css';
 // add this:
-import '@fuz.dev/fuz-code/prism.css';"
+import '@fuz.dev/fuz_code/prism.css';"
 		/>
 		<p>And then use it:</p>
 		<Code
@@ -106,13 +106,16 @@ import '@fuz.dev/fuz-code/prism.css';"
 		</div>
 	</section>
 	<section>
+		<p>
+			The <code>fuz_code_vite_plugins</code> import optimizes your bundle by excluding the builtin
+			Prism theme so you can use <code>@fuz.dev/fuz_code/prism.css</code> or some other version:
+		</p>
 		<div>
 			<Code
 				lang="ts"
 				content={`import type {UserConfig} from 'vite';
 import {sveltekit} from '@sveltejs/kit/vite';
-
-import {fuz_code_vite_plugins} from './src/lib/fuz_code_vite_plugins';
+import {fuz_code_vite_plugins} from '@fuz.dev/fuz_code/fuz_code_vite_plugins';
 
 const config: UserConfig = {
 	plugins: [sveltekit(), ...fuz_code_vite_plugins],
