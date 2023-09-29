@@ -12,6 +12,10 @@ docs:
 
 see [the Fuz template](https://github.com/fuz-dev/template) for more
 
+## TODO
+
+- do syntax highlighting at compile-time in the normal case, and don't import Prism at runtime, just the CSS
+
 ## [🐦](https://wikipedia.org/wiki/Free_and_open-source_software)
 
 [MIT](LICENSE)
