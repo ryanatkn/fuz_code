@@ -18,7 +18,7 @@
 			The
 			<LibraryVocab name="Code" />
 			component supports syntax highlighting with
-			<a href="https://prismjs.com/">Prism</a> (<a href="https://github.com/PrismJS/prism">source</a
+			<a href="https://prismjs.com/">Prism</a> (<a href="https://github.com/PrismJS/prism">repo</a
 			>).
 		</p>
 		<p>It depends on two packages that you must install yourself:</p>
@@ -114,8 +114,13 @@ import '@fuz.dev/fuz_code/prism.css'; // add this"
 					>remove_prism_css</a
 				></code
 			>
-			import optimizes your bundle by excluding the builtin Prism theme so you can use
-			<code>@fuz.dev/fuz_code/prism.css</code> or some other version:
+			Vite plugin is an optimization that excludes the builtin Prism theme, letting you use a minimal
+			theme that doesn't need selectors for overrides like
+			<code
+				><a href="https://github.com/fuz-dev/fuz_code/blob/main/src/lib/prism.css"
+					>@fuz.dev/fuz_code/prism.css</a
+				></code
+			>, while also avoiding waste:
 		</p>
 		<div>
 			<Code
