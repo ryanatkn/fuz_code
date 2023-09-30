@@ -1,6 +1,6 @@
 {
   "name": "@fuz.dev/fuz_code",
-  "description": "code blocks with syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz",
+  "description": "syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz",
   "version": "0.2.0",
   "license": "MIT",
   "type": "module",
@@ -28,7 +28,7 @@
     "@changesets/changelog-git": "^0.1.14",
     "@feltjs/eslint-config": "^0.4.0",
     "@fuz.dev/fuz": "^0.70.0",
-    "@grogarden/gro": "^0.92.2",
+    "@grogarden/gro": "^0.92.3",
     "@grogarden/util": "^0.15.0",
     "@sveltejs/adapter-static": "^2.0.3",
     "@sveltejs/kit": "^1.25.1",

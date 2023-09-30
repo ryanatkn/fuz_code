@@ -1,6 +1,6 @@
 # @fuz.dev/fuz_code
 
-> code blocks with syntax highlighting using
+> syntax highlighting using
 > [prismjs](https://github.com/PrismJS/prism) for
 > [Svelte](https://github.com/sveltejs/svelte),
 > [SvelteKit](https://github.com/sveltejs/kit),
