@@ -3,7 +3,6 @@
 	// import LibraryItem from '@fuz.dev/fuz_library/LibraryItem.svelte';
 	// import LibraryVocab from '@fuz.dev/fuz_library/LibraryVocab.svelte';
 	import LibraryVocab from '$routes/LibraryVocab.svelte';
-
 	import Code from '$lib/Code.svelte';
 
 	// TODO what convention? `LibraryTome`? Maybe just `Tome`? `/tomes`? both? what other options?

@@ -1,34 +1,39 @@
 <script lang="ts">
+	import LibraryHeader from '@fuz.dev/fuz_library/LibraryHeader.svelte';
+	import LibraryFooter from '@fuz.dev/fuz_library/LibraryFooter.svelte';
+	import {parse_package_meta} from '@fuz.dev/fuz_library/package.js';
+
 	import CodeTome from '$routes/CodeTome.svelte';
-	import PackageSummary from '$routes/PackageSummary.svelte';
+
+	// TODO SvelteKit warns about this but we put `/static` in `/src` because of what it's saying,
+	/// maybe change to import as the first item from `packages`
+	import package_json from '../static/.well-known/package.json';
+	const pkg = parse_package_meta(package_json.homepage, package_json);
 </script>
 
-<main class="width_md">
-	<header class="box">
-		<div class="prose">
-			<h2>@fuz.dev/fuz_code</h2>
-		</div>
-		<PackageSummary />
-	</header>
-	<section>
-		<CodeTome />
-	</section>
-	<footer class="box">
-		<PackageSummary />
-	</footer>
+<main class="box width_full">
+	<div class="box width_md">
+		<section>
+			<LibraryHeader {pkg} />
+		</section>
+		<section>
+			<CodeTome />
+		</section>
+		<section>
+			<LibraryFooter {pkg} root_url="https://www.fuz.dev/" />
+		</section>
+	</div>
 </main>
 
 <style>
 	main {
+		margin-bottom: var(--spacing_xl5);
+	}
+	section {
+		margin-top: var(--spacing_xl3);
+		margin-bottom: var(--spacing_xl3);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin: 0 auto;
-	}
-	section,
-	header,
-	footer {
-		/* TODO shouldn't be needed, probably use `Card` once it's published */
-		margin-bottom: var(--spacing_xl5);
 	}
 </style>
