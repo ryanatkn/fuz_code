@@ -1,5 +1,12 @@
 # @fuz.dev/fuz_code
 
+## 0.2.1
+
+### Patch Changes
+
+- 42e89c7: upgrade @fuz.dev/fuz@0.72 from 0.70
+- 77d1f16: change description to "syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz"
+
 ## 0.2.0
 
 ### Minor Changes
