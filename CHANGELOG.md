@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_code
 
+## 0.3.0
+
+### Minor Changes
+
+- 3b44dc1: bump minor version for fuz upgrade
+
 ## 0.2.1
 
 ### Patch Changes
