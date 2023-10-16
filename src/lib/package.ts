@@ -55,6 +55,7 @@ export const package_json = {
 	exports: {
 		'./Code.svelte': {svelte: './dist/Code.svelte', types: './dist/Code.svelte.d.ts'},
 		'./package.gen.js': {default: './dist/package.gen.js', types: './dist/package.gen.d.ts'},
+		'./package.js': {default: './dist/package.js', types: './dist/package.d.ts'},
 		'./prism.css': {default: './dist/prism.css'},
 		'./remove_prism_css_vite_plugin.js': {
 			default: './dist/remove_prism_css_vite_plugin.js',
