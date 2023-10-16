@@ -1,13 +1,11 @@
 <script lang="ts">
 	import LibraryHeader from '@fuz.dev/fuz_library/LibraryHeader.svelte';
 	import LibraryFooter from '@fuz.dev/fuz_library/LibraryFooter.svelte';
-	import {parse_package_meta} from '@fuz.dev/fuz_library/package.js';
+	import {parse_package_meta} from '@fuz.dev/fuz_library/package_meta.js';
 
 	import CodeTome from '$routes/CodeTome.svelte';
+	import {package_json} from '$lib/package.js';
 
-	// TODO SvelteKit warns about this but we put `/static` in `/src` because of what it's saying,
-	/// maybe change to import as the first item from `packages`
-	import package_json from '../static/.well-known/package.json';
 	const pkg = parse_package_meta(package_json.homepage, package_json);
 </script>
 
