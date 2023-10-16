@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_code
 
+## 0.3.1
+
+### Patch Changes
+
+- ff0dced: publish $lib/package.ts
+
 ## 0.3.0
 
 ### Minor Changes
