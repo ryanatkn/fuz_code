@@ -75,6 +75,10 @@
       "svelte": "./dist/Code.svelte",
       "types": "./dist/Code.svelte.d.ts"
     },
+    "./package.gen.js": {
+      "default": "./dist/package.gen.js",
+      "types": "./dist/package.gen.d.ts"
+    },
     "./prism.css": {
       "default": "./dist/prism.css"
     },
