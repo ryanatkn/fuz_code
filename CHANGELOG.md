@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_code
 
+## 0.3.2
+
+### Patch Changes
+
+- b06d22d: upgrade gro to fix default svelte exports
+
 ## 0.3.1
 
 ### Patch Changes
