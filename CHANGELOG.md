@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_code
 
+## 0.4.0
+
+### Minor Changes
+
+- 9010c5b: upgrade deps
+
 ## 0.3.2
 
 ### Patch Changes
