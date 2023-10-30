@@ -6,6 +6,7 @@ export const package_json = {
 	name: '@fuz.dev/fuz_code',
 	description: 'syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz',
 	version: '0.4.1',
+	public: true,
 	license: 'MIT',
 	type: 'module',
 	homepage: 'https://code.fuz.dev/',
@@ -23,7 +24,7 @@ export const package_json = {
 	devDependencies: {
 		'@changesets/changelog-git': '^0.1.14',
 		'@feltjs/eslint-config': '^0.4.1',
-		'@fuz.dev/fuz': '^0.76.0',
+		'@fuz.dev/fuz': '^0.77.1',
 		'@fuz.dev/fuz_library': '^0.16.2',
 		'@grogarden/gro': '^0.98.1',
 		'@grogarden/util': '^0.15.2',
