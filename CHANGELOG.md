@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_code
 
+## 0.4.1
+
+### Patch Changes
+
+- 6a6c372: upgrade gro to fix `package.ts`
+
 ## 0.4.0
 
 ### Minor Changes
