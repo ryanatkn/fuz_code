@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_code
 
+## 0.4.2
+
+### Patch Changes
+
+- 1ff962f: add `"public": true,` to `package.json`
+
 ## 0.4.1
 
 ### Patch Changes

@@ -5,7 +5,7 @@ import type {PackageJson} from '@grogarden/gro/package_json.js';
 export const package_json = {
 	name: '@fuz.dev/fuz_code',
 	description: 'syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz',
-	version: '0.4.1',
+	version: '0.4.2',
 	public: true,
 	license: 'MIT',
 	type: 'module',
