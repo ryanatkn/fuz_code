@@ -1,8 +1,8 @@
 <script lang="ts">
 	// import Tome from '@fuz.dev/fuz_library/Tome.svelte';
 	// import LibraryItem from '@fuz.dev/fuz_library/LibraryItem.svelte';
-	// import LibraryVocab from '@fuz.dev/fuz_library/LibraryVocab.svelte';
-	import LibraryVocab from '$routes/LibraryVocab.svelte';
+	// import Library_Vocab from '@fuz.dev/fuz_library/Library_Vocab.svelte';
+	import Library_Vocab from '$routes/Library_Vocab.svelte';
 	import Code from '$lib/Code.svelte';
 
 	// TODO what convention? `LibraryTome`? Maybe just `Tome`? `/tomes`? both? what other options?
@@ -15,7 +15,7 @@
 	<section>
 		<p>
 			The
-			<LibraryVocab name="Code" />
+			<Library_Vocab name="Code" />
 			component supports syntax highlighting with
 			<a href="https://prismjs.com/">Prism</a> (<a href="https://github.com/PrismJS/prism">repo</a
 			>).
@@ -31,7 +31,7 @@ import '@fuz.dev/fuz/theme.css'; // or your own
 // add this:
 import '@fuz.dev/fuz_code/prism.css'; // add this"
 		/>
-		<p>then use <LibraryVocab name="Code" />:</p>
+		<p>then use <Library_Vocab name="Code" />:</p>
 		<Code
 			content={'<!-- Something.svelte -->\n<' +
 				`script>\n\timport Code from '@fuz.dev/fuz_code/Code.svelte';\n</script>\n\n<Code content="<header>hello world</header>" />`}
@@ -48,7 +48,7 @@ import '@fuz.dev/fuz_code/prism.css'; // add this"
 	</section>
 	<section>
 		<p>
-			<LibraryVocab name="Code" /> highlights
+			<Library_Vocab name="Code" /> highlights
 			<a href="https://svelte.dev/">Svelte</a>
 			by default:
 		</p>
@@ -72,7 +72,7 @@ import '@fuz.dev/fuz_code/prism.css'; // add this"
 	</section>
 	<section>
 		<p>
-			<LibraryVocab name="Code" /> supports TypeScript with <code>lang="ts"</code>:
+			<Library_Vocab name="Code" /> supports TypeScript with <code>lang="ts"</code>:
 		</p>
 		<div class="spaced">
 			<Code content={`<Code lang="ts" content="export type A<T> = ('b' | 3) & T;" />`} />
@@ -92,14 +92,14 @@ import '@fuz.dev/fuz_code/prism.css'; // add this"
 	</section>
 	<section>
 		<p>
-			<LibraryVocab name="Code" /> is a block by default:
+			<Library_Vocab name="Code" /> is a block by default:
 		</p>
 		<p>ab<Code content="c" /></p>
 		<Code content={'<p>ab<Code content="c" /></p>'} />
 	</section>
 	<section>
 		<p>
-			<LibraryVocab name="Code" /> can be inlined with <Code
+			<Library_Vocab name="Code" /> can be inlined with <Code
 				inline
 				content={`<Code inline content="..." />`}
 			/>

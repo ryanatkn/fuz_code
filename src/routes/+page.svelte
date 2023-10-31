@@ -4,7 +4,7 @@
 	import {parse_package_meta} from '@fuz.dev/fuz_library/package_meta.js';
 	import {base} from '$app/paths';
 
-	import CodeTome from '$routes/CodeTome.svelte';
+	import Code_Tome from '$routes/Code_Tome.svelte';
 	import {package_json} from '$lib/package.js';
 
 	const pkg = parse_package_meta(package_json.homepage, package_json);
@@ -16,7 +16,7 @@
 			<LibraryHeader {pkg} />
 		</section>
 		<section>
-			<CodeTome />
+			<Code_Tome />
 		</section>
 		<section class="box">
 			<a href="{base}/about" class="chip">about</a>
