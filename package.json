@@ -1,7 +1,7 @@
 {
   "name": "@fuz.dev/fuz_code",
   "description": "syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "public": true,
   "license": "MIT",
   "type": "module",

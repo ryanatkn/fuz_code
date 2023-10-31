@@ -1,5 +1,11 @@
 # @fuz.dev/fuz_code
 
+## 0.4.3
+
+### Patch Changes
+
+- 7a497dc: add peer deps
+
 ## 0.4.2
 
 ### Patch Changes
