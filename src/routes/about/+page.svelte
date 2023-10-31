@@ -1,7 +1,7 @@
 <script lang="ts">
 	import PackageDetail from '@fuz.dev/fuz_library/PackageDetail.svelte';
 	import {parse_package_meta} from '@fuz.dev/fuz_library/package_meta.js';
-	import LibraryFooter from '@fuz.dev/fuz_library/LibraryFooter.svelte';
+	import Library_Footer from '@fuz.dev/fuz_library/Library_Footer.svelte';
 	import Breadcrumb from '@fuz.dev/fuz_library/Breadcrumb.svelte';
 
 	import {package_json} from '$lib/package.js';
@@ -26,7 +26,7 @@
 		</div>
 	</section>
 	<section class="box">
-		<LibraryFooter {pkg} />
+		<Library_Footer {pkg} />
 		<Breadcrumb>🧶</Breadcrumb>
 	</section>
 </main>
