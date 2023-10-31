@@ -21,6 +21,7 @@ export const package_json = {
 		deploy: 'gro deploy',
 	},
 	files: ['dist'],
+	peerDependencies: {svelte: '*'},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.1.14',
 		'@feltjs/eslint-config': '^0.4.1',
