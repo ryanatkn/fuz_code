@@ -6,7 +6,7 @@ import type {Src_Json} from '@grogarden/gro/src_json.js';
 export const package_json = {
 	name: '@fuz.dev/fuz_code',
 	description: 'syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz',
-	version: '0.4.3',
+	version: '0.5.0',
 	public: true,
 	license: 'MIT',
 	type: 'module',
@@ -74,7 +74,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@fuz.dev/fuz_code',
-	version: '0.4.3',
+	version: '0.5.0',
 	modules: {
 		'./Code.svelte': {path: 'Code.svelte', declarations: []},
 		'./prism.css': {path: 'prism.css', declarations: []},
