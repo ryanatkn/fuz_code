@@ -5,7 +5,7 @@
 	import {base} from '$app/paths';
 
 	import Code_Tome from '$routes/Code_Tome.svelte';
-	import {package_json, src_json} from '$lib/package.js';
+	import {package_json, src_json} from '$routes/package.js';
 
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 </script>
