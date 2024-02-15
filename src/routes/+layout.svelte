@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>@fuz.dev/fuz_code</title>
+	<title>@ryanatkn/fuz_code</title>
 </svelte:head>
 
 <Themed>

@@ -4,14 +4,14 @@ import type {Package_Json} from '@grogarden/gro/package_json.js';
 import type {Src_Json} from '@grogarden/gro/src_json.js';
 
 export const package_json = {
-	name: '@fuz.dev/fuz_code',
+	name: '@ryanatkn/fuz_code',
 	description: 'syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz',
 	version: '0.5.0',
 	public: true,
 	license: 'MIT',
 	type: 'module',
 	homepage: 'https://code.fuz.dev/',
-	repository: 'https://github.com/fuz-dev/fuz_code',
+	repository: 'https://github.com/ryanatkn/fuz_code',
 	author: {name: 'Ryan Atkinson', email: 'mail@ryanatkn.com', url: 'https://www.ryanatkn.com/'},
 	engines: {node: '>=20.10'},
 	scripts: {
@@ -73,7 +73,7 @@ export const package_json = {
 } satisfies Package_Json;
 
 export const src_json = {
-	name: '@fuz.dev/fuz_code',
+	name: '@ryanatkn/fuz_code',
 	version: '0.5.0',
 	modules: {
 		'./Code.svelte': {path: 'Code.svelte', declarations: []},

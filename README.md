@@ -1,4 +1,4 @@
-# @fuz.dev/fuz_code
+# @ryanatkn/fuz_code
 
 > syntax highlighting using
 > [prismjs](https://github.com/PrismJS/prism) for

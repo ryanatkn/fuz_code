@@ -29,12 +29,12 @@
 import '@fuz.dev/fuz/style.css';
 import '@fuz.dev/fuz/theme.css'; // or your own
 // add this:
-import '@fuz.dev/fuz_code/prism.css'; // add this"
+import '@ryanatkn/fuz_code/prism.css'; // add this"
 		/>
 		<p>then use <Library_Vocab name="Code" />:</p>
 		<Code
 			content={'<!-- Something.svelte -->\n<' +
-				`script>\n\timport Code from '@fuz.dev/fuz_code/Code.svelte';\n</script>\n\n<Code content="<header>hello world</header>" />`}
+				`script>\n\timport Code from '@ryanatkn/fuz_code/Code.svelte';\n</script>\n\n<Code content="<header>hello world</header>" />`}
 		/>
 		<p>outputs:</p>
 		<Code content="<header>hello world</header>" />
@@ -109,15 +109,15 @@ import '@fuz.dev/fuz_code/prism.css'; // add this"
 		<p>
 			The <code
 				><a
-					href="https://github.com/fuz-dev/fuz_code/blob/main/src/lib/remove_prism_css_vite_plugin.ts"
+					href="https://github.com/ryanatkn/fuz_code/blob/main/src/lib/remove_prism_css_vite_plugin.ts"
 					>remove_prism_css</a
 				></code
 			>
 			Vite plugin is an optimization that excludes the builtin Prism theme, letting you use a minimal
 			theme that doesn't need selectors for overrides like
 			<code
-				><a href="https://github.com/fuz-dev/fuz_code/blob/main/src/lib/prism.css"
-					>@fuz.dev/fuz_code/prism.css</a
+				><a href="https://github.com/ryanatkn/fuz_code/blob/main/src/lib/prism.css"
+					>@ryanatkn/fuz_code/prism.css</a
 				></code
 			>, while also avoiding waste:
 		</p>
@@ -126,7 +126,7 @@ import '@fuz.dev/fuz_code/prism.css'; // add this"
 				lang="ts"
 				content={`import type {UserConfig} from 'vite';
 import {sveltekit} from '@sveltejs/kit/vite';
-import {remove_prism_css} from '@fuz.dev/fuz_code/remove_prism_css_vite_plugin.js';
+import {remove_prism_css} from '@ryanatkn/fuz_code/remove_prism_css_vite_plugin.js';
 
 const config: UserConfig = {
 	plugins: [sveltekit(), remove_prism_css()],
