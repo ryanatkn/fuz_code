@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.7.0
+
+### Minor Changes
+
+- upgrade ([33dd8e8](https://github.com/ryanatkn/fuz_code/commit/33dd8e8))
+
 ## 0.6.0
 
 ### Minor Changes
