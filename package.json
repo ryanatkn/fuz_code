@@ -26,6 +26,8 @@
     "dist"
   ],
   "peerDependencies": {
+    "prism-svelte": "*",
+    "prismjs": "*",
     "svelte": "*"
   },
   "devDependencies": {
