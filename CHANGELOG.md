@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.6.0
+
+### Minor Changes
+
+- republish ([0ab431c](https://github.com/ryanatkn/fuz_code/commit/0ab431c))
+
 ## 0.5.0
 
 ### Minor Changes
