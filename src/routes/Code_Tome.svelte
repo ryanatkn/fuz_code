@@ -1,7 +1,7 @@
 <script lang="ts">
-	// import Tome from '@fuz.dev/fuz_library/Tome.svelte';
-	// import LibraryItem from '@fuz.dev/fuz_library/LibraryItem.svelte';
-	// import Library_Vocab from '@fuz.dev/fuz_library/Library_Vocab.svelte';
+	// import Tome from '@ryanatkn/fuz/Tome.svelte';
+	// import LibraryItem from '@ryanatkn/fuz/LibraryItem.svelte';
+	// import Library_Vocab from '@ryanatkn/fuz/Library_Vocab.svelte';
 	import Library_Vocab from '$routes/Library_Vocab.svelte';
 	import Code from '$lib/Code.svelte';
 
@@ -26,8 +26,8 @@
 		<Code
 			lang="js"
 			content="// +layout.svelte
-import '@fuz.dev/fuz/style.css';
-import '@fuz.dev/fuz/theme.css'; // or your own
+import '@ryanatkn/fuz/style.css';
+import '@ryanatkn/fuz/theme.css'; // or your own
 // add this:
 import '@ryanatkn/fuz_code/prism.css'; // add this"
 		/>
