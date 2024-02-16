@@ -5,7 +5,7 @@
 	import 'prism-svelte';
 
 	/**
-	 * Users are expected to import `@fuz.dev/fuz_code/prism.css`, like in the main `+layout.svelte`.
+	 * Users are expected to import `@ryanatkn/fuz_code/prism.css`, like in the main `+layout.svelte`.
 	 */
 
 	export let content: string;

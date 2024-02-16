@@ -1,6 +1,6 @@
 {
-  "name": "@fuz.dev/fuz_code",
-  "version": "0.5.0",
+  "name": "@ryanatkn/fuz_code",
+  "version": "0.7.0",
   "modules": {
     "./Code.svelte": {
       "path": "Code.svelte",

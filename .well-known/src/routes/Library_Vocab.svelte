@@ -4,6 +4,6 @@
 </script>
 
 <code
-	><a href="https://github.com/fuz-dev/fuz_code/blob/main/src/lib/{name}{extension}">{name}</a
+	><a href="https://github.com/ryanatkn/fuz_code/blob/main/src/lib/{name}{extension}">{name}</a
 	></code
 >
