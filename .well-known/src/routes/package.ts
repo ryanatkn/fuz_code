@@ -6,7 +6,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 export const package_json = {
 	name: '@ryanatkn/fuz_code',
 	description: 'syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz',
-	version: '0.7.0',
+	version: '0.8.0',
 	public: true,
 	license: 'MIT',
 	type: 'module',
@@ -27,15 +27,15 @@ export const package_json = {
 		'@changesets/changelog-git': '^0.2.0',
 		'@ryanatkn/belt': '^0.20.3',
 		'@ryanatkn/eslint-config': '^0.1.0',
-		'@ryanatkn/fuz': '^0.83.0',
-		'@ryanatkn/gro': '^0.112.0',
+		'@ryanatkn/fuz': '^0.87.0',
+		'@ryanatkn/gro': '^0.112.2',
 		'@sveltejs/adapter-static': '^3.0.1',
 		'@sveltejs/kit': '^2.5.0',
 		'@sveltejs/package': '^2.2.6',
 		'@sveltejs/vite-plugin-svelte': '^3.0.2',
 		'@types/prismjs': '^1.26.3',
-		'@typescript-eslint/eslint-plugin': '^7.0.1',
-		'@typescript-eslint/parser': '^7.0.1',
+		'@typescript-eslint/eslint-plugin': '^7.0.2',
+		'@typescript-eslint/parser': '^7.0.2',
 		eslint: '^8.56.0',
 		'eslint-plugin-svelte': '^2.35.1',
 		prettier: '^3.2.5',
@@ -73,7 +73,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@ryanatkn/fuz_code',
-	version: '0.7.0',
+	version: '0.8.0',
 	modules: {
 		'./Code.svelte': {path: 'Code.svelte', declarations: []},
 		'./prism.css': {path: 'prism.css', declarations: []},
