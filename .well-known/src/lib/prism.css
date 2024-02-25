@@ -12,7 +12,7 @@ See also `$lib/Code.svelte` for runtime usage.
 }
 
 .token.namespace {
-	color: var(--color_d);
+	color: var(--color_d_5);
 }
 
 .token.property,
@@ -22,7 +22,7 @@ See also `$lib/Code.svelte` for runtime usage.
 .token.constant,
 .token.symbol,
 .token.deleted {
-	color: var(--color_a);
+	color: var(--color_a_5);
 }
 
 .token.selector,
@@ -31,24 +31,24 @@ See also `$lib/Code.svelte` for runtime usage.
 .token.char,
 .token.builtin,
 .token.inserted {
-	color: var(--color_b);
+	color: var(--color_b_5);
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: var(--color_f);
+	color: var(--color_f_5);
 }
 
 .token.function,
 .token.class-name {
-	color: var(--color_d);
+	color: var(--color_d_5);
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-	color: var(--color_e);
+	color: var(--color_e_5);
 }
 
 .token.important,
