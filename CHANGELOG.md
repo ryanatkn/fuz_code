@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.9.0
+
+### Minor Changes
+
+- upgrade deps ([ec413b9](https://github.com/ryanatkn/fuz_code/commit/ec413b9))
+
 ## 0.8.0
 
 ### Minor Changes
