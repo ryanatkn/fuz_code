@@ -37,8 +37,8 @@
 <style>
 	pre {
 		background-color: var(--fg_1);
-		border-radius: var(--border_radius_xs);
-		padding: var(--spacing_xs3) var(--spacing_xs);
+		border-radius: var(--radius_xs);
+		padding: var(--space_3xs) var(--space_xs);
 	}
 	code {
 		background-color: unset;
