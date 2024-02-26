@@ -1,8 +1,8 @@
 <script lang="ts">
 	// import Tome from '@ryanatkn/fuz/Tome.svelte';
 	// import LibraryItem from '@ryanatkn/fuz/LibraryItem.svelte';
-	// import Library_Vocab from '@ryanatkn/fuz/Library_Vocab.svelte';
-	import Library_Vocab from '$routes/Library_Vocab.svelte';
+	// import Library_Tome_Link from '@ryanatkn/fuz/Library_Tome_Link.svelte';
+	import Library_Tome_Link from '$routes/Library_Tome_Link.svelte';
 	import Code from '$lib/Code.svelte';
 
 	// TODO what convention? `LibraryTome`? Maybe just `Tome`? `/tomes`? both? what other options?
@@ -15,7 +15,7 @@
 	<section>
 		<p>
 			The
-			<Library_Vocab name="Code" />
+			<Library_Tome_Link name="Code" />
 			component supports syntax highlighting with
 			<a href="https://prismjs.com/">Prism</a> (<a href="https://github.com/PrismJS/prism">repo</a
 			>).
@@ -31,7 +31,7 @@ import '@ryanatkn/fuz/theme.css'; // or your own
 // add this:
 import '@ryanatkn/fuz_code/prism.css'; // add this"
 		/>
-		<p>then use <Library_Vocab name="Code" />:</p>
+		<p>then use <Library_Tome_Link name="Code" />:</p>
 		<Code
 			content={'<!-- Something.svelte -->\n<' +
 				`script>\n\timport Code from '@ryanatkn/fuz_code/Code.svelte';\n</script>\n\n<Code content="<header>hello world</header>" />`}
@@ -48,7 +48,7 @@ import '@ryanatkn/fuz_code/prism.css'; // add this"
 	</section>
 	<section>
 		<p>
-			<Library_Vocab name="Code" /> highlights
+			<Library_Tome_Link name="Code" /> highlights
 			<a href="https://svelte.dev/">Svelte</a>
 			by default:
 		</p>
@@ -72,7 +72,7 @@ import '@ryanatkn/fuz_code/prism.css'; // add this"
 	</section>
 	<section>
 		<p>
-			<Library_Vocab name="Code" /> supports TypeScript with <code>lang="ts"</code>:
+			<Library_Tome_Link name="Code" /> supports TypeScript with <code>lang="ts"</code>:
 		</p>
 		<div class="spaced">
 			<Code content={`<Code lang="ts" content="export type A<T> = ('b' | 3) & T;" />`} />
@@ -92,14 +92,14 @@ import '@ryanatkn/fuz_code/prism.css'; // add this"
 	</section>
 	<section>
 		<p>
-			<Library_Vocab name="Code" /> is a block by default:
+			<Library_Tome_Link name="Code" /> is a block by default:
 		</p>
 		<p>ab<Code content="c" /></p>
 		<Code content={'<p>ab<Code content="c" /></p>'} />
 	</section>
 	<section>
 		<p>
-			<Library_Vocab name="Code" /> can be inlined with <Code
+			<Library_Tome_Link name="Code" /> can be inlined with <Code
 				inline
 				content={`<Code inline content="..." />`}
 			/>
@@ -144,7 +144,7 @@ export default config;`}
 <style>
 	section {
 		/* TODO not sure about this -- maybe make it a util class? or a component? */
-		padding: var(--spacing_2);
+		padding: var(--space_2xl);
 		display: flex;
 		flex-direction: column;
 	}

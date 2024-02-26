@@ -30,11 +30,11 @@
 <style>
 	main {
 		/* TODO hacky */
-		margin-bottom: var(--spacing_5);
-		padding: var(--spacing_3) 0;
+		margin-bottom: var(--space_5xl);
+		padding: var(--space_3xl) 0;
 	}
 	section {
-		margin-bottom: var(--spacing_5);
+		margin-bottom: var(--space_5xl);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
