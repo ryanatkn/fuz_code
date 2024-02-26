@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.10.0
+
+### Minor Changes
+
+- upgrade fuz ([a49de52](https://github.com/ryanatkn/fuz_code/commit/a49de52))
+
 ## 0.9.0
 
 ### Minor Changes
