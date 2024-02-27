@@ -26,6 +26,7 @@
     "dist"
   ],
   "peerDependencies": {
+    "@ryanatkn/fuz": "*",
     "prism-svelte": "*",
     "prismjs": "*",
     "svelte": "*"
