@@ -144,7 +144,7 @@ export default config;`}
 <style>
 	section {
 		/* TODO not sure about this -- maybe make it a util class? or a component? */
-		padding: var(--space_2xl);
+		padding: var(--space_xl2);
 		display: flex;
 		flex-direction: column;
 	}

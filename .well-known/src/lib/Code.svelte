@@ -38,7 +38,7 @@
 	pre {
 		background-color: var(--fg_1);
 		border-radius: var(--radius_xs);
-		padding: var(--space_3xs) var(--space_xs);
+		padding: var(--space_xs3) var(--space_xs);
 	}
 	code {
 		background-color: unset;
