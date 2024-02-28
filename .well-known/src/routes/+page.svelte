@@ -10,7 +10,7 @@
 	const pkg = parse_package_meta(package_json.homepage, package_json, src_json);
 </script>
 
-<main class="box width_full">
+<main class="box w_100">
 	<div class="box width_md">
 		<section>
 			<Library_Header {pkg} />
