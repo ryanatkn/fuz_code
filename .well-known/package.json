@@ -12,6 +12,8 @@
     "email": "mail@ryanatkn.com",
     "url": "https://www.ryanatkn.com/"
   },
+  "bugs": "https://github.com/ryanatkn/fuz_code/issues",
+  "funding": "https://www.ryanatkn.com/funding",
   "engines": {
     "node": ">=20.10"
   },
