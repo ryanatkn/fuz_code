@@ -13,6 +13,8 @@ export const package_json = {
 	homepage: 'https://code.fuz.dev/',
 	repository: 'https://github.com/ryanatkn/fuz_code',
 	author: {name: 'Ryan Atkinson', email: 'mail@ryanatkn.com', url: 'https://www.ryanatkn.com/'},
+	bugs: 'https://github.com/ryanatkn/fuz_code/issues',
+	funding: 'https://www.ryanatkn.com/funding',
 	engines: {node: '>=20.10'},
 	scripts: {
 		start: 'gro dev',
