@@ -26,8 +26,8 @@
 		<Code
 			lang="js"
 			content="// +layout.svelte
-import '@ryanatkn/fuz/style.css';
-import '@ryanatkn/fuz/theme.css'; // or your own
+import '@ryanatkn/moss/style.css';
+import '@ryanatkn/moss/theme.css'; // or your own
 // add this:
 import '@ryanatkn/fuz_code/prism.css'; // add this"
 		/>
