@@ -31,7 +31,7 @@
     "@ryanatkn/fuz": "*",
     "prism-svelte": "*",
     "prismjs": "*",
-    "svelte": "*"
+    "svelte": "^5"
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
