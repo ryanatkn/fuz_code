@@ -24,7 +24,7 @@ export const package_json = {
 		deploy: 'gro deploy',
 	},
 	files: ['dist'],
-	peerDependencies: {'@ryanatkn/fuz': '*', 'prism-svelte': '*', prismjs: '*', svelte: '^5'},
+	peerDependencies: {'@ryanatkn/fuz': '*', 'prism-svelte': '^0.5', prismjs: '^1', svelte: '^5'},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
 		'@ryanatkn/belt': '^0.20.5',
