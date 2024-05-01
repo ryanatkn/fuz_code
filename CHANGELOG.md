@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.12.0
+
+### Minor Changes
+
+- fix: remove peer dep on `@ryanatkn/fuz` because of circularity ([11c70e9](https://github.com/ryanatkn/fuz_code/commit/11c70e9))
+
 ## 0.11.0
 
 ### Minor Changes
