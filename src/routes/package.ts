@@ -6,7 +6,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 export const package_json = {
 	name: '@ryanatkn/fuz_code',
 	description: 'syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz',
-	version: '0.11.0',
+	version: '0.12.0',
 	public: true,
 	license: 'MIT',
 	type: 'module',
@@ -24,7 +24,7 @@ export const package_json = {
 		deploy: 'gro deploy',
 	},
 	files: ['dist'],
-	peerDependencies: {'@ryanatkn/fuz': '*', 'prism-svelte': '^0.5', prismjs: '^1', svelte: '^5'},
+	peerDependencies: {'prism-svelte': '^0.5', prismjs: '^1', svelte: '^5'},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
 		'@ryanatkn/belt': '^0.20.5',
@@ -76,7 +76,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@ryanatkn/fuz_code',
-	version: '0.11.0',
+	version: '0.12.0',
 	modules: {
 		'./Code.svelte': {path: 'Code.svelte', declarations: []},
 		'./prism.css': {path: 'prism.css', declarations: []},
