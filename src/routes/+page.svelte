@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Library_Header from '@ryanatkn/fuz/Library_Header.svelte';
+	import Package_Summary from '@ryanatkn/fuz/Package_Summary.svelte';
 	import Library_Footer from '@ryanatkn/fuz/Library_Footer.svelte';
 	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 	import {base} from '$app/paths';
@@ -13,7 +13,7 @@
 <main class="box w_100">
 	<div class="box width_md">
 		<section>
-			<Library_Header {pkg} />
+			<Package_Summary {pkg} />
 		</section>
 		<section>
 			<Code_Tome />
