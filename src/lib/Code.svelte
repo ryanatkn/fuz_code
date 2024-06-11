@@ -3,6 +3,7 @@
 	import Prism from 'prismjs';
 	import 'prismjs/components/prism-typescript.js';
 	import 'prism-svelte';
+	import type {Snippet} from 'svelte';
 
 	/**
 	 * Users are expected to import `@ryanatkn/fuz_code/prism.css`, like in the main `+layout.svelte`.
@@ -14,9 +15,17 @@
 		code_attrs?: any;
 		lang?: string | null;
 		inline?: boolean;
+		children?: Snippet<[markup: string]>;
 	}
 
-	const {content, pre_attrs, code_attrs, lang = 'svelte', inline = false}: Props = $props();
+	const {
+		content,
+		pre_attrs,
+		code_attrs,
+		lang = 'svelte',
+		inline = false,
+		children,
+	}: Props = $props();
 
 	const grammar = $derived(lang === null ? null : Prism.languages[lang]);
 
@@ -32,9 +41,9 @@
 </script>
 
 <pre class:inline {...pre_attrs}><code {...code_attrs}
-		><slot {markup}
-			>{#if highlighted !== null}{@html highlighted}{:else}{content}{/if}</slot
-		></code
+		>{#if children}{@render children(
+				markup,
+			)}{:else if highlighted !== null}{@html highlighted}{:else}{content}{/if}</code
 	></pre>
 
 <style>
