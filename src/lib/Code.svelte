@@ -3,25 +3,37 @@
 	import Prism from 'prismjs';
 	import 'prismjs/components/prism-typescript.js';
 	import 'prism-svelte';
+	import type {Snippet} from 'svelte';
 
 	/**
 	 * Users are expected to import `@ryanatkn/fuz_code/prism.css`, like in the main `+layout.svelte`.
 	 */
 
-	export let content: string;
+	interface Props {
+		content: string;
+		pre_attrs?: any;
+		code_attrs?: any;
+		lang?: string | null;
+		inline?: boolean;
+		children?: Snippet<[markup: string]>;
+	}
 
-	export let pre_attrs: any = undefined;
-	export let code_attrs: any = undefined;
+	const {
+		content,
+		pre_attrs,
+		code_attrs,
+		lang = 'svelte',
+		inline = false,
+		children,
+	}: Props = $props();
 
-	export let lang: string | null = 'svelte';
-
-	export let inline = false;
-
-	$: grammar = lang === null ? null : Prism.languages[lang];
+	const grammar = $derived(lang === null ? null : Prism.languages[lang]);
 
 	// TODO do this at compile time somehow
-	$: highlighted = grammar === null ? null : content && Prism.highlight(content, grammar, lang!);
-	$: markup = highlighted ?? content;
+	const highlighted = $derived(
+		grammar === null ? null : content && Prism.highlight(content, grammar, lang!),
+	);
+	const markup = $derived(highlighted ?? content);
 
 	// TODO add `CopyToClipboard`, maybe only when not inline?
 
@@ -29,9 +41,9 @@
 </script>
 
 <pre class:inline {...pre_attrs}><code {...code_attrs}
-		><slot {markup}
-			>{#if highlighted !== null}{@html highlighted}{:else}{content}{/if}</slot
-		></code
+		>{#if children}{@render children(
+				markup,
+			)}{:else if highlighted !== null}{@html highlighted}{:else}{content}{/if}</code
 	></pre>
 
 <style>
