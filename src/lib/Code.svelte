@@ -8,20 +8,27 @@
 	 * Users are expected to import `@ryanatkn/fuz_code/prism.css`, like in the main `+layout.svelte`.
 	 */
 
-	export let content: string;
+	 interface Props {
+		 content: string;
+		 pre_attrs?: any
+		 code_attrs?: any
+		 lang?: string | null
+		 inline?: boolean;
+	 }
 
-	export let pre_attrs: any = undefined;
-	export let code_attrs: any = undefined;
+	 const {
+content,
+pre_attrs,
+code_attrs,
+lang = 'svelte',
+inline = false
+}: Props = $props();
 
-	export let lang: string | null = 'svelte';
-
-	export let inline = false;
-
-	$: grammar = lang === null ? null : Prism.languages[lang];
+	const grammar =  $derived(lang === null ? null : Prism.languages[lang]);
 
 	// TODO do this at compile time somehow
-	$: highlighted = grammar === null ? null : content && Prism.highlight(content, grammar, lang!);
-	$: markup = highlighted ?? content;
+	const highlighted =  $derived(grammar === null ? null : content && Prism.highlight(content, grammar, lang!));
+	const markup =  $derived(highlighted ?? content);
 
 	// TODO add `CopyToClipboard`, maybe only when not inline?
 

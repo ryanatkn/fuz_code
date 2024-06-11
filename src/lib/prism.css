@@ -1,6 +1,9 @@
 /*
-fuz vars for Prism - https://github.com/PrismJS/prism - https://prismjs.com/
-See also `$lib/Code.svelte` for runtime usage.
+
+Fuz variables for Prism -
+https://github.com/PrismJS/prism - https://prismjs.com/ - https://www.fuz.dev/
+See `$lib/Code.svelte` for runtime usage.
+
 */
 
 .token.comment,
