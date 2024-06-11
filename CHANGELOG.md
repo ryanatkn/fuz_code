@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.13.0
+
+### Minor Changes
+
+- upgrade `svelte@5` ([#4](https://github.com/ryanatkn/fuz_code/pull/4))
+
 ## 0.12.0
 
 ### Minor Changes
