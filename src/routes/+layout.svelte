@@ -4,6 +4,13 @@
 	import '$lib/prism.css';
 
 	import Themed from '@ryanatkn/fuz/Themed.svelte';
+	import type {Snippet} from 'svelte';
+
+	interface Props {
+		children: Snippet;
+	}
+
+	const {children}: Props = $props();
 </script>
 
 <svelte:head>
@@ -11,5 +18,5 @@
 </svelte:head>
 
 <Themed>
-	<slot />
+	{@render children()}
 </Themed>

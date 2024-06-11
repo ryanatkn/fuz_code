@@ -1,7 +1,10 @@
 <script lang="ts">
-	export let name: string;
-	export let extension = '.svelte'; // TODO shouldn't be a thing
+	interface Props {
+		name: string;
+		extension?: string; // TODO shouldn't be a thing
+	}
 
+	const {name, extension = '.svelte'}: Props = $props();
 	// TODO confusing overlap with @ryanatkn/fuz/Tome_Link.svelte
 </script>
 
