@@ -1,5 +1,5 @@
 ---
-"@ryanatkn/fuz_code": minor
+'@ryanatkn/fuz_code': minor
 ---
 
-upgrade to Svelte 5
+upgrade `svelte@5`
