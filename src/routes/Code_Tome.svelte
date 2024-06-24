@@ -41,9 +41,9 @@ import '@ryanatkn/fuz_code/prism.css'; // add this"
 	</section>
 	<section>
 		<aside>
-			⚠️ performing syntax highlighting at runtime like this does is wasteful, the API is a
-			work-in-progress for efficiency - you can use <code>lang={'{'}null}</code> with pre-highligted
-			text but the component will still import <code>prismjs</code> and <code>prism-svelte</code>
+			⚠️ Performing syntax highlighting at runtime like this is wasteful. The API's efficiency is
+			work-in-progress - you can use <code>lang={'{'}null}</code> with pre-highligted text but the
+			component will still import <code>prismjs</code> and <code>prism-svelte</code>.
 		</aside>
 	</section>
 	<section>
