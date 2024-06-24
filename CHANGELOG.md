@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.14.1
+
+### Patch Changes
+
+- fix `inline` prop behavior ([67bb1f7](https://github.com/ryanatkn/fuz_code/commit/67bb1f7))
+
 ## 0.14.0
 
 ### Minor Changes
