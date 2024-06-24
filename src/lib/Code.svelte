@@ -57,4 +57,8 @@
 		/* the default `code` padding displays incorrectly wrapping the highlighted code */
 		padding: 0;
 	}
+	.inline {
+		display: inline-block;
+		vertical-align: bottom;
+	}
 </style>
