@@ -15,7 +15,7 @@ export const package_json = {
 	author: {name: 'Ryan Atkinson', email: 'mail@ryanatkn.com', url: 'https://www.ryanatkn.com/'},
 	bugs: 'https://github.com/ryanatkn/fuz_code/issues',
 	funding: 'https://www.ryanatkn.com/funding',
-	engines: {node: '>=22.3'},
+	engines: {node: '>=20.12'},
 	scripts: {
 		start: 'gro dev',
 		dev: 'gro dev',
@@ -27,11 +27,11 @@ export const package_json = {
 	peerDependencies: {'prism-svelte': '^0.5', prismjs: '^1', svelte: '^5.0.0-next.0'},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
-		'@ryanatkn/belt': '^0.21.0',
+		'@ryanatkn/belt': '^0.22.0',
 		'@ryanatkn/eslint-config': '^0.1.3',
 		'@ryanatkn/fuz': '^0.104.1',
-		'@ryanatkn/gro': '^0.123.0',
-		'@ryanatkn/moss': '^0.5.0',
+		'@ryanatkn/gro': '^0.124.0',
+		'@ryanatkn/moss': '^0.6.0',
 		'@sveltejs/adapter-static': '^3.0.2',
 		'@sveltejs/kit': '^2.5.17',
 		'@sveltejs/package': '^2.3.2',
