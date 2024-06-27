@@ -7,7 +7,7 @@ export const package_json = {
 	name: '@ryanatkn/fuz_code',
 	description: 'syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz',
 	glyph: '🎨',
-	version: '0.15.0',
+	version: '0.15.1',
 	public: true,
 	license: 'MIT',
 	type: 'module',
@@ -78,7 +78,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@ryanatkn/fuz_code',
-	version: '0.15.0',
+	version: '0.15.1',
 	modules: {
 		'./package.json': {path: 'package.json', declarations: []},
 		'./Code.svelte': {path: 'Code.svelte', declarations: []},
