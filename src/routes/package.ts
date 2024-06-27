@@ -6,6 +6,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 export const package_json = {
 	name: '@ryanatkn/fuz_code',
 	description: 'syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz',
+	glyph: '🎨',
 	version: '0.15.0',
 	public: true,
 	license: 'MIT',
@@ -27,10 +28,10 @@ export const package_json = {
 	peerDependencies: {'prism-svelte': '^0.5', prismjs: '^1', svelte: '^5.0.0-next.0'},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
-		'@ryanatkn/belt': '^0.22.0',
+		'@ryanatkn/belt': '^0.23.0',
 		'@ryanatkn/eslint-config': '^0.1.3',
-		'@ryanatkn/fuz': '^0.105.1',
-		'@ryanatkn/gro': '^0.124.0',
+		'@ryanatkn/fuz': '^0.105.2',
+		'@ryanatkn/gro': '^0.125.1',
 		'@ryanatkn/moss': '^0.6.0',
 		'@sveltejs/adapter-static': '^3.0.2',
 		'@sveltejs/kit': '^2.5.17',
@@ -63,14 +64,14 @@ export const package_json = {
 	exports: {
 		'./package.json': './package.json',
 		'./Code.svelte': {
+			types: './dist/Code.svelte.d.ts',
 			svelte: './dist/Code.svelte',
 			default: './dist/Code.svelte',
-			types: './dist/Code.svelte.d.ts',
 		},
 		'./prism.css': {default: './dist/prism.css'},
 		'./remove_prism_css_vite_plugin.js': {
-			default: './dist/remove_prism_css_vite_plugin.js',
 			types: './dist/remove_prism_css_vite_plugin.d.ts',
+			default: './dist/remove_prism_css_vite_plugin.js',
 		},
 	},
 } satisfies Package_Json;
