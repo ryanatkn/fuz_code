@@ -25,9 +25,6 @@
     "test": "gro test",
     "deploy": "gro deploy"
   },
-  "files": [
-    "dist"
-  ],
   "peerDependencies": {
     "prism-svelte": "^0.5",
     "prismjs": "^1",
@@ -80,6 +77,12 @@
       }
     ]
   },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
   "exports": {
     "./package.json": "./package.json",
     "./Code.svelte": {
