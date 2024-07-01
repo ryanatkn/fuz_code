@@ -13,7 +13,7 @@
 <main class="box w_100">
 	<div class="box width_md">
 		<section>
-			<Package_Summary {pkg} pixelated_logo />
+			<Package_Summary {pkg} />
 		</section>
 		<section>
 			<Code_Tome />
