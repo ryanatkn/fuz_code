@@ -1,3 +1,5 @@
+[<img src="/static/logo.svg" alt="a friendly pink spider facing you" align="right" width="192" height="192">](https://code.fuz.dev/)
+
 # @ryanatkn/fuz_code
 
 > syntax highlighting using
