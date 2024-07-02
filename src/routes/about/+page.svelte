@@ -12,11 +12,11 @@
 </script>
 
 <main class="width_md">
-	<section>
+	<section class="box">
 		<header>
-			<h1>{pkg.repo_name}</h1>
+			<h1 class="mt_xl5">{pkg.repo_name}</h1>
 		</header>
-		<Breadcrumb>🧶</Breadcrumb>
+		<Breadcrumb>🎨</Breadcrumb>
 	</section>
 	<section class="box w_100 mb_lg">
 		<div class="panel p_md width_md">
@@ -24,8 +24,11 @@
 		</div>
 	</section>
 	<section class="box">
-		<Library_Footer {pkg} />
-		<Breadcrumb>🧶</Breadcrumb>
+		<Library_Footer {pkg}>
+			<div class="mb_lg">
+				<Breadcrumb>🎨</Breadcrumb>
+			</div>
+		</Library_Footer>
 	</section>
 </main>
 
