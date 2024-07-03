@@ -22,7 +22,7 @@
 	<Code content="npm i -D prismjs prism-svelte" lang={null} />
 	<p>Then import the styles:</p>
 	<Code
-		lang="js"
+		lang="ts"
 		content="// +layout.svelte
 import '@ryanatkn/moss/style.css';
 import '@ryanatkn/moss/theme.css'; // or your own
