@@ -31,10 +31,10 @@ export const package_json = {
 	peerDependencies: {'prism-svelte': '^0.5', prismjs: '^1', svelte: '^5.0.0-next.0'},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
-		'@ryanatkn/belt': '^0.24.2',
+		'@ryanatkn/belt': '^0.24.3',
 		'@ryanatkn/eslint-config': '^0.4.0',
 		'@ryanatkn/fuz': '^0.108.3',
-		'@ryanatkn/gro': '^0.129.1',
+		'@ryanatkn/gro': '^0.129.4',
 		'@ryanatkn/moss': '^0.7.0',
 		'@sveltejs/adapter-static': '^3.0.2',
 		'@sveltejs/kit': '^2.5.18',
