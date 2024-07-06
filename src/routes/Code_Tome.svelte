@@ -31,8 +31,8 @@ import '@ryanatkn/fuz_code/prism.css'; // add this"
 	/>
 	<p>then use <Tome_Link name="Code" />:</p>
 	<Code
-		content={'<!-- Something.svelte -->\n<' +
-			`script>\n\timport Code from '@ryanatkn/fuz_code/Code.svelte';\n</script>\n\n<Code content="<header>hello world</header>" />`}
+		content={'<' +
+			`script>\n\t// Something.svelte\n\timport Code from '@ryanatkn/fuz_code/Code.svelte';\n</script>\n\n<Code content="<header>hello world</header>" />`}
 	/>
 	<p>outputs:</p>
 	<Code content="<header>hello world</header>" />
@@ -92,16 +92,18 @@ import '@ryanatkn/fuz_code/prism.css'; // add this"
 	<p>
 		<Tome_Link name="Code" /> is a block by default:
 	</p>
-	<p>ab<Code content="c" /></p>
-	<Code content={'<p>ab<Code content="c" /></p>'} />
+	<!-- TODO @multiple this `div` should be `<p>` but it errors with "`<pre>` contain `<p>`", but it's the other way around? -->
+	<div>ab<Code content="c" /></div>
+	<Code content={'<div>ab<Code content="c" /></div>'} />
 </section>
 <section>
-	<p>
+	<!-- TODO @multiple this `div` should be `<p>` but it errors with "`<pre>` contain `<p>`", but it's the other way around? -->
+	<div>
 		<Tome_Link name="Code" /> can be inlined with <Code
 			inline
 			content={`<Code inline content="..." />`}
 		/>
-	</p>
+	</div>
 </section>
 <section>
 	<p>
