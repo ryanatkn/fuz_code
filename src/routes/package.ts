@@ -5,7 +5,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 
 export const package_json = {
 	name: '@ryanatkn/fuz_code',
-	version: '0.15.1',
+	version: '0.15.2',
 	description: 'syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz',
 	glyph: '🎨',
 	logo: 'logo.svg',
@@ -81,7 +81,7 @@ export const package_json = {
 
 export const src_json = {
 	name: '@ryanatkn/fuz_code',
-	version: '0.15.1',
+	version: '0.15.2',
 	modules: {
 		'./package.json': {path: 'package.json', declarations: []},
 		'./Code.svelte': {path: 'Code.svelte', declarations: []},

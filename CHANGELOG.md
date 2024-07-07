@@ -1,5 +1,14 @@
 # @ryanatkn/fuz_code
 
+## 0.15.2
+
+### Patch Changes
+
+- enable tsconfig `declaration` and `declarationMap` ([b6abdd2](https://github.com/ryanatkn/fuz_code/commit/b6abdd2))
+- add `sideEffects` to `package.json` ([88a50cc](https://github.com/ryanatkn/fuz_code/commit/88a50cc))
+- publish src files ([3699312](https://github.com/ryanatkn/fuz_code/commit/3699312))
+- add tsconfig `sourceRoot` ([6ede67a](https://github.com/ryanatkn/fuz_code/commit/6ede67a))
+
 ## 0.15.1
 
 ### Patch Changes
