@@ -92,12 +92,12 @@ import '@ryanatkn/fuz_code/prism.css'; // add this"
 	<p>
 		<Tome_Link name="Code" /> is a block by default:
 	</p>
-	<!-- TODO @multiple this `div` should be `<p>` but it errors with "`<pre>` contain `<p>`", but it's the other way around? -->
+	<!-- TODO @many this `div` should be `<p>` but it errors with "`<pre>` contain `<p>`", but it's the other way around? -->
 	<div>ab<Code content="c" /></div>
 	<Code content={'<div>ab<Code content="c" /></div>'} />
 </section>
 <section>
-	<!-- TODO @multiple this `div` should be `<p>` but it errors with "`<pre>` contain `<p>`", but it's the other way around? -->
+	<!-- TODO @many this `div` should be `<p>` but it errors with "`<pre>` contain `<p>`", but it's the other way around? -->
 	<div>
 		<Tome_Link name="Code" /> can be inlined with <Code
 			inline
