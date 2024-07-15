@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.16.0
+
+### Minor Changes
+
+- upgrade `@ryanatkn/fuz@0.110.4` from `0.108.3` ([73082df](https://github.com/ryanatkn/fuz_code/commit/73082df))
+
 ## 0.15.2
 
 ### Patch Changes
