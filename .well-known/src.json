@@ -1,0 +1,27 @@
+{
+  "name": "@ryanatkn/fuz_code",
+  "version": "0.16.0",
+  "modules": {
+    "./package.json": {
+      "path": "package.json",
+      "declarations": []
+    },
+    "./Code.svelte": {
+      "path": "Code.svelte",
+      "declarations": []
+    },
+    "./prism.css": {
+      "path": "prism.css",
+      "declarations": []
+    },
+    "./remove_prism_css_vite_plugin.js": {
+      "path": "remove_prism_css_vite_plugin.ts",
+      "declarations": [
+        {
+          "name": "remove_prism_css",
+          "kind": "function"
+        }
+      ]
+    }
+  }
+}
