@@ -28,7 +28,12 @@ export const package_json = {
 	},
 	type: 'module',
 	engines: {node: '>=20.12'},
-	peerDependencies: {'prism-svelte': '^0.5', prismjs: '^1', svelte: '^5.0.0-next.0'},
+	peerDependencies: {
+		'@ryanatkn/moss': '*',
+		'prism-svelte': '^0.5',
+		prismjs: '^1',
+		svelte: '^5.0.0-next.0',
+	},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
 		'@ryanatkn/belt': '^0.24.9',
