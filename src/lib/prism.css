@@ -11,7 +11,7 @@ See `$lib/Code.svelte` for runtime usage.
 .token.doctype,
 .token.cdata,
 .token.punctuation {
-	color: var(--text_3);
+	color: var(--text_color_5);
 }
 
 .token.namespace {
