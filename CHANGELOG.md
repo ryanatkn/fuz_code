@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.18.0
+
+### Minor Changes
+
+- upgrade `@ryanatkn/moss@0.12` from `0.11.1` ([5708c52](https://github.com/ryanatkn/fuz_code/commit/5708c52))
+
 ## 0.17.0
 
 ### Minor Changes
