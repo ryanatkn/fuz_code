@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz_code",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz",
   "glyph": "🎨",
   "logo": "logo.svg",
