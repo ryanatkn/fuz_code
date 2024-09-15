@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.19.0
+
+### Minor Changes
+
+- bump required node version to `20.17` ([b74b797](https://github.com/ryanatkn/fuz_code/commit/b74b797))
+
 ## 0.18.0
 
 ### Minor Changes
