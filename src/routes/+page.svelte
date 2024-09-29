@@ -16,6 +16,14 @@
 			<Package_Summary {pkg} />
 		</section>
 		<section>
+			<blockquote class="width_sm">
+				⚠️ this library is going to <a href="https://github.com/ryanatkn/fuz_code/issues/8"
+					>replace</a
+				>
+				<code>prismjs</code> with <code><a href="https://github.com/shikijs/shiki">shiki</a></code>
+			</blockquote>
+		</section>
+		<section>
 			<Code_Tome />
 		</section>
 		<section class="box">

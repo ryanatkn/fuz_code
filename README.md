@@ -2,6 +2,9 @@
 
 [<img src="static/logo.svg" alt="a friendly pink spider facing you" align="right" width="192" height="192">](https://code.fuz.dev/)
 
+> ⚠️ this library is going
+> to [replace](https://github.com/ryanatkn/fuz_code/issues/8) `prismjs` with `shiki`
+
 > syntax highlighting using
 > [prismjs](https://github.com/PrismJS/prism) for
 > [Svelte](https://github.com/sveltejs/svelte),
