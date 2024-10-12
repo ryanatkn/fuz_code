@@ -2,6 +2,7 @@
 	import '@ryanatkn/moss/style.css';
 	import '@ryanatkn/moss/theme.css';
 	import '$lib/prism.css';
+	import '$routes/moss.css';
 
 	import Themed from '@ryanatkn/fuz/Themed.svelte';
 	import type {Snippet} from 'svelte';
