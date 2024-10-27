@@ -17,14 +17,26 @@ a.chip {
 	font-weight: 700;
 }
 
+.flex {
+	display: flex;
+}
+.flex_1 {
+	flex: 1;
+}
 .inline {
 	display: inline;
 }
 .mb_lg {
 	margin-bottom: var(--space_lg);
 }
+.mt_0 {
+	margin-top: 0;
+}
 .mt_xl5 {
 	margin-top: var(--space_xl5);
+}
+.p_lg {
+	padding: var(--space_lg);
 }
 .p_md {
 	padding: var(--space_md);
@@ -36,6 +48,20 @@ a.chip {
 	background-color: var(--panel_bg, var(--fg_1));
 }
 
+/* can be used to override the direction of a `.box` */
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.shadow_inset_xs {
+	box-shadow: var(--shadow_inset_xs)
+		color-mix(in hsl, var(--shadow_color) var(--shadow_alpha, var(--shadow_alpha_1)), transparent);
+}
+.text_align_center {
+	text-align: center;
+}
 .w_100 {
 	width: 100%;
 }
