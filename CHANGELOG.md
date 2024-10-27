@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.20.0
+
+### Minor Changes
+
+- upgrade peer dep to Svelte 5 ([5aa3efb](https://github.com/ryanatkn/fuz_code/commit/5aa3efb))
+
 ## 0.19.0
 
 ### Minor Changes
