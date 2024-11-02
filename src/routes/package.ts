@@ -29,6 +29,7 @@ export const package_json = {
 	type: 'module',
 	engines: {node: '>=20.17'},
 	peerDependencies: {'@ryanatkn/moss': '*', svelte: '^5'},
+	peerDependenciesMeta: {'@ryanatkn/moss': {optional: true}, svelte: {optional: true}},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
 		'@ryanatkn/belt': '^0.26.1',
@@ -40,6 +41,7 @@ export const package_json = {
 		'@sveltejs/kit': '^2.7.4',
 		'@sveltejs/package': '^2.3.7',
 		'@sveltejs/vite-plugin-svelte': '^4.0.0',
+		'@types/node': '^22.8.6',
 		eslint: '^9.14.0',
 		'eslint-plugin-svelte': '^2.46.0',
 		prettier: '^3.3.3',

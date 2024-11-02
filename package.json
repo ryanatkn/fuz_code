@@ -33,6 +33,14 @@
     "@ryanatkn/moss": "*",
     "svelte": "^5"
   },
+  "peerDependenciesMeta": {
+    "@ryanatkn/moss": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
     "@ryanatkn/belt": "^0.26.1",
