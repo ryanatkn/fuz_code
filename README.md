@@ -8,8 +8,8 @@
 
 fuz_code is a rework of [Prism](https://github.com/PrismJS/prism). The main changes:
 
-- has a minimal, explicit API to generate stylized HTML, and knows nothing about the DOM
-- uses stateless ES modules instead of globals with side effects and pseudo-module behaviors
+- has a minimal and explicit API to generate stylized HTML, and knows nothing about the DOM
+- uses stateless ES modules, instead of globals with side effects and pseudo-module behaviors
 - has various incompatible changes, so using Prism grammars requires some tweaks
 - smaller (by about 6.5kB, 3kB gzipped) and [faster](#benchmarks)
 - written in TypeScript
