@@ -32,6 +32,34 @@ export class Syntax_Styler {
 		}
 	}
 
+	add_lang(id: string, grammar: Grammar, aliases?: string[]): void {
+		this.langs[id] = grammar;
+		if (aliases) {
+			for (var alias of aliases) {
+				this.langs[alias] = grammar;
+			}
+		}
+	}
+
+	add_extended_lang(
+		base_id: string,
+		extension_id: string,
+		extension: Grammar,
+		aliases?: string[],
+	): Grammar {
+		var grammar = this.extend_grammar(base_id, extension);
+		this.add_lang(extension_id, grammar, aliases);
+		return grammar;
+	}
+
+	get_lang(id: string): Grammar {
+		var lang = this.langs[id];
+		if (lang === undefined) {
+			throw Error(`The language "${id}" has no grammar.`);
+		}
+		return lang;
+	}
+
 	/**
 	 * Accepts a string of text as input
 	 * and the language definitions to use,
@@ -46,7 +74,7 @@ export class Syntax_Styler {
 	 * @param lang - The name of the language definition passed to `grammar`.
 	 * @param grammar - An object containing the tokens to use.
 	 *
-	 * Usually a language definition like `Syntax_Styler.langs.markup`.
+	 * Usually a language definition like `syntax_styler.get_lang('markup')`.
 	 *
 	 * @returns the styled HTML
 	 *
@@ -56,10 +84,7 @@ export class Syntax_Styler {
 	 * @example
 	 * stylize('var foo = false;', 'ts', custom_grammar);
 	 */
-	stylize(text: string, lang: string, grammar: Grammar | undefined = this.langs[lang]): string {
-		if (!grammar) {
-			throw Error(`The language "${lang}" has no grammar.`);
-		}
+	stylize(text: string, lang: string, grammar: Grammar | undefined = this.get_lang(lang)): string {
 		var ctx: Hook_Before_Tokenize_Callback_Context = {
 			code: text,
 			grammar,
@@ -82,12 +107,12 @@ export class Syntax_Styler {
 	 *
 	 * This helper method makes it easy to modify existing languages. For example, the CSS language definition
 	 * not only defines CSS styling for CSS documents, but also needs to define styling for CSS embedded
-	 * in HTML through `<style>` elements. To do this, it needs to modify `Syntax_Styler.langs.markup` and add the
-	 * appropriate tokens. However, `Syntax_Styler.langs.markup` is a regular JavaScript object literal, so if you do
+	 * in HTML through `<style>` elements. To do this, it needs to modify `syntax_styler.get_lang('markup')` and add the
+	 * appropriate tokens. However, `syntax_styler.get_lang('markup')` is a regular JavaScript object literal, so if you do
 	 * this:
 	 *
 	 * ```js
-	 * Syntax_Styler.langs.markup.style = {
+	 * syntax_styler.get_lang('markup').style = {
 	 *     // token
 	 * };
 	 * ```
@@ -112,7 +137,7 @@ export class Syntax_Styler {
 	 *
 	 * ```js
 	 * grammar_insert_before('markup', 'comment', {
-	 *     'comment': Syntax_Styler.langs.markup.comment,
+	 *     'comment': syntax_styler.get_lang('markup').comment,
 	 *     // tokens after 'comment'
 	 * });
 	 * ```
@@ -128,25 +153,25 @@ export class Syntax_Styler {
 	 * Instead, it will create a new object and replace all references to the target object with the new one. This
 	 * can be done without temporarily deleting properties, so the iteration order is well-defined.
 	 *
-	 * However, only references that can be reached from `Syntax_Styler.langs` or `insert` will be replaced. I.e. if
+	 * However, only references that can be reached from `syntax_styler.langs` or `insert` will be replaced. I.e. if
 	 * you hold the target object in a variable, then the value of the variable will not change.
 	 *
 	 * ```js
-	 * var oldMarkup = Syntax_Styler.langs.markup;
+	 * var oldMarkup = syntax_styler.get_lang('markup');
 	 * var newMarkup = grammar_insert_before('markup', 'comment', { ... });
 	 *
-	 * assert(oldMarkup !== Syntax_Styler.langs.markup);
-	 * assert(newMarkup === Syntax_Styler.langs.markup);
+	 * assert(oldMarkup !== syntax_styler.get_lang('markup'));
+	 * assert(newMarkup === syntax_styler.get_lang('markup'));
 	 * ```
 	 *
-	 * @param inside - The property of `root` (e.g. a language id in `Syntax_Styler.langs`) that contains the
+	 * @param inside - The property of `root` (e.g. a language id in `syntax_styler.langs`) that contains the
 	 * object to be modified.
 	 * @param before - The key to insert before.
 	 * @param insert - An object containing the key-value pairs to be inserted.
 	 * @param root - The object containing `inside`, i.e. the object that contains the
 	 * object to be modified.
 	 *
-	 * Defaults to `Syntax_Styler.langs`.
+	 * Defaults to `syntax_styler.langs`.
 	 *
 	 * @returns the new grammar object
 	 */
@@ -249,38 +274,24 @@ export class Syntax_Styler {
 	/**
 	 * Creates a deep copy of the language with the given id and appends the given tokens.
 	 *
-	 * If a token in `redef` also appears in the copied language, then the existing token in the copied language
+	 * If a token in `extension` also appears in the copied language, then the existing token in the copied language
 	 * will be overwritten at its original position.
 	 *
 	 * ## Best practices
 	 *
-	 * Since the position of overwriting tokens (token in `redef` that overwrite tokens in the copied language)
+	 * Since the position of overwriting tokens (token in `extension` that overwrite tokens in the copied language)
 	 * doesn't matter, they can technically be in any order. However, this can be confusing to others that trying to
 	 * understand the language definition because, normally, the order of tokens matters in the grammars.
 	 *
 	 * Therefore, it is encouraged to order overwriting tokens according to the positions of the overwritten tokens.
 	 * Furthermore, all non-overwriting tokens should be placed after the overwriting ones.
 	 *
-	 * @param id - The id of the language to extend. This has to be a key in `Syntax_Styler.langs`.
-	 * @param redef - The new tokens to append.
-	 * @returns The new language created.
-	 * @example
-	 * Syntax_Styler.langs['css-with-colors'] = extend_grammar('css', {
-	 *     // Syntax_Styler.langs.css already has a 'comment' token, so this token will overwrite CSS' 'comment' token
-	 *     // at its original position
-	 *     'comment': { ... },
-	 *     // CSS doesn't have a 'color' token, so this token will be appended
-	 *     'color': /\b(?:red|green|blue)\b/
-	 * });
+	 * @param base_id - The id of the language to extend. This has to be a key in `syntax_styler.langs`.
+	 * @param extension - The new tokens to append.
+	 * @returns the new grammar
 	 */
-	extend_grammar(id: string, redef: Grammar): Grammar {
-		var lang = deep_clone(this.langs[id]);
-
-		if (!lang) {
-			throw Error(`Language "${id}" not found.`);
-		}
-
-		return {...lang, ...redef};
+	extend_grammar(base_id: string, extension: Grammar): Grammar {
+		return {...deep_clone(this.get_lang(base_id)), ...extension};
 	}
 
 	// TODO add some builtins
@@ -369,7 +380,7 @@ export interface Grammar_Token {
  * @param text - a string with the code to be styled
  * @param grammar - an object containing the tokens to use
  *
- * Usually a language definition like `Syntax_Styler.langs.markup`.
+ * Usually a language definition like `syntax_styler.get_lang('markup')`.
  *
  * @returns an array of strings and tokens, a token stream
  *
