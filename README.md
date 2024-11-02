@@ -11,7 +11,7 @@ fuz_code is a rework of [Prism](https://github.com/PrismJS/prism). The main chan
 - has a minimal and explicit API to generate stylized HTML, and knows nothing about the DOM
 - uses stateless ES modules, instead of globals with side effects and pseudo-module behaviors
 - has various incompatible changes, so using Prism grammars requires some tweaks
-- smaller (by about 6.5kB, 3kB gzipped) and [faster](#benchmarks)
+- smaller (by 6.5kB minified and 3kB gzipped, ~1/3 less) and [faster](#benchmarks)
 - written in TypeScript
 
 Like Prism, there are zero dependencies (unless you count `@types/prismjs`),
@@ -29,11 +29,15 @@ A [zero-dependency theme](src/lib/theme_standalone.css)
 is provided with some caveats, see below for more.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
-this library is lighter and [vastly faster](#benchmarks)
+this library is much lighter
+(using its faster `shiki/engine/javascript`, 503kB minified to 16.5kB, 63kb gzipped to 5.7kB)
+and [vastly faster](#benchmarks)
 for runtime usage because it uses JS regexps instead of
 the [Onigurama regexp engine](https://shiki.matsu.io/guide/regex-engines)
 used by TextMate grammars,
 and because Prism grammars are much simpler (and less powerful!) than TextMate's.
+Shiki also has 38 dependencies to fuz_code's 0,
+but for static buildtime usage this is not a fair comparison.
 
 ## Usage
 
@@ -136,12 +140,12 @@ because it uses TextMate grammars.
 
 Results styling the [Svelte sample](src/lib/code_sample_inputs.ts):
 
-| Task name             | Throughput average (ops/s) | Throughput median (ops/s) | Samples |
-| --------------------- | -------------------------- | ------------------------- | ------- |
-| syntax_styler.stylize | 3149 ± 0.56%               | 3333                      | 6004    |
-| Prism.highlight       | 2748 ± 0.51%               | 2500                      | 5293    |
-| Shiki js regexp       | 69 ± 0.59%                 | 69                        | 138     |
-| Shiki builtin regexp  | 41 ± 0.27%                 | 40                        | 82      |
+| Task name               | Throughput average (ops/s) | Throughput median (ops/s) | Samples |
+| ----------------------- | -------------------------- | ------------------------- | ------- |
+| syntax_styler.stylize   | 3149 ± 0.56%               | 3333                      | 6004    |
+| Prism.highlight         | 2748 ± 0.51%               | 2500                      | 5293    |
+| Shiki engine/javascript | 69 ± 0.59%                 | 69                        | 138     |
+| Shiki engine/oniguruma  | 41 ± 0.27%                 | 40                        | 82      |
 
 Directly runnable benchmarks are not included yet -
 I don't know if I'll add them here or make a separate project.
@@ -191,10 +195,10 @@ bench
 	.add('Prism.highlight', () => {
 		Prism.highlight(sample_svelte_code, Prism.languages.svelte, 'svelte');
 	})
-	.add('Shiki js regexp', () => {
+	.add('Shiki engine/javascript', () => {
 		shiki_highlighter_js.codeToHtml(sample_svelte_code, {lang: 'svelte', theme: 'nord'});
 	})
-	.add('Shiki builtin regexp', () => {
+	.add('Shiki engine/oniguruma', () => {
 		shiki_highlighter_builtin.codeToHtml(sample_svelte_code, {lang: 'svelte', theme: 'nord'});
 	});
 
