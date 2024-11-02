@@ -9,7 +9,7 @@ import type {Create_Grammar, Grammar_Token} from '$lib/syntax_styler.js';
  * @see LICENSE
  */
 export const create_grammar_ts: Create_Grammar = (syntax_styler) => {
-	const grammar_ts = syntax_styler.extend_grammar('js', {
+	const grammar_ts = syntax_styler.add_extended_lang('js', 'ts', {
 		class_name: {
 			pattern:
 				/(\b(?:class|extends|implements|instanceof|interface|new|type)\s+)(?!keyof\b)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?:\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?/,
@@ -20,8 +20,6 @@ export const create_grammar_ts: Create_Grammar = (syntax_styler) => {
 		builtin:
 			/\b(?:Array|Function|Promise|any|boolean|console|never|number|string|symbol|unknown)\b/,
 	});
-
-	syntax_styler.add_lang('ts', grammar_ts);
 
 	// The keywords TypeScript adds to JavaScript
 	(grammar_ts.keyword as any).push(

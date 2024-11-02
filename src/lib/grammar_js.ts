@@ -12,7 +12,7 @@ import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/gra
 export const create_grammar_js: Create_Grammar = (syntax_styler) => {
 	const grammar_clike = syntax_styler.get_lang('clike');
 
-	const grammar_js = syntax_styler.extend_grammar('clike', {
+	const grammar_js = syntax_styler.add_extended_lang('clike', 'js', {
 		class_name: [
 			grammar_clike.class_name,
 			{
@@ -65,8 +65,6 @@ export const create_grammar_js: Create_Grammar = (syntax_styler) => {
 		operator:
 			/--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/,
 	});
-
-	syntax_styler.add_lang('js', grammar_js);
 
 	(grammar_js as any).class_name[0].pattern =
 		/(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/;

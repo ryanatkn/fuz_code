@@ -13,11 +13,7 @@ export type Create_Grammar = (syntax_styler: Syntax_Styler) => void;
  * @see LICENSE
  */
 export class Syntax_Styler {
-	// TODO BLOCK probably `add_language` and `get_language` and `maybe_get_language` API instead of manually mutating/reading
-	private langs: Record<string, Grammar | undefined> = {
-		/**
-		 * The grammar for plain, unformatted text.
-		 */
+	langs: Record<string, Grammar | undefined> = {
 		plaintext: {},
 	};
 
@@ -290,7 +286,6 @@ export class Syntax_Styler {
 	 * @param extension - The new tokens to append.
 	 * @returns the new grammar
 	 */
-	// TODO BLOCK dont use directly
 	extend_grammar(base_id: string, extension: Grammar): Grammar {
 		return {...deep_clone(this.get_lang(base_id)), ...extension};
 	}

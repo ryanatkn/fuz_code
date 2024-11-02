@@ -14,7 +14,7 @@ const blocks = '(if|else if|await|then|catch|each|html|debug)';
 export const create_grammar_svelte: Create_Grammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.get_lang('ts');
 
-	const grammar_svelte = syntax_styler.extend_grammar('markup', {
+	const grammar_svelte = syntax_styler.add_extended_lang('markup', 'svelte', {
 		each: {
 			pattern: /{[#/]each(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*}/,
 			inside: {
@@ -99,8 +99,6 @@ export const create_grammar_svelte: Create_Grammar = (syntax_styler) => {
 			inside: grammar_ts,
 		},
 	});
-
-	syntax_styler.add_lang('svelte', grammar_svelte);
 
 	// oof lol
 	((grammar_svelte.tag as Grammar_Token).inside!.attr_value as Grammar_Token).inside!.entity =
