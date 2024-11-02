@@ -7,14 +7,12 @@ import {add_grammar_ts} from '$lib/grammar_ts.js';
 import {add_grammar_svelte} from '$lib/grammar_svelte.js';
 import {add_grammar_json} from '$lib/grammar_json.js';
 
-export const syntax_styler = new Syntax_Styler({
-	grammars: [
-		add_grammar_markup,
-		add_grammar_css,
-		add_grammar_clike,
-		add_grammar_js,
-		add_grammar_ts,
-		add_grammar_svelte,
-		add_grammar_json,
-	],
-});
+export const syntax_styler = new Syntax_Styler();
+
+add_grammar_markup(syntax_styler);
+add_grammar_css(syntax_styler);
+add_grammar_clike(syntax_styler);
+add_grammar_js(syntax_styler);
+add_grammar_ts(syntax_styler);
+add_grammar_svelte(syntax_styler);
+add_grammar_json(syntax_styler);

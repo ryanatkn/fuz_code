@@ -1,7 +1,3 @@
-export interface Syntax_Styler_Options {
-	grammars?: Add_Grammar[];
-}
-
 export type Add_Grammar = (syntax_styler: Syntax_Styler) => void;
 
 /**
@@ -17,17 +13,21 @@ export class Syntax_Styler {
 		plaintext: {},
 	};
 
-	constructor(options: Syntax_Styler_Options = {}) {
-		const {grammars} = options;
-		if (grammars) {
-			for (const add_grammar of grammars) {
-				// TODO this API? problem is the grammars rely on mutating existing grammars in the `syntax_styler`,
-				// so for now adding grammars will remain inherently stateful
-				// this.langs[id] =
-				add_grammar(this);
-			}
-		}
-	}
+	// constructor() {
+	// TODO this API? problem is the grammars rely on mutating existing grammars in the `syntax_styler`,
+	// so for now adding grammars will remain inherently stateful
+	// export interface Syntax_Styler_Options {
+	// 	grammars?: Add_Grammar[];
+	// }
+	// options: Syntax_Styler_Options = {}
+	// const {grammars} = options;
+	// if (grammars) {
+	// 	for (const add_grammar of grammars) {
+	// this.langs[id] =
+	// 		add_grammar(this);
+	// 	}
+	// }
+	// }
 
 	add_lang(id: string, grammar: Grammar, aliases?: string[]): void {
 		this.langs[id] = grammar;
