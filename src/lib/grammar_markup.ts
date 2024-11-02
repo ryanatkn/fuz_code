@@ -75,15 +75,8 @@ export const create_grammar_markup: Create_Grammar = (syntax_styler) => {
 
 	grammar_markup.tag.inside.attr_value.inside.entity = grammar_markup.entity;
 
-	syntax_styler.langs.markup = grammar_markup;
-	syntax_styler.langs.html = grammar_markup;
-	syntax_styler.langs.mathml = grammar_markup;
-	syntax_styler.langs.svg = grammar_markup;
-
-	syntax_styler.langs.xml = syntax_styler.extend_grammar('markup', {});
-	syntax_styler.langs.ssml = syntax_styler.langs.xml;
-	syntax_styler.langs.atom = syntax_styler.langs.xml;
-	syntax_styler.langs.rss = syntax_styler.langs.xml;
+	syntax_styler.add_lang('markup', grammar_markup, ['html', 'mathml', 'svg']);
+	syntax_styler.add_extended_lang('markup', 'xml', {}, ['ssml', 'atom', 'rss']);
 };
 
 /**
@@ -126,13 +119,13 @@ export const grammar_markup_add_inlined = (
 						[lang_key]: {
 							pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
 							lookbehind: true,
-							inside: syntax_styler.langs[lang],
+							inside: syntax_styler.get_lang(lang),
 						},
 					},
 				},
 				[lang_key]: {
 					pattern: /[\s\S]+/,
-					inside: syntax_styler.langs[lang],
+					inside: syntax_styler.get_lang(lang),
 				},
 			},
 		},
@@ -155,38 +148,38 @@ export const grammar_markup_add_attribute = (
 	attr_name: string,
 	lang: string,
 ): void => {
-	((syntax_styler.langs.markup!.tag as Grammar_Token).inside!.special_attr as Grammar_Token[]).push(
-		{
-			pattern: RegExp(
-				/(^|["'\s])/.source +
-					'(?:' +
-					attr_name +
-					')' +
-					/\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))/.source,
-				'i',
-			),
-			lookbehind: true,
-			inside: {
-				attr_name: /^[^\s=]+/,
-				attr_value: {
-					pattern: /=[\s\S]+/,
-					inside: {
-						value: {
-							pattern: /(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,
-							lookbehind: true,
-							alias: [lang, 'lang_' + lang],
-							inside: syntax_styler.langs[lang],
-						},
-						punctuation: [
-							{
-								pattern: /^=/,
-								alias: 'attr_equals',
-							},
-							/"|'/,
-						],
+	(
+		(syntax_styler.get_lang('markup').tag as Grammar_Token).inside!.special_attr as Grammar_Token[]
+	).push({
+		pattern: RegExp(
+			/(^|["'\s])/.source +
+				'(?:' +
+				attr_name +
+				')' +
+				/\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))/.source,
+			'i',
+		),
+		lookbehind: true,
+		inside: {
+			attr_name: /^[^\s=]+/,
+			attr_value: {
+				pattern: /=[\s\S]+/,
+				inside: {
+					value: {
+						pattern: /(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,
+						lookbehind: true,
+						alias: [lang, 'lang_' + lang], // TODO remove this alias?
+						inside: syntax_styler.get_lang(lang),
 					},
+					punctuation: [
+						{
+							pattern: /^=/,
+							alias: 'attr_equals',
+						},
+						/"|'/,
+					],
 				},
 			},
 		},
-	);
+	});
 };

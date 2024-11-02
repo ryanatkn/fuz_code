@@ -43,5 +43,5 @@ export const create_grammar_clike: Create_Grammar = (syntax_styler) => {
 		punctuation: /[{}[\];(),.:]/,
 	} satisfies Grammar;
 
-	syntax_styler.langs.clike = grammar_clike;
+	syntax_styler.add_lang('clike', grammar_clike);
 };

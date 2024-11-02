@@ -75,9 +75,9 @@ export const create_grammar_css: Create_Grammar = (syntax_styler) => {
 		punctuation: /[(){};:,]/,
 	} satisfies Grammar;
 
-	syntax_styler.langs.css = grammar_css;
-
 	grammar_css.atrule.inside.rest = grammar_css;
+
+	syntax_styler.add_lang('css', grammar_css);
 
 	grammar_markup_add_inlined(syntax_styler, 'style', 'css');
 	grammar_markup_add_attribute(syntax_styler, 'style', 'css');

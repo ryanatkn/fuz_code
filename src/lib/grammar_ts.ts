@@ -21,7 +21,7 @@ export const create_grammar_ts: Create_Grammar = (syntax_styler) => {
 			/\b(?:Array|Function|Promise|any|boolean|console|never|number|string|symbol|unknown)\b/,
 	});
 
-	syntax_styler.langs.ts = grammar_ts;
+	syntax_styler.add_lang('ts', grammar_ts);
 
 	// The keywords TypeScript adds to JavaScript
 	(grammar_ts.keyword as any).push(

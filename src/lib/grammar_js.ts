@@ -10,10 +10,7 @@ import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/gra
  * @see LICENSE
  */
 export const create_grammar_js: Create_Grammar = (syntax_styler) => {
-	const grammar_clike = syntax_styler.langs.clike;
-	if (!grammar_clike) {
-		throw Error('grammar_clike must be created before grammar_js');
-	}
+	const grammar_clike = syntax_styler.get_lang('clike');
 
 	const grammar_js = syntax_styler.extend_grammar('clike', {
 		class_name: [
@@ -69,7 +66,7 @@ export const create_grammar_js: Create_Grammar = (syntax_styler) => {
 			/--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/,
 	});
 
-	syntax_styler.langs.js = grammar_js;
+	syntax_styler.add_lang('js', grammar_js);
 
 	(grammar_js as any).class_name[0].pattern =
 		/(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/;
@@ -101,7 +98,7 @@ export const create_grammar_js: Create_Grammar = (syntax_styler) => {
 					pattern: /^(\/)[\s\S]+(?=\/[a-z]*$)/,
 					lookbehind: true,
 					alias: 'lang_regex',
-					inside: syntax_styler.langs.regex,
+					inside: syntax_styler.langs.regex, // TODO use `get_lang` after adding `regex` support
 				},
 				regex_delimiter: /^\/|\/$/,
 				regex_flags: /^[a-z]+$/,
