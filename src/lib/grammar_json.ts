@@ -1,4 +1,4 @@
-import type {Create_Grammar, Grammar} from '$lib/syntax_styler.js';
+import type {Add_Grammar, Grammar} from '$lib/syntax_styler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,7 +8,7 @@ import type {Create_Grammar, Grammar} from '$lib/syntax_styler.js';
  *
  * @see LICENSE
  */
-export const create_grammar_json: Create_Grammar = (syntax_styler) => {
+export const add_grammar_json: Add_Grammar = (syntax_styler) => {
 	const grammar_json = {
 		property: {
 			pattern: /(^|[^\\])"(?:\\.|[^\\"\r\n])*"(?=\s*:)/,

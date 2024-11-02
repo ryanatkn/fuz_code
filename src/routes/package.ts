@@ -128,24 +128,24 @@ export const src_json = {
 		'./Code.svelte': {path: 'Code.svelte', declarations: []},
 		'./grammar_clike.js': {
 			path: 'grammar_clike.ts',
-			declarations: [{name: 'create_grammar_clike', kind: 'variable'}],
+			declarations: [{name: 'add_grammar_clike', kind: 'variable'}],
 		},
 		'./grammar_css.js': {
 			path: 'grammar_css.ts',
-			declarations: [{name: 'create_grammar_css', kind: 'variable'}],
+			declarations: [{name: 'add_grammar_css', kind: 'variable'}],
 		},
 		'./grammar_js.js': {
 			path: 'grammar_js.ts',
-			declarations: [{name: 'create_grammar_js', kind: 'variable'}],
+			declarations: [{name: 'add_grammar_js', kind: 'variable'}],
 		},
 		'./grammar_json.js': {
 			path: 'grammar_json.ts',
-			declarations: [{name: 'create_grammar_json', kind: 'variable'}],
+			declarations: [{name: 'add_grammar_json', kind: 'variable'}],
 		},
 		'./grammar_markup.js': {
 			path: 'grammar_markup.ts',
 			declarations: [
-				{name: 'create_grammar_markup', kind: 'variable'},
+				{name: 'add_grammar_markup', kind: 'variable'},
 				{name: 'grammar_markup_add_inlined', kind: 'function'},
 				{name: 'grammar_markup_add_attribute', kind: 'function'},
 			],
@@ -153,19 +153,19 @@ export const src_json = {
 		'./grammar_svelte.js': {
 			path: 'grammar_svelte.ts',
 			declarations: [
-				{name: 'create_grammar_svelte', kind: 'variable'},
+				{name: 'add_grammar_svelte', kind: 'variable'},
 				{name: 'grammar_svelte_add_inlined', kind: 'function'},
 			],
 		},
 		'./grammar_ts.js': {
 			path: 'grammar_ts.ts',
-			declarations: [{name: 'create_grammar_ts', kind: 'variable'}],
+			declarations: [{name: 'add_grammar_ts', kind: 'variable'}],
 		},
 		'./syntax_styler.js': {
 			path: 'syntax_styler.ts',
 			declarations: [
 				{name: 'Syntax_Styler_Options', kind: 'type'},
-				{name: 'Create_Grammar', kind: 'type'},
+				{name: 'Add_Grammar', kind: 'type'},
 				{name: 'Syntax_Styler', kind: 'class'},
 				{name: 'Grammar_Value', kind: 'type'},
 				{name: 'Grammar', kind: 'type'},

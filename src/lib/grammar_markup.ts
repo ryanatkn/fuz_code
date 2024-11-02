@@ -1,4 +1,4 @@
-import type {Create_Grammar, Syntax_Styler, Grammar, Grammar_Token} from '$lib/syntax_styler.js';
+import type {Add_Grammar, Syntax_Styler, Grammar, Grammar_Token} from '$lib/syntax_styler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,7 +8,7 @@ import type {Create_Grammar, Syntax_Styler, Grammar, Grammar_Token} from '$lib/s
  *
  * @see LICENSE
  */
-export const create_grammar_markup: Create_Grammar = (syntax_styler) => {
+export const add_grammar_markup: Add_Grammar = (syntax_styler) => {
 	const grammar_markup = {
 		comment: {
 			pattern: /<!--(?:(?!<!--)[\s\S])*?-->/,

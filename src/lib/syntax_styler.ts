@@ -1,8 +1,8 @@
 export interface Syntax_Styler_Options {
-	grammars?: Create_Grammar[];
+	grammars?: Add_Grammar[];
 }
 
-export type Create_Grammar = (syntax_styler: Syntax_Styler) => void;
+export type Add_Grammar = (syntax_styler: Syntax_Styler) => void;
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -20,10 +20,11 @@ export class Syntax_Styler {
 	constructor(options: Syntax_Styler_Options = {}) {
 		const {grammars} = options;
 		if (grammars) {
-			for (const create_grammar of grammars) {
-				// TODO BLOCK this API
+			for (const add_grammar of grammars) {
+				// TODO this API? problem is the grammars rely on mutating existing grammars in the `syntax_styler`,
+				// so for now adding grammars will remain inherently stateful
 				// this.langs[id] =
-				create_grammar(this);
+				add_grammar(this);
 			}
 		}
 	}

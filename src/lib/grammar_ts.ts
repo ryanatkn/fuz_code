@@ -1,4 +1,4 @@
-import type {Create_Grammar, Grammar_Token} from '$lib/syntax_styler.js';
+import type {Add_Grammar, Grammar_Token} from '$lib/syntax_styler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,7 +8,7 @@ import type {Create_Grammar, Grammar_Token} from '$lib/syntax_styler.js';
  *
  * @see LICENSE
  */
-export const create_grammar_ts: Create_Grammar = (syntax_styler) => {
+export const add_grammar_ts: Add_Grammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.add_extended_lang('js', 'ts', {
 		class_name: {
 			pattern:
