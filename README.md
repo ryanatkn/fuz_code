@@ -68,15 +68,7 @@ rather than being settable by a user option unlike the Moss version.
 import '@ryanatkn/fuz_code/theme_standalone.css';
 ```
 
-Docs are a work in progress, open issues if you need help:
-
-- [code.fuz.dev](https://code.fuz.dev/)
-- [samples](https://code.fuz.dev/samples) on the website
-  (also see the [inputs](src/lib/code_sample_inputs.ts)
-  and [outputs](src/lib/code_sample_outputs.ts))
-- [tests](src/lib/syntax_styler.test.ts)
-
-## Modules
+### Modules
 
 - [@ryanatkn/fuz_code](src/lib/index.ts) - index with default grammars,
   use this as a guide if you want custom grammars
@@ -100,7 +92,20 @@ Enabled [by default](src/lib/index.ts):
 - [`json`](src/lib/grammar_json.ts)
 - [`clike`](src/lib/grammar_clike.ts)
 
-## TODO
+### More
+
+Docs are a work in progress:
+
+- this readme has usage instructions
+- [code.fuz.dev](https://code.fuz.dev/)
+- [samples](https://code.fuz.dev/samples) on the website
+  (also see the [inputs](src/lib/code_sample_inputs.ts)
+  and [outputs](src/lib/code_sample_outputs.ts))
+- [tests](src/lib/syntax_styler.test.ts)
+
+Please open issues if you need any help.
+
+## Todo
 
 - add builtin grammars for `markdown` and `regexp`
 - lazy load the builtin grammars in `Code.svelte`
