@@ -7,6 +7,8 @@
 	import Code_Tome from '$routes/Code_Tome.svelte';
 	import {package_json, src_json} from '$routes/package.js';
 
+	// import '$lib/benchmark.js';
+
 	const pkg = parse_package_meta(package_json, src_json);
 </script>
 
@@ -16,18 +18,17 @@
 			<Package_Summary {pkg} />
 		</section>
 		<section>
-			<blockquote class="width_sm">
-				⚠️ this library is going to <a href="https://github.com/ryanatkn/fuz_code/issues/8"
-					>replace</a
-				>
-				<code>prismjs</code> with <code><a href="https://github.com/shikijs/shiki">shiki</a></code>
-			</blockquote>
+			<aside>
+				⚠️ Docs are a work in progress, the <a href="https://github.com/ryanatkn/fuz_code">readme</a
+				> has more info.
+			</aside>
 		</section>
 		<section>
 			<Code_Tome />
 		</section>
-		<section class="box">
+		<section class="box gap_lg">
 			<a href="{base}/about" class="chip">about</a>
+			<a href="{base}/samples" class="chip">samples</a>
 		</section>
 		<section>
 			<Library_Footer {pkg} root_url="https://www.fuz.dev/" />

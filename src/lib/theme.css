@@ -1,8 +1,8 @@
 /*
 
-Fuz variables for Prism -
-https://github.com/PrismJS/prism - https://prismjs.com/ - https://www.fuz.dev/
-See `$lib/Code.svelte` for runtime usage.
+@ryanatkn/fuz_code/theme.css
+
+This is the default CSS file that styles the output HTML of `stylize`.
 
 */
 
@@ -20,16 +20,22 @@ See `$lib/Code.svelte` for runtime usage.
 
 .token.property,
 .token.tag,
-.token.boolean,
-.token.number,
 .token.constant,
 .token.symbol,
 .token.deleted {
 	color: var(--color_a_5);
 }
 
+.token.number {
+	color: var(--color_e_5);
+}
+
+.token.boolean {
+	color: var(--color_i_5);
+}
+
 .token.selector,
-.token.attr-name,
+.token.attr_name,
 .token.string,
 .token.char,
 .token.builtin,
@@ -38,13 +44,13 @@ See `$lib/Code.svelte` for runtime usage.
 }
 
 .token.atrule,
-.token.attr-value,
+.token.attr_value,
 .token.keyword {
 	color: var(--color_f_5);
 }
 
 .token.function,
-.token.class-name {
+.token.class_name {
 	color: var(--color_d_5);
 }
 
