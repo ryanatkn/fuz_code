@@ -14,10 +14,19 @@ fuz_code is a rework of [Prism](https://github.com/PrismJS/prism). The main chan
 - smaller (by about 6.5kB, 3kB gzipped) and [faster](#benchmarks)
 - written in TypeScript
 
-It also has builtin [Svelte](https://svelte.dev/) support
+Like Prism, there are zero dependencies (unless you count `@types/prismjs`),
+but there are two optional dependencies,
+[Svelte](https://svelte.dev/) and the stylesheet from [Moss](https://github.com/ryanatkn/moss).
+
+fuz_code provides optional builtin Svelte support
 with a [Svelte grammar](src/lib/grammar_svelte.ts)
 based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
 and a [Svelte component](src/lib/Code.svelte) for convenient usage.
+
+The [default theme](src/lib/theme.css) integrates
+with my CSS library [Moss](https://github.com/ryanatkn/moss).
+A [zero-dependency theme](src/lib/theme_standalone.css)
+is provided with some caveats, see below for more.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is lighter and [vastly faster](#benchmarks)
@@ -25,11 +34,6 @@ for runtime usage because it uses JS regexps instead of
 the [Onigurama regexp engine](https://shiki.matsu.io/guide/regex-engines)
 used by TextMate grammars,
 and because Prism grammars are much simpler (and less powerful!) than TextMate's.
-
-The [default theme](src/lib/theme.css) integrates
-with my CSS design system [Moss](https://github.com/ryanatkn/moss).
-A [zero-dependency theme](src/lib/theme_standalone.css)
-is provided with some caveats, see below for more.
 
 ## Usage
 
@@ -53,8 +57,9 @@ import '@ryanatkn/fuz_code/theme.css';
 ```
 
 The primary themes (currently just [one](src/lib/theme.css)) have a dependency
-on my CSS framework [Moss](https://github.com/ryanatkn/moss)
+on my CSS library [Moss](https://github.com/ryanatkn/moss)
 for [color-scheme](https://moss.ryanatkn.com/library/themes) awareness.
+See the [Moss docs](https://moss.ryanatkn.com/) for its usage.
 
 [A dependency-free version](src/lib/theme_standalone.css) of the initial theme is provided,
 but note that the colors are staticly defined instead of using
@@ -79,6 +84,8 @@ import '@ryanatkn/fuz_code/theme_standalone.css';
   default theme with no dependencies
 - [@ryanatkn/fuz_code/Code.svelte](src/lib/Code.svelte) -
   Svelte component with a convenient API
+
+I encourage you to poke around [`src/lib`](src/lib) if you're interested in using fuz_code.
 
 ### Grammars
 
