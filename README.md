@@ -23,8 +23,8 @@ Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is lighter and [vastly faster](#benchmarks)
 for runtime usage because it uses JS regexps instead of
 the [Onigurama regexp engine](https://shiki.matsu.io/guide/regex-engines)
-used by TextMate grammars.
-However, Prism grammars are much simpler and less powerful than TextMate's.
+used by TextMate grammars,
+and because Prism grammars are much simpler and less powerful than TextMate's.
 
 The [default theme](src/lib/theme.css) integrates
 with my CSS design system [Moss](https://github.com/ryanatkn/moss).
