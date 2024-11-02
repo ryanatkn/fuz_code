@@ -30,14 +30,14 @@ is provided with some caveats, see below for more.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is much lighter
-(using its faster `shiki/engine/javascript`, 503kB minified to 16kB, 63kb gzipped to 5.6kB)
+(with its faster `shiki/engine/javascript`, 503kB minified to 16kB, 63kb gzipped to 5.6kB)
 and [vastly faster](#benchmarks)
 for runtime usage because it uses JS regexps instead of
 the [Onigurama regexp engine](https://shiki.matsu.io/guide/regex-engines)
-used by TextMate grammars,
-and because Prism grammars are much simpler (and less powerful!) than TextMate's.
-Shiki also has 38 dependencies to fuz_code's 0,
-but for static buildtime usage this is not a fair comparison.
+used by TextMate grammars.
+Shiki also has 38 dependencies instead of 0.
+However this is not a fair comparison because Shiki is designed mainly for buildtime usage,
+and Prism grammars are much simpler and less powerful than TextMate's.
 
 ## Usage
 
@@ -123,8 +123,8 @@ Please open issues if you need any help.
 - improve the default theme colors
 - add more themes
 - add a Vite plugin to do syntax styling at build-time for static cases
+- add a worker helper module
 - add some useful plugins, flesh out the API (start with line emphasis)
-- better worker support
 - improve the TypeScript grammar to tokenize types
 - improve the grammars in subtle ways
 
