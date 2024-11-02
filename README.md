@@ -153,7 +153,7 @@ I don't know if I'll add them here or make a separate project.
 To run the benchmarks yourself:
 
 ```bash
-npm i -D shiki prismjs prism-svelte @types/prismjs
+npm i -D shiki prismjs prism-svelte @types/prismjs @ryanatkn/fuz_code
 ```
 
 Then add this file and import it somewhere like `$routes/+page.svelte`:
