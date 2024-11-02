@@ -11,7 +11,7 @@ fuz_code is a rework of [Prism](https://github.com/PrismJS/prism). The main chan
 - has a minimal and explicit API to generate stylized HTML, and knows nothing about the DOM
 - uses stateless ES modules, instead of globals with side effects and pseudo-module behaviors
 - has various incompatible changes, so using Prism grammars requires some tweaks
-- smaller (by 6.5kB minified and 3kB gzipped, ~1/3 less) and [faster](#benchmarks)
+- smaller (by 7kB minified and 3kB gzipped, ~1/3 less) and [faster](#benchmarks)
 - written in TypeScript
 
 Like Prism, there are zero dependencies (unless you count `@types/prismjs`),
@@ -30,7 +30,7 @@ is provided with some caveats, see below for more.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is much lighter
-(using its faster `shiki/engine/javascript`, 503kB minified to 16.5kB, 63kb gzipped to 5.7kB)
+(using its faster `shiki/engine/javascript`, 503kB minified to 16kB, 63kb gzipped to 5.6kB)
 and [vastly faster](#benchmarks)
 for runtime usage because it uses JS regexps instead of
 the [Onigurama regexp engine](https://shiki.matsu.io/guide/regex-engines)
