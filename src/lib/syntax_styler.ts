@@ -13,9 +13,6 @@ export type Create_Grammar = (syntax_styler: Syntax_Styler) => void;
  * @see LICENSE
  */
 export class Syntax_Styler {
-	/**
-	 * This namespace contains all currently loaded languages and the some helper functions to create and modify languages.
-	 */
 	// TODO BLOCK probably `add_language` and `get_language` and `maybe_get_language` API instead of manually mutating/reading
 	langs: Record<string, Grammar | undefined> = {
 		/**

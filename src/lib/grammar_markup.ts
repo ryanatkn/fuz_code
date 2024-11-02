@@ -96,7 +96,7 @@ export const create_grammar_markup: Create_Grammar = (syntax_styler) => {
  * case insensitive.
  * @param lang - The language key.
  * @example
- * grammar_markup_add_inlined('style', 'css');
+ * grammar_markup_add_inlined(syntax_styler, 'style', 'css');
  */
 export const grammar_markup_add_inlined = (
 	syntax_styler: Syntax_Styler,
@@ -149,7 +149,7 @@ export const grammar_markup_add_inlined = (
  * case insensitive.
  * @param lang - The language key.
  * @example
- * grammar_markup_add_attribute('style', 'css');
+ * grammar_markup_add_attribute(syntax_styler, 'style', 'css');
  */
 export const grammar_markup_add_attribute = (
 	syntax_styler: Syntax_Styler,
