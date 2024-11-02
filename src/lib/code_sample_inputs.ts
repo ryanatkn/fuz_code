@@ -11,7 +11,7 @@ export const sample_json_code = `
 	"null": null,
 	"object": {
 		"array": [1, "b", false]
-	}
+	} // comments :D
 }
 
 `.trim();
@@ -46,6 +46,21 @@ export const sample_html_code = `
 	<li>list item 1</li>
 	<li>list item 2</li>
 </ul>
+
+<script type="text/javascript">
+	const ok = 'yes';
+</script>
+
+<style type="text/css">
+	.special::before {
+		content: "< & >";
+	}
+</style>
+
+<![CDATA[
+	if (a < 0) alert("b");
+	<not-a-tag>
+]]>
 `.trim();
 
 // see `styled_css_code` in `./code_sample_outputs.js`
@@ -65,6 +80,14 @@ p {
 }
 
 /* comment */
+
+/*
+multi
+line
+
+<comment>
+
+*/
 
 #unique_id {
 	background-color: blue;

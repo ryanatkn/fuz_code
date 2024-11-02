@@ -102,10 +102,11 @@ export const grammar_markup_add_inlined = (
 	syntax_styler: Syntax_Styler,
 	tag_name: string,
 	lang: string,
+	inside_lang = 'markup',
 ): void => {
 	const language_key = 'language_' + lang;
 
-	syntax_styler.grammar_insert_before('markup', 'cdata', {
+	syntax_styler.grammar_insert_before(inside_lang, 'cdata', {
 		[tag_name]: {
 			pattern: RegExp(
 				/(<__[^>]*>)(?:<!\[CDATA\[(?:[^\]]|\](?!\]>))*\]\]>|(?!<!\[CDATA\[)[\s\S])*?(?=<\/__>)/.source.replace(

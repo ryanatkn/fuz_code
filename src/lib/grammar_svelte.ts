@@ -1,4 +1,5 @@
 import type {Create_Grammar, Grammar_Token, Syntax_Styler} from '$lib/syntax_styler.js';
+import {grammar_markup_add_inlined} from './grammar_markup.js';
 
 const blocks = '(if|else if|await|then|catch|each|html|debug)';
 
@@ -117,37 +118,5 @@ export const grammar_svelte_add_inlined = (
 	tag_name: string,
 	lang: string,
 ): void => {
-	const language_key = 'language_' + lang;
-
-	// TODO BLOCK share code with `grammar_markup_add_inlined`?
-	syntax_styler.grammar_insert_before('svelte', 'cdata', {
-		[tag_name]: {
-			pattern: RegExp(
-				/(<__[\s\S]*?>)(?:<!\[CDATA\[[\s\S]*?\]\]>\s*|[\s\S])*?(?=<\/__>)/.source.replace(
-					/__/g,
-					tag_name,
-				),
-				'i',
-			),
-			lookbehind: true,
-			greedy: true,
-			inside: {
-				included_cdata: {
-					pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
-					inside: {
-						cdata: /^<!\[CDATA\[|\]\]>$/i,
-						[language_key]: {
-							pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
-							lookbehind: true,
-							inside: syntax_styler.languages[lang],
-						},
-					},
-				},
-				[language_key]: {
-					pattern: /[\s\S]+/,
-					inside: syntax_styler.languages[lang],
-				},
-			},
-		},
-	});
+	grammar_markup_add_inlined(syntax_styler, tag_name, lang, 'svelte');
 };
