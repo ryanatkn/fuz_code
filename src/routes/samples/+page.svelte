@@ -11,7 +11,7 @@
 		{#each samples as { content, lang }}
 			<div>
 				<h2>{lang}</h2>
-				<pre><Code {content} language={lang} /></pre>
+				<pre><Code {content} {lang} /></pre>
 			</div>
 		{/each}
 	</div>

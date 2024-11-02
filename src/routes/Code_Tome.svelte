@@ -21,7 +21,7 @@
 	</p>
 	<p>To use it, import the default theme or your own:</p>
 	<Code
-		language="ts"
+		lang="ts"
 		content="// +layout.svelte
 import '@ryanatkn/fuz_code/theme.css'; // add this"
 	/>
@@ -73,7 +73,7 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 		<Code content={`<Code lang="ts" content="export type A<T> = ('b' | 3) & T;" />`} />
 	</div>
 	<div>
-		<Code language="ts" content={`export type A<T> = ('b' | 3) & T;`} />
+		<Code lang="ts" content={`export type A<T> = ('b' | 3) & T;`} />
 	</div>
 </section>
 <section>
@@ -83,7 +83,7 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 	<div class="mb_lg">
 		<Code content={'<Code lang={null} content="<aside>all is gray</aside>" />'} />
 	</div>
-	<Code language={null} content={`<aside>all is gray</aside>`} />
+	<Code lang={null} content={`<aside>all is gray</aside>`} />
 </section>
 <section>
 	<p>
