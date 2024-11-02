@@ -43,7 +43,7 @@ export class Syntax_Styler {
 	 * 3. `wrap`: on each `Syntax_Token`
 	 *
 	 * @param text - A string with the code to be styled.
-	 * @param language - The name of the language definition passed to `grammar`.
+	 * @param lang - The name of the language definition passed to `grammar`.
 	 * @param grammar - An object containing the tokens to use.
 	 *
 	 * Usually a language definition like `Syntax_Styler.langs.markup`.
@@ -56,18 +56,14 @@ export class Syntax_Styler {
 	 * @example
 	 * stylize('var foo = false;', 'ts', custom_grammar);
 	 */
-	stylize(
-		text: string,
-		language: string,
-		grammar: Grammar | undefined = this.langs[language],
-	): string {
+	stylize(text: string, lang: string, grammar: Grammar | undefined = this.langs[lang]): string {
 		if (!grammar) {
-			throw Error(`The language "${language}" has no grammar.`);
+			throw Error(`The language "${lang}" has no grammar.`);
 		}
 		var ctx: Hook_Before_Tokenize_Callback_Context = {
 			code: text,
 			grammar,
-			language,
+			lang,
 			tokens: undefined,
 		};
 		this.run_hook_before_tokenize(ctx);
@@ -76,7 +72,7 @@ export class Syntax_Styler {
 			ctx.grammar,
 		);
 		this.run_hook_after_tokenize(ctx as any as Hook_After_Tokenize_Callback_Context);
-		return this.stringify_token(encode(ctx.tokens), ctx.language);
+		return this.stringify_token(encode(ctx.tokens), ctx.lang);
 	}
 
 	/**
@@ -195,28 +191,28 @@ export class Syntax_Styler {
 	 * Runs the `wrap` hook on each `Syntax_Token`.
 	 *
 	 * @param o - The token or token stream to be converted.
-	 * @param language - The name of current language.
+	 * @param lang - The name of current language.
 	 * @returns The HTML representation of the token or token stream.
 	 */
-	stringify_token(o: string | Syntax_Token | Syntax_Token_Stream, language: string): string {
+	stringify_token(o: string | Syntax_Token | Syntax_Token_Stream, lang: string): string {
 		if (typeof o === 'string') {
 			return o;
 		}
 		if (Array.isArray(o)) {
 			var s = '';
 			for (var e of o) {
-				s += this.stringify_token(e, language);
+				s += this.stringify_token(e, lang);
 			}
 			return s;
 		}
 
 		var ctx: Hook_Wrap_Callback_Context = {
 			type: o.type,
-			content: this.stringify_token(o.content, language),
+			content: this.stringify_token(o.content, lang),
 			tag: 'span',
 			classes: ['token', o.type],
 			attributes: {},
-			language,
+			lang,
 		};
 
 		var aliases = o.alias;
@@ -719,13 +715,13 @@ export type Hook_Wrap_Callback = (ctx: Hook_Wrap_Callback_Context) => void;
 export interface Hook_Before_Tokenize_Callback_Context {
 	code: string;
 	grammar: Grammar;
-	language: string;
+	lang: string;
 	tokens: undefined;
 }
 export interface Hook_After_Tokenize_Callback_Context {
 	code: string;
 	grammar: Grammar;
-	language: string;
+	lang: string;
 	tokens: Syntax_Token_Stream;
 }
 export interface Hook_Wrap_Callback_Context {
@@ -734,7 +730,7 @@ export interface Hook_Wrap_Callback_Context {
 	tag: string;
 	classes: string[];
 	attributes: Record<string, string>;
-	language: string;
+	lang: string;
 }
 
 var unique_id = 0;

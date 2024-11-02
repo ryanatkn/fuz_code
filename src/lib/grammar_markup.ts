@@ -104,7 +104,7 @@ export const grammar_markup_add_inlined = (
 	lang: string,
 	inside_lang = 'markup',
 ): void => {
-	const language_key = 'language_' + lang;
+	const lang_key = 'lang_' + lang;
 
 	syntax_styler.grammar_insert_before(inside_lang, 'cdata', {
 		[tag_name]: {
@@ -124,14 +124,14 @@ export const grammar_markup_add_inlined = (
 					pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
 					inside: {
 						cdata: /^<!\[CDATA\[|\]\]>$/i,
-						[language_key]: {
+						[lang_key]: {
 							pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
 							lookbehind: true,
 							inside: syntax_styler.langs[lang],
 						},
 					},
 				},
-				[language_key]: {
+				[lang_key]: {
 					pattern: /[\s\S]+/,
 					inside: syntax_styler.langs[lang],
 				},
@@ -175,7 +175,7 @@ export const grammar_markup_add_attribute = (
 						value: {
 							pattern: /(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,
 							lookbehind: true,
-							alias: [lang, 'language_' + lang],
+							alias: [lang, 'lang_' + lang],
 							inside: syntax_styler.langs[lang],
 						},
 						punctuation: [

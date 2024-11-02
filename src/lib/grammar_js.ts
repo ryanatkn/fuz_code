@@ -100,7 +100,7 @@ export const create_grammar_js: Create_Grammar = (syntax_styler) => {
 				regex_source: {
 					pattern: /^(\/)[\s\S]+(?=\/[a-z]*$)/,
 					lookbehind: true,
-					alias: 'language_regex',
+					alias: 'lang_regex',
 					inside: syntax_styler.langs.regex,
 				},
 				regex_delimiter: /^\/|\/$/,

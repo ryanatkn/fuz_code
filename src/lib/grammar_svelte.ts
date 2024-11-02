@@ -21,7 +21,7 @@ export const create_grammar_svelte: Create_Grammar = (syntax_styler) => {
 		each: {
 			pattern: /{[#/]each(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*}/,
 			inside: {
-				language_ts: [
+				lang_ts: [
 					{
 						pattern: /(as[\s\S]*)\([\s\S]*\)(?=\s*\})/,
 						lookbehind: true,
@@ -49,7 +49,7 @@ export const create_grammar_svelte: Create_Grammar = (syntax_styler) => {
 			inside: {
 				punctuation: /^{|}$/,
 				keyword: [new RegExp('[#:/@]' + blocks + '( )*'), /as/, /then/],
-				language_ts: {
+				lang_ts: {
 					pattern: /[\s\S]*/,
 					inside: grammar_ts,
 				},
@@ -67,7 +67,7 @@ export const create_grammar_svelte: Create_Grammar = (syntax_styler) => {
 						namespace: /^[^\s>/:]+:/,
 					},
 				},
-				language_ts: {
+				lang_ts: {
 					pattern: /\{(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*\}/,
 					inside: grammar_ts,
 				},
@@ -81,7 +81,7 @@ export const create_grammar_svelte: Create_Grammar = (syntax_styler) => {
 								lookbehind: true,
 							},
 						],
-						language_ts: {
+						lang_ts: {
 							pattern: /{[\s\S]+}/,
 							inside: grammar_ts,
 						},
@@ -96,7 +96,7 @@ export const create_grammar_svelte: Create_Grammar = (syntax_styler) => {
 				},
 			},
 		},
-		language_ts: {
+		lang_ts: {
 			pattern: /\{(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*\}/,
 			lookbehind: true,
 			inside: grammar_ts,
