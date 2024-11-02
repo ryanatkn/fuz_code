@@ -202,7 +202,8 @@ console.table(bench.table());
 based on [Prism](https://github.com/PrismJS/prism)
 by [Lea Verou](https://lea.verou.me/)
 
-the Svelte grammar is based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
+the [Svelte grammar](src/lib/grammar_svelte.ts)
+is based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
 by [@pngwn](https://github.com/pngwn)
 
 [MIT](LICENSE)
