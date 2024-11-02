@@ -1,4 +1,4 @@
-import {Syntax_Styler, type Grammar_Token} from '$lib/syntax_styler.js';
+import type {Create_Grammar, Grammar_Token, Syntax_Styler} from '$lib/syntax_styler.js';
 
 const blocks = '(if|else if|await|then|catch|each|html|debug)';
 
@@ -10,7 +10,7 @@ const blocks = '(if|else if|await|then|catch|each|html|debug)';
  *
  * @see LICENSE
  */
-export const create_grammar_svelte = (syntax_styler: Syntax_Styler): void => {
+export const create_grammar_svelte: Create_Grammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.languages.ts;
 	if (!grammar_ts) {
 		throw Error('grammar_ts must be created before grammar_svelte');
@@ -119,6 +119,7 @@ export const grammar_svelte_add_inlined = (
 ): void => {
 	const language_key = 'language_' + lang;
 
+	// TODO BLOCK share code with `grammar_markup_add_inlined`?
 	syntax_styler.grammar_insert_before('svelte', 'cdata', {
 		[tag_name]: {
 			pattern: RegExp(

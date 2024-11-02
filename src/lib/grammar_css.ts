@@ -1,4 +1,4 @@
-import {Syntax_Styler, type Grammar} from '$lib/syntax_styler.js';
+import type {Create_Grammar, Grammar} from '$lib/syntax_styler.js';
 import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
 var string = /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/;
@@ -11,7 +11,7 @@ var string = /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\
  *
  * @see LICENSE
  */
-export const create_grammar_css = (syntax_styler: Syntax_Styler): void => {
+export const create_grammar_css: Create_Grammar = (syntax_styler) => {
 	const grammar_css = {
 		comment: /\/\*[\s\S]*?\*\//,
 		atrule: {

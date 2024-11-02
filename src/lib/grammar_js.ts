@@ -1,4 +1,4 @@
-import {Syntax_Styler} from '$lib/syntax_styler.js';
+import type {Create_Grammar} from '$lib/syntax_styler.js';
 import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
 /**
@@ -9,7 +9,7 @@ import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/gra
  *
  * @see LICENSE
  */
-export const create_grammar_js = (syntax_styler: Syntax_Styler): void => {
+export const create_grammar_js: Create_Grammar = (syntax_styler) => {
 	const grammar_clike = syntax_styler.languages.clike;
 	if (!grammar_clike) {
 		throw Error('grammar_clike must be created before grammar_js');
