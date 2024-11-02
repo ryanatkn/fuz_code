@@ -73,10 +73,9 @@ export const create_grammar_markup: Create_Grammar = (syntax_styler) => {
 		],
 	} satisfies Grammar;
 
-	syntax_styler.langs.markup = grammar_markup;
-
 	grammar_markup.tag.inside.attr_value.inside.entity = grammar_markup.entity;
 
+	syntax_styler.langs.markup = grammar_markup;
 	syntax_styler.langs.html = grammar_markup;
 	syntax_styler.langs.mathml = grammar_markup;
 	syntax_styler.langs.svg = grammar_markup;
