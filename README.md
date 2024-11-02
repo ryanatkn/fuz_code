@@ -76,9 +76,21 @@ Docs are a work in progress, open issues if you need help:
   and [outputs](src/lib/code_sample_outputs.ts))
 - [tests](src/lib/syntax_styler.test.ts)
 
-## Grammars
+## Modules
 
-For now, all of these are [enabled by default](src/lib/index.ts):
+- [@ryanatkn/fuz_code](src/lib/index.ts) - index with default grammars,
+  use this as a guide if you want custom grammars
+- [@ryanatkn/fuz_code/syntax_styler.js](src/lib/syntax_styler.ts) - utilities for custom grammars
+- [@ryanatkn/fuz_code/theme.css](src/lib/theme.css) -
+  default theme that depends on [Moss](https://github.com/ryanatkn/moss)
+- [@ryanatkn/fuz_code/theme_standalone.css](src/lib/theme_standalone.css) -
+  default theme with no dependencies
+- [@ryanatkn/fuz_code/Code.svelte](src/lib/Code.svelte) -
+  Svelte component with a convenient API
+
+### Grammars
+
+Enabled [by default](src/lib/index.ts):
 
 - [`markup`](src/lib/grammar_markup.ts) (html, xml, etc)
 - [`svelte`](src/lib/grammar_svelte.ts)
