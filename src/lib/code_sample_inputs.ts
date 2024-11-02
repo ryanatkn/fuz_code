@@ -1,7 +1,7 @@
 // code_sample_inputs.ts
 
 // see `styled_json_code` in `./code_sample_outputs.js`
-// for the result of `stylize(sample_json_code, Syntax_Styler.languages.json, 'json')`
+// for the result of `stylize(sample_json_code, Syntax_Styler.langs.json, 'json')`
 export const sample_json_code = `
 
 {
@@ -17,7 +17,7 @@ export const sample_json_code = `
 `.trim();
 
 // see `styled_html_code` in `./code_sample_outputs.js`
-// for the result of `stylize(sample_html_code, Syntax_Styler.languages.markup, 'html')`
+// for the result of `stylize(sample_html_code, Syntax_Styler.langs.markup, 'html')`
 export const sample_html_code = `
 
 <!DOCTYPE html>
@@ -64,7 +64,7 @@ export const sample_html_code = `
 `.trim();
 
 // see `styled_css_code` in `./code_sample_outputs.js`
-// for the result of `stylize(sample_css_code, Syntax_Styler.languages.css, 'css')`
+// for the result of `stylize(sample_css_code, Syntax_Styler.langs.css, 'css')`
 export const sample_css_code = `
 
 .some_class {
@@ -105,7 +105,7 @@ div > p {
 `.trim();
 
 // see `styled_ts_code` in `./code_sample_outputs.js`
-// for the result of `stylize(sample_ts_code, Syntax_Styler.languages.ts, 'ts')`
+// for the result of `stylize(sample_ts_code, Syntax_Styler.langs.ts, 'ts')`
 export const sample_ts_code = `
 
 const a = 1;
@@ -167,7 +167,7 @@ export const plus = (a: any, b: any): any => a + b;
 `.trim();
 
 // see `styled_css_code` in `./code_sample_outputs.js`
-// for the result of `stylize(sample_svelte_code, Syntax_Styler.languages.svelte, 'svelte')`
+// for the result of `stylize(sample_svelte_code, Syntax_Styler.langs.svelte, 'svelte')`
 export const sample_svelte_code = `
 
 <script lang="ts" module>

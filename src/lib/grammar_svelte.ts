@@ -12,7 +12,7 @@ const blocks = '(if|else if|await|then|catch|each|html|debug)';
  * @see LICENSE
  */
 export const create_grammar_svelte: Create_Grammar = (syntax_styler) => {
-	const grammar_ts = syntax_styler.languages.ts;
+	const grammar_ts = syntax_styler.langs.ts;
 	if (!grammar_ts) {
 		throw Error('grammar_ts must be created before grammar_svelte');
 	}
@@ -103,7 +103,7 @@ export const create_grammar_svelte: Create_Grammar = (syntax_styler) => {
 		},
 	});
 
-	syntax_styler.languages.svelte = grammar_svelte;
+	syntax_styler.langs.svelte = grammar_svelte;
 
 	// oof lol
 	((grammar_svelte.tag as Grammar_Token).inside!.attr_value as Grammar_Token).inside!.entity =

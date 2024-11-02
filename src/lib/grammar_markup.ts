@@ -73,18 +73,18 @@ export const create_grammar_markup: Create_Grammar = (syntax_styler) => {
 		],
 	} satisfies Grammar;
 
-	syntax_styler.languages.markup = grammar_markup;
+	syntax_styler.langs.markup = grammar_markup;
 
 	grammar_markup.tag.inside.attr_value.inside.entity = grammar_markup.entity;
 
-	syntax_styler.languages.html = grammar_markup;
-	syntax_styler.languages.mathml = grammar_markup;
-	syntax_styler.languages.svg = grammar_markup;
+	syntax_styler.langs.html = grammar_markup;
+	syntax_styler.langs.mathml = grammar_markup;
+	syntax_styler.langs.svg = grammar_markup;
 
-	syntax_styler.languages.xml = syntax_styler.extend_grammar('markup', {});
-	syntax_styler.languages.ssml = syntax_styler.languages.xml;
-	syntax_styler.languages.atom = syntax_styler.languages.xml;
-	syntax_styler.languages.rss = syntax_styler.languages.xml;
+	syntax_styler.langs.xml = syntax_styler.extend_grammar('markup', {});
+	syntax_styler.langs.ssml = syntax_styler.langs.xml;
+	syntax_styler.langs.atom = syntax_styler.langs.xml;
+	syntax_styler.langs.rss = syntax_styler.langs.xml;
 };
 
 /**
@@ -127,13 +127,13 @@ export const grammar_markup_add_inlined = (
 						[language_key]: {
 							pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
 							lookbehind: true,
-							inside: syntax_styler.languages[lang],
+							inside: syntax_styler.langs[lang],
 						},
 					},
 				},
 				[language_key]: {
 					pattern: /[\s\S]+/,
-					inside: syntax_styler.languages[lang],
+					inside: syntax_styler.langs[lang],
 				},
 			},
 		},
@@ -156,38 +156,38 @@ export const grammar_markup_add_attribute = (
 	attr_name: string,
 	lang: string,
 ): void => {
-	(
-		(syntax_styler.languages.markup!.tag as Grammar_Token).inside!.special_attr as Grammar_Token[]
-	).push({
-		pattern: RegExp(
-			/(^|["'\s])/.source +
-				'(?:' +
-				attr_name +
-				')' +
-				/\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))/.source,
-			'i',
-		),
-		lookbehind: true,
-		inside: {
-			attr_name: /^[^\s=]+/,
-			attr_value: {
-				pattern: /=[\s\S]+/,
-				inside: {
-					value: {
-						pattern: /(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,
-						lookbehind: true,
-						alias: [lang, 'language_' + lang],
-						inside: syntax_styler.languages[lang],
-					},
-					punctuation: [
-						{
-							pattern: /^=/,
-							alias: 'attr_equals',
+	((syntax_styler.langs.markup!.tag as Grammar_Token).inside!.special_attr as Grammar_Token[]).push(
+		{
+			pattern: RegExp(
+				/(^|["'\s])/.source +
+					'(?:' +
+					attr_name +
+					')' +
+					/\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))/.source,
+				'i',
+			),
+			lookbehind: true,
+			inside: {
+				attr_name: /^[^\s=]+/,
+				attr_value: {
+					pattern: /=[\s\S]+/,
+					inside: {
+						value: {
+							pattern: /(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,
+							lookbehind: true,
+							alias: [lang, 'language_' + lang],
+							inside: syntax_styler.langs[lang],
 						},
-						/"|'/,
-					],
+						punctuation: [
+							{
+								pattern: /^=/,
+								alias: 'attr_equals',
+							},
+							/"|'/,
+						],
+					},
 				},
 			},
 		},
-	});
+	);
 };

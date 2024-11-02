@@ -193,7 +193,7 @@ bench
 		syntax_styler.stylize(sample_svelte_code, 'svelte');
 	})
 	.add('Prism.highlight', () => {
-		Prism.highlight(sample_svelte_code, Prism.languages.svelte, 'svelte');
+		Prism.highlight(sample_svelte_code, Prism.langs.svelte, 'svelte');
 	})
 	.add('Shiki engine/javascript', () => {
 		shiki_highlighter_js.codeToHtml(sample_svelte_code, {lang: 'svelte', theme: 'nord'});

@@ -34,5 +34,5 @@ export const create_grammar_json: Create_Grammar = (syntax_styler) => {
 		},
 	} satisfies Grammar;
 
-	syntax_styler.languages.json = grammar_json;
+	syntax_styler.langs.json = grammar_json;
 };

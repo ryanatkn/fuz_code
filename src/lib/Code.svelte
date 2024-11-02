@@ -29,7 +29,7 @@
 		children,
 	}: Props = $props();
 
-	const grammar = $derived(language === null ? null : syntax_styler.languages[language]);
+	const grammar = $derived(language === null ? null : syntax_styler.langs[language]);
 
 	// TODO do this at compile time somehow
 	const styled = $derived(

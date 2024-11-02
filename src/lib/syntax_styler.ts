@@ -17,7 +17,7 @@ export class Syntax_Styler {
 	 * This namespace contains all currently loaded languages and the some helper functions to create and modify languages.
 	 */
 	// TODO BLOCK probably `add_language` and `get_language` and `maybe_get_language` API instead of manually mutating/reading
-	languages: Record<string, Grammar | undefined> = {
+	langs: Record<string, Grammar | undefined> = {
 		/**
 		 * The grammar for plain, unformatted text.
 		 */
@@ -29,7 +29,7 @@ export class Syntax_Styler {
 		if (grammars) {
 			for (const create_grammar of grammars) {
 				// TODO BLOCK this API
-				// this.languages[id] =
+				// this.langs[id] =
 				create_grammar(this);
 			}
 		}
@@ -49,7 +49,7 @@ export class Syntax_Styler {
 	 * @param language - The name of the language definition passed to `grammar`.
 	 * @param grammar - An object containing the tokens to use.
 	 *
-	 * Usually a language definition like `Syntax_Styler.languages.markup`.
+	 * Usually a language definition like `Syntax_Styler.langs.markup`.
 	 *
 	 * @returns the styled HTML
 	 *
@@ -62,7 +62,7 @@ export class Syntax_Styler {
 	stylize(
 		text: string,
 		language: string,
-		grammar: Grammar | undefined = this.languages[language],
+		grammar: Grammar | undefined = this.langs[language],
 	): string {
 		if (!grammar) {
 			throw Error(`The language "${language}" has no grammar.`);
@@ -89,12 +89,12 @@ export class Syntax_Styler {
 	 *
 	 * This helper method makes it easy to modify existing languages. For example, the CSS language definition
 	 * not only defines CSS styling for CSS documents, but also needs to define styling for CSS embedded
-	 * in HTML through `<style>` elements. To do this, it needs to modify `Syntax_Styler.languages.markup` and add the
-	 * appropriate tokens. However, `Syntax_Styler.languages.markup` is a regular JavaScript object literal, so if you do
+	 * in HTML through `<style>` elements. To do this, it needs to modify `Syntax_Styler.langs.markup` and add the
+	 * appropriate tokens. However, `Syntax_Styler.langs.markup` is a regular JavaScript object literal, so if you do
 	 * this:
 	 *
 	 * ```js
-	 * Syntax_Styler.languages.markup.style = {
+	 * Syntax_Styler.langs.markup.style = {
 	 *     // token
 	 * };
 	 * ```
@@ -119,7 +119,7 @@ export class Syntax_Styler {
 	 *
 	 * ```js
 	 * grammar_insert_before('markup', 'comment', {
-	 *     'comment': Syntax_Styler.languages.markup.comment,
+	 *     'comment': Syntax_Styler.langs.markup.comment,
 	 *     // tokens after 'comment'
 	 * });
 	 * ```
@@ -135,25 +135,25 @@ export class Syntax_Styler {
 	 * Instead, it will create a new object and replace all references to the target object with the new one. This
 	 * can be done without temporarily deleting properties, so the iteration order is well-defined.
 	 *
-	 * However, only references that can be reached from `Syntax_Styler.languages` or `insert` will be replaced. I.e. if
+	 * However, only references that can be reached from `Syntax_Styler.langs` or `insert` will be replaced. I.e. if
 	 * you hold the target object in a variable, then the value of the variable will not change.
 	 *
 	 * ```js
-	 * var oldMarkup = Syntax_Styler.languages.markup;
+	 * var oldMarkup = Syntax_Styler.langs.markup;
 	 * var newMarkup = grammar_insert_before('markup', 'comment', { ... });
 	 *
-	 * assert(oldMarkup !== Syntax_Styler.languages.markup);
-	 * assert(newMarkup === Syntax_Styler.languages.markup);
+	 * assert(oldMarkup !== Syntax_Styler.langs.markup);
+	 * assert(newMarkup === Syntax_Styler.langs.markup);
 	 * ```
 	 *
-	 * @param inside - The property of `root` (e.g. a language id in `Syntax_Styler.languages`) that contains the
+	 * @param inside - The property of `root` (e.g. a language id in `Syntax_Styler.langs`) that contains the
 	 * object to be modified.
 	 * @param before - The key to insert before.
 	 * @param insert - An object containing the key-value pairs to be inserted.
 	 * @param root - The object containing `inside`, i.e. the object that contains the
 	 * object to be modified.
 	 *
-	 * Defaults to `Syntax_Styler.languages`.
+	 * Defaults to `Syntax_Styler.langs`.
 	 *
 	 * @returns the new grammar object
 	 */
@@ -161,7 +161,7 @@ export class Syntax_Styler {
 		inside: string,
 		before: string,
 		insert: Grammar,
-		root: Record<string, any> = this.languages,
+		root: Record<string, any> = this.langs,
 	): Grammar {
 		var grammar = root[inside];
 		var updated: Grammar = {};
@@ -183,7 +183,7 @@ export class Syntax_Styler {
 		root[inside] = updated;
 
 		// Update references in other language definitions
-		depth_first_search(this.languages, (o, key, value) => {
+		depth_first_search(this.langs, (o, key, value) => {
 			if (value === old && key !== inside) {
 				o[key] = updated;
 			}
@@ -268,12 +268,12 @@ export class Syntax_Styler {
 	 * Therefore, it is encouraged to order overwriting tokens according to the positions of the overwritten tokens.
 	 * Furthermore, all non-overwriting tokens should be placed after the overwriting ones.
 	 *
-	 * @param id - The id of the language to extend. This has to be a key in `Syntax_Styler.languages`.
+	 * @param id - The id of the language to extend. This has to be a key in `Syntax_Styler.langs`.
 	 * @param redef - The new tokens to append.
 	 * @returns The new language created.
 	 * @example
-	 * Syntax_Styler.languages['css-with-colors'] = extend_grammar('css', {
-	 *     // Syntax_Styler.languages.css already has a 'comment' token, so this token will overwrite CSS' 'comment' token
+	 * Syntax_Styler.langs['css-with-colors'] = extend_grammar('css', {
+	 *     // Syntax_Styler.langs.css already has a 'comment' token, so this token will overwrite CSS' 'comment' token
 	 *     // at its original position
 	 *     'comment': { ... },
 	 *     // CSS doesn't have a 'color' token, so this token will be appended
@@ -281,7 +281,7 @@ export class Syntax_Styler {
 	 * });
 	 */
 	extend_grammar(id: string, redef: Grammar): Grammar {
-		var lang = deep_clone(this.languages[id]);
+		var lang = deep_clone(this.langs[id]);
 
 		if (!lang) {
 			throw Error(`Language "${id}" not found.`);
@@ -376,13 +376,13 @@ export interface Grammar_Token {
  * @param text - a string with the code to be styled
  * @param grammar - an object containing the tokens to use
  *
- * Usually a language definition like `Syntax_Styler.languages.markup`.
+ * Usually a language definition like `Syntax_Styler.langs.markup`.
  *
  * @returns an array of strings and tokens, a token stream
  *
  * @example
  * var code = `var foo = 0;`;
- * var tokens = tokenize_syntax(code, Syntax_Styler.languages.js);
+ * var tokens = tokenize_syntax(code, Syntax_Styler.langs.js);
  * for (var token of tokens) {
  *     if (token instanceof Syntax_Token && token.type === 'number') {
  *         console.log(`Found numeric literal: ${token.content}`);
