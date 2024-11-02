@@ -195,8 +195,7 @@ export class Syntax_Styler {
 	/**
 	 * Converts the given token or token stream to an HTML representation.
 	 *
-	 * The following hooks will be run:
-	 * 1. `wrap`: On each {@link Syntax_Token}.
+	 * Runs the `wrap` hook on each `Syntax_Token`.
 	 *
 	 * @param o - The token or token stream to be converted.
 	 * @param language - The name of current language.
@@ -226,7 +225,7 @@ export class Syntax_Styler {
 		var aliases = o.alias;
 		if (aliases) {
 			if (Array.isArray(aliases)) {
-				Array.prototype.push.apply(ctx.classes, aliases);
+				ctx.classes.push(...aliases);
 			} else {
 				ctx.classes.push(aliases);
 			}
@@ -294,6 +293,7 @@ export class Syntax_Styler {
 	// TODO add some builtins
 	plugins: Record<string, any> = {};
 
+	// TODO maybe extend/compose an event listener?
 	hooks_before_tokenize: Hook_Before_Tokenize_Callback[] = [];
 	hooks_after_tokenize: Hook_After_Tokenize_Callback[] = [];
 	hooks_wrap: Hook_Wrap_Callback[] = [];
@@ -395,7 +395,7 @@ export const tokenize_syntax = (text: string, grammar: Grammar): Syntax_Token_St
 		for (var token in rest) {
 			grammar[token] = rest[token];
 		}
-		grammar.rest = undefined; // preserve shape (original code used `delete`)
+		grammar.rest = undefined; // preserve shape
 	}
 
 	var token_list = new Linked_List();
@@ -432,7 +432,7 @@ export class Syntax_Token {
 	/**
 	 * The type of the token.
 	 *
-	 * This is usually the key of a pattern in a {@link Grammar}.
+	 * This is usually the key of a pattern in a `Grammar`.
 	 */
 	type: string;
 
@@ -459,8 +459,7 @@ export class Syntax_Token {
 		this.type = type;
 		this.content = content;
 		this.alias = alias;
-
-		this.length = matched_str.length | 0;
+		this.length = matched_str.length;
 	}
 }
 
@@ -489,7 +488,7 @@ const match_pattern = (
 		// change the match to remove the text matched by the lookbehind group
 		var lookbehind_length = match[1].length;
 		match.index += lookbehind_length;
-		match[0] = match[0].slice(lookbehind_length);
+		match[0] = match[0].substring(lookbehind_length);
 	}
 	return match;
 };
@@ -596,7 +595,7 @@ const match_grammar = (
 					remove_count--;
 
 					// replace with the new match
-					str = text.slice(pos, p);
+					str = text.substring(pos, p);
 					match.index -= pos;
 				} else {
 					match = match_pattern(pattern, 0, str!, lookbehind);
@@ -607,8 +606,8 @@ const match_grammar = (
 
 				var from = match.index;
 				var match_str = match[0];
-				var before = str!.slice(0, from);
-				var after = str!.slice(from + match_str.length);
+				var before = str!.substring(0, from);
+				var after = str!.substring(from + match_str.length);
 
 				var reach = pos + str!.length;
 				if (rematch && reach > rematch.reach) {
