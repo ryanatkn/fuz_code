@@ -11,7 +11,7 @@ fuz_code is a rework of [Prism](https://github.com/PrismJS/prism). The main chan
 - has a minimal, explicit API to generate stylized HTML, and knows nothing about the DOM
 - uses stateless ES modules instead of globals with side effects and pseudo-module behaviors
 - has various incompatible changes, so using Prism grammars requires some tweaks
-- smaller and faster (is marginally faster and perf will be prioritized soon)
+- smaller (by 6.5kB, 3kB gzipped) and [faster](#benchmarks)
 - written in TypeScript
 
 It also has builtin [Svelte](https://svelte.dev/) support
@@ -102,6 +102,9 @@ For now, all of these are [enabled by default](src/lib/index.ts):
 
 ## Benchmarks
 
+Performance is a high priority to best support runtime usage.
+This project is still early and there are more gains to be had.
+
 Note that this benchmark is somewhat unfair to Shiki
 because it's not designed for runtime usage,
 and it probably does a significantly better job at the task at hand
@@ -117,8 +120,7 @@ Results styling the [Svelte sample](src/lib/code_sample_inputs.ts):
 | Shiki builtin regexp  | 41 ± 0.27%                 | 40                        | 82      |
 
 Directly runnable benchmarks are not included yet -
-I don't know if I'll add them here or make a separate project,
-but I plan to continue to improve performance to best support runtime usage.
+I don't know if I'll add them here or make a separate project.
 
 To run the benchmarks yourself:
 
