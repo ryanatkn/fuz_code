@@ -82,18 +82,61 @@
     "!dist/**/*.test.*"
   ],
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./package.json": "./package.json",
+    "./code_sample_inputs.js": {
+      "types": "./dist/code_sample_inputs.d.ts",
+      "default": "./dist/code_sample_inputs.js"
+    },
+    "./code_sample_outputs.js": {
+      "types": "./dist/code_sample_outputs.d.ts",
+      "default": "./dist/code_sample_outputs.js"
+    },
     "./Code.svelte": {
       "types": "./dist/Code.svelte.d.ts",
       "svelte": "./dist/Code.svelte",
       "default": "./dist/Code.svelte"
     },
-    "./prism.css": {
-      "default": "./dist/prism.css"
+    "./grammar_clike.js": {
+      "types": "./dist/grammar_clike.d.ts",
+      "default": "./dist/grammar_clike.js"
     },
-    "./remove_prism_css_vite_plugin.js": {
-      "types": "./dist/remove_prism_css_vite_plugin.d.ts",
-      "default": "./dist/remove_prism_css_vite_plugin.js"
+    "./grammar_css.js": {
+      "types": "./dist/grammar_css.d.ts",
+      "default": "./dist/grammar_css.js"
+    },
+    "./grammar_js.js": {
+      "types": "./dist/grammar_js.d.ts",
+      "default": "./dist/grammar_js.js"
+    },
+    "./grammar_json.js": {
+      "types": "./dist/grammar_json.d.ts",
+      "default": "./dist/grammar_json.js"
+    },
+    "./grammar_markup.js": {
+      "types": "./dist/grammar_markup.d.ts",
+      "default": "./dist/grammar_markup.js"
+    },
+    "./grammar_svelte.js": {
+      "types": "./dist/grammar_svelte.d.ts",
+      "default": "./dist/grammar_svelte.js"
+    },
+    "./grammar_ts.js": {
+      "types": "./dist/grammar_ts.d.ts",
+      "default": "./dist/grammar_ts.js"
+    },
+    "./syntax_styler.js": {
+      "types": "./dist/syntax_styler.d.ts",
+      "default": "./dist/syntax_styler.js"
+    },
+    "./theme_standalone.css": {
+      "default": "./dist/theme_standalone.css"
+    },
+    "./theme.css": {
+      "default": "./dist/theme.css"
     }
   }
 }
