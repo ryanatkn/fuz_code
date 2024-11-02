@@ -199,7 +199,10 @@ console.table(bench.table());
 
 ## License [🐦](https://wikipedia.org/wiki/Free_and_open-source_software)
 
-based on [Prism](https://github.com/PrismJS/prism) by [Lea Verou](https://lea.verou.me/)
-and [`prism-svelte`](https://github.com/pngwn/prism-svelte) by [@pngwn](https://github.com/pngwn)
+based on [Prism](https://github.com/PrismJS/prism)
+by [Lea Verou](https://lea.verou.me/)
+
+the Svelte grammar is based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
+by [@pngwn](https://github.com/pngwn)
 
 [MIT](LICENSE)
