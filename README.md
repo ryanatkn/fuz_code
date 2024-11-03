@@ -19,12 +19,11 @@ but there are two optional dependencies,
 [Svelte](https://svelte.dev/) and
 the `color-scheme`-adaptive colors from [Moss](https://github.com/ryanatkn/moss).
 
-fuz_code provides optional builtin Svelte support
+- fuz_code provides optional builtin Svelte support
 with a [Svelte grammar](src/lib/grammar_svelte.ts)
 based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
 and a [Svelte component](src/lib/Code.svelte) for convenient usage.
-
-The [default theme](src/lib/theme.css) integrates
+- The [default theme](src/lib/theme.css) integrates
 with my CSS library [Moss](https://github.com/ryanatkn/moss).
 A zero-dependency fuz_code [theme](src/lib/theme_standalone.css)
 is also provided with some caveats, see below for more.
