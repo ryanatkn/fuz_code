@@ -46,9 +46,7 @@
 
 <svelte:element this={tag} {...pre_attrs} class="code" class:inline class:pre={inline}
 	><code {...code_attrs}
-		>{#if children}{@render children(
-				markup,
-			)}{:else if styled !== null}{@html styled}{:else}{content}{/if}</code
+		>{#if children}{@render children(markup)}{:else}{@html markup}{/if}</code
 	></svelte:element
 >
 

@@ -15,7 +15,7 @@
 	<p>
 		The
 		<Tome_Link name="Code" />
-		component supports syntax styling originally based on
+		Svelte component supports syntax styling originally based on
 		<a href="https://github.com/PrismJS/prism">Prism</a> by
 		<a href="https://lea.verou.me/">Lea Verou</a>.
 	</p>
@@ -35,8 +35,9 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 </section>
 <section>
 	<aside>
-		⚠️ Performing syntax styling at runtime like this is wasteful. The API's efficiency is
-		work-in-progress - for now you can use <code>lang={'{'}null}</code> with pre-highligted text.
+		⚠️ Performing syntax styling at runtime like this is often wasteful. The plan is to provide a
+		Vite plugin to optimize static cases. For now you can use <code>lang={'{'}null}</code> with pre-highligted
+		HTML.
 	</aside>
 </section>
 <section>

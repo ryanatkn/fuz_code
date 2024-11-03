@@ -18,17 +18,20 @@
 			<Package_Summary {pkg} />
 		</section>
 		<section>
-			<aside>
-				⚠️ Docs are a work in progress, the <a href="https://github.com/ryanatkn/fuz_code">readme</a
-				> has more info.
+			<aside class="width_sm">
+				⚠️ Docs are a work in progress. This page has usage examples with the optional Svelte
+				component, and the <a href="https://github.com/ryanatkn/fuz_code">readme</a> has TypeScript usage
+				docs.
 			</aside>
 		</section>
-		<section>
-			<Code_Tome />
+		<section class="panel">
+			<div class="bg shadow_sm radius_xs">
+				<Code_Tome />
+			</div>
 		</section>
-		<section class="box gap_lg">
-			<a href="{base}/about" class="chip">about</a>
+		<section class="box gap_xl3 size_xl2">
 			<a href="{base}/samples" class="chip">samples</a>
+			<a href="{base}/about" class="chip">about</a>
 		</section>
 		<section>
 			<Library_Footer {pkg} root_url="https://www.fuz.dev/" />
@@ -42,10 +45,10 @@
 		margin-bottom: var(--space_xl5);
 		padding: var(--space_xl3) 0;
 	}
-	section {
+	/* section {
 		margin-bottom: var(--space_xl5);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-	}
+	} */
 </style>

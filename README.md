@@ -2,7 +2,7 @@
 
 [<img src="static/logo.svg" alt="a friendly pink spider facing you" align="right" width="192" height="192">](https://code.fuz.dev/)
 
-> syntax styling utilities and components for Svelte, SvelteKit, TypeScript 🎨
+> syntax styling utilities and components for TypeScript, Svelte, SvelteKit 🎨
 
 **[code.fuz.dev](https://code.fuz.dev/)**
 
@@ -14,9 +14,10 @@ fuz_code is a rework of [Prism](https://github.com/PrismJS/prism). The main chan
 - smaller (by 7kB minified and 3kB gzipped, ~1/3 less) and [faster](#benchmarks)
 - written in TypeScript
 
-Like Prism, there are zero dependencies (unless you count `@types/prismjs`),
+Like Prism, there are zero dependencies (unless you count Prism's `@types/prismjs`),
 but there are two optional dependencies,
-[Svelte](https://svelte.dev/) and the stylesheet from [Moss](https://github.com/ryanatkn/moss).
+[Svelte](https://svelte.dev/) and
+the `color-scheme`-adaptive colors from [Moss](https://github.com/ryanatkn/moss).
 
 fuz_code provides optional builtin Svelte support
 with a [Svelte grammar](src/lib/grammar_svelte.ts)
@@ -25,12 +26,12 @@ and a [Svelte component](src/lib/Code.svelte) for convenient usage.
 
 The [default theme](src/lib/theme.css) integrates
 with my CSS library [Moss](https://github.com/ryanatkn/moss).
-A [zero-dependency theme](src/lib/theme_standalone.css)
-is provided with some caveats, see below for more.
+A zero-dependency fuz_code [theme](src/lib/theme_standalone.css)
+is also provided with some caveats, see below for more.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is much lighter
-(with its faster `shiki/engine/javascript`, 503kB minified to 16kB, 63kb gzipped to 5.6kB)
+(with its faster `shiki/engine/javascript`, 503kB minified to 16kB, 63kb gzipped to 5.6kB),
 and [vastly faster](#benchmarks)
 for runtime usage because it uses JS regexps instead of
 the [Onigurama regexp engine](https://shiki.matsu.io/guide/regex-engines)
@@ -107,8 +108,8 @@ Enabled [by default](src/lib/index.ts):
 
 Docs are a work in progress:
 
-- this readme has usage instructions
-- [code.fuz.dev](https://code.fuz.dev/)
+- this readme has basic usage instructions
+- [code.fuz.dev](https://code.fuz.dev/) has usage examples with the Svelte component
 - [samples](https://code.fuz.dev/samples) on the website
   (also see the [inputs](src/lib/code_sample_inputs.ts)
   and [outputs](src/lib/code_sample_outputs.ts))
