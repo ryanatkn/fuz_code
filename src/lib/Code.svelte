@@ -1,13 +1,10 @@
 <script lang="ts">
-	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
 	import type {Snippet} from 'svelte';
 
-	import {syntax_styler as syntax_styler_default} from '$lib/index.js';
-	import {Syntax_Styler, type Grammar} from '$lib/syntax_styler.js'; // TODO lazy load these grammars (cache promise in module context)
+	import {syntax_styler as syntax_styler_default} from '$lib/index.js'; // TODO lazy load these grammars (cache promise in module context)
+	import {Syntax_Styler, type Grammar} from '$lib/syntax_styler.js';
 
-	/**
-	 * Users are expected to import `@ryanatkn/fuz_code/theme.css`, like in the main `+layout.svelte`.
-	 */
+	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
 
 	interface Props {
 		content: string;
