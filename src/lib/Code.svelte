@@ -1,20 +1,19 @@
 <script lang="ts">
-	// TODO do syntax highlighting at compile-time in the normal case, and don't import these at runtime
-	import Prism from 'prismjs';
-	import 'prismjs/components/prism-typescript.js';
-	import 'prism-svelte';
 	import type {Snippet} from 'svelte';
 
-	/**
-	 * Users are expected to import `@ryanatkn/fuz_code/prism.css`, like in the main `+layout.svelte`.
-	 */
+	import {syntax_styler as syntax_styler_default} from '$lib/index.js'; // TODO lazy load these grammars (cache promise in module context)
+	import {Syntax_Styler, type Grammar} from '$lib/syntax_styler.js';
+
+	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
 
 	interface Props {
 		content: string;
 		pre_attrs?: any;
 		code_attrs?: any;
 		lang?: string | null;
+		grammar?: Grammar | undefined;
 		inline?: boolean;
+		syntax_styler?: Syntax_Styler;
 		children?: Snippet<[markup: string]>;
 	}
 
@@ -23,38 +22,38 @@
 		pre_attrs,
 		code_attrs,
 		lang = 'svelte',
+		grammar,
 		inline = false,
+		syntax_styler = syntax_styler_default,
 		children,
 	}: Props = $props();
 
-	const grammar = $derived(lang === null ? null : Prism.languages[lang]);
-
 	// TODO do this at compile time somehow
-	const highlighted = $derived(
-		grammar === null ? null : content && Prism.highlight(content, grammar, lang!),
+	const styled = $derived(
+		lang === null || !content ? null : syntax_styler.stylize(content, lang, grammar),
 	);
-	const markup = $derived(highlighted ?? content);
+	const markup = $derived(styled ?? content);
 
-	// TODO add `CopyToClipboard`, maybe only when not inline?
+	const tag = $derived(inline ? 'span' : 'pre');
 
 	/* eslint-disable svelte/no-at-html-tags */
 </script>
 
-<pre class:inline {...pre_attrs}><code {...code_attrs}
-		>{#if children}{@render children(
-				markup,
-			)}{:else if highlighted !== null}{@html highlighted}{:else}{content}{/if}</code
-	></pre>
+<svelte:element this={tag} {...pre_attrs} class="code" class:inline class:pre={inline}
+	><code {...code_attrs}
+		>{#if children}{@render children(markup)}{:else}{@html markup}{/if}</code
+	></svelte:element
+>
 
 <style>
-	pre {
+	.code {
 		background-color: var(--fg_1);
 		border-radius: var(--radius_xs);
 		padding: var(--space_xs3) var(--space_xs);
 	}
 	code {
 		background-color: unset;
-		/* the default `code` padding displays incorrectly wrapping the highlighted code */
+		/* the default `code` padding displays incorrectly wrapping the styled code */
 		padding: 0;
 	}
 	.inline {

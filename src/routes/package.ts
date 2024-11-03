@@ -6,7 +6,7 @@ import type {Src_Json} from '@ryanatkn/gro/src_json.js';
 export const package_json = {
 	name: '@ryanatkn/fuz_code',
 	version: '0.20.0',
-	description: 'syntax highlighting using prismjs for Svelte, SvelteKit, TypeScript, and Fuz',
+	description: 'syntax styling utilities and components for TypeScript, Svelte, SvelteKit',
 	glyph: '🎨',
 	logo: 'logo.svg',
 	logo_alt: 'a friendly pink spider facing you',
@@ -28,7 +28,8 @@ export const package_json = {
 	},
 	type: 'module',
 	engines: {node: '>=20.17'},
-	peerDependencies: {'@ryanatkn/moss': '*', 'prism-svelte': '^0.5', prismjs: '^1', svelte: '^5'},
+	peerDependencies: {'@ryanatkn/moss': '*', svelte: '^5'},
+	peerDependenciesMeta: {'@ryanatkn/moss': {optional: true}, svelte: {optional: true}},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.0',
 		'@ryanatkn/belt': '^0.26.1',
@@ -40,13 +41,11 @@ export const package_json = {
 		'@sveltejs/kit': '^2.7.4',
 		'@sveltejs/package': '^2.3.7',
 		'@sveltejs/vite-plugin-svelte': '^4.0.0',
-		'@types/prismjs': '^1.26.5',
+		'@types/node': '^22.8.6',
 		eslint: '^9.14.0',
 		'eslint-plugin-svelte': '^2.46.0',
 		prettier: '^3.3.3',
 		'prettier-plugin-svelte': '^3.2.7',
-		'prism-svelte': '^0.5.0',
-		prismjs: '^1.29.0',
 		svelte: '^5.1.9',
 		'svelte-check': '^4.0.5',
 		tslib: '^2.8.1',
@@ -65,17 +64,37 @@ export const package_json = {
 	sideEffects: ['**/*.css'],
 	files: ['dist', 'src/lib/**/*.ts', '!src/lib/**/*.test.*', '!dist/**/*.test.*'],
 	exports: {
+		'.': {types: './dist/index.d.ts', default: './dist/index.js'},
 		'./package.json': './package.json',
+		'./code_sample_inputs.js': {
+			types: './dist/code_sample_inputs.d.ts',
+			default: './dist/code_sample_inputs.js',
+		},
+		'./code_sample_outputs.js': {
+			types: './dist/code_sample_outputs.d.ts',
+			default: './dist/code_sample_outputs.js',
+		},
 		'./Code.svelte': {
 			types: './dist/Code.svelte.d.ts',
 			svelte: './dist/Code.svelte',
 			default: './dist/Code.svelte',
 		},
-		'./prism.css': {default: './dist/prism.css'},
-		'./remove_prism_css_vite_plugin.js': {
-			types: './dist/remove_prism_css_vite_plugin.d.ts',
-			default: './dist/remove_prism_css_vite_plugin.js',
+		'./grammar_clike.js': {types: './dist/grammar_clike.d.ts', default: './dist/grammar_clike.js'},
+		'./grammar_css.js': {types: './dist/grammar_css.d.ts', default: './dist/grammar_css.js'},
+		'./grammar_js.js': {types: './dist/grammar_js.d.ts', default: './dist/grammar_js.js'},
+		'./grammar_json.js': {types: './dist/grammar_json.d.ts', default: './dist/grammar_json.js'},
+		'./grammar_markup.js': {
+			types: './dist/grammar_markup.d.ts',
+			default: './dist/grammar_markup.js',
 		},
+		'./grammar_svelte.js': {
+			types: './dist/grammar_svelte.d.ts',
+			default: './dist/grammar_svelte.js',
+		},
+		'./grammar_ts.js': {types: './dist/grammar_ts.d.ts', default: './dist/grammar_ts.js'},
+		'./syntax_styler.js': {types: './dist/syntax_styler.d.ts', default: './dist/syntax_styler.js'},
+		'./theme_standalone.css': {default: './dist/theme_standalone.css'},
+		'./theme.css': {default: './dist/theme.css'},
 	},
 } satisfies Package_Json;
 
@@ -83,13 +102,86 @@ export const src_json = {
 	name: '@ryanatkn/fuz_code',
 	version: '0.20.0',
 	modules: {
+		'.': {path: 'index.ts', declarations: [{name: 'syntax_styler', kind: 'variable'}]},
 		'./package.json': {path: 'package.json', declarations: []},
-		'./Code.svelte': {path: 'Code.svelte', declarations: []},
-		'./prism.css': {path: 'prism.css', declarations: []},
-		'./remove_prism_css_vite_plugin.js': {
-			path: 'remove_prism_css_vite_plugin.ts',
-			declarations: [{name: 'remove_prism_css', kind: 'function'}],
+		'./code_sample_inputs.js': {
+			path: 'code_sample_inputs.ts',
+			declarations: [
+				{name: 'sample_json_code', kind: 'variable'},
+				{name: 'sample_html_code', kind: 'variable'},
+				{name: 'sample_css_code', kind: 'variable'},
+				{name: 'sample_ts_code', kind: 'variable'},
+				{name: 'sample_svelte_code', kind: 'variable'},
+				{name: 'samples', kind: 'variable'},
+			],
 		},
+		'./code_sample_outputs.js': {
+			path: 'code_sample_outputs.ts',
+			declarations: [
+				{name: 'styled_json_code', kind: 'variable'},
+				{name: 'styled_html_code', kind: 'variable'},
+				{name: 'styled_css_code', kind: 'variable'},
+				{name: 'styled_ts_code', kind: 'variable'},
+				{name: 'styled_svelte_code', kind: 'variable'},
+			],
+		},
+		'./Code.svelte': {path: 'Code.svelte', declarations: []},
+		'./grammar_clike.js': {
+			path: 'grammar_clike.ts',
+			declarations: [{name: 'add_grammar_clike', kind: 'variable'}],
+		},
+		'./grammar_css.js': {
+			path: 'grammar_css.ts',
+			declarations: [{name: 'add_grammar_css', kind: 'variable'}],
+		},
+		'./grammar_js.js': {
+			path: 'grammar_js.ts',
+			declarations: [{name: 'add_grammar_js', kind: 'variable'}],
+		},
+		'./grammar_json.js': {
+			path: 'grammar_json.ts',
+			declarations: [{name: 'add_grammar_json', kind: 'variable'}],
+		},
+		'./grammar_markup.js': {
+			path: 'grammar_markup.ts',
+			declarations: [
+				{name: 'add_grammar_markup', kind: 'variable'},
+				{name: 'grammar_markup_add_inlined', kind: 'function'},
+				{name: 'grammar_markup_add_attribute', kind: 'function'},
+			],
+		},
+		'./grammar_svelte.js': {
+			path: 'grammar_svelte.ts',
+			declarations: [
+				{name: 'add_grammar_svelte', kind: 'variable'},
+				{name: 'grammar_svelte_add_inlined', kind: 'function'},
+			],
+		},
+		'./grammar_ts.js': {
+			path: 'grammar_ts.ts',
+			declarations: [{name: 'add_grammar_ts', kind: 'variable'}],
+		},
+		'./syntax_styler.js': {
+			path: 'syntax_styler.ts',
+			declarations: [
+				{name: 'Add_Grammar', kind: 'type'},
+				{name: 'Syntax_Styler', kind: 'class'},
+				{name: 'Grammar_Value', kind: 'type'},
+				{name: 'Grammar', kind: 'type'},
+				{name: 'Grammar_Token', kind: 'type'},
+				{name: 'tokenize_syntax', kind: 'function'},
+				{name: 'Syntax_Token', kind: 'class'},
+				{name: 'Syntax_Token_Stream', kind: 'type'},
+				{name: 'Hook_Before_Tokenize_Callback', kind: 'type'},
+				{name: 'Hook_After_Tokenize_Callback', kind: 'type'},
+				{name: 'Hook_Wrap_Callback', kind: 'type'},
+				{name: 'Hook_Before_Tokenize_Callback_Context', kind: 'type'},
+				{name: 'Hook_After_Tokenize_Callback_Context', kind: 'type'},
+				{name: 'Hook_Wrap_Callback_Context', kind: 'type'},
+			],
+		},
+		'./theme_standalone.css': {path: 'theme_standalone.css', declarations: []},
+		'./theme.css': {path: 'theme.css', declarations: []},
 	},
 } satisfies Src_Json;
 

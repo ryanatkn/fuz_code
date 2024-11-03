@@ -7,6 +7,8 @@
 	import Code_Tome from '$routes/Code_Tome.svelte';
 	import {package_json, src_json} from '$routes/package.js';
 
+	// import '$lib/benchmark.js';
+
 	const pkg = parse_package_meta(package_json, src_json);
 </script>
 
@@ -16,17 +18,19 @@
 			<Package_Summary {pkg} />
 		</section>
 		<section>
-			<blockquote class="width_sm">
-				⚠️ this library is going to <a href="https://github.com/ryanatkn/fuz_code/issues/8"
-					>replace</a
-				>
-				<code>prismjs</code> with <code><a href="https://github.com/shikijs/shiki">shiki</a></code>
-			</blockquote>
+			<aside class="width_sm">
+				⚠️ Docs are a work in progress. This page has usage examples with the optional Svelte
+				component, and the <a href="https://github.com/ryanatkn/fuz_code">readme</a> has TypeScript usage
+				docs.
+			</aside>
 		</section>
-		<section>
-			<Code_Tome />
+		<section class="panel">
+			<div class="bg shadow_sm radius_xs">
+				<Code_Tome />
+			</div>
 		</section>
-		<section class="box">
+		<section class="box gap_xl3 size_xl2">
+			<a href="{base}/samples" class="chip">samples</a>
 			<a href="{base}/about" class="chip">about</a>
 		</section>
 		<section>
@@ -41,10 +45,10 @@
 		margin-bottom: var(--space_xl5);
 		padding: var(--space_xl3) 0;
 	}
-	section {
+	/* section {
 		margin-bottom: var(--space_xl5);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-	}
+	} */
 </style>

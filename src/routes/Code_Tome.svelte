@@ -15,19 +15,15 @@
 	<p>
 		The
 		<Tome_Link name="Code" />
-		component supports syntax highlighting with
-		<a href="https://prismjs.com/">Prism</a> (<a href="https://github.com/PrismJS/prism">repo</a>).
+		Svelte component supports syntax styling originally based on
+		<a href="https://github.com/PrismJS/prism">Prism</a> by
+		<a href="https://lea.verou.me/">Lea Verou</a>.
 	</p>
-	<p>It depends on two packages that you must install yourself:</p>
-	<Code content="npm i -D prismjs prism-svelte" lang={null} />
-	<p>Then import the styles:</p>
+	<p>To use it, import the default theme or your own:</p>
 	<Code
 		lang="ts"
 		content="// +layout.svelte
-import '@ryanatkn/moss/style.css';
-import '@ryanatkn/moss/theme.css'; // or your own
-// add this:
-import '@ryanatkn/fuz_code/prism.css'; // add this"
+import '@ryanatkn/fuz_code/theme.css'; // add this"
 	/>
 	<p>then use <Tome_Link name="Code" />:</p>
 	<Code
@@ -39,25 +35,27 @@ import '@ryanatkn/fuz_code/prism.css'; // add this"
 </section>
 <section>
 	<aside>
-		⚠️ Performing syntax highlighting at runtime like this is wasteful. The API's efficiency is
-		work-in-progress - you can use <code>lang={'{'}null}</code> with pre-highligted text but the
-		component will still import <code>prismjs</code> and <code>prism-svelte</code>.
+		⚠️ Performing syntax styling at runtime like this is often wasteful. The plan is to provide a
+		Vite plugin to optimize static cases. For now you can use <code>lang={'{'}null}</code> with pre-highligted
+		HTML.
 	</aside>
 </section>
 <section>
 	<p>
-		<Tome_Link name="Code" /> highlights
+		<Tome_Link name="Code" /> styles
 		<a href="https://svelte.dev/">Svelte</a>
-		by default:
+		by default, originally based on
+		<a href="https://github.com/pngwn/prism-svelte"><code>prism-svelte</code></a>
+		by <a href="https://github.com/pngwn">@pngwn</a>:
 	</p>
 	<div class="mb_lg">
 		<Code content={'<Code content="<scr..." />'} />
 	</div>
-	<p>highlighted:</p>
+	<p>styled:</p>
 	<div>
 		<Code
 			content={'<' +
-				`script>
+				`script lang="ts">
 	import Card from '@fuz.dev/fuz-library/Card.svelte';
 	console.log('hello Card', Card);
 </script>
@@ -81,60 +79,27 @@ import '@ryanatkn/fuz_code/prism.css'; // add this"
 </section>
 <section>
 	<p>
-		Passing <code>lang={'{'}null}</code> disables syntax highlighting:
+		Passing <code>lang={'{'}null}</code> disables syntax styling:
 	</p>
-	<Code lang={null} content={`<aside>all is gray</aside>`} />
 	<div class="mb_lg">
-		<Code content={'<Code lang={null} content="..." />'} />
+		<Code content={'<Code lang={null} content="<aside>all is gray</aside>" />'} />
 	</div>
+	<Code lang={null} content={`<aside>all is gray</aside>`} />
 </section>
 <section>
 	<p>
 		<Tome_Link name="Code" /> is a block by default:
 	</p>
-	<!-- TODO @many this `div` should be `<p>` but it errors with "`<pre>` contain `<p>`", but it's the other way around? -->
 	<div>ab<Code content="c" /></div>
 	<Code content={'<div>ab<Code content="c" /></div>'} />
 </section>
 <section>
-	<!-- TODO @many this `div` should be `<p>` but it errors with "`<pre>` contain `<p>`", but it's the other way around? -->
-	<div>
+	<p>
 		<Tome_Link name="Code" /> can be inlined with <Code
 			inline
 			content={`<Code inline content="..." />`}
 		/>
-	</div>
-</section>
-<section>
-	<p>
-		The <code
-			><a
-				href="https://github.com/ryanatkn/fuz_code/blob/main/src/lib/remove_prism_css_vite_plugin.ts"
-				>remove_prism_css</a
-			></code
-		>
-		Vite plugin is an optimization that excludes the builtin Prism theme, letting you use a minimal theme
-		that doesn't need selectors for overrides like
-		<code
-			><a href="https://github.com/ryanatkn/fuz_code/blob/main/src/lib/prism.css"
-				>@ryanatkn/fuz_code/prism.css</a
-			></code
-		>, while also avoiding waste:
 	</p>
-	<div>
-		<Code
-			lang="ts"
-			content={`import type {UserConfig} from 'vite';
-import {sveltekit} from '@sveltejs/kit/vite';
-import {remove_prism_css} from '@ryanatkn/fuz_code/remove_prism_css_vite_plugin.js';
-
-const config: UserConfig = {
-	plugins: [sveltekit(), remove_prism_css()],
-};
-
-export default config;`}
-		/>
-	</div>
 </section>
 
 <!-- </LibraryItem> -->
