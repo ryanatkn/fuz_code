@@ -23,7 +23,7 @@ based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
 and a [Svelte component](src/lib/Code.svelte) for convenient usage.
 - The [default theme](src/lib/theme.css) integrates
 with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference.
-A zero-dependency fuz_code [theme](src/lib/theme_standalone.css)
+A [zero-dependency theme](src/lib/theme_standalone.css)
 is also provided that uses the less-customizable `light-dark()`, see below for more.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
@@ -63,12 +63,12 @@ on my CSS library [Moss](https://github.com/ryanatkn/moss)
 for [color-scheme](https://moss.ryanatkn.com/library/themes) awareness.
 See the [Moss docs](https://moss.ryanatkn.com/) for its usage.
 
-[A dependency-free version](src/lib/theme_standalone.css) of the initial theme is provided,
+[A dependency-free version](src/lib/theme_standalone.css) of the default theme is provided,
 but note that the colors are staticly defined instead of using
 Moss' [style variables](https://moss.ryanatkn.com/library/variables).
 They use [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark)
 which means they're hardcoded to the inferred `color-scheme`,
-rather than being settable by a user option unlike the Moss version.
+rather than being settable by a user option unlike the Moss version. This could be improved using a class convention like `.dark`.
 
 ```ts
 // no dependencies:
