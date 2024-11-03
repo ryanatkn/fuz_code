@@ -15,16 +15,14 @@ fuz_code is a rework of [Prism](https://github.com/PrismJS/prism). The main chan
 - written in TypeScript
 
 Like Prism, there are zero dependencies (unless you count Prism's `@types/prismjs`),
-but there are two optional dependencies,
-[Svelte](https://svelte.dev/) and
-the `color-scheme`-adaptive colors from [Moss](https://github.com/ryanatkn/moss).
+but there are two optional dependencies:
 
-- fuz_code provides optional builtin Svelte support
+- fuz_code provides optional builtin [Svelte](https://svelte.dev/) support
 with a [Svelte grammar](src/lib/grammar_svelte.ts)
 based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
 and a [Svelte component](src/lib/Code.svelte) for convenient usage.
 - The [default theme](src/lib/theme.css) integrates
-with my CSS library [Moss](https://github.com/ryanatkn/moss).
+with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference.
 A zero-dependency fuz_code [theme](src/lib/theme_standalone.css)
 is also provided with some caveats, see below for more.
 
