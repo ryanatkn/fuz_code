@@ -34,11 +34,9 @@
 	);
 	const markup = $derived(styled ?? content);
 
-	// TODO add `CopyToClipboard`, maybe only when not inline?
+	const tag = $derived(inline ? 'span' : 'pre');
 
 	/* eslint-disable svelte/no-at-html-tags */
-
-	const tag = $derived(inline ? 'span' : 'pre');
 </script>
 
 <svelte:element this={tag} {...pre_attrs} class="code" class:inline class:pre={inline}
