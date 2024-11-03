@@ -24,7 +24,7 @@ and a [Svelte component](src/lib/Code.svelte) for convenient usage.
 - The [default theme](src/lib/theme.css) integrates
 with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference.
 A zero-dependency fuz_code [theme](src/lib/theme_standalone.css)
-is also provided with some caveats, see below for more.
+is also provided that uses the less-customizable `light-dark()`, see below for more.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is much lighter
