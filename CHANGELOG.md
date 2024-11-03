@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.21.0
+
+### Minor Changes
+
+- add `syntax_styler` and remove Prism ([#9](https://github.com/ryanatkn/fuz_code/pull/9))
+
 ## 0.20.0
 
 ### Minor Changes
