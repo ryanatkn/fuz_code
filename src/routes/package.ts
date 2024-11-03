@@ -164,7 +164,6 @@ export const src_json = {
 		'./syntax_styler.js': {
 			path: 'syntax_styler.ts',
 			declarations: [
-				{name: 'Syntax_Styler_Options', kind: 'type'},
 				{name: 'Add_Grammar', kind: 'type'},
 				{name: 'Syntax_Styler', kind: 'class'},
 				{name: 'Grammar_Value', kind: 'type'},
