@@ -18,13 +18,13 @@ Like Prism, there are zero dependencies (unless you count Prism's `@types/prismj
 but there are two optional dependencies:
 
 - fuz_code provides optional builtin [Svelte](https://svelte.dev/) support
-with a [Svelte grammar](src/lib/grammar_svelte.ts)
-based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
-and a [Svelte component](src/lib/Code.svelte) for convenient usage.
+  with a [Svelte grammar](src/lib/grammar_svelte.ts)
+  based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
+  and a [Svelte component](src/lib/Code.svelte) for convenient usage.
 - The [default theme](src/lib/theme.css) integrates
-with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference.
-A [zero-dependency theme](src/lib/theme_standalone.css)
-is also provided that uses the less-customizable `light-dark()`, see below for more.
+  with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference.
+  A [zero-dependency theme](src/lib/theme_standalone.css)
+  is also provided that uses the less-customizable `light-dark()`, see below for more.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is much lighter
