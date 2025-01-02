@@ -1,4 +1,4 @@
-import{a as l,t as b,e as $}from"../chunks/disclose-version.x8Kwb08J.js";import{c as s,o as k,s as u,r as e,t as j,q as h}from"../chunks/runtime.BV8fNuL_.js";import{s as w}from"../chunks/render.DgViPNrz.js";import{e as T,i as E}from"../chunks/string.CgiQkm2j.js";import{B as D}from"../chunks/Breadcrumb.BXV0qU0p.js";import{C}from"../chunks/Code.BTTS5pms.js";const H=`
+import{b as l,t as h,d as $}from"../chunks/disclose-version.Bjnog2dZ.js";import{q as s,w as k,v as u,r as e,t as w,x as b}from"../chunks/runtime.DDLLKe4V.js";import{s as j}from"../chunks/render.Apy9DF0D.js";import{e as T,i as E}from"../chunks/string.qdsbXVjl.js";import{B as D}from"../chunks/Breadcrumb.CMtz_gkP.js";import{C}from"../chunks/Code.Bjl99cQg.js";const H=`
 
 {
 	"string": "a string",
@@ -193,4 +193,4 @@ ${v.split(`
 `)}
 </style>
 
-`.trim(),O=[{content:H,lang:"json"},{content:_,lang:"html"},{content:v,lang:"css"},{content:x,lang:"ts"},{content:L,lang:"svelte"}];var P=b("<div><h2> </h2> <pre><!></pre></div>"),S=b('<main class="box w_100 svelte-1itab2p"><!> <div class="flex flex_wrap justify_content_space_around"></div></main>');function Y(t){var n=S(),m=s(n);D(m,{children:(o,r)=>{k();var a=$("🎨");l(o,a)},$$slots:{default:!0}});var p=u(m,2);T(p,21,()=>O,E,(o,r)=>{let a=()=>h(r).content,d=()=>h(r).lang;var c=P(),i=s(c),f=s(i,!0);e(i);var g=u(i,2),y=s(g);C(y,{get content(){return a()},get lang(){return d()}}),e(g),e(c),j(()=>w(f,d())),l(o,c)}),e(p),e(n),l(t,n)}export{Y as component};
+`.trim(),O=[{content:H,lang:"json"},{content:_,lang:"html"},{content:v,lang:"css"},{content:x,lang:"ts"},{content:L,lang:"svelte"}];var P=h("<div><h2> </h2> <pre><!></pre></div>"),S=h('<main class="box w_100 svelte-1itab2p"><!> <div class="flex flex_wrap justify_content_space_around"></div></main>');function Y(t){var n=S(),m=s(n);D(m,{children:(o,r)=>{k();var a=$("🎨");l(o,a)},$$slots:{default:!0}});var p=u(m,2);T(p,21,()=>O,E,(o,r)=>{let a=()=>b(r).content,d=()=>b(r).lang;var c=P(),i=s(c),f=s(i,!0);e(i);var g=u(i,2),y=s(g);C(y,{get content(){return a()},get lang(){return d()}}),e(g),e(c),w(()=>j(f,d())),l(o,c)}),e(p),e(n),l(t,n)}export{Y as component};
