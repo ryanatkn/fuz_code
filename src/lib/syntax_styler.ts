@@ -29,7 +29,7 @@ export class Syntax_Styler {
 	// }
 	// }
 
-	add_lang(id: string, grammar: Grammar, aliases?: string[]): void {
+	add_lang(id: string, grammar: Grammar, aliases?: Array<string>): void {
 		this.langs[id] = grammar;
 		if (aliases !== undefined) {
 			for (var alias of aliases) {
@@ -42,7 +42,7 @@ export class Syntax_Styler {
 		base_id: string,
 		extension_id: string,
 		extension: Grammar,
-		aliases?: string[],
+		aliases?: Array<string>,
 	): Grammar {
 		var grammar = this.extend_grammar(base_id, extension);
 		this.add_lang(extension_id, grammar, aliases);
@@ -295,9 +295,9 @@ export class Syntax_Styler {
 	plugins: Record<string, any> = {};
 
 	// TODO maybe extend/compose an event listener?
-	hooks_before_tokenize: Hook_Before_Tokenize_Callback[] = [];
-	hooks_after_tokenize: Hook_After_Tokenize_Callback[] = [];
-	hooks_wrap: Hook_Wrap_Callback[] = [];
+	hooks_before_tokenize: Array<Hook_Before_Tokenize_Callback> = [];
+	hooks_after_tokenize: Array<Hook_After_Tokenize_Callback> = [];
+	hooks_wrap: Array<Hook_Wrap_Callback> = [];
 
 	add_hook_before_tokenize(cb: Hook_Before_Tokenize_Callback): void {
 		this.hooks_before_tokenize.push(cb);
@@ -326,7 +326,7 @@ export class Syntax_Styler {
 	}
 }
 
-export type Grammar_Value = RegExp | Grammar_Token | Grammar_Value[];
+export type Grammar_Value = RegExp | Grammar_Token | Array<Grammar_Value>;
 
 export type Grammar = Record<string, Grammar_Value> & {rest?: Grammar | undefined};
 
@@ -359,7 +359,7 @@ export interface Grammar_Token {
 	/**
 	 * An optional alias or list of aliases.
 	 */
-	alias?: string | string[];
+	alias?: string | Array<string>;
 	/**
 	 * The nested grammar of this token.
 	 */
@@ -447,14 +447,14 @@ export class Syntax_Token {
 	/**
 	 * The alias(es) of the token.
 	 */
-	alias: string | string[];
+	alias: string | Array<string>;
 
 	length: number;
 
 	constructor(
 		type: string,
 		content: string | Syntax_Token_Stream,
-		alias: string | string[],
+		alias: string | Array<string>,
 		matched_str: string = '',
 	) {
 		this.type = type;
@@ -706,7 +706,7 @@ const remove_range = <T>(list: Linked_List<T>, node: Linked_List_Node<T>, count:
 	list.length -= i;
 };
 
-const to_array = <T>(list: Linked_List<T>): T[] => {
+const to_array = <T>(list: Linked_List<T>): Array<T> => {
 	var array = [];
 	var node = list.head.next;
 	while (node !== list.tail) {
@@ -736,7 +736,7 @@ export interface Hook_Wrap_Callback_Context {
 	type: string;
 	content: string;
 	tag: string;
-	classes: string[];
+	classes: Array<string>;
 	attributes: Record<string, string>;
 	lang: string;
 }

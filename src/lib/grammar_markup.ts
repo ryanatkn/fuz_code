@@ -149,7 +149,8 @@ export const grammar_markup_add_attribute = (
 	lang: string,
 ): void => {
 	(
-		(syntax_styler.get_lang('markup').tag as Grammar_Token).inside!.special_attr as Grammar_Token[]
+		(syntax_styler.get_lang('markup').tag as Grammar_Token).inside!
+			.special_attr as Array<Grammar_Token>
 	).push({
 		pattern: RegExp(
 			/(^|["'\s])/.source +
