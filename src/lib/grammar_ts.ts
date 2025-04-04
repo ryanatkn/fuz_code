@@ -21,7 +21,7 @@ export const add_grammar_ts: Add_Grammar = (syntax_styler) => {
 			/\b(?:Array|Function|Promise|any|boolean|console|never|number|string|symbol|unknown)\b/,
 	});
 
-	// The keywords TypeScript adds to JavaScript
+	// The keywords TypeScript adds to JS
 	(grammar_ts.keyword as any).push(
 		/\b(?:abstract|declare|is|keyof|readonly|require)\b/,
 		// keywords that have to be followed by an identifier
