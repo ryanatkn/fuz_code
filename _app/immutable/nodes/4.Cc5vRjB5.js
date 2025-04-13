@@ -1,4 +1,4 @@
-import{b as l,t as h,d as $}from"../chunks/disclose-version.Bjnog2dZ.js";import{q as s,w as k,v as u,r as e,t as w,x as b}from"../chunks/runtime.DDLLKe4V.js";import{s as j}from"../chunks/render.Apy9DF0D.js";import{e as T,i as E}from"../chunks/string.qdsbXVjl.js";import{B as D}from"../chunks/Breadcrumb.CMtz_gkP.js";import{C}from"../chunks/Code.Bjl99cQg.js";const H=`
+import{t as h,b as l,d as $}from"../chunks/DSoiYCM3.js";import{q as o,v as u,w as k,r as s,x as b,t as w}from"../chunks/C0lNcMS6.js";import{s as j}from"../chunks/Cdo0vGeP.js";import{e as T}from"../chunks/DPMtRYzY.js";import{B as E}from"../chunks/CgA33GfL.js";import{C as D}from"../chunks/bWQkgw6r.js";const C=`
 
 {
 	"string": "a string",
@@ -148,7 +148,7 @@ export function add(x: number, y: number): number {
 }
 
 export const plus = (a: any, b: any): any => a + b;
-`.trim(),L=`
+`.trim(),H=`
 
 <script lang="ts" module>
 	export const HELLO = 'world';
@@ -193,4 +193,4 @@ ${v.split(`
 `)}
 </style>
 
-`.trim(),O=[{content:H,lang:"json"},{content:_,lang:"html"},{content:v,lang:"css"},{content:x,lang:"ts"},{content:L,lang:"svelte"}];var P=h("<div><h2> </h2> <pre><!></pre></div>"),S=h('<main class="box w_100 svelte-1itab2p"><!> <div class="flex flex_wrap justify_content_space_around"></div></main>');function Y(t){var n=S(),m=s(n);D(m,{children:(o,r)=>{k();var a=$("🎨");l(o,a)},$$slots:{default:!0}});var p=u(m,2);T(p,21,()=>O,E,(o,r)=>{let a=()=>b(r).content,d=()=>b(r).lang;var c=P(),i=s(c),f=s(i,!0);e(i);var g=u(i,2),y=s(g);C(y,{get content(){return a()},get lang(){return d()}}),e(g),e(c),w(()=>j(f,d())),l(o,c)}),e(p),e(n),l(t,n)}export{Y as component};
+`.trim(),L=[{content:C,lang:"json"},{content:_,lang:"html"},{content:v,lang:"css"},{content:x,lang:"ts"},{content:H,lang:"svelte"}];var O=h("<div><h2> </h2> <pre><!></pre></div>"),P=h('<main class="box w_100 svelte-1itab2p"><!> <div class="flex flex_wrap justify_content_space_around"></div></main>');function J(t){var r=P(),m=o(r);E(m,{children:(n,e)=>{k();var a=$("🎨");l(n,a)},$$slots:{default:!0}});var p=u(m,2);T(p,21,()=>L,({content:n,lang:e})=>e,(n,e)=>{let a=()=>b(e).content,d=()=>b(e).lang;var c=O(),i=o(c),f=o(i,!0);s(i);var g=u(i,2),y=o(g);D(y,{get content(){return a()},get lang(){return d()}}),s(g),s(c),w(()=>j(f,d())),l(n,c)}),s(p),s(r),l(t,r)}export{J as component};
