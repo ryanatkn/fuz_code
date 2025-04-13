@@ -10,6 +10,8 @@
 	// const LIBRARY_ITEM_NAME = 'Code';
 </script>
 
+<!-- eslint-disable svelte/no-useless-mustaches -->
+
 <!-- <LibraryItem name={LIBRARY_ITEM_NAME}> -->
 <section>
 	<p>

@@ -8,7 +8,7 @@
 <main class="box w_100">
 	<Breadcrumb>🎨</Breadcrumb>
 	<div class="flex flex_wrap justify_content_space_around">
-		{#each samples as { content, lang }}
+		{#each samples as { content, lang } (lang)}
 			<div>
 				<h2>{lang}</h2>
 				<pre><Code {content} {lang} /></pre>

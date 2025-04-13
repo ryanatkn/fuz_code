@@ -105,7 +105,7 @@ export class Syntax_Styler {
 	 * This helper method makes it easy to modify existing languages. For example, the CSS language definition
 	 * not only defines CSS styling for CSS documents, but also needs to define styling for CSS embedded
 	 * in HTML through `<style>` elements. To do this, it needs to modify `syntax_styler.get_lang('markup')` and add the
-	 * appropriate tokens. However, `syntax_styler.get_lang('markup')` is a regular JavaScript object literal, so if you do
+	 * appropriate tokens. However, `syntax_styler.get_lang('markup')` is a regular JS object literal, so if you do
 	 * this:
 	 *
 	 * ```js
@@ -539,7 +539,7 @@ const match_grammar = (
 				// iterate the token list and keep track of the current token/string position
 				var current_node = start_node.next, pos = start_pos;
 				current_node !== token_list.tail;
-				pos += current_node.value!.length, current_node = current_node.next
+				pos += current_node!.value!.length, current_node = current_node!.next
 			) {
 				if (rematch && pos >= rematch.reach) {
 					break;
