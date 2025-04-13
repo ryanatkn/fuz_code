@@ -539,7 +539,7 @@ const match_grammar = (
 				// iterate the token list and keep track of the current token/string position
 				var current_node = start_node.next, pos = start_pos;
 				current_node !== token_list.tail;
-				pos += current_node.value!.length, current_node = current_node.next
+				pos += current_node!.value!.length, current_node = current_node!.next
 			) {
 				if (rematch && pos >= rematch.reach) {
 					break;
