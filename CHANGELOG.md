@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.22.0
+
+### Minor Changes
+
+- bump node@22.11 ([#10](https://github.com/ryanatkn/fuz_code/pull/10))
+
 ## 0.21.0
 
 ### Minor Changes
