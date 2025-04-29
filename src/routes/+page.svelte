@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Package_Summary from '@ryanatkn/fuz/Package_Summary.svelte';
-	import Library_Footer from '@ryanatkn/fuz/Library_Footer.svelte';
+	import Docs_Footer from '@ryanatkn/fuz/Docs_Footer.svelte';
 	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
 	import {base} from '$app/paths';
 
@@ -34,7 +34,7 @@
 			<a href="{base}/about" class="chip">about</a>
 		</section>
 		<section>
-			<Library_Footer {pkg} root_url="https://www.fuz.dev/" />
+			<Docs_Footer {pkg} root_url="https://www.fuz.dev/" />
 		</section>
 	</div>
 </main>

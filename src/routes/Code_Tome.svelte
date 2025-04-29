@@ -1,18 +1,18 @@
 <script lang="ts">
 	// import Tome from '@ryanatkn/fuz/Tome.svelte';
-	// import LibraryItem from '@ryanatkn/fuz/LibraryItem.svelte';
+	// import Docs_Item from '@ryanatkn/fuz/Docs_Item.svelte';
 	// import Tome_Link from '@ryanatkn/fuz/Tome_Link.svelte';
 	import Tome_Link from '$routes/Tome_Link.svelte';
 	import Code from '$lib/Code.svelte';
 
-	// TODO what convention? `LibraryTome`? Maybe just `Tome`? `/tomes`? both? what other options?
+	// TODO what convention? `Docs_Tome`? Maybe just `Tome`? `/tomes`? both? what other options?
 
 	// const LIBRARY_ITEM_NAME = 'Code';
 </script>
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<!-- <LibraryItem name={LIBRARY_ITEM_NAME}> -->
+<!-- <Docs_Item name={LIBRARY_ITEM_NAME}> -->
 <section>
 	<p>
 		The
@@ -104,7 +104,7 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 	</p>
 </section>
 
-<!-- </LibraryItem> -->
+<!-- </DocsItem> -->
 
 <style>
 	section {

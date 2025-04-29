@@ -60,12 +60,12 @@ import '@ryanatkn/fuz_code/theme.css';
 
 The primary themes (currently just [one](src/lib/theme.css)) have a dependency
 on my CSS library [Moss](https://github.com/ryanatkn/moss)
-for [color-scheme](https://moss.ryanatkn.com/library/themes) awareness.
+for [color-scheme](https://moss.ryanatkn.com/docs/themes) awareness.
 See the [Moss docs](https://moss.ryanatkn.com/) for its usage.
 
 [A dependency-free version](src/lib/theme_standalone.css) of the default theme is provided,
 but note that the colors are staticly defined instead of using
-Moss' [style variables](https://moss.ryanatkn.com/library/variables).
+Moss' [style variables](https://moss.ryanatkn.com/docs/variables).
 They use [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark)
 which means they're hardcoded to the inferred `color-scheme`,
 rather than being settable by a user option unlike the Moss version. This could be improved using a class convention like `.dark`.
