@@ -5,39 +5,35 @@
 		<link rel="icon" href="/favicon.png" />
 		<link rel="icon" href="/logo.svg" sizes="any" type="image/svg+xml" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<script>
+			document.documentElement.classList.add(
+				((c) =>
+					c === 'dark' || (c !== 'light' && matchMedia('(prefers-color-scheme:dark)').matches)
+						? 'dark'
+						: 'light')(localStorage.getItem('fuz:color-scheme')),
+			);
+		</script>
+
 		
 		<link href="/_app/immutable/assets/0.Bf1TcS_G.css" rel="stylesheet">
 		<link href="/_app/immutable/assets/package.CZfu1DZn.css" rel="stylesheet">
 		<link href="/_app/immutable/assets/Code.CkP222Om.css" rel="stylesheet">
 		<link href="/_app/immutable/assets/2.CpgQ_oZl.css" rel="stylesheet">
-		<link rel="modulepreload" href="/_app/immutable/entry/start.vf8nqg1B.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/BepMydjM.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/C0lNcMS6.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/D6SdpkX9.js">
-		<link rel="modulepreload" href="/_app/immutable/entry/app.AjtErhSY.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/Cdo0vGeP.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/DSoiYCM3.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/BBdQa1Ch.js">
-		<link rel="modulepreload" href="/_app/immutable/nodes/0.Dhusc1Ng.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/BakLm11Z.js">
-		<link rel="modulepreload" href="/_app/immutable/nodes/2.DhPl79OF.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/CUXrafDC.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/gjRq7cFy.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/Drs84fXE.js"><!--[--><!--]--><!--[--><!--[!--><!--]--> <!--[--><!---->
-	<meta name="color-scheme" content="light dark" />
-	
-	<script nonce="%sveltekit.nonce%">
-		try {
-			let c = localStorage.getItem('color-scheme');
-			if (c === 'auto' || (c !== 'dark' && c !== 'light')) {
-				c = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-			} else if (c === 'light') {
-			 document.documentElement.classList.add('light');
-			}
-			if (c === 'dark') document.documentElement.classList.add('dark');
-		} catch (_) {}
-	</script>
-<!----><!--]--><!--]--><title>@ryanatkn/fuz_code</title>
+		<link rel="modulepreload" href="/_app/immutable/entry/start.BmYWlTUt.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/Bcp4TC-h.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/BAIGoyCn.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/D67g374Z.js">
+		<link rel="modulepreload" href="/_app/immutable/entry/app.CQ1XiXdh.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/HrHkmgOG.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/zSVGcJQj.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/Dt-yysjV.js">
+		<link rel="modulepreload" href="/_app/immutable/nodes/0.CU-qRif0.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/CnkhduzW.js">
+		<link rel="modulepreload" href="/_app/immutable/nodes/2.Cq6m8je_.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/DdqxOUNs.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/DhRdxPIg.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/BLgmYt2y.js"><!--[--><!--]--><!--[--><!--[!--><!--]--><!--]--><title>@ryanatkn/fuz_code</title>
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents"><!--[--><!--[--><!----><!----><main class="box w_100 svelte-wuxjcb"><div class="box width_md"><section><div class="package_summary svelte-1widkfd"><header class="box svelte-1widkfd"><!--[!--><div class="repo_name svelte-1widkfd">fuz_code</div><!--]-->  <!--[--><!--[!--><img src="https://code.fuz.dev/logo.svg" alt="a friendly pink spider facing you" style="width: var(--size, var(--icon_size_xl2)); height: var(--size, var(--icon_size_xl2));"><!--]--><!--]--></header> <!--[!--><!--]--> <!--[--><!--[!--><p class="text_align_center">syntax styling utilities and components for TypeScript, Svelte, SvelteKit <!--[-->🎨<!--]--></p><!--]--><!--]--> <!----> <!--[--><!--[!--><div class="homepage_url svelte-1widkfd"><a class="chip svelte-1widkfd" href="https://code.fuz.dev/">code.fuz.dev</a></div><!--]--><!--]--> <div class="links svelte-1widkfd"><!--[--><a class="chip svelte-1widkfd" href="https://github.com/ryanatkn/fuz_code">repo</a><!--]--> <!--[--><a class="chip svelte-1widkfd" title="version" href="https://github.com/ryanatkn/fuz_code/blob/main/CHANGELOG.md">0.22.0</a><!--]--> <!--[--><a class="chip svelte-1widkfd" href="https://www.npmjs.com/package/@ryanatkn/fuz_code">npm</a><!--]--></div> <!--[--><!--[!--><blockquote class="npm_url svelte-1widkfd">npm i -D @ryanatkn/fuz_code</blockquote><!--]--><!--]--></div><!----></section> <section><aside class="width_sm">⚠️ Docs are a work in progress. This page has usage examples with the optional Svelte
@@ -61,15 +57,15 @@
 			
 			<script>
 				{
-					__sveltekit_48krfc = {
+					__sveltekit_fkhsot = {
 						base: ""
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("/_app/immutable/entry/start.vf8nqg1B.js"),
-						import("/_app/immutable/entry/app.AjtErhSY.js")
+						import("/_app/immutable/entry/start.BmYWlTUt.js"),
+						import("/_app/immutable/entry/app.CQ1XiXdh.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2],
