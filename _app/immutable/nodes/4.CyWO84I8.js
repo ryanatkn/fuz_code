@@ -1,4 +1,4 @@
-import{t as b,a as l,d as $}from"../chunks/BudaIYaM.js";import{c as o,s as u,y as k,r as s,z as h,t as j}from"../chunks/BBdl3Tnx.js";import{s as w}from"../chunks/BfJs6YqD.js";import{e as T}from"../chunks/DCYMhZkF.js";import{B as E}from"../chunks/ISbIXt-W.js";import{C as D}from"../chunks/DrJ-0L4C.js";const C=`
+import{t as b,a as l,d as $}from"../chunks/BudaIYaM.js";import{c as o,s as u,y as k,r as s,z as h,t as j}from"../chunks/BBdl3Tnx.js";import{s as w}from"../chunks/BfJs6YqD.js";import{e as T}from"../chunks/DCYMhZkF.js";import{B as E}from"../chunks/Ar_SRXIn.js";import{C as D}from"../chunks/DrJ-0L4C.js";const C=`
 
 {
 	"string": "a string",
