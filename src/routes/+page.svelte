@@ -30,8 +30,9 @@
 			</div>
 		</section>
 		<section class="box gap_xl3 size_xl2">
-			<a href="{base}/samples" class="chip">samples</a>
-			<a href="{base}/about" class="chip">about</a>
+			<!-- TODO large variants of the chip? using `--size`? -->
+			<a href="{base}/samples" class="chip px_xl py_sm">samples</a>
+			<a href="{base}/about" class="chip px_xl py_sm">about</a>
 		</section>
 		<section>
 			<Docs_Footer {pkg} root_url="https://www.fuz.dev/" />
