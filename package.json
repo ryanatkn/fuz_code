@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz_code",
-  "version": "0.22.0",
+  "version": "0.23.0",
   "description": "syntax styling utilities and components for TypeScript, Svelte, SvelteKit",
   "glyph": "🎨",
   "logo": "logo.svg",

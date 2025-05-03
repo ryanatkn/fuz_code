@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.23.0
+
+### Minor Changes
+
+- update deps ([e208d86](https://github.com/ryanatkn/fuz_code/commit/e208d86))
+
 ## 0.22.0
 
 ### Minor Changes
