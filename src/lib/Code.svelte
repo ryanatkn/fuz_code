@@ -48,7 +48,7 @@
 <style>
 	.code {
 		background-color: var(--fg_1);
-		border-radius: var(--radius_xs);
+		border-radius: var(--border_radius_xs);
 		padding: var(--space_xs3) var(--space_xs);
 	}
 	code {

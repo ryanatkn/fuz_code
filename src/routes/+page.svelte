@@ -25,12 +25,12 @@
 			</aside>
 		</section>
 		<section class="panel">
-			<div class="bg shadow_sm radius_xs">
+			<div class="bg shadow_sm border_radius_xs">
 				<Code_Tome />
 			</div>
 		</section>
-		<section class="box gap_xl3 size_xl2">
-			<!-- TODO large variants of the chip? using `--size`? -->
+		<section class="box gap_xl3 font_size_xl2">
+			<!-- TODO large variants of the chip? using `--font_size`? -->
 			<a href="{base}/samples" class="chip px_xl py_sm">samples</a>
 			<a href="{base}/about" class="chip px_xl py_sm">about</a>
 		</section>
