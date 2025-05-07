@@ -34,9 +34,9 @@ export const package_json = {
 		'@changesets/changelog-git': '^0.2.1',
 		'@ryanatkn/belt': '^0.30.2',
 		'@ryanatkn/eslint-config': '^0.8.0',
-		'@ryanatkn/fuz': '^0.141.1',
-		'@ryanatkn/gro': '^0.156.0',
-		'@ryanatkn/moss': '^0.28.0',
+		'@ryanatkn/fuz': '^0.143.0',
+		'@ryanatkn/gro': '^0.158.0',
+		'@ryanatkn/moss': '^0.29.0',
 		'@sveltejs/adapter-static': '^3.0.8',
 		'@sveltejs/kit': '^2.20.8',
 		'@sveltejs/package': '^2.3.11',
@@ -103,7 +103,7 @@ export const src_json = {
 	version: '0.23.0',
 	modules: {
 		'.': {path: 'index.ts', declarations: [{name: 'syntax_styler', kind: 'variable'}]},
-		'./package.json': {path: 'package.json', declarations: []},
+		'./package.json': {path: 'package.json', declarations: [{name: 'default', kind: 'json'}]},
 		'./code_sample_inputs.js': {
 			path: 'code_sample_inputs.ts',
 			declarations: [
@@ -125,27 +125,27 @@ export const src_json = {
 				{name: 'styled_svelte_code', kind: 'variable'},
 			],
 		},
-		'./Code.svelte': {path: 'Code.svelte', declarations: []},
+		'./Code.svelte': {path: 'Code.svelte', declarations: [{name: 'default', kind: 'component'}]},
 		'./grammar_clike.js': {
 			path: 'grammar_clike.ts',
-			declarations: [{name: 'add_grammar_clike', kind: 'variable'}],
+			declarations: [{name: 'add_grammar_clike', kind: 'function'}],
 		},
 		'./grammar_css.js': {
 			path: 'grammar_css.ts',
-			declarations: [{name: 'add_grammar_css', kind: 'variable'}],
+			declarations: [{name: 'add_grammar_css', kind: 'function'}],
 		},
 		'./grammar_js.js': {
 			path: 'grammar_js.ts',
-			declarations: [{name: 'add_grammar_js', kind: 'variable'}],
+			declarations: [{name: 'add_grammar_js', kind: 'function'}],
 		},
 		'./grammar_json.js': {
 			path: 'grammar_json.ts',
-			declarations: [{name: 'add_grammar_json', kind: 'variable'}],
+			declarations: [{name: 'add_grammar_json', kind: 'function'}],
 		},
 		'./grammar_markup.js': {
 			path: 'grammar_markup.ts',
 			declarations: [
-				{name: 'add_grammar_markup', kind: 'variable'},
+				{name: 'add_grammar_markup', kind: 'function'},
 				{name: 'grammar_markup_add_inlined', kind: 'function'},
 				{name: 'grammar_markup_add_attribute', kind: 'function'},
 			],
@@ -153,13 +153,13 @@ export const src_json = {
 		'./grammar_svelte.js': {
 			path: 'grammar_svelte.ts',
 			declarations: [
-				{name: 'add_grammar_svelte', kind: 'variable'},
+				{name: 'add_grammar_svelte', kind: 'function'},
 				{name: 'grammar_svelte_add_inlined', kind: 'function'},
 			],
 		},
 		'./grammar_ts.js': {
 			path: 'grammar_ts.ts',
-			declarations: [{name: 'add_grammar_ts', kind: 'variable'}],
+			declarations: [{name: 'add_grammar_ts', kind: 'function'}],
 		},
 		'./syntax_styler.js': {
 			path: 'syntax_styler.ts',
@@ -180,8 +180,11 @@ export const src_json = {
 				{name: 'Hook_Wrap_Callback_Context', kind: 'type'},
 			],
 		},
-		'./theme_standalone.css': {path: 'theme_standalone.css', declarations: []},
-		'./theme.css': {path: 'theme.css', declarations: []},
+		'./theme_standalone.css': {
+			path: 'theme_standalone.css',
+			declarations: [{name: 'default', kind: 'css'}],
+		},
+		'./theme.css': {path: 'theme.css', declarations: [{name: 'default', kind: 'css'}]},
 	},
 } satisfies Src_Json;
 
