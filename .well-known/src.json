@@ -13,7 +13,12 @@
     },
     "./package.json": {
       "path": "package.json",
-      "declarations": []
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "json"
+        }
+      ]
     },
     "./code_sample_inputs.js": {
       "path": "code_sample_inputs.ts",
@@ -71,14 +76,19 @@
     },
     "./Code.svelte": {
       "path": "Code.svelte",
-      "declarations": []
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
     },
     "./grammar_clike.js": {
       "path": "grammar_clike.ts",
       "declarations": [
         {
           "name": "add_grammar_clike",
-          "kind": "variable"
+          "kind": "function"
         }
       ]
     },
@@ -87,7 +97,7 @@
       "declarations": [
         {
           "name": "add_grammar_css",
-          "kind": "variable"
+          "kind": "function"
         }
       ]
     },
@@ -96,7 +106,7 @@
       "declarations": [
         {
           "name": "add_grammar_js",
-          "kind": "variable"
+          "kind": "function"
         }
       ]
     },
@@ -105,7 +115,7 @@
       "declarations": [
         {
           "name": "add_grammar_json",
-          "kind": "variable"
+          "kind": "function"
         }
       ]
     },
@@ -114,7 +124,7 @@
       "declarations": [
         {
           "name": "add_grammar_markup",
-          "kind": "variable"
+          "kind": "function"
         },
         {
           "name": "grammar_markup_add_inlined",
@@ -131,7 +141,7 @@
       "declarations": [
         {
           "name": "add_grammar_svelte",
-          "kind": "variable"
+          "kind": "function"
         },
         {
           "name": "grammar_svelte_add_inlined",
@@ -144,7 +154,7 @@
       "declarations": [
         {
           "name": "add_grammar_ts",
-          "kind": "variable"
+          "kind": "function"
         }
       ]
     },
@@ -211,11 +221,21 @@
     },
     "./theme_standalone.css": {
       "path": "theme_standalone.css",
-      "declarations": []
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "css"
+        }
+      ]
     },
     "./theme.css": {
       "path": "theme.css",
-      "declarations": []
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "css"
+        }
+      ]
     }
   }
 }
