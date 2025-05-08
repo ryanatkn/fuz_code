@@ -6,8 +6,8 @@
 
 **[code.fuz.dev](https://code.fuz.dev/)**
 
-fuz_code is a rework of [Prism](https://github.com/PrismJS/prism).
-([prismjs.com](https://prismjs.com/))
+fuz_code is a rework of [Prism](https://github.com/PrismJS/prism)
+([prismjs.com](https://prismjs.com/)).
 The main changes:
 
 - has a minimal and explicit API to generate stylized HTML, and knows nothing about the DOM
