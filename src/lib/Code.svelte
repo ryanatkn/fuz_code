@@ -39,7 +39,7 @@
 	/* eslint-disable svelte/no-at-html-tags */
 </script>
 
-<svelte:element this={tag} {...pre_attrs} class="code" class:inline class:pre={inline}
+<svelte:element this={tag} {...pre_attrs} class:code={true} class:inline class:pre={inline}
 	><code {...code_attrs}
 		>{#if children}{@render children(markup)}{:else}{@html markup}{/if}</code
 	></svelte:element
