@@ -1,5 +1,15 @@
 # @ryanatkn/fuz_code
 
+## 0.24.0
+
+### Minor Changes
+
+- bump node@22.15 from 22.11 ([105db95](https://github.com/ryanatkn/fuz_code/commit/105db95))
+
+### Patch Changes
+
+- fix: stop clobbering `pre_attrs.class` on `Code` ([5829701](https://github.com/ryanatkn/fuz_code/commit/5829701))
+
 ## 0.23.0
 
 ### Minor Changes
