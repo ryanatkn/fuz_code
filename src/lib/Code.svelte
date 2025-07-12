@@ -36,6 +36,7 @@
 
 	const tag = $derived(inline ? 'span' : 'pre');
 
+	// TODO @many @html making me nervous
 	/* eslint-disable svelte/no-at-html-tags */
 </script>
 
