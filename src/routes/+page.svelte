@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Package_Summary from '@ryanatkn/fuz/Package_Summary.svelte';
 	import Docs_Footer from '@ryanatkn/fuz/Docs_Footer.svelte';
-	import {parse_package_meta} from '@ryanatkn/gro/package_meta.js';
+	import {parse_pkg} from '@ryanatkn/belt/pkg.js';
 	import {base} from '$app/paths';
 
 	import Code_Tome from '$routes/Code_Tome.svelte';
@@ -9,7 +9,7 @@
 
 	// import '$lib/benchmark.js';
 
-	const pkg = parse_package_meta(package_json, src_json);
+	const pkg = parse_pkg(package_json, src_json);
 </script>
 
 <main class="box w_100">
