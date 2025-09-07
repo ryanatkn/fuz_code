@@ -1,4 +1,4 @@
-import{t as b,a as l,d as $}from"../chunks/BIwJdAGd.js";import{c as o,s as u,y as k,r as s,z as h,t as j}from"../chunks/ChH5WMfS.js";import{s as w}from"../chunks/C9nCr4_7.js";import{e as T}from"../chunks/HHKd7Ysr.js";import{B as E}from"../chunks/DDr2sVVM.js";import{C as D}from"../chunks/C-OGaGKD.js";const C=`
+import"../chunks/CWj6FrbW.js";import{f as b,b as l,u as $,d as o,s as u,v as k,r as s,w as h,t as w}from"../chunks/BvZVVatf.js";import{s as j}from"../chunks/hvLUm8kY.js";import{e as T}from"../chunks/ryV6IRC3.js";import{B as E}from"../chunks/FiU0ueqO.js";import{C as D}from"../chunks/QjIlMrwa.js";const C=`
 
 {
 	"string": "a string",
@@ -193,4 +193,4 @@ ${v.split(`
 `)}
 </style>
 
-`.trim(),L=[{content:C,lang:"json"},{content:_,lang:"html"},{content:v,lang:"css"},{content:x,lang:"ts"},{content:H,lang:"svelte"}];var O=b("<div><h2> </h2> <pre><!></pre></div>"),P=b('<main class="box w_100 svelte-1itab2p"><!> <div class="display_flex flex_wrap justify_content_space_around"></div></main>');function J(t){var r=P(),m=o(r);E(m,{children:(n,e)=>{k();var a=$("🎨");l(n,a)},$$slots:{default:!0}});var p=u(m,2);T(p,21,()=>L,({content:n,lang:e})=>e,(n,e)=>{let a=()=>h(e).content,d=()=>h(e).lang;var c=O(),i=o(c),y=o(i,!0);s(i);var g=u(i,2),f=o(g);D(f,{get content(){return a()},get lang(){return d()}}),s(g),s(c),j(()=>w(y,d())),l(n,c)}),s(p),s(r),l(t,r)}export{J as component};
+`.trim(),L=[{content:C,lang:"json"},{content:_,lang:"html"},{content:v,lang:"css"},{content:x,lang:"ts"},{content:H,lang:"svelte"}];var O=b("<div><h2> </h2> <pre><!></pre></div>"),P=b('<main class="box w_100 svelte-1itab2p"><!> <div class="display_flex flex_wrap justify_content_space_around"></div></main>');function J(t){var r=P(),m=o(r);E(m,{children:(n,e)=>{k();var a=$("🎨");l(n,a)},$$slots:{default:!0}});var p=u(m,2);T(p,21,()=>L,({content:n,lang:e})=>e,(n,e)=>{let a=()=>h(e).content,d=()=>h(e).lang;var c=O(),i=o(c),f=o(i,!0);s(i);var g=u(i,2),y=o(g);D(y,{get content(){return a()},get lang(){return d()}}),s(g),s(c),w(()=>j(f,d())),l(n,c)}),s(p),s(r),l(t,r)}export{J as component};
