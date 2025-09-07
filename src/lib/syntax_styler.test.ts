@@ -1,7 +1,4 @@
-// syntax_styler.test.ts
-
-import {test} from 'uvu';
-import * as assert from 'uvu/assert';
+import {test, assert} from 'vitest';
 
 import {syntax_styler} from '$lib/index.js';
 import {
@@ -21,27 +18,25 @@ import {
 
 test('styles HTML', () => {
 	const styled = syntax_styler.stylize(sample_html_code, 'html');
-	assert.is(styled, styled_html_code);
+	assert.strictEqual(styled, styled_html_code);
 });
 
 test('styles CSS', () => {
 	const styled = syntax_styler.stylize(sample_css_code, 'css');
-	assert.is(styled, styled_css_code);
+	assert.strictEqual(styled, styled_css_code);
 });
 
 test('styles TypeScript', () => {
 	const styled = syntax_styler.stylize(sample_ts_code, 'ts');
-	assert.is(styled, styled_ts_code);
+	assert.strictEqual(styled, styled_ts_code);
 });
 
 test('styles Svelte', () => {
 	const styled = syntax_styler.stylize(sample_svelte_code, 'svelte');
-	assert.is(styled, styled_svelte_code);
+	assert.strictEqual(styled, styled_svelte_code);
 });
 
 test('styles JSON', () => {
 	const styled = syntax_styler.stylize(sample_json_code, 'json');
-	assert.is(styled, styled_json_code);
+	assert.strictEqual(styled, styled_json_code);
 });
-
-test.run();
