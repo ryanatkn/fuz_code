@@ -2,7 +2,7 @@
 	import Package_Summary from '@ryanatkn/fuz/Package_Summary.svelte';
 	import Docs_Footer from '@ryanatkn/fuz/Docs_Footer.svelte';
 	import {parse_pkg} from '@ryanatkn/belt/pkg.js';
-	import {base} from '$app/paths';
+	import {resolve} from '$app/paths';
 
 	import Code_Tome from '$routes/Code_Tome.svelte';
 	import {package_json, src_json} from '$routes/package.js';
@@ -31,8 +31,8 @@
 		</section>
 		<section class="box gap_xl3 font_size_xl2">
 			<!-- TODO large variants of the chip? using `--font_size`? -->
-			<a href="{base}/samples" class="chip px_xl py_sm">samples</a>
-			<a href="{base}/about" class="chip px_xl py_sm">about</a>
+			<a href={resolve('/samples')} class="chip px_xl py_sm">samples</a>
+			<a href={resolve('/about')} class="chip px_xl py_sm">about</a>
 		</section>
 		<section>
 			<Docs_Footer {pkg} root_url="https://www.fuz.dev/" />
