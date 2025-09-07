@@ -1,5 +1,3 @@
-// code_sample_inputs.ts
-
 // see `styled_json_code` in `./code_sample_outputs.js`
 // for the result of `stylize(sample_json_code, Syntax_Styler.langs.json, 'json')`
 export const sample_json_code = `
