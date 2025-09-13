@@ -304,7 +304,7 @@ export const src_json: Src_Json = {
 		'./rangestyler.js': {
 			path: 'rangestyler.ts',
 			declarations: [
-				{name: 'supports_highlight_api', kind: 'function'},
+				{name: 'supports_css_highlight_api', kind: 'function'},
 				{name: 'Rangestyler', kind: 'class'},
 				{name: 'rangestyler_global', kind: 'variable'},
 			],

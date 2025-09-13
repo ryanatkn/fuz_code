@@ -9,7 +9,7 @@ import {
 /**
  * Check for CSS Highlights API support.
  */
-export function supports_highlight_api(): boolean {
+export function supports_css_highlight_api(): boolean {
 	return (
 		typeof CSS !== 'undefined' &&
 		'highlights' in CSS &&
@@ -27,7 +27,7 @@ export class Rangestyler {
 	}
 
 	get supports_native(): boolean {
-		return supports_highlight_api();
+		return supports_css_highlight_api();
 	}
 
 	register_language(language: Rangestyler_Language): void {
