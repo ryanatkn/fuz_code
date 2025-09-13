@@ -9,7 +9,7 @@ export interface Benchmark_Result {
 	samples: number;
 }
 
-export const run_benchmark = async (filter?: string): Promise<Benchmark_Result[]> => {
+export const run_benchmark = async (filter?: string): Promise<Array<Benchmark_Result>> => {
 	const bench = new Bench({
 		time: 5000,
 		warmupTime: 1000,
@@ -28,7 +28,7 @@ export const run_benchmark = async (filter?: string): Promise<Benchmark_Result[]
 
 	await bench.run();
 
-	const results: Benchmark_Result[] = [];
+	const results: Array<Benchmark_Result> = [];
 
 	for (const task of bench.tasks) {
 		if (task && task.result) {
@@ -44,8 +44,8 @@ export const run_benchmark = async (filter?: string): Promise<Benchmark_Result[]
 	return results;
 };
 
-export const format_benchmark_results = (results: Benchmark_Result[]): string => {
-	const lines: string[] = [
+export const format_benchmark_results = (results: Array<Benchmark_Result>): string => {
+	const lines: Array<string> = [
 		'## Benchmark Results',
 		'',
 		'| Sample | Ops/sec | Mean Time (ms) | Samples |',

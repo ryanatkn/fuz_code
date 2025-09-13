@@ -8,6 +8,6 @@ run_and_print_benchmark(filter)
 		process.exit(0);
 	})
 	.catch((error) => {
-		console.error('Benchmark failed:', error);
+		console.error('benchmark failed:', error); // eslint-disable-line no-console
 		process.exit(1);
 	});

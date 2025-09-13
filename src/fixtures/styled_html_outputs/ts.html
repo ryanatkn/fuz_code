@@ -19,7 +19,7 @@
 		<span class="token keyword">return</span> <span class="token template_string"><span class="token template_punctuation string">`</span><span class="token string">Hello, </span><span class="token interpolation"><span class="token interpolation_punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>d1<span class="token interpolation_punctuation punctuation">}</span></span><span class="token template_punctuation string">`</span></span><span class="token punctuation">;</span>
 	<span class="token punctuation">}</span>
 
-	<span class="token function_variable function">instance_method</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+	instance_method <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
 		<span class="token comment">/* ... */</span>
 		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">#private_method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 		<span class="token comment">// foo</span>
@@ -29,8 +29,8 @@
 		<span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class_name">Error</span><span class="token punctuation">(</span><span class="token template_string"><span class="token template_punctuation string">`</span><span class="token interpolation"><span class="token interpolation_punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>d1<span class="token interpolation_punctuation punctuation">}</span></span><span class="token string"> etc</span><span class="token template_punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token punctuation">}</span>
 
-	<span class="token keyword">protected</span> <span class="token function">protected_method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class_name">RegExp</span><span class="token punctuation">(</span><span class="token string">'protected'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">protected</span> <span class="token function">protected_method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+		<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class_name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// eslint-disable-line no-console</span>
 	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 

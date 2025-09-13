@@ -21,8 +21,8 @@ export const create_text_node = (element: Element, text: string): Text => {
 export const find_matches = (
 	text: string,
 	patterns: Array<Rangestyler_Pattern>,
-): Rangestyler_Match_Result[] => {
-	const matches: Rangestyler_Match_Result[] = [];
+): Array<Rangestyler_Match_Result> => {
+	const matches: Array<Rangestyler_Match_Result> = [];
 
 	for (const pattern of patterns) {
 		const regex = pattern.match;
@@ -95,11 +95,11 @@ export const find_matches = (
  * Remove overlapping matches based on priority
  */
 export const resolve_overlaps = (
-	matches: Rangestyler_Match_Result[],
-): Rangestyler_Match_Result[] => {
+	matches: Array<Rangestyler_Match_Result>,
+): Array<Rangestyler_Match_Result> => {
 	if (matches.length === 0) return [];
 
-	const resolved: Rangestyler_Match_Result[] = [];
+	const resolved: Array<Rangestyler_Match_Result> = [];
 	let last_end = -1;
 
 	for (const match of matches) {
@@ -120,9 +120,9 @@ export const resolve_overlaps = (
  */
 export const create_ranges = (
 	text_node: Text,
-	matches: Rangestyler_Match_Result[],
-): Map<string, Range[]> => {
-	const ranges_by_name = new Map<string, Range[]>();
+	matches: Array<Rangestyler_Match_Result>,
+): Map<string, Array<Range>> => {
+	const ranges_by_name = new Map<string, Array<Range>>();
 
 	for (const match of matches) {
 		const name = match.pattern.name;
@@ -160,7 +160,7 @@ export const build_ranges = (
 	element: Element,
 	text: string,
 	patterns: Array<Rangestyler_Pattern>,
-): {text_node: Text; ranges_by_name: Map<string, Range[]>} => {
+): {text_node: Text; ranges_by_name: Map<string, Array<Range>>} => {
 	// Create text node
 	const text_node = create_text_node(element, text);
 
@@ -181,7 +181,7 @@ export const build_ranges = (
  */
 export const generate_html_fallback = (
 	text: string,
-	matches: Rangestyler_Match_Result[],
+	matches: Array<Rangestyler_Match_Result>,
 ): string => {
 	if (matches.length === 0) {
 		return escape_html(text);

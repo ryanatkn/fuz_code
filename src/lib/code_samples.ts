@@ -36,7 +36,7 @@ export const sample_svelte: Code_Sample = {
 	content: sample_content.svelte,
 };
 
-export const samples: Code_Sample[] = [
+export const samples: Array<Code_Sample> = [
 	sample_json,
 	sample_html,
 	sample_css,

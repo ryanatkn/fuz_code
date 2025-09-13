@@ -272,7 +272,7 @@ class D {
 		return \`Hello, \${this.d1}\`;
 	}
 
-	instance_method = () => {
+	instance_method = (): void => {
 		/* ... */
 		this.#private_method();
 		// foo
@@ -282,8 +282,8 @@ class D {
 		throw new Error(\`\${this.d1} etc\`);
 	}
 
-	protected protected_method() {
-		console.log(new RegExp('protected'));
+	protected protected_method(): void {
+		console.log(new Date()); // eslint-disable-line no-console
 	}
 }
 

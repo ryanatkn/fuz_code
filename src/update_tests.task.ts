@@ -8,12 +8,12 @@ import {domstyler_global} from './lib/domstyler_global.js';
 
 export const task: Task = {
 	summary: 'update test fixtures with current behavior',
-	run: async () => {
+	run: () => {
 		for (const [lang, content] of Object.entries(samples)) {
 			const styled = domstyler_global.stylize(content, lang);
-			const fixture_path = `src/fixtures/styled_html_outputs/${lang}.html`;
+			const fixture_path = `./src/fixtures/styled_html_outputs/${lang}.html`;
 			writeFileSync(fixture_path, styled);
-			console.log(`updated fixture: ${fixture_path}`);
+			console.log(`updated fixture: ${fixture_path}`); // eslint-disable-line no-console
 		}
 	},
 };

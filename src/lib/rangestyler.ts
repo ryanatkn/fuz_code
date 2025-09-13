@@ -16,7 +16,7 @@ export const supports_css_highlight_api = (): boolean =>
 
 export class Rangestyler {
 	private languages: Map<string, Rangestyler_Language>;
-	private active_highlights: Map<Element, string[]>;
+	private active_highlights: Map<Element, Array<string>>;
 
 	constructor() {
 		this.languages = new Map();
@@ -65,7 +65,7 @@ export class Rangestyler {
 		const {ranges_by_name} = build_ranges(element, text, patterns);
 
 		// Register highlights
-		const highlight_names: string[] = [];
+		const highlight_names: Array<string> = [];
 
 		for (const [name, ranges] of ranges_by_name) {
 			const highlight_name = `${prefix}_${name}`;
