@@ -74,6 +74,10 @@ export const package_json: Package_Json = {
 			svelte: './dist/Domstyler_Code.svelte',
 			default: './dist/Domstyler_Code.svelte',
 		},
+		'./domstyler_global.js': {
+			types: './dist/domstyler_global.d.ts',
+			default: './dist/domstyler_global.js',
+		},
 		'./domstyler_lang_clike.js': {
 			types: './dist/domstyler_lang_clike.d.ts',
 			default: './dist/domstyler_lang_clike.js',
@@ -105,6 +109,7 @@ export const package_json: Package_Json = {
 		'./domstyler_theme_standalone.css': {default: './dist/domstyler_theme_standalone.css'},
 		'./domstyler_theme.css': {default: './dist/domstyler_theme.css'},
 		'./domstyler.js': {types: './dist/domstyler.d.ts', default: './dist/domstyler.js'},
+		'./helpers.js': {types: './dist/helpers.d.ts', default: './dist/helpers.js'},
 		'./rangestyler_builder.js': {
 			types: './dist/rangestyler_builder.d.ts',
 			default: './dist/rangestyler_builder.js',
@@ -113,6 +118,10 @@ export const package_json: Package_Json = {
 			types: './dist/Rangestyler_Code.svelte.d.ts',
 			svelte: './dist/Rangestyler_Code.svelte',
 			default: './dist/Rangestyler_Code.svelte',
+		},
+		'./rangestyler_global.js': {
+			types: './dist/rangestyler_global.d.ts',
+			default: './dist/rangestyler_global.js',
 		},
 		'./rangestyler_lang_css.js': {
 			types: './dist/rangestyler_lang_css.d.ts',
@@ -191,6 +200,10 @@ export const src_json: Src_Json = {
 			path: 'Domstyler_Code.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
 		},
+		'./domstyler_global.js': {
+			path: 'domstyler_global.ts',
+			declarations: [{name: 'domstyler_global', kind: 'variable'}],
+		},
 		'./domstyler_lang_clike.js': {
 			path: 'domstyler_lang_clike.ts',
 			declarations: [{name: 'add_domstyler_grammar_clike', kind: 'function'}],
@@ -203,8 +216,8 @@ export const src_json: Src_Json = {
 			path: 'domstyler_lang_html.ts',
 			declarations: [
 				{name: 'add_domstyler_grammar_markup', kind: 'function'},
-				{name: 'grammar_markup_add_inlined', kind: 'function'},
-				{name: 'grammar_markup_add_attribute', kind: 'function'},
+				{name: 'domstyler_grammar_markup_add_inlined', kind: 'function'},
+				{name: 'domstyler_grammar_markup_add_attribute', kind: 'function'},
 			],
 		},
 		'./domstyler_lang_js.js': {
@@ -219,7 +232,7 @@ export const src_json: Src_Json = {
 			path: 'domstyler_lang_svelte.ts',
 			declarations: [
 				{name: 'add_domstyler_grammar_svelte', kind: 'function'},
-				{name: 'grammar_svelte_add_inlined', kind: 'function'},
+				{name: 'domstyler_grammar_svelte_add_inlined', kind: 'function'},
 			],
 		},
 		'./domstyler_lang_ts.js': {
@@ -251,9 +264,9 @@ export const src_json: Src_Json = {
 				{name: 'Hook_Before_Tokenize_Callback_Context', kind: 'type'},
 				{name: 'Hook_After_Tokenize_Callback_Context', kind: 'type'},
 				{name: 'Hook_Wrap_Callback_Context', kind: 'type'},
-				{name: 'domstyler', kind: 'variable'},
 			],
 		},
+		'./helpers.js': {path: 'helpers.ts', declarations: [{name: 'escape_html', kind: 'function'}]},
 		'./rangestyler_builder.js': {
 			path: 'rangestyler_builder.ts',
 			declarations: [
@@ -268,6 +281,10 @@ export const src_json: Src_Json = {
 		'./Rangestyler_Code.svelte': {
 			path: 'Rangestyler_Code.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./rangestyler_global.js': {
+			path: 'rangestyler_global.ts',
+			declarations: [{name: 'rangestyler_global', kind: 'variable'}],
 		},
 		'./rangestyler_lang_css.js': {
 			path: 'rangestyler_lang_css.ts',
@@ -296,9 +313,9 @@ export const src_json: Src_Json = {
 		'./rangestyler_types.js': {
 			path: 'rangestyler_types.ts',
 			declarations: [
-				{name: 'Rangestyler_Pattern', kind: 'type'},
 				{name: 'Rangestyler_Language', kind: 'type'},
-				{name: 'Match_Result', kind: 'type'},
+				{name: 'Rangestyler_Pattern', kind: 'type'},
+				{name: 'Rangestyler_Match_Result', kind: 'type'},
 			],
 		},
 		'./rangestyler.js': {
@@ -306,7 +323,6 @@ export const src_json: Src_Json = {
 			declarations: [
 				{name: 'supports_css_highlight_api', kind: 'function'},
 				{name: 'Rangestyler', kind: 'class'},
-				{name: 'rangestyler_global', kind: 'variable'},
 			],
 		},
 		'./run_benchmark.js': {path: 'run_benchmark.ts'},

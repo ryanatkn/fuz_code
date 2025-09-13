@@ -9,13 +9,10 @@ import {
 /**
  * Check for CSS Highlights API support.
  */
-export function supports_css_highlight_api(): boolean {
-	return (
-		typeof CSS !== 'undefined' &&
-		'highlights' in CSS &&
-		typeof (globalThis as any).Highlight === 'function'
-	);
-}
+export const supports_css_highlight_api = (): boolean =>
+	typeof CSS !== 'undefined' &&
+	'highlights' in CSS &&
+	typeof (globalThis as any).Highlight === 'function';
 
 export class Rangestyler {
 	private languages: Map<string, Rangestyler_Language>;

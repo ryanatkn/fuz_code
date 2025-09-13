@@ -1,9 +1,10 @@
 import type {Rangestyler_Pattern, Rangestyler_Match_Result} from './rangestyler_types.js';
+import {escape_html} from './helpers.js';
 
 /**
  * Create a text node in an element and return it
  */
-export function create_text_node(element: Element, text: string): Text {
+export const create_text_node = (element: Element, text: string): Text => {
 	// Clear element first
 	element.textContent = '';
 
@@ -12,15 +13,15 @@ export function create_text_node(element: Element, text: string): Text {
 	element.appendChild(text_node);
 
 	return text_node;
-}
+};
 
 /**
  * Find all pattern matches in text
  */
-export function find_matches(
+export const find_matches = (
 	text: string,
 	patterns: Array<Rangestyler_Pattern>,
-): Rangestyler_Match_Result[] {
+): Rangestyler_Match_Result[] => {
 	const matches: Rangestyler_Match_Result[] = [];
 
 	for (const pattern of patterns) {
@@ -88,12 +89,14 @@ export function find_matches(
 	});
 
 	return matches;
-}
+};
 
 /**
  * Remove overlapping matches based on priority
  */
-export function resolve_overlaps(matches: Rangestyler_Match_Result[]): Rangestyler_Match_Result[] {
+export const resolve_overlaps = (
+	matches: Rangestyler_Match_Result[],
+): Rangestyler_Match_Result[] => {
 	if (matches.length === 0) return [];
 
 	const resolved: Rangestyler_Match_Result[] = [];
@@ -110,15 +113,15 @@ export function resolve_overlaps(matches: Rangestyler_Match_Result[]): Rangestyl
 	}
 
 	return resolved;
-}
+};
 
 /**
  * Create Range objects from matches
  */
-export function create_ranges(
+export const create_ranges = (
 	text_node: Text,
 	matches: Rangestyler_Match_Result[],
-): Map<string, Range[]> {
+): Map<string, Range[]> => {
 	const ranges_by_name = new Map<string, Range[]>();
 
 	for (const match of matches) {
@@ -148,16 +151,16 @@ export function create_ranges(
 	}
 
 	return ranges_by_name;
-}
+};
 
 /**
  * Build ranges from text and patterns
  */
-export function build_ranges(
+export const build_ranges = (
 	element: Element,
 	text: string,
 	patterns: Array<Rangestyler_Pattern>,
-): {text_node: Text; ranges_by_name: Map<string, Range[]>} {
+): {text_node: Text; ranges_by_name: Map<string, Range[]>} => {
 	// Create text node
 	const text_node = create_text_node(element, text);
 
@@ -171,12 +174,15 @@ export function build_ranges(
 	const ranges_by_name = create_ranges(text_node, resolved);
 
 	return {text_node, ranges_by_name};
-}
+};
 
 /**
  * Generate HTML fallback from matches (for unsupported browsers)
  */
-export function generate_html_fallback(text: string, matches: Rangestyler_Match_Result[]): string {
+export const generate_html_fallback = (
+	text: string,
+	matches: Rangestyler_Match_Result[],
+): string => {
 	if (matches.length === 0) {
 		return escape_html(text);
 	}
@@ -224,16 +230,4 @@ export function generate_html_fallback(text: string, matches: Rangestyler_Match_
 	}
 
 	return html;
-}
-
-/**
- * Escape HTML special characters
- */
-function escape_html(text: string): string {
-	return text
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;')
-		.replace(/'/g, '&#039;');
-}
+};

@@ -107,6 +107,10 @@
       "svelte": "./dist/Domstyler_Code.svelte",
       "default": "./dist/Domstyler_Code.svelte"
     },
+    "./domstyler_global.js": {
+      "types": "./dist/domstyler_global.d.ts",
+      "default": "./dist/domstyler_global.js"
+    },
     "./domstyler_lang_clike.js": {
       "types": "./dist/domstyler_lang_clike.d.ts",
       "default": "./dist/domstyler_lang_clike.js"
@@ -145,6 +149,10 @@
       "types": "./dist/domstyler.d.ts",
       "default": "./dist/domstyler.js"
     },
+    "./helpers.js": {
+      "types": "./dist/helpers.d.ts",
+      "default": "./dist/helpers.js"
+    },
     "./rangestyler_builder.js": {
       "types": "./dist/rangestyler_builder.d.ts",
       "default": "./dist/rangestyler_builder.js"
@@ -153,6 +161,10 @@
       "types": "./dist/Rangestyler_Code.svelte.d.ts",
       "svelte": "./dist/Rangestyler_Code.svelte",
       "default": "./dist/Rangestyler_Code.svelte"
+    },
+    "./rangestyler_global.js": {
+      "types": "./dist/rangestyler_global.d.ts",
+      "default": "./dist/rangestyler_global.js"
     },
     "./rangestyler_lang_css.js": {
       "types": "./dist/rangestyler_lang_css.d.ts",
