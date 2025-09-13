@@ -38,7 +38,7 @@ export class Rangestyler {
 	highlight(element: Element, text: string, lang_id: string): void {
 		const language = this.get_language(lang_id);
 		if (!language) {
-			console.warn(`Language "${lang_id}" not found`);
+			console.error(`Language "${lang_id}" not found`); // eslint-disable-line no-console
 			element.textContent = text;
 			return;
 		}
@@ -77,7 +77,7 @@ export class Rangestyler {
 					const highlight = new (globalThis as any).Highlight(...ranges);
 					(CSS as any).highlights.set(highlight_name, highlight);
 				} catch (error) {
-					console.warn(`Failed to register highlight "${highlight_name}":`, error);
+					console.error(`Failed to register highlight "${highlight_name}":`, error); // eslint-disable-line no-console
 				}
 			}
 		}

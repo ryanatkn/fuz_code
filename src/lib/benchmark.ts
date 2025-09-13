@@ -2,6 +2,8 @@ import {Bench} from 'tinybench';
 import {samples} from './code_samples.js';
 import {domstyler_global} from './domstyler_global.js';
 
+/* eslint-disable no-console */
+
 export interface Benchmark_Result {
 	name: string;
 	ops_per_sec: number;
@@ -31,7 +33,7 @@ export const run_benchmark = async (filter?: string): Promise<Array<Benchmark_Re
 	const results: Array<Benchmark_Result> = [];
 
 	for (const task of bench.tasks) {
-		if (task && task.result) {
+		if (task.result) {
 			results.push({
 				name: task.name,
 				ops_per_sec: task.result.throughput.mean,

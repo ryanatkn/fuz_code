@@ -122,7 +122,7 @@ export const create_ranges = (
 	text_node: Text,
 	matches: Array<Rangestyler_Match_Result>,
 ): Map<string, Array<Range>> => {
-	const ranges_by_name = new Map<string, Array<Range>>();
+	const ranges_by_name: Map<string, Array<Range>> = new Map();
 
 	for (const match of matches) {
 		const name = match.pattern.name;
