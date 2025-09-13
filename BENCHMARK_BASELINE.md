@@ -16,3 +16,14 @@ Date: 2025-09-13
 
 **Total samples benchmarked:** 5
 **Average ops/sec:** 28703.29
+
+| Sample | Ops/sec  | Mean Time (ms) | Samples |
+| ------ | -------- | -------------- | ------- |
+| json   | 76123.57 | 0.0136         | 367787  |
+| html   | 14254.46 | 0.0714         | 70060   |
+| css    | 42429.14 | 0.0240         | 208269  |
+| ts     | 8304.00  | 0.1218         | 41065   |
+| svelte | 2568.42  | 0.3947         | 12667   |
+
+**Total samples benchmarked:** 5
+**Average ops/sec:** 28735.92
