@@ -13,7 +13,7 @@
 		<p>
 			The <code>Rangestyler</code> uses the CSS custom highlight API (<a
 				href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_custom_highlight_API">MDN</a
-			>). Instead of generating DOM elements like spans, it uses
+			>). Instead of generating DOM elements like spans to style text, it uses
 			<a href="https://developer.mozilla.org/en-US/docs/Web/API/Range">Range</a>
 			and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Highlight">Highlight</a>.
 		</p>
