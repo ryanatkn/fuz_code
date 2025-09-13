@@ -1,7 +1,8 @@
 <script lang="ts">
 	import '@ryanatkn/moss/style.css';
 	import '@ryanatkn/moss/theme.css';
-	import '$lib/theme.css';
+	import '$lib/domstyler_theme.css';
+	import '$lib/rangestyler_theme.css';
 	import '$routes/moss.css';
 
 	import Themed from '@ryanatkn/fuz/Themed.svelte';

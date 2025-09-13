@@ -1,4 +1,4 @@
-import type {Add_Grammar, Grammar_Token} from '$lib/syntax_styler.js';
+import type {Add_Domstyler_Grammar, Grammar_Token} from '$lib/domstyler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,8 +8,8 @@ import type {Add_Grammar, Grammar_Token} from '$lib/syntax_styler.js';
  *
  * @see LICENSE
  */
-export const add_grammar_ts: Add_Grammar = (syntax_styler) => {
-	const grammar_ts = syntax_styler.add_extended_lang('js', 'ts', {
+export const add_domstyler_grammar_ts: Add_Domstyler_Grammar = (domstyler) => {
+	const domstyler_grammar_ts = domstyler.add_extended_lang('js', 'ts', {
 		class_name: {
 			pattern:
 				/(\b(?:class|extends|implements|instanceof|interface|new|type)\s+)(?!keyof\b)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?:\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?/,
@@ -22,7 +22,7 @@ export const add_grammar_ts: Add_Grammar = (syntax_styler) => {
 	});
 
 	// The keywords TypeScript adds to JS
-	(grammar_ts.keyword as any).push(
+	(domstyler_grammar_ts.keyword as any).push(
 		/\b(?:abstract|declare|is|keyof|readonly|require)\b/,
 		// keywords that have to be followed by an identifier
 		/\b(?:asserts|infer|interface|module|namespace|type)\b(?=\s*(?:[{_$a-zA-Z\xA0-\uFFFF]|$))/,
@@ -31,16 +31,16 @@ export const add_grammar_ts: Add_Grammar = (syntax_styler) => {
 	);
 
 	// doesn't work with TS because TS is too complex
-	delete grammar_ts.parameter;
-	delete grammar_ts.literal_property;
+	delete domstyler_grammar_ts.parameter;
+	delete domstyler_grammar_ts.literal_property;
 
 	// a version of TS specifically for styling types
-	var type_inside = syntax_styler.extend_grammar('ts', {});
+	var type_inside = domstyler.extend_grammar('ts', {});
 	(type_inside as any).class_name = undefined;
 
-	(grammar_ts.class_name as Grammar_Token).inside = type_inside;
+	(domstyler_grammar_ts.class_name as Grammar_Token).inside = type_inside;
 
-	syntax_styler.grammar_insert_before('ts', 'function', {
+	domstyler.domstyler_grammar_insert_before('ts', 'function', {
 		decorator: {
 			pattern: /@[$\w\xA0-\uFFFF]+/,
 			inside: {

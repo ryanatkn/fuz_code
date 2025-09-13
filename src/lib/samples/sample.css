@@ -1,0 +1,35 @@
+.some_class {
+	color: red;
+}
+
+.hypen-class {
+	font-size: 16px;
+}
+
+p {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* comment */
+
+/*
+multi
+line
+
+<comment>
+
+*/
+
+#unique_id {
+	background-color: blue;
+}
+
+div > p {
+	margin: 10px;
+}
+
+@media (max-width: 600px) {
+	body {
+		background-color: lightblue;
+	}
+}

@@ -1,4 +1,4 @@
-import type {Add_Grammar, Grammar} from '$lib/syntax_styler.js';
+import type {Add_Domstyler_Grammar, Grammar} from '$lib/domstyler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,8 +8,8 @@ import type {Add_Grammar, Grammar} from '$lib/syntax_styler.js';
  *
  * @see LICENSE
  */
-export const add_grammar_clike: Add_Grammar = (syntax_styler) => {
-	const grammar_clike = {
+export const add_domstyler_grammar_clike: Add_Domstyler_Grammar = (domstyler) => {
+	const domstyler_grammar_clike = {
 		comment: [
 			{
 				pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
@@ -43,5 +43,5 @@ export const add_grammar_clike: Add_Grammar = (syntax_styler) => {
 		punctuation: /[{}[\];(),.:]/,
 	} satisfies Grammar;
 
-	syntax_styler.add_lang('clike', grammar_clike);
+	domstyler.add_lang('clike', domstyler_grammar_clike);
 };

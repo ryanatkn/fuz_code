@@ -1,4 +1,4 @@
-export type Add_Grammar = (syntax_styler: Syntax_Styler) => void;
+export type Add_Domstyler_Grammar = (domstyler: Domstyler) => void;
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,7 +8,7 @@ export type Add_Grammar = (syntax_styler: Syntax_Styler) => void;
  *
  * @see LICENSE
  */
-export class Syntax_Styler {
+export class Domstyler {
 	langs: Record<string, Grammar | undefined> = {
 		plaintext: {},
 	};
@@ -17,7 +17,7 @@ export class Syntax_Styler {
 	// TODO this API? problem is the grammars rely on mutating existing grammars in the `syntax_styler`,
 	// so for now adding grammars will remain inherently stateful
 	// export interface Syntax_Styler_Options {
-	// 	grammars?: Add_Grammar[];
+	// 	grammars?: Add_Domstyler_Grammar[];
 	// }
 	// options: Syntax_Styler_Options = {}
 	// const {grammars} = options;
@@ -71,7 +71,7 @@ export class Syntax_Styler {
 	 * @param lang - The name of the language definition passed to `grammar`.
 	 * @param grammar - An object containing the tokens to use.
 	 *
-	 * Usually a language definition like `syntax_styler.get_lang('markup')`.
+	 * Usually a language definition like `domstyler.get_lang('markup')`.
 	 *
 	 * @returns the styled HTML
 	 *
@@ -104,12 +104,12 @@ export class Syntax_Styler {
 	 *
 	 * This helper method makes it easy to modify existing languages. For example, the CSS language definition
 	 * not only defines CSS styling for CSS documents, but also needs to define styling for CSS embedded
-	 * in HTML through `<style>` elements. To do this, it needs to modify `syntax_styler.get_lang('markup')` and add the
-	 * appropriate tokens. However, `syntax_styler.get_lang('markup')` is a regular JS object literal, so if you do
+	 * in HTML through `<style>` elements. To do this, it needs to modify `domstyler.get_lang('markup')` and add the
+	 * appropriate tokens. However, `domstyler.get_lang('markup')` is a regular JS object literal, so if you do
 	 * this:
 	 *
 	 * ```js
-	 * syntax_styler.get_lang('markup').style = {
+	 * domstyler.get_lang('markup').style = {
 	 *     // token
 	 * };
 	 * ```
@@ -118,7 +118,7 @@ export class Syntax_Styler {
 	 * before existing tokens. For the CSS example above, you would use it like this:
 	 *
 	 * ```js
-	 * grammar_insert_before('markup', 'cdata', {
+	 * domstyler_grammar_insert_before('markup', 'cdata', {
 	 *     'style': {
 	 *         // token
 	 *     }
@@ -133,7 +133,7 @@ export class Syntax_Styler {
 	 * This behavior can be used to insert tokens after `before`:
 	 *
 	 * ```js
-	 * grammar_insert_before('markup', 'comment', {
+	 * domstyler_grammar_insert_before('markup', 'comment', {
 	 *     'comment': syntax_styler.get_lang('markup').comment,
 	 *     // tokens after 'comment'
 	 * });
@@ -150,29 +150,29 @@ export class Syntax_Styler {
 	 * Instead, it will create a new object and replace all references to the target object with the new one. This
 	 * can be done without temporarily deleting properties, so the iteration order is well-defined.
 	 *
-	 * However, only references that can be reached from `syntax_styler.langs` or `insert` will be replaced. I.e. if
+	 * However, only references that can be reached from `domstyler.langs` or `insert` will be replaced. I.e. if
 	 * you hold the target object in a variable, then the value of the variable will not change.
 	 *
 	 * ```js
-	 * var oldMarkup = syntax_styler.get_lang('markup');
-	 * var newMarkup = grammar_insert_before('markup', 'comment', { ... });
+	 * var oldMarkup = domstyler.get_lang('markup');
+	 * var newMarkup = domstyler_grammar_insert_before('markup', 'comment', { ... });
 	 *
-	 * assert(oldMarkup !== syntax_styler.get_lang('markup'));
-	 * assert(newMarkup === syntax_styler.get_lang('markup'));
+	 * assert(oldMarkup !== domstyler.get_lang('markup'));
+	 * assert(newMarkup === domstyler.get_lang('markup'));
 	 * ```
 	 *
-	 * @param inside - The property of `root` (e.g. a language id in `syntax_styler.langs`) that contains the
+	 * @param inside - The property of `root` (e.g. a language id in `domstyler.langs`) that contains the
 	 * object to be modified.
 	 * @param before - The key to insert before.
 	 * @param insert - An object containing the key-value pairs to be inserted.
 	 * @param root - The object containing `inside`, i.e. the object that contains the
 	 * object to be modified.
 	 *
-	 * Defaults to `syntax_styler.langs`.
+	 * Defaults to `domstyler.langs`.
 	 *
 	 * @returns the new grammar object
 	 */
-	grammar_insert_before(
+	domstyler_grammar_insert_before(
 		inside: string,
 		before: string,
 		insert: Grammar,
@@ -283,7 +283,7 @@ export class Syntax_Styler {
 	 * Therefore, it is encouraged to order overwriting tokens according to the positions of the overwritten tokens.
 	 * Furthermore, all non-overwriting tokens should be placed after the overwriting ones.
 	 *
-	 * @param base_id - The id of the language to extend. This has to be a key in `syntax_styler.langs`.
+	 * @param base_id - The id of the language to extend. This has to be a key in `domstyler.langs`.
 	 * @param extension - The new tokens to append.
 	 * @returns the new grammar
 	 */
@@ -383,7 +383,7 @@ export interface Grammar_Token {
  *
  * @example
  * var code = `var foo = 0;`;
- * var tokens = tokenize_syntax(code, Syntax_Styler.langs.js);
+ * var tokens = tokenize_syntax(code, Domstyler.langs.js);
  * for (var token of tokens) {
  *     if (token instanceof Syntax_Token && token.type === 'number') {
  *         console.log(`Found numeric literal: ${token.content}`);

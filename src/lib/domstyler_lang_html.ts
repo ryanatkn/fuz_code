@@ -1,4 +1,5 @@
-import type {Add_Grammar, Syntax_Styler, Grammar, Grammar_Token} from '$lib/syntax_styler.js';
+import type {Add_Domstyler_Grammar, Grammar, Grammar_Token} from '$lib/domstyler.js';
+import type {Domstyler} from '$lib/domstyler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,8 +9,8 @@ import type {Add_Grammar, Syntax_Styler, Grammar, Grammar_Token} from '$lib/synt
  *
  * @see LICENSE
  */
-export const add_grammar_markup: Add_Grammar = (syntax_styler) => {
-	const grammar_markup = {
+export const add_domstyler_grammar_markup: Add_Domstyler_Grammar = (domstyler) => {
+	const domstyler_grammar_markup = {
 		comment: {
 			pattern: /<!--(?:(?!<!--)[\s\S])*?-->/,
 			greedy: true,
@@ -73,10 +74,10 @@ export const add_grammar_markup: Add_Grammar = (syntax_styler) => {
 		],
 	} satisfies Grammar;
 
-	grammar_markup.tag.inside.attr_value.inside.entity = grammar_markup.entity;
+	domstyler_grammar_markup.tag.inside.attr_value.inside.entity = domstyler_grammar_markup.entity;
 
-	syntax_styler.add_lang('markup', grammar_markup, ['html', 'mathml', 'svg']);
-	syntax_styler.add_extended_lang('markup', 'xml', {}, ['ssml', 'atom', 'rss']);
+	domstyler.add_lang('markup', domstyler_grammar_markup, ['html', 'mathml', 'svg']);
+	domstyler.add_extended_lang('markup', 'xml', {}, ['ssml', 'atom', 'rss']);
 };
 
 /**
@@ -88,17 +89,17 @@ export const add_grammar_markup: Add_Grammar = (syntax_styler) => {
  * case insensitive.
  * @param lang - The language key.
  * @example
- * grammar_markup_add_inlined(syntax_styler, 'style', 'css');
+ * domstyler_grammar_markup_add_inlined(domstyler, 'style', 'css');
  */
-export const grammar_markup_add_inlined = (
-	syntax_styler: Syntax_Styler,
+export const domstyler_grammar_markup_add_inlined = (
+	domstyler: Domstyler,
 	tag_name: string,
 	lang: string,
 	inside_lang = 'markup',
 ): void => {
 	const lang_key = 'lang_' + lang;
 
-	syntax_styler.grammar_insert_before(inside_lang, 'cdata', {
+	domstyler.domstyler_grammar_insert_before(inside_lang, 'cdata', {
 		[tag_name]: {
 			pattern: RegExp(
 				/(<__[^>]*>)(?:<!\[CDATA\[(?:[^\]]|\](?!\]>))*\]\]>|(?!<!\[CDATA\[)[\s\S])*?(?=<\/__>)/.source.replace(
@@ -119,13 +120,13 @@ export const grammar_markup_add_inlined = (
 						[lang_key]: {
 							pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
 							lookbehind: true,
-							inside: syntax_styler.get_lang(lang),
+							inside: domstyler.get_lang(lang),
 						},
 					},
 				},
 				[lang_key]: {
 					pattern: /[\s\S]+/,
-					inside: syntax_styler.get_lang(lang),
+					inside: domstyler.get_lang(lang),
 				},
 			},
 		},
@@ -141,16 +142,15 @@ export const grammar_markup_add_inlined = (
  * case insensitive.
  * @param lang - The language key.
  * @example
- * grammar_markup_add_attribute(syntax_styler, 'style', 'css');
+ * domstyler_grammar_markup_add_attribute(domstyler, 'style', 'css');
  */
-export const grammar_markup_add_attribute = (
-	syntax_styler: Syntax_Styler,
+export const domstyler_grammar_markup_add_attribute = (
+	domstyler: Domstyler,
 	attr_name: string,
 	lang: string,
 ): void => {
 	(
-		(syntax_styler.get_lang('markup').tag as Grammar_Token).inside!
-			.special_attr as Array<Grammar_Token>
+		(domstyler.get_lang('markup').tag as Grammar_Token).inside!.special_attr as Array<Grammar_Token>
 	).push({
 		pattern: RegExp(
 			/(^|["'\s])/.source +
@@ -170,7 +170,7 @@ export const grammar_markup_add_attribute = (
 						pattern: /(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,
 						lookbehind: true,
 						alias: [lang, 'lang_' + lang], // TODO remove this alias?
-						inside: syntax_styler.get_lang(lang),
+						inside: domstyler.get_lang(lang),
 					},
 					punctuation: [
 						{

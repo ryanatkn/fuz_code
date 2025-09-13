@@ -1,4 +1,4 @@
-import type {Add_Grammar, Grammar} from '$lib/syntax_styler.js';
+import type {Add_Domstyler_Grammar, Grammar} from '$lib/domstyler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,8 +8,8 @@ import type {Add_Grammar, Grammar} from '$lib/syntax_styler.js';
  *
  * @see LICENSE
  */
-export const add_grammar_json: Add_Grammar = (syntax_styler) => {
-	const grammar_json = {
+export const add_domstyler_grammar_json: Add_Domstyler_Grammar = (domstyler) => {
+	const domstyler_grammar_json = {
 		property: {
 			pattern: /(^|[^\\])"(?:\\.|[^\\"\r\n])*"(?=\s*:)/,
 			lookbehind: true,
@@ -34,5 +34,5 @@ export const add_grammar_json: Add_Grammar = (syntax_styler) => {
 		},
 	} satisfies Grammar;
 
-	syntax_styler.add_lang('json', grammar_json);
+	domstyler.add_lang('json', domstyler_grammar_json);
 };

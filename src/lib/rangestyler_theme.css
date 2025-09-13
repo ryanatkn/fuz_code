@@ -1,0 +1,241 @@
+/*
+ * CSS Custom Highlight API theme
+ * Maps to the same color scheme as the existing token-based theme
+ */
+
+/* TypeScript/JS */
+::highlight(ts_comment) {
+	color: var(--text_color_5);
+	font-style: italic;
+}
+
+::highlight(ts_string) {
+	color: var(--color_b_5);
+}
+
+::highlight(ts_type) {
+	color: var(--color_c_5);
+}
+
+::highlight(ts_keyword) {
+	color: var(--color_f_5);
+}
+
+::highlight(ts_number) {
+	color: var(--color_e_5);
+}
+
+::highlight(ts_boolean) {
+	color: var(--color_i_5);
+}
+
+::highlight(ts_function) {
+	color: var(--color_d_5);
+}
+
+::highlight(ts_class_name) {
+	color: var(--color_d_5);
+}
+
+::highlight(ts_regex) {
+	color: var(--color_e_5);
+}
+
+::highlight(ts_operator) {
+	color: var(--text_color_5);
+}
+
+::highlight(ts_punctuation) {
+	color: var(--text_color_5);
+}
+
+::highlight(ts_template_expression) {
+	color: var(--color_a_5);
+}
+
+/* JSON */
+::highlight(json_comment) {
+	color: var(--text_color_5);
+	font-style: italic;
+}
+
+::highlight(json_property) {
+	color: var(--color_f_5);
+}
+
+::highlight(json_string) {
+	color: var(--color_b_5);
+}
+
+::highlight(json_number) {
+	color: var(--color_e_5);
+}
+
+::highlight(json_boolean) {
+	color: var(--color_i_5);
+}
+
+::highlight(json_null) {
+	color: var(--color_f_5);
+}
+
+::highlight(json_punctuation) {
+	color: var(--text_color_5);
+}
+
+::highlight(json_operator) {
+	color: var(--text_color_5);
+}
+
+/* CSS */
+::highlight(css_comment) {
+	color: var(--text_color_5);
+	font-style: italic;
+}
+
+::highlight(css_string) {
+	color: var(--color_b_5);
+}
+
+::highlight(css_url) {
+	color: var(--color_b_5);
+	text-decoration: underline;
+}
+
+::highlight(css_atrule) {
+	color: var(--color_f_5);
+}
+
+::highlight(css_selector) {
+	color: var(--color_d_5);
+}
+
+::highlight(css_property) {
+	color: var(--color_c_5);
+}
+
+::highlight(css_important) {
+	color: var(--color_a_5);
+	font-weight: bold;
+}
+
+::highlight(css_function) {
+	color: var(--color_d_5);
+}
+
+::highlight(css_number) {
+	color: var(--color_e_5);
+}
+
+::highlight(css_color) {
+	color: var(--color_e_5);
+}
+
+::highlight(css_keyword) {
+	color: var(--color_i_5);
+}
+
+::highlight(css_punctuation) {
+	color: var(--text_color_5);
+}
+
+/* HTML */
+::highlight(html_comment) {
+	color: var(--text_color_5);
+	font-style: italic;
+}
+
+::highlight(html_doctype) {
+	color: var(--text_color_5);
+}
+
+::highlight(html_prolog) {
+	color: var(--text_color_5);
+}
+
+::highlight(html_cdata) {
+	color: var(--text_color_5);
+}
+
+::highlight(html_tag) {
+	color: var(--color_a_5);
+}
+
+::highlight(html_attr_name) {
+	color: var(--color_d_5);
+}
+
+::highlight(html_attr_value) {
+	color: var(--color_b_5);
+}
+
+::highlight(html_entity) {
+	color: var(--color_e_5);
+}
+
+::highlight(html_punctuation) {
+	color: var(--text_color_5);
+}
+
+::highlight(html_operator) {
+	color: var(--text_color_5);
+}
+
+/* Svelte */
+::highlight(svelte_comment) {
+	color: var(--text_color_5);
+	font-style: italic;
+}
+
+::highlight(svelte_block) {
+	color: var(--color_f_5);
+	font-weight: bold;
+}
+
+::highlight(svelte_expression) {
+	color: var(--color_a_5);
+}
+
+::highlight(svelte_directive) {
+	color: var(--color_f_5);
+}
+
+::highlight(svelte_script_tag) {
+	color: var(--color_a_5);
+}
+
+::highlight(svelte_style_tag) {
+	color: var(--color_a_5);
+}
+
+::highlight(svelte_doctype) {
+	color: var(--text_color_5);
+}
+
+::highlight(svelte_cdata) {
+	color: var(--text_color_5);
+}
+
+::highlight(svelte_tag) {
+	color: var(--color_a_5);
+}
+
+::highlight(svelte_attr_name) {
+	color: var(--color_d_5);
+}
+
+::highlight(svelte_attr_value) {
+	color: var(--color_b_5);
+}
+
+::highlight(svelte_entity) {
+	color: var(--color_e_5);
+}
+
+::highlight(svelte_punctuation) {
+	color: var(--text_color_5);
+}
+
+::highlight(svelte_operator) {
+	color: var(--text_color_5);
+}

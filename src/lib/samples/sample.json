@@ -1,0 +1,9 @@
+{
+	"string": "a string",
+	"number": 12345,
+	"boolean": true,
+	"null": null,
+	"object": {
+		"array": [1, "b", false]
+	}
+}

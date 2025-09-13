@@ -1,5 +1,8 @@
-import type {Add_Grammar} from '$lib/syntax_styler.js';
-import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/grammar_markup.js';
+import type {Add_Domstyler_Grammar} from '$lib/domstyler.js';
+import {
+	domstyler_grammar_markup_add_attribute,
+	domstyler_grammar_markup_add_inlined,
+} from '$lib/domstyler_lang_html.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -9,12 +12,12 @@ import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/gra
  *
  * @see LICENSE
  */
-export const add_grammar_js: Add_Grammar = (syntax_styler) => {
-	const grammar_clike = syntax_styler.get_lang('clike');
+export const add_domstyler_grammar_js: Add_Domstyler_Grammar = (domstyler) => {
+	const domstyler_grammar_clike = domstyler.get_lang('clike');
 
-	const grammar_js = syntax_styler.add_extended_lang('clike', 'js', {
+	const domstyler_grammar_js = domstyler.add_extended_lang('clike', 'js', {
 		class_name: [
-			grammar_clike.class_name,
+			domstyler_grammar_clike.class_name,
 			{
 				pattern:
 					/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:constructor|prototype))/,
@@ -66,10 +69,10 @@ export const add_grammar_js: Add_Grammar = (syntax_styler) => {
 			/--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/,
 	});
 
-	(grammar_js as any).class_name[0].pattern =
+	(domstyler_grammar_js as any).class_name[0].pattern =
 		/(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/;
 
-	syntax_styler.grammar_insert_before('js', 'keyword', {
+	domstyler.domstyler_grammar_insert_before('js', 'keyword', {
 		regex: {
 			pattern: RegExp(
 				// lookbehind
@@ -96,7 +99,7 @@ export const add_grammar_js: Add_Grammar = (syntax_styler) => {
 					pattern: /^(\/)[\s\S]+(?=\/[a-z]*$)/,
 					lookbehind: true,
 					alias: 'lang_regex',
-					inside: syntax_styler.langs.regex, // TODO use `get_lang` after adding `regex` support
+					inside: domstyler.langs.regex, // TODO use `get_lang` after adding `regex` support
 				},
 				regex_delimiter: /^\/|\/$/,
 				regex_flags: /^[a-z]+$/,
@@ -113,30 +116,30 @@ export const add_grammar_js: Add_Grammar = (syntax_styler) => {
 				pattern:
 					/(function(?:\s+(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)?\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\))/,
 				lookbehind: true,
-				inside: grammar_js,
+				inside: domstyler_grammar_js,
 			},
 			{
 				pattern:
 					/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$a-z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*=>)/i,
 				lookbehind: true,
-				inside: grammar_js,
+				inside: domstyler_grammar_js,
 			},
 			{
 				pattern: /(\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*=>)/,
 				lookbehind: true,
-				inside: grammar_js,
+				inside: domstyler_grammar_js,
 			},
 			{
 				pattern:
 					/((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*)\(\s*|\]\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*\{)/,
 				lookbehind: true,
-				inside: grammar_js,
+				inside: domstyler_grammar_js,
 			},
 		],
 		constant: /\b[A-Z](?:[A-Z_]|\dx?)*\b/,
 	});
 
-	syntax_styler.grammar_insert_before('js', 'string', {
+	domstyler.domstyler_grammar_insert_before('js', 'string', {
 		hashbang: {
 			pattern: /^#!.*/,
 			greedy: true,
@@ -158,7 +161,7 @@ export const add_grammar_js: Add_Grammar = (syntax_styler) => {
 							pattern: /^\$\{|\}$/,
 							alias: 'punctuation',
 						},
-						rest: grammar_js as any, // TODO try to fix this type
+						rest: domstyler_grammar_js as any, // TODO try to fix this type
 					},
 				},
 				string: /[\s\S]+/,
@@ -172,7 +175,7 @@ export const add_grammar_js: Add_Grammar = (syntax_styler) => {
 		},
 	});
 
-	syntax_styler.grammar_insert_before('js', 'operator', {
+	domstyler.domstyler_grammar_insert_before('js', 'operator', {
 		literal_property: {
 			pattern: /((?:^|[,{])[ \t]*)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*:)/m,
 			lookbehind: true,
@@ -180,12 +183,12 @@ export const add_grammar_js: Add_Grammar = (syntax_styler) => {
 		},
 	});
 
-	grammar_markup_add_inlined(syntax_styler, 'script', 'js');
+	domstyler_grammar_markup_add_inlined(domstyler, 'script', 'js');
 
 	// add attribute support for all DOM events.
 	// https://developer.mozilla.org/en-US/docs/Web/Events#Standard_events
-	grammar_markup_add_attribute(
-		syntax_styler,
+	domstyler_grammar_markup_add_attribute(
+		domstyler,
 		/on(?:abort|blur|change|click|composition(?:end|start|update)|dblclick|error|focus(?:in|out)?|key(?:down|up)|load|mouse(?:down|enter|leave|move|out|over|up)|reset|resize|scroll|select|slotchange|submit|unload|wheel)/
 			.source,
 		'js',

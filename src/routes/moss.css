@@ -2,11 +2,11 @@
 
 /* * 
  * File statistics:
- * - Total files in filer: 262
- * - External dependencies: 234
- * - Internal project files: 28
- * - Files processed (passed filter): 232
- * - Files with CSS classes: 19
+ * - Total files in filer: 255
+ * - External dependencies: 197
+ * - Internal project files: 58
+ * - Files processed (passed filter): 227
+ * - Files with CSS classes: 24
  * - Unique classes found: 41
  */
 
@@ -84,6 +84,9 @@ a.chip {
 .flex_wrap {
 	flex-wrap: wrap;
 }
+.align_items_center {
+	align-items: center;
+}
 .justify_content_space_around {
 	justify-content: space-around;
 }
@@ -96,6 +99,12 @@ a.chip {
 }
 .bg {
 	background-color: var(--bg);
+}
+.color_a_5 {
+	color: var(--color_a_5);
+}
+.color_b_5 {
+	color: var(--color_b_5);
 }
 .border_radius_xs {
 	border-radius: var(--border_radius_xs);
@@ -128,17 +137,39 @@ a.chip {
 	padding-top: var(--space_sm);
 	padding-bottom: var(--space_sm);
 }
+.py_xl5 {
+	padding-top: var(--space_xl5);
+	padding-bottom: var(--space_xl5);
+}
 .mt_0 {
 	margin-top: 0;
 }
+.mt_md {
+	margin-top: var(--space_md);
+}
+.mt_xl {
+	margin-top: var(--space_xl);
+}
 .mt_xl5 {
 	margin-top: var(--space_xl5);
+}
+.mt_xl7 {
+	margin-top: var(--space_xl7);
 }
 .mr_xs {
 	margin-right: var(--space_xs);
 }
 .mb_lg {
 	margin-bottom: var(--space_lg);
+}
+.mb_xl {
+	margin-bottom: var(--space_xl);
+}
+.mb_xl5 {
+	margin-bottom: var(--space_xl5);
+}
+.gap_sm {
+	gap: var(--space_sm);
 }
 .gap_xl3 {
 	gap: var(--space_xl3);

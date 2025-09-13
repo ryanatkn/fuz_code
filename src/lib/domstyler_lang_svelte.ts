@@ -1,5 +1,5 @@
-import type {Add_Grammar, Grammar_Token, Syntax_Styler} from '$lib/syntax_styler.js';
-import {grammar_markup_add_inlined} from '$lib/grammar_markup.js';
+import type {Add_Domstyler_Grammar, Grammar_Token, Domstyler} from '$lib/domstyler.js';
+import {domstyler_grammar_markup_add_inlined} from '$lib/domstyler_lang_html.js';
 
 const blocks = '(if|else if|await|then|catch|each|html|debug)';
 
@@ -11,10 +11,10 @@ const blocks = '(if|else if|await|then|catch|each|html|debug)';
  *
  * @see LICENSE
  */
-export const add_grammar_svelte: Add_Grammar = (syntax_styler) => {
-	const grammar_ts = syntax_styler.get_lang('ts');
+export const add_domstyler_grammar_svelte: Add_Domstyler_Grammar = (domstyler) => {
+	const domstyler_grammar_ts = domstyler.get_lang('ts');
 
-	const grammar_svelte = syntax_styler.add_extended_lang('markup', 'svelte', {
+	const domstyler_grammar_svelte = domstyler.add_extended_lang('markup', 'svelte', {
 		each: {
 			pattern: /{[#/]each(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*}/,
 			inside: {
@@ -22,17 +22,17 @@ export const add_grammar_svelte: Add_Grammar = (syntax_styler) => {
 					{
 						pattern: /(as[\s\S]*)\([\s\S]*\)(?=\s*\})/,
 						lookbehind: true,
-						inside: grammar_ts,
+						inside: domstyler_grammar_ts,
 					},
 					{
 						pattern: /(as[\s]*)[\s\S]*(?=\s*)/,
 						lookbehind: true,
-						inside: grammar_ts,
+						inside: domstyler_grammar_ts,
 					},
 					{
 						pattern: /(#each[\s]*)[\s\S]*(?=as)/,
 						lookbehind: true,
-						inside: grammar_ts,
+						inside: domstyler_grammar_ts,
 					},
 				],
 				keyword: /[#/]each|as/,
@@ -48,7 +48,7 @@ export const add_grammar_svelte: Add_Grammar = (syntax_styler) => {
 				keyword: [new RegExp('[#:/@]' + blocks + '( )*'), /as/, /then/],
 				lang_ts: {
 					pattern: /[\s\S]*/,
-					inside: grammar_ts,
+					inside: domstyler_grammar_ts,
 				},
 			},
 		},
@@ -66,7 +66,7 @@ export const add_grammar_svelte: Add_Grammar = (syntax_styler) => {
 				},
 				lang_ts: {
 					pattern: /\{(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*\}/,
-					inside: grammar_ts,
+					inside: domstyler_grammar_ts,
 				},
 				attr_value: {
 					pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/i,
@@ -80,7 +80,7 @@ export const add_grammar_svelte: Add_Grammar = (syntax_styler) => {
 						],
 						lang_ts: {
 							pattern: /{[\s\S]+}/,
-							inside: grammar_ts,
+							inside: domstyler_grammar_ts,
 						},
 					},
 				},
@@ -96,22 +96,23 @@ export const add_grammar_svelte: Add_Grammar = (syntax_styler) => {
 		lang_ts: {
 			pattern: /\{(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*\}/,
 			lookbehind: true,
-			inside: grammar_ts,
+			inside: domstyler_grammar_ts,
 		},
 	});
 
 	// oof lol
-	((grammar_svelte.tag as Grammar_Token).inside!.attr_value as Grammar_Token).inside!.entity =
-		grammar_svelte.entity;
+	(
+		(domstyler_grammar_svelte.tag as Grammar_Token).inside!.attr_value as Grammar_Token
+	).inside!.entity = domstyler_grammar_svelte.entity;
 
-	grammar_svelte_add_inlined(syntax_styler, 'style', 'css');
-	grammar_svelte_add_inlined(syntax_styler, 'script', 'ts');
+	domstyler_grammar_svelte_add_inlined(domstyler, 'style', 'css');
+	domstyler_grammar_svelte_add_inlined(domstyler, 'script', 'ts');
 };
 
-export const grammar_svelte_add_inlined = (
-	syntax_styler: Syntax_Styler,
+export const domstyler_grammar_svelte_add_inlined = (
+	domstyler: Domstyler,
 	tag_name: string,
 	lang: string,
 ): void => {
-	grammar_markup_add_inlined(syntax_styler, tag_name, lang, 'svelte');
+	domstyler_grammar_markup_add_inlined(domstyler, tag_name, lang, 'svelte');
 };

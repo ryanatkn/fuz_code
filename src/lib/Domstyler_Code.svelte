@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import {syntax_styler as syntax_styler_default} from '$lib/index.js'; // TODO lazy load these grammars (cache promise in module context)
-	import {Syntax_Styler, type Grammar} from '$lib/syntax_styler.js';
+	import {Domstyler, type Grammar} from '$lib/domstyler.js';
+	import {domstyler_global} from '$lib/domstyler_global.js';
 
 	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
 
@@ -13,7 +13,7 @@
 		lang?: string | null;
 		grammar?: Grammar | undefined;
 		inline?: boolean;
-		syntax_styler?: Syntax_Styler;
+		domstyler?: Domstyler;
 		children?: Snippet<[markup: string]>;
 	}
 
@@ -24,13 +24,13 @@
 		lang = 'svelte',
 		grammar,
 		inline = false,
-		syntax_styler = syntax_styler_default,
+		domstyler = domstyler_global,
 		children,
 	}: Props = $props();
 
 	// TODO do this at compile time somehow
 	const styled = $derived(
-		lang === null || !content ? null : syntax_styler.stylize(content, lang, grammar),
+		lang === null || !content ? null : domstyler.stylize(content, lang, grammar),
 	);
 	const markup = $derived(styled ?? content);
 
