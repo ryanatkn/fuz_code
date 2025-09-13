@@ -2,21 +2,19 @@
 	import {rangestyler_global} from './rangestyler_global.js';
 	import type {Rangestyler} from './rangestyler.js';
 
-	interface Props {
-		content: string;
-		lang?: string;
-		pre_attrs?: any;
-		code_attrs?: any;
-		rangestyler?: Rangestyler;
-	}
-
 	const {
 		content,
 		lang = 'ts',
 		pre_attrs,
 		code_attrs,
 		rangestyler = rangestyler_global,
-	}: Props = $props();
+	}: {
+		content: string;
+		lang?: string;
+		pre_attrs?: any;
+		code_attrs?: any;
+		rangestyler?: Rangestyler;
+	} = $props();
 
 	// Element reference
 	let code_element: HTMLElement | undefined = $state();

@@ -1,10 +1,11 @@
 <script lang="ts">
-	interface Props {
+	const {
+		name,
+		extension = '.svelte',
+	}: {
 		name: string;
 		extension?: string; // TODO shouldn't be a thing
-	}
-
-	const {name, extension = '.svelte'}: Props = $props();
+	} = $props();
 	// TODO confusing overlap with @ryanatkn/fuz/Tome_Link.svelte
 </script>
 

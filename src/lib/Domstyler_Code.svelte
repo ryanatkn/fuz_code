@@ -6,17 +6,6 @@
 
 	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
 
-	interface Props {
-		content: string;
-		pre_attrs?: any;
-		code_attrs?: any;
-		lang?: string | null;
-		grammar?: Grammar | undefined;
-		inline?: boolean;
-		domstyler?: Domstyler;
-		children?: Snippet<[markup: string]>;
-	}
-
 	const {
 		content,
 		pre_attrs,
@@ -26,7 +15,16 @@
 		inline = false,
 		domstyler = domstyler_global,
 		children,
-	}: Props = $props();
+	}: {
+		content: string;
+		pre_attrs?: any;
+		code_attrs?: any;
+		lang?: string | null;
+		grammar?: Grammar | undefined;
+		inline?: boolean;
+		domstyler?: Domstyler;
+		children?: Snippet<[markup: string]>;
+	} = $props();
 
 	// TODO do this at compile time somehow
 	const styled = $derived(
