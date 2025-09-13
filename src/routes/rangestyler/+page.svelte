@@ -11,8 +11,9 @@
 	<section class="width_md mt_xl7">
 		<h1>Rangestyler</h1>
 		<p>
-			The <code>Rangestyler</code> is a fork of <a href="https://github.com/PrismJS/prism">Prism</a>
-			by <a href="https://lea.verou.me/">Lea Verou</a>.
+			The <code>Rangestyler</code> uses the CSS custom highlight API (<a
+				href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_custom_highlight_API">MDN</a
+			>).
 		</p>
 	</section>
 	<section class="display_flex flex_wrap justify_content_space_around gap_sm">
