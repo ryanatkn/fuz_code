@@ -19,8 +19,23 @@ export const samples: Record<Sample_Key, Code_Sample> = {
 	"number": 12345,
 	"boolean": true,
 	"null": null,
+	"empty": "",
+	"escaped": "quote: \\"test\\" and backslash: \\\\",
 	"object": {
-		"array": [1, "b", false]
+		"array": [1, "b", false],
+		"strings": ["first", "second", "third"],
+		"mixed": [
+			"string at start",
+			123,
+			true,
+			"string in middle",
+			null,
+			"string at end"
+		],
+		"nested": [
+			["nested", "array", "strings"],
+			{"key": "value in nested object"}
+		]
 	}
 }
 `,
