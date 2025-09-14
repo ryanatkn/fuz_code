@@ -111,7 +111,7 @@
 }
 
 ::highlight(css_property) {
-	color: var(--color_c_5);
+	color: var(--color_a_5);
 }
 
 ::highlight(css_important) {
@@ -162,7 +162,7 @@
 }
 
 ::highlight(html_attr_name) {
-	color: var(--color_d_5);
+	color: var(--color_f_5);
 }
 
 ::highlight(html_attr_value) {
@@ -221,7 +221,7 @@
 }
 
 ::highlight(svelte_attr_name) {
-	color: var(--color_d_5);
+	color: var(--color_f_5);
 }
 
 ::highlight(svelte_attr_value) {

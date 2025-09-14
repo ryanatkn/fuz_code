@@ -9,7 +9,7 @@
 
 	<span class="token keyword">const</span> <span class="token punctuation">{</span>
 		thing<span class="token punctuation">,</span>
-		<span class="token attr_name">bound</span> <span class="token operator">=</span> $<span class="token function">bindable</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		bound <span class="token operator">=</span> $<span class="token function">bindable</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 		children<span class="token punctuation">,</span>
 	<span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span>
 		thing<span class="token operator">:</span> <span class="token class_name">Record</span><span class="token operator">&lt;</span><span class="token type">string</span><span class="token punctuation">,</span> <span class="token type">any</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
@@ -17,11 +17,11 @@
 		children<span class="token operator">:</span> <span class="token class_name">Snippet</span><span class="token punctuation">;</span>
 	<span class="token punctuation">}</span> <span class="token operator">=</span> $<span class="token function">props</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="token keyword">const</span> <span class="token attr_name">thing_keys</span> <span class="token operator">=</span> $<span class="token function">derived</span><span class="token punctuation">(</span><span class="token class_name">Object</span><span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>thing<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">const</span> thing_keys <span class="token operator">=</span> $<span class="token function">derived</span><span class="token punctuation">(</span><span class="token class_name">Object</span><span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>thing<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-	<span class="token keyword">const</span> <span class="token attr_name">a</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 
-	<span class="token keyword">const</span> <span class="token attr_name">b</span> <span class="token operator">=</span> <span class="token string">&#039;b&#039;</span><span class="token punctuation">;</span>
+	<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token string">&#039;b&#039;</span><span class="token punctuation">;</span>
 
 	<span class="token keyword">let</span> c<span class="token operator">:</span> <span class="token type">boolean</span> <span class="token operator">=</span> $<span class="token function">state</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -30,7 +30,7 @@
 	<span class="token keyword">class</span> <span class="token class_name">D</span> <span class="token punctuation">{</span>
 		d1<span class="token operator">:</span> <span class="token type">string</span> <span class="token operator">=</span> <span class="token string">&#039;d&#039;</span><span class="token punctuation">;</span>
 		d2<span class="token operator">:</span> <span class="token type">number</span><span class="token punctuation">;</span>
-		<span class="token attr_name">d3</span> <span class="token operator">=</span> $<span class="token function">state</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		d3 <span class="token operator">=</span> $<span class="token function">state</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 		<span class="token function">constructor</span><span class="token punctuation">(</span>d2<span class="token operator">:</span> <span class="token type">number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 			<span class="token keyword">this</span><span class="token punctuation">.</span>d2 <span class="token operator">=</span> d2<span class="token punctuation">;</span>
@@ -40,7 +40,7 @@
 			<span class="token keyword">return</span> <span class="token string">`Hello, ${this.d1}`</span><span class="token punctuation">;</span>
 		<span class="token punctuation">}</span>
 
-		<span class="token attr_name">instance_method</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+		instance_method <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
 			<span class="token comment">/* ... */</span>
 			<span class="token keyword">this</span><span class="token punctuation">.</span>#<span class="token function">private_method</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 			<span class="token comment">// foo</span>
@@ -78,7 +78,7 @@
 		<span class="token keyword">return</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
 	<span class="token punctuation">}</span>
 
-	<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token attr_name">plus</span> <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token type">any</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token type">any</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token type">any</span> <span class="token operator">=&gt;</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+	<span class="token keyword">export</span> <span class="token keyword">const</span> plus <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token type">any</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token type">any</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token type">any</span> <span class="token operator">=&gt;</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
 <span class="token tag">&lt;/script</span><span class="token punctuation">&gt;</span>
 
 <span class="token tag">&lt;h1</span><span class="token punctuation">&gt;</span>hello <span class="token svelte_expression">{HELLO}</span>!<span class="token tag">&lt;/h1</span><span class="token punctuation">&gt;</span>

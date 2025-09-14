@@ -15,58 +15,58 @@
 
 ## Match Statistics
 
-**Total matches:** 643
+**Total matches:** 553
 
 ### Distribution by Pattern Type
 
 | Pattern Type        | Count | Percentage |
 | ------------------- | ----- | ---------- |
-| punctuation         | 266   | 41.4%      |
-| operator            | 106   | 16.5%      |
-| tag                 | 39    | 6.1%       |
-| keyword             | 34    | 5.3%       |
-| svelte_expression   | 34    | 5.3%       |
-| attr_name           | 31    | 4.8%       |
-| attr_value          | 18    | 2.8%       |
-| class_name          | 17    | 2.6%       |
-| function            | 17    | 2.6%       |
-| type                | 16    | 2.5%       |
-| number              | 14    | 2.2%       |
-| string              | 10    | 1.6%       |
-| comment             | 9     | 1.4%       |
-| property            | 9     | 1.4%       |
-| selector            | 7     | 1.1%       |
-| svelte_block        | 6     | 0.9%       |
-| boolean             | 5     | 0.8%       |
-| template_expression | 2     | 0.3%       |
+| punctuation         | 238   | 43.0%      |
+| operator            | 89    | 16.1%      |
+| keyword             | 34    | 6.1%       |
+| tag                 | 31    | 5.6%       |
+| class_name          | 17    | 3.1%       |
+| function            | 17    | 3.1%       |
+| attr_name           | 16    | 2.9%       |
+| type                | 16    | 2.9%       |
+| svelte_expression   | 16    | 2.9%       |
+| attr_value          | 14    | 2.5%       |
+| number              | 14    | 2.5%       |
+| string              | 10    | 1.8%       |
+| comment             | 9     | 1.6%       |
+| property            | 9     | 1.6%       |
+| selector            | 7     | 1.3%       |
+| svelte_block        | 6     | 1.1%       |
+| boolean             | 5     | 0.9%       |
+| template_expression | 2     | 0.4%       |
 | regex               | 1     | 0.2%       |
 | doctype             | 1     | 0.2%       |
 | atrule              | 1     | 0.2%       |
 
 ## Sample Matches
 
-| Pattern     | Text                        | Position | Priority |
-| ----------- | --------------------------- | -------- | -------- |
-| tag         | `<script lang="ts" module>` | 0-25     | 92       |
-| tag         | `<script`                   | 0-7      | 60       |
-| punctuation | `<`                         | 0-1      | 10       |
-| attr_name   | `lang`                      | 8-12     | 55       |
-| attr_value  | `="ts"`                     | 12-17    | 70       |
-| operator    | `=`                         | 12-13    | 5        |
-| punctuation | `>`                         | 24-25    | 10       |
-| keyword     | `export`                    | 27-33    | 150      |
-| keyword     | `const`                     | 34-39    | 150      |
-| class_name  | `HELLO`                     | 40-45    | 130      |
-| attr_name   | `HELLO`                     | 40-45    | 55       |
-| operator    | `=`                         | 46-47    | 120      |
-| attr_value  | `= 'world'`                 | 46-55    | 70       |
-| operator    | `=`                         | 46-47    | 5        |
-| string      | `'world'`                   | 48-55    | 190      |
-| punctuation | `;`                         | 55-56    | 110      |
-| tag         | `</script>`                 | 57-66    | 92       |
-| attr_name   | `lang`                      | 76-80    | 55       |
-| attr_value  | `="ts"`                     | 80-85    | 70       |
-| comment     | `// @ts-expect-error`       | 88-107   | 200      |
+| Pattern     | Text                  | Position | Priority |
+| ----------- | --------------------- | -------- | -------- |
+| tag         | `<script`             | 0-7      | 60       |
+| punctuation | `<`                   | 0-1      | 10       |
+| attr_name   | `lang`                | 8-12     | 55       |
+| attr_value  | `="ts"`               | 12-17    | 70       |
+| operator    | `=`                   | 12-13    | 5        |
+| punctuation | `>`                   | 24-25    | 10       |
+| keyword     | `export`              | 27-33    | 50       |
+| keyword     | `const`               | 34-39    | 50       |
+| class_name  | `HELLO`               | 40-45    | 30       |
+| operator    | `=`                   | 46-47    | 20       |
+| string      | `'world'`             | 48-55    | 90       |
+| punctuation | `;`                   | 55-56    | 10       |
+| tag         | `</script`            | 57-65    | 60       |
+| tag         | `<script`             | 68-75    | 60       |
+| attr_name   | `lang`                | 76-80    | 55       |
+| attr_value  | `="ts"`               | 80-85    | 70       |
+| operator    | `=`                   | 80-81    | 5        |
+| comment     | `// @ts-expect-error` | 88-107   | 100      |
+| keyword     | `import`              | 109-115  | 50       |
+| class_name  | `Thing`               | 116-121  | 30       |
 
 ## Summary
 
@@ -74,4 +74,4 @@
 - ✅ Style boundaries detected
 - 🔧 Embedded languages: ts, css
 - 📊 Pattern types: 21
-- 🎯 Total matches: 643
+- 🎯 Total matches: 553

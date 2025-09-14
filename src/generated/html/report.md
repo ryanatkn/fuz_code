@@ -13,19 +13,19 @@
 
 ## Match Statistics
 
-**Total matches:** 139
+**Total matches:** 134
 
 ### Distribution by Pattern Type
 
 | Pattern Type | Count | Percentage |
 | ------------ | ----- | ---------- |
-| punctuation  | 77    | 55.4%      |
-| tag          | 26    | 18.7%      |
-| operator     | 10    | 7.2%       |
-| attr_name    | 9     | 6.5%       |
-| attr_value   | 9     | 6.5%       |
-| string       | 2     | 1.4%       |
-| property     | 2     | 1.4%       |
+| punctuation  | 75    | 56.0%      |
+| tag          | 26    | 19.4%      |
+| operator     | 9     | 6.7%       |
+| attr_name    | 8     | 6.0%       |
+| attr_value   | 8     | 6.0%       |
+| string       | 2     | 1.5%       |
+| property     | 2     | 1.5%       |
 | doctype      | 1     | 0.7%       |
 | keyword      | 1     | 0.7%       |
 | selector     | 1     | 0.7%       |
@@ -51,10 +51,10 @@
 | attr_name   | `class`                     | 110-115  | 60       |
 | attr_value  | `="a b c"`                  | 115-123  | 80       |
 | operator    | `=`                         | 115-116  | 5        |
-| keyword     | `const`                     | 373-378  | 150      |
-| string      | `'yes'`                     | 384-389  | 190      |
-| selector    | `\n\t.special::before `     | 425-444  | 170      |
-| property    | `.special`                  | 427-435  | 160      |
+| keyword     | `const`                     | 373-378  | 50       |
+| string      | `'yes'`                     | 384-389  | 90       |
+| selector    | `\n\t.special::before `     | 425-444  | 70       |
+| property    | `.special`                  | 427-435  | 60       |
 
 ## Summary
 
@@ -62,4 +62,4 @@
 - ✅ Style boundaries detected
 - 🔧 Embedded languages: ts, css
 - 📊 Pattern types: 11
-- 🎯 Total matches: 139
+- 🎯 Total matches: 134

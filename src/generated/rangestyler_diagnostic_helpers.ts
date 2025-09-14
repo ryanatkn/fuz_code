@@ -1,4 +1,4 @@
-import {detect_boundaries, find_matches_with_boundaries} from '$lib/rangestyler_builder.js';
+import {find_matches_with_boundaries} from '$lib/rangestyler_builder.js';
 import {rangestyler_global} from '$lib/rangestyler_global.js';
 import {samples} from '$lib/samples/all.js';
 
@@ -37,8 +37,13 @@ export const process_language_sample = async (lang: string): Promise<Language_Di
 		throw new Error(`No sample found for language: ${lang}`);
 	}
 
-	// Detect boundaries
-	const boundaries = detect_boundaries(content);
+	// Detect boundaries using language-specific detection
+	const language = rangestyler_global.get_language(lang);
+	const boundaries = language?.detect_boundaries?.(content) || [{
+		type: 'content' as const,
+		start: 0,
+		end: content.length,
+	}];
 	const boundary_infos: Array<Boundary_Info> = boundaries.map((b) => ({
 		type: b.type,
 		start: b.start,
@@ -52,12 +57,13 @@ export const process_language_sample = async (lang: string): Promise<Language_Di
 	}));
 
 	// Get patterns and find matches
-	const patterns = rangestyler_global.get_language(lang)?.patterns || [];
-	const matches = find_matches_with_boundaries(
+	const patterns = language?.patterns || [];
+	const {matches} = find_matches_with_boundaries(
 		content,
 		patterns,
 		lang,
 		(id) => rangestyler_global.get_language(id)?.patterns,
+		language?.detect_boundaries,
 	);
 
 	// Process match statistics

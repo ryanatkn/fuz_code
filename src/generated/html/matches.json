@@ -1,12 +1,12 @@
 {
-	"total": 139,
+	"total": 134,
 	"by_type": {
 		"doctype": 1,
 		"tag": 26,
-		"punctuation": 77,
-		"attr_name": 9,
-		"attr_value": 9,
-		"operator": 10,
+		"punctuation": 75,
+		"attr_name": 8,
+		"attr_value": 8,
+		"operator": 9,
 		"keyword": 1,
 		"string": 2,
 		"selector": 1,
@@ -36,15 +36,15 @@
 		{"pattern_name": "attr_name", "text": "class", "start": 110, "end": 115, "priority": 60},
 		{"pattern_name": "attr_value", "text": "=\"a b c\"", "start": 115, "end": 123, "priority": 80},
 		{"pattern_name": "operator", "text": "=", "start": 115, "end": 116, "priority": 5},
-		{"pattern_name": "keyword", "text": "const", "start": 373, "end": 378, "priority": 150},
-		{"pattern_name": "string", "text": "'yes'", "start": 384, "end": 389, "priority": 190},
+		{"pattern_name": "keyword", "text": "const", "start": 373, "end": 378, "priority": 50},
+		{"pattern_name": "string", "text": "'yes'", "start": 384, "end": 389, "priority": 90},
 		{
 			"pattern_name": "selector",
 			"text": "\n\t.special::before ",
 			"start": 425,
 			"end": 444,
-			"priority": 170
+			"priority": 70
 		},
-		{"pattern_name": "property", "text": ".special", "start": 427, "end": 435, "priority": 160}
+		{"pattern_name": "property", "text": ".special", "start": 427, "end": 435, "priority": 60}
 	]
 }

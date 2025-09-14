@@ -25,11 +25,12 @@ export const task: Task = {
 			// Generate rangestyler fixture using HTML fallback mode
 			const language = rangestyler_global.get_language(lang);
 			if (language) {
-				const matches = find_matches_with_boundaries(
+				const {matches} = find_matches_with_boundaries(
 					content,
 					language.patterns,
 					lang,
 					(id) => rangestyler_global.get_language(id)?.patterns,
+					language.detect_boundaries,
 				);
 				const resolved = resolve_overlaps(matches);
 				const rangestyled = generate_html_fallback(content, resolved);

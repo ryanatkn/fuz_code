@@ -1,6 +1,9 @@
 export interface Rangestyler_Language {
 	id: string;
 	patterns: Array<Rangestyler_Pattern>;
+
+	// Optional boundary detection for languages with embedded content
+	detect_boundaries?: (text: string) => Array<Rangestyler_Language_Boundary>;
 }
 
 export interface Rangestyler_Pattern {

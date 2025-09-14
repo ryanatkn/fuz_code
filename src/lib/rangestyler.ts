@@ -1,6 +1,5 @@
 import type {
 	Rangestyler_Language,
-	Rangestyler_Pattern,
 	Rangestyler_Mode,
 } from '$lib/rangestyler_types.js';
 import {
@@ -55,17 +54,17 @@ export class Rangestyler {
 		const use_ranges = mode === 'ranges' || (mode === 'auto' && this.supports_native);
 
 		if (use_ranges && this.supports_native) {
-			this.#highlight_with_ranges(element, text, language.patterns, lang_id);
+			this.#highlight_with_ranges(element, text, language, lang_id);
 		} else {
 			// Fall back to HTML generation or explicitly use HTML mode
-			this.#highlight_with_html(element, text, language.patterns, lang_id);
+			this.#highlight_with_html(element, text, language, lang_id);
 		}
 	}
 
 	#highlight_with_ranges(
 		element: Element,
 		text: string,
-		patterns: Array<Rangestyler_Pattern>,
+		language: Rangestyler_Language,
 		lang_id: string,
 	): void {
 		// Clear any existing highlights for this element
@@ -75,25 +74,26 @@ export class Rangestyler {
 		const {ranges_by_name} = build_ranges_with_boundaries(
 			element,
 			text,
-			patterns,
+			language.patterns,
 			lang_id,
 			(id) => this.get_language(id)?.patterns,
+			language.detect_boundaries,
 		);
 
 		// Register highlights
 		const highlight_names: Array<string> = [];
 
 		for (const [name, ranges] of ranges_by_name) {
-			const highlight_name = `${lang_id}_${name}`;
-			highlight_names.push(highlight_name);
+			// Names already include proper language prefixes from create_ranges
+			highlight_names.push(name);
 
 			// Register with CSS highlights directly
-			if (typeof CSS !== 'undefined' && 'highlights' in CSS) {
+			if (globalThis.CSS?.highlights) {
 				try {
-					const highlight = new (globalThis as any).Highlight(...ranges);
-					(CSS as any).highlights.set(highlight_name, highlight);
+					const highlight = new globalThis.Highlight(...ranges);
+					CSS.highlights.set(name, highlight);
 				} catch (error) {
-					console.error(`Failed to register highlight "${highlight_name}":`, error); // eslint-disable-line no-console
+					console.error(`Failed to register highlight "${name}":`, error); // eslint-disable-line no-console
 				}
 			}
 		}
@@ -108,15 +108,16 @@ export class Rangestyler {
 	#highlight_with_html(
 		element: Element,
 		text: string,
-		patterns: Array<Rangestyler_Pattern>,
+		language: Rangestyler_Language,
 		lang_id: string,
 	): void {
 		// Find and resolve matches (use boundary-aware matching for HTML/Svelte)
-		const matches = find_matches_with_boundaries(
+		const {matches} = find_matches_with_boundaries(
 			text,
-			patterns,
+			language.patterns,
 			lang_id,
 			(id) => this.get_language(id)?.patterns,
+			language.detect_boundaries,
 		);
 		const resolved = resolve_overlaps(matches);
 
@@ -132,9 +133,9 @@ export class Rangestyler {
 	 */
 	clear_highlights(element: Element): void {
 		const highlights = this.active_highlights.get(element);
-		if (highlights && typeof CSS !== 'undefined' && 'highlights' in CSS) {
+		if (highlights && globalThis.CSS?.highlights) {
 			for (const name of highlights) {
-				(CSS as any).highlights.delete(name);
+				globalThis.CSS?.highlights.delete(name);
 			}
 			this.active_highlights.delete(element);
 		}
@@ -144,8 +145,8 @@ export class Rangestyler {
 	 * Clear all highlights
 	 */
 	clear_all(): void {
-		if (typeof CSS !== 'undefined' && 'highlights' in CSS) {
-			(CSS as any).highlights.clear();
+		if (globalThis.CSS?.highlights) {
+			globalThis.CSS?.highlights.clear();
 		}
 		this.active_highlights.clear();
 	}

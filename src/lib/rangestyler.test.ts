@@ -1,7 +1,9 @@
 import {test, assert, describe} from 'vitest';
 
-import {detect_boundaries, find_matches_with_boundaries} from '$lib/rangestyler_builder.js';
+import {find_matches_with_boundaries} from '$lib/rangestyler_builder.js';
 import {rangestyler_global} from '$lib/rangestyler_global.js';
+import {html_language} from '$lib/rangestyler_lang_html.js';
+import {svelte_language} from '$lib/rangestyler_lang_svelte.js';
 
 describe('detect_boundaries', () => {
 	test('detects script tags', () => {
@@ -10,7 +12,7 @@ describe('detect_boundaries', () => {
 <p>text</p>
 </html>`;
 
-		const boundaries = detect_boundaries(html);
+		const boundaries = html_language.detect_boundaries!(html);
 
 		// Should have content before script, script content, and content after
 		const script_boundary = boundaries.find((b) => b.type === 'script');
@@ -24,7 +26,7 @@ describe('detect_boundaries', () => {
 <p>text</p>
 </html>`;
 
-		const boundaries = detect_boundaries(html);
+		const boundaries = html_language.detect_boundaries!(html);
 
 		const style_boundary = boundaries.find((b) => b.type === 'style');
 		assert.ok(style_boundary);
@@ -40,7 +42,7 @@ describe('detect_boundaries', () => {
 <p>text</p>
 </html>`;
 
-		const boundaries = detect_boundaries(html);
+		const boundaries = html_language.detect_boundaries!(html);
 
 		// Should not detect script inside comment
 		const script_boundary = boundaries.find((b) => b.type === 'script');
@@ -55,7 +57,7 @@ describe('detect_boundaries', () => {
 <style>p { padding: 0; }</style>
 `;
 
-		const boundaries = detect_boundaries(html);
+		const boundaries = html_language.detect_boundaries!(html);
 
 		const script_boundaries = boundaries.filter((b) => b.type === 'script');
 		const style_boundaries = boundaries.filter((b) => b.type === 'style');
@@ -79,7 +81,7 @@ describe('detect_boundaries', () => {
 <style></style>
 `;
 
-		const boundaries = detect_boundaries(html);
+		const boundaries = html_language.detect_boundaries!(html);
 
 		// Should only have content boundaries for empty tags
 		const script_boundaries = boundaries.filter((b) => b.type === 'script');
@@ -96,7 +98,7 @@ describe('detect_boundaries', () => {
 <p>text</p>
 `;
 
-		const boundaries = detect_boundaries(html);
+		const boundaries = html_language.detect_boundaries!(html);
 
 		// Filter out content boundaries
 		const special_boundaries = boundaries.filter((b) => b.type !== 'content');
@@ -116,11 +118,12 @@ describe('find_matches_with_boundaries', () => {
 	test('applies TypeScript patterns in script tags', () => {
 		const html = `<script>const x: number = 1;</script>`;
 
-		const matches = find_matches_with_boundaries(
+		const {matches} = find_matches_with_boundaries(
 			html,
 			rangestyler_global.get_language('html')?.patterns || [],
 			'html',
 			(id) => rangestyler_global.get_language(id)?.patterns,
+			html_language.detect_boundaries,
 		);
 
 		// Should have matches for TypeScript keywords and types
@@ -134,11 +137,12 @@ describe('find_matches_with_boundaries', () => {
 	test('applies CSS patterns in style tags', () => {
 		const html = `<style>.class { color: red; }</style>`;
 
-		const matches = find_matches_with_boundaries(
+		const {matches} = find_matches_with_boundaries(
 			html,
 			rangestyler_global.get_language('html')?.patterns || [],
 			'html',
 			(id) => rangestyler_global.get_language(id)?.patterns,
+			html_language.detect_boundaries,
 		);
 
 		// Should have matches for CSS selectors and properties
@@ -152,11 +156,12 @@ describe('find_matches_with_boundaries', () => {
 	test('comments are matched but prevent nested language detection', () => {
 		const html = `<!-- <script>const x = 1;</script> -->`;
 
-		const matches = find_matches_with_boundaries(
+		const {matches} = find_matches_with_boundaries(
 			html,
 			rangestyler_global.get_language('html')?.patterns || [],
 			'html',
 			(id) => rangestyler_global.get_language(id)?.patterns,
+			html_language.detect_boundaries,
 		);
 
 		// Should have the comment match
@@ -185,11 +190,12 @@ describe('find_matches_with_boundaries', () => {
 </body>
 </html>`;
 
-		const matches = find_matches_with_boundaries(
+		const {matches} = find_matches_with_boundaries(
 			html,
 			rangestyler_global.get_language('html')?.patterns || [],
 			'html',
 			(id) => rangestyler_global.get_language(id)?.patterns,
+			html_language.detect_boundaries,
 		);
 
 		// Should have various match types
@@ -215,11 +221,12 @@ describe('Svelte language patterns', () => {
   <p>False</p>
 {/if}`;
 
-		const matches = find_matches_with_boundaries(
+		const {matches} = find_matches_with_boundaries(
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
 			(id) => rangestyler_global.get_language(id)?.patterns,
+			svelte_language.detect_boundaries,
 		);
 
 		const svelte_blocks = matches.filter((m) => m.pattern.name === 'svelte_block');
@@ -232,11 +239,12 @@ describe('Svelte language patterns', () => {
   <li>{item.name}</li>
 {/each}`;
 
-		const matches = find_matches_with_boundaries(
+		const {matches} = find_matches_with_boundaries(
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
 			(id) => rangestyler_global.get_language(id)?.patterns,
+			svelte_language.detect_boundaries,
 		);
 
 		const svelte_blocks = matches.filter((m) => m.pattern.name === 'svelte_block');
@@ -249,11 +257,12 @@ describe('Svelte language patterns', () => {
   Click me
 </button>`;
 
-		const matches = find_matches_with_boundaries(
+		const {matches} = find_matches_with_boundaries(
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
 			(id) => rangestyler_global.get_language(id)?.patterns,
+			svelte_language.detect_boundaries,
 		);
 
 		const directives = matches.filter((m) => m.pattern.name === 'svelte_directive');
@@ -267,11 +276,12 @@ describe('Svelte language patterns', () => {
   const increment = () => count++;
 </script>`;
 
-		const matches = find_matches_with_boundaries(
+		const {matches} = find_matches_with_boundaries(
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
 			(id) => rangestyler_global.get_language(id)?.patterns,
+			svelte_language.detect_boundaries,
 		);
 
 		// Should have TypeScript patterns applied
@@ -291,11 +301,12 @@ describe('Svelte language patterns', () => {
   }
 </style>`;
 
-		const matches = find_matches_with_boundaries(
+		const {matches} = find_matches_with_boundaries(
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
 			(id) => rangestyler_global.get_language(id)?.patterns,
+			svelte_language.detect_boundaries,
 		);
 
 		// Should have CSS patterns applied
@@ -316,7 +327,7 @@ describe('Edge cases', () => {
   const html = "</script>";
 </script>`;
 
-		const boundaries = detect_boundaries(html);
+		const boundaries = html_language.detect_boundaries!(html);
 		const script_boundary = boundaries.find((b) => b.type === 'script');
 
 		// The regex will incorrectly match the first </script> even though it's in a string
@@ -330,11 +341,12 @@ describe('Edge cases', () => {
 	test('handles nested curly braces in Svelte', () => {
 		const svelte = `{#each items as { id, name }}{name}{/each}`;
 
-		const matches = find_matches_with_boundaries(
+		const {matches} = find_matches_with_boundaries(
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
 			(id) => rangestyler_global.get_language(id)?.patterns,
+			svelte_language.detect_boundaries,
 		);
 
 		const svelte_blocks = matches.filter((m) => m.pattern.name === 'svelte_block');
@@ -347,7 +359,7 @@ describe('Edge cases', () => {
   import { something } from '$lib/module.js';
 </script>`;
 
-		const boundaries = detect_boundaries(html);
+		const boundaries = html_language.detect_boundaries!(html);
 		const script_boundary = boundaries.find((b) => b.type === 'script');
 
 		assert.ok(script_boundary);
@@ -363,7 +375,7 @@ describe('Edge cases', () => {
   }
 </style>`;
 
-		const boundaries = detect_boundaries(html);
+		const boundaries = html_language.detect_boundaries!(html);
 		const style_boundary = boundaries.find((b) => b.type === 'style');
 
 		assert.ok(style_boundary);
