@@ -8,6 +8,7 @@ Unlike `theme.css`, these colors do not adapt to the `color-scheme`.
 */
 
 .token.comment,
+.token.attr_equals,
 .token.prolog,
 .token.doctype,
 .token.cdata,
@@ -46,7 +47,8 @@ Unlike `theme.css`, these colors do not adapt to the `color-scheme`.
 
 .token.atrule,
 .token.attr_value,
-.token.keyword {
+.token.keyword,
+.token.null {
 	color: light-dark(#6a3e1b, #b08b6d);
 }
 
