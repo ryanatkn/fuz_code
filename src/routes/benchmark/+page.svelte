@@ -3,7 +3,7 @@
 
 	import {domstyler_global} from '$lib/domstyler_global.js';
 	import {rangestyler_global} from '$lib/rangestyler_global.js';
-	import {samples} from '$lib/code_samples.js';
+	import {samples as all_samples} from '$lib/samples/all.js';
 
 	// Benchmark state
 	let running = $state(false);
@@ -25,6 +25,7 @@
 		status = 'Running benchmarks...';
 
 		// Filter to TS/JS samples for comparison
+		const samples = Object.values(all_samples);
 		const ts_samples = samples.filter((s) => s.lang === 'ts' || s.lang === 'js');
 
 		for (const sample of ts_samples) {

@@ -3,7 +3,7 @@
 
 	import Domstyler_Code from '$lib/Domstyler_Code.svelte';
 	import Footer from '$routes/Footer.svelte';
-	import {samples} from '$lib/code_samples.js';
+	import {samples} from '$lib/samples/all.js';
 </script>
 
 <main class="box w_100">
@@ -16,7 +16,7 @@
 		</p>
 	</section>
 	<section class="display_flex flex_wrap justify_content_space_around gap_sm">
-		{#each samples as { content, lang } (lang)}
+		{#each Object.values(samples) as { content, lang } (lang)}
 			<div>
 				<h2>{lang}</h2>
 				<pre><Domstyler_Code {content} {lang} /></pre>

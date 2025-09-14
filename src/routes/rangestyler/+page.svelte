@@ -3,7 +3,7 @@
 
 	import Rangestyler_Code from '$lib/Rangestyler_Code.svelte';
 	import Footer from '$routes/Footer.svelte';
-	import {samples} from '$lib/code_samples.js';
+	import {samples} from '$lib/samples/all.js';
 </script>
 
 <main class="box w_100">
@@ -19,7 +19,7 @@
 		</p>
 	</section>
 	<section class="display_flex flex_wrap justify_content_space_around gap_sm">
-		{#each samples as sample (sample.name)}
+		{#each Object.values(samples) as sample (sample.name)}
 			<div>
 				<h2 class="display_flex align_items_center gap_sm">
 					<span>{sample.name}</span> <small><code>'{sample.lang}'</code></small>

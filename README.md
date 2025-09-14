@@ -111,8 +111,7 @@ Docs are a work in progress:
 - this readme has basic usage instructions
 - [code.fuz.dev](https://code.fuz.dev/) has usage examples with the Svelte component
 - [samples](https://code.fuz.dev/samples) on the website
-  (also see the [inputs](src/lib/code_samples.ts)
-  and [outputs](src/lib/code_sample_outputs.ts))
+  (also see the [sample files](src/lib/samples/))
 - [tests](src/lib/syntax_styler.test.ts)
 
 Please open issues if you need any help.
@@ -139,7 +138,7 @@ because it's not designed for runtime usage,
 and it probably does a significantly better job at the task at hand
 because it uses TextMate grammars.
 
-Results styling the [Svelte sample](src/lib/code_samples.ts):
+Results styling the Svelte sample:
 
 | Task name               | Throughput average (ops/s) | Throughput median (ops/s) | Samples |
 | ----------------------- | -------------------------- | ------------------------- | ------- |
@@ -172,7 +171,9 @@ import nord from 'shiki/themes/nord.mjs';
 import {createOnigurumaEngine} from 'shiki/engine/oniguruma';
 
 import {syntax_styler} from '$lib/index.js';
-import {sample_svelte_code} from '$lib/code_samples.js';
+import {samples} from '$lib/samples/all.js';
+
+const sample_svelte_code = samples.svelte_complex.content;
 
 console.log('benchmarking');
 const bench = new Bench({name: 'syntax styling', time: 2000});

@@ -1,6 +1,7 @@
 # JSON Complex Sample Report
 
 ## Sample Info
+
 - **Language**: json
 - **Variant**: complex
 - **Source**: src/lib/samples/sample_complex.json
@@ -9,10 +10,12 @@
 ## Statistics
 
 ### Boundaries
+
 - **Total**: 1
 - content: [0:121]
 
 ### Matches
+
 - **Total**: 31
 - **By Type**:
   - punctuation: 12
@@ -24,6 +27,7 @@
   - null: 2
 
 ## Sample Matches
+
 - **punctuation** [0:1]: `{`
 - **property** [3:11]: `"string"`
 - **operator** [11:12]: `:`
@@ -36,37 +40,54 @@
 - **property** [44:53]: `"boolean"`
 
 ## Domstyler Output
-```html
-<span class="token punctuation">{</span>
-	<span class="token property">"string"</span><span class="token operator">:</span> <span class="token string">"a string"</span><span class="token punctuation">,</span>
-	<span class="token property">"number"</span><span class="token operator">:</span> <span class="token number">12345</span><span class="token punctuation">,</span>
-	<span class="token property">"boolean"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-	<span class="token property">"null"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
-	<span class="token property">"object"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-		<span class="token property">"array"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">]</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
 
+```html
+<span class="token punctuation">{</span> <span class="token property">"string"</span
+><span class="token operator">:</span> <span class="token string">"a string"</span
+><span class="token punctuation">,</span> <span class="token property">"number"</span
+><span class="token operator">:</span> <span class="token number">12345</span
+><span class="token punctuation">,</span> <span class="token property">"boolean"</span
+><span class="token operator">:</span> <span class="token boolean">true</span
+><span class="token punctuation">,</span> <span class="token property">"null"</span
+><span class="token operator">:</span> <span class="token null keyword">null</span
+><span class="token punctuation">,</span> <span class="token property">"object"</span
+><span class="token operator">:</span> <span class="token punctuation">{</span>
+<span class="token property">"array"</span><span class="token operator">:</span>
+<span class="token punctuation">[</span><span class="token number">1</span
+><span class="token punctuation">,</span> <span class="token string">"b"</span
+><span class="token punctuation">,</span> <span class="token boolean">false</span
+><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 ```
 
 ## Rangestyler Output
-```html
-<span class="token punctuation">{</span>
-	<span class="token property">&quot;string&quot;</span><span class="token operator">:</span> <span class="token string">&quot;a string&quot;</span><span class="token punctuation">,</span>
-	<span class="token property">&quot;number&quot;</span><span class="token operator">:</span> <span class="token number">12345</span><span class="token punctuation">,</span>
-	<span class="token property">&quot;boolean&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-	<span class="token property">&quot;null&quot;</span><span class="token operator">:</span> <span class="token null">null</span><span class="token punctuation">,</span>
-	<span class="token property">&quot;object&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-		<span class="token property">&quot;array&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> &quot;b&quot;<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">]</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
 
+```html
+<span class="token punctuation">{</span> <span class="token property">&quot;string&quot;</span
+><span class="token operator">:</span> <span class="token string">&quot;a string&quot;</span
+><span class="token punctuation">,</span> <span class="token property">&quot;number&quot;</span
+><span class="token operator">:</span> <span class="token number">12345</span
+><span class="token punctuation">,</span> <span class="token property">&quot;boolean&quot;</span
+><span class="token operator">:</span> <span class="token boolean">true</span
+><span class="token punctuation">,</span> <span class="token property">&quot;null&quot;</span
+><span class="token operator">:</span> <span class="token null">null</span
+><span class="token punctuation">,</span> <span class="token property">&quot;object&quot;</span
+><span class="token operator">:</span> <span class="token punctuation">{</span>
+<span class="token property">&quot;array&quot;</span><span class="token operator">:</span>
+<span class="token punctuation">[</span><span class="token number">1</span
+><span class="token punctuation">,</span> &quot;b&quot;<span class="token punctuation">,</span>
+<span class="token boolean">false</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 ```
 
 ## Comparison
+
 - Domstyler size: 1267 bytes
 - Rangestyler size: 1305 bytes
 - Size difference: -38 bytes
 
 ---
-*Generated by src/generated/update.task.ts*
+
+_Generated by src/generated/update.task.ts_

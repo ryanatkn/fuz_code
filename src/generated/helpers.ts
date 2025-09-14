@@ -98,11 +98,13 @@ export function generate_rangestyler_data(sample: Sample_Spec): {
 	}
 
 	// Detect boundaries
-	const boundaries = language.detect_boundaries?.(sample.content) || [{
-		type: 'content',
-		start: 0,
-		end: sample.content.length,
-	}];
+	const boundaries = language.detect_boundaries?.(sample.content) || [
+		{
+			type: 'content',
+			start: 0,
+			end: sample.content.length,
+		},
+	];
 
 	// Find matches
 	const match_result = find_matches_with_boundaries(
@@ -128,7 +130,7 @@ export function generate_rangestyler_data(sample: Sample_Spec): {
  */
 export function generate_match_statistics(
 	sample: Sample_Spec,
-	matches: Array<any>
+	matches: Array<any>,
 ): Match_Statistics {
 	const match_stats: Record<string, number> = {};
 	const match_samples: Array<any> = [];
@@ -138,7 +140,7 @@ export function generate_match_statistics(
 		match_stats[type] = (match_stats[type] || 0) + 1;
 
 		// Include first few examples of each type
-		if (match_samples.filter(m => m.pattern_name === type).length < 3) {
+		if (match_samples.filter((m) => m.pattern_name === type).length < 3) {
 			match_samples.push({
 				pattern_name: type,
 				text: sample.content.slice(match.start, match.end),
@@ -195,17 +197,20 @@ export function generate_report(output: Generated_Output): string {
 
 ### Boundaries
 - **Total**: ${boundaries.length}
-${boundaries.map(b => `- ${b.type}: [${b.start}:${b.end}]`).join('\n')}
+${boundaries.map((b) => `- ${b.type}: [${b.start}:${b.end}]`).join('\n')}
 
 ### Matches
 - **Total**: ${matches.total}
 - **By Type**:
-${Object.entries(matches.by_type).map(([type, count]) => `  - ${type}: ${count}`).join('\n')}
+${Object.entries(matches.by_type)
+	.map(([type, count]) => `  - ${type}: ${count}`)
+	.join('\n')}
 
 ## Sample Matches
-${matches.samples.slice(0, 10).map(m =>
-	`- **${m.pattern_name}** [${m.start}:${m.end}]: \`${m.text.replace(/`/g, '\\`')}\``
-).join('\n')}
+${matches.samples
+	.slice(0, 10)
+	.map((m) => `- **${m.pattern_name}** [${m.start}:${m.end}]: \`${m.text.replace(/`/g, '\\`')}\``)
+	.join('\n')}
 
 ## Domstyler Output
 \`\`\`html

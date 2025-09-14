@@ -1,5 +1,5 @@
 import {Bench} from 'tinybench';
-import {samples} from '$lib/code_samples.js';
+import {samples as all_samples} from '$lib/samples/all.js';
 import {domstyler_global} from '$lib/domstyler_global.js';
 
 /* eslint-disable no-console */
@@ -18,6 +18,7 @@ export const run_benchmark = async (filter?: string): Promise<Array<Benchmark_Re
 		warmupIterations: 50,
 	});
 
+	const samples = Object.values(all_samples);
 	const samples_to_run = filter
 		? samples.filter((s) => s.name.includes(filter) || s.lang === filter)
 		: samples;

@@ -1,7 +1,4 @@
-import type {
-	Rangestyler_Language,
-	Rangestyler_Mode,
-} from '$lib/rangestyler_types.js';
+import type {Rangestyler_Language, Rangestyler_Mode} from '$lib/rangestyler_types.js';
 import {
 	build_ranges_with_boundaries,
 	find_matches_with_boundaries,

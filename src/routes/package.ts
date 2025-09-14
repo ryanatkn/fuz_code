@@ -68,7 +68,6 @@ export const package_json: Package_Json = {
 	exports: {
 		'./package.json': './package.json',
 		'./benchmark.js': {types: './dist/benchmark.d.ts', default: './dist/benchmark.js'},
-		'./code_samples.js': {types: './dist/code_samples.d.ts', default: './dist/code_samples.js'},
 		'./Domstyler_Code.svelte': {
 			types: './dist/Domstyler_Code.svelte.d.ts',
 			svelte: './dist/Domstyler_Code.svelte',
@@ -182,18 +181,6 @@ export const src_json: Src_Json = {
 				{name: 'run_benchmark', kind: 'function'},
 				{name: 'format_benchmark_results', kind: 'function'},
 				{name: 'run_and_print_benchmark', kind: 'function'},
-			],
-		},
-		'./code_samples.js': {
-			path: 'code_samples.ts',
-			declarations: [
-				{name: 'Code_Sample', kind: 'type'},
-				{name: 'sample_json', kind: 'variable'},
-				{name: 'sample_html', kind: 'variable'},
-				{name: 'sample_css', kind: 'variable'},
-				{name: 'sample_ts', kind: 'variable'},
-				{name: 'sample_svelte', kind: 'variable'},
-				{name: 'samples', kind: 'variable'},
 			],
 		},
 		'./Domstyler_Code.svelte': {
@@ -338,8 +325,9 @@ export const src_json: Src_Json = {
 		'./samples/all.js': {
 			path: 'samples/all.ts',
 			declarations: [
-				{name: 'samples_complex', kind: 'variable'},
-				{name: 'all_samples', kind: 'variable'},
+				{name: 'Sample_Key', kind: 'type'},
+				{name: 'samples', kind: 'variable'},
+				{name: 'sample_langs', kind: 'variable'},
 			],
 		},
 		'./samples/sample_complex.css': {

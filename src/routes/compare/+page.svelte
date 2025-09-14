@@ -3,13 +3,13 @@
 
 	import Domstyler_Code from '$lib/Domstyler_Code.svelte';
 	import Rangestyler_Code from '$lib/Rangestyler_Code.svelte';
-	import {samples} from '$lib/code_samples.js';
+	import {samples} from '$lib/samples/all.js';
 	import Footer from '$routes/Footer.svelte';
 </script>
 
 <main class="box w_100 py_xl5">
 	<Breadcrumb>🎨</Breadcrumb>
-	{#each samples as sample (sample.name)}
+	{#each Object.values(samples) as sample (sample.name)}
 		<section>
 			<h2 class="box panel p_md mb_0">{sample.lang}</h2>
 			<div class="display_flex gap_sm py_xl5">

@@ -24,6 +24,7 @@ export interface Rangestyler_Match_Result {
 }
 
 export interface Rangestyler_Language_Boundary {
+	// TODO this shouldnt be language-specific, could embed the kind of language and/or keys
 	type: 'script' | 'style' | 'content';
 	start: number;
 	end: number;

@@ -45,7 +45,8 @@ The codebase uses a flat structure with clear `domstyler` and `rangestyler` pref
 
 ### Shared Files
 
-- `src/lib/code_samples.ts` - Test input samples
+- `src/lib/code_sample.ts` - Code Sample interface and language constants
+- `src/lib/samples/all.ts` - Generated sample data
 - `src/lib/benchmark.ts` - Performance benchmarking
 - `src/lib/run_benchmark.ts` - Benchmark runner
 

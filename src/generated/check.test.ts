@@ -6,6 +6,7 @@ import {
 	get_fixture_path,
 	type Generated_Output,
 } from './helpers.js';
+import {sample_langs} from '$lib/code_sample.js';
 
 /**
  * Test Architecture Overview
@@ -50,7 +51,7 @@ describe('generated fixtures match runtime', () => {
 				// Basic sanity check - fixtures must be generated before tests can run
 				assert.ok(
 					existsSync(fixture_path),
-					`Fixture file missing: ${fixture_path}. Run 'npm run task src/generated/update' to generate.`
+					`Fixture file missing: ${fixture_path}. Run 'npm run task src/generated/update' to generate.`,
 				);
 			});
 
@@ -76,7 +77,7 @@ describe('generated fixtures match runtime', () => {
 				assert.strictEqual(
 					runtime_output.domstyler_html,
 					fixture.domstyler_html,
-					`Domstyler output mismatch for ${sample.lang}_${sample.variant}`
+					`Domstyler output mismatch for ${sample.lang}_${sample.variant}`,
 				);
 
 				// TODO: Additional assertions
@@ -108,7 +109,7 @@ describe('generated fixtures match runtime', () => {
 				assert.strictEqual(
 					runtime_output.rangestyler_html,
 					fixture.rangestyler_html,
-					`Rangestyler output mismatch for ${sample.lang}_${sample.variant}`
+					`Rangestyler output mismatch for ${sample.lang}_${sample.variant}`,
 				);
 
 				// TODO: Semantic comparison with domstyler
@@ -138,7 +139,7 @@ describe('generated fixtures match runtime', () => {
 				assert.deepEqual(
 					runtime_output.boundaries,
 					fixture.boundaries,
-					`Boundaries mismatch for ${sample.lang}_${sample.variant}`
+					`Boundaries mismatch for ${sample.lang}_${sample.variant}`,
 				);
 
 				// TODO: Validate boundary integrity
@@ -167,13 +168,13 @@ describe('generated fixtures match runtime', () => {
 				assert.strictEqual(
 					runtime_output.matches.total,
 					fixture.matches.total,
-					`Match count mismatch for ${sample.lang}_${sample.variant}`
+					`Match count mismatch for ${sample.lang}_${sample.variant}`,
 				);
 
 				assert.deepEqual(
 					runtime_output.matches.by_type,
 					fixture.matches.by_type,
-					`Match type statistics mismatch for ${sample.lang}_${sample.variant}`
+					`Match type statistics mismatch for ${sample.lang}_${sample.variant}`,
 				);
 
 				// TODO: Pattern effectiveness analysis
@@ -186,7 +187,6 @@ describe('generated fixtures match runtime', () => {
 
 describe('all expected languages are tested', () => {
 	test('sample files exist for all supported languages', () => {
-		const expected_languages = ['ts', 'css', 'html', 'json', 'svelte'];
 		const found_languages = new Set<string>();
 
 		const samples = discover_samples();
@@ -194,11 +194,8 @@ describe('all expected languages are tested', () => {
 			found_languages.add(sample.lang);
 		}
 
-		for (const lang of expected_languages) {
-			assert.ok(
-				found_languages.has(lang),
-				`Missing sample files for language: ${lang}`
-			);
+		for (const lang of sample_langs) {
+			assert.ok(found_languages.has(lang), `Missing sample files for language: ${lang}`);
 		}
 	});
 });

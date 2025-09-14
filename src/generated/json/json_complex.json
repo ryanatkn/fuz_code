@@ -1,143 +1,41 @@
 {
-  "sample": {
-    "lang": "json",
-    "variant": "complex",
-    "content": "{\n\t\"string\": \"a string\",\n\t\"number\": 12345,\n\t\"boolean\": true,\n\t\"null\": null,\n\t\"object\": {\n\t\t\"array\": [1, \"b\", false]\n\t}\n}\n",
-    "filepath": "src/lib/samples/sample_complex.json"
-  },
-  "boundaries": [
-    {
-      "type": "content",
-      "start": 0,
-      "end": 121
-    }
-  ],
-  "matches": {
-    "total": 31,
-    "by_type": {
-      "punctuation": 12,
-      "property": 6,
-      "operator": 6,
-      "string": 1,
-      "number": 2,
-      "boolean": 2,
-      "null": 2
-    },
-    "samples": [
-      {
-        "pattern_name": "punctuation",
-        "text": "{",
-        "start": 0,
-        "end": 1,
-        "priority": 20
-      },
-      {
-        "pattern_name": "property",
-        "text": "\"string\"",
-        "start": 3,
-        "end": 11,
-        "priority": 90
-      },
-      {
-        "pattern_name": "operator",
-        "text": ":",
-        "start": 11,
-        "end": 12,
-        "priority": 10
-      },
-      {
-        "pattern_name": "string",
-        "text": "\"a string\"",
-        "start": 13,
-        "end": 23,
-        "priority": 85
-      },
-      {
-        "pattern_name": "punctuation",
-        "text": ",",
-        "start": 23,
-        "end": 24,
-        "priority": 20
-      },
-      {
-        "pattern_name": "property",
-        "text": "\"number\"",
-        "start": 26,
-        "end": 34,
-        "priority": 90
-      },
-      {
-        "pattern_name": "operator",
-        "text": ":",
-        "start": 34,
-        "end": 35,
-        "priority": 10
-      },
-      {
-        "pattern_name": "number",
-        "text": "12345",
-        "start": 36,
-        "end": 41,
-        "priority": 50
-      },
-      {
-        "pattern_name": "punctuation",
-        "text": ",",
-        "start": 41,
-        "end": 42,
-        "priority": 20
-      },
-      {
-        "pattern_name": "property",
-        "text": "\"boolean\"",
-        "start": 44,
-        "end": 53,
-        "priority": 90
-      },
-      {
-        "pattern_name": "operator",
-        "text": ":",
-        "start": 53,
-        "end": 54,
-        "priority": 10
-      },
-      {
-        "pattern_name": "boolean",
-        "text": "true",
-        "start": 55,
-        "end": 59,
-        "priority": 45
-      },
-      {
-        "pattern_name": "null",
-        "text": "null",
-        "start": 63,
-        "end": 67,
-        "priority": 40
-      },
-      {
-        "pattern_name": "null",
-        "text": "null",
-        "start": 70,
-        "end": 74,
-        "priority": 40
-      },
-      {
-        "pattern_name": "number",
-        "text": "1",
-        "start": 101,
-        "end": 102,
-        "priority": 50
-      },
-      {
-        "pattern_name": "boolean",
-        "text": "false",
-        "start": 109,
-        "end": 114,
-        "priority": 45
-      }
-    ]
-  },
-  "domstyler_html": "<span class=\"token punctuation\">{</span>\n\t<span class=\"token property\">\"string\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"a string\"</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">\"number\"</span><span class=\"token operator\">:</span> <span class=\"token number\">12345</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">\"boolean\"</span><span class=\"token operator\">:</span> <span class=\"token boolean\">true</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">\"null\"</span><span class=\"token operator\">:</span> <span class=\"token null keyword\">null</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">\"object\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n\t\t<span class=\"token property\">\"array\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"b\"</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">false</span><span class=\"token punctuation\">]</span>\n\t<span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n",
-  "rangestyler_html": "<span class=\"token punctuation\">{</span>\n\t<span class=\"token property\">&quot;string&quot;</span><span class=\"token operator\">:</span> <span class=\"token string\">&quot;a string&quot;</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">&quot;number&quot;</span><span class=\"token operator\">:</span> <span class=\"token number\">12345</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">&quot;boolean&quot;</span><span class=\"token operator\">:</span> <span class=\"token boolean\">true</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">&quot;null&quot;</span><span class=\"token operator\">:</span> <span class=\"token null\">null</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">&quot;object&quot;</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n\t\t<span class=\"token property\">&quot;array&quot;</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> &quot;b&quot;<span class=\"token punctuation\">,</span> <span class=\"token boolean\">false</span><span class=\"token punctuation\">]</span>\n\t<span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n"
+	"sample": {
+		"lang": "json",
+		"variant": "complex",
+		"content": "{\n\t\"string\": \"a string\",\n\t\"number\": 12345,\n\t\"boolean\": true,\n\t\"null\": null,\n\t\"object\": {\n\t\t\"array\": [1, \"b\", false]\n\t}\n}\n",
+		"filepath": "src/lib/samples/sample_complex.json"
+	},
+	"boundaries": [{"type": "content", "start": 0, "end": 121}],
+	"matches": {
+		"total": 31,
+		"by_type": {
+			"punctuation": 12,
+			"property": 6,
+			"operator": 6,
+			"string": 1,
+			"number": 2,
+			"boolean": 2,
+			"null": 2
+		},
+		"samples": [
+			{"pattern_name": "punctuation", "text": "{", "start": 0, "end": 1, "priority": 20},
+			{"pattern_name": "property", "text": "\"string\"", "start": 3, "end": 11, "priority": 90},
+			{"pattern_name": "operator", "text": ":", "start": 11, "end": 12, "priority": 10},
+			{"pattern_name": "string", "text": "\"a string\"", "start": 13, "end": 23, "priority": 85},
+			{"pattern_name": "punctuation", "text": ",", "start": 23, "end": 24, "priority": 20},
+			{"pattern_name": "property", "text": "\"number\"", "start": 26, "end": 34, "priority": 90},
+			{"pattern_name": "operator", "text": ":", "start": 34, "end": 35, "priority": 10},
+			{"pattern_name": "number", "text": "12345", "start": 36, "end": 41, "priority": 50},
+			{"pattern_name": "punctuation", "text": ",", "start": 41, "end": 42, "priority": 20},
+			{"pattern_name": "property", "text": "\"boolean\"", "start": 44, "end": 53, "priority": 90},
+			{"pattern_name": "operator", "text": ":", "start": 53, "end": 54, "priority": 10},
+			{"pattern_name": "boolean", "text": "true", "start": 55, "end": 59, "priority": 45},
+			{"pattern_name": "null", "text": "null", "start": 63, "end": 67, "priority": 40},
+			{"pattern_name": "null", "text": "null", "start": 70, "end": 74, "priority": 40},
+			{"pattern_name": "number", "text": "1", "start": 101, "end": 102, "priority": 50},
+			{"pattern_name": "boolean", "text": "false", "start": 109, "end": 114, "priority": 45}
+		]
+	},
+	"domstyler_html": "<span class=\"token punctuation\">{</span>\n\t<span class=\"token property\">\"string\"</span><span class=\"token operator\">:</span> <span class=\"token string\">\"a string\"</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">\"number\"</span><span class=\"token operator\">:</span> <span class=\"token number\">12345</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">\"boolean\"</span><span class=\"token operator\">:</span> <span class=\"token boolean\">true</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">\"null\"</span><span class=\"token operator\">:</span> <span class=\"token null keyword\">null</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">\"object\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n\t\t<span class=\"token property\">\"array\"</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"b\"</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">false</span><span class=\"token punctuation\">]</span>\n\t<span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n",
+	"rangestyler_html": "<span class=\"token punctuation\">{</span>\n\t<span class=\"token property\">&quot;string&quot;</span><span class=\"token operator\">:</span> <span class=\"token string\">&quot;a string&quot;</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">&quot;number&quot;</span><span class=\"token operator\">:</span> <span class=\"token number\">12345</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">&quot;boolean&quot;</span><span class=\"token operator\">:</span> <span class=\"token boolean\">true</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">&quot;null&quot;</span><span class=\"token operator\">:</span> <span class=\"token null\">null</span><span class=\"token punctuation\">,</span>\n\t<span class=\"token property\">&quot;object&quot;</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n\t\t<span class=\"token property\">&quot;array&quot;</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> &quot;b&quot;<span class=\"token punctuation\">,</span> <span class=\"token boolean\">false</span><span class=\"token punctuation\">]</span>\n\t<span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n"
 }
