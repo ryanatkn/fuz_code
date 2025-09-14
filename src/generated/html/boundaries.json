@@ -9,8 +9,8 @@
 	{
 		"type": "content",
 		"start": 228,
-		"end": 340,
-		"length": 112,
+		"end": 371,
+		"length": 143,
 		"text_snippet": "\\n\\n<br />\\n\\n<hr />\\n\\n<img src=\"image.jpg\" alt=\"access..."
 	},
 	{
@@ -21,7 +21,13 @@
 		"length": 20,
 		"text_snippet": "\\n\\tconst ok = 'yes';\\n"
 	},
-	{"type": "content", "start": 400, "end": 402, "length": 2, "text_snippet": "\\n\\n"},
+	{
+		"type": "content",
+		"start": 391,
+		"end": 425,
+		"length": 34,
+		"text_snippet": "</script>\\n\\n<style type=\"text/css\">"
+	},
 	{
 		"type": "style",
 		"start": 425,
@@ -32,9 +38,9 @@
 	},
 	{
 		"type": "content",
-		"start": 477,
+		"start": 469,
 		"end": 528,
-		"length": 51,
-		"text_snippet": "\\n\\n<![CDATA[ if (a < 0) alert(\"b\"); <not-a-tag> ]]>..."
+		"length": 59,
+		"text_snippet": "</style>\\n\\n<![CDATA[ if (a < 0) alert(\"b\"); <not-a-..."
 	}
 ]

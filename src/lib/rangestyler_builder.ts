@@ -299,14 +299,15 @@ export const detect_boundaries = (text: string): Array<Rangestyler_Language_Boun
 		if (!overlaps && content) {
 			// Add boundary for the content only (not the tags)
 			const content_start = match.index + opening_tag.length;
+			const content_end = content_start + content.length;
 			boundaries.push({
 				type: 'script',
 				start: content_start,
-				end: content_start + content.length,
+				end: content_end,
 				language: 'ts', // Default to TypeScript for script tags
 			});
-			// Mark entire script tag region as processed
-			for (let i = match.index; i < match.index + full_match.length; i++) {
+			// Mark only the content region as processed (not the tags)
+			for (let i = content_start; i < content_end; i++) {
 				processed_regions.add(`${i}`);
 			}
 		}
@@ -331,14 +332,15 @@ export const detect_boundaries = (text: string): Array<Rangestyler_Language_Boun
 		if (!overlaps && content) {
 			// Add boundary for the content only (not the tags)
 			const content_start = match.index + opening_tag.length;
+			const content_end = content_start + content.length;
 			boundaries.push({
 				type: 'style',
 				start: content_start,
-				end: content_start + content.length,
+				end: content_end,
 				language: 'css',
 			});
-			// Mark entire style tag region as processed
-			for (let i = match.index; i < match.index + full_match.length; i++) {
+			// Mark only the content region as processed (not the tags)
+			for (let i = content_start; i < content_end; i++) {
 				processed_regions.add(`${i}`);
 			}
 		}

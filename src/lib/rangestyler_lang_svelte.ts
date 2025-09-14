@@ -46,14 +46,6 @@ export const svelte_language: Rangestyler_Language = {
 			greedy: true,
 		},
 
-		// Script and style tags (just the tags themselves, content handled by boundaries)
-		{
-			name: 'tag',
-			match: /<\/?(?:script|style)(?:\s+[^>]*)?>|<\/(?:script|style)>/gi,
-			priority: 92,
-			greedy: true,
-		},
-
 		// CDATA sections (handled by boundary detection)
 		{
 			name: 'cdata',

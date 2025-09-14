@@ -38,14 +38,6 @@ export const html_language: Rangestyler_Language = {
 			greedy: true,
 		},
 
-		// Script and style tags (just the tags, not content)
-		{
-			name: 'tag',
-			match: /<\/?(?:script|style)(?:\s+[^>]*)?>|<\/(?:script|style)>/gi,
-			priority: 82,
-			greedy: true,
-		},
-
 		// Attribute values (strings in quotes)
 		{
 			name: 'attr_value',

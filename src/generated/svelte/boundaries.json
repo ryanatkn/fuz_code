@@ -1,5 +1,12 @@
 [
 	{
+		"type": "content",
+		"start": 0,
+		"end": 25,
+		"length": 25,
+		"text_snippet": "<script lang=\"ts\" module>"
+	},
+	{
 		"type": "script",
 		"start": 25,
 		"end": 57,
@@ -7,7 +14,13 @@
 		"length": 32,
 		"text_snippet": "\\n\\texport const HELLO = 'world';\\n"
 	},
-	{"type": "content", "start": 66, "end": 68, "length": 2, "text_snippet": "\\n\\n"},
+	{
+		"type": "content",
+		"start": 57,
+		"end": 86,
+		"length": 29,
+		"text_snippet": "</script>\\n\\n<script lang=\"ts\">"
+	},
 	{
 		"type": "script",
 		"start": 86,
@@ -18,16 +31,16 @@
 	},
 	{
 		"type": "content",
-		"start": 1277,
+		"start": 1268,
 		"end": 1767,
-		"length": 490,
-		"text_snippet": "\\n\\n<h1>hello {HELLO}!</h1>\\n\\n{#each thing_keys as ke..."
+		"length": 499,
+		"text_snippet": "</script>\\n\\n<h1>hello {HELLO}!</h1>\\n\\n{#each thing_k..."
 	},
 	{
 		"type": "content",
 		"start": 1804,
-		"end": 1936,
-		"length": 132,
+		"end": 1943,
+		"length": 139,
 		"text_snippet": "\\n{a}\\n{b}\\n{bound}\\n{D}\\n\\n<br />\\n\\n<hr />\\n\\n<img src=\"im..."
 	},
 	{
@@ -38,5 +51,5 @@
 		"length": 381,
 		"text_snippet": "\\n\\t.some_class {\\n\\t\\tcolor: red;\\n\\t}\\n\\n\\t.hypen-class {\\n..."
 	},
-	{"type": "content", "start": 2332, "end": 2333, "length": 1, "text_snippet": "\\n"}
+	{"type": "content", "start": 2324, "end": 2333, "length": 9, "text_snippet": "</style>\\n"}
 ]

@@ -1,6 +1,9 @@
 import type {Gen} from '@ryanatkn/gro';
 import type {Raw_Gen_File} from '@ryanatkn/gro/gen.js';
-import {process_language_sample, generate_comparison_report} from './rangestyler_helpers.js';
+import {
+	process_language_sample,
+	generate_comparison_report,
+} from './rangestyler_diagnostic_helpers.js';
 
 export const gen: Gen = async () => {
 	// Process all languages

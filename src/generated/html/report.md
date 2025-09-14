@@ -5,31 +5,31 @@
 | Type    | Start | End | Length | Language | Snippet                                    |
 | ------- | ----- | --- | ------ | -------- | ------------------------------------------ |
 | content | 0     | 191 | 191    | -        | `<!doctype html>\n\n<div class="test">\n\` |
-| content | 228   | 340 | 112    | -        | `\n\n<br />\n\n<hr />\n\n<img src="image.` |
+| content | 228   | 371 | 143    | -        | `\n\n<br />\n\n<hr />\n\n<img src="image.` |
 | script  | 371   | 391 | 20     | ts       | `\n\tconst ok = 'yes';\n`                  |
-| content | 400   | 402 | 2      | -        | `\n\n`                                     |
+| content | 391   | 425 | 34     | -        | `</script>\n\n<style type="text/css">`     |
 | style   | 425   | 469 | 44     | css      | `\n\t.special::before {\n\t\tcontent: '< ` |
-| content | 477   | 528 | 51     | -        | `\n\n<![CDATA[ if (a < 0) alert("b"); <no` |
+| content | 469   | 528 | 59     | -        | `</style>\n\n<![CDATA[ if (a < 0) alert("` |
 
 ## Match Statistics
 
-**Total matches:** 117
+**Total matches:** 139
 
 ### Distribution by Pattern Type
 
 | Pattern Type | Count | Percentage |
 | ------------ | ----- | ---------- |
-| punctuation  | 65    | 55.6%      |
-| tag          | 22    | 18.8%      |
-| operator     | 8     | 6.8%       |
-| attr_name    | 7     | 6.0%       |
-| attr_value   | 7     | 6.0%       |
-| string       | 2     | 1.7%       |
-| property     | 2     | 1.7%       |
-| doctype      | 1     | 0.9%       |
-| keyword      | 1     | 0.9%       |
-| selector     | 1     | 0.9%       |
-| cdata        | 1     | 0.9%       |
+| punctuation  | 77    | 55.4%      |
+| tag          | 26    | 18.7%      |
+| operator     | 10    | 7.2%       |
+| attr_name    | 9     | 6.5%       |
+| attr_value   | 9     | 6.5%       |
+| string       | 2     | 1.4%       |
+| property     | 2     | 1.4%       |
+| doctype      | 1     | 0.7%       |
+| keyword      | 1     | 0.7%       |
+| selector     | 1     | 0.7%       |
+| cdata        | 1     | 0.7%       |
 
 ## Sample Matches
 
@@ -62,4 +62,4 @@
 - ✅ Style boundaries detected
 - 🔧 Embedded languages: ts, css
 - 📊 Pattern types: 11
-- 🎯 Total matches: 117
+- 🎯 Total matches: 139

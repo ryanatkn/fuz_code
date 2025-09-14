@@ -1,12 +1,12 @@
 {
-	"total": 117,
+	"total": 139,
 	"by_type": {
 		"doctype": 1,
-		"tag": 22,
-		"punctuation": 65,
-		"attr_name": 7,
-		"attr_value": 7,
-		"operator": 8,
+		"tag": 26,
+		"punctuation": 77,
+		"attr_name": 9,
+		"attr_value": 9,
+		"operator": 10,
 		"keyword": 1,
 		"string": 2,
 		"selector": 1,

@@ -1,18 +1,18 @@
 {
-	"total": 610,
+	"total": 643,
 	"by_type": {
+		"tag": 39,
+		"punctuation": 266,
+		"attr_name": 31,
+		"attr_value": 18,
+		"operator": 106,
 		"keyword": 34,
 		"class_name": 17,
-		"attr_name": 29,
-		"operator": 104,
-		"attr_value": 16,
 		"string": 10,
-		"punctuation": 251,
 		"comment": 9,
 		"svelte_expression": 34,
 		"function": 17,
 		"boolean": 5,
-		"tag": 27,
 		"type": 16,
 		"number": 14,
 		"template_expression": 2,
@@ -24,6 +24,19 @@
 		"atrule": 1
 	},
 	"samples": [
+		{
+			"pattern_name": "tag",
+			"text": "<script lang=\"ts\" module>",
+			"start": 0,
+			"end": 25,
+			"priority": 92
+		},
+		{"pattern_name": "tag", "text": "<script", "start": 0, "end": 7, "priority": 60},
+		{"pattern_name": "punctuation", "text": "<", "start": 0, "end": 1, "priority": 10},
+		{"pattern_name": "attr_name", "text": "lang", "start": 8, "end": 12, "priority": 55},
+		{"pattern_name": "attr_value", "text": "=\"ts\"", "start": 12, "end": 17, "priority": 70},
+		{"pattern_name": "operator", "text": "=", "start": 12, "end": 13, "priority": 5},
+		{"pattern_name": "punctuation", "text": ">", "start": 24, "end": 25, "priority": 10},
 		{"pattern_name": "keyword", "text": "export", "start": 27, "end": 33, "priority": 150},
 		{"pattern_name": "keyword", "text": "const", "start": 34, "end": 39, "priority": 150},
 		{"pattern_name": "class_name", "text": "HELLO", "start": 40, "end": 45, "priority": 130},
@@ -33,40 +46,15 @@
 		{"pattern_name": "operator", "text": "=", "start": 46, "end": 47, "priority": 5},
 		{"pattern_name": "string", "text": "'world'", "start": 48, "end": 55, "priority": 190},
 		{"pattern_name": "punctuation", "text": ";", "start": 55, "end": 56, "priority": 110},
+		{"pattern_name": "tag", "text": "</script>", "start": 57, "end": 66, "priority": 92},
+		{"pattern_name": "attr_name", "text": "lang", "start": 76, "end": 80, "priority": 55},
+		{"pattern_name": "attr_value", "text": "=\"ts\"", "start": 80, "end": 85, "priority": 70},
 		{
 			"pattern_name": "comment",
 			"text": "// @ts-expect-error",
 			"start": 88,
 			"end": 107,
 			"priority": 200
-		},
-		{"pattern_name": "operator", "text": "/", "start": 88, "end": 89, "priority": 120},
-		{"pattern_name": "punctuation", "text": "/", "start": 88, "end": 89, "priority": 10},
-		{"pattern_name": "punctuation", "text": "/", "start": 89, "end": 90, "priority": 10},
-		{"pattern_name": "keyword", "text": "import", "start": 109, "end": 115, "priority": 150},
-		{"pattern_name": "class_name", "text": "Thing", "start": 116, "end": 121, "priority": 130},
-		{
-			"pattern_name": "string",
-			"text": "'$lib/Thing.svelte'",
-			"start": 127,
-			"end": 146,
-			"priority": 190
-		},
-		{"pattern_name": "class_name", "text": "Thing", "start": 133, "end": 138, "priority": 130},
-		{
-			"pattern_name": "svelte_expression",
-			"text": "{Snippet}",
-			"start": 161,
-			"end": 170,
-			"priority": 95
-		},
-		{"pattern_name": "string", "text": "'svelte'", "start": 176, "end": 184, "priority": 190},
-		{
-			"pattern_name": "svelte_expression",
-			"text": "{\n\t\tthing,\n\t\tbound = $bindable",
-			"start": 194,
-			"end": 246,
-			"priority": 95
 		}
 	]
 }
