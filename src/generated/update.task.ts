@@ -6,7 +6,9 @@ import {discover_samples, process_sample, generate_report, get_fixture_path} fro
 
 export const task: Task = {
 	summary: 'update all test fixtures from sample files',
-	run: async () => {
+	run: async ({invoke_task}) => {
+		await invoke_task('gen');
+
 		// Discover all sample files
 		const samples = discover_samples();
 

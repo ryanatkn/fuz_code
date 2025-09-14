@@ -5,7 +5,7 @@
 - **Language**: json
 - **Variant**: complex
 - **Source**: src/lib/samples/sample_complex.json
-- **Size**: 332 characters
+- **Size**: 327 characters
 
 ## Statistics
 
@@ -55,16 +55,16 @@
 - code: [263:268]
 - property: [268:276]
 - code: [276:280]
-- string: [280:288]
-- code: [288:290]
-- string: [290:295]
-- code: [295:297]
-- string: [297:299]
-- code: [299:303]
-- property: [303:308]
-- code: [308:310]
-- string: [310:324]
-- code: [324:332]
+- string: [280:283]
+- code: [283:285]
+- string: [285:290]
+- code: [290:292]
+- string: [292:294]
+- code: [294:298]
+- property: [298:303]
+- code: [303:305]
+- string: [305:319]
+- code: [319:327]
 
 ### Matches
 
@@ -129,7 +129,7 @@
 ><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token property">"nested"</span><span class="token operator">:</span>
 <span class="token punctuation">[</span><span class="token punctuation">[</span
-><span class="token string">"nested"</span><span class="token punctuation">,</span>
+><span class="token string">"a"</span><span class="token punctuation">,</span>
 <span class="token string">"str"</span><span class="token punctuation">,</span>
 <span class="token string">""</span><span class="token punctuation">]</span
 ><span class="token punctuation">,</span> <span class="token punctuation">{</span
@@ -178,7 +178,7 @@
 ><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token property">&quot;nested&quot;</span><span class="token operator">:</span>
 <span class="token punctuation">[</span><span class="token punctuation">[</span
-><span class="token string">&quot;nested&quot;</span><span class="token punctuation">,</span>
+><span class="token string">&quot;a&quot;</span><span class="token punctuation">,</span>
 <span class="token string">&quot;str&quot;</span><span class="token punctuation">,</span>
 <span class="token string">&quot;&quot;</span><span class="token punctuation">]</span
 ><span class="token punctuation">,</span> <span class="token punctuation">{</span
@@ -191,8 +191,8 @@
 
 ## Comparison
 
-- Domstyler size: 3402 bytes
-- Rangestyler size: 3656 bytes
+- Domstyler size: 3397 bytes
+- Rangestyler size: 3651 bytes
 - Size difference: -254 bytes
 
 ---

@@ -25,7 +25,7 @@ export const samples: Record<Sample_Key, Code_Sample> = {
 		"array": [1, "b", false],
 		"strings": ["1", "2", "3"],
 		"mixed": ["start", 123, true, "middle", null, "end"],
-		"nested": [["nested", "str", ""], {"key": "nested value"}]
+		"nested": [["a", "str", ""], {"key": "nested value"}]
 	}
 }
 `,
@@ -49,13 +49,14 @@ p {
 
 /*
 multi
-line
+.line {
+	i: 100px
 
 <comment>
 
-*/
+@media*/
 
-#unique_id {
+#id {
 	background-color: blue;
 }
 
@@ -79,7 +80,7 @@ div > p {
 }
 
 .background {
-	background-image: url("data:image/svg+xml,%3Csvg xmlns=''");
+	background-image: url('data:image/svg+xml...');
 }
 `,
 	},

@@ -5,7 +5,7 @@
 - **Language**: css
 - **Variant**: complex
 - **Source**: src/lib/samples/sample_complex.css
-- **Size**: 555 characters
+- **Size**: 554 characters
 
 ## Statistics
 
@@ -15,16 +15,16 @@
 - code: [0:115]
 - comment: [115:128]
 - code: [128:130]
-- comment: [130:158]
-- code: [158:302]
-- comment: [302:359]
-- code: [359:389]
-- string: [389:422]
-- code: [422:439]
-- string: [439:452]
-- code: [452:514]
-- string: [514:550]
-- code: [550:555]
+- comment: [130:177]
+- code: [177:314]
+- comment: [314:371]
+- code: [371:401]
+- string: [401:434]
+- code: [434:451]
+- string: [451:464]
+- code: [464:526]
+- string: [526:549]
+- code: [549:554]
 
 ### Matches
 
@@ -83,9 +83,9 @@
 
 <span class="token comment">/* comment */</span>
 
-<span class="token comment">/* multi line &lt;comment> */</span>
+<span class="token comment">/* multi .line { i: 100px &lt;comment> @media*/</span>
 
-<span class="token selector">#unique_id</span> <span class="token punctuation">{</span>
+<span class="token selector">#id</span> <span class="token punctuation">{</span>
 <span class="token property">background-color</span
 ><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -126,7 +126,7 @@
 <span class="token property">background-image</span><span class="token punctuation">:</span>
 <span class="token url"
 	><span class="token function">url</span><span class="token punctuation">(</span
-	><span class="token string url">"data:image/svg+xml,%3Csvg xmlns=''"</span
+	><span class="token string url">'data:image/svg+xml...'</span
 	><span class="token punctuation">)</span></span
 ><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -160,10 +160,10 @@
 
 <span class="token comment">/* comment */</span><span class="token comment"></span>
 
-<span class="token comment">/* multi line &lt;comment&gt; */</span
+<span class="token comment">/* multi .line { i: 100px &lt;comment&gt; @media*/</span
 ><span class="token comment"></span>
 
-<span class="token selector">#unique_id</span> <span class="token punctuation">{</span>
+<span class="token selector">#id</span> <span class="token punctuation">{</span>
 <span class="token property">background-color</span
 ><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -199,16 +199,16 @@
 <span class="token selector">.background</span> <span class="token punctuation">{</span>
 <span class="token property">background-image</span><span class="token punctuation">:</span>
 <span class="token function">url</span><span class="token punctuation">(</span
-><span class="token string">&quot;data:image/svg+xml,%3Csvg xmlns=&#039;&#039;&quot;</span
+><span class="token string">&#039;data:image/svg+xml...&#039;</span
 ><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 ```
 
 ## Comparison
 
-- Domstyler size: 3460 bytes
-- Rangestyler size: 3736 bytes
-- Size difference: -276 bytes
+- Domstyler size: 3459 bytes
+- Rangestyler size: 3725 bytes
+- Size difference: -266 bytes
 
 ---
 
