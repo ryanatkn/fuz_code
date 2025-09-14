@@ -22,10 +22,10 @@ export const json_language: Rangestyler_Language = {
 			greedy: true,
 		},
 
-		// String values (strings not before colons)
+		// String values (complete strings that are not property names)
 		{
 			name: 'string',
-			match: /"(?:\\.|[^\\"\r\n])*"(?!\s*:)/g,
+			match: /(?<=:\s*)"(?:\\.|[^\\"\r\n])*"/g,
 			priority: 85,
 			greedy: true,
 		},

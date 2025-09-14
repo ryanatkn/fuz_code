@@ -60,7 +60,7 @@
 }
 
 ::highlight(json_property) {
-	color: var(--color_f_5);
+	color: var(--color_a_5);
 }
 
 ::highlight(json_string) {
