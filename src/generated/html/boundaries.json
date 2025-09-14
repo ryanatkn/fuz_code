@@ -2,16 +2,9 @@
 	{
 		"type": "content",
 		"start": 0,
-		"end": 191,
-		"length": 191,
-		"text_snippet": "<!doctype html>\\n\\n<div class=\"test\">\\n\\t<p>hello worl..."
-	},
-	{
-		"type": "content",
-		"start": 228,
 		"end": 371,
-		"length": 143,
-		"text_snippet": "\\n\\n<br />\\n\\n<hr />\\n\\n<img src=\"image.jpg\" alt=\"access..."
+		"length": 371,
+		"text_snippet": "<!doctype html>\\n\\n<div class=\"test\">\\n\\t<p>hello worl..."
 	},
 	{
 		"type": "script",

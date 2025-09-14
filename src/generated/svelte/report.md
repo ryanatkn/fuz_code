@@ -8,34 +8,33 @@
 | script  | 25    | 57   | 32     | ts       | `\n\texport const HELLO = 'world';\n`      |
 | content | 57    | 86   | 29     | -        | `</script>\n\n<script lang="ts">`          |
 | script  | 86    | 1268 | 1182   | ts       | `\n\t// @ts-expect-error\n\timport Thing ` |
-| content | 1268  | 1767 | 499    | -        | `</script>\n\n<h1>hello {HELLO}!</h1>\n\n` |
-| content | 1804  | 1943 | 139    | -        | `\n{a}\n{b}\n{bound}\n{D}\n\n<br />\n\n<h` |
+| content | 1268  | 1943 | 675    | -        | `</script>\n\n<h1>hello {HELLO}!</h1>\n\n` |
 | style   | 1943  | 2324 | 381    | css      | `\n\t.some_class {\n\t\tcolor: red;\n\t}\` |
 | content | 2324  | 2333 | 9      | -        | `</style>\n`                               |
 
 ## Match Statistics
 
-**Total matches:** 553
+**Total matches:** 568
 
 ### Distribution by Pattern Type
 
 | Pattern Type        | Count | Percentage |
 | ------------------- | ----- | ---------- |
-| punctuation         | 238   | 43.0%      |
-| operator            | 89    | 16.1%      |
-| keyword             | 34    | 6.1%       |
-| tag                 | 31    | 5.6%       |
-| class_name          | 17    | 3.1%       |
-| function            | 17    | 3.1%       |
-| attr_name           | 16    | 2.9%       |
-| type                | 16    | 2.9%       |
-| svelte_expression   | 16    | 2.9%       |
+| punctuation         | 248   | 43.7%      |
+| operator            | 89    | 15.7%      |
+| tag                 | 35    | 6.2%       |
+| keyword             | 34    | 6.0%       |
+| class_name          | 17    | 3.0%       |
+| function            | 17    | 3.0%       |
+| attr_name           | 16    | 2.8%       |
+| type                | 16    | 2.8%       |
+| svelte_expression   | 16    | 2.8%       |
 | attr_value          | 14    | 2.5%       |
 | number              | 14    | 2.5%       |
 | string              | 10    | 1.8%       |
-| comment             | 9     | 1.6%       |
+| comment             | 10    | 1.8%       |
 | property            | 9     | 1.6%       |
-| selector            | 7     | 1.3%       |
+| selector            | 7     | 1.2%       |
 | svelte_block        | 6     | 1.1%       |
 | boolean             | 5     | 0.9%       |
 | template_expression | 2     | 0.4%       |
@@ -74,4 +73,4 @@
 - ✅ Style boundaries detected
 - 🔧 Embedded languages: ts, css
 - 📊 Pattern types: 21
-- 🎯 Total matches: 553
+- 🎯 Total matches: 568

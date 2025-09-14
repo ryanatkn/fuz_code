@@ -280,9 +280,6 @@ export const generate_html_fallback = (
 	return html;
 };
 
-// This function is now deprecated - boundary detection has moved to language definitions
-// Keeping for backwards compatibility during migration
-
 /**
  * Get appropriate patterns for a given boundary type
  */
@@ -316,13 +313,18 @@ export const find_matches_with_boundaries = (
 	lang: string,
 	get_language_patterns: (lang_id: string) => Array<Rangestyler_Pattern> | undefined,
 	detect_boundaries_fn?: (text: string) => Array<Rangestyler_Language_Boundary>,
-): {matches: Array<Rangestyler_Match_Result>; language_map: Map<Rangestyler_Match_Result, string>} => {
+): {
+	matches: Array<Rangestyler_Match_Result>;
+	language_map: Map<Rangestyler_Match_Result, string>;
+} => {
 	// Use language-specific boundary detection if provided, otherwise treat as single boundary
-	const boundaries = detect_boundaries_fn?.(text) || [{
-		type: 'content' as const,
-		start: 0,
-		end: text.length,
-	}];
+	const boundaries = detect_boundaries_fn?.(text) || [
+		{
+			type: 'content' as const,
+			start: 0,
+			end: text.length,
+		},
+	];
 	const all_matches: Array<Rangestyler_Match_Result> = [];
 	const language_map = new Map<Rangestyler_Match_Result, string>();
 

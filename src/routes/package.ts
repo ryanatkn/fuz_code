@@ -277,7 +277,6 @@ export const src_json: Src_Json = {
 				{name: 'build_ranges', kind: 'function'},
 				{name: 'build_ranges_with_boundaries', kind: 'function'},
 				{name: 'generate_html_fallback', kind: 'function'},
-				{name: 'detect_boundaries', kind: 'function'},
 				{name: 'get_boundary_patterns', kind: 'function'},
 				{name: 'find_matches_with_boundaries', kind: 'function'},
 			],
