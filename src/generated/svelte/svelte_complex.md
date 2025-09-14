@@ -22,7 +22,7 @@
 
 ### Matches
 
-- **Total**: 566
+- **Total**: 549
 - **By Type**:
   - tag: 35
   - punctuation: 248
@@ -31,17 +31,15 @@
   - operator: 89
   - keyword: 34
   - class_name: 17
-  - string: 9
-  - comment: 8
   - function: 17
   - boolean: 5
   - type: 16
   - number: 14
   - template_expression: 2
-  - regex: 1
   - svelte_expression: 16
   - svelte_block: 6
   - doctype: 1
+  - comment: 1
   - selector: 8
   - property: 9
   - atrule: 1
@@ -622,21 +620,25 @@ click me
 	>&gt;</span
 >
 <span class="token keyword">export</span> <span class="token keyword">const</span>
-<span class="token class_name">HELLO</span> <span class="token operator">=</span>
-<span class="token string">&#039;world&#039;</span><span class="token punctuation">;</span>
+<span class="token class_name">HELLO</span>
+<span class="token operator">=</span> &#039;world&#039;<span class="token punctuation">;</span>
 <span class="token tag">&lt;/script</span><span class="token punctuation">&gt;</span>
 
 <span class="token tag">&lt;script</span> <span class="token attr_name">lang</span
 ><span class="token attr_value">=&quot;ts&quot;</span><span class="token punctuation">&gt;</span>
-<span class="token comment">// @ts-expect-error</span>
-<span class="token keyword">import</span> <span class="token class_name">Thing</span>
-<span class="token keyword">from</span>
-<span class="token string">&#039;$lib/Thing.svelte&#039;</span
-><span class="token punctuation">;</span> <span class="token keyword">import</span>
-<span class="token keyword">type</span> <span class="token punctuation">{</span
-><span class="token class_name">Snippet</span><span class="token punctuation">}</span>
-<span class="token keyword">from</span> <span class="token string">&#039;svelte&#039;</span
-><span class="token punctuation">;</span>
+<span class="token operator">/</span><span class="token operator">/</span> @ts<span
+	class="token operator"
+	>-</span
+>expect<span class="token operator">-</span>error <span class="token keyword">import</span>
+<span class="token class_name">Thing</span> <span class="token keyword">from</span> &#039;$lib<span
+	class="token operator"
+	>/</span
+><span class="token class_name">Thing</span
+><span class="token punctuation">.</span>svelte&#039;<span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token keyword">type</span>
+<span class="token punctuation">{</span><span class="token class_name">Snippet</span
+><span class="token punctuation">}</span>
+<span class="token keyword">from</span> &#039;svelte&#039;<span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> <span class="token punctuation">{</span> thing<span
 	class="token punctuation"
@@ -674,8 +676,10 @@ bound <span class="token operator">=</span> $<span class="token function">bindab
 <span class="token keyword">const</span> a <span class="token operator">=</span>
 <span class="token number">1</span><span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> b <span class="token operator">=</span>
-<span class="token string">&#039;b&#039;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> b <span class="token operator">=</span> &#039;b&#039;<span
+	class="token punctuation"
+	>;</span
+>
 
 <span class="token keyword">let</span> c<span class="token operator">:</span>
 <span class="token type">boolean</span> <span class="token operator">=</span> $<span
@@ -686,19 +690,20 @@ bound <span class="token operator">=</span> $<span class="token function">bindab
 
 <span class="token keyword">export</span> <span class="token keyword">type</span>
 <span class="token class_name">Some_Type</span> <span class="token operator">=</span>
-<span class="token number">1</span> <span class="token operator">|</span>
-<span class="token string">&#039;b&#039;</span> <span class="token operator">|</span>
-<span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token number">1</span> <span class="token operator">|</span> &#039;b&#039;
+<span class="token operator">|</span> <span class="token boolean">true</span
+><span class="token punctuation">;</span>
 
 <span class="token keyword">class</span> <span class="token class_name">D</span>
 <span class="token punctuation">{</span> d1<span class="token operator">:</span>
-<span class="token type">string</span> <span class="token operator">=</span>
-<span class="token string">&#039;d&#039;</span><span class="token punctuation">;</span> d2<span
-	class="token operator"
-	>:</span
+<span class="token type">string</span> <span class="token operator">=</span> &#039;d&#039;<span
+	class="token punctuation"
+	>;</span
 >
-<span class="token type">number</span><span class="token punctuation">;</span> d3
-<span class="token operator">=</span> $<span class="token function">state</span
+d2<span class="token operator">:</span> <span class="token type">number</span
+><span class="token punctuation">;</span> d3 <span class="token operator">=</span> $<span
+	class="token function"
+	>state</span
 ><span class="token punctuation">(</span><span class="token boolean">false</span
 ><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -717,28 +722,32 @@ bound <span class="token operator">=</span> $<span class="token function">bindab
 <span class="token function">class_method</span><span class="token punctuation">(</span
 ><span class="token punctuation">)</span><span class="token operator">:</span>
 <span class="token type">string</span> <span class="token punctuation">{</span>
-<span class="token keyword">return</span> <span class="token string">`Hello, ${this.d1}`</span
-><span class="token punctuation">;</span>
+<span class="token keyword">return</span> `<span class="token class_name">Hello</span
+><span class="token punctuation">,</span>
+<span class="token template_expression">${this.d1}</span>`<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 instance_method <span class="token operator">=</span> <span class="token punctuation">(</span
 ><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
-<span class="token punctuation">{</span>
-<span class="token comment">/* ... */</span>
+<span class="token punctuation">{</span> <span class="token operator">/</span
+><span class="token operator">*</span> <span class="token operator">...</span>
+<span class="token operator">*</span><span class="token operator">/</span>
 <span class="token keyword">this</span><span class="token punctuation">.</span>#<span
 	class="token function"
 	>private_method</span
 ><span class="token punctuation">(</span><span class="token punctuation">)</span
+><span class="token punctuation">;</span> <span class="token operator">/</span
+><span class="token operator">/</span> foo <span class="token punctuation">}</span
 ><span class="token punctuation">;</span>
-<span class="token comment">// foo</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 #<span class="token function">private_method</span><span class="token punctuation">(</span
 ><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 <span class="token keyword">throw</span> <span class="token keyword">new</span>
-<span class="token function">Error</span><span class="token punctuation">(</span
-><span class="token string">`${this.d1} etc`</span><span class="token punctuation">)</span
-><span class="token punctuation">;</span>
+<span class="token function">Error</span><span class="token punctuation">(</span>`<span
+	class="token template_expression"
+	>${this.d1}</span
+>
+etc`<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">protected</span> <span class="token function">protected_method</span
@@ -748,16 +757,26 @@ instance_method <span class="token operator">=</span> <span class="token punctua
 ><span class="token keyword">new</span> <span class="token function">Date</span
 ><span class="token punctuation">(</span><span class="token number">123</span
 ><span class="token punctuation">)</span><span class="token punctuation">)</span
-><span class="token punctuation">;</span>
-<span class="token comment">// eslint-disable-line no-console</span>
+><span class="token punctuation">;</span> <span class="token operator">/</span
+><span class="token operator">/</span> eslint<span class="token operator">-</span>disable<span
+	class="token operator"
+	>-</span
+>line no<span class="token operator">-</span>console
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token comment">// comment</span>
+<span class="token operator">/</span><span class="token operator">/</span> comment
 
-<span class="token comment">/* other comment const comment = false; */</span>
+<span class="token operator">/</span><span class="token operator">*</span>
+other comment
 
-<span class="token comment">/** * JSDoc comment */</span>
+<span class="token keyword">const</span> comment <span class="token operator">=</span>
+<span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token operator">*</span><span class="token operator">/</span>
+
+<span class="token operator">/</span><span class="token operator">**</span>
+<span class="token operator">*</span> <span class="token class_name">JSDoc</span> comment
+<span class="token operator">*</span><span class="token operator">/</span>
 
 <span class="token keyword">export</span> <span class="token keyword">interface</span>
 <span class="token class_name">Some_E</span> <span class="token punctuation">{</span> name<span
@@ -776,8 +795,11 @@ instance_method <span class="token operator">=</span> <span class="token punctua
 	>:</span
 >
 <span class="token class_name">Some_E</span> <span class="token operator">=</span>
-<span class="token punctuation">{</span>name<span class="token operator">:</span>
-<span class="token string">&#039;A. H.&#039;</span><span class="token punctuation">,</span> age<span
+<span class="token punctuation">{</span>name<span class="token operator">:</span> &#039;<span
+	class="token class_name"
+	>A</span
+><span class="token punctuation">.</span> <span class="token class_name">H</span
+><span class="token punctuation">.</span>&#039;<span class="token punctuation">,</span> age<span
 	class="token operator"
 	>:</span
 >
@@ -942,8 +964,8 @@ click me <span class="token tag">&lt;/button</span><span class="token punctuatio
 ## Comparison
 
 - Domstyler size: 23839 bytes
-- Rangestyler size: 17540 bytes
-- Size difference: 6299 bytes
+- Rangestyler size: 18582 bytes
+- Size difference: 5257 bytes
 
 ---
 

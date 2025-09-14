@@ -115,7 +115,10 @@ class D {
 	};
 
 	#private_method() {
-		throw new Error(\`\${this.d1} etc\`);
+		throw new Error(\`\${this.d1} 
+			multiline
+			etc
+		\`);
 	}
 
 	protected protected_method(): void {
@@ -149,6 +152,18 @@ export function add(x: number, y: number): number {
 }
 
 export const plus = (a: any, b: any): any => a + b;
+
+// boundary test cases
+export const str_with_keywords = 'const class function string';
+export const str_with_comment = '// this is not a comment';
+export const template_with_expr = \`Value: \${1 + 2} and \${true}\`;
+
+// regex that looks like comment
+export const regex = /\\/\\/.*/g;
+export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^\\/])+$/;
+
+// string in comment should not be highlighted as string
+// const commented = "this string is in a comment";
 `,
 	},
 	html_complex: {
