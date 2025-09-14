@@ -2,6 +2,7 @@ import type {
 	Rangestyler_Pattern,
 	Rangestyler_Match_Result,
 	Rangestyler_Language_Boundary,
+	Rangestyler_Language,
 } from '$lib/rangestyler_types.js';
 import {escape_html} from '$lib/helpers.js';
 
@@ -37,13 +38,15 @@ export const find_matches = (
 		let match: RegExpExecArray | null;
 
 		while ((match = global_regex.exec(text)) !== null) {
-			const full_match = match[0];
+			let full_match = match[0];
 			let start_offset = match.index;
 
-			// Handle lookbehind by adjusting start position
-			if (pattern.lookbehind && match.length > 1) {
+			// Handle lookbehind by adjusting start position and match text
+			if (pattern.lookbehind && match.length > 1 && match[1]) {
 				// The first capture group is the lookbehind part
-				start_offset += match[1].length;
+				const lookbehind_length = match[1].length;
+				start_offset += lookbehind_length;
+				full_match = full_match.substring(lookbehind_length);
 			}
 
 			const result: Rangestyler_Match_Result = {
@@ -191,8 +194,9 @@ export const build_ranges_with_boundaries = (
 	text: string,
 	patterns: Array<Rangestyler_Pattern>,
 	lang_id: string,
-	get_language_patterns: (lang_id: string) => Array<Rangestyler_Pattern> | undefined,
+	get_language: (lang_id: string) => Rangestyler_Language | undefined,
 	detect_boundaries_fn?: (text: string) => Array<Rangestyler_Language_Boundary>,
+	current_language?: Rangestyler_Language,
 ): {text_node: Text; ranges_by_name: Map<string, Array<Range>>} => {
 	// Create text node
 	const text_node = create_text_node(element, text);
@@ -202,8 +206,9 @@ export const build_ranges_with_boundaries = (
 		text,
 		patterns,
 		lang_id,
-		get_language_patterns,
+		get_language,
 		detect_boundaries_fn,
+		current_language,
 	);
 
 	// Resolve overlaps
@@ -281,26 +286,52 @@ export const generate_html_fallback = (
 };
 
 /**
- * Get appropriate patterns for a given boundary type
+ * Get appropriate patterns for a given boundary
  */
 export const get_boundary_patterns = (
 	boundary: Rangestyler_Language_Boundary,
 	patterns: Array<Rangestyler_Pattern>,
-	get_language_patterns: (lang_id: string) => Array<Rangestyler_Pattern> | undefined,
+	get_language: (lang_id: string) => Rangestyler_Language | undefined,
+	current_language?: Rangestyler_Language,
 ): Array<Rangestyler_Pattern> => {
-	switch (boundary.type) {
-		case 'script':
-			// Use ONLY TypeScript patterns inside script tags
-			// The script/style tags themselves are in content boundaries
-			return get_language_patterns('ts') || [];
-		case 'style':
-			// Use ONLY CSS patterns inside style tags
-			return get_language_patterns('css') || [];
-		case 'content':
-		default:
-			// Use base language patterns for HTML content
-			return patterns;
+	// First check if boundary has its own patterns
+	if (boundary.patterns) {
+		return boundary.patterns;
 	}
+
+	// Check if current language provides patterns for this boundary
+	if (current_language?.get_boundary_patterns) {
+		const lang_patterns = current_language.get_boundary_patterns(boundary);
+		if (lang_patterns) {
+			return lang_patterns;
+		}
+	}
+
+	// Handle embedded languages
+	if (boundary.type === 'embedded' && boundary.embedded_language) {
+		const embedded_lang = get_language(boundary.embedded_language);
+		return embedded_lang?.patterns || [];
+	}
+
+	// Handle comment boundaries - return a simple pattern to match all as comment
+	if (boundary.type === 'comment') {
+		return [
+			{
+				name: 'comment',
+				match: /.*/s, // Match everything in this boundary
+				priority: 100,
+				greedy: true,
+			},
+		];
+	}
+
+	// Default to base language patterns for 'code' type
+	if (boundary.type === 'code') {
+		return patterns;
+	}
+
+	// Fallback to empty patterns
+	return [];
 };
 
 /**
@@ -311,8 +342,9 @@ export const find_matches_with_boundaries = (
 	text: string,
 	patterns: Array<Rangestyler_Pattern>,
 	lang: string,
-	get_language_patterns: (lang_id: string) => Array<Rangestyler_Pattern> | undefined,
+	get_language: (lang_id: string) => Rangestyler_Language | undefined,
 	detect_boundaries_fn?: (text: string) => Array<Rangestyler_Language_Boundary>,
+	current_language?: Rangestyler_Language,
 ): {
 	matches: Array<Rangestyler_Match_Result>;
 	language_map: Map<Rangestyler_Match_Result, string>;
@@ -320,7 +352,8 @@ export const find_matches_with_boundaries = (
 	// Use language-specific boundary detection if provided, otherwise treat as single boundary
 	const boundaries = detect_boundaries_fn?.(text) || [
 		{
-			type: 'content' as const,
+			language: lang,
+			type: 'code',
 			start: 0,
 			end: text.length,
 		},
@@ -333,7 +366,12 @@ export const find_matches_with_boundaries = (
 		const boundary_text = text.slice(boundary.start, boundary.end);
 
 		// Get appropriate patterns for this boundary
-		const boundary_patterns = get_boundary_patterns(boundary, patterns, get_language_patterns);
+		const boundary_patterns = get_boundary_patterns(
+			boundary,
+			patterns,
+			get_language,
+			current_language,
+		);
 
 		// Skip if no patterns to apply
 		if (boundary_patterns.length === 0) {

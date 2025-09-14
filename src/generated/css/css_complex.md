@@ -11,33 +11,37 @@
 
 ### Boundaries
 
-- **Total**: 1
-- content: [0:301]
+- **Total**: 5
+- code: [0:115]
+- comment: [115:128]
+- code: [128:130]
+- comment: [130:158]
+- code: [158:301]
 
 ### Matches
 
-- **Total**: 62
+- **Total**: 64
 - **By Type**:
   - selector: 7
   - punctuation: 34
   - property: 7
   - number: 10
   - function: 1
-  - comment: 2
+  - comment: 4
   - atrule: 1
 
 ## Sample Matches
 
 - **selector** [0:11]: `.some_class`
 - **punctuation** [12:13]: `{`
-- **property** [14:20]: `	color`
+- **property** [15:20]: `color`
 - **punctuation** [20:21]: `:`
 - **punctuation** [25:26]: `;`
 - **selector** [30:42]: `.hypen-class`
-- **property** [45:55]: `	font-size`
+- **property** [46:55]: `font-size`
 - **number** [57:61]: `16px`
 - **selector** [66:67]: `p`
-- **property** [70:81]: `	box-shadow`
+- **property** [71:81]: `box-shadow`
 
 ## Domstyler Output
 
@@ -102,19 +106,19 @@
 
 ```html
 <span class="token selector">.some_class</span> <span class="token punctuation">{</span>
-<span class="token property"> color</span><span class="token punctuation">:</span> red<span
+<span class="token property">color</span><span class="token punctuation">:</span> red<span
 	class="token punctuation"
 	>;</span
 >
 <span class="token punctuation">}</span>
 
 <span class="token selector">.hypen-class</span> <span class="token punctuation">{</span>
-<span class="token property"> font-size</span><span class="token punctuation">:</span>
+<span class="token property">font-size</span><span class="token punctuation">:</span>
 <span class="token number">16px</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token selector">p</span> <span class="token punctuation">{</span>
-<span class="token property"> box-shadow</span><span class="token punctuation">:</span>
+<span class="token property">box-shadow</span><span class="token punctuation">:</span>
 <span class="token number">0</span> <span class="token number">0</span>
 <span class="token number">10px</span> <span class="token function">rgba</span
 ><span class="token punctuation">(</span><span class="token number">0</span
@@ -124,23 +128,24 @@
 ><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token comment">/* comment */</span>
+<span class="token comment">/* comment */</span><span class="token comment"></span>
 
-<span class="token comment">/* multi line &lt;comment&gt; */</span>
+<span class="token comment">/* multi line &lt;comment&gt; */</span
+><span class="token comment"></span>
 
-#unique_id <span class="token punctuation">{</span>
-<span class="token property"> background-color</span
+<span class="token selector">#unique_id</span> <span class="token punctuation">{</span>
+<span class="token property">background-color</span
 ><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token selector">div &gt; p</span> <span class="token punctuation">{</span>
-<span class="token property"> margin</span><span class="token punctuation">:</span>
+<span class="token property">margin</span><span class="token punctuation">:</span>
 <span class="token number">10px</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token atrule">@media (max-width: 600px)</span>
 <span class="token punctuation">{</span> <span class="token selector">body</span>
-<span class="token punctuation">{</span> <span class="token property"> background-color</span
+<span class="token punctuation">{</span> <span class="token property">background-color</span
 ><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -149,8 +154,8 @@
 ## Comparison
 
 - Domstyler size: 2270 bytes
-- Rangestyler size: 2361 bytes
-- Size difference: -91 bytes
+- Rangestyler size: 2467 bytes
+- Size difference: -197 bytes
 
 ---
 

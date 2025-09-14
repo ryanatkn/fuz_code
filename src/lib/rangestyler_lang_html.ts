@@ -40,10 +40,11 @@ const detect_html_boundaries = (text: string): Array<Rangestyler_Language_Bounda
 			const content_start = match.index + opening_tag.length;
 			const content_end = content_start + content.length;
 			boundaries.push({
-				type: 'script',
+				language: 'html',
+				type: 'embedded',
 				start: content_start,
 				end: content_end,
-				language: 'ts', // Default to TypeScript for script tags
+				embedded_language: 'ts', // TypeScript for script tags
 			});
 			// Mark only the content region as processed (not the tags)
 			for (let i = content_start; i < content_end; i++) {
@@ -73,10 +74,11 @@ const detect_html_boundaries = (text: string): Array<Rangestyler_Language_Bounda
 			const content_start = match.index + opening_tag.length;
 			const content_end = content_start + content.length;
 			boundaries.push({
-				type: 'style',
+				language: 'html',
+				type: 'embedded',
 				start: content_start,
 				end: content_end,
-				language: 'css',
+				embedded_language: 'css', // CSS for style tags
 			});
 			// Mark only the content region as processed (not the tags)
 			for (let i = content_start; i < content_end; i++) {
@@ -113,7 +115,8 @@ const detect_html_boundaries = (text: string): Array<Rangestyler_Language_Bounda
 	for (const range of ranges) {
 		if (last_end < range.start) {
 			boundaries.push({
-				type: 'content',
+				language: 'html',
+				type: 'code',
 				start: last_end,
 				end: range.start,
 			});
@@ -124,7 +127,8 @@ const detect_html_boundaries = (text: string): Array<Rangestyler_Language_Bounda
 	// Add final content boundary if needed
 	if (last_end < text.length) {
 		boundaries.push({
-			type: 'content',
+			language: 'html',
+			type: 'code',
 			start: last_end,
 			end: text.length,
 		});
@@ -133,7 +137,8 @@ const detect_html_boundaries = (text: string): Array<Rangestyler_Language_Bounda
 	// If no special regions found, entire text is content
 	if (boundaries.length === 0) {
 		boundaries.push({
-			type: 'content',
+			language: 'html',
+			type: 'code',
 			start: 0,
 			end: text.length,
 		});

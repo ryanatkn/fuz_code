@@ -138,8 +138,8 @@ npm run benchmark # Run benchmarks
 npm run build     # Build library
 
 # Test fixtures workflow
-gro src/generated/update             # regenerate
 gro test src/generated/check.test.ts # verify
+gro src/generated/update             # regenerate ONLY if on-disk files are incorrect
 ```
 
 ## Current Performance Bottlenecks
@@ -200,18 +200,35 @@ Generated fixtures are stored in `src/generated/{lang}/`:
   "matches": {          // Pattern match statistics
     "total": 61,
     "by_type": {"selector": 6, "property": 7, ...},
-    "samples": [...]
+    "samples": [...]   // Sample matches for debugging
   },
   "domstyler_html": "...",    // Expected HTML from domstyler
   "rangestyler_html": "..."   // Expected HTML from rangestyler
 }
 ```
 
-**Reading fixtures:**
+**Using fixtures for debugging:**
+
+The generated fixtures are invaluable for debugging pattern matching issues:
+
+1. **Check boundaries**: Look at the `boundaries` array to see how text is segmented (e.g., comments vs content)
+2. **Review matches**: The `matches.samples` array shows which patterns matched where
+3. **Compare HTML**: Compare `domstyler_html` vs `rangestyler_html` to spot differences
+4. **Human-readable reports**: The `.md` files provide a visual overview
 
 ```typescript
+// Example: Debug why a pattern isn't matching
 import {readFileSync} from 'node:fs';
 const fixture = JSON.parse(readFileSync('src/generated/css/css_complex.json', 'utf-8'));
+
+// Check if your expected text was matched
+const matches = fixture.matches.samples;
+const id_selector_match = matches.find((m) => m.text === '#unique_id');
+console.log('ID selector match:', id_selector_match);
+
+// See all selector matches
+const selectors = matches.filter((m) => m.pattern_name === 'selector');
+console.log('All selectors:', selectors);
 ```
 
 ## Planned Optimizations

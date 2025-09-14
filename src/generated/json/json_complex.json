@@ -5,7 +5,7 @@
 		"content": "{\n\t\"string\": \"a string\",\n\t\"number\": 12345,\n\t\"boolean\": true,\n\t\"null\": null,\n\t\"object\": {\n\t\t\"array\": [1, \"b\", false]\n\t}\n}\n",
 		"filepath": "src/lib/samples/sample_complex.json"
 	},
-	"boundaries": [{"type": "content", "start": 0, "end": 121}],
+	"boundaries": [{"language": "json", "type": "code", "start": 0, "end": 121}],
 	"matches": {
 		"total": 31,
 		"by_type": {

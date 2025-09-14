@@ -12,11 +12,11 @@
 ### Boundaries
 
 - **Total**: 5
-- content: [0:371]
-- script: [371:391]
-- content: [391:425]
-- style: [425:469]
-- content: [469:528]
+- code: [0:371]
+- embedded: [371:391]
+- code: [391:425]
+- embedded: [425:469]
+- code: [469:528]
 
 ### Matches
 
@@ -260,7 +260,7 @@
 <span class="token tag">&lt;style</span> <span class="token attr_name">type</span
 ><span class="token attr_value">=&quot;text/css&quot;</span
 ><span class="token punctuation">&gt;</span> <span class="token selector">.special::before</span>
-<span class="token punctuation">{</span> <span class="token property"> content</span
+<span class="token punctuation">{</span> <span class="token property">content</span
 ><span class="token punctuation">:</span>
 <span class="token string">&#039;&lt; &amp; &gt;&#039;</span
 ><span class="token punctuation">;</span>

@@ -1,19 +1,75 @@
-import type {Rangestyler_Language} from '$lib/rangestyler_types.js';
+import type {Rangestyler_Language, Rangestyler_Language_Boundary} from '$lib/rangestyler_types.js';
+
+/**
+ * Detect comment boundaries in CSS
+ */
+const detect_css_boundaries = (text: string): Array<Rangestyler_Language_Boundary> => {
+	const boundaries: Array<Rangestyler_Language_Boundary> = [];
+	const comment_regex = /\/\*[\s\S]*?\*\//g;
+	let last_end = 0;
+	let match;
+
+	// Find all comments
+	while ((match = comment_regex.exec(text)) !== null) {
+		// Add CSS code boundary before comment (only if non-empty)
+		if (match.index > last_end) {
+			boundaries.push({
+				language: 'css',
+				type: 'code',
+				start: last_end,
+				end: match.index,
+			});
+		}
+
+		// Add comment as its own boundary
+		boundaries.push({
+			language: 'css',
+			type: 'comment',
+			start: match.index,
+			end: match.index + match[0].length,
+			patterns: [
+				{
+					name: 'comment',
+					match: /.*/s,
+					priority: 100,
+					greedy: true,
+				},
+			],
+		});
+
+		last_end = match.index + match[0].length;
+	}
+
+	// Add final CSS code boundary if there's text after last comment
+	if (last_end < text.length) {
+		boundaries.push({
+			language: 'css',
+			type: 'code',
+			start: last_end,
+			end: text.length,
+		});
+	}
+
+	// If no comments found, treat entire text as CSS code
+	if (boundaries.length === 0) {
+		boundaries.push({
+			language: 'css',
+			type: 'code',
+			start: 0,
+			end: text.length,
+		});
+	}
+
+	return boundaries;
+};
 
 /**
  * CSS language definition
  */
 export const css_language: Rangestyler_Language = {
 	id: 'css',
+	detect_boundaries: detect_css_boundaries,
 	patterns: [
-		// Comments
-		{
-			name: 'comment',
-			match: /\/\*[\s\S]*?\*\//g,
-			priority: 100,
-			greedy: true,
-		},
-
 		// Strings (single and double quoted)
 		{
 			name: 'string',
@@ -58,7 +114,7 @@ export const css_language: Rangestyler_Language = {
 		// Properties (CSS property names)
 		{
 			name: 'property',
-			match: /(?:^|[^-\w\xA0-\uFFFF])[-_a-z\xA0-\uFFFF][-\w\xA0-\uFFFF]*(?=\s*:)/gi,
+			match: /(^|[^-\w\xA0-\uFFFF])[-_a-z\xA0-\uFFFF][-\w\xA0-\uFFFF]*(?=\s*:)/gi,
 			priority: 60,
 			greedy: true,
 			lookbehind: true,

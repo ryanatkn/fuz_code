@@ -41,10 +41,11 @@ const detect_svelte_boundaries = (text: string): Array<Rangestyler_Language_Boun
 			const content_start = match.index + opening_tag.length;
 			const content_end = content_start + content.length;
 			boundaries.push({
-				type: 'script',
+				language: 'svelte',
+				type: 'embedded',
 				start: content_start,
 				end: content_end,
-				language: 'ts', // Default to TypeScript for Svelte script tags
+				embedded_language: 'ts', // Default to TypeScript for Svelte script tags
 			});
 			// Mark only the content region as processed (not the tags)
 			for (let i = content_start; i < content_end; i++) {
@@ -74,10 +75,11 @@ const detect_svelte_boundaries = (text: string): Array<Rangestyler_Language_Boun
 			const content_start = match.index + opening_tag.length;
 			const content_end = content_start + content.length;
 			boundaries.push({
-				type: 'style',
+				language: 'svelte',
+				type: 'embedded',
 				start: content_start,
 				end: content_end,
-				language: 'css',
+				embedded_language: 'css',
 			});
 			// Mark only the content region as processed (not the tags)
 			for (let i = content_start; i < content_end; i++) {
@@ -114,7 +116,8 @@ const detect_svelte_boundaries = (text: string): Array<Rangestyler_Language_Boun
 	for (const range of ranges) {
 		if (last_end < range.start) {
 			boundaries.push({
-				type: 'content',
+				language: 'svelte',
+				type: 'code',
 				start: last_end,
 				end: range.start,
 			});
@@ -125,7 +128,8 @@ const detect_svelte_boundaries = (text: string): Array<Rangestyler_Language_Boun
 	// Add final content boundary if needed
 	if (last_end < text.length) {
 		boundaries.push({
-			type: 'content',
+			language: 'svelte',
+			type: 'code',
 			start: last_end,
 			end: text.length,
 		});
@@ -134,7 +138,8 @@ const detect_svelte_boundaries = (text: string): Array<Rangestyler_Language_Boun
 	// If no special regions found, entire text is content
 	if (boundaries.length === 0) {
 		boundaries.push({
-			type: 'content',
+			language: 'svelte',
+			type: 'code',
 			start: 0,
 			end: text.length,
 		});

@@ -15,7 +15,9 @@ describe('detect_boundaries', () => {
 		const boundaries = html_language.detect_boundaries!(html);
 
 		// Should have content before script, script content, and content after
-		const script_boundary = boundaries.find((b) => b.type === 'script');
+		const script_boundary = boundaries.find(
+			(b) => b.type === 'embedded' && b.embedded_language === 'ts',
+		);
 		assert.ok(script_boundary);
 		assert.strictEqual(html.slice(script_boundary.start, script_boundary.end), 'const x = 1;');
 	});
@@ -28,7 +30,9 @@ describe('detect_boundaries', () => {
 
 		const boundaries = html_language.detect_boundaries!(html);
 
-		const style_boundary = boundaries.find((b) => b.type === 'style');
+		const style_boundary = boundaries.find(
+			(b) => b.type === 'embedded' && b.embedded_language === 'css',
+		);
 		assert.ok(style_boundary);
 		assert.strictEqual(
 			html.slice(style_boundary.start, style_boundary.end),
@@ -45,7 +49,9 @@ describe('detect_boundaries', () => {
 		const boundaries = html_language.detect_boundaries!(html);
 
 		// Should not detect script inside comment
-		const script_boundary = boundaries.find((b) => b.type === 'script');
+		const script_boundary = boundaries.find(
+			(b) => b.type === 'embedded' && b.embedded_language === 'ts',
+		);
 		assert.strictEqual(script_boundary, undefined);
 	});
 
@@ -59,8 +65,12 @@ describe('detect_boundaries', () => {
 
 		const boundaries = html_language.detect_boundaries!(html);
 
-		const script_boundaries = boundaries.filter((b) => b.type === 'script');
-		const style_boundaries = boundaries.filter((b) => b.type === 'style');
+		const script_boundaries = boundaries.filter(
+			(b) => b.type === 'embedded' && b.embedded_language === 'ts',
+		);
+		const style_boundaries = boundaries.filter(
+			(b) => b.type === 'embedded' && b.embedded_language === 'css',
+		);
 
 		assert.strictEqual(script_boundaries.length, 2);
 		assert.strictEqual(style_boundaries.length, 2);
@@ -84,8 +94,12 @@ describe('detect_boundaries', () => {
 		const boundaries = html_language.detect_boundaries!(html);
 
 		// Should only have content boundaries for empty tags
-		const script_boundaries = boundaries.filter((b) => b.type === 'script');
-		const style_boundaries = boundaries.filter((b) => b.type === 'style');
+		const script_boundaries = boundaries.filter(
+			(b) => b.type === 'embedded' && b.embedded_language === 'ts',
+		);
+		const style_boundaries = boundaries.filter(
+			(b) => b.type === 'embedded' && b.embedded_language === 'css',
+		);
 
 		assert.strictEqual(script_boundaries.length, 0);
 		assert.strictEqual(style_boundaries.length, 0);
@@ -100,12 +114,12 @@ describe('detect_boundaries', () => {
 
 		const boundaries = html_language.detect_boundaries!(html);
 
-		// Filter out content boundaries
-		const special_boundaries = boundaries.filter((b) => b.type !== 'content');
+		// Filter out code boundaries
+		const special_boundaries = boundaries.filter((b) => b.type === 'embedded');
 
 		assert.strictEqual(special_boundaries.length, 2);
-		assert.strictEqual(special_boundaries[0].type, 'style');
-		assert.strictEqual(special_boundaries[1].type, 'script');
+		assert.strictEqual(special_boundaries[0].embedded_language, 'css');
+		assert.strictEqual(special_boundaries[1].embedded_language, 'ts');
 
 		// Verify boundaries are sorted by start position
 		for (let i = 1; i < boundaries.length; i++) {
@@ -122,8 +136,9 @@ describe('find_matches_with_boundaries', () => {
 			html,
 			rangestyler_global.get_language('html')?.patterns || [],
 			'html',
-			(id) => rangestyler_global.get_language(id)?.patterns,
+			(id) => rangestyler_global.get_language(id),
 			html_language.detect_boundaries,
+			html_language,
 		);
 
 		// Should have matches for TypeScript keywords and types
@@ -141,8 +156,9 @@ describe('find_matches_with_boundaries', () => {
 			html,
 			rangestyler_global.get_language('html')?.patterns || [],
 			'html',
-			(id) => rangestyler_global.get_language(id)?.patterns,
+			(id) => rangestyler_global.get_language(id),
 			html_language.detect_boundaries,
+			html_language,
 		);
 
 		// Should have matches for CSS selectors and properties
@@ -160,8 +176,9 @@ describe('find_matches_with_boundaries', () => {
 			html,
 			rangestyler_global.get_language('html')?.patterns || [],
 			'html',
-			(id) => rangestyler_global.get_language(id)?.patterns,
+			(id) => rangestyler_global.get_language(id),
 			html_language.detect_boundaries,
+			html_language,
 		);
 
 		// Should have the comment match
@@ -194,8 +211,9 @@ describe('find_matches_with_boundaries', () => {
 			html,
 			rangestyler_global.get_language('html')?.patterns || [],
 			'html',
-			(id) => rangestyler_global.get_language(id)?.patterns,
+			(id) => rangestyler_global.get_language(id),
 			html_language.detect_boundaries,
+			html_language,
 		);
 
 		// Should have various match types
@@ -225,8 +243,9 @@ describe('Svelte language patterns', () => {
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
-			(id) => rangestyler_global.get_language(id)?.patterns,
+			(id) => rangestyler_global.get_language(id),
 			svelte_language.detect_boundaries,
+			svelte_language,
 		);
 
 		const svelte_blocks = matches.filter((m) => m.pattern.name === 'svelte_block');
@@ -243,8 +262,9 @@ describe('Svelte language patterns', () => {
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
-			(id) => rangestyler_global.get_language(id)?.patterns,
+			(id) => rangestyler_global.get_language(id),
 			svelte_language.detect_boundaries,
+			svelte_language,
 		);
 
 		const svelte_blocks = matches.filter((m) => m.pattern.name === 'svelte_block');
@@ -261,8 +281,9 @@ describe('Svelte language patterns', () => {
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
-			(id) => rangestyler_global.get_language(id)?.patterns,
+			(id) => rangestyler_global.get_language(id),
 			svelte_language.detect_boundaries,
+			svelte_language,
 		);
 
 		const directives = matches.filter((m) => m.pattern.name === 'svelte_directive');
@@ -280,8 +301,9 @@ describe('Svelte language patterns', () => {
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
-			(id) => rangestyler_global.get_language(id)?.patterns,
+			(id) => rangestyler_global.get_language(id),
 			svelte_language.detect_boundaries,
+			svelte_language,
 		);
 
 		// Should have TypeScript patterns applied
@@ -305,8 +327,9 @@ describe('Svelte language patterns', () => {
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
-			(id) => rangestyler_global.get_language(id)?.patterns,
+			(id) => rangestyler_global.get_language(id),
 			svelte_language.detect_boundaries,
+			svelte_language,
 		);
 
 		// Should have CSS patterns applied
@@ -328,7 +351,9 @@ describe('Edge cases', () => {
 </script>`;
 
 		const boundaries = html_language.detect_boundaries!(html);
-		const script_boundary = boundaries.find((b) => b.type === 'script');
+		const script_boundary = boundaries.find(
+			(b) => b.type === 'embedded' && b.embedded_language === 'ts',
+		);
 
 		// The regex will incorrectly match the first </script> even though it's in a string
 		// This is a known limitation of regex-based parsing
@@ -345,8 +370,9 @@ describe('Edge cases', () => {
 			svelte,
 			rangestyler_global.get_language('svelte')?.patterns || [],
 			'svelte',
-			(id) => rangestyler_global.get_language(id)?.patterns,
+			(id) => rangestyler_global.get_language(id),
 			svelte_language.detect_boundaries,
+			svelte_language,
 		);
 
 		const svelte_blocks = matches.filter((m) => m.pattern.name === 'svelte_block');
@@ -360,7 +386,9 @@ describe('Edge cases', () => {
 </script>`;
 
 		const boundaries = html_language.detect_boundaries!(html);
-		const script_boundary = boundaries.find((b) => b.type === 'script');
+		const script_boundary = boundaries.find(
+			(b) => b.type === 'embedded' && b.embedded_language === 'ts',
+		);
 
 		assert.ok(script_boundary);
 		const content = html.slice(script_boundary.start, script_boundary.end);
@@ -376,7 +404,9 @@ describe('Edge cases', () => {
 </style>`;
 
 		const boundaries = html_language.detect_boundaries!(html);
-		const style_boundary = boundaries.find((b) => b.type === 'style');
+		const style_boundary = boundaries.find(
+			(b) => b.type === 'embedded' && b.embedded_language === 'css',
+		);
 
 		assert.ok(style_boundary);
 		const content = html.slice(style_boundary.start, style_boundary.end);

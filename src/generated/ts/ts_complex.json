@@ -5,7 +5,7 @@
 		"content": "const a = 1;\n\nconst b = 'b';\n\nconst c = true;\n\nexport type Some_Type = 1 | 'b' | true;\n\nclass D {\n\td1: string = 'd';\n\td2: number;\n\td3 = $state(false);\n\n\tconstructor(d2: number) {\n\t\tthis.d2 = d2;\n\t}\n\n\tclass_method(): string {\n\t\treturn `Hello, ${this.d1}`;\n\t}\n\n\tinstance_method = (): void => {\n\t\t/* ... */\n\t\tthis.#private_method();\n\t\t// foo\n\t};\n\n\t#private_method() {\n\t\tthrow new Error(`${this.d1} etc`);\n\t}\n\n\tprotected protected_method(): void {\n\t\tconsole.log(new Date()); // eslint-disable-line no-console\n\t}\n}\n\nexport {a, b, c, D};\n\n// comment\n\n/*\nother comment\n\nconst comment = false;\n*/\n\n/**\n * JSDoc comment\n */\n\nexport interface Some_E {\n\tname: string;\n\tage: number;\n}\n\nexport const some_e: Some_E = {name: 'A. H.', age: 100};\n\nexport function add(x: number, y: number): number {\n\treturn x + y;\n}\n\nexport const plus = (a: any, b: any): any => a + b;\n",
 		"filepath": "src/lib/samples/sample_complex.ts"
 	},
-	"boundaries": [{"type": "content", "start": 0, "end": 854}],
+	"boundaries": [{"language": "ts", "type": "code", "start": 0, "end": 854}],
 	"matches": {
 		"total": 229,
 		"by_type": {

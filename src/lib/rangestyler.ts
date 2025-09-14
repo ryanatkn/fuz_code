@@ -73,8 +73,9 @@ export class Rangestyler {
 			text,
 			language.patterns,
 			lang_id,
-			(id) => this.get_language(id)?.patterns,
+			(id) => this.get_language(id),
 			language.detect_boundaries,
+			language,
 		);
 
 		// Register highlights
@@ -113,8 +114,9 @@ export class Rangestyler {
 			text,
 			language.patterns,
 			lang_id,
-			(id) => this.get_language(id)?.patterns,
+			(id) => this.get_language(id),
 			language.detect_boundaries,
+			language,
 		);
 		const resolved = resolve_overlaps(matches);
 
