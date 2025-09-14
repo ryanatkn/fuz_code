@@ -98,6 +98,10 @@
       "types": "./dist/benchmark.d.ts",
       "default": "./dist/benchmark.js"
     },
+    "./code_sample.js": {
+      "types": "./dist/code_sample.d.ts",
+      "default": "./dist/code_sample.js"
+    },
     "./Domstyler_Code.svelte": {
       "types": "./dist/Domstyler_Code.svelte.d.ts",
       "svelte": "./dist/Domstyler_Code.svelte",

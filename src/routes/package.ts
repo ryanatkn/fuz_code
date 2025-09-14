@@ -68,6 +68,7 @@ export const package_json: Package_Json = {
 	exports: {
 		'./package.json': './package.json',
 		'./benchmark.js': {types: './dist/benchmark.d.ts', default: './dist/benchmark.js'},
+		'./code_sample.js': {types: './dist/code_sample.d.ts', default: './dist/code_sample.js'},
 		'./Domstyler_Code.svelte': {
 			types: './dist/Domstyler_Code.svelte.d.ts',
 			svelte: './dist/Domstyler_Code.svelte',
@@ -181,6 +182,14 @@ export const src_json: Src_Json = {
 				{name: 'run_benchmark', kind: 'function'},
 				{name: 'format_benchmark_results', kind: 'function'},
 				{name: 'run_and_print_benchmark', kind: 'function'},
+			],
+		},
+		'./code_sample.js': {
+			path: 'code_sample.ts',
+			declarations: [
+				{name: 'Code_Sample', kind: 'type'},
+				{name: 'sample_langs', kind: 'variable'},
+				{name: 'Sample_Lang', kind: 'type'},
 			],
 		},
 		'./Domstyler_Code.svelte': {
