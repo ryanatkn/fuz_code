@@ -22,7 +22,7 @@
 
 ### Matches
 
-- **Total**: 567
+- **Total**: 566
 - **By Type**:
   - tag: 35
   - punctuation: 248
@@ -31,7 +31,7 @@
   - operator: 89
   - keyword: 34
   - class_name: 17
-  - string: 10
+  - string: 9
   - comment: 8
   - function: 17
   - boolean: 5
@@ -933,9 +933,8 @@ click me <span class="token tag">&lt;/button</span><span class="token punctuatio
 <span class="token punctuation">}</span>
 
 <span class="token selector">.special::before</span> <span class="token punctuation">{</span>
-<span class="token property">content</span><span class="token punctuation">:</span>
-<span class="token string">&#039;&lt; &amp; &gt;&#039;</span
-><span class="token punctuation">;</span>
+<span class="token property">content</span><span class="token punctuation">:</span> &#039;&lt; &amp;
+&gt;&#039;<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token tag">&lt;/style</span><span class="token punctuation">&gt;</span>
 ```
@@ -943,8 +942,8 @@ click me <span class="token tag">&lt;/button</span><span class="token punctuatio
 ## Comparison
 
 - Domstyler size: 23839 bytes
-- Rangestyler size: 17574 bytes
-- Size difference: 6265 bytes
+- Rangestyler size: 17540 bytes
+- Size difference: 6299 bytes
 
 ---
 

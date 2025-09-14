@@ -23,19 +23,9 @@ export const samples: Record<Sample_Key, Code_Sample> = {
 	"escaped": "quote: \\"test\\" and backslash: \\\\",
 	"object": {
 		"array": [1, "b", false],
-		"strings": ["first", "second", "third"],
-		"mixed": [
-			"string at start",
-			123,
-			true,
-			"string in middle",
-			null,
-			"string at end"
-		],
-		"nested": [
-			["nested", "array", "strings"],
-			{"key": "value in nested object"}
-		]
+		"strings": ["1", "2", "3"],
+		"mixed": ["start", 123, true, "middle", null, "end"],
+		"nested": [["nested", "array", "strings"], {"key": "nested value"}]
 	}
 }
 `,
@@ -77,6 +67,19 @@ div > p {
 	body {
 		background-color: lightblue;
 	}
+}
+
+/* String boundaries - patterns shouldn't match inside */
+.content::before {
+	content: 'color: red; /* not a comment */';
+}
+
+.attr[title='Click: here'] {
+	cursor: pointer;
+}
+
+.background {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns=''");
 }
 `,
 	},

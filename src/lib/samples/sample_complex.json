@@ -8,7 +8,7 @@
 	"object": {
 		"array": [1, "b", false],
 		"strings": ["1", "2", "3"],
-		"mixed": ["string at start", 123, true, "string in middle", null, "string at end"],
-		"nested": [["nested", "array", "strings"], {"key": "value in nested object"}]
+		"mixed": ["start", 123, true, "middle", null, "end"],
+		"nested": [["nested", "array", "strings"], {"key": "nested value"}]
 	}
 }

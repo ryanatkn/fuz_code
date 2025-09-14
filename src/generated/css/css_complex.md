@@ -5,30 +5,39 @@
 - **Language**: css
 - **Variant**: complex
 - **Source**: src/lib/samples/sample_complex.css
-- **Size**: 301 characters
+- **Size**: 555 characters
 
 ## Statistics
 
 ### Boundaries
 
-- **Total**: 5
+- **Total**: 13
 - code: [0:115]
 - comment: [115:128]
 - code: [128:130]
 - comment: [130:158]
-- code: [158:301]
+- code: [158:302]
+- comment: [302:359]
+- code: [359:389]
+- string: [389:422]
+- code: [422:439]
+- string: [439:452]
+- code: [452:514]
+- string: [514:550]
+- code: [550:555]
 
 ### Matches
 
-- **Total**: 64
+- **Total**: 93
 - **By Type**:
-  - selector: 7
-  - punctuation: 34
-  - property: 7
+  - selector: 10
+  - punctuation: 50
+  - property: 11
   - number: 10
-  - function: 1
-  - comment: 4
+  - function: 2
+  - comment: 6
   - atrule: 1
+  - string: 3
 
 ## Sample Matches
 
@@ -100,6 +109,27 @@
 ><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
+
+<span class="token comment">/* String boundaries - patterns shouldn't match inside */</span>
+<span class="token selector">.content::before</span> <span class="token punctuation">{</span>
+<span class="token property">content</span><span class="token punctuation">:</span>
+<span class="token string">'color: red; /* not a comment */'</span
+><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.attr[title='Click: here']</span>
+<span class="token punctuation">{</span> <span class="token property">cursor</span
+><span class="token punctuation">:</span> pointer<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.background</span> <span class="token punctuation">{</span>
+<span class="token property">background-image</span><span class="token punctuation">:</span>
+<span class="token url"
+	><span class="token function">url</span><span class="token punctuation">(</span
+	><span class="token string url">"data:image/svg+xml,%3Csvg xmlns=''"</span
+	><span class="token punctuation">)</span></span
+><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 ```
 
 ## Rangestyler Output
@@ -149,13 +179,36 @@
 ><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
+
+<span class="token comment">/* String boundaries - patterns shouldn&#039;t match inside */</span
+><span class="token comment"></span> <span class="token selector">.content::before</span>
+<span class="token punctuation">{</span> <span class="token property">content</span
+><span class="token punctuation">:</span>
+<span class="token string">&#039;color: red; /* not a comment */&#039;</span
+><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+.attr[title=<span class="token string">&#039;Click: here&#039;</span
+><span class="token selector">]</span> <span class="token punctuation">{</span>
+<span class="token property">cursor</span><span class="token punctuation">:</span> pointer<span
+	class="token punctuation"
+	>;</span
+>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.background</span> <span class="token punctuation">{</span>
+<span class="token property">background-image</span><span class="token punctuation">:</span>
+<span class="token function">url</span><span class="token punctuation">(</span
+><span class="token string">&quot;data:image/svg+xml,%3Csvg xmlns=&#039;&#039;&quot;</span
+><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 ```
 
 ## Comparison
 
-- Domstyler size: 2270 bytes
-- Rangestyler size: 2467 bytes
-- Size difference: -197 bytes
+- Domstyler size: 3460 bytes
+- Rangestyler size: 3736 bytes
+- Size difference: -276 bytes
 
 ---
 

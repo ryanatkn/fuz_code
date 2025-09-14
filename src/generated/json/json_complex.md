@@ -5,7 +5,7 @@
 - **Language**: json
 - **Variant**: complex
 - **Source**: src/lib/samples/sample_complex.json
-- **Size**: 381 characters
+- **Size**: 341 characters
 
 ## Statistics
 
@@ -47,24 +47,24 @@
 - code: [207:212]
 - property: [212:219]
 - code: [219:222]
-- string: [222:239]
-- code: [239:252]
-- string: [252:270]
-- code: [270:278]
-- string: [278:293]
-- code: [293:298]
-- property: [298:306]
-- code: [306:310]
-- string: [310:318]
-- code: [318:320]
-- string: [320:327]
-- code: [327:329]
-- string: [329:338]
-- code: [338:342]
-- property: [342:347]
-- code: [347:349]
-- string: [349:373]
-- code: [373:381]
+- string: [222:229]
+- code: [229:242]
+- string: [242:250]
+- code: [250:258]
+- string: [258:263]
+- code: [263:268]
+- property: [268:276]
+- code: [276:280]
+- string: [280:288]
+- code: [288:290]
+- string: [290:297]
+- code: [297:299]
+- string: [299:308]
+- code: [308:312]
+- property: [312:317]
+- code: [317:319]
+- string: [319:333]
+- code: [333:341]
 
 ### Matches
 
@@ -120,12 +120,12 @@
 ><span class="token punctuation">,</span> <span class="token string">"3"</span
 ><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token property">"mixed"</span><span class="token operator">:</span>
-<span class="token punctuation">[</span><span class="token string">"string at start"</span
+<span class="token punctuation">[</span><span class="token string">"start"</span
 ><span class="token punctuation">,</span> <span class="token number">123</span
 ><span class="token punctuation">,</span> <span class="token boolean">true</span
-><span class="token punctuation">,</span> <span class="token string">"string in middle"</span
+><span class="token punctuation">,</span> <span class="token string">"middle"</span
 ><span class="token punctuation">,</span> <span class="token null keyword">null</span
-><span class="token punctuation">,</span> <span class="token string">"string at end"</span
+><span class="token punctuation">,</span> <span class="token string">"end"</span
 ><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token property">"nested"</span><span class="token operator">:</span>
 <span class="token punctuation">[</span><span class="token punctuation">[</span
@@ -134,7 +134,7 @@
 <span class="token string">"strings"</span><span class="token punctuation">]</span
 ><span class="token punctuation">,</span> <span class="token punctuation">{</span
 ><span class="token property">"key"</span><span class="token operator">:</span>
-<span class="token string">"value in nested object"</span><span class="token punctuation">}</span
+<span class="token string">"nested value"</span><span class="token punctuation">}</span
 ><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -169,13 +169,12 @@
 ><span class="token punctuation">,</span> <span class="token string">&quot;3&quot;</span
 ><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token property">&quot;mixed&quot;</span><span class="token operator">:</span>
-<span class="token punctuation">[</span><span class="token string">&quot;string at start&quot;</span
+<span class="token punctuation">[</span><span class="token string">&quot;start&quot;</span
 ><span class="token punctuation">,</span> <span class="token number">123</span
 ><span class="token punctuation">,</span> <span class="token boolean">true</span
-><span class="token punctuation">,</span>
-<span class="token string">&quot;string in middle&quot;</span
+><span class="token punctuation">,</span> <span class="token string">&quot;middle&quot;</span
 ><span class="token punctuation">,</span> <span class="token null">null</span
-><span class="token punctuation">,</span> <span class="token string">&quot;string at end&quot;</span
+><span class="token punctuation">,</span> <span class="token string">&quot;end&quot;</span
 ><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token property">&quot;nested&quot;</span><span class="token operator">:</span>
 <span class="token punctuation">[</span><span class="token punctuation">[</span
@@ -184,16 +183,16 @@
 <span class="token string">&quot;strings&quot;</span><span class="token punctuation">]</span
 ><span class="token punctuation">,</span> <span class="token punctuation">{</span
 ><span class="token property">&quot;key&quot;</span><span class="token operator">:</span>
-<span class="token string">&quot;value in nested object&quot;</span
-><span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span class="token string">&quot;nested value&quot;</span><span class="token punctuation">}</span
+><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 ```
 
 ## Comparison
 
-- Domstyler size: 3451 bytes
-- Rangestyler size: 3705 bytes
+- Domstyler size: 3411 bytes
+- Rangestyler size: 3665 bytes
 - Size difference: -254 bytes
 
 ---

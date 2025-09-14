@@ -1,17 +1,20 @@
 import type {Rangestyler_Language, Rangestyler_Language_Boundary} from '$lib/rangestyler_types.js';
 
 /**
- * Detect comment boundaries in CSS
+ * Detect comment and string boundaries in CSS
  */
 const detect_css_boundaries = (text: string): Array<Rangestyler_Language_Boundary> => {
 	const boundaries: Array<Rangestyler_Language_Boundary> = [];
-	const comment_regex = /\/\*[\s\S]*?\*\//g;
+
+	// Combined regex to find both comments and strings
+	// Comments: /* ... */
+	// Strings: "..." or '...'
+	const boundary_regex = /(\/\*[\s\S]*?\*\/)|("(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/g;
 	let last_end = 0;
 	let match;
 
-	// Find all comments
-	while ((match = comment_regex.exec(text)) !== null) {
-		// Add CSS code boundary before comment (only if non-empty)
+	while ((match = boundary_regex.exec(text)) !== null) {
+		// Add CSS code boundary before this match (only if non-empty)
 		if (match.index > last_end) {
 			boundaries.push({
 				language: 'css',
@@ -21,26 +24,47 @@ const detect_css_boundaries = (text: string): Array<Rangestyler_Language_Boundar
 			});
 		}
 
-		// Add comment as its own boundary
-		boundaries.push({
-			language: 'css',
-			type: 'comment',
-			start: match.index,
-			end: match.index + match[0].length,
-			patterns: [
-				{
-					name: 'comment',
-					match: /.*/s,
-					priority: 100,
-					greedy: true,
-				},
-			],
-		});
+		// Determine if this is a comment or string
+		const is_comment = match[0].startsWith('/*');
+
+		if (is_comment) {
+			// Add comment boundary
+			boundaries.push({
+				language: 'css',
+				type: 'comment',
+				start: match.index,
+				end: match.index + match[0].length,
+				patterns: [
+					{
+						name: 'comment',
+						match: /.*/s,
+						priority: 100,
+						greedy: true,
+					},
+				],
+			});
+		} else {
+			// Add string boundary
+			boundaries.push({
+				language: 'css',
+				type: 'string',
+				start: match.index,
+				end: match.index + match[0].length,
+				patterns: [
+					{
+						name: 'string',
+						match: /.+/s,
+						priority: 100,
+						greedy: true,
+					},
+				],
+			});
+		}
 
 		last_end = match.index + match[0].length;
 	}
 
-	// Add final CSS code boundary if there's text after last comment
+	// Add final CSS code boundary if there's text after last boundary
 	if (last_end < text.length) {
 		boundaries.push({
 			language: 'css',
@@ -50,7 +74,7 @@ const detect_css_boundaries = (text: string): Array<Rangestyler_Language_Boundar
 		});
 	}
 
-	// If no comments found, treat entire text as CSS code
+	// If no boundaries found, treat entire text as CSS code
 	if (boundaries.length === 0) {
 		boundaries.push({
 			language: 'css',
@@ -70,13 +94,7 @@ export const css_language: Rangestyler_Language = {
 	id: 'css',
 	detect_boundaries: detect_css_boundaries,
 	patterns: [
-		// Strings (single and double quoted)
-		{
-			name: 'string',
-			match: /"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*'/g,
-			priority: 90,
-			greedy: true,
-		},
+		// Note: Strings are handled via boundaries, not patterns
 
 		// URLs
 		{

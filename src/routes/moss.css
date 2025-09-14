@@ -87,6 +87,9 @@ a.chip {
 .align_items_center {
 	align-items: center;
 }
+.justify_content_center {
+	justify-content: center;
+}
 .justify_content_space_around {
 	justify-content: space-around;
 }

@@ -12,7 +12,7 @@
 	{#each Object.values(samples) as sample (sample.name)}
 		<section>
 			<h2 class="box panel p_md mb_0">{sample.lang}</h2>
-			<div class="display_flex gap_sm py_xl5">
+			<div class="display_flex justify_content_center flex_wrap gap_sm py_xl5">
 				<div>
 					<h3>domstyler</h3>
 					<Domstyler_Code content={sample.content} lang={sample.lang} />
