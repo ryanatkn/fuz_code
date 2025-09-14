@@ -155,17 +155,17 @@ export const package_json: Package_Json = {
 			default: './dist/samples/all.gen.js',
 		},
 		'./samples/all.js': {types: './dist/samples/all.d.ts', default: './dist/samples/all.js'},
-		'./samples/sample.css': {default: './dist/samples/sample.css'},
-		'./samples/sample.html': {default: './dist/samples/sample.html'},
-		'./samples/sample.json': {default: './dist/samples/sample.json'},
-		'./samples/sample.svelte': {
-			types: './dist/samples/sample.svelte.d.ts',
-			svelte: './dist/samples/sample.svelte',
-			default: './dist/samples/sample.svelte',
+		'./samples/sample_complex.css': {default: './dist/samples/sample_complex.css'},
+		'./samples/sample_complex.html': {default: './dist/samples/sample_complex.html'},
+		'./samples/sample_complex.json': {default: './dist/samples/sample_complex.json'},
+		'./samples/sample_complex.svelte': {
+			types: './dist/samples/sample_complex.svelte.d.ts',
+			svelte: './dist/samples/sample_complex.svelte',
+			default: './dist/samples/sample_complex.svelte',
 		},
-		'./samples/sample.js': {
-			types: './dist/samples/sample.d.ts',
-			default: './dist/samples/sample.js',
+		'./samples/sample_complex.js': {
+			types: './dist/samples/sample_complex.d.ts',
+			default: './dist/samples/sample_complex.js',
 		},
 	},
 } as any;
@@ -337,23 +337,26 @@ export const src_json: Src_Json = {
 		},
 		'./samples/all.js': {
 			path: 'samples/all.ts',
-			declarations: [{name: 'samples', kind: 'variable'}],
+			declarations: [
+				{name: 'samples_complex', kind: 'variable'},
+				{name: 'all_samples', kind: 'variable'},
+			],
 		},
-		'./samples/sample.css': {
-			path: 'samples/sample.css',
+		'./samples/sample_complex.css': {
+			path: 'samples/sample_complex.css',
 			declarations: [{name: 'default', kind: 'css'}],
 		},
-		'./samples/sample.html': {path: 'samples/sample.html'},
-		'./samples/sample.json': {
-			path: 'samples/sample.json',
+		'./samples/sample_complex.html': {path: 'samples/sample_complex.html'},
+		'./samples/sample_complex.json': {
+			path: 'samples/sample_complex.json',
 			declarations: [{name: 'default', kind: 'json'}],
 		},
-		'./samples/sample.svelte': {
-			path: 'samples/sample.svelte',
+		'./samples/sample_complex.svelte': {
+			path: 'samples/sample_complex.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
 		},
-		'./samples/sample.js': {
-			path: 'samples/sample.ts',
+		'./samples/sample_complex.js': {
+			path: 'samples/sample_complex.ts',
 			declarations: [
 				{name: 'add', kind: 'function'},
 				{name: 'Some_Type', kind: 'type'},

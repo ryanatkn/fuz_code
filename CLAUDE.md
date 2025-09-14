@@ -19,7 +19,6 @@ The codebase uses a flat structure with clear `domstyler` and `rangestyler` pref
 - `src/lib/Domstyler_Code.svelte` - Svelte component wrapper
 - `src/lib/domstyler_theme.css` - Main theme (requires Moss)
 - `src/lib/domstyler_theme_standalone.css` - Dependency-free theme
-- `src/lib/domstyler_test.ts` - Unit tests
 
 ### Range Styler (CSS Custom Highlight API)
 
@@ -33,6 +32,16 @@ The codebase uses a flat structure with clear `domstyler` and `rangestyler` pref
 - `src/lib/rangestyler_lang_svelte.ts` - Svelte patterns
 - `src/lib/Rangestyler_Code.svelte` - Svelte component
 - `src/lib/rangestyler_theme.css` - ::highlight() styles
+
+### Test Infrastructure
+
+- `src/lib/samples/sample_*.{lang}` - Test sample files (source of truth)
+- `src/lib/samples/all.gen.ts` - Auto-generated sample aggregator
+- `src/generated/update.task.ts` - Regenerates test fixtures
+- `src/generated/check.test.ts` - Verifies runtime matches fixtures
+- `src/generated/helpers.ts` - Shared test utilities
+- `src/generated/{lang}/` - Generated fixtures (JSON + markdown reports)
+- `src/lib/rangestyler.test.ts` - Boundary detection tests
 
 ### Shared Files
 
@@ -121,11 +130,13 @@ rangestyler_global.highlight(element, code, 'ts');
 ## Commands
 
 ```bash
-npm run dev       # Development server
-npm run build     # Build library
 npm run test      # Run tests
-npm run preview   # Preview built site
 npm run benchmark # Run benchmarks
+npm run build     # Build library
+
+# Test fixtures workflow
+gro src/generated/update             # regenerate
+gro test src/generated/check.test.ts # verify
 ```
 
 ## Current Performance Bottlenecks
@@ -150,14 +161,30 @@ npm run benchmark # Run benchmarks
 - `/compare` - Side-by-side comparison
 - `/benchmark` - Performance testing
 
+## Test Workflow
+
+The test system uses a fixture-based approach:
+
+1. **Sample files** (`src/lib/samples/sample_*.{lang}`) are the source of truth
+2. **Generate fixtures**: `npm run task src/generated/update`
+   - Discovers samples via filesystem search
+   - Generates JSON data + markdown reports
+   - Removes old fixtures before regenerating (clean slate)
+3. **Verify tests**: `npm test src/generated/check.test.ts`
+   - Compares runtime output with fixtures
+   - Tests both domstyler and rangestyler
+4. **Review changes**: `git diff src/generated/`
+   - Commit expected changes after verification
+
 ## Planned Optimizations
 
-See `TODO.md` and `TODO_HIGHLIGHT.md` for optimization plans:
+See `TODO.md`, `TODO_HIGHLIGHT.md`, and `TODO_TESTS.md` for plans:
 
 - Pattern caching
 - Array-based token storage
 - Grammar pre-compilation
 - Multiple implementation strategies for benchmarking
+- Additional sample variants (basic, edge cases)
 
 # important-instruction-reminders
 

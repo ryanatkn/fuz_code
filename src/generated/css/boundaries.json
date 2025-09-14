@@ -1,9 +1,0 @@
-[
-	{
-		"type": "content",
-		"start": 0,
-		"end": 301,
-		"length": 301,
-		"text_snippet": ".some_class {\\n\\tcolor: red;\\n}\\n\\n.hypen-class {\\n\\tfont..."
-	}
-]
