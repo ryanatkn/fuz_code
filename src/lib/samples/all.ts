@@ -25,7 +25,7 @@ export const samples: Record<Sample_Key, Code_Sample> = {
 		"array": [1, "b", false],
 		"strings": ["1", "2", "3"],
 		"mixed": ["start", 123, true, "middle", null, "end"],
-		"nested": [["nested", "array", "strings"], {"key": "nested value"}]
+		"nested": [["nested", "str", ""], {"key": "nested value"}]
 	}
 }
 `,

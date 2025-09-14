@@ -5,7 +5,7 @@
 - **Language**: json
 - **Variant**: complex
 - **Source**: src/lib/samples/sample_complex.json
-- **Size**: 341 characters
+- **Size**: 332 characters
 
 ## Statistics
 
@@ -57,14 +57,14 @@
 - code: [276:280]
 - string: [280:288]
 - code: [288:290]
-- string: [290:297]
-- code: [297:299]
-- string: [299:308]
-- code: [308:312]
-- property: [312:317]
-- code: [317:319]
-- string: [319:333]
-- code: [333:341]
+- string: [290:295]
+- code: [295:297]
+- string: [297:299]
+- code: [299:303]
+- property: [303:308]
+- code: [308:310]
+- string: [310:324]
+- code: [324:332]
 
 ### Matches
 
@@ -130,8 +130,8 @@
 <span class="token property">"nested"</span><span class="token operator">:</span>
 <span class="token punctuation">[</span><span class="token punctuation">[</span
 ><span class="token string">"nested"</span><span class="token punctuation">,</span>
-<span class="token string">"array"</span><span class="token punctuation">,</span>
-<span class="token string">"strings"</span><span class="token punctuation">]</span
+<span class="token string">"str"</span><span class="token punctuation">,</span>
+<span class="token string">""</span><span class="token punctuation">]</span
 ><span class="token punctuation">,</span> <span class="token punctuation">{</span
 ><span class="token property">"key"</span><span class="token operator">:</span>
 <span class="token string">"nested value"</span><span class="token punctuation">}</span
@@ -179,8 +179,8 @@
 <span class="token property">&quot;nested&quot;</span><span class="token operator">:</span>
 <span class="token punctuation">[</span><span class="token punctuation">[</span
 ><span class="token string">&quot;nested&quot;</span><span class="token punctuation">,</span>
-<span class="token string">&quot;array&quot;</span><span class="token punctuation">,</span>
-<span class="token string">&quot;strings&quot;</span><span class="token punctuation">]</span
+<span class="token string">&quot;str&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;&quot;</span><span class="token punctuation">]</span
 ><span class="token punctuation">,</span> <span class="token punctuation">{</span
 ><span class="token property">&quot;key&quot;</span><span class="token operator">:</span>
 <span class="token string">&quot;nested value&quot;</span><span class="token punctuation">}</span
@@ -191,8 +191,8 @@
 
 ## Comparison
 
-- Domstyler size: 3411 bytes
-- Rangestyler size: 3665 bytes
+- Domstyler size: 3402 bytes
+- Rangestyler size: 3656 bytes
 - Size difference: -254 bytes
 
 ---
