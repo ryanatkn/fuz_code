@@ -22,7 +22,7 @@
 
 ### Matches
 
-- **Total**: 568
+- **Total**: 569
 - **By Type**:
   - tag: 35
   - punctuation: 248
@@ -42,7 +42,7 @@
   - svelte_expression: 16
   - svelte_block: 6
   - doctype: 1
-  - selector: 7
+  - selector: 8
   - property: 9
   - atrule: 1
 
@@ -891,16 +891,20 @@ click me <span class="token tag">&lt;/button</span><span class="token punctuatio
 ><span class="token punctuation">&gt;</span> <span class="token tag">&lt;/ul</span
 ><span class="token punctuation">&gt;</span>
 
-<span class="token tag">&lt;style</span><span class="token punctuation">&gt;</span
-><span class="token selector"> .some_class </span><span class="token punctuation">{</span>
+<span class="token tag">&lt;style</span><span class="token punctuation">&gt;</span>
+<span class="token selector">.some_class</span> <span class="token punctuation">{</span>
 <span class="token property"> color</span><span class="token punctuation">:</span> red<span
 	class="token punctuation"
 	>;</span
 >
-<span class="token selector">} .hypen-class </span><span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.hypen-class</span> <span class="token punctuation">{</span>
 <span class="token property"> font-size</span><span class="token punctuation">:</span>
 <span class="token number">16px</span><span class="token punctuation">;</span>
-<span class="token selector">} p </span><span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">p</span> <span class="token punctuation">{</span>
 <span class="token property"> box-shadow</span><span class="token punctuation">:</span>
 <span class="token number">0</span> <span class="token number">0</span>
 <span class="token number">10px</span> <span class="token function">rgba</span
@@ -909,22 +913,30 @@ click me <span class="token tag">&lt;/button</span><span class="token punctuatio
 ><span class="token punctuation">,</span> <span class="token number">0</span
 ><span class="token punctuation">,</span> <span class="token number">0.1</span
 ><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token selector">} /* comment */ /* multi line &lt;comment&gt; */ #unique_id </span
-><span class="token punctuation">{</span> <span class="token property"> background-color</span
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* comment */</span>
+
+<span class="token comment">/* multi line &lt;comment&gt; */</span>
+
+#unique_id <span class="token punctuation">{</span>
+<span class="token property"> background-color</span
 ><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
-<span class="token selector">} div &gt; p </span><span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">div &gt; p</span> <span class="token punctuation">{</span>
 <span class="token property"> margin</span><span class="token punctuation">:</span>
 <span class="token number">10px</span><span class="token punctuation">;</span>
-<span class="token selector">} @media (max-width: 600px) </span
-><span class="token punctuation">{</span> <span class="token punctuation">:</span
-><span class="token function">global</span><span class="token punctuation">(</span>body<span
-	class="token punctuation"
-	>)</span
->
+<span class="token punctuation">}</span>
+
+<span class="token atrule">@media (max-width: 600px)</span>
+<span class="token punctuation">{</span> <span class="token selector">:global(body)</span>
 <span class="token punctuation">{</span> <span class="token property"> background-color</span
 ><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token selector">} .special::before </span><span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.special::before</span> <span class="token punctuation">{</span>
 <span class="token property"> content</span><span class="token punctuation">:</span>
 <span class="token string">&#039;&lt; &amp; &gt;&#039;</span
 ><span class="token punctuation">;</span>
@@ -935,8 +947,8 @@ click me <span class="token tag">&lt;/button</span><span class="token punctuatio
 ## Comparison
 
 - Domstyler size: 23839 bytes
-- Rangestyler size: 17459 bytes
-- Size difference: 6380 bytes
+- Rangestyler size: 17608 bytes
+- Size difference: 6231 bytes
 
 ---
 

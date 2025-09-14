@@ -6,6 +6,8 @@ A performance-focused fork of PrismJS for syntax highlighting, optimized for run
 
 The codebase uses a flat structure with clear `domstyler` and `rangestyler` prefixes:
 
+**IMPORTANT**: Domstyler is considered legacy - we should NOT fix it, only use it as a reference for expected behavior, which in some cases is worse than rangestyler. All improvements go into rangestyler.
+
 ### DOM Styler (HTML Generation)
 
 - `src/lib/domstyler.ts` - Main tokenization engine with pattern matching
@@ -167,15 +169,50 @@ gro test src/generated/check.test.ts # verify
 The test system uses a fixture-based approach:
 
 1. **Sample files** (`src/lib/samples/sample_*.{lang}`) are the source of truth
-2. **Generate fixtures**: `npm run task src/generated/update`
+2. **Generate fixtures**: `gro src/generated/update`
    - Discovers samples via filesystem search
    - Generates JSON data + markdown reports
    - Removes old fixtures before regenerating (clean slate)
-3. **Verify tests**: `npm test src/generated/check.test.ts`
+3. **Verify tests**: `gro test src/generated/check.test.ts`
    - Compares runtime output with fixtures
    - Tests both domstyler and rangestyler
 4. **Review changes**: `git diff src/generated/`
    - Commit expected changes after verification
+
+### Test Fixtures
+
+Generated fixtures are stored in `src/generated/{lang}/`:
+
+- `{lang}_{variant}.json` - Machine-readable test data
+- `{lang}_{variant}.md` - Human-readable report
+
+**JSON fixture structure:**
+
+```json
+{
+  "sample": {
+    "lang": "css",
+    "variant": "complex",
+    "content": "...",
+    "filepath": "src/lib/samples/sample_complex.css"
+  },
+  "boundaries": [...],  // Language boundaries for embedded content
+  "matches": {          // Pattern match statistics
+    "total": 61,
+    "by_type": {"selector": 6, "property": 7, ...},
+    "samples": [...]
+  },
+  "domstyler_html": "...",    // Expected HTML from domstyler
+  "rangestyler_html": "..."   // Expected HTML from rangestyler
+}
+```
+
+**Reading fixtures:**
+
+```typescript
+import {readFileSync} from 'node:fs';
+const fixture = JSON.parse(readFileSync('src/generated/css/css_complex.json', 'utf-8'));
+```
 
 ## Planned Optimizations
 

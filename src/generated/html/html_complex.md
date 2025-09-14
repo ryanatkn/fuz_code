@@ -259,8 +259,8 @@
 
 <span class="token tag">&lt;style</span> <span class="token attr_name">type</span
 ><span class="token attr_value">=&quot;text/css&quot;</span
-><span class="token punctuation">&gt;</span><span class="token selector"> .special::before </span
-><span class="token punctuation">{</span> <span class="token property"> content</span
+><span class="token punctuation">&gt;</span> <span class="token selector">.special::before</span>
+<span class="token punctuation">{</span> <span class="token property"> content</span
 ><span class="token punctuation">:</span>
 <span class="token string">&#039;&lt; &amp; &gt;&#039;</span
 ><span class="token punctuation">;</span>

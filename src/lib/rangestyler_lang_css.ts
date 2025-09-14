@@ -47,13 +47,12 @@ export const css_language: Rangestyler_Language = {
 			greedy: true,
 		},
 
-		// Selectors (simplified - matches common patterns)
+		// Selectors - match identifiers and combinators before opening brace
 		{
 			name: 'selector',
-			match: /(?:^|\})\s*[^{}]+(?=\s*\{)/g,
+			match: /[^{}\s][^{}]*?(?=\s*\{)/g,
 			priority: 70,
 			greedy: true,
-			lookbehind: true,
 		},
 
 		// Properties (CSS property names)
