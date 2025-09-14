@@ -52,7 +52,7 @@ multi
 .line {
 	i: 100px
 
-<comment>
+</style>
 
 @media*/
 
@@ -70,9 +70,9 @@ div > p {
 	}
 }
 
-/* String boundaries - patterns shouldn't match inside */
+/* patterns in strings are not falsely detected */
 .content::before {
-	content: 'color: red; /* not a comment */';
+	content: '</style> /* not a comment */';
 }
 
 .attr[title='Click: here'] {

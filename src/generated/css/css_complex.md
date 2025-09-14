@@ -5,7 +5,7 @@
 - **Language**: css
 - **Variant**: complex
 - **Source**: src/lib/samples/sample_complex.css
-- **Size**: 554 characters
+- **Size**: 543 characters
 
 ## Statistics
 
@@ -15,16 +15,16 @@
 - code: [0:115]
 - comment: [115:128]
 - code: [128:130]
-- comment: [130:177]
-- code: [177:314]
-- comment: [314:371]
-- code: [371:401]
-- string: [401:434]
-- code: [434:451]
-- string: [451:464]
-- code: [464:526]
-- string: [526:549]
-- code: [549:554]
+- comment: [130:176]
+- code: [176:313]
+- comment: [313:363]
+- code: [363:393]
+- string: [393:423]
+- code: [423:440]
+- string: [440:453]
+- code: [453:515]
+- string: [515:538]
+- code: [538:543]
 
 ### Matches
 
@@ -83,7 +83,7 @@
 
 <span class="token comment">/* comment */</span>
 
-<span class="token comment">/* multi .line { i: 100px &lt;comment> @media*/</span>
+<span class="token comment">/* multi .line { i: 100px &lt;/style> @media*/</span>
 
 <span class="token selector">#id</span> <span class="token punctuation">{</span>
 <span class="token property">background-color</span
@@ -110,10 +110,10 @@
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token comment">/* String boundaries - patterns shouldn't match inside */</span>
+<span class="token comment">/* patterns in strings are not falsely detected */</span>
 <span class="token selector">.content::before</span> <span class="token punctuation">{</span>
 <span class="token property">content</span><span class="token punctuation">:</span>
-<span class="token string">'color: red; /* not a comment */'</span
+<span class="token string">'&lt;/style> /* not a comment */'</span
 ><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
@@ -160,7 +160,7 @@
 
 <span class="token comment">/* comment */</span><span class="token comment"></span>
 
-<span class="token comment">/* multi .line { i: 100px &lt;comment&gt; @media*/</span
+<span class="token comment">/* multi .line { i: 100px &lt;/style&gt; @media*/</span
 ><span class="token comment"></span>
 
 <span class="token selector">#id</span> <span class="token punctuation">{</span>
@@ -180,11 +180,11 @@
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-<span class="token comment">/* String boundaries - patterns shouldn&#039;t match inside */</span
+<span class="token comment">/* patterns in strings are not falsely detected */</span
 ><span class="token comment"></span> <span class="token selector">.content::before</span>
 <span class="token punctuation">{</span> <span class="token property">content</span
 ><span class="token punctuation">:</span>
-<span class="token string">&#039;color: red; /* not a comment */&#039;</span
+<span class="token string">&#039;&lt;/style&gt; /* not a comment */&#039;</span
 ><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
@@ -206,9 +206,9 @@
 
 ## Comparison
 
-- Domstyler size: 3459 bytes
-- Rangestyler size: 3725 bytes
-- Size difference: -266 bytes
+- Domstyler size: 3451 bytes
+- Rangestyler size: 3715 bytes
+- Size difference: -264 bytes
 
 ---
 
