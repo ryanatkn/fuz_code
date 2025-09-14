@@ -164,7 +164,7 @@ export const plus = (a: any, b: any): any => a + b;
 
 <button type="button" disabled>click me</button>
 
-<!-- comment <div>a<br /> b</div> -->
+<!-- comment <div>a<br /> b</div> <script> -->
 
 <br />
 
@@ -178,7 +178,7 @@ export const plus = (a: any, b: any): any => a + b;
 </ul>
 
 <script type="text/javascript">
-	const ok = 'yes';
+	const ok = '<style>';
 </script>
 
 <style type="text/css">

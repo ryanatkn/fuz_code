@@ -5,32 +5,28 @@
 - **Language**: html
 - **Variant**: complex
 - **Source**: src/lib/samples/sample_complex.html
-- **Size**: 528 characters
+- **Size**: 541 characters
 
 ## Statistics
 
 ### Boundaries
 
-- **Total**: 5
-- code: [0:371]
-- embedded: [371:391]
-- code: [391:425]
-- embedded: [425:469]
-- code: [469:528]
+- **Total**: 3
+- code: [0:401]
+- embedded: [401:482]
+- code: [482:541]
 
 ### Matches
 
-- **Total**: 148
+- **Total**: 142
 - **By Type**:
   - doctype: 1
   - tag: 30
-  - punctuation: 85
+  - punctuation: 83
   - attr_name: 8
-  - attr_value: 8
-  - operator: 9
+  - attr_value: 7
+  - operator: 8
   - comment: 1
-  - keyword: 1
-  - string: 1
   - selector: 1
   - property: 2
   - cdata: 1
@@ -111,7 +107,7 @@
 	><span class="token punctuation">></span></span
 >
 
-<span class="token comment">&lt;!-- comment &lt;div>a&lt;br /> b&lt;/div> --></span>
+<span class="token comment">&lt;!-- comment &lt;div>a&lt;br /> b&lt;/div> &lt;script> --></span>
 
 <span class="token tag"
 	><span class="token tag"><span class="token punctuation">&lt;</span>br</span>
@@ -173,7 +169,7 @@
 ><span class="token script"
 	><span class="token lang_js">
 		<span class="token keyword">const</span> ok <span class="token operator">=</span>
-		<span class="token string">'yes'</span><span class="token punctuation">;</span>
+		<span class="token string">'&lt;style>'</span><span class="token punctuation">;</span>
 	</span></span
 ><span class="token tag"
 	><span class="token tag"><span class="token punctuation">&lt;/</span>script</span
@@ -228,7 +224,9 @@
 	>&gt;</span
 >click me<span class="token tag">&lt;/button</span><span class="token punctuation">&gt;</span>
 
-<span class="token comment">&lt;!-- comment &lt;div&gt;a&lt;br /&gt; b&lt;/div&gt; --&gt;</span>
+<span class="token comment"
+	>&lt;!-- comment &lt;div&gt;a&lt;br /&gt; b&lt;/div&gt; &lt;script&gt; --&gt;</span
+>
 
 <span class="token tag">&lt;br</span> <span class="token punctuation">/</span
 ><span class="token punctuation">&gt;</span>
@@ -252,14 +250,12 @@
 
 <span class="token tag">&lt;script</span> <span class="token attr_name">type</span
 ><span class="token attr_value">=&quot;text/javascript&quot;</span
-><span class="token punctuation">&gt;</span> <span class="token keyword">const</span> ok
-<span class="token operator">=</span> <span class="token string">&#039;yes&#039;</span
-><span class="token punctuation">;</span> <span class="token tag">&lt;/script</span
-><span class="token punctuation">&gt;</span>
-
-<span class="token tag">&lt;style</span> <span class="token attr_name">type</span
-><span class="token attr_value">=&quot;text/css&quot;</span
-><span class="token punctuation">&gt;</span> <span class="token selector">.special::before</span>
+><span class="token punctuation">&gt;</span> const <span class="token attr_name">ok</span>
+<span class="token operator">=</span> &#039;<span class="token tag">&lt;style</span
+><span class="token punctuation">&gt;</span
+><span class="token selector"
+	>&#039;; &lt;/script&gt; &lt;style type=&quot;text/css&quot;&gt; .special::before</span
+>
 <span class="token punctuation">{</span> <span class="token property">content</span
 ><span class="token punctuation">:</span> &#039;&lt; &amp; &gt;&#039;<span class="token punctuation"
 	>;</span
@@ -274,9 +270,9 @@
 
 ## Comparison
 
-- Domstyler size: 6164 bytes
-- Rangestyler size: 3633 bytes
-- Size difference: 2531 bytes
+- Domstyler size: 6183 bytes
+- Rangestyler size: 3442 bytes
+- Size difference: 2741 bytes
 
 ---
 
