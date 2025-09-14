@@ -94,6 +94,18 @@ rangestyler_global.highlight(element, code, 'ts');
    - No grammar inheritance
    - Direct platform API usage (CSS.highlights, globalThis.Highlight)
 
+### Colors
+
+`--color_a` - blue
+`--color_b` - green
+`--color_c` - red
+`--color_d` - purple
+`--color_e` - yellow
+`--color_f` - brown
+`--color_g` - pink
+`--color_h` - orange
+`--color_i` - cyan
+
 ## Performance Characteristics
 
 ### DOM Styler
