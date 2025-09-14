@@ -37,8 +37,8 @@ Unlike `theme.css`, these colors do not adapt to the `color-scheme`.
 }
 
 .token.selector,
-.token.attr_name,
 .token.string,
+.token.attr_value,
 .token.char,
 .token.builtin,
 .token.inserted {
@@ -46,7 +46,7 @@ Unlike `theme.css`, these colors do not adapt to the `color-scheme`.
 }
 
 .token.atrule,
-.token.attr_value,
+.token.attr_name,
 .token.keyword,
 .token.null {
 	color: light-dark(#6a3e1b, #b08b6d);

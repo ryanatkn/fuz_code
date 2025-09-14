@@ -36,8 +36,8 @@ This is the default CSS file that styles the output HTML of `stylize`.
 }
 
 .token.selector,
-.token.attr_name,
 .token.string,
+.token.attr_value,
 .token.char,
 .token.builtin,
 .token.inserted {
@@ -45,7 +45,7 @@ This is the default CSS file that styles the output HTML of `stylize`.
 }
 
 .token.atrule,
-.token.attr_value,
+.token.attr_name,
 .token.keyword,
 .token.null {
 	color: var(--color_f_5);
