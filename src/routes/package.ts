@@ -275,7 +275,11 @@ export const src_json: Src_Json = {
 				{name: 'resolve_overlaps', kind: 'function'},
 				{name: 'create_ranges', kind: 'function'},
 				{name: 'build_ranges', kind: 'function'},
+				{name: 'build_ranges_with_boundaries', kind: 'function'},
 				{name: 'generate_html_fallback', kind: 'function'},
+				{name: 'detect_boundaries', kind: 'function'},
+				{name: 'get_boundary_patterns', kind: 'function'},
+				{name: 'find_matches_with_boundaries', kind: 'function'},
 			],
 		},
 		'./Rangestyler_Code.svelte': {
@@ -316,6 +320,8 @@ export const src_json: Src_Json = {
 				{name: 'Rangestyler_Language', kind: 'type'},
 				{name: 'Rangestyler_Pattern', kind: 'type'},
 				{name: 'Rangestyler_Match_Result', kind: 'type'},
+				{name: 'Rangestyler_Language_Boundary', kind: 'type'},
+				{name: 'Rangestyler_Mode', kind: 'type'},
 			],
 		},
 		'./rangestyler.js': {

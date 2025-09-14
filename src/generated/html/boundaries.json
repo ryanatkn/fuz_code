@@ -1,0 +1,40 @@
+[
+	{
+		"type": "content",
+		"start": 0,
+		"end": 191,
+		"length": 191,
+		"text_snippet": "<!doctype html>\\n\\n<div class=\"test\">\\n\\t<p>hello worl..."
+	},
+	{
+		"type": "content",
+		"start": 228,
+		"end": 340,
+		"length": 112,
+		"text_snippet": "\\n\\n<br />\\n\\n<hr />\\n\\n<img src=\"image.jpg\" alt=\"access..."
+	},
+	{
+		"type": "script",
+		"start": 371,
+		"end": 391,
+		"language": "ts",
+		"length": 20,
+		"text_snippet": "\\n\\tconst ok = 'yes';\\n"
+	},
+	{"type": "content", "start": 400, "end": 402, "length": 2, "text_snippet": "\\n\\n"},
+	{
+		"type": "style",
+		"start": 425,
+		"end": 469,
+		"language": "css",
+		"length": 44,
+		"text_snippet": "\\n\\t.special::before {\\n\\t\\tcontent: '< & >';\\n\\t}\\n"
+	},
+	{
+		"type": "content",
+		"start": 477,
+		"end": 528,
+		"length": 51,
+		"text_snippet": "\\n\\n<![CDATA[ if (a < 0) alert(\"b\"); <not-a-tag> ]]>..."
+	}
+]

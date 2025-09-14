@@ -1,4 +1,4 @@
-import type {Rangestyler_Language} from './rangestyler_types.js';
+import type {Rangestyler_Language} from '$lib/rangestyler_types.js';
 
 /**
  * TypeScript language definition

@@ -2,12 +2,12 @@
 
 /* * 
  * File statistics:
- * - Total files in filer: 255
+ * - Total files in filer: 280
  * - External dependencies: 202
- * - Internal project files: 53
- * - Files processed (passed filter): 230
- * - Files with CSS classes: 24
- * - Unique classes found: 41
+ * - Internal project files: 78
+ * - Files processed (passed filter): 231
+ * - Files with CSS classes: 25
+ * - Unique classes found: 42
  */
 
 .box {
@@ -158,6 +158,9 @@ a.chip {
 }
 .mr_xs {
 	margin-right: var(--space_xs);
+}
+.mb_0 {
+	margin-bottom: 0;
 }
 .mb_lg {
 	margin-bottom: var(--space_lg);

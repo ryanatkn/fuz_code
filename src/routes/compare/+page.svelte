@@ -10,16 +10,23 @@
 <main class="box w_100 py_xl5">
 	<Breadcrumb>🎨</Breadcrumb>
 	{#each samples as sample (sample.name)}
-		<div class="display_flex gap_sm py_xl5">
-			<div>
-				<h3>domstyler</h3>
-				<Domstyler_Code content={sample.content} lang={sample.lang} />
+		<section>
+			<h2 class="box panel p_md mb_0">{sample.lang}</h2>
+			<div class="display_flex gap_sm py_xl5">
+				<div>
+					<h3>domstyler</h3>
+					<Domstyler_Code content={sample.content} lang={sample.lang} />
+				</div>
+				<div>
+					<h3>rangestyler (ranges)</h3>
+					<Rangestyler_Code content={sample.content} lang={sample.lang} mode="ranges" />
+				</div>
+				<div>
+					<h3>rangestyler (html)</h3>
+					<Rangestyler_Code content={sample.content} lang={sample.lang} mode="html" />
+				</div>
 			</div>
-			<div>
-				<h3>rangestyler</h3>
-				<Rangestyler_Code content={sample.content} lang={sample.lang} />
-			</div>
-		</div>
+		</section>
 		<hr />
 	{/each}
 	<Footer />

@@ -1,6 +1,6 @@
 import {Bench} from 'tinybench';
-import {samples} from './code_samples.js';
-import {domstyler_global} from './domstyler_global.js';
+import {samples} from '$lib/code_samples.js';
+import {domstyler_global} from '$lib/domstyler_global.js';
 
 /* eslint-disable no-console */
 

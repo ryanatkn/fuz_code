@@ -1,6 +1,7 @@
 <script lang="ts">
-	import {rangestyler_global} from './rangestyler_global.js';
-	import type {Rangestyler} from './rangestyler.js';
+	import {rangestyler_global} from '$lib/rangestyler_global.js';
+	import type {Rangestyler} from '$lib/rangestyler.js';
+	import type {Rangestyler_Mode} from '$lib/rangestyler_types.js';
 
 	const {
 		content,
@@ -8,12 +9,14 @@
 		pre_attrs,
 		code_attrs,
 		rangestyler = rangestyler_global,
+		mode = 'auto',
 	}: {
 		content: string;
 		lang?: string;
 		pre_attrs?: any;
 		code_attrs?: any;
 		rangestyler?: Rangestyler;
+		mode?: Rangestyler_Mode;
 	} = $props();
 
 	// Element reference
@@ -22,7 +25,7 @@
 	// Update highlights
 	function update_highlight() {
 		if (!code_element || !content) return;
-		rangestyler.highlight(code_element, content, lang);
+		rangestyler.highlight(code_element, content, lang, mode);
 	}
 
 	// Reactive highlighting using $effect

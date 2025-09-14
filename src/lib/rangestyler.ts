@@ -1,10 +1,14 @@
-import type {Rangestyler_Language, Rangestyler_Pattern} from './rangestyler_types.js';
+import type {
+	Rangestyler_Language,
+	Rangestyler_Pattern,
+	Rangestyler_Mode,
+} from '$lib/rangestyler_types.js';
 import {
-	build_ranges,
-	find_matches,
+	build_ranges_with_boundaries,
+	find_matches_with_boundaries,
 	resolve_overlaps,
 	generate_html_fallback,
-} from './rangestyler_builder.js';
+} from '$lib/rangestyler_builder.js';
 
 /**
  * Check for CSS Highlights API support.
@@ -35,7 +39,12 @@ export class Rangestyler {
 		return this.languages.get(id);
 	}
 
-	highlight(element: Element, text: string, lang_id: string): void {
+	highlight(
+		element: Element,
+		text: string,
+		lang_id: string,
+		mode: Rangestyler_Mode = 'auto',
+	): void {
 		const language = this.get_language(lang_id);
 		if (!language) {
 			console.error(`Language "${lang_id}" not found`); // eslint-disable-line no-console
@@ -43,12 +52,13 @@ export class Rangestyler {
 			return;
 		}
 
-		// Use native highlights if available
-		if (this.supports_native) {
+		const use_ranges = mode === 'ranges' || (mode === 'auto' && this.supports_native);
+
+		if (use_ranges && this.supports_native) {
 			this.#highlight_with_ranges(element, text, language.patterns, lang_id);
 		} else {
-			// Fall back to HTML generation
-			this.#highlight_with_html(element, text, language.patterns);
+			// Fall back to HTML generation or explicitly use HTML mode
+			this.#highlight_with_html(element, text, language.patterns, lang_id);
 		}
 	}
 
@@ -56,19 +66,25 @@ export class Rangestyler {
 		element: Element,
 		text: string,
 		patterns: Array<Rangestyler_Pattern>,
-		prefix: string,
+		lang_id: string,
 	): void {
 		// Clear any existing highlights for this element
 		this.clear_highlights(element);
 
-		// Build ranges
-		const {ranges_by_name} = build_ranges(element, text, patterns);
+		// Build ranges (use boundary-aware for HTML/Svelte)
+		const {ranges_by_name} = build_ranges_with_boundaries(
+			element,
+			text,
+			patterns,
+			lang_id,
+			(id) => this.get_language(id)?.patterns,
+		);
 
 		// Register highlights
 		const highlight_names: Array<string> = [];
 
 		for (const [name, ranges] of ranges_by_name) {
-			const highlight_name = `${prefix}_${name}`;
+			const highlight_name = `${lang_id}_${name}`;
 			highlight_names.push(highlight_name);
 
 			// Register with CSS highlights directly
@@ -89,9 +105,19 @@ export class Rangestyler {
 	/**
 	 * Highlight using HTML generation (fallback)
 	 */
-	#highlight_with_html(element: Element, text: string, patterns: Array<Rangestyler_Pattern>): void {
-		// Find and resolve matches
-		const matches = find_matches(text, patterns);
+	#highlight_with_html(
+		element: Element,
+		text: string,
+		patterns: Array<Rangestyler_Pattern>,
+		lang_id: string,
+	): void {
+		// Find and resolve matches (use boundary-aware matching for HTML/Svelte)
+		const matches = find_matches_with_boundaries(
+			text,
+			patterns,
+			lang_id,
+			(id) => this.get_language(id)?.patterns,
+		);
 		const resolved = resolve_overlaps(matches);
 
 		// Generate HTML

@@ -1,4 +1,4 @@
-import type {Rangestyler_Language} from './rangestyler_types.js';
+import type {Rangestyler_Language} from '$lib/rangestyler_types.js';
 
 /**
  * HTML language definition
@@ -6,7 +6,7 @@ import type {Rangestyler_Language} from './rangestyler_types.js';
 export const html_language: Rangestyler_Language = {
 	id: 'html',
 	patterns: [
-		// Comments
+		// Comments (handled by boundary detection but kept for highlighting the delimiters)
 		{
 			name: 'comment',
 			match: /<!--[\s\S]*?-->/g,
@@ -14,7 +14,7 @@ export const html_language: Rangestyler_Language = {
 			greedy: true,
 		},
 
-		// CDATA sections
+		// CDATA sections (handled by boundary detection but kept for highlighting the delimiters)
 		{
 			name: 'cdata',
 			match: /<!\[CDATA\[[\s\S]*?\]\]>/gi,
@@ -35,6 +35,14 @@ export const html_language: Rangestyler_Language = {
 			name: 'prolog',
 			match: /<\?[\s\S]+?\?>/g,
 			priority: 85,
+			greedy: true,
+		},
+
+		// Script and style tags (just the tags, not content)
+		{
+			name: 'tag',
+			match: /<\/?(?:script|style)(?:\s+[^>]*)?>|<\/(?:script|style)>/gi,
+			priority: 82,
 			greedy: true,
 		},
 

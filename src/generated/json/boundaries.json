@@ -1,0 +1,9 @@
+[
+	{
+		"type": "content",
+		"start": 0,
+		"end": 121,
+		"length": 121,
+		"text_snippet": "{\\n\\t\"string\": \"a string\",\\n\\t\"number\": 12345,\\n\\t\"boole..."
+	}
+]

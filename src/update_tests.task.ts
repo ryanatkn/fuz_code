@@ -1,8 +1,8 @@
 import type {Task} from '@ryanatkn/gro';
 import {writeFileSync} from 'node:fs';
 
-import {samples} from './lib/samples/all.js';
-import {domstyler_global} from './lib/domstyler_global.js';
+import {samples} from '$lib/samples/all.js';
+import {domstyler_global} from '$lib/domstyler_global.js';
 
 // TODO better snapshot support
 

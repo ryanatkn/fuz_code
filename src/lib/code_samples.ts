@@ -1,4 +1,4 @@
-import {samples as sample_content} from './samples/all.js';
+import {samples as sample_content} from '$lib/samples/all.js';
 
 export interface Code_Sample {
 	name: string;

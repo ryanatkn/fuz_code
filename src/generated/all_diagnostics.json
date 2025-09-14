@@ -1,0 +1,385 @@
+{
+	"css": {
+		"boundaries": [
+			{
+				"type": "content",
+				"start": 0,
+				"end": 301,
+				"length": 301,
+				"text_snippet": ".some_class {\\n\\tcolor: red;\\n}\\n\\n.hypen-class {\\n\\tfont..."
+			}
+		],
+		"matches": {
+			"total": 61,
+			"by_type": {
+				"selector": 6,
+				"punctuation": 34,
+				"property": 7,
+				"number": 10,
+				"function": 1,
+				"comment": 2,
+				"atrule": 1
+			},
+			"samples": [
+				{"pattern_name": "selector", "text": ".some_class ", "start": 0, "end": 12, "priority": 70},
+				{"pattern_name": "punctuation", "text": "{", "start": 12, "end": 13, "priority": 10},
+				{"pattern_name": "property", "text": "\tcolor", "start": 14, "end": 20, "priority": 60},
+				{"pattern_name": "punctuation", "text": ":", "start": 20, "end": 21, "priority": 10},
+				{"pattern_name": "punctuation", "text": ";", "start": 25, "end": 26, "priority": 10},
+				{
+					"pattern_name": "selector",
+					"text": "}\n\n.hypen-class ",
+					"start": 27,
+					"end": 43,
+					"priority": 70
+				},
+				{"pattern_name": "property", "text": "\tfont-size", "start": 45, "end": 55, "priority": 60},
+				{"pattern_name": "number", "text": "16px", "start": 57, "end": 61, "priority": 45},
+				{"pattern_name": "selector", "text": "}\n\np ", "start": 63, "end": 68, "priority": 70},
+				{
+					"pattern_name": "property",
+					"text": "\tbox-shadow",
+					"start": 70,
+					"end": 81,
+					"priority": 60
+				},
+				{"pattern_name": "number", "text": "0", "start": 83, "end": 84, "priority": 45},
+				{"pattern_name": "number", "text": "0", "start": 85, "end": 86, "priority": 45},
+				{"pattern_name": "function", "text": "rgba", "start": 92, "end": 96, "priority": 50},
+				{
+					"pattern_name": "comment",
+					"text": "/* comment */",
+					"start": 115,
+					"end": 128,
+					"priority": 100
+				},
+				{
+					"pattern_name": "comment",
+					"text": "/*\nmulti\nline\n\n<comment>\n\n*/",
+					"start": 130,
+					"end": 158,
+					"priority": 100
+				},
+				{
+					"pattern_name": "atrule",
+					"text": "@media (max-width: 600px)",
+					"start": 229,
+					"end": 254,
+					"priority": 80
+				}
+			]
+		}
+	},
+	"html": {
+		"boundaries": [
+			{
+				"type": "content",
+				"start": 0,
+				"end": 191,
+				"length": 191,
+				"text_snippet": "<!doctype html>\\n\\n<div class=\"test\">\\n\\t<p>hello worl..."
+			},
+			{
+				"type": "content",
+				"start": 228,
+				"end": 340,
+				"length": 112,
+				"text_snippet": "\\n\\n<br />\\n\\n<hr />\\n\\n<img src=\"image.jpg\" alt=\"access..."
+			},
+			{
+				"type": "script",
+				"start": 371,
+				"end": 391,
+				"language": "ts",
+				"length": 20,
+				"text_snippet": "\\n\\tconst ok = 'yes';\\n"
+			},
+			{"type": "content", "start": 400, "end": 402, "length": 2, "text_snippet": "\\n\\n"},
+			{
+				"type": "style",
+				"start": 425,
+				"end": 469,
+				"language": "css",
+				"length": 44,
+				"text_snippet": "\\n\\t.special::before {\\n\\t\\tcontent: '< & >';\\n\\t}\\n"
+			},
+			{
+				"type": "content",
+				"start": 477,
+				"end": 528,
+				"length": 51,
+				"text_snippet": "\\n\\n<![CDATA[ if (a < 0) alert(\"b\"); <not-a-tag> ]]>..."
+			}
+		],
+		"matches": {
+			"total": 117,
+			"by_type": {
+				"doctype": 1,
+				"tag": 22,
+				"punctuation": 65,
+				"attr_name": 7,
+				"attr_value": 7,
+				"operator": 8,
+				"keyword": 1,
+				"string": 2,
+				"selector": 1,
+				"property": 2,
+				"cdata": 1
+			},
+			"samples": [
+				{
+					"pattern_name": "doctype",
+					"text": "<!doctype html>",
+					"start": 0,
+					"end": 15,
+					"priority": 90
+				},
+				{"pattern_name": "tag", "text": "<!doctype", "start": 0, "end": 9, "priority": 70},
+				{"pattern_name": "punctuation", "text": "<", "start": 0, "end": 1, "priority": 10},
+				{"pattern_name": "punctuation", "text": ">", "start": 14, "end": 15, "priority": 10},
+				{"pattern_name": "tag", "text": "<div", "start": 17, "end": 21, "priority": 70},
+				{"pattern_name": "punctuation", "text": "<", "start": 17, "end": 18, "priority": 10},
+				{"pattern_name": "attr_name", "text": "class", "start": 22, "end": 27, "priority": 60},
+				{"pattern_name": "attr_value", "text": "=\"test\"", "start": 27, "end": 34, "priority": 80},
+				{"pattern_name": "operator", "text": "=", "start": 27, "end": 28, "priority": 5},
+				{"pattern_name": "tag", "text": "<p", "start": 37, "end": 39, "priority": 70},
+				{"pattern_name": "attr_name", "text": "class", "start": 68, "end": 73, "priority": 60},
+				{
+					"pattern_name": "attr_value",
+					"text": "=\"some_class hypen-class\"",
+					"start": 73,
+					"end": 98,
+					"priority": 80
+				},
+				{"pattern_name": "operator", "text": "=", "start": 73, "end": 74, "priority": 5},
+				{"pattern_name": "attr_name", "text": "class", "start": 110, "end": 115, "priority": 60},
+				{
+					"pattern_name": "attr_value",
+					"text": "=\"a b c\"",
+					"start": 115,
+					"end": 123,
+					"priority": 80
+				},
+				{"pattern_name": "operator", "text": "=", "start": 115, "end": 116, "priority": 5},
+				{"pattern_name": "keyword", "text": "const", "start": 373, "end": 378, "priority": 150},
+				{"pattern_name": "string", "text": "'yes'", "start": 384, "end": 389, "priority": 190},
+				{
+					"pattern_name": "selector",
+					"text": "\n\t.special::before ",
+					"start": 425,
+					"end": 444,
+					"priority": 170
+				},
+				{"pattern_name": "property", "text": ".special", "start": 427, "end": 435, "priority": 160}
+			]
+		}
+	},
+	"json": {
+		"boundaries": [
+			{
+				"type": "content",
+				"start": 0,
+				"end": 121,
+				"length": 121,
+				"text_snippet": "{\\n\\t\"string\": \"a string\",\\n\\t\"number\": 12345,\\n\\t\"boole..."
+			}
+		],
+		"matches": {
+			"total": 32,
+			"by_type": {
+				"punctuation": 12,
+				"property": 6,
+				"string": 2,
+				"operator": 6,
+				"number": 2,
+				"boolean": 2,
+				"null": 2
+			},
+			"samples": [
+				{"pattern_name": "punctuation", "text": "{", "start": 0, "end": 1, "priority": 20},
+				{"pattern_name": "property", "text": "\"string\"", "start": 3, "end": 11, "priority": 90},
+				{"pattern_name": "string", "text": "\": \"", "start": 10, "end": 14, "priority": 85},
+				{"pattern_name": "operator", "text": ":", "start": 11, "end": 12, "priority": 10},
+				{"pattern_name": "punctuation", "text": ",", "start": 23, "end": 24, "priority": 20},
+				{"pattern_name": "property", "text": "\"number\"", "start": 26, "end": 34, "priority": 90},
+				{"pattern_name": "operator", "text": ":", "start": 34, "end": 35, "priority": 10},
+				{"pattern_name": "number", "text": "12345", "start": 36, "end": 41, "priority": 50},
+				{"pattern_name": "punctuation", "text": ",", "start": 41, "end": 42, "priority": 20},
+				{"pattern_name": "property", "text": "\"boolean\"", "start": 44, "end": 53, "priority": 90},
+				{"pattern_name": "operator", "text": ":", "start": 53, "end": 54, "priority": 10},
+				{"pattern_name": "boolean", "text": "true", "start": 55, "end": 59, "priority": 45},
+				{"pattern_name": "null", "text": "null", "start": 63, "end": 67, "priority": 40},
+				{"pattern_name": "null", "text": "null", "start": 70, "end": 74, "priority": 40},
+				{"pattern_name": "string", "text": "\": [1, \"", "start": 97, "end": 105, "priority": 85},
+				{"pattern_name": "number", "text": "1", "start": 101, "end": 102, "priority": 50},
+				{"pattern_name": "boolean", "text": "false", "start": 109, "end": 114, "priority": 45}
+			]
+		}
+	},
+	"ts": {
+		"boundaries": [
+			{
+				"type": "content",
+				"start": 0,
+				"end": 854,
+				"length": 854,
+				"text_snippet": "const a = 1;\\n\\nconst b = 'b';\\n\\nconst c = true;\\n\\nexp..."
+			}
+		],
+		"matches": {
+			"total": 229,
+			"by_type": {
+				"keyword": 28,
+				"operator": 57,
+				"number": 3,
+				"punctuation": 87,
+				"string": 6,
+				"boolean": 4,
+				"class_name": 11,
+				"type": 14,
+				"function": 10,
+				"template_expression": 2,
+				"comment": 6,
+				"regex": 1
+			},
+			"samples": [
+				{"pattern_name": "keyword", "text": "const", "start": 0, "end": 5, "priority": 50},
+				{"pattern_name": "operator", "text": "=", "start": 8, "end": 9, "priority": 20},
+				{"pattern_name": "number", "text": "1", "start": 10, "end": 11, "priority": 40},
+				{"pattern_name": "punctuation", "text": ";", "start": 11, "end": 12, "priority": 10},
+				{"pattern_name": "keyword", "text": "const", "start": 14, "end": 19, "priority": 50},
+				{"pattern_name": "operator", "text": "=", "start": 22, "end": 23, "priority": 20},
+				{"pattern_name": "string", "text": "'b'", "start": 24, "end": 27, "priority": 90},
+				{"pattern_name": "punctuation", "text": ";", "start": 27, "end": 28, "priority": 10},
+				{"pattern_name": "keyword", "text": "const", "start": 30, "end": 35, "priority": 50},
+				{"pattern_name": "operator", "text": "=", "start": 38, "end": 39, "priority": 20},
+				{"pattern_name": "boolean", "text": "true", "start": 40, "end": 44, "priority": 45},
+				{"pattern_name": "punctuation", "text": ";", "start": 44, "end": 45, "priority": 10},
+				{"pattern_name": "class_name", "text": "Some_Type", "start": 59, "end": 68, "priority": 30},
+				{"pattern_name": "number", "text": "1", "start": 71, "end": 72, "priority": 40},
+				{"pattern_name": "string", "text": "'b'", "start": 75, "end": 78, "priority": 90},
+				{"pattern_name": "boolean", "text": "true", "start": 81, "end": 85, "priority": 45},
+				{"pattern_name": "class_name", "text": "D", "start": 94, "end": 95, "priority": 30},
+				{"pattern_name": "type", "text": "string", "start": 103, "end": 109, "priority": 55},
+				{"pattern_name": "string", "text": "'d'", "start": 112, "end": 115, "priority": 90},
+				{"pattern_name": "type", "text": "number", "start": 122, "end": 128, "priority": 55}
+			]
+		}
+	},
+	"svelte": {
+		"boundaries": [
+			{
+				"type": "script",
+				"start": 25,
+				"end": 57,
+				"language": "ts",
+				"length": 32,
+				"text_snippet": "\\n\\texport const HELLO = 'world';\\n"
+			},
+			{"type": "content", "start": 66, "end": 68, "length": 2, "text_snippet": "\\n\\n"},
+			{
+				"type": "script",
+				"start": 86,
+				"end": 1268,
+				"language": "ts",
+				"length": 1182,
+				"text_snippet": "\\n\\t// @ts-expect-error\\n\\timport Thing from '$lib/Thi..."
+			},
+			{
+				"type": "content",
+				"start": 1277,
+				"end": 1767,
+				"length": 490,
+				"text_snippet": "\\n\\n<h1>hello {HELLO}!</h1>\\n\\n{#each thing_keys as ke..."
+			},
+			{
+				"type": "content",
+				"start": 1804,
+				"end": 1936,
+				"length": 132,
+				"text_snippet": "\\n{a}\\n{b}\\n{bound}\\n{D}\\n\\n<br />\\n\\n<hr />\\n\\n<img src=\"im..."
+			},
+			{
+				"type": "style",
+				"start": 1943,
+				"end": 2324,
+				"language": "css",
+				"length": 381,
+				"text_snippet": "\\n\\t.some_class {\\n\\t\\tcolor: red;\\n\\t}\\n\\n\\t.hypen-class {\\n..."
+			},
+			{"type": "content", "start": 2332, "end": 2333, "length": 1, "text_snippet": "\\n"}
+		],
+		"matches": {
+			"total": 610,
+			"by_type": {
+				"keyword": 34,
+				"class_name": 17,
+				"attr_name": 29,
+				"operator": 104,
+				"attr_value": 16,
+				"string": 10,
+				"punctuation": 251,
+				"comment": 9,
+				"svelte_expression": 34,
+				"function": 17,
+				"boolean": 5,
+				"tag": 27,
+				"type": 16,
+				"number": 14,
+				"template_expression": 2,
+				"regex": 1,
+				"svelte_block": 6,
+				"doctype": 1,
+				"selector": 7,
+				"property": 9,
+				"atrule": 1
+			},
+			"samples": [
+				{"pattern_name": "keyword", "text": "export", "start": 27, "end": 33, "priority": 150},
+				{"pattern_name": "keyword", "text": "const", "start": 34, "end": 39, "priority": 150},
+				{"pattern_name": "class_name", "text": "HELLO", "start": 40, "end": 45, "priority": 130},
+				{"pattern_name": "attr_name", "text": "HELLO", "start": 40, "end": 45, "priority": 55},
+				{"pattern_name": "operator", "text": "=", "start": 46, "end": 47, "priority": 120},
+				{"pattern_name": "attr_value", "text": "= 'world'", "start": 46, "end": 55, "priority": 70},
+				{"pattern_name": "operator", "text": "=", "start": 46, "end": 47, "priority": 5},
+				{"pattern_name": "string", "text": "'world'", "start": 48, "end": 55, "priority": 190},
+				{"pattern_name": "punctuation", "text": ";", "start": 55, "end": 56, "priority": 110},
+				{
+					"pattern_name": "comment",
+					"text": "// @ts-expect-error",
+					"start": 88,
+					"end": 107,
+					"priority": 200
+				},
+				{"pattern_name": "operator", "text": "/", "start": 88, "end": 89, "priority": 120},
+				{"pattern_name": "punctuation", "text": "/", "start": 88, "end": 89, "priority": 10},
+				{"pattern_name": "punctuation", "text": "/", "start": 89, "end": 90, "priority": 10},
+				{"pattern_name": "keyword", "text": "import", "start": 109, "end": 115, "priority": 150},
+				{"pattern_name": "class_name", "text": "Thing", "start": 116, "end": 121, "priority": 130},
+				{
+					"pattern_name": "string",
+					"text": "'$lib/Thing.svelte'",
+					"start": 127,
+					"end": 146,
+					"priority": 190
+				},
+				{"pattern_name": "class_name", "text": "Thing", "start": 133, "end": 138, "priority": 130},
+				{
+					"pattern_name": "svelte_expression",
+					"text": "{Snippet}",
+					"start": 161,
+					"end": 170,
+					"priority": 95
+				},
+				{"pattern_name": "string", "text": "'svelte'", "start": 176, "end": 184, "priority": 190},
+				{
+					"pattern_name": "svelte_expression",
+					"text": "{\n\t\tthing,\n\t\tbound = $bindable",
+					"start": 194,
+					"end": 246,
+					"priority": 95
+				}
+			]
+		}
+	}
+}

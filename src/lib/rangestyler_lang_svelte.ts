@@ -1,4 +1,4 @@
-import type {Rangestyler_Language} from './rangestyler_types.js';
+import type {Rangestyler_Language} from '$lib/rangestyler_types.js';
 
 /**
  * Svelte language definition
@@ -6,51 +6,59 @@ import type {Rangestyler_Language} from './rangestyler_types.js';
 export const svelte_language: Rangestyler_Language = {
 	id: 'svelte',
 	patterns: [
-		// HTML Comments
+		// HTML Comments (handled by boundary detection but kept for highlighting)
 		{
 			name: 'comment',
 			match: /<!--[\s\S]*?-->/g,
+			priority: 110,
+			greedy: true,
+		},
+
+		// Svelte each blocks (complex nested pattern from domstyler)
+		{
+			name: 'svelte_block',
+			match: /\{[#/]each(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*\}/g,
+			priority: 105,
+			greedy: true,
+		},
+
+		// Svelte control blocks (#if, :else, /if, @html, @debug, etc.)
+		{
+			name: 'svelte_block',
+			match: /\{[#:/@](?:if|else if|else|await|then|catch|html|debug|const|key)\b[^}]*\}/g,
 			priority: 100,
 			greedy: true,
 		},
 
-		// Svelte blocks (#if, #each, etc.)
+		// Svelte snippet blocks
 		{
 			name: 'svelte_block',
-			match: /\{[#:/@](?:if|else|each|await|then|catch|html|debug|const|key)\b[^}]*\}/g,
+			match: /\{#snippet\s+\w+[^}]*\}[\s\S]*?\{\/snippet\}/g,
+			priority: 98,
+			greedy: true,
+		},
+
+		// TS expressions in curly braces (simpler pattern to avoid nested complexity)
+		{
+			name: 'svelte_expression',
+			match: /\{[^{}]*\}/g,
 			priority: 95,
 			greedy: true,
 		},
 
-		// TS expressions in curly braces
+		// Script and style tags (just the tags themselves, content handled by boundaries)
 		{
-			name: 'svelte_expression',
-			match: /\{(?:[^{}]|\{[^}]*\})*\}/g,
-			priority: 90,
+			name: 'tag',
+			match: /<\/?(?:script|style)(?:\s+[^>]*)?>|<\/(?:script|style)>/gi,
+			priority: 92,
 			greedy: true,
 		},
 
-		// Script tags
-		{
-			name: 'script_tag',
-			match: /<script(?:\s+[^>]*)?>[\s\S]*?<\/script>/gi,
-			priority: 85,
-			greedy: true,
-		},
-
-		// Style tags
-		{
-			name: 'style_tag',
-			match: /<style(?:\s+[^>]*)?>[\s\S]*?<\/style>/gi,
-			priority: 85,
-			greedy: true,
-		},
-
-		// CDATA sections
+		// CDATA sections (handled by boundary detection)
 		{
 			name: 'cdata',
 			match: /<!\[CDATA\[[\s\S]*?\]\]>/gi,
-			priority: 80,
+			priority: 90,
 			greedy: true,
 		},
 
@@ -58,6 +66,22 @@ export const svelte_language: Rangestyler_Language = {
 		{
 			name: 'doctype',
 			match: /<!DOCTYPE[^>]*>/gi,
+			priority: 85,
+			greedy: true,
+		},
+
+		// Prolog (XML declaration)
+		{
+			name: 'prolog',
+			match: /<\?[\s\S]+?\?>/g,
+			priority: 83,
+			greedy: true,
+		},
+
+		// Svelte directives (on:, bind:, use:, class:, style:, in:, out:, transition:, animate:, let:)
+		{
+			name: 'svelte_directive',
+			match: /(?:on|bind|use|class|style|in|out|transition|animate|let):[^\s>/=]+/g,
 			priority: 75,
 			greedy: true,
 		},
@@ -67,14 +91,6 @@ export const svelte_language: Rangestyler_Language = {
 			name: 'attr_value',
 			match: /=\s*(?:"[^"]*"|'[^']*'|\{[^}]*\})/g,
 			priority: 70,
-			greedy: true,
-		},
-
-		// Svelte directives (on:, bind:, use:, etc.)
-		{
-			name: 'svelte_directive',
-			match: /\b(?:on|bind|use|class|style|in|out|transition|animate|let):[^\s>/=]+/g,
-			priority: 65,
 			greedy: true,
 		},
 

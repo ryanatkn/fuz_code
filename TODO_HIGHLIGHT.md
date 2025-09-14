@@ -1,30 +1,5 @@
 # CSS Custom Highlight API Implementation
 
-## CSS Theme
-
-```css
-::highlight(ts_comment) {
-	color: var(--text_color_5);
-}
-::highlight(ts_keyword) {
-	color: var(--color_f_5);
-}
-::highlight(ts_string) {
-	color: var(--color_b_5);
-}
-/* ... per language, per token type */
-```
-
-## Design Decisions
-
-1. **Snake_case naming** - Consistent with codebase
-2. **No aliases** - Only exact language IDs ('ts', not 'typescript')
-3. **Direct platform APIs** - No abstraction layers
-4. **Pattern-based** - Simple regex patterns, no grammar inheritance
-5. **Global instance** - Pre-registered languages in highlight_styler_global
-
----
-
 ## Future Work (Phases 2-4)
 
 ### Phase 2: Auto-Optimization

@@ -19,3 +19,12 @@ export interface Rangestyler_Match_Result {
 	text: string;
 	captures?: Array<{start: number; end: number; text: string}>;
 }
+
+export interface Rangestyler_Language_Boundary {
+	type: 'script' | 'style' | 'content';
+	start: number;
+	end: number;
+	language?: string; // 'ts', 'css', etc.
+}
+
+export type Rangestyler_Mode = 'auto' | 'ranges' | 'html';
