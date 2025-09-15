@@ -128,7 +128,8 @@
 	><span class="token function">url</span><span class="token punctuation">(</span
 	><span class="token string url">'data:image/svg+xml...'</span
 	><span class="token punctuation">)</span></span
-><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 ```
 
 ## Rangestyler Output

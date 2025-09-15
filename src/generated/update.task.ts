@@ -17,7 +17,7 @@ export const task: Task = {
 
 		// Remove existing language directories
 		for (const lang of languages) {
-			const dir = join('src/generated', lang);
+			const dir = join('fixtures/generated', lang);
 			if (existsSync(dir)) {
 				rmSync(dir, {recursive: true, force: true});
 				console.log(`Removed existing directory: ${dir}`); // eslint-disable-line no-console
@@ -32,7 +32,7 @@ export const task: Task = {
 			const output = process_sample(sample);
 
 			// Ensure directory exists
-			const dir = join('src/generated', sample.lang);
+			const dir = join('fixtures/generated', sample.lang);
 			mkdirSync(dir, {recursive: true});
 
 			// Write JSON file

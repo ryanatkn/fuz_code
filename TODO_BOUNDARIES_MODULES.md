@@ -34,11 +34,10 @@
 
 ## 📝 TODO
 
-1. Fix CSS selector fragmentation when strings appear in attribute selectors
-2. Unify selector colors across all implementations
-3. Implement Svelte language scanner
-4. Performance optimization and caching
-5. Consider removing rangestyler once boundary scanner is stable
+1. Unify selector colors across all implementations
+2. Implement Svelte language scanner
+3. Performance optimization and caching
+4. Consider removing rangestyler once boundary scanner is stable
 
 ## Problems
 
