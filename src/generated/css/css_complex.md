@@ -128,8 +128,7 @@
 	><span class="token function">url</span><span class="token punctuation">(</span
 	><span class="token string url">'data:image/svg+xml...'</span
 	><span class="token punctuation">)</span></span
-><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+><span class="token punctuation">;</span> <span class="token punctuation">}</span>
 ```
 
 ## Rangestyler Output
@@ -204,10 +203,81 @@
 <span class="token punctuation">}</span>
 ```
 
+## Boundary Scanner Output
+
+```html
+<span class="token selector">.some_class</span> <span class="token punctuation">{</span>
+<span class="token property">color</span><span class="token punctuation">:</span> red<span
+	class="token punctuation"
+	>;</span
+>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.hypen-class</span> <span class="token punctuation">{</span>
+<span class="token property">font-size</span><span class="token punctuation">:</span>
+<span class="token number">16px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">p</span> <span class="token punctuation">{</span>
+<span class="token property">box-shadow</span><span class="token punctuation">:</span>
+<span class="token number">0</span> <span class="token number">0</span>
+<span class="token number">10px</span> <span class="token function">rgba</span
+><span class="token punctuation">(</span><span class="token number">0</span
+><span class="token punctuation">,</span> <span class="token number">0</span
+><span class="token punctuation">,</span> <span class="token number">0</span
+><span class="token punctuation">,</span> <span class="token number">0.1</span
+><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* comment */</span>
+
+<span class="token comment">/* multi .line { i: 100px &lt;/style&gt; @media*/</span>
+
+<span class="token selector">#id</span> <span class="token punctuation">{</span>
+<span class="token property">background-color</span
+><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">div &gt; p</span> <span class="token punctuation">{</span>
+<span class="token property">margin</span><span class="token punctuation">:</span>
+<span class="token number">10px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token atrule">@media (max-width: 600px)</span>
+<span class="token punctuation">{</span> <span class="token selector">body</span>
+<span class="token punctuation">{</span> <span class="token property">background-color</span
+><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* patterns in strings are not falsely detected */</span>
+<span class="token selector">.content::before</span> <span class="token punctuation">{</span>
+<span class="token property">content</span><span class="token punctuation">:</span>
+<span class="token string">&#039;&lt;/style&gt; /* not a comment */&#039;</span
+><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+.attr[title=<span class="token string">&#039;Click: here&#039;</span
+><span class="token selector">]</span> <span class="token punctuation">{</span>
+<span class="token property">cursor</span><span class="token punctuation">:</span> pointer<span
+	class="token punctuation"
+	>;</span
+>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.background</span> <span class="token punctuation">{</span>
+<span class="token property">background-image</span><span class="token punctuation">:</span>
+<span class="token function">url</span><span class="token punctuation">(</span
+><span class="token string">&#039;data:image/svg+xml...&#039;</span
+><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+```
+
 ## Comparison
 
 - Domstyler size: 3451 bytes
 - Rangestyler size: 3715 bytes
+- Boundary Scanner size: 3610 bytes
 - Size difference: -264 bytes
 
 ---

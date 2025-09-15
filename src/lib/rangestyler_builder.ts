@@ -349,7 +349,7 @@ export const find_matches_with_boundaries = (
 	matches: Array<Rangestyler_Match_Result>;
 	language_map: Map<Rangestyler_Match_Result, string>;
 } => {
-	// Use language-specific boundary detection if provided, otherwise treat as single boundary
+	// Use language-specific boundary detection or treat as single boundary
 	const boundaries = detect_boundaries_fn?.(text) || [
 		{
 			language: lang,

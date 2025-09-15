@@ -9,7 +9,8 @@ const detect_css_boundaries = (text: string): Array<Rangestyler_Language_Boundar
 	// Combined regex to find both comments and strings
 	// Comments: /* ... */
 	// Strings: "..." or '...'
-	const boundary_regex = /(\/\*[\s\S]*?\*\/)|("(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/g;
+	const boundary_regex =
+		/(\/\*[\s\S]*?\*\/)|("(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/g;
 	let last_end = 0;
 	let match;
 

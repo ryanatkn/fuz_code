@@ -24,6 +24,7 @@
     "test": "gro test",
     "preview": "vite preview",
     "deploy": "gro deploy",
+    "update-generated-fixtures": "gro src/generated/update",
     "benchmark": "vite-node src/lib/run_benchmark.ts"
   },
   "type": "module",
@@ -97,6 +98,75 @@
     "./benchmark.js": {
       "types": "./dist/benchmark.d.ts",
       "default": "./dist/benchmark.js"
+    },
+    "./boundary_scanner_base.js": {
+      "types": "./dist/boundary_scanner_base.d.ts",
+      "default": "./dist/boundary_scanner_base.js"
+    },
+    "./boundary_scanner_css.js": {
+      "types": "./dist/boundary_scanner_css.d.ts",
+      "default": "./dist/boundary_scanner_css.js"
+    },
+    "./boundary_scanner_global.js": {
+      "types": "./dist/boundary_scanner_global.d.ts",
+      "default": "./dist/boundary_scanner_global.js"
+    },
+    "./boundary_scanner_html_generator.js": {
+      "types": "./dist/boundary_scanner_html_generator.d.ts",
+      "default": "./dist/boundary_scanner_html_generator.js"
+    },
+    "./boundary_scanner_html.js": {
+      "types": "./dist/boundary_scanner_html.d.ts",
+      "default": "./dist/boundary_scanner_html.js"
+    },
+    "./boundary_scanner_json.js": {
+      "types": "./dist/boundary_scanner_json.d.ts",
+      "default": "./dist/boundary_scanner_json.js"
+    },
+    "./boundary_scanner_orchestrator.js": {
+      "types": "./dist/boundary_scanner_orchestrator.d.ts",
+      "default": "./dist/boundary_scanner_orchestrator.js"
+    },
+    "./boundary_scanner_range_builder.js": {
+      "types": "./dist/boundary_scanner_range_builder.d.ts",
+      "default": "./dist/boundary_scanner_range_builder.js"
+    },
+    "./boundary_scanner_registry.js": {
+      "types": "./dist/boundary_scanner_registry.d.ts",
+      "default": "./dist/boundary_scanner_registry.js"
+    },
+    "./boundary_scanner_ts.js": {
+      "types": "./dist/boundary_scanner_ts.d.ts",
+      "default": "./dist/boundary_scanner_ts.js"
+    },
+    "./boundary_scanner_types.js": {
+      "types": "./dist/boundary_scanner_types.d.ts",
+      "default": "./dist/boundary_scanner_types.js"
+    },
+    "./boundary_tokenizer_css.js": {
+      "types": "./dist/boundary_tokenizer_css.d.ts",
+      "default": "./dist/boundary_tokenizer_css.js"
+    },
+    "./boundary_tokenizer_html.js": {
+      "types": "./dist/boundary_tokenizer_html.d.ts",
+      "default": "./dist/boundary_tokenizer_html.js"
+    },
+    "./boundary_tokenizer_json.js": {
+      "types": "./dist/boundary_tokenizer_json.d.ts",
+      "default": "./dist/boundary_tokenizer_json.js"
+    },
+    "./boundary_tokenizer_ts.js": {
+      "types": "./dist/boundary_tokenizer_ts.d.ts",
+      "default": "./dist/boundary_tokenizer_ts.js"
+    },
+    "./boundary_tokenizer_types.js": {
+      "types": "./dist/boundary_tokenizer_types.d.ts",
+      "default": "./dist/boundary_tokenizer_types.js"
+    },
+    "./Boundaryscanner_Code.svelte": {
+      "types": "./dist/Boundaryscanner_Code.svelte.d.ts",
+      "svelte": "./dist/Boundaryscanner_Code.svelte",
+      "default": "./dist/Boundaryscanner_Code.svelte"
     },
     "./code_sample.js": {
       "types": "./dist/code_sample.d.ts",

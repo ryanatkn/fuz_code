@@ -4,12 +4,17 @@
  */
 
 /* TypeScript/JS */
-::highlight(ts_comment) {
+::highlight(ts_comment),
+::highlight(ts_comment_single),
+::highlight(ts_comment_multi) {
 	color: var(--text_color_5);
 	font-style: italic;
 }
 
-::highlight(ts_string) {
+::highlight(ts_string),
+::highlight(ts_string_single),
+::highlight(ts_string_double),
+::highlight(ts_template) {
 	color: var(--color_b_5);
 }
 
@@ -93,7 +98,9 @@
 	font-style: italic;
 }
 
-::highlight(css_string) {
+::highlight(css_string),
+::highlight(css_string_single),
+::highlight(css_string_double) {
 	color: var(--color_b_5);
 }
 
@@ -157,7 +164,9 @@
 	color: var(--text_color_5);
 }
 
-::highlight(html_tag) {
+::highlight(html_tag),
+::highlight(html_script),
+::highlight(html_style) {
 	color: var(--color_a_5);
 }
 

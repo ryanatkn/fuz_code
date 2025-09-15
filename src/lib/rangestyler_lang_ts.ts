@@ -8,7 +8,8 @@ const detect_ts_boundaries = (text: string): Array<Rangestyler_Language_Boundary
 
 	// Combined regex to find comments, strings, template literals, and regex literals
 	// Order matters: multi-line comments, single-line comments, template literals, strings, regex
-	const boundary_regex = /(\/\*[\s\S]*?\*\/)|(\/\/.*)|(`(?:\\[\s\S]|(?!`)[^\\])*`)|("(?:\\[\s\S]|(?!")[^\\])*"|'(?:\\[\s\S]|(?!')[^\\])*')|(\/(?:\[(?:[^\]\\\r\n]|\\.)*\]|\\.|[^\/\\[\r\n])+\/[dgimyus]{0,7})/g;
+	const boundary_regex =
+		/(\/\*[\s\S]*?\*\/)|(\/\/.*)|(`(?:\\[\s\S]|(?!`)[^\\])*`)|("(?:\\[\s\S]|(?!")[^\\])*"|'(?:\\[\s\S]|(?!')[^\\])*')|(\/(?:\[(?:[^\]\\\r\n]|\\.)*\]|\\.|[^\/\\[\r\n])+\/[dgimyus]{0,7})/g;
 
 	let last_end = 0;
 	let match;

@@ -3,6 +3,7 @@
 
 	import Domstyler_Code from '$lib/Domstyler_Code.svelte';
 	import Rangestyler_Code from '$lib/Rangestyler_Code.svelte';
+	import Boundaryscanner_Code from '$lib/Boundaryscanner_Code.svelte';
 	import {samples} from '$lib/samples/all.js';
 	import Footer from '$routes/Footer.svelte';
 </script>
@@ -24,6 +25,14 @@
 				<div>
 					<h3>rangestyler (html)</h3>
 					<Rangestyler_Code content={sample.content} lang={sample.lang} mode="html" />
+				</div>
+				<div>
+					<h3>boundary scanner (ranges)</h3>
+					<Boundaryscanner_Code content={sample.content} lang={sample.lang} mode="ranges" />
+				</div>
+				<div>
+					<h3>boundary scanner (html)</h3>
+					<Boundaryscanner_Code content={sample.content} lang={sample.lang} mode="html" />
 				</div>
 			</div>
 		</section>

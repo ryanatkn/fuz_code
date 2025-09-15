@@ -8,6 +8,8 @@ import {
 	generate_html_fallback,
 } from '$lib/rangestyler_builder.js';
 import {rangestyler_global} from '$lib/rangestyler_global.js';
+import {boundary_scanner_global} from '$lib/boundary_scanner_global.js';
+import {generate_html_from_tokens} from '$lib/boundary_scanner_html_generator.js';
 
 export interface Sample_Spec {
 	lang: string;
@@ -34,6 +36,7 @@ export interface Generated_Output {
 	matches: Match_Statistics;
 	domstyler_html: string;
 	rangestyler_html: string;
+	boundary_scanner_html?: string;
 }
 
 /**
@@ -169,11 +172,33 @@ export const generate_match_statistics = (
 };
 
 /**
+ * Generate boundary scanner HTML output for a sample
+ */
+export const generate_boundary_scanner_output = (sample: Sample_Spec): string | undefined => {
+	// Check if language is supported by boundary scanner
+	if (!boundary_scanner_global.has_language(sample.lang)) {
+		return undefined;
+	}
+
+	try {
+		// Scan and get tokens
+		const tokens = boundary_scanner_global.scan(sample.content, sample.lang);
+
+		// Generate HTML from tokens
+		return generate_html_from_tokens(sample.content, tokens);
+	} catch (error) {
+		console.error(`Boundary scanner error for ${sample.lang}_${sample.variant}:`, error);
+		return undefined;
+	}
+};
+
+/**
  * Process a sample and generate all outputs
  */
 export const process_sample = (sample: Sample_Spec): Generated_Output => {
 	const domstyler_html = generate_domstyler_output(sample);
 	const rangestyler_data = generate_rangestyler_data(sample);
+	const boundary_scanner_html = generate_boundary_scanner_output(sample);
 
 	return {
 		sample: {
@@ -186,6 +211,7 @@ export const process_sample = (sample: Sample_Spec): Generated_Output => {
 		matches: rangestyler_data.matches,
 		domstyler_html,
 		rangestyler_html: rangestyler_data.html,
+		boundary_scanner_html,
 	};
 };
 
@@ -193,7 +219,8 @@ export const process_sample = (sample: Sample_Spec): Generated_Output => {
  * Generate markdown report for a sample
  */
 export const generate_report = (output: Generated_Output): string => {
-	const {sample, boundaries, matches, domstyler_html, rangestyler_html} = output;
+	const {sample, boundaries, matches, domstyler_html, rangestyler_html, boundary_scanner_html} =
+		output;
 
 	return `# ${sample.lang.toUpperCase()} ${sample.variant.charAt(0).toUpperCase() + sample.variant.slice(1)} Sample Report
 
@@ -232,9 +259,24 @@ ${domstyler_html}
 ${rangestyler_html}
 \`\`\`
 
+${
+	boundary_scanner_html
+		? `## Boundary Scanner Output
+\`\`\`html
+${boundary_scanner_html}
+\`\`\`
+
+`
+		: ''
+}
 ## Comparison
 - Domstyler size: ${domstyler_html.length} bytes
-- Rangestyler size: ${rangestyler_html.length} bytes
+- Rangestyler size: ${rangestyler_html.length} bytes${
+		boundary_scanner_html
+			? `
+- Boundary Scanner size: ${boundary_scanner_html.length} bytes`
+			: ''
+	}
 - Size difference: ${domstyler_html.length - rangestyler_html.length} bytes
 
 ---

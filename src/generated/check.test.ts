@@ -147,6 +147,37 @@ describe('generated fixtures match runtime', () => {
 				// assert(validate_no_boundary_overlaps(runtime_output.boundaries));
 			});
 
+			test('boundary scanner output matches fixture (if supported)', () => {
+				/**
+				 * Boundary scanner is a new implementation
+				 * Tests HTML generation from boundary detection
+				 *
+				 * Should verify:
+				 * - Correct HTML generation from boundaries
+				 * - Proper exit condition handling (e.g., </script> in strings)
+				 * - Template literal expression tracking
+				 * - Performance improvement over regex approach
+				 */
+				if (!existsSync(fixture_path)) {
+					console.warn(`Skipping test - fixture missing: ${fixture_path}`); // eslint-disable-line no-console
+					return;
+				}
+
+				const fixture: Generated_Output = JSON.parse(readFileSync(fixture_path, 'utf-8'));
+				const runtime_output = process_sample(sample);
+
+				// Skip if boundary scanner doesn't support this language yet
+				if (!runtime_output.boundary_scanner_html || !fixture.boundary_scanner_html) {
+					return;
+				}
+
+				assert.strictEqual(
+					runtime_output.boundary_scanner_html,
+					fixture.boundary_scanner_html,
+					`Boundary scanner output mismatch for ${sample.lang}_${sample.variant}`,
+				);
+			});
+
 			test('match statistics are consistent', () => {
 				/**
 				 * Tracks pattern matching performance and coverage

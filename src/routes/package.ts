@@ -25,6 +25,7 @@ export const package_json: Package_Json = {
 		test: 'gro test',
 		preview: 'vite preview',
 		deploy: 'gro deploy',
+		'update-generated-fixtures': 'gro src/generated/update',
 		benchmark: 'vite-node src/lib/run_benchmark.ts',
 	},
 	type: 'module',
@@ -68,6 +69,75 @@ export const package_json: Package_Json = {
 	exports: {
 		'./package.json': './package.json',
 		'./benchmark.js': {types: './dist/benchmark.d.ts', default: './dist/benchmark.js'},
+		'./boundary_scanner_base.js': {
+			types: './dist/boundary_scanner_base.d.ts',
+			default: './dist/boundary_scanner_base.js',
+		},
+		'./boundary_scanner_css.js': {
+			types: './dist/boundary_scanner_css.d.ts',
+			default: './dist/boundary_scanner_css.js',
+		},
+		'./boundary_scanner_global.js': {
+			types: './dist/boundary_scanner_global.d.ts',
+			default: './dist/boundary_scanner_global.js',
+		},
+		'./boundary_scanner_html_generator.js': {
+			types: './dist/boundary_scanner_html_generator.d.ts',
+			default: './dist/boundary_scanner_html_generator.js',
+		},
+		'./boundary_scanner_html.js': {
+			types: './dist/boundary_scanner_html.d.ts',
+			default: './dist/boundary_scanner_html.js',
+		},
+		'./boundary_scanner_json.js': {
+			types: './dist/boundary_scanner_json.d.ts',
+			default: './dist/boundary_scanner_json.js',
+		},
+		'./boundary_scanner_orchestrator.js': {
+			types: './dist/boundary_scanner_orchestrator.d.ts',
+			default: './dist/boundary_scanner_orchestrator.js',
+		},
+		'./boundary_scanner_range_builder.js': {
+			types: './dist/boundary_scanner_range_builder.d.ts',
+			default: './dist/boundary_scanner_range_builder.js',
+		},
+		'./boundary_scanner_registry.js': {
+			types: './dist/boundary_scanner_registry.d.ts',
+			default: './dist/boundary_scanner_registry.js',
+		},
+		'./boundary_scanner_ts.js': {
+			types: './dist/boundary_scanner_ts.d.ts',
+			default: './dist/boundary_scanner_ts.js',
+		},
+		'./boundary_scanner_types.js': {
+			types: './dist/boundary_scanner_types.d.ts',
+			default: './dist/boundary_scanner_types.js',
+		},
+		'./boundary_tokenizer_css.js': {
+			types: './dist/boundary_tokenizer_css.d.ts',
+			default: './dist/boundary_tokenizer_css.js',
+		},
+		'./boundary_tokenizer_html.js': {
+			types: './dist/boundary_tokenizer_html.d.ts',
+			default: './dist/boundary_tokenizer_html.js',
+		},
+		'./boundary_tokenizer_json.js': {
+			types: './dist/boundary_tokenizer_json.d.ts',
+			default: './dist/boundary_tokenizer_json.js',
+		},
+		'./boundary_tokenizer_ts.js': {
+			types: './dist/boundary_tokenizer_ts.d.ts',
+			default: './dist/boundary_tokenizer_ts.js',
+		},
+		'./boundary_tokenizer_types.js': {
+			types: './dist/boundary_tokenizer_types.d.ts',
+			default: './dist/boundary_tokenizer_types.js',
+		},
+		'./Boundaryscanner_Code.svelte': {
+			types: './dist/Boundaryscanner_Code.svelte.d.ts',
+			svelte: './dist/Boundaryscanner_Code.svelte',
+			default: './dist/Boundaryscanner_Code.svelte',
+		},
 		'./code_sample.js': {types: './dist/code_sample.d.ts', default: './dist/code_sample.js'},
 		'./Domstyler_Code.svelte': {
 			types: './dist/Domstyler_Code.svelte.d.ts',
@@ -183,6 +253,153 @@ export const src_json: Src_Json = {
 				{name: 'format_benchmark_results', kind: 'function'},
 				{name: 'run_and_print_benchmark', kind: 'function'},
 			],
+		},
+		'./boundary_scanner_base.js': {
+			path: 'boundary_scanner_base.ts',
+			declarations: [
+				{name: 'Boundary_Scanner', kind: 'class'},
+				{name: 'Scanner_Pool', kind: 'class'},
+			],
+		},
+		'./boundary_scanner_css.js': {
+			path: 'boundary_scanner_css.ts',
+			declarations: [
+				{name: 'css_boundary_types', kind: 'variable'},
+				{name: 'Css_Scanner', kind: 'class'},
+			],
+		},
+		'./boundary_scanner_global.js': {
+			path: 'boundary_scanner_global.ts',
+			declarations: [{name: 'boundary_scanner_global', kind: 'variable'}],
+		},
+		'./boundary_scanner_html_generator.js': {
+			path: 'boundary_scanner_html_generator.ts',
+			declarations: [{name: 'generate_html_from_tokens', kind: 'function'}],
+		},
+		'./boundary_scanner_html.js': {
+			path: 'boundary_scanner_html.ts',
+			declarations: [
+				{name: 'html_boundary_types', kind: 'variable'},
+				{name: 'Html_Scanner', kind: 'class'},
+			],
+		},
+		'./boundary_scanner_json.js': {
+			path: 'boundary_scanner_json.ts',
+			declarations: [
+				{name: 'json_boundary_types', kind: 'variable'},
+				{name: 'Json_Scanner', kind: 'class'},
+			],
+		},
+		'./boundary_scanner_orchestrator.js': {
+			path: 'boundary_scanner_orchestrator.ts',
+			declarations: [{name: 'Scanner_Orchestrator', kind: 'class'}],
+		},
+		'./boundary_scanner_range_builder.js': {
+			path: 'boundary_scanner_range_builder.ts',
+			declarations: [
+				{name: 'build_ranges_from_tokens', kind: 'function'},
+				{name: 'apply_highlights', kind: 'function'},
+				{name: 'clear_highlights', kind: 'function'},
+				{name: 'highlight_with_tokens', kind: 'function'},
+				{name: 'supports_css_highlight_api', kind: 'function'},
+			],
+		},
+		'./boundary_scanner_registry.js': {
+			path: 'boundary_scanner_registry.ts',
+			declarations: [{name: 'Boundary_Registry', kind: 'class'}],
+		},
+		'./boundary_scanner_ts.js': {
+			path: 'boundary_scanner_ts.ts',
+			declarations: [
+				{name: 'ts_boundary_types', kind: 'variable'},
+				{name: 'Ts_Scanner', kind: 'class'},
+			],
+		},
+		'./boundary_scanner_types.js': {
+			path: 'boundary_scanner_types.ts',
+			declarations: [
+				{name: 'Token', kind: 'type'},
+				{name: 'Code_Tokenizer', kind: 'type'},
+				{name: 'Boundary_Type_Def', kind: 'type'},
+				{name: 'Found_Boundary', kind: 'type'},
+				{name: 'Language_Scanner', kind: 'type'},
+				{name: 'Boundary', kind: 'type'},
+				{name: 'Scan_Context', kind: 'type'},
+				{name: 'CHAR_LT', kind: 'variable'},
+				{name: 'CHAR_GT', kind: 'variable'},
+				{name: 'CHAR_SLASH', kind: 'variable'},
+				{name: 'CHAR_STAR', kind: 'variable'},
+				{name: 'CHAR_QUOTE', kind: 'variable'},
+				{name: 'CHAR_SQUOTE', kind: 'variable'},
+				{name: 'CHAR_BACKTICK', kind: 'variable'},
+				{name: 'CHAR_BACKSLASH', kind: 'variable'},
+				{name: 'CHAR_DOLLAR', kind: 'variable'},
+				{name: 'CHAR_LBRACE', kind: 'variable'},
+				{name: 'CHAR_RBRACE', kind: 'variable'},
+				{name: 'CHAR_LPAREN', kind: 'variable'},
+				{name: 'CHAR_RPAREN', kind: 'variable'},
+				{name: 'CHAR_LBRACKET', kind: 'variable'},
+				{name: 'CHAR_RBRACKET', kind: 'variable'},
+				{name: 'CHAR_NEWLINE', kind: 'variable'},
+				{name: 'CHAR_CR', kind: 'variable'},
+				{name: 'CHAR_TAB', kind: 'variable'},
+				{name: 'CHAR_SPACE', kind: 'variable'},
+				{name: 'CHAR_EXCLAIM', kind: 'variable'},
+				{name: 'CHAR_MINUS', kind: 'variable'},
+				{name: 'CHAR_EQUALS', kind: 'variable'},
+				{name: 'CHAR_COLON', kind: 'variable'},
+				{name: 'CHAR_SEMICOLON', kind: 'variable'},
+				{name: 'CHAR_COMMA', kind: 'variable'},
+				{name: 'CHAR_DOT', kind: 'variable'},
+				{name: 'CHAR_HASH', kind: 'variable'},
+				{name: 'CHAR_AT', kind: 'variable'},
+				{name: 'CHAR_PERCENT', kind: 'variable'},
+				{name: 'CHAR_AMPERSAND', kind: 'variable'},
+				{name: 'CHAR_PIPE', kind: 'variable'},
+				{name: 'CHAR_PLUS', kind: 'variable'},
+				{name: 'CHAR_QUESTION', kind: 'variable'},
+				{name: 'CHAR_TILDE', kind: 'variable'},
+				{name: 'CHAR_CARET', kind: 'variable'},
+				{name: 'CHAR_a', kind: 'variable'},
+				{name: 'CHAR_z', kind: 'variable'},
+				{name: 'CHAR_A', kind: 'variable'},
+				{name: 'CHAR_Z', kind: 'variable'},
+				{name: 'CHAR_0', kind: 'variable'},
+				{name: 'CHAR_9', kind: 'variable'},
+			],
+		},
+		'./boundary_tokenizer_css.js': {
+			path: 'boundary_tokenizer_css.ts',
+			declarations: [{name: 'Css_Code_Tokenizer', kind: 'class'}],
+		},
+		'./boundary_tokenizer_html.js': {
+			path: 'boundary_tokenizer_html.ts',
+			declarations: [
+				{name: 'Html_Tag_Tokenizer', kind: 'class'},
+				{name: 'Html_Code_Tokenizer', kind: 'class'},
+				{name: 'Html_Doctype_Tokenizer', kind: 'class'},
+				{name: 'Html_Cdata_Tokenizer', kind: 'class'},
+				{name: 'Html_Comment_Tokenizer', kind: 'class'},
+			],
+		},
+		'./boundary_tokenizer_json.js': {
+			path: 'boundary_tokenizer_json.ts',
+			declarations: [{name: 'Json_Code_Tokenizer', kind: 'class'}],
+		},
+		'./boundary_tokenizer_ts.js': {
+			path: 'boundary_tokenizer_ts.ts',
+			declarations: [{name: 'Ts_Code_Tokenizer', kind: 'class'}],
+		},
+		'./boundary_tokenizer_types.js': {
+			path: 'boundary_tokenizer_types.ts',
+			declarations: [
+				{name: 'Token_Pattern', kind: 'type'},
+				{name: 'Pattern_Based_Tokenizer', kind: 'class'},
+			],
+		},
+		'./Boundaryscanner_Code.svelte': {
+			path: 'Boundaryscanner_Code.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
 		},
 		'./code_sample.js': {
 			path: 'code_sample.ts',

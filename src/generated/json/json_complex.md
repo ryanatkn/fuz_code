@@ -189,10 +189,60 @@
 <span class="token punctuation">}</span>
 ```
 
+## Boundary Scanner Output
+
+```html
+<span class="token punctuation">{</span> <span class="token property">&quot;string&quot;</span
+><span class="token operator">:</span> <span class="token string">&quot;a string&quot;</span
+><span class="token punctuation">,</span> <span class="token property">&quot;number&quot;</span
+><span class="token operator">:</span> <span class="token number">12345</span
+><span class="token punctuation">,</span> <span class="token property">&quot;boolean&quot;</span
+><span class="token operator">:</span> <span class="token boolean">true</span
+><span class="token punctuation">,</span> <span class="token property">&quot;null&quot;</span
+><span class="token operator">:</span> <span class="token null">null</span
+><span class="token punctuation">,</span> <span class="token property">&quot;empty&quot;</span
+><span class="token operator">:</span> <span class="token string">&quot;&quot;</span
+><span class="token punctuation">,</span> <span class="token property">&quot;escaped&quot;</span
+><span class="token operator">:</span>
+<span class="token string">&quot;quote: \&quot;test\&quot; and backslash: \\&quot;</span
+><span class="token punctuation">,</span> <span class="token property">&quot;object&quot;</span
+><span class="token operator">:</span> <span class="token punctuation">{</span>
+<span class="token property">&quot;array&quot;</span><span class="token operator">:</span>
+<span class="token punctuation">[</span><span class="token number">1</span
+><span class="token punctuation">,</span> <span class="token string">&quot;b&quot;</span
+><span class="token punctuation">,</span> <span class="token boolean">false</span
+><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token property">&quot;strings&quot;</span><span class="token operator">:</span>
+<span class="token punctuation">[</span><span class="token string">&quot;1&quot;</span
+><span class="token punctuation">,</span> <span class="token string">&quot;2&quot;</span
+><span class="token punctuation">,</span> <span class="token string">&quot;3&quot;</span
+><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token property">&quot;mixed&quot;</span><span class="token operator">:</span>
+<span class="token punctuation">[</span><span class="token string">&quot;start&quot;</span
+><span class="token punctuation">,</span> <span class="token number">123</span
+><span class="token punctuation">,</span> <span class="token boolean">true</span
+><span class="token punctuation">,</span> <span class="token string">&quot;middle&quot;</span
+><span class="token punctuation">,</span> <span class="token null">null</span
+><span class="token punctuation">,</span> <span class="token string">&quot;end&quot;</span
+><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token property">&quot;nested&quot;</span><span class="token operator">:</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span
+><span class="token string">&quot;a&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;str&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;&quot;</span><span class="token punctuation">]</span
+><span class="token punctuation">,</span> <span class="token punctuation">{</span
+><span class="token property">&quot;key&quot;</span><span class="token operator">:</span>
+<span class="token string">&quot;nested value&quot;</span><span class="token punctuation">}</span
+><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+```
+
 ## Comparison
 
 - Domstyler size: 3397 bytes
 - Rangestyler size: 3651 bytes
+- Boundary Scanner size: 3651 bytes
 - Size difference: -254 bytes
 
 ---

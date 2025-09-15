@@ -33,7 +33,7 @@ const detect_json_boundaries = (text: string): Array<Rangestyler_Language_Bounda
 			patterns: [
 				{
 					name: boundary_type,
-					match: /.+/s,  // Changed from .* to .+ to avoid empty matches
+					match: /.+/s, // Changed from .* to .+ to avoid empty matches
 					priority: 100,
 					greedy: true,
 				},

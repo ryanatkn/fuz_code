@@ -2,6 +2,18 @@
 
 A performance-focused fork of PrismJS for syntax highlighting, optimized for runtime use.
 
+## Commands
+
+```bash
+gro test      # Run tests
+gro test -- file_pattern -t "specific filter"
+npm run benchmark # Run benchmarks
+
+# Test fixtures workflow
+gro test src/generated/check.test.ts # verify
+gro src/generated/update             # regenerate ONLY if on-disk files are incorrect
+```
+
 ## File Structure
 
 The codebase uses a flat structure with clear `domstyler` and `rangestyler` prefixes:
@@ -129,18 +141,6 @@ rangestyler_global.highlight(element, code, 'ts');
 - Uses native browser Range objects instead of HTML generation
 - Smaller memory footprint
 - Falls back to HTML generation in older browsers
-
-## Commands
-
-```bash
-npm run test      # Run tests
-npm run benchmark # Run benchmarks
-npm run build     # Build library
-
-# Test fixtures workflow
-gro test src/generated/check.test.ts # verify
-gro src/generated/update             # regenerate ONLY if on-disk files are incorrect
-```
 
 ## Current Performance Bottlenecks
 
