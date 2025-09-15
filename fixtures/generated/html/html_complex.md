@@ -11,38 +11,8 @@
 
 ### Boundaries
 
-- **Total**: 3
-- code: [0:401]
-- embedded: [401:482]
-- code: [482:541]
-
-### Matches
-
-- **Total**: 142
-- **By Type**:
-  - doctype: 1
-  - tag: 30
-  - punctuation: 83
-  - attr_name: 8
-  - attr_value: 7
-  - operator: 8
-  - comment: 1
-  - selector: 1
-  - property: 2
-  - cdata: 1
-
-## Sample Matches
-
-- **doctype** [0:15]: `<!doctype html>`
-- **tag** [0:9]: `<!doctype`
-- **punctuation** [0:1]: `<`
-- **punctuation** [14:15]: `>`
-- **tag** [17:21]: `<div`
-- **punctuation** [17:18]: `<`
-- **attr_name** [22:27]: `class`
-- **attr_value** [27:34]: `="test"`
-- **operator** [27:28]: `=`
-- **tag** [37:39]: `<p`
+- **Total**: 1
+- code: [0:541]
 
 ## Domstyler Output
 
@@ -198,76 +168,6 @@
 <span class="token cdata">&lt;![CDATA[ if (a &lt; 0) alert("b"); &lt;not-a-tag> ]]></span>
 ```
 
-## Rangestyler Output
-
-```html
-<span class="token doctype">&lt;!doctype html&gt;</span>
-
-<span class="token tag">&lt;div</span> <span class="token attr_name">class</span
-><span class="token attr_value">=&quot;test&quot;</span><span class="token punctuation">&gt;</span>
-<span class="token tag">&lt;p</span><span class="token punctuation">&gt;</span>hello world!<span
-	class="token tag"
-	>&lt;/p</span
-><span class="token punctuation">&gt;</span> <span class="token tag">&lt;/div</span
-><span class="token punctuation">&gt;</span>
-
-<span class="token tag">&lt;p</span> <span class="token attr_name">class</span
-><span class="token attr_value">=&quot;some_class hypen-class&quot;</span
-><span class="token punctuation">&gt;</span>some <span class="token tag">&lt;span</span>
-<span class="token attr_name">class</span><span class="token attr_value">=&quot;a b c&quot;</span
-><span class="token punctuation">&gt;</span>text<span class="token tag">&lt;/span</span
-><span class="token punctuation">&gt;</span><span class="token tag">&lt;/p</span
-><span class="token punctuation">&gt;</span>
-
-<span class="token tag">&lt;button</span> <span class="token attr_name">type</span
-><span class="token attr_value">=&quot;button&quot;</span> disabled<span class="token punctuation"
-	>&gt;</span
->click me<span class="token tag">&lt;/button</span><span class="token punctuation">&gt;</span>
-
-<span class="token comment"
-	>&lt;!-- comment &lt;div&gt;a&lt;br /&gt; b&lt;/div&gt; &lt;script&gt; --&gt;</span
->
-
-<span class="token tag">&lt;br</span> <span class="token punctuation">/</span
-><span class="token punctuation">&gt;</span>
-
-<span class="token tag">&lt;hr</span> <span class="token punctuation">/</span
-><span class="token punctuation">&gt;</span>
-
-<span class="token tag">&lt;img</span> <span class="token attr_name">src</span
-><span class="token attr_value">=&quot;image.jpg&quot;</span>
-<span class="token attr_name">alt</span><span class="token attr_value">=&quot;access&quot;</span>
-<span class="token punctuation">/</span><span class="token punctuation">&gt;</span>
-
-<span class="token tag">&lt;ul</span><span class="token punctuation">&gt;</span>
-<span class="token tag">&lt;li</span><span class="token punctuation">&gt;</span>list item 1<span
-	class="token tag"
-	>&lt;/li</span
-><span class="token punctuation">&gt;</span> <span class="token tag">&lt;li</span
-><span class="token punctuation">&gt;</span>list item 2<span class="token tag">&lt;/li</span
-><span class="token punctuation">&gt;</span> <span class="token tag">&lt;/ul</span
-><span class="token punctuation">&gt;</span>
-
-<span class="token tag">&lt;script</span> <span class="token attr_name">type</span
-><span class="token attr_value">=&quot;text/javascript&quot;</span
-><span class="token punctuation">&gt;</span> const <span class="token attr_name">ok</span>
-<span class="token operator">=</span> &#039;<span class="token tag">&lt;style</span
-><span class="token punctuation">&gt;</span
-><span class="token selector"
-	>&#039;; &lt;/script&gt; &lt;style type=&quot;text/css&quot;&gt; .special::before</span
->
-<span class="token punctuation">{</span> <span class="token property">content</span
-><span class="token punctuation">:</span> &#039;&lt; &amp; &gt;&#039;<span class="token punctuation"
-	>;</span
->
-<span class="token punctuation">}</span>
-<span class="token tag">&lt;/style</span><span class="token punctuation">&gt;</span>
-
-<span class="token cdata"
-	>&lt;![CDATA[ if (a &lt; 0) alert(&quot;b&quot;); &lt;not-a-tag&gt; ]]&gt;</span
->
-```
-
 ## Boundary Scanner Output
 
 ```html
@@ -361,9 +261,7 @@ me<span class="token punctuation">&lt;</span><span class="token punctuation">/</
 ## Comparison
 
 - Domstyler size: 6183 bytes
-- Rangestyler size: 3442 bytes
 - Boundary Scanner size: 5016 bytes
-- Size difference: 2741 bytes
 
 ---
 

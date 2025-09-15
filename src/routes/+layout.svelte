@@ -2,7 +2,7 @@
 	import '@ryanatkn/moss/style.css';
 	import '@ryanatkn/moss/theme.css';
 	import '$lib/domstyler_theme.css';
-	import '$lib/rangestyler_theme.css';
+	import '$lib/boundary_scanner_theme.css';
 	import '$routes/moss.css';
 
 	import Themed from '@ryanatkn/fuz/Themed.svelte';

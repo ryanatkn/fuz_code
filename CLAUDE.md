@@ -18,7 +18,7 @@ gro src/fixtures/update             # regenerate ONLY if on-disk files are incor
 
 The codebase uses a flat structure with clear `domstyler` and `rangestyler` prefixes:
 
-**IMPORTANT**: Domstyler is considered legacy - we should NOT fix it, only use it as a reference for expected behavior, which in some cases is worse than rangestyler. All improvements go into rangestyler.
+**IMPORTANT**: Domstyler is considered legacy - we should NOT fix it, only use it as a reference for expected behavior. All improvements go into the boundary scanner system.
 
 ### DOM Styler (HTML Generation)
 
@@ -34,18 +34,25 @@ The codebase uses a flat structure with clear `domstyler` and `rangestyler` pref
 - `src/lib/domstyler_theme.css` - Main theme (requires Moss)
 - `src/lib/domstyler_theme_standalone.css` - Dependency-free theme
 
-### Range Styler (CSS Custom Highlight API)
+### Boundary Scanner (New Token-Based System)
 
-- `src/lib/rangestyler.ts` - Main class using native browser Ranges
-- `src/lib/rangestyler_builder.ts` - Pattern → Range conversion
-- `src/lib/rangestyler_types.ts` - Pattern, Rangestyler_Language types
-- `src/lib/rangestyler_lang_ts.ts` - TypeScript patterns
-- `src/lib/rangestyler_lang_css.ts` - CSS patterns
-- `src/lib/rangestyler_lang_html.ts` - HTML patterns
-- `src/lib/rangestyler_lang_json.ts` - JSON patterns
-- `src/lib/rangestyler_lang_svelte.ts` - Svelte patterns
-- `src/lib/Rangestyler_Code.svelte` - Svelte component
-- `src/lib/rangestyler_theme.css` - ::highlight() styles
+- `src/lib/boundary_scanner_base.ts` - Base scanner class and pool management
+- `src/lib/boundary_scanner_orchestrator.ts` - Main orchestrator for multi-language support
+- `src/lib/boundary_scanner_registry.ts` - Registry for boundary types and scanners
+- `src/lib/boundary_scanner_types.ts` - Core types and character constants
+- `src/lib/boundary_scanner_html_generator.ts` - HTML generation from tokens
+- `src/lib/boundary_scanner_range_builder.ts` - CSS Custom Highlight API support
+- Language-specific scanners:
+  - `src/lib/boundary_scanner_ts.ts` - TypeScript scanner
+  - `src/lib/boundary_scanner_css.ts` - CSS scanner
+  - `src/lib/boundary_scanner_html.ts` - HTML scanner
+  - `src/lib/boundary_scanner_json.ts` - JSON scanner
+- Pattern-based tokenizers:
+  - `src/lib/boundary_tokenizer_ts.ts` - TypeScript tokenizer
+  - `src/lib/boundary_tokenizer_css.ts` - CSS tokenizer
+  - `src/lib/boundary_tokenizer_html.ts` - HTML tokenizers
+  - `src/lib/boundary_tokenizer_json.ts` - JSON tokenizer
+- `src/lib/Boundaryscanner_Code.svelte` - Svelte component wrapper
 
 ### Test Infrastructure
 
@@ -79,17 +86,19 @@ const html = domstyler.stylize(code, 'ts');
 <Domstyler_Code content={code} lang="ts" />
 ```
 
-### Range Styler (CSS Custom Highlight API)
+### Boundary Scanner (Token-Based System)
 
 ```typescript
-import {rangestyler_global} from '$lib/rangestyler.js';
-import Rangestyler_Code from '$lib/Rangestyler_Code.svelte';
+import {boundary_scanner_global} from '$lib/boundary_scanner_global.js';
+import {generate_html_from_tokens} from '$lib/boundary_scanner_html_generator.js';
+import Boundaryscanner_Code from '$lib/Boundaryscanner_Code.svelte';
 
 // Direct API
-rangestyler_global.highlight(element, code, 'ts');
+const tokens = boundary_scanner_global.scan(code, 'ts');
+const html = generate_html_from_tokens(code, tokens);
 
 // Component
-<Rangestyler_Code content={code} lang="ts" />
+<Boundaryscanner_Code content={code} lang="ts" />
 ```
 
 ## Architecture
@@ -106,17 +115,18 @@ rangestyler_global.highlight(element, code, 'ts');
    - Grammar extension/inheritance (e.g., TS extends JS)
    - Dynamic grammar insertion for language embedding
 
-### Range Styler
+### Boundary Scanner
 
-1. **Highlighting Flow**:
-   - Text → Pattern matching → Range objects → CSS Custom Highlights
-   - Direct pattern to Range conversion without intermediate tokens
-   - Automatic fallback to HTML for unsupported browsers
+1. **Tokenization Flow**:
+   - Text → Character-by-character scanning → Token stream → HTML/Range output
+   - Uses state machines for accurate boundary detection
+   - Supports nested language contexts and proper exit condition handling
 
-2. **Pattern System**:
-   - Simpler pattern-based definitions
-   - No grammar inheritance
-   - Direct platform API usage (CSS.highlights, globalThis.Highlight)
+2. **Scanner System**:
+   - Language-specific scanners with boundary type definitions
+   - Pattern-based tokenizers for syntax highlighting within boundaries
+   - Registry system for modular language support
+   - CSS Custom Highlight API support with HTML fallback
 
 ### Colors
 
@@ -136,11 +146,12 @@ rangestyler_global.highlight(element, code, 'ts');
 
 - Works in all browsers
 
-### Range Styler
+### Boundary Scanner
 
-- Uses native browser Range objects instead of HTML generation
-- Smaller memory footprint
-- Falls back to HTML generation in older browsers
+- Character-by-character scanning for accurate boundary detection
+- Separate tokenization phase for syntax highlighting
+- Support for both HTML generation and CSS Custom Highlights
+- Modular architecture with language-specific scanners
 
 ## Current Performance Bottlenecks
 
@@ -151,16 +162,16 @@ rangestyler_global.highlight(element, code, 'ts');
 3. **Deep cloning** - Grammar extension copies entire trees
 4. **String concatenation** - HTML built via string concat
 
-### Range Styler
+### Boundary Scanner
 
-1. **Pattern matching** - Could benefit from caching
-2. **Range creation** - Multiple DOM operations
-3. **Overlap resolution** - O(n²) in worst case
+1. **Character scanning** - O(n) but could benefit from lookahead optimization
+2. **Token creation** - Efficient single-pass generation
+3. **Language switching** - Boundary detection overhead for nested contexts
 
 ## Demo Pages
 
 - `/samples` - DOM Styler examples
-- `/highlight` - Range Styler demo
+- `/boundary` - Boundary Scanner demo
 - `/compare` - Side-by-side comparison
 - `/benchmark` - Performance testing
 

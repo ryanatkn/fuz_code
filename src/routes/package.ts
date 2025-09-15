@@ -105,6 +105,7 @@ export const package_json: Package_Json = {
 			types: './dist/boundary_scanner_registry.d.ts',
 			default: './dist/boundary_scanner_registry.js',
 		},
+		'./boundary_scanner_theme.css': {default: './dist/boundary_scanner_theme.css'},
 		'./boundary_scanner_ts.js': {
 			types: './dist/boundary_scanner_ts.d.ts',
 			default: './dist/boundary_scanner_ts.js',
@@ -180,45 +181,6 @@ export const package_json: Package_Json = {
 		'./domstyler_theme.css': {default: './dist/domstyler_theme.css'},
 		'./domstyler.js': {types: './dist/domstyler.d.ts', default: './dist/domstyler.js'},
 		'./helpers.js': {types: './dist/helpers.d.ts', default: './dist/helpers.js'},
-		'./rangestyler_builder.js': {
-			types: './dist/rangestyler_builder.d.ts',
-			default: './dist/rangestyler_builder.js',
-		},
-		'./Rangestyler_Code.svelte': {
-			types: './dist/Rangestyler_Code.svelte.d.ts',
-			svelte: './dist/Rangestyler_Code.svelte',
-			default: './dist/Rangestyler_Code.svelte',
-		},
-		'./rangestyler_global.js': {
-			types: './dist/rangestyler_global.d.ts',
-			default: './dist/rangestyler_global.js',
-		},
-		'./rangestyler_lang_css.js': {
-			types: './dist/rangestyler_lang_css.d.ts',
-			default: './dist/rangestyler_lang_css.js',
-		},
-		'./rangestyler_lang_html.js': {
-			types: './dist/rangestyler_lang_html.d.ts',
-			default: './dist/rangestyler_lang_html.js',
-		},
-		'./rangestyler_lang_json.js': {
-			types: './dist/rangestyler_lang_json.d.ts',
-			default: './dist/rangestyler_lang_json.js',
-		},
-		'./rangestyler_lang_svelte.js': {
-			types: './dist/rangestyler_lang_svelte.d.ts',
-			default: './dist/rangestyler_lang_svelte.js',
-		},
-		'./rangestyler_lang_ts.js': {
-			types: './dist/rangestyler_lang_ts.d.ts',
-			default: './dist/rangestyler_lang_ts.js',
-		},
-		'./rangestyler_theme.css': {default: './dist/rangestyler_theme.css'},
-		'./rangestyler_types.js': {
-			types: './dist/rangestyler_types.d.ts',
-			default: './dist/rangestyler_types.js',
-		},
-		'./rangestyler.js': {types: './dist/rangestyler.d.ts', default: './dist/rangestyler.js'},
 		'./run_benchmark.js': {types: './dist/run_benchmark.d.ts', default: './dist/run_benchmark.js'},
 		'./samples/all.gen.js': {
 			types: './dist/samples/all.gen.d.ts',
@@ -297,16 +259,18 @@ export const src_json: Src_Json = {
 		'./boundary_scanner_range_builder.js': {
 			path: 'boundary_scanner_range_builder.ts',
 			declarations: [
-				{name: 'build_ranges_from_tokens', kind: 'function'},
-				{name: 'apply_highlights', kind: 'function'},
-				{name: 'clear_highlights', kind: 'function'},
-				{name: 'highlight_with_tokens', kind: 'function'},
+				{name: 'Boundaryscanner_Mode', kind: 'type'},
 				{name: 'supports_css_highlight_api', kind: 'function'},
+				{name: 'Highlight_Manager', kind: 'class'},
 			],
 		},
 		'./boundary_scanner_registry.js': {
 			path: 'boundary_scanner_registry.ts',
 			declarations: [{name: 'Boundary_Registry', kind: 'class'}],
+		},
+		'./boundary_scanner_theme.css': {
+			path: 'boundary_scanner_theme.css',
+			declarations: [{name: 'default', kind: 'css'}],
 		},
 		'./boundary_scanner_ts.js': {
 			path: 'boundary_scanner_ts.ts',
@@ -480,69 +444,6 @@ export const src_json: Src_Json = {
 			],
 		},
 		'./helpers.js': {path: 'helpers.ts', declarations: [{name: 'escape_html', kind: 'function'}]},
-		'./rangestyler_builder.js': {
-			path: 'rangestyler_builder.ts',
-			declarations: [
-				{name: 'create_text_node', kind: 'function'},
-				{name: 'find_matches', kind: 'function'},
-				{name: 'resolve_overlaps', kind: 'function'},
-				{name: 'create_ranges', kind: 'function'},
-				{name: 'build_ranges', kind: 'function'},
-				{name: 'build_ranges_with_boundaries', kind: 'function'},
-				{name: 'generate_html_fallback', kind: 'function'},
-				{name: 'get_boundary_patterns', kind: 'function'},
-				{name: 'find_matches_with_boundaries', kind: 'function'},
-			],
-		},
-		'./Rangestyler_Code.svelte': {
-			path: 'Rangestyler_Code.svelte',
-			declarations: [{name: 'default', kind: 'component'}],
-		},
-		'./rangestyler_global.js': {
-			path: 'rangestyler_global.ts',
-			declarations: [{name: 'rangestyler_global', kind: 'variable'}],
-		},
-		'./rangestyler_lang_css.js': {
-			path: 'rangestyler_lang_css.ts',
-			declarations: [{name: 'css_language', kind: 'variable'}],
-		},
-		'./rangestyler_lang_html.js': {
-			path: 'rangestyler_lang_html.ts',
-			declarations: [{name: 'html_language', kind: 'variable'}],
-		},
-		'./rangestyler_lang_json.js': {
-			path: 'rangestyler_lang_json.ts',
-			declarations: [{name: 'json_language', kind: 'variable'}],
-		},
-		'./rangestyler_lang_svelte.js': {
-			path: 'rangestyler_lang_svelte.ts',
-			declarations: [{name: 'svelte_language', kind: 'variable'}],
-		},
-		'./rangestyler_lang_ts.js': {
-			path: 'rangestyler_lang_ts.ts',
-			declarations: [{name: 'ts_language', kind: 'variable'}],
-		},
-		'./rangestyler_theme.css': {
-			path: 'rangestyler_theme.css',
-			declarations: [{name: 'default', kind: 'css'}],
-		},
-		'./rangestyler_types.js': {
-			path: 'rangestyler_types.ts',
-			declarations: [
-				{name: 'Rangestyler_Language', kind: 'type'},
-				{name: 'Rangestyler_Pattern', kind: 'type'},
-				{name: 'Rangestyler_Match_Result', kind: 'type'},
-				{name: 'Rangestyler_Language_Boundary', kind: 'type'},
-				{name: 'Rangestyler_Mode', kind: 'type'},
-			],
-		},
-		'./rangestyler.js': {
-			path: 'rangestyler.ts',
-			declarations: [
-				{name: 'supports_css_highlight_api', kind: 'function'},
-				{name: 'Rangestyler', kind: 'class'},
-			],
-		},
 		'./run_benchmark.js': {path: 'run_benchmark.ts'},
 		'./samples/all.gen.js': {
 			path: 'samples/all.gen.ts',

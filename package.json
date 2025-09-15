@@ -135,6 +135,9 @@
       "types": "./dist/boundary_scanner_registry.d.ts",
       "default": "./dist/boundary_scanner_registry.js"
     },
+    "./boundary_scanner_theme.css": {
+      "default": "./dist/boundary_scanner_theme.css"
+    },
     "./boundary_scanner_ts.js": {
       "types": "./dist/boundary_scanner_ts.d.ts",
       "default": "./dist/boundary_scanner_ts.js"
@@ -222,50 +225,6 @@
     "./helpers.js": {
       "types": "./dist/helpers.d.ts",
       "default": "./dist/helpers.js"
-    },
-    "./rangestyler_builder.js": {
-      "types": "./dist/rangestyler_builder.d.ts",
-      "default": "./dist/rangestyler_builder.js"
-    },
-    "./Rangestyler_Code.svelte": {
-      "types": "./dist/Rangestyler_Code.svelte.d.ts",
-      "svelte": "./dist/Rangestyler_Code.svelte",
-      "default": "./dist/Rangestyler_Code.svelte"
-    },
-    "./rangestyler_global.js": {
-      "types": "./dist/rangestyler_global.d.ts",
-      "default": "./dist/rangestyler_global.js"
-    },
-    "./rangestyler_lang_css.js": {
-      "types": "./dist/rangestyler_lang_css.d.ts",
-      "default": "./dist/rangestyler_lang_css.js"
-    },
-    "./rangestyler_lang_html.js": {
-      "types": "./dist/rangestyler_lang_html.d.ts",
-      "default": "./dist/rangestyler_lang_html.js"
-    },
-    "./rangestyler_lang_json.js": {
-      "types": "./dist/rangestyler_lang_json.d.ts",
-      "default": "./dist/rangestyler_lang_json.js"
-    },
-    "./rangestyler_lang_svelte.js": {
-      "types": "./dist/rangestyler_lang_svelte.d.ts",
-      "default": "./dist/rangestyler_lang_svelte.js"
-    },
-    "./rangestyler_lang_ts.js": {
-      "types": "./dist/rangestyler_lang_ts.d.ts",
-      "default": "./dist/rangestyler_lang_ts.js"
-    },
-    "./rangestyler_theme.css": {
-      "default": "./dist/rangestyler_theme.css"
-    },
-    "./rangestyler_types.js": {
-      "types": "./dist/rangestyler_types.d.ts",
-      "default": "./dist/rangestyler_types.js"
-    },
-    "./rangestyler.js": {
-      "types": "./dist/rangestyler.d.ts",
-      "default": "./dist/rangestyler.js"
     },
     "./run_benchmark.js": {
       "types": "./dist/run_benchmark.d.ts",

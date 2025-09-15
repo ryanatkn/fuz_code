@@ -17,19 +17,12 @@ import {sample_langs} from '$lib/code_sample.js';
  *
  * Current State:
  * - Tests exact HTML match between runtime and fixtures
- * - Separate tests for domstyler and rangestyler outputs
- * - Known differences exist between implementations
+ * - Tests domstyler (legacy) and boundary scanner outputs
  *
  * Future Goals:
- * - Migrate from domstyler to rangestyler as primary implementation
+ * - Migrate from domstyler to boundary scanner as primary implementation
  * - Test semantic equivalence rather than exact HTML match
  * - Ensure complete coverage with no unhighlighted code
- *
- * Known Implementation Differences:
- * - HTML escaping: domstyler uses raw quotes, rangestyler uses entities (&#039;)
- * - Class names: domstyler 'builtin' vs rangestyler 'type' for TypeScript types
- * - Template strings: domstyler has complex nesting, rangestyler simpler
- * - Arrow functions: different escaping (=> vs =&gt;)
  */
 
 // TODO: Helper functions for semantic comparison
@@ -85,39 +78,6 @@ describe('generated fixtures match runtime', () => {
 				// assert(validate_no_overlaps(extract_tokens(runtime_output.domstyler_html)));
 			});
 
-			test('rangestyler output matches fixture', () => {
-				/**
-				 * Current: Tests exact HTML string match
-				 *
-				 * Ideal: Should test:
-				 * - Semantic equivalence with domstyler (same tokens highlighted)
-				 * - Proper HTML escaping (security)
-				 * - Correct boundary detection for nested languages
-				 * - Fallback HTML generation quality
-				 *
-				 * Note: Rangestyler is the future - improvements here are expected
-				 * and should not break tests once we verify correctness
-				 */
-				if (!existsSync(fixture_path)) {
-					console.warn(`Skipping test - fixture missing: ${fixture_path}`); // eslint-disable-line no-console
-					return;
-				}
-
-				const fixture: Generated_Output = JSON.parse(readFileSync(fixture_path, 'utf-8'));
-				const runtime_output = process_sample(sample);
-
-				assert.strictEqual(
-					runtime_output.rangestyler_html,
-					fixture.rangestyler_html,
-					`Rangestyler output mismatch for ${sample.lang}_${sample.variant}`,
-				);
-
-				// TODO: Semantic comparison with domstyler
-				// const domstyler_tokens = extract_token_positions(runtime_output.domstyler_html);
-				// const rangestyler_tokens = extract_token_positions(runtime_output.rangestyler_html);
-				// assert(compare_token_positions(domstyler_tokens, rangestyler_tokens));
-			});
-
 			test('boundaries match fixture', () => {
 				/**
 				 * Critical for nested language support (e.g., JS in HTML, CSS in Svelte)
@@ -147,7 +107,7 @@ describe('generated fixtures match runtime', () => {
 				// assert(validate_no_boundary_overlaps(runtime_output.boundaries));
 			});
 
-			test('boundary scanner output matches fixture (if supported)', () => {
+			test('boundary scanner output matches fixture', () => {
 				/**
 				 * Boundary scanner is a new implementation
 				 * Tests HTML generation from boundary detection
@@ -177,41 +137,6 @@ describe('generated fixtures match runtime', () => {
 					`Boundary scanner output mismatch for ${sample.lang}_${sample.variant}`,
 				);
 			});
-
-			test('match statistics are consistent', () => {
-				/**
-				 * Tracks pattern matching performance and coverage
-				 *
-				 * Future enhancements:
-				 * - Track which patterns never match (dead code)
-				 * - Identify patterns that match too broadly
-				 * - Performance metrics per pattern
-				 * - Coverage percentage by token type
-				 */
-				if (!existsSync(fixture_path)) {
-					console.warn(`Skipping test - fixture missing: ${fixture_path}`); // eslint-disable-line no-console
-					return;
-				}
-
-				const fixture: Generated_Output = JSON.parse(readFileSync(fixture_path, 'utf-8'));
-				const runtime_output = process_sample(sample);
-
-				assert.strictEqual(
-					runtime_output.matches.total,
-					fixture.matches.total,
-					`Match count mismatch for ${sample.lang}_${sample.variant}`,
-				);
-
-				assert.deepEqual(
-					runtime_output.matches.by_type,
-					fixture.matches.by_type,
-					`Match type statistics mismatch for ${sample.lang}_${sample.variant}`,
-				);
-
-				// TODO: Pattern effectiveness analysis
-				// const unused_patterns = find_unused_patterns(language.patterns, runtime_output.matches);
-				// assert(unused_patterns.length === 0, `Unused patterns: ${unused_patterns}`);
-			});
 		});
 	}
 });
@@ -236,7 +161,7 @@ describe('all expected languages are tested', () => {
  * =======================
  *
  * describe('semantic equivalence', () => {
- *   test('domstyler and rangestyler highlight same tokens', () => {
+ *   test('domstyler and boundary scanner highlight same tokens', () => {
  *     // Compare token positions regardless of HTML differences
  *   });
  *

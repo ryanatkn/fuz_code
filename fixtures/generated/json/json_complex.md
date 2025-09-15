@@ -11,85 +11,8 @@
 
 ### Boundaries
 
-- **Total**: 53
-- code: [0:3]
-- property: [3:11]
-- code: [11:13]
-- string: [13:23]
-- code: [23:26]
-- property: [26:34]
-- code: [34:44]
-- property: [44:53]
-- code: [53:62]
-- property: [62:68]
-- code: [68:77]
-- property: [77:84]
-- code: [84:86]
-- string: [86:88]
-- code: [88:91]
-- property: [91:100]
-- code: [100:102]
-- string: [102:137]
-- code: [137:140]
-- property: [140:148]
-- code: [148:154]
-- property: [154:161]
-- code: [161:167]
-- string: [167:170]
-- code: [170:182]
-- property: [182:191]
-- code: [191:194]
-- string: [194:197]
-- code: [197:199]
-- string: [199:202]
-- code: [202:204]
-- string: [204:207]
-- code: [207:212]
-- property: [212:219]
-- code: [219:222]
-- string: [222:229]
-- code: [229:242]
-- string: [242:250]
-- code: [250:258]
-- string: [258:263]
-- code: [263:268]
-- property: [268:276]
-- code: [276:280]
-- string: [280:283]
-- code: [283:285]
-- string: [285:290]
-- code: [290:292]
-- string: [292:294]
-- code: [294:298]
-- property: [298:303]
-- code: [303:305]
-- string: [305:319]
-- code: [319:327]
-
-### Matches
-
-- **Total**: 83
-- **By Type**:
-  - punctuation: 37
-  - property: 12
-  - operator: 12
-  - string: 14
-  - number: 3
-  - boolean: 3
-  - null: 2
-
-## Sample Matches
-
-- **punctuation** [0:1]: `{`
-- **property** [3:11]: `"string"`
-- **operator** [11:12]: `:`
-- **string** [13:23]: `"a string"`
-- **punctuation** [23:24]: `,`
-- **property** [26:34]: `"number"`
-- **operator** [34:35]: `:`
-- **number** [36:41]: `12345`
-- **punctuation** [41:42]: `,`
-- **property** [44:53]: `"boolean"`
+- **Total**: 1
+- code: [0:327]
 
 ## Domstyler Output
 
@@ -135,55 +58,6 @@
 ><span class="token punctuation">,</span> <span class="token punctuation">{</span
 ><span class="token property">"key"</span><span class="token operator">:</span>
 <span class="token string">"nested value"</span><span class="token punctuation">}</span
-><span class="token punctuation">]</span>
-<span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-```
-
-## Rangestyler Output
-
-```html
-<span class="token punctuation">{</span> <span class="token property">&quot;string&quot;</span
-><span class="token operator">:</span> <span class="token string">&quot;a string&quot;</span
-><span class="token punctuation">,</span> <span class="token property">&quot;number&quot;</span
-><span class="token operator">:</span> <span class="token number">12345</span
-><span class="token punctuation">,</span> <span class="token property">&quot;boolean&quot;</span
-><span class="token operator">:</span> <span class="token boolean">true</span
-><span class="token punctuation">,</span> <span class="token property">&quot;null&quot;</span
-><span class="token operator">:</span> <span class="token null">null</span
-><span class="token punctuation">,</span> <span class="token property">&quot;empty&quot;</span
-><span class="token operator">:</span> <span class="token string">&quot;&quot;</span
-><span class="token punctuation">,</span> <span class="token property">&quot;escaped&quot;</span
-><span class="token operator">:</span>
-<span class="token string">&quot;quote: \&quot;test\&quot; and backslash: \\&quot;</span
-><span class="token punctuation">,</span> <span class="token property">&quot;object&quot;</span
-><span class="token operator">:</span> <span class="token punctuation">{</span>
-<span class="token property">&quot;array&quot;</span><span class="token operator">:</span>
-<span class="token punctuation">[</span><span class="token number">1</span
-><span class="token punctuation">,</span> <span class="token string">&quot;b&quot;</span
-><span class="token punctuation">,</span> <span class="token boolean">false</span
-><span class="token punctuation">]</span><span class="token punctuation">,</span>
-<span class="token property">&quot;strings&quot;</span><span class="token operator">:</span>
-<span class="token punctuation">[</span><span class="token string">&quot;1&quot;</span
-><span class="token punctuation">,</span> <span class="token string">&quot;2&quot;</span
-><span class="token punctuation">,</span> <span class="token string">&quot;3&quot;</span
-><span class="token punctuation">]</span><span class="token punctuation">,</span>
-<span class="token property">&quot;mixed&quot;</span><span class="token operator">:</span>
-<span class="token punctuation">[</span><span class="token string">&quot;start&quot;</span
-><span class="token punctuation">,</span> <span class="token number">123</span
-><span class="token punctuation">,</span> <span class="token boolean">true</span
-><span class="token punctuation">,</span> <span class="token string">&quot;middle&quot;</span
-><span class="token punctuation">,</span> <span class="token null">null</span
-><span class="token punctuation">,</span> <span class="token string">&quot;end&quot;</span
-><span class="token punctuation">]</span><span class="token punctuation">,</span>
-<span class="token property">&quot;nested&quot;</span><span class="token operator">:</span>
-<span class="token punctuation">[</span><span class="token punctuation">[</span
-><span class="token string">&quot;a&quot;</span><span class="token punctuation">,</span>
-<span class="token string">&quot;str&quot;</span><span class="token punctuation">,</span>
-<span class="token string">&quot;&quot;</span><span class="token punctuation">]</span
-><span class="token punctuation">,</span> <span class="token punctuation">{</span
-><span class="token property">&quot;key&quot;</span><span class="token operator">:</span>
-<span class="token string">&quot;nested value&quot;</span><span class="token punctuation">}</span
 ><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
@@ -241,9 +115,7 @@
 ## Comparison
 
 - Domstyler size: 3397 bytes
-- Rangestyler size: 3651 bytes
 - Boundary Scanner size: 3651 bytes
-- Size difference: -254 bytes
 
 ---
 

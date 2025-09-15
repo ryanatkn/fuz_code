@@ -52,4 +52,3 @@ boundary_scanner_global.register_boundary_tokenizer('html_cdata', new Html_Cdata
 boundary_scanner_global.register_boundary_tokenizer('html_comment', new Html_Comment_Tokenizer());
 
 // TODO: Register Svelte scanner when implemented
-// NOTE: After all tokenizers are complete, rangestyler can be removed entirely
