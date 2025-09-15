@@ -51,7 +51,7 @@ describe('generated fixtures match runtime', () => {
 				// Basic sanity check - fixtures must be generated before tests can run
 				assert.ok(
 					existsSync(fixture_path),
-					`Fixture file missing: ${fixture_path}. Run 'npm run task src/generated/update' to generate.`,
+					`Fixture file missing: ${fixture_path}. Run 'npm run task src/fixtures/update' to generate.`,
 				);
 			});
 

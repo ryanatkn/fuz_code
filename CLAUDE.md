@@ -10,8 +10,8 @@ gro test -- file_pattern -t "specific filter"
 npm run benchmark # Run benchmarks
 
 # Test fixtures workflow
-gro test src/generated/check.test.ts # verify
-gro src/generated/update             # regenerate ONLY if on-disk files are incorrect
+gro test src/fixtures/check.test.ts # verify
+gro src/fixtures/update             # regenerate ONLY if on-disk files are incorrect
 ```
 
 ## File Structure
@@ -51,10 +51,10 @@ The codebase uses a flat structure with clear `domstyler` and `rangestyler` pref
 
 - `src/lib/samples/sample_*.{lang}` - Test sample files (source of truth)
 - `src/lib/samples/all.gen.ts` - Auto-generated sample aggregator
-- `src/generated/update.task.ts` - Regenerates test fixtures
-- `src/generated/check.test.ts` - Verifies runtime matches fixtures
-- `src/generated/helpers.ts` - Shared test utilities
-- `src/generated/{lang}/` - Generated fixtures (JSON + markdown reports)
+- `src/fixtures/update.task.ts` - Regenerates test fixtures
+- `src/fixtures/check.test.ts` - Verifies runtime matches fixtures
+- `src/fixtures/helpers.ts` - Shared test utilities
+- `src/fixtures/{lang}/` - Generated fixtures (JSON + markdown reports)
 - `src/lib/rangestyler.test.ts` - Boundary detection tests
 
 ### Shared Files
@@ -169,19 +169,19 @@ rangestyler_global.highlight(element, code, 'ts');
 The test system uses a fixture-based approach:
 
 1. **Sample files** (`src/lib/samples/sample_*.{lang}`) are the source of truth
-2. **Generate fixtures**: `gro src/generated/update`
+2. **Generate fixtures**: `gro src/fixtures/update`
    - Discovers samples via filesystem search
    - Generates JSON data + markdown reports
    - Removes old fixtures before regenerating (clean slate)
-3. **Verify tests**: `gro test src/generated/check.test.ts`
+3. **Verify tests**: `gro test src/fixtures/check.test.ts`
    - Compares runtime output with fixtures
    - Tests both domstyler and rangestyler
-4. **Review changes**: `git diff src/generated/`
+4. **Review changes**: `git diff src/fixtures/`
    - Commit expected changes after verification
 
 ### Test Fixtures
 
-Generated fixtures are stored in `src/generated/{lang}/`:
+Generated fixtures are stored in `src/fixtures/{lang}/`:
 
 - `{lang}_{variant}.json` - Machine-readable test data
 - `{lang}_{variant}.md` - Human-readable report
@@ -219,7 +219,7 @@ The generated fixtures are invaluable for debugging pattern matching issues:
 ```typescript
 // Example: Debug why a pattern isn't matching
 import {readFileSync} from 'node:fs';
-const fixture = JSON.parse(readFileSync('src/generated/css/css_complex.json', 'utf-8'));
+const fixture = JSON.parse(readFileSync('src/fixtures/css/css_complex.json', 'utf-8'));
 
 // Check if your expected text was matched
 const matches = fixture.matches.samples;

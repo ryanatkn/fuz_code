@@ -25,7 +25,7 @@ export const package_json: Package_Json = {
 		test: 'gro test',
 		preview: 'vite preview',
 		deploy: 'gro deploy',
-		'update-generated-fixtures': 'gro src/generated/update',
+		'update-generated-fixtures': 'gro src/fixtures/update',
 		benchmark: 'vite-node src/lib/run_benchmark.ts',
 	},
 	type: 'module',

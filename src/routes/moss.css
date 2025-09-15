@@ -2,11 +2,11 @@
 
 /* * 
  * File statistics:
- * - Total files in filer: 308
+ * - Total files in filer: 309
  * - External dependencies: 235
- * - Internal project files: 73
- * - Files processed (passed filter): 271
- * - Files with CSS classes: 27
+ * - Internal project files: 74
+ * - Files processed (passed filter): 272
+ * - Files with CSS classes: 28
  * - Unique classes found: 42
  */
 
@@ -131,6 +131,9 @@ a.chip {
 }
 .p_lg {
 	padding: var(--space_lg);
+}
+.p_xl3 {
+	padding: var(--space_xl3);
 }
 .px_xl {
 	padding-left: var(--space_xl);
