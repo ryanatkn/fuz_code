@@ -1,4 +1,6 @@
 <script lang="ts">
+	import {onDestroy} from 'svelte';
+
 	import {boundary_scanner_global} from '$lib/boundary_scanner_global.js';
 	import {generate_html_from_tokens} from '$lib/boundary_scanner_html_generator.js';
 	import {
@@ -6,7 +8,7 @@
 		supports_css_highlight_api,
 		type Boundaryscanner_Mode,
 	} from '$lib/boundary_scanner_range_builder.js';
-	import {onDestroy} from 'svelte';
+	import {escape_html} from '$lib/helpers.js';
 
 	const {
 		content,
@@ -39,7 +41,7 @@
 		// Check if language is supported
 		if (!boundary_scanner_global.has_language(lang)) {
 			// For unsupported languages, just escape HTML
-			return content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+			return escape_html(content);
 		}
 
 		// Scan and get tokens
