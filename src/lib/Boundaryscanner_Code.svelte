@@ -6,6 +6,7 @@
 		supports_css_highlight_api,
 		type Boundaryscanner_Mode,
 	} from '$lib/boundary_scanner_range_builder.js';
+	import {onDestroy} from 'svelte';
 
 	const {
 		content,
@@ -25,9 +26,6 @@
 	let code_element: HTMLElement | undefined = $state();
 	// Create manager eagerly to avoid checks
 	const highlight_manager = new Highlight_Manager();
-	// Track content changes to avoid unnecessary work
-	let previous_content = '';
-	let previous_lang = '';
 
 	// Compute display mode
 	const use_ranges = $derived(
@@ -76,6 +74,10 @@
 		highlight_manager.highlight_from_tokens(code_element, tokens);
 	};
 
+	// Track content changes to avoid unnecessary work
+	let previous_content = '';
+	let previous_lang = '';
+
 	// Reactive highlighting using $effect for Range mode
 	$effect(() => {
 		if (use_ranges && code_element) {
@@ -86,11 +88,10 @@
 				update_highlight();
 			}
 		}
+	});
 
-		// Cleanup function - always destroy the manager when component unmounts
-		return () => {
-			highlight_manager.destroy();
-		};
+	onDestroy(() => {
+		highlight_manager.destroy();
 	});
 </script>
 
