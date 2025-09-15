@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Breadcrumb from '@ryanatkn/fuz/Breadcrumb.svelte';
 
-	import Rangestyler_Code from '$lib/Rangestyler_Code.svelte';
+	import Boundaryscanner_Code from '$lib/Boundaryscanner_Code.svelte';
 	import Footer from '$routes/Footer.svelte';
 	import {samples} from '$lib/samples/all.js';
 </script>
@@ -9,9 +9,9 @@
 <main class="box w_100">
 	<Breadcrumb>🎨</Breadcrumb>
 	<section class="width_md mt_xl7">
-		<h1>Rangestyler</h1>
+		<h1>Boundaryscanner</h1>
 		<p>
-			The <code>Rangestyler</code> uses the CSS custom highlight API (<a
+			The <code>Boundaryscanner</code> uses the CSS custom highlight API (<a
 				href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_custom_highlight_API">MDN</a
 			>). Rather than using DOM elements like spans to style text, it uses
 			<a href="https://developer.mozilla.org/en-US/docs/Web/API/Range">Range</a>
@@ -24,7 +24,7 @@
 				<h2 class="display_flex align_items_center gap_sm">
 					<span>{sample.name}</span> <small><code>'{sample.lang}'</code></small>
 				</h2>
-				<pre><Rangestyler_Code content={sample.content} lang={sample.lang} /></pre>
+				<pre><Boundaryscanner_Code content={sample.content} lang={sample.lang} /></pre>
 			</div>
 		{/each}
 	</section>

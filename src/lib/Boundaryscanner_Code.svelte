@@ -2,12 +2,10 @@
 	import {boundary_scanner_global} from '$lib/boundary_scanner_global.js';
 	import {generate_html_from_tokens} from '$lib/boundary_scanner_html_generator.js';
 	import {
-		highlight_with_tokens,
-		clear_highlights,
+		Highlight_Manager,
 		supports_css_highlight_api,
+		type Boundaryscanner_Mode,
 	} from '$lib/boundary_scanner_range_builder.js';
-
-	type Boundaryscanner_Mode = 'auto' | 'ranges' | 'html';
 
 	const {
 		content,
@@ -23,9 +21,13 @@
 		mode?: Boundaryscanner_Mode;
 	} = $props();
 
-	// Element reference
+	// Element reference and highlight manager
 	let code_element: HTMLElement | undefined = $state();
-	let active_highlights: Array<string> = [];
+	// Create manager eagerly to avoid checks
+	const highlight_manager = new Highlight_Manager();
+	// Track content changes to avoid unnecessary work
+	let previous_content = '';
+	let previous_lang = '';
 
 	// Compute display mode
 	const use_ranges = $derived(
@@ -48,7 +50,7 @@
 	});
 
 	// Update highlights for Range mode
-	function update_highlight() {
+	const update_highlight = () => {
 		if (!code_element || !content || !use_ranges) return;
 
 		// Check if language is supported
@@ -58,35 +60,36 @@
 			return;
 		}
 
-		// Clear any existing highlights
-		if (active_highlights.length > 0) {
-			clear_highlights(active_highlights);
-			active_highlights = [];
-		}
+		// Clear existing highlights before updating
+		highlight_manager.clear_element_ranges();
 
-		// Ensure the element has the text content first
-		// This is critical for Range API to work
-		code_element.textContent = content;
+		// Ensure the element has the text content
+		// Only update if content has changed to avoid DOM thrashing
+		if (code_element.textContent !== content) {
+			code_element.textContent = content;
+		}
 
 		// Scan and get tokens
 		const tokens = boundary_scanner_global.scan(content, lang);
 
-		// Use Range API with tokens
-		active_highlights = highlight_with_tokens(code_element, content, tokens);
-	}
+		// Highlight the tokens using the manager
+		highlight_manager.highlight_from_tokens(code_element, tokens);
+	};
 
 	// Reactive highlighting using $effect for Range mode
 	$effect(() => {
-		if (use_ranges && code_element && content) {
-			update_highlight();
+		if (use_ranges && code_element) {
+			// Only update if content or language actually changed
+			if (content !== previous_content || lang !== previous_lang) {
+				previous_content = content;
+				previous_lang = lang;
+				update_highlight();
+			}
 		}
 
-		// Cleanup function
+		// Cleanup function - always destroy the manager when component unmounts
 		return () => {
-			if (active_highlights.length > 0) {
-				clear_highlights(active_highlights);
-				active_highlights = [];
-			}
+			highlight_manager.destroy();
 		};
 	});
 </script>
@@ -94,7 +97,7 @@
 <pre {...pre_attrs} class:code={true} data-lang={lang}><code
 		{...code_attrs}
 		bind:this={code_element}
-		>{#if use_ranges}{@html ''}{:else}{@html html_content}{/if}</code
+		>{#if !use_ranges}{@html html_content}{/if}</code
 	></pre>
 
 <style>

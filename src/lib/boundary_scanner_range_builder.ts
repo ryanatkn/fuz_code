@@ -1,5 +1,7 @@
 import type {Token} from './boundary_scanner_types.js';
 
+export type Boundaryscanner_Mode = 'auto' | 'ranges' | 'html';
+
 /**
  * Check for CSS Highlights API support.
  */
@@ -9,93 +11,102 @@ export const supports_css_highlight_api = (): boolean =>
 	typeof (globalThis as any).Highlight === 'function';
 
 /**
- * Build Range objects from tokens (the new public API)
- * Groups tokens by type and creates ranges for CSS Highlights API
+ * Highlight Manager - Properly manages highlights for a single element
+ * Tracks ranges per element and only removes its own ranges when clearing
  */
-export function build_ranges_from_tokens(
-	element: Element,
-	_text: string,
-	tokens: Array<Token>,
-): Map<string, Array<Range>> {
-	const ranges_by_name = new Map<string, Array<Range>>();
+export class Highlight_Manager {
+	private element_ranges: Map<string, Array<Range>>;
 
-	// Get the text node
-	const text_node = element.firstChild;
-	if (!text_node || text_node.nodeType !== Node.TEXT_NODE) {
-		return ranges_by_name;
+	constructor() {
+		this.element_ranges = new Map();
 	}
 
-	// Process each token
-	for (const token of tokens) {
-		// Use the token type directly as the highlight name
-		// (e.g., 'json_boolean', 'ts_keyword')
-		const highlight_name = token.type;
+	/**
+	 * Highlight tokens by creating ranges and adding them to shared highlights
+	 */
+	highlight_from_tokens(element: Element, tokens: Array<Token>): void {
+		if (!globalThis.CSS?.highlights) {
+			console.warn('CSS Highlights API not supported');
+			return;
+		}
 
-		try {
-			// Create a Range for this token
-			const range = document.createRange();
-			range.setStart(text_node, token.start);
-			range.setEnd(text_node, token.end);
+		// Get the text node
+		const text_node = element.firstChild;
+		if (!text_node || text_node.nodeType !== Node.TEXT_NODE) {
+			return;
+		}
 
-			// Add to the appropriate highlight group
-			if (!ranges_by_name.has(highlight_name)) {
-				ranges_by_name.set(highlight_name, []);
+		// Group tokens by type and create ranges
+		const ranges_by_name = new Map<string, Array<Range>>();
+
+		for (const token of tokens) {
+			const highlight_name = token.type;
+
+			try {
+				// Create a Range for this token
+				const range = document.createRange();
+				range.setStart(text_node, token.start);
+				range.setEnd(text_node, token.end);
+
+				// Add to the appropriate highlight group
+				if (!ranges_by_name.has(highlight_name)) {
+					ranges_by_name.set(highlight_name, []);
+				}
+				ranges_by_name.get(highlight_name)!.push(range);
+			} catch (error) {
+				console.error(`Failed to create range for token ${token.type}:`, error);
 			}
-			ranges_by_name.get(highlight_name)!.push(range);
-		} catch (error) {
-			console.error(`Failed to create range for token ${token.type}:`, error);
+		}
+
+		// Add ranges to highlights and track them
+		for (const [name, ranges] of ranges_by_name) {
+			// Track ranges for this element
+			this.element_ranges.set(name, ranges);
+
+			// Get or create the shared highlight
+			let highlight = CSS.highlights.get(name);
+			if (!highlight) {
+				highlight = new globalThis.Highlight();
+				CSS.highlights.set(name, highlight);
+			}
+
+			// Add ranges to the highlight
+			for (const range of ranges) {
+				highlight.add(range);
+			}
 		}
 	}
 
-	return ranges_by_name;
-}
+	/**
+	 * Clear only this element's ranges from highlights
+	 */
+	clear_element_ranges(): void {
+		if (!globalThis.CSS?.highlights) return;
 
-/**
- * Apply CSS highlights from ranges
- */
-export function apply_highlights(ranges_by_name: Map<string, Array<Range>>): Array<string> {
-	const highlight_names: Array<string> = [];
+		for (const [name, ranges] of this.element_ranges) {
+			const highlight = CSS.highlights.get(name);
+			if (highlight) {
+				// Remove only this element's ranges
+				for (const range of ranges) {
+					highlight.delete(range);
+				}
 
-	if (!globalThis.CSS?.highlights) {
-		console.warn('CSS Highlights API not supported');
-		return highlight_names;
-	}
-
-	for (const [name, ranges] of ranges_by_name) {
-		try {
-			const highlight = new globalThis.Highlight(...ranges);
-			CSS.highlights.set(name, highlight);
-			highlight_names.push(name);
-		} catch (error) {
-			console.error(`Failed to register highlight "${name}":`, error);
+				// If highlight is now empty, remove it from registry
+				if (highlight.size === 0) {
+					CSS.highlights.delete(name);
+				}
+			}
 		}
+
+		// Clear our tracking
+		this.element_ranges.clear();
 	}
 
-	return highlight_names;
-}
-
-/**
- * Clear CSS highlights
- */
-export function clear_highlights(highlight_names: Array<string>): void {
-	if (!globalThis.CSS?.highlights) return;
-
-	for (const name of highlight_names) {
-		CSS.highlights.delete(name);
+	/**
+	 * Destroy this manager and clean up
+	 */
+	destroy(): void {
+		this.clear_element_ranges();
 	}
 }
 
-/**
- * Highlight element with tokens using Range API (the new public API)
- */
-export function highlight_with_tokens(
-	element: Element,
-	text: string,
-	tokens: Array<Token>,
-): Array<string> {
-	// Build ranges from tokens
-	const ranges_by_name = build_ranges_from_tokens(element, text, tokens);
-
-	// Apply highlights and return names for cleanup
-	return apply_highlights(ranges_by_name);
-}
