@@ -2,6 +2,7 @@
 	import {onMount} from 'svelte';
 	import type {Component} from 'svelte';
 	import type {Benchmark_Component_Props} from './benchmark_types.js';
+	import {ensure_paint} from './benchmark_dom.js';
 
 	interface Props {
 		Benchmarked_Component: Component<Benchmark_Component_Props> | null;
@@ -11,14 +12,10 @@
 
 	let {Benchmarked_Component = null, props = null, on_render_complete = () => {}}: Props = $props();
 
-	// Signal completion after mount
-	onMount(() => {
-		// TODO what's the most robust way to do this? likely flawed
-		requestAnimationFrame(() => {
-			requestAnimationFrame(() => {
-				on_render_complete();
-			});
-		});
+	// Signal completion after mount+paint
+	onMount(async () => {
+		await ensure_paint();
+		on_render_complete();
 	});
 </script>
 
