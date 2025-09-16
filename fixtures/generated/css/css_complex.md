@@ -134,7 +134,9 @@
 <span class="token number">10px</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token atrule">@media (max-width: 600px)</span>
+<span class="token atrule">@media</span> <span class="token punctuation">(</span
+><span class="token property">max-width</span><span class="token punctuation">:</span>
+<span class="token number">600px</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span> <span class="token selector">body</span>
 <span class="token punctuation">{</span> <span class="token property">background-color</span
 ><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
@@ -167,7 +169,7 @@
 ## Comparison
 
 - Domstyler size: 3451 bytes
-- Boundary Scanner size: 3610 bytes
+- Boundary Scanner size: 3797 bytes
 
 ---
 

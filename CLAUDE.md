@@ -197,27 +197,6 @@ Generated fixtures are stored in `src/fixtures/{lang}/`:
 - `{lang}_{variant}.json` - Machine-readable test data
 - `{lang}_{variant}.md` - Human-readable report
 
-**JSON fixture structure:**
-
-```json
-{
-  "sample": {
-    "lang": "css",
-    "variant": "complex",
-    "content": "...",
-    "filepath": "src/lib/samples/sample_complex.css"
-  },
-  "boundaries": [...],  // Language boundaries for embedded content
-  "matches": {          // Pattern match statistics
-    "total": 61,
-    "by_type": {"selector": 6, "property": 7, ...},
-    "samples": [...]   // Sample matches for debugging
-  },
-  "domstyler_html": "...",    // Expected HTML from domstyler
-  "rangestyler_html": "..."   // Expected HTML from rangestyler
-}
-```
-
 **Using fixtures for debugging:**
 
 The generated fixtures are invaluable for debugging pattern matching issues:

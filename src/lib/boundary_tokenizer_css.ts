@@ -15,7 +15,7 @@ export class Css_Code_Tokenizer extends Pattern_Based_Tokenizer implements Code_
 	patterns: Array<Token_Pattern> = [
 		// At-rules (@media, @import, @keyframes, etc.) - highest priority
 		{
-			regex: /@[\w-]+(?:[^;{]|\/\*[\s\S]*?\*\/)*?(?:;|(?=\s*\{))/g,
+			regex: /@[\w-]+/g,
 			type: 'css_atrule',
 		},
 
