@@ -12,13 +12,27 @@
 
 	let {Benchmarked_Component = null, props = null, on_render_complete = () => {}}: Props = $props();
 
+	let container_el: HTMLDivElement;
+
 	// Signal completion after mount+paint
 	onMount(async () => {
+		// TODO any tweaks to this, including order?
+		// Force layout recalculation for all modes to ensure consistent timing,
+		// and use them to ensure they can't be optimized.
+		const rect = container_el.getBoundingClientRect();
+		const height = container_el.offsetHeight;
+		if (rect.width <= 0 || height <= 0) {
+			console.error('Unexpected negative dimensions');
+		}
+
 		await ensure_paint();
+
 		on_render_complete();
 	});
 </script>
 
-{#if Benchmarked_Component && props}
-	<Benchmarked_Component {...props} />
-{/if}
+<div bind:this={container_el}>
+	{#if Benchmarked_Component && props}
+		<Benchmarked_Component {...props} />
+	{/if}
+</div>

@@ -81,6 +81,9 @@
 
 <div class="box width_lg mx_auto">
 	<h1 class="mt_xl5">benchmark</h1>
+	<p>
+		<code class="font_weight_400 font_size_sm">chromium --js-flags="--expose-gc"</code>
+	</p>
 
 	<section class="panel p_lg">
 		<h2 class="mt_0">config</h2>

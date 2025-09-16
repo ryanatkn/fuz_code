@@ -7,7 +7,7 @@
  * - Internal project files: 71
  * - Files processed (passed filter): 270
  * - Files with CSS classes: 27
- * - Unique classes found: 45
+ * - Unique classes found: 46
  */
 
 .box {
@@ -98,12 +98,20 @@ a.chip {
 .justify_content_space_around {
 	justify-content: space-around;
 }
+.font_size_sm {
+	font-size: var(--font_size_sm);
+	--font_size: var(--font_size_sm);
+}
 .font_size_xl2 {
 	font-size: var(--font_size_xl2);
 	--font_size: var(--font_size_xl2);
 }
 .text_align_center {
 	text-align: center;
+}
+.font_weight_400 {
+	font-weight: 400;
+	--font_weight: 400;
 }
 .bg {
 	background-color: var(--bg);
