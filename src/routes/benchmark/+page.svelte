@@ -11,7 +11,7 @@
 
 	// Configuration
 	let config: Benchmark_Config = $state({
-		iterations: 15, // 15
+		iterations: 10,
 		warmup_count: 3,
 		cooldown_ms: 100,
 		content_multiplier: 20, // 100

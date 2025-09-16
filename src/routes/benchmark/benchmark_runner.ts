@@ -99,7 +99,9 @@ export const measurement_phase = async (
 				times.push(NaN);
 				timestamps.push(Date.now());
 			} else if (elapsed < MIN_VALID_TIMING_MS) {
-				console.warn(`[Measurement] Suspiciously fast timing (${elapsed}ms) - possible no-op render`);
+				console.warn(
+					`[Measurement] Suspiciously fast timing (${elapsed}ms) - possible no-op render`,
+				);
 				times.push(elapsed);
 				timestamps.push(Date.now());
 				recent_timings.push(elapsed);
@@ -220,7 +222,9 @@ export const run_all_benchmarks = async (
 					warnings.push(`${test_name}: Suspiciously fast mean time (${stats.mean.toFixed(3)}ms)`);
 				}
 				if (stats.outlier_ratio > HIGH_OUTLIER_RATIO) {
-					warnings.push(`${test_name}: High outlier ratio (${(stats.outlier_ratio * 100).toFixed(1)}%)`);
+					warnings.push(
+						`${test_name}: High outlier ratio (${(stats.outlier_ratio * 100).toFixed(1)}%)`,
+					);
 				}
 
 				results.push({

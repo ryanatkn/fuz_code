@@ -20,7 +20,6 @@ export const find_sample = (samples: Record<string, Code_Sample>, lang: string) 
 	return Object.values(samples).find((s) => s.lang === lang && s.name.includes('complex'));
 };
 
-
 // Generate large content by repeating and varying the base content
 export const generate_large_content = (
 	base_content: string,
@@ -106,4 +105,3 @@ export const pre_generate_large_contents = (
 
 	return large_contents;
 };
-

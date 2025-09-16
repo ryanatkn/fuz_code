@@ -70,7 +70,10 @@ export interface Summary_Stats {
 
 // Benchmark harness controller interface
 export interface Benchmark_Harness_Controller {
-	run_iteration: (component: Component<Benchmark_Component_Props>, props: Benchmark_Component_Props) => Promise<number>;
+	run_iteration: (
+		component: Component<Benchmark_Component_Props>,
+		props: Benchmark_Component_Props,
+	) => Promise<number>;
 	cleanup: () => Promise<void>;
 }
 

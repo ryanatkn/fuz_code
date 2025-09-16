@@ -21,7 +21,9 @@ export const calculate_timing_jitter = (recent_timings: number[]): number => {
 
 	return std_dev / mean;
 };
-export const check_system_stability = async (recent_timings: number[]): Promise<Stability_Check> => {
+export const check_system_stability = async (
+	recent_timings: number[],
+): Promise<Stability_Check> => {
 	const lag_start = performance.now();
 	await new Promise((resolve) => setTimeout(resolve, 0));
 	const lag = performance.now() - lag_start;
@@ -35,17 +37,23 @@ export const check_system_stability = async (recent_timings: number[]): Promise<
 
 	const jitter = calculate_timing_jitter(recent_timings);
 
-	const is_stable = lag < MAX_ACCEPTABLE_LAG_MS && memory_pressure < MAX_MEMORY_PRESSURE && jitter < MAX_JITTER_RATIO;
+	const is_stable =
+		lag < MAX_ACCEPTABLE_LAG_MS &&
+		memory_pressure < MAX_MEMORY_PRESSURE &&
+		jitter < MAX_JITTER_RATIO;
 
 	return {is_stable, lag, memory_pressure, jitter};
 };
 export const get_instability_reason = (stability: Stability_Check): string => {
 	if (stability.lag > MAX_ACCEPTABLE_LAG_MS) return 'high_lag';
 	if (stability.jitter > MAX_JITTER_RATIO) return 'high_jitter';
-	if (stability.memory_pressure && stability.memory_pressure > MAX_MEMORY_PRESSURE) return 'memory_pressure';
+	if (stability.memory_pressure && stability.memory_pressure > MAX_MEMORY_PRESSURE)
+		return 'memory_pressure';
 	return 'unknown';
 };
 export const extended_cooldown = async (reason: string): Promise<void> => {
 	console.log(`System instability: ${reason}, waiting...`);
-	await new Promise((resolve) => setTimeout(resolve, COOLDOWN_TIMES[reason] || COOLDOWN_TIMES.unknown));
+	await new Promise((resolve) =>
+		setTimeout(resolve, COOLDOWN_TIMES[reason] || COOLDOWN_TIMES.unknown),
+	);
 };

@@ -32,7 +32,9 @@ const calculate_median = (sorted_array: number[]): number => {
 };
 
 // Outlier detection using MAD (Median Absolute Deviation) method
-export const detect_outliers = (times: number[]): {
+export const detect_outliers = (
+	times: number[],
+): {
 	cleaned_times: number[];
 	outliers: number[];
 } => {
@@ -44,7 +46,7 @@ export const detect_outliers = (times: number[]): {
 	const median = calculate_median(sorted);
 
 	// Calculate MAD (Median Absolute Deviation)
-	const deviations = times.map(t => Math.abs(t - median));
+	const deviations = times.map((t) => Math.abs(t - median));
 	const sorted_deviations = [...deviations].sort((a, b) => a - b);
 	const mad = calculate_median(sorted_deviations);
 
@@ -79,7 +81,7 @@ export const detect_outliers = (times: number[]): {
 	const outliers: number[] = [];
 
 	for (const time of times) {
-		const modified_z_score = MAD_CONSTANT * (time - median) / mad;
+		const modified_z_score = (MAD_CONSTANT * (time - median)) / mad;
 		if (Math.abs(modified_z_score) > MAD_Z_SCORE_THRESHOLD) {
 			outliers.push(time);
 		} else {
@@ -93,7 +95,7 @@ export const detect_outliers = (times: number[]): {
 		outliers.length = 0;
 
 		for (const time of times) {
-			const modified_z_score = MAD_CONSTANT * (time - median) / mad;
+			const modified_z_score = (MAD_CONSTANT * (time - median)) / mad;
 			if (Math.abs(modified_z_score) > MAD_Z_SCORE_EXTREME) {
 				outliers.push(time);
 			} else {
@@ -103,9 +105,9 @@ export const detect_outliers = (times: number[]): {
 
 		if (outliers.length > times.length * OUTLIER_RATIO_EXTREME) {
 			// Sort by distance from median and keep closest values
-			const with_distances = times.map(t => ({
+			const with_distances = times.map((t) => ({
 				time: t,
-				distance: Math.abs(t - median)
+				distance: Math.abs(t - median),
 			}));
 			with_distances.sort((a, b) => a.distance - b.distance);
 
