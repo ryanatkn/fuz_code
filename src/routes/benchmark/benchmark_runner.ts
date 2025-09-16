@@ -21,11 +21,10 @@ import {implementations, languages, pre_generate_large_contents} from './benchma
 import {analyze_results, calculate_summary, check_high_variance} from './benchmark_stats.js';
 
 // Timing validation constants
-const MIN_VALID_TIMING_MS = 0.01; // Suspiciously fast threshold
-const MAX_VALID_TIMING_MS = 60000; // 60 seconds - possible hang
-const SUSPICIOUS_MEAN_MS = 0.1; // Warn if mean is below this
-const HIGH_OUTLIER_RATIO = 0.2; // 20% outliers is concerning
-const GC_FREQUENCY = 5; // Run GC every N iterations
+const MIN_VALID_TIMING_MS = 0.01;
+const MAX_VALID_TIMING_MS = 60000;
+const SUSPICIOUS_MEAN_MS = 0.1;
+const HIGH_OUTLIER_RATIO = 0.2;
 
 // Warmup phase using harness with large content
 export const warmup_phase = async (
@@ -37,13 +36,11 @@ export const warmup_phase = async (
 	harness: Benchmark_Harness_Controller,
 ): Promise<void> => {
 	for (let i = 0; i < warmup_count; i++) {
-		// Create single item with large content for warmup
 		const props: Benchmark_Component_Props = {content, lang};
 		if (impl.mode !== null) {
 			props.mode = impl.mode;
 		}
 
-		// Run warmup iteration with single large content
 		await harness.run_iteration(impl.component, props);
 
 		await inter_test_cooldown(cooldown_ms);
@@ -77,7 +74,6 @@ export const measurement_phase = async (
 		// Cooldown between tests
 		await inter_test_cooldown(config.cooldown_ms);
 
-		// Check stability
 		const stability = await check_system_stability(recent_timings);
 		stability_checks.push(stability);
 
@@ -87,13 +83,11 @@ export const measurement_phase = async (
 			await extended_cooldown(reason);
 		}
 
-		// Create single props with large content
 		const props: Benchmark_Component_Props = {content, lang};
 		if (impl.mode !== null) {
 			props.mode = impl.mode;
 		}
 
-		// Measure single large content rendering using harness
 		console.log(`[Measurement] Running iteration ${i + 1}...`);
 
 		try {
@@ -127,13 +121,11 @@ export const measurement_phase = async (
 			timestamps.push(Date.now());
 		}
 
-		// Update progress
 		if (onProgress) {
 			onProgress();
 		}
 
-		// Garbage collection hint periodically (more aggressive for large content)
-		if (i % GC_FREQUENCY === 0 && typeof globalThis.gc !== 'undefined') {
+		if (typeof globalThis.gc !== 'undefined') {
 			globalThis.gc();
 		}
 	}

@@ -1,9 +1,4 @@
-// DOM timing utilities for benchmarking
-
 import {tick} from 'svelte';
-
-// Constants
-const ANIMATION_FRAME_COUNT = 3; // Number of animation frames for cooldown
 
 // Ensure browser paint has completed
 export const ensure_paint = (): Promise<void> => {
@@ -34,8 +29,6 @@ export const inter_test_cooldown = async (cooldown_ms: number): Promise<void> =>
 	const actual_cooldown = cooldown_ms + Math.random() * cooldown_ms;
 	await new Promise((resolve) => setTimeout(resolve, actual_cooldown));
 
-	// Multiple animation frames
-	for (let i = 0; i < ANIMATION_FRAME_COUNT; i++) {
-		await new Promise((resolve) => requestAnimationFrame(resolve));
-	}
+	await ensure_paint();
+	await ensure_paint();
 };

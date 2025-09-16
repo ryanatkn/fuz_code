@@ -19,7 +19,7 @@ const OUTLIER_RATIO_EXTREME = 0.4;
 const OUTLIER_KEEP_RATIO = 0.8;
 const PERCENTILE_95 = 0.95;
 const PERCENTILE_99 = 0.99;
-const CONFIDENCE_INTERVAL_Z = 1.96; // 95% CI
+const CONFIDENCE_INTERVAL_Z = 1.96;
 const MS_PER_SECOND = 1000;
 const MIN_SAMPLE_SIZE = 3;
 
@@ -48,14 +48,12 @@ export const detect_outliers = (times: number[]): {
 	const sorted_deviations = [...deviations].sort((a, b) => a - b);
 	const mad = calculate_median(sorted_deviations);
 
-	// If MAD is 0 (all values are identical), use IQR as fallback
 	if (mad === 0) {
 		const q1 = sorted[Math.floor(sorted.length * QUARTILE_Q1)];
 		const q3 = sorted[Math.floor(sorted.length * QUARTILE_Q3)];
 		const iqr = q3 - q1;
 
 		if (iqr === 0) {
-			// All values are identical
 			return {cleaned_times: times, outliers: []};
 		}
 
@@ -103,7 +101,6 @@ export const detect_outliers = (times: number[]): {
 			}
 		}
 
-		// If still too many outliers, at least remove the most extreme ones
 		if (outliers.length > times.length * OUTLIER_RATIO_EXTREME) {
 			// Sort by distance from median and keep closest values
 			const with_distances = times.map(t => ({
@@ -166,19 +163,14 @@ export const analyze_results = (data: Measurement_Data): Benchmark_Stats => {
 		};
 	}
 
-	// Detect and remove outliers from valid times
 	const {cleaned_times, outliers} = detect_outliers(valid_times);
+	const final_sorted = [...cleaned_times].sort((a, b) => a - b);
 
-	// Use cleaned times for analysis
-	const final_times = cleaned_times;
-	const final_sorted = [...final_times].sort((a, b) => a - b);
-
-	// Calculate statistics
-	const mean = final_times.reduce((a, b) => a + b, 0) / final_times.length;
-	const median = final_sorted[Math.floor(final_sorted.length / 2)];
+	const mean = cleaned_times.reduce((a, b) => a + b, 0) / cleaned_times.length;
+	const median = calculate_median(final_sorted);
 
 	const variance =
-		final_times.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / final_times.length;
+		cleaned_times.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / cleaned_times.length;
 	const std_dev = Math.sqrt(variance);
 
 	const min = final_sorted[0];
@@ -188,8 +180,7 @@ export const analyze_results = (data: Measurement_Data): Benchmark_Stats => {
 
 	const cv = std_dev / mean;
 
-	// Calculate confidence interval (95%)
-	const se = std_dev / Math.sqrt(final_times.length);
+	const se = std_dev / Math.sqrt(cleaned_times.length);
 	const ci_margin = CONFIDENCE_INTERVAL_Z * se;
 	const ci_lower = mean - ci_margin;
 	const ci_upper = mean + ci_margin;
@@ -213,7 +204,7 @@ export const analyze_results = (data: Measurement_Data): Benchmark_Stats => {
 		confidence_interval: [ci_lower, ci_upper],
 		outliers: outliers.length,
 		outlier_ratio: outliers.length / valid_times.length,
-		sample_size: final_times.length,
+		sample_size: cleaned_times.length,
 		raw_sample_size: data.times.length,
 		stability_ratio,
 		unstable_iterations: unstable_count,

@@ -56,6 +56,7 @@
 		// Check if language is supported
 		if (!boundary_scanner_global.has_language(lang)) {
 			// For unsupported languages, just set text content
+			console.error('unsupported language', lang);
 			code_element.textContent = content;
 			return;
 		}
