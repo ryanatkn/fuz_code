@@ -19,8 +19,9 @@
 		// TODO any tweaks to this, including order?
 		// Force layout recalculation for all modes to ensure consistent timing,
 		// and use them to ensure they can't be optimized.
-		const rect = container_el.getBoundingClientRect();
-		const height = container_el.offsetHeight;
+		const code_el = container_el.querySelector('code');
+		const rect = code_el!.getBoundingClientRect();
+		const height = code_el!.offsetHeight;
 		if (rect.width <= 0 || height <= 0) {
 			console.error('Unexpected negative dimensions');
 		}
