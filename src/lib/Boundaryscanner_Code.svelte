@@ -24,73 +24,49 @@
 		mode?: Boundaryscanner_Mode;
 	} = $props();
 
-	// Element reference and highlight manager
 	let code_element: HTMLElement | undefined = $state();
-	// Create manager eagerly to avoid checks
 	const highlight_manager = new Highlight_Manager();
 
-	// Compute display mode
 	const use_ranges = $derived(
 		mode === 'ranges' || (mode === 'auto' && supports_css_highlight_api()),
 	);
 
-	// Compute HTML content for HTML mode
+	const is_language_supported = $derived(boundary_scanner_global.has_language(lang));
+
 	const html_content = $derived.by(() => {
 		if (!content) return '';
 
-		// Check if language is supported
-		if (!boundary_scanner_global.has_language(lang)) {
-			// For unsupported languages, just escape HTML
+		if (!is_language_supported) {
+			console.error('unsupported language', lang);
 			return escape_html(content);
 		}
 
-		// Scan and get tokens
 		const tokens = boundary_scanner_global.scan(content, lang);
 		return generate_html_from_tokens(content, tokens);
 	});
 
-	// Update highlights for Range mode
 	const update_highlight = () => {
 		if (!code_element || !content || !use_ranges) return;
 
-		// Check if language is supported
-		if (!boundary_scanner_global.has_language(lang)) {
-			// For unsupported languages, just set text content
+		if (!is_language_supported) {
 			console.error('unsupported language', lang);
 			code_element.textContent = content;
 			return;
 		}
 
-		// Clear existing highlights before updating
 		highlight_manager.clear_element_ranges();
 
-		// Ensure the element has the text content
 		// Only update if content has changed to avoid DOM thrashing
 		if (code_element.textContent !== content) {
 			code_element.textContent = content;
 		}
 
-		// Scan and get tokens
 		const tokens = boundary_scanner_global.scan(content, lang);
-
-		// Highlight the tokens using the manager
 		highlight_manager.highlight_from_tokens(code_element, tokens);
 	};
 
-	// Track content changes to avoid unnecessary work
-	let previous_content = '';
-	let previous_lang = '';
-
-	// Reactive highlighting using $effect for Range mode
 	$effect(() => {
-		if (use_ranges && code_element) {
-			// Only update if content or language actually changed
-			if (content !== previous_content || lang !== previous_lang) {
-				previous_content = content;
-				previous_lang = lang;
-				update_highlight();
-			}
-		}
+		update_highlight();
 	});
 
 	onDestroy(() => {
