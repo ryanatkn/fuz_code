@@ -85,16 +85,18 @@ export class Highlight_Manager {
 
 		for (const [name, ranges] of this.element_ranges) {
 			const highlight = CSS.highlights.get(name);
-			if (highlight) {
-				// Remove only this element's ranges
-				for (const range of ranges) {
-					highlight.delete(range);
-				}
+			if (!highlight) {
+				console.error('Expected to find CSS highlight:', name);
+				continue;
+			}
+			// Remove only this element's ranges
+			for (const range of ranges) {
+				highlight.delete(range);
+			}
 
-				// If highlight is now empty, remove it from registry
-				if (highlight.size === 0) {
-					CSS.highlights.delete(name);
-				}
+			// If highlight is now empty, remove it from registry
+			if (highlight.size === 0) {
+				CSS.highlights.delete(name);
 			}
 		}
 
@@ -109,4 +111,3 @@ export class Highlight_Manager {
 		this.clear_element_ranges();
 	}
 }
-
