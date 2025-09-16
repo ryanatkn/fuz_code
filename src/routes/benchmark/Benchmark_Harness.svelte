@@ -23,19 +23,8 @@
 		component: Component<Benchmark_Component_Props>,
 		props: Benchmark_Component_Props,
 	): Promise<number> => {
-		current_component = null;
-		current_props = null;
-		render_resolver = null;
-
-		if (active_timeout_id) {
-			clearTimeout(active_timeout_id);
-			active_timeout_id = undefined;
-		}
-
-		await tick();
-		await ensure_paint();
-
 		iteration_key++;
+
 		const render_promise = new Promise<void>((resolve, reject) => {
 			render_resolver = resolve;
 
@@ -67,21 +56,12 @@
 
 			await ensure_paint();
 
-			current_component = null;
-			current_props = null;
-			render_resolver = null;
-
 			return elapsed;
 		} catch (error) {
 			console.error('[Harness] Render failed:', error);
-			if (active_timeout_id) {
-				clearTimeout(active_timeout_id);
-				active_timeout_id = undefined;
-			}
-			current_component = null;
-			current_props = null;
-			render_resolver = null;
 			throw error;
+		} finally {
+			await cleanup();
 		}
 	};
 	export const cleanup = async () => {
@@ -107,4 +87,3 @@
 		/>
 	{/key}
 {/if}
-
