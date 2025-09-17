@@ -131,35 +131,6 @@
 	color: var(--color_a_5);
 }
 
-/* Additional token types with underscore separators (DOM styler conventions) */
-::highlight(class-name) {
+::highlight(function_variable) {
 	color: var(--color_d_5);
-}
-
-::highlight(function-variable) {
-	color: var(--color_d_5);
-}
-
-::highlight(attr-name) {
-	color: var(--color_f_5);
-}
-
-::highlight(attr-value) {
-	color: var(--color_b_5);
-}
-
-::highlight(attr-equals) {
-	color: var(--text_color_5);
-}
-
-::highlight(template-string) {
-	color: var(--color_b_5);
-}
-
-::highlight(template-punctuation) {
-	color: var(--color_a_5);
-}
-
-::highlight(property-string) {
-	color: var(--color_a_5);
 }

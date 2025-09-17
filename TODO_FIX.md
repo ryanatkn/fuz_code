@@ -8,6 +8,21 @@ Successfully migrated from the complex boundary scanner system to a simplified D
 - **Unified tokenization** using DOM styler (PrismJS fork)
 - **Added range highlighting** via CSS Custom Highlight API
 - **Maintained backwards compatibility** with existing language definitions
+- **Consolidated components** - merged Code.svelte and Domstyler_Range_Code.svelte
+
+## ✅ Fixed Issues
+
+### Range Highlighting with Svelte Comments
+**Problem**: Range highlighting failed when using declarative template rendering
+**Solution**: Updated `highlight_from_tokens()` to find text nodes among all child nodes, handling Svelte's comment nodes correctly
+
+### Component Consolidation
+**Completed**:
+- Added inline mode support to unified Code component
+- Added children snippet support for custom rendering
+- Proper null language handling
+- Removed old Code.svelte, renamed Domstyler_Range_Code.svelte to Code.svelte
+- Updated all imports across the codebase
 
 ## 🔧 Remaining Issues
 
@@ -64,7 +79,7 @@ After refactoring, we have inconsistent naming:
 - `domstyler_*` files renamed to `grammar_*` for language definitions
 - `domstyler.ts` renamed to `syntax_styler.ts`
 - But still have `domstyler_global.ts`, `domstyler_range_builder.ts`
-- Component named `Domstyler_Range_Code.svelte` but imports from mixed names
+- Component now properly named `Code.svelte` (was `Domstyler_Range_Code.svelte`)
 
 ## 📋 Action Items
 
@@ -75,11 +90,12 @@ After refactoring, we have inconsistent naming:
    - Test with simple HTML samples first
    - Check if positions are calculated correctly for nested tags
 
-2. **Reconcile theme files**
+2. **Reconcile theme files** (Next Session)
    - Audit all token types from both themes
    - Create mapping table of token type → color
    - Ensure both themes use same color for same token type
    - Add missing ::highlight() definitions
+   - Test with all supported languages
 
 3. **Standardize file naming**
    - Decide on consistent naming scheme
@@ -110,14 +126,15 @@ After refactoring, we have inconsistent naming:
 1. **HTML range highlighting fails silently**
    - No error in console
    - Falls back to no highlighting instead of HTML mode
+   - Needs investigation of token flattening for markup
 
 2. **Token position overlap possible**
    - Nested tokens might create overlapping ranges
    - CSS Highlight API may not handle this well
 
-3. **Theme switching issues**
-   - Switching between HTML and range mode doesn't update colors immediately
-   - May need to clear and re-apply highlights
+3. **Theme color mismatches**
+   - Some tokens use different colors between HTML and range modes
+   - Missing highlight definitions for certain token types
 
 ## 📊 Testing Status
 
@@ -130,10 +147,21 @@ After refactoring, we have inconsistent naming:
 
 ## 🎯 Next Steps
 
-1. **Immediate**: Fix HTML range highlighting
-2. **Today**: Reconcile theme colors
-3. **This Week**: Standardize naming, regenerate fixtures
-4. **Future**: Add more languages, optimize performance
+1. **Completed This Session**:
+   - ✅ Fixed range highlighting with Svelte comment nodes
+   - ✅ Consolidated Code components
+   - ✅ Added inline mode and children snippet support
+
+2. **Next Session**: Reconcile theme colors
+   - Audit token types and color mappings
+   - Update theme_highlight.css to match theme.css
+   - Test all languages in both modes
+
+3. **Future**:
+   - Fix HTML/markup range highlighting
+   - Standardize file naming
+   - Regenerate fixtures
+   - Add more languages
 
 ## 📝 Notes
 

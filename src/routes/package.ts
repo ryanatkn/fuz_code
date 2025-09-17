@@ -83,11 +83,6 @@ export const package_json: Package_Json = {
 			types: './dist/domstyler_range_builder.d.ts',
 			default: './dist/domstyler_range_builder.js',
 		},
-		'./Domstyler_Range_Code.svelte': {
-			types: './dist/Domstyler_Range_Code.svelte.d.ts',
-			svelte: './dist/Domstyler_Range_Code.svelte',
-			default: './dist/Domstyler_Range_Code.svelte',
-		},
 		'./grammar_clike.js': {types: './dist/grammar_clike.d.ts', default: './dist/grammar_clike.js'},
 		'./grammar_css.js': {types: './dist/grammar_css.d.ts', default: './dist/grammar_css.js'},
 		'./grammar_markup.js': {
@@ -163,10 +158,6 @@ export const src_json: Src_Json = {
 				{name: 'flatten_domstyler_tokens', kind: 'function'},
 				{name: 'Domstyler_Highlight_Manager', kind: 'class'},
 			],
-		},
-		'./Domstyler_Range_Code.svelte': {
-			path: 'Domstyler_Range_Code.svelte',
-			declarations: [{name: 'default', kind: 'component'}],
 		},
 		'./grammar_clike.js': {
 			path: 'grammar_clike.ts',

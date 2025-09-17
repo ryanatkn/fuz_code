@@ -192,10 +192,9 @@ Generated fixtures in `src/fixtures/{lang}/`:
 npm run benchmark
 ```
 
-Compares three modes:
+Compares the two modes:
 
 - `domstyler_html` - Traditional HTML generation
-- `domstyler_ranges_auto` - Auto-detect browser support
 - `domstyler_ranges_forced` - Force CSS Highlights
 
 ### Optimization Notes

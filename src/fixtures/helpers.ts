@@ -1,7 +1,7 @@
 import {readFileSync} from 'node:fs';
 import {search_fs} from '@ryanatkn/gro/search_fs.js';
 import {basename, join, relative} from 'node:path';
-import {domstyler_global} from '$lib/domstyler_global.js';
+import {syntax_styler} from '$lib/domstyler_global.js';
 import {tokenize_syntax} from '$lib/syntax_styler.js';
 import {flatten_domstyler_tokens} from '$lib/domstyler_range_builder.js';
 
@@ -58,7 +58,7 @@ export const get_fixture_path = (lang: string, variant: string, ext: 'json' | 't
  * Generate domstyler HTML output for a sample
  */
 export const generate_domstyler_output = (sample: Sample_Spec): string => {
-	return domstyler_global.stylize(sample.content, sample.lang);
+	return syntax_styler.stylize(sample.content, sample.lang);
 };
 
 /**
@@ -66,7 +66,7 @@ export const generate_domstyler_output = (sample: Sample_Spec): string => {
  */
 export const generate_token_data = (sample: Sample_Spec): Array<any> => {
 	// Get tokens from DOM styler and flatten them with positions
-	const grammar = domstyler_global.get_lang(sample.lang);
+	const grammar = syntax_styler.get_lang(sample.lang);
 	const tokens = tokenize_syntax(sample.content, grammar);
 	const flat_tokens = flatten_domstyler_tokens(tokens);
 

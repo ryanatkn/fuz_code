@@ -109,9 +109,18 @@ export class Domstyler_Highlight_Manager {
 			return;
 		}
 
-		// Get the text node
-		const text_node = element.firstChild;
-		if (!text_node || text_node.nodeType !== Node.TEXT_NODE) {
+		// Find the text node (it might not be firstChild due to Svelte comment nodes)
+		let text_node: Node | null = null;
+		for (const node of element.childNodes) {
+			if (node.nodeType === Node.TEXT_NODE) {
+				text_node = node;
+				break;
+			}
+		}
+
+		if (!text_node) {
+			// TODO maybe create one?
+			console.error('no text node to highlight');
 			return;
 		}
 
