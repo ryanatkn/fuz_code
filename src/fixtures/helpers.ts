@@ -1,7 +1,7 @@
 import {readFileSync} from 'node:fs';
 import {search_fs} from '@ryanatkn/gro/search_fs.js';
 import {basename, join, relative} from 'node:path';
-import {syntax_styler} from '$lib/syntax_styler_global.js';
+import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 import {tokenize_syntax, type Syntax_Token_Stream, Syntax_Token} from '$lib/syntax_styler.js';
 
 export interface Sample_Spec {
@@ -54,10 +54,10 @@ export const get_fixture_path = (lang: string, variant: string, ext: 'json' | 't
 };
 
 /**
- * Generate domstyler HTML output for a sample
+ * Generate syntax HTML output for a sample
  */
-export const generate_domstyler_output = (sample: Sample_Spec): string => {
-	return syntax_styler.stylize(sample.content, sample.lang);
+export const generate_syntax_output = (sample: Sample_Spec): string => {
+	return syntax_styler_global.stylize(sample.content, sample.lang);
 };
 
 /**
@@ -119,11 +119,11 @@ const get_token_length = (token: Syntax_Token): number => {
 };
 
 /**
- * Generate token data from DOM styler
+ * Generate token data from syntax styler
  */
 export const generate_token_data = (sample: Sample_Spec): Array<any> => {
-	// Get tokens from DOM styler and extract all with positions
-	const grammar = syntax_styler.get_lang(sample.lang);
+	// Get tokens from syntax styler and extract all with positions
+	const grammar = syntax_styler_global.get_lang(sample.lang);
 	const tokens = tokenize_syntax(sample.content, grammar);
 	const flat_tokens = extract_all_tokens(tokens);
 
@@ -134,7 +134,7 @@ export const generate_token_data = (sample: Sample_Spec): Array<any> => {
  * Process a sample to generate all outputs
  */
 export const process_sample = (sample: Sample_Spec): Generated_Output => {
-	const html = generate_domstyler_output(sample);
+	const html = generate_syntax_output(sample);
 	const tokens = generate_token_data(sample);
 
 	return {

@@ -9,10 +9,10 @@ import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/gra
  *
  * @see LICENSE
  */
-export const add_grammar_js: Add_Grammar = (domstyler) => {
-	const grammar_clike = domstyler.get_lang('clike');
+export const add_grammar_js: Add_Grammar = (syntax_styler) => {
+	const grammar_clike = syntax_styler.get_lang('clike');
 
-	const grammar_js = domstyler.add_extended_lang('clike', 'js', {
+	const grammar_js = syntax_styler.add_extended_lang('clike', 'js', {
 		class_name: [
 			grammar_clike.class_name,
 			{
@@ -69,7 +69,7 @@ export const add_grammar_js: Add_Grammar = (domstyler) => {
 	(grammar_js as any).class_name[0].pattern =
 		/(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/;
 
-	domstyler.grammar_insert_before('js', 'keyword', {
+	syntax_styler.grammar_insert_before('js', 'keyword', {
 		regex: {
 			pattern: RegExp(
 				// lookbehind
@@ -96,7 +96,7 @@ export const add_grammar_js: Add_Grammar = (domstyler) => {
 					pattern: /^(\/)[\s\S]+(?=\/[a-z]*$)/,
 					lookbehind: true,
 					alias: 'lang_regex',
-					inside: domstyler.langs.regex, // TODO use `get_lang` after adding `regex` support
+					inside: syntax_styler.langs.regex, // TODO use `get_lang` after adding `regex` support
 				},
 				regex_delimiter: /^\/|\/$/,
 				regex_flags: /^[a-z]+$/,
@@ -136,7 +136,7 @@ export const add_grammar_js: Add_Grammar = (domstyler) => {
 		constant: /\b[A-Z](?:[A-Z_]|\dx?)*\b/,
 	});
 
-	domstyler.grammar_insert_before('js', 'string', {
+	syntax_styler.grammar_insert_before('js', 'string', {
 		hashbang: {
 			pattern: /^#!.*/,
 			greedy: true,
@@ -172,7 +172,7 @@ export const add_grammar_js: Add_Grammar = (domstyler) => {
 		},
 	});
 
-	domstyler.grammar_insert_before('js', 'operator', {
+	syntax_styler.grammar_insert_before('js', 'operator', {
 		literal_property: {
 			pattern: /((?:^|[,{])[ \t]*)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*:)/m,
 			lookbehind: true,
@@ -180,12 +180,12 @@ export const add_grammar_js: Add_Grammar = (domstyler) => {
 		},
 	});
 
-	grammar_markup_add_inlined(domstyler, 'script', 'js');
+	grammar_markup_add_inlined(syntax_styler, 'script', 'js');
 
 	// add attribute support for all DOM events.
 	// https://developer.mozilla.org/en-US/docs/Web/Events#Standard_events
 	grammar_markup_add_attribute(
-		domstyler,
+		syntax_styler,
 		/on(?:abort|blur|change|click|composition(?:end|start|update)|dblclick|error|focus(?:in|out)?|key(?:down|up)|load|mouse(?:down|enter|leave|move|out|over|up)|reset|resize|scroll|select|slotchange|submit|unload|wheel)/
 			.source,
 		'js',

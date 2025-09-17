@@ -43,7 +43,7 @@
 						<strong>{fmt(stats.avg_cv * 100, 1)}%</strong>
 						<span>CV</span>
 					</div>
-					{#if impl !== 'domstyler' && stats.improvement !== undefined}
+					{#if impl !== 'syntax_html' && stats.improvement !== undefined}
 						<div>
 							<strong class:positive={stats.improvement > 0} class:negative={stats.improvement < 0}>
 								{stats.improvement > 0 ? '+' : ''}{fmt(stats.improvement, 1)}%

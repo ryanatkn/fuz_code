@@ -1,16 +1,18 @@
+<script module>
+	const supports_ranges = supports_css_highlight_api();
+</script>
+
 <script lang="ts">
 	import {onDestroy} from 'svelte';
 	import type {Snippet} from 'svelte';
 
-	import {syntax_styler} from '$lib/syntax_styler_global.js';
+	import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 	import {tokenize_syntax, type Syntax_Styler, type Grammar} from '$lib/syntax_styler.js';
 	import {
 		Highlight_Manager,
 		supports_css_highlight_api,
-		type Domstyler_Range_Mode,
+		type Highlight_Mode,
 	} from '$lib/highlight_manager.js';
-
-	// TODO best way to handle SSR?
 
 	const {
 		content,
@@ -20,30 +22,29 @@
 		code_attrs,
 		grammar,
 		inline = false,
-		domstyler = syntax_styler,
+		syntax_styler = syntax_styler_global,
 		children,
 	}: {
 		content: string;
 		lang?: string | null;
-		mode?: Domstyler_Range_Mode;
+		mode?: Highlight_Mode;
 		pre_attrs?: any;
 		code_attrs?: any;
 		grammar?: Grammar | undefined;
 		inline?: boolean;
-		domstyler?: Syntax_Styler;
+		syntax_styler?: Syntax_Styler;
 		children?: Snippet<[markup: string]>;
 	} = $props();
 
 	let code_element: HTMLElement | undefined = $state();
-	const highlight_manager = new Highlight_Manager();
 
-	const use_ranges = $derived(
-		mode === 'ranges' || (mode === 'auto' && supports_css_highlight_api()),
-	);
+	const highlight_manager = supports_ranges ? new Highlight_Manager() : null;
+
+	const use_ranges = $derived(supports_ranges && (mode === 'ranges' || mode === 'auto'));
 
 	const tag = $derived(inline ? 'span' : 'pre');
 
-	const is_language_supported = $derived(lang !== null && domstyler.langs[lang] !== undefined);
+	const is_language_supported = $derived(lang !== null && syntax_styler.langs[lang] !== undefined);
 
 	// Generate HTML markup for non-range mode
 	const html_content = $derived.by(() => {
@@ -59,34 +60,36 @@
 			return content;
 		}
 
-		return domstyler.stylize(content, lang, grammar);
+		return syntax_styler.stylize(content, lang, grammar);
 	});
 
 	// Apply highlights for range mode
-	$effect(() => {
-		if (!code_element || !content || !use_ranges) {
+	if (highlight_manager) {
+		$effect(() => {
+			if (!code_element || !content || !use_ranges) {
+				highlight_manager.clear_element_ranges();
+				return;
+			}
+
+			// If lang is null or unsupported, no highlighting needed
+			if (lang === null || !is_language_supported) {
+				highlight_manager.clear_element_ranges();
+				return;
+			}
+
+			// Clear existing highlights
 			highlight_manager.clear_element_ranges();
-			return;
-		}
 
-		// If lang is null or unsupported, no highlighting needed
-		if (lang === null || !is_language_supported) {
-			highlight_manager.clear_element_ranges();
-			return;
-		}
+			// Get tokens from syntax styler
+			const tokens = tokenize_syntax(content, grammar || syntax_styler.get_lang(lang));
 
-		// Clear existing highlights
-		highlight_manager.clear_element_ranges();
-
-		// Get tokens from DOM styler
-		const tokens = tokenize_syntax(content, grammar || domstyler.get_lang(lang));
-
-		// Apply highlights
-		highlight_manager.highlight_from_domstyler_tokens(code_element, tokens);
-	});
+			// Apply highlights
+			highlight_manager.highlight_from_syntax_tokens(code_element, tokens);
+		});
+	}
 
 	onDestroy(() => {
-		highlight_manager.destroy();
+		highlight_manager?.destroy();
 	});
 
 	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime

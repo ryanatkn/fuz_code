@@ -194,8 +194,8 @@ npm run benchmark
 
 Compares the two modes:
 
-- `domstyler_html` - Traditional HTML generation
-- `domstyler_ranges_forced` - Force CSS Highlights
+- `syntax_html` - Traditional HTML generation
+- `syntax_ranges` - Force CSS Highlights
 
 ### Optimization Notes
 

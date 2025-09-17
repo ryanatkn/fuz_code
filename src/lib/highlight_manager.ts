@@ -1,28 +1,31 @@
 import {Syntax_Token, type Syntax_Token_Stream} from './syntax_styler.js';
 
-export type Domstyler_Range_Mode = 'auto' | 'ranges' | 'html';
+export type Highlight_Mode = 'auto' | 'ranges' | 'html';
 
 /**
  * Check for CSS Highlights API support.
  */
 export const supports_css_highlight_api = (): boolean =>
-	typeof CSS !== 'undefined' && 'highlights' in CSS && !!globalThis.Highlight;
+	!!(globalThis.CSS?.highlights && globalThis.Highlight);
 
 /**
- * Highlight Manager - Manages highlights for a single element
- * Tracks ranges per element and only removes its own ranges when clearing
+ * Manages highlights for a single element.
+ * Tracks ranges per element and only removes its own ranges when clearing.
  */
 export class Highlight_Manager {
-	private element_ranges: Map<string, Array<Range>>;
+	element_ranges: Map<string, Array<Range>>;
 
 	constructor() {
+		if (!supports_css_highlight_api()) {
+			throw Error('CSS Highlights API not supported');
+		}
 		this.element_ranges = new Map();
 	}
 
 	/**
 	 * Create ranges for all tokens in the tree
 	 */
-	private create_all_ranges(
+	#create_all_ranges(
 		tokens: Syntax_Token_Stream,
 		text_node: Node,
 		ranges_by_type: Map<string, Array<Range>>,
@@ -38,7 +41,7 @@ export class Highlight_Manager {
 			}
 
 			const start = pos;
-			const length = this.get_token_length(token);
+			const length = this.#get_token_length(token);
 			const end = start + length;
 
 			// Create range for EVERY token - no complex logic
@@ -58,7 +61,7 @@ export class Highlight_Manager {
 
 			// Process nested tokens
 			if (Array.isArray(token.content)) {
-				this.create_all_ranges(token.content, text_node, ranges_by_type, start);
+				this.#create_all_ranges(token.content, text_node, ranges_by_type, start);
 			}
 
 			pos = end;
@@ -70,7 +73,7 @@ export class Highlight_Manager {
 	/**
 	 * Calculate the total text length of a token
 	 */
-	private get_token_length(token: Syntax_Token): number {
+	#get_token_length(token: Syntax_Token): number {
 		if (typeof token.content === 'string') {
 			return token.content.length;
 		}
@@ -80,21 +83,16 @@ export class Highlight_Manager {
 			if (typeof item === 'string') {
 				length += item.length;
 			} else {
-				length += this.get_token_length(item);
+				length += this.#get_token_length(item);
 			}
 		}
 		return length;
 	}
 
 	/**
-	 * Highlight from DOM styler token stream
+	 * Highlight from syntax styler token stream
 	 */
-	highlight_from_domstyler_tokens(element: Element, tokens: Syntax_Token_Stream): void {
-		if (!globalThis.CSS?.highlights) {
-			console.warn('CSS Highlights API not supported');
-			return;
-		}
-
+	highlight_from_syntax_tokens(element: Element, tokens: Syntax_Token_Stream): void {
 		// Find the text node (it might not be firstChild due to Svelte comment nodes)
 		let text_node: Node | null = null;
 		for (const node of element.childNodes) {
@@ -114,7 +112,7 @@ export class Highlight_Manager {
 
 		// Create ranges for all tokens - simple direct traversal
 		const ranges_by_type = new Map<string, Array<Range>>();
-		this.create_all_ranges(tokens, text_node, ranges_by_type, 0);
+		this.#create_all_ranges(tokens, text_node, ranges_by_type, 0);
 
 		// Apply highlights
 		for (const [type, ranges] of ranges_by_type) {
@@ -139,8 +137,6 @@ export class Highlight_Manager {
 	 * Clear only this element's ranges from highlights
 	 */
 	clear_element_ranges(): void {
-		if (!globalThis.CSS?.highlights) return;
-
 		for (const [name, ranges] of this.element_ranges) {
 			const highlight = CSS.highlights.get(name);
 			if (!highlight) {

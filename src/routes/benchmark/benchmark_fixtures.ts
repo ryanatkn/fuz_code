@@ -3,8 +3,8 @@ import type {Benchmarked_Implementation} from './benchmark_types.js';
 
 // Implementation configurations
 export const implementations: Benchmarked_Implementation[] = [
-	{name: 'domstyler_html', component: Code, mode: 'html'},
-	{name: 'domstyler_ranges_forced', component: Code, mode: 'ranges'},
+	{name: 'syntax_html', component: Code, mode: 'html'},
+	{name: 'syntax_ranges', component: Code, mode: 'ranges'},
 ];
 
 import type {Code_Sample} from '$lib/code_sample.js';

@@ -8,7 +8,7 @@ import type {Add_Grammar, Grammar} from '$lib/syntax_styler.js';
  *
  * @see LICENSE
  */
-export const add_grammar_json: Add_Grammar = (domstyler) => {
+export const add_grammar_json: Add_Grammar = (syntax_styler) => {
 	const grammar_json = {
 		property: {
 			pattern: /(^|[^\\])"(?:\\.|[^\\"\r\n])*"(?=\s*:)/,
@@ -34,5 +34,5 @@ export const add_grammar_json: Add_Grammar = (domstyler) => {
 		},
 	} satisfies Grammar;
 
-	domstyler.add_lang('json', grammar_json);
+	syntax_styler.add_lang('json', grammar_json);
 };

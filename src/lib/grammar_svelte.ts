@@ -11,10 +11,10 @@ const blocks = '(if|else if|await|then|catch|each|html|debug)';
  *
  * @see LICENSE
  */
-export const add_grammar_svelte: Add_Grammar = (domstyler) => {
-	const grammar_ts = domstyler.get_lang('ts');
+export const add_grammar_svelte: Add_Grammar = (syntax_styler) => {
+	const grammar_ts = syntax_styler.get_lang('ts');
 
-	const grammar_svelte = domstyler.add_extended_lang('markup', 'svelte', {
+	const grammar_svelte = syntax_styler.add_extended_lang('markup', 'svelte', {
 		each: {
 			pattern: /{[#/]each(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*}/,
 			inside: {
@@ -104,14 +104,14 @@ export const add_grammar_svelte: Add_Grammar = (domstyler) => {
 	((grammar_svelte.tag as Grammar_Token).inside!.attr_value as Grammar_Token).inside!.entity =
 		grammar_svelte.entity;
 
-	grammar_svelte_add_inlined(domstyler, 'style', 'css');
-	grammar_svelte_add_inlined(domstyler, 'script', 'ts');
+	grammar_svelte_add_inlined(syntax_styler, 'style', 'css');
+	grammar_svelte_add_inlined(syntax_styler, 'script', 'ts');
 };
 
 export const grammar_svelte_add_inlined = (
-	domstyler: Syntax_Styler,
+	syntax_styler: Syntax_Styler,
 	tag_name: string,
 	lang: string,
 ): void => {
-	grammar_markup_add_inlined(domstyler, tag_name, lang, 'svelte');
+	grammar_markup_add_inlined(syntax_styler, tag_name, lang, 'svelte');
 };

@@ -15,14 +15,10 @@ import {sample_langs} from '$lib/code_sample.js';
  * This test suite verifies that our syntax highlighters produce consistent,
  * correct output by comparing runtime behavior against generated fixtures.
  *
- * Current State:
- * - Tests exact HTML match between runtime and fixtures
- * - Tests domstyler (legacy) and boundary scanner outputs
- *
- * Future Goals:
- * - Migrate from domstyler to boundary scanner as primary implementation
- * - Test semantic equivalence rather than exact HTML match
- * - Ensure complete coverage with no unhighlighted code
+ * Tests generated fixture files to ensure:
+ * - HTML rendering matches generated fixtures
+ * - Token ranges are properly nested (no invalid overlaps)
+ * - All expected tokens are present
  */
 
 // TODO: Helper functions for semantic comparison
@@ -48,7 +44,7 @@ describe('generated fixtures match runtime', () => {
 				);
 			});
 
-			test('domstyler output matches fixture', () => {
+			test('syntax styler output matches fixture', () => {
 				/**
 				 * Current: Tests exact HTML string match
 				 *
@@ -171,8 +167,8 @@ describe('all expected languages are tested', () => {
  * =======================
  *
  * describe('semantic equivalence', () => {
- *   test('domstyler and boundary scanner highlight same tokens', () => {
- *     // Compare token positions regardless of HTML differences
+ *   test('all tokens have proper ranges', () => {
+ *     // Compare token positions are valid
  *   });
  *
  *   test('no code is left unhighlighted', () => {

@@ -1,6 +1,6 @@
 import {Bench} from 'tinybench';
 import {samples as all_samples} from '$lib/samples/all.js';
-import {syntax_styler} from '$lib/syntax_styler_global.js';
+import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 
 /* eslint-disable no-console */
 
@@ -25,7 +25,7 @@ export const run_benchmark = async (filter?: string): Promise<Array<Benchmark_Re
 
 	for (const sample of samples_to_run) {
 		bench.add(`baseline:${sample.name}`, () => {
-			syntax_styler.stylize(sample.content, sample.lang);
+			syntax_styler_global.stylize(sample.content, sample.lang);
 		});
 	}
 

@@ -8,7 +8,7 @@ import type {Syntax_Styler, Add_Grammar, Grammar, Grammar_Token} from '$lib/synt
  *
  * @see LICENSE
  */
-export const add_grammar_markup: Add_Grammar = (domstyler) => {
+export const add_grammar_markup: Add_Grammar = (syntax_styler) => {
 	const grammar_markup = {
 		comment: {
 			pattern: /<!--(?:(?!<!--)[\s\S])*?-->/,
@@ -75,8 +75,8 @@ export const add_grammar_markup: Add_Grammar = (domstyler) => {
 
 	grammar_markup.tag.inside.attr_value.inside.entity = grammar_markup.entity;
 
-	domstyler.add_lang('markup', grammar_markup, ['html', 'mathml', 'svg']);
-	domstyler.add_extended_lang('markup', 'xml', {}, ['ssml', 'atom', 'rss']);
+	syntax_styler.add_lang('markup', grammar_markup, ['html', 'mathml', 'svg']);
+	syntax_styler.add_extended_lang('markup', 'xml', {}, ['ssml', 'atom', 'rss']);
 };
 
 /**
@@ -87,18 +87,16 @@ export const add_grammar_markup: Add_Grammar = (domstyler) => {
  * @param tag_name - The name of the tag that contains the inlined language. This name will be treated as
  * case insensitive.
  * @param lang - The language key.
- * @example
- * grammar_markup_add_inlined(domstyler, 'style', 'css');
  */
 export const grammar_markup_add_inlined = (
-	domstyler: Syntax_Styler,
+	syntax_styler: Syntax_Styler,
 	tag_name: string,
 	lang: string,
 	inside_lang = 'markup',
 ): void => {
 	const lang_key = 'lang_' + lang;
 
-	domstyler.grammar_insert_before(inside_lang, 'cdata', {
+	syntax_styler.grammar_insert_before(inside_lang, 'cdata', {
 		[tag_name]: {
 			pattern: RegExp(
 				/(<__[^>]*>)(?:<!\[CDATA\[(?:[^\]]|\](?!\]>))*\]\]>|(?!<!\[CDATA\[)[\s\S])*?(?=<\/__>)/.source.replace(
@@ -119,13 +117,13 @@ export const grammar_markup_add_inlined = (
 						[lang_key]: {
 							pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
 							lookbehind: true,
-							inside: domstyler.get_lang(lang),
+							inside: syntax_styler.get_lang(lang),
 						},
 					},
 				},
 				[lang_key]: {
 					pattern: /[\s\S]+/,
-					inside: domstyler.get_lang(lang),
+					inside: syntax_styler.get_lang(lang),
 				},
 			},
 		},
@@ -140,16 +138,14 @@ export const grammar_markup_add_inlined = (
  * @param attr_name - The name of the tag that contains the inlined language. This name will be treated as
  * case insensitive.
  * @param lang - The language key.
- * @example
- * grammar_markup_add_attribute(domstyler, 'style', 'css');
  */
 export const grammar_markup_add_attribute = (
-	domstyler: Syntax_Styler,
+	syntax_styler: Syntax_Styler,
 	attr_name: string,
 	lang: string,
 ): void => {
 	(
-		(domstyler.get_lang('markup').tag as Grammar_Token).inside!.special_attr as Array<Grammar_Token>
+		(syntax_styler.get_lang('markup').tag as Grammar_Token).inside!.special_attr as Array<Grammar_Token>
 	).push({
 		pattern: RegExp(
 			/(^|["'\s])/.source +
@@ -169,7 +165,7 @@ export const grammar_markup_add_attribute = (
 						pattern: /(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,
 						lookbehind: true,
 						alias: [lang, 'lang_' + lang], // TODO remove this alias?
-						inside: domstyler.get_lang(lang),
+						inside: syntax_styler.get_lang(lang),
 					},
 					punctuation: [
 						{

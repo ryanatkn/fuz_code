@@ -246,7 +246,7 @@ export const calculate_summary = (results: Benchmark_Result[]): Record<string, S
 	}
 
 	// Calculate relative performance
-	const baseline_mean = summary.domstyler?.avg_mean || 1;
+	const baseline_mean = summary.syntax_html?.avg_mean || 1;
 	for (const impl of Object.keys(summary)) {
 		summary[impl].relative_speed = baseline_mean / summary[impl].avg_mean;
 		summary[impl].improvement = (summary[impl].relative_speed! - 1) * 100;
