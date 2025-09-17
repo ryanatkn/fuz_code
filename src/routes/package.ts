@@ -79,34 +79,16 @@ export const package_json: Package_Json = {
 			types: './dist/domstyler_global.d.ts',
 			default: './dist/domstyler_global.js',
 		},
-		'./grammar_clike.js': {
-			types: './dist/grammar_clike.d.ts',
-			default: './dist/grammar_clike.js',
-		},
-		'./grammar_css.js': {
-			types: './dist/grammar_css.d.ts',
-			default: './dist/grammar_css.js',
-		},
-		'./grammar_html.js': {
-			types: './dist/grammar_html.d.ts',
-			default: './dist/grammar_html.js',
-		},
-		'./grammar_js.js': {
-			types: './dist/grammar_js.d.ts',
-			default: './dist/grammar_js.js',
-		},
-		'./grammar_json.js': {
-			types: './dist/grammar_json.d.ts',
-			default: './dist/grammar_json.js',
-		},
+		'./grammar_clike.js': {types: './dist/grammar_clike.d.ts', default: './dist/grammar_clike.js'},
+		'./grammar_css.js': {types: './dist/grammar_css.d.ts', default: './dist/grammar_css.js'},
+		'./grammar_html.js': {types: './dist/grammar_html.d.ts', default: './dist/grammar_html.js'},
+		'./grammar_js.js': {types: './dist/grammar_js.d.ts', default: './dist/grammar_js.js'},
+		'./grammar_json.js': {types: './dist/grammar_json.d.ts', default: './dist/grammar_json.js'},
 		'./grammar_svelte.js': {
 			types: './dist/grammar_svelte.d.ts',
 			default: './dist/grammar_svelte.js',
 		},
-		'./grammar_ts.js': {
-			types: './dist/grammar_ts.d.ts',
-			default: './dist/grammar_ts.js',
-		},
+		'./grammar_ts.js': {types: './dist/grammar_ts.d.ts', default: './dist/grammar_ts.js'},
 		'./domstyler_range_builder.js': {
 			types: './dist/domstyler_range_builder.d.ts',
 			default: './dist/domstyler_range_builder.js',
