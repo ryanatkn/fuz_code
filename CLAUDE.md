@@ -5,14 +5,14 @@ A performance-focused fork of PrismJS for syntax highlighting, optimized for run
 ## Quick Start
 
 ```typescript
-import Domstyler_Range_Code from '$lib/Domstyler_Range_Code.svelte';
+import Code from '$lib/Code.svelte';
 
 // Auto-detects and uses CSS Highlight API when available
-<Domstyler_Range_Code content={code} lang="ts" />
+<Code content={code} lang="ts" />
 
 // Force specific rendering mode
-<Domstyler_Range_Code content={code} lang="ts" mode="html" />    // Traditional HTML
-<Domstyler_Range_Code content={code} lang="ts" mode="ranges" />  // CSS Highlights
+<Code content={code} lang="ts" mode="html" />    // Traditional HTML
+<Code content={code} lang="ts" mode="ranges" />  // CSS Highlights
 ```
 
 ## Commands
@@ -28,7 +28,7 @@ npm run benchmark                   # Run performance benchmarks
 
 ### Core System
 
-**DOM Styler** - A PrismJS fork with two rendering modes:
+**Syntax Styler** - A PrismJS fork with two rendering modes:
 
 1. **HTML Mode** - Traditional token-based HTML generation with CSS classes
 2. **Range Mode** - CSS Custom Highlight API for native browser highlighting (Chrome 105+, Firefox 111+)
@@ -39,8 +39,8 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 #### Tokenization Engine
 
-- `src/lib/domstyler.ts` - Core tokenization engine with linked list processing
-- `src/lib/domstyler_global.ts` - Pre-configured global instance
+- `src/lib/syntax_styler.ts` - Core tokenization engine with linked list processing
+- `src/lib/syntax_styler_global.ts` - Pre-configured global instance
 - `src/lib/tokenize_syntax()` - Main tokenization function
 
 #### Language Definitions
@@ -54,14 +54,12 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 #### Range Highlighting
 
-- `src/lib/highlight_manager.ts` - Position calculation from token trees
-- `src/lib/flatten_domstyler_tokens()` - Converts nested tokens to flat array with positions
+- `src/lib/highlight_manager.ts` - Direct tree traversal for range creation
 - `src/lib/Highlight_Manager` - Manages CSS Custom Highlights per element
 
 #### Components
 
-- `src/lib/Code.svelte` - Traditional HTML rendering
-- `src/lib/Domstyler_Range_Code.svelte` - Hybrid component with auto-detection
+- `src/lib/Code.svelte` - Hybrid component supporting both HTML and range modes with auto-detection
 
 #### Themes
 
@@ -73,7 +71,7 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 ### Token Tree Structure
 
-DOM styler creates a hierarchical token tree where tokens can contain nested tokens:
+Syntax styler creates a hierarchical token tree where tokens can contain nested tokens:
 
 ```typescript
 interface Syntax_Token {
@@ -84,15 +82,15 @@ interface Syntax_Token {
 }
 ```
 
-### Position Calculation
+### Range Creation
 
-Since PrismJS wasn't designed for position tracking, we calculate positions post-tokenization:
+For CSS Custom Highlights, ranges are created directly from the token tree during a single traversal:
 
 ```typescript
-// Flatten nested token tree and calculate absolute positions
+// Generate tokens from syntax styler
 const tokens = tokenize_syntax(code, grammar);
-const flatTokens = flatten_domstyler_tokens(tokens);
-// flatTokens now contains: [{type: 'keyword', start: 0, end: 5}, ...]
+// Highlight manager creates ranges directly from the token tree
+highlight_manager.highlight_from_syntax_tokens(element, tokens);
 ```
 
 ### CSS Custom Highlights
@@ -122,10 +120,10 @@ CSS.highlights.set(token.type, highlight);
 
 ## API Reference
 
-### Domstyler
+### Syntax_Styler
 
 ```typescript
-class Domstyler {
+class Syntax_Styler {
 	// Generate HTML with syntax highlighting
 	stylize(text: string, lang: string): string;
 
@@ -137,14 +135,14 @@ class Domstyler {
 }
 ```
 
-### domstyler_global
+### syntax_styler_global
 
 Pre-configured instance with all languages loaded:
 
 ```typescript
-import {domstyler_global} from '$lib/domstyler_global.js';
+import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 
-const html = domstyler_global.stylize(code, 'ts');
+const html = syntax_styler_global.stylize(code, 'ts');
 ```
 
 ### Highlight_Manager
@@ -155,7 +153,7 @@ Manages CSS Custom Highlights for an element:
 const manager = new Highlight_Manager();
 
 // Apply highlights from tokens
-manager.highlight_from_domstyler_tokens(element, tokens);
+manager.highlight_from_syntax_tokens(element, tokens);
 
 // Clear highlights
 manager.clear_element_ranges();

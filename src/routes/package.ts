@@ -183,7 +183,7 @@ export const src_json: Src_Json = {
 		'./highlight_manager.js': {
 			path: 'highlight_manager.ts',
 			declarations: [
-				{name: 'Domstyler_Range_Mode', kind: 'type'},
+				{name: 'Highlight_Mode', kind: 'type'},
 				{name: 'supports_css_highlight_api', kind: 'function'},
 				{name: 'Highlight_Manager', kind: 'class'},
 			],
@@ -235,7 +235,7 @@ export const src_json: Src_Json = {
 		},
 		'./syntax_styler_global.js': {
 			path: 'syntax_styler_global.ts',
-			declarations: [{name: 'syntax_styler', kind: 'variable'}],
+			declarations: [{name: 'syntax_styler_global', kind: 'variable'}],
 		},
 		'./syntax_styler.js': {
 			path: 'syntax_styler.ts',
