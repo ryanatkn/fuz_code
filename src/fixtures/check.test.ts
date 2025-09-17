@@ -78,15 +78,41 @@ describe('generated fixtures match runtime', () => {
 				// assert(validate_no_overlaps(extract_tokens(runtime_output.domstyler_html)));
 			});
 
-			test('boundaries match fixture', () => {
+			test('token positions are valid', () => {
 				/**
-				 * Critical for nested language support (e.g., JS in HTML, CSS in Svelte)
+				 * Validates that token positions are correctly calculated
+				 * from the DOM styler token tree
 				 *
 				 * Should verify:
-				 * - Correct detection of language boundaries
-				 * - No overlapping boundaries
-				 * - Complete coverage (no gaps)
-				 * - Proper handling of edge cases (empty tags, comments)
+				 * - No overlapping tokens
+				 * - All positions within bounds
+				 * - Tokens match expected patterns
+				 */
+				const runtime_output = process_sample(sample);
+
+				// Verify no overlapping tokens
+				let lastEnd = 0;
+				for (const token of runtime_output.tokens) {
+					assert.ok(
+						token.start >= lastEnd,
+						`Token overlap detected at position ${token.start} (previous ended at ${lastEnd})`,
+					);
+					assert.ok(
+						token.end <= sample.content.length,
+						`Token extends beyond content at position ${token.end} (content length: ${sample.content.length})`,
+					);
+					lastEnd = Math.max(lastEnd, token.end);
+				}
+			});
+
+			test('token data matches fixture', () => {
+				/**
+				 * Ensures token positions are consistent between runs
+				 *
+				 * Should verify:
+				 * - Token positions match expected values
+				 * - Token types are correctly identified
+				 * - Tokenization is deterministic
 				 */
 				if (!existsSync(fixture_path)) {
 					console.warn(`Skipping test - fixture missing: ${fixture_path}`); // eslint-disable-line no-console
@@ -97,44 +123,9 @@ describe('generated fixtures match runtime', () => {
 				const runtime_output = process_sample(sample);
 
 				assert.deepEqual(
-					runtime_output.boundaries,
-					fixture.boundaries,
-					`Boundaries mismatch for ${sample.lang}_${sample.variant}`,
-				);
-
-				// TODO: Validate boundary integrity
-				// assert(validate_boundary_coverage(sample.content, runtime_output.boundaries));
-				// assert(validate_no_boundary_overlaps(runtime_output.boundaries));
-			});
-
-			test('boundary scanner output matches fixture', () => {
-				/**
-				 * Boundary scanner is a new implementation
-				 * Tests HTML generation from boundary detection
-				 *
-				 * Should verify:
-				 * - Correct HTML generation from boundaries
-				 * - Proper exit condition handling (e.g., </script> in strings)
-				 * - Template literal expression tracking
-				 * - Performance improvement over regex approach
-				 */
-				if (!existsSync(fixture_path)) {
-					console.warn(`Skipping test - fixture missing: ${fixture_path}`); // eslint-disable-line no-console
-					return;
-				}
-
-				const fixture: Generated_Output = JSON.parse(readFileSync(fixture_path, 'utf-8'));
-				const runtime_output = process_sample(sample);
-
-				// Skip if boundary scanner doesn't support this language yet
-				if (!runtime_output.boundary_scanner_html || !fixture.boundary_scanner_html) {
-					return;
-				}
-
-				assert.strictEqual(
-					runtime_output.boundary_scanner_html,
-					fixture.boundary_scanner_html,
-					`Boundary scanner output mismatch for ${sample.lang}_${sample.variant}`,
+					runtime_output.tokens,
+					fixture.tokens,
+					`Token data mismatch for ${sample.lang}_${sample.variant}`,
 				);
 			});
 		});

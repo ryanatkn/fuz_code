@@ -2,11 +2,11 @@
 
 /* * 
  * File statistics:
- * - Total files in filer: 306
+ * - Total files in filer: 291
  * - External dependencies: 235
- * - Internal project files: 71
- * - Files processed (passed filter): 270
- * - Files with CSS classes: 27
+ * - Internal project files: 56
+ * - Files processed (passed filter): 255
+ * - Files with CSS classes: 25
  * - Unique classes found: 46
  */
 
@@ -88,9 +88,6 @@ a.chip {
 }
 .flex_wrap {
 	flex-wrap: wrap;
-}
-.align_items_center {
-	align-items: center;
 }
 .justify_content_center {
 	justify-content: center;

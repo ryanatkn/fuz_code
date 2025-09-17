@@ -1,0 +1,57 @@
+=== TOKENS ===
+<!doctype html>           [  0-15 ] doctype
+<                         [ 17-18 ] punctuation
+=                         [ 27-28 ] punctuation
+"                         [ 28-29 ] punctuation
+"                         [ 33-34 ] punctuation
+>                         [ 34-35 ] punctuation
+<                         [ 37-38 ] punctuation
+>                         [ 39-40 ] punctuation
+</                        [ 52-54 ] punctuation
+>                         [ 55-56 ] punctuation
+</                        [ 57-59 ] punctuation
+>                         [ 62-63 ] punctuation
+<                         [ 65-66 ] punctuation
+=                         [ 73-74 ] punctuation
+"                         [ 74-75 ] punctuation
+"                         [ 97-98 ] punctuation
+>                         [ 98-99 ] punctuation
+<                         [104-105] punctuation
+=                         [115-116] punctuation
+"                         [116-117] punctuation
+"                         [122-123] punctuation
+>                         [123-124] punctuation
+</                        [128-130] punctuation
+>                         [134-135] punctuation
+</                        [135-137] punctuation
+>                         [138-139] punctuation
+<                         [141-142] punctuation
+=                         [153-154] punctuation
+"                         [154-155] punctuation
+"                         [161-162] punctuation
+>                         [171-172] punctuation
+</                        [180-182] punctuation
+>                         [188-189] punctuation
+<!-- comment <div>a<br /> b</div> <script> --> [191-237] comment
+<                         [239-240] punctuation
+/>                        [243-245] punctuation
+<                         [247-248] punctuation
+/>                        [251-253] punctuation
+<                         [255-256] punctuation
+=                         [263-264] punctuation
+... and 44 more tokens
+
+=== STATS ===
+Total tokens: 84
+Sample length: 541 characters
+
+Token types:
+  punctuation: 75
+  string: 2
+  doctype: 1
+  comment: 1
+  keyword: 1
+  operator: 1
+  selector: 1
+  property: 1
+  cdata: 1

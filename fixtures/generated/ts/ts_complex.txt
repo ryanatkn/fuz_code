@@ -1,0 +1,61 @@
+=== TOKENS ===
+const                     [  0-5  ] keyword
+=                         [  8-9  ] operator
+1                         [ 10-11 ] number
+;                         [ 11-12 ] punctuation
+const                     [ 14-19 ] keyword
+=                         [ 22-23 ] operator
+'b'                       [ 24-27 ] string
+;                         [ 27-28 ] punctuation
+const                     [ 30-35 ] keyword
+=                         [ 38-39 ] operator
+true                      [ 40-44 ] boolean
+;                         [ 44-45 ] punctuation
+export                    [ 47-53 ] keyword
+type                      [ 54-58 ] keyword
+=                         [ 69-70 ] operator
+1                         [ 71-72 ] number
+|                         [ 73-74 ] operator
+'b'                       [ 75-78 ] string
+|                         [ 79-80 ] operator
+true                      [ 81-85 ] boolean
+;                         [ 85-86 ] punctuation
+class                     [ 88-93 ] keyword
+D                         [ 94-95 ] constant
+{                         [ 96-97 ] punctuation
+:                         [101-102] operator
+string                    [103-109] builtin
+=                         [110-111] operator
+'d'                       [112-115] string
+;                         [115-116] punctuation
+:                         [120-121] operator
+number                    [122-128] builtin
+;                         [128-129] punctuation
+=                         [134-135] operator
+$state                    [136-142] function
+(                         [142-143] punctuation
+false                     [143-148] boolean
+)                         [148-149] punctuation
+;                         [149-150] punctuation
+constructor               [153-164] function
+(                         [164-165] punctuation
+... and 188 more tokens
+
+=== STATS ===
+Total tokens: 228
+Sample length: 1327 characters
+
+Token types:
+  punctuation: 93
+  operator: 39
+  keyword: 37
+  builtin: 13
+  string: 10
+  comment: 10
+  function: 8
+  number: 5
+  boolean: 4
+  delimiter: 4
+  constant: 2
+  source: 2
+  flags: 1

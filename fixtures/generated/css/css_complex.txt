@@ -1,0 +1,55 @@
+=== TOKENS ===
+.some_class               [  0-11 ] selector
+{                         [ 12-13 ] punctuation
+color                     [ 15-20 ] property
+:                         [ 20-21 ] punctuation
+;                         [ 25-26 ] punctuation
+}                         [ 27-28 ] punctuation
+.hypen-class              [ 30-42 ] selector
+{                         [ 43-44 ] punctuation
+font-size                 [ 46-55 ] property
+:                         [ 55-56 ] punctuation
+;                         [ 61-62 ] punctuation
+}                         [ 63-64 ] punctuation
+p                         [ 66-67 ] selector
+{                         [ 68-69 ] punctuation
+box-shadow                [ 71-81 ] property
+:                         [ 81-82 ] punctuation
+rgba                      [ 92-96 ] function
+(                         [ 96-97 ] punctuation
+,                         [ 98-99 ] punctuation
+,                         [101-102] punctuation
+,                         [104-105] punctuation
+)                         [109-110] punctuation
+;                         [110-111] punctuation
+}                         [112-113] punctuation
+/* comment */             [115-128] comment
+/*\nmulti\n.line {\n\ti: 100px\n\n</style>\n\n@media*/ [130-176] comment
+#id                       [178-181] selector
+{                         [182-183] punctuation
+background-color          [185-201] property
+:                         [201-202] punctuation
+;                         [207-208] punctuation
+}                         [209-210] punctuation
+div > p                   [212-219] selector
+{                         [220-221] punctuation
+margin                    [223-229] property
+:                         [229-230] punctuation
+;                         [235-236] punctuation
+}                         [237-238] punctuation
+@media                    [240-246] rule
+(                         [247-248] punctuation
+... and 35 more tokens
+
+=== STATS ===
+Total tokens: 75
+Sample length: 557 characters
+
+Token types:
+  punctuation: 48
+  property: 10
+  selector: 8
+  comment: 4
+  function: 2
+  string: 2
+  rule: 1

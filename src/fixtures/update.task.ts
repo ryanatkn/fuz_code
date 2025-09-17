@@ -2,7 +2,7 @@ import type {Task} from '@ryanatkn/gro';
 import {writeFileSync, mkdirSync, rmSync, existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {format_file} from '@ryanatkn/gro/format_file.js';
-import {discover_samples, process_sample, generate_report, get_fixture_path} from './helpers.js';
+import {discover_samples, process_sample, generate_debug_text, get_fixture_path} from './helpers.js';
 
 export const task: Task = {
 	summary: 'update all test fixtures from sample files',
@@ -42,12 +42,11 @@ export const task: Task = {
 			writeFileSync(json_path, formatted_json);
 			console.log(`  → ${json_path}`); // eslint-disable-line no-console
 
-			// Generate and write markdown report
-			const report = generate_report(output);
-			const md_path = get_fixture_path(sample.lang, sample.variant, 'md');
-			const formatted_md = await format_file(report, {filepath: md_path});
-			writeFileSync(md_path, formatted_md);
-			console.log(`  → ${md_path}`); // eslint-disable-line no-console
+			// Generate and write debug text file
+			const debug_text = generate_debug_text(output);
+			const txt_path = get_fixture_path(sample.lang, sample.variant, 'txt');
+			writeFileSync(txt_path, debug_text);
+			console.log(`  → ${txt_path}`); // eslint-disable-line no-console
 		}
 
 		console.log(`\n✓ Updated ${samples.length} samples`); // eslint-disable-line no-console

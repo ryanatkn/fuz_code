@@ -1,239 +1,274 @@
 # fuz_code - Syntax Highlighter
 
-A performance-focused fork of PrismJS for syntax highlighting, optimized for runtime use.
+A performance-focused fork of PrismJS for syntax highlighting, optimized for runtime use with optional CSS Custom Highlight API support.
+
+## Quick Start
+
+```typescript
+import Domstyler_Range_Code from '$lib/Domstyler_Range_Code.svelte';
+
+// Auto-detects and uses CSS Highlight API when available
+<Domstyler_Range_Code content={code} lang="ts" />
+
+// Force specific rendering mode
+<Domstyler_Range_Code content={code} lang="ts" mode="html" />    // Traditional HTML
+<Domstyler_Range_Code content={code} lang="ts" mode="ranges" />  // CSS Highlights
+```
 
 ## Commands
 
 ```bash
-gro test      # Run tests
-gro test -- file_pattern -t "specific filter"
-npm run benchmark # Run benchmarks
-
-# Test fixtures workflow
-gro test src/fixtures/check.test.ts # verify
-gro src/fixtures/update             # regenerate ONLY if on-disk files are incorrect
-```
-
-## File Structure
-
-The codebase uses a flat structure with clear `domstyler` and `rangestyler` prefixes:
-
-**IMPORTANT**: Domstyler is considered legacy - we should NOT fix it, only use it as a reference for expected behavior. All improvements go into the boundary scanner system.
-
-### DOM Styler (HTML Generation)
-
-- `src/lib/domstyler.ts` - Main tokenization engine with pattern matching
-- `src/lib/domstyler_lang_js.ts` - JS/ECMAScript patterns
-- `src/lib/domstyler_lang_ts.ts` - TypeScript (extends JS)
-- `src/lib/domstyler_lang_svelte.ts` - Svelte components
-- `src/lib/domstyler_lang_html.ts` - HTML/XML (formerly markup)
-- `src/lib/domstyler_lang_css.ts` - CSS stylesheets
-- `src/lib/domstyler_lang_json.ts` - JSON data
-- `src/lib/domstyler_lang_clike.ts` - Base for C-like languages
-- `src/lib/Domstyler_Code.svelte` - Svelte component wrapper
-- `src/lib/domstyler_theme.css` - Main theme (requires Moss)
-- `src/lib/domstyler_theme_standalone.css` - Dependency-free theme
-
-### Boundary Scanner (New Token-Based System)
-
-- `src/lib/boundary_scanner_base.ts` - Base scanner class and pool management
-- `src/lib/boundary_scanner_orchestrator.ts` - Main orchestrator for multi-language support
-- `src/lib/boundary_scanner_registry.ts` - Registry for boundary types and scanners
-- `src/lib/boundary_scanner_types.ts` - Core types and character constants
-- `src/lib/boundary_scanner_html_generator.ts` - HTML generation from tokens
-- `src/lib/boundary_scanner_range_builder.ts` - CSS Custom Highlight API support
-- Language-specific scanners:
-  - `src/lib/boundary_scanner_ts.ts` - TypeScript scanner
-  - `src/lib/boundary_scanner_css.ts` - CSS scanner
-  - `src/lib/boundary_scanner_html.ts` - HTML scanner
-  - `src/lib/boundary_scanner_json.ts` - JSON scanner
-- Pattern-based tokenizers:
-  - `src/lib/boundary_tokenizer_ts.ts` - TypeScript tokenizer
-  - `src/lib/boundary_tokenizer_css.ts` - CSS tokenizer
-  - `src/lib/boundary_tokenizer_html.ts` - HTML tokenizers
-  - `src/lib/boundary_tokenizer_json.ts` - JSON tokenizer
-- `src/lib/Boundaryscanner_Code.svelte` - Svelte component wrapper
-
-### Test Infrastructure
-
-- `src/lib/samples/sample_*.{lang}` - Test sample files (source of truth)
-- `src/lib/samples/all.gen.ts` - Auto-generated sample aggregator
-- `src/fixtures/update.task.ts` - Regenerates test fixtures
-- `src/fixtures/check.test.ts` - Verifies runtime matches fixtures
-- `src/fixtures/helpers.ts` - Shared test utilities
-- `src/fixtures/{lang}/` - Generated fixtures (JSON + markdown reports)
-- `src/lib/rangestyler.test.ts` - Boundary detection tests
-
-### Shared Files
-
-- `src/lib/code_sample.ts` - Code Sample interface and language constants
-- `src/lib/samples/all.ts` - Generated sample data
-- `src/lib/benchmark.ts` - Performance benchmarking
-- `src/lib/run_benchmark.ts` - Benchmark runner
-
-## Usage
-
-### DOM Styler (Traditional HTML Generation)
-
-```typescript
-import {domstyler} from '$lib/domstyler.js';
-import Domstyler_Code from '$lib/Domstyler_Code.svelte';
-
-// Direct API
-const html = domstyler.stylize(code, 'ts');
-
-// Component
-<Domstyler_Code content={code} lang="ts" />
-```
-
-### Boundary Scanner (Token-Based System)
-
-```typescript
-import {boundary_scanner_global} from '$lib/boundary_scanner_global.js';
-import {generate_html_from_tokens} from '$lib/boundary_scanner_html_generator.js';
-import Boundaryscanner_Code from '$lib/Boundaryscanner_Code.svelte';
-
-// Direct API
-const tokens = boundary_scanner_global.scan(code, 'ts');
-const html = generate_html_from_tokens(code, tokens);
-
-// Component
-<Boundaryscanner_Code content={code} lang="ts" />
+gro test                            # Run all tests
+gro test src/fixtures/check.test.ts # Verify fixture generation
+gro src/fixtures/update             # Regenerate fixtures
+npm run benchmark                   # Run performance benchmarks
 ```
 
 ## Architecture
 
-### DOM Styler
+### Core System
 
-1. **Tokenization Flow**:
-   - Text → Grammar patterns (regex) → Token stream (linked list) → HTML output
-   - Uses recursive pattern matching with greedy/non-greedy support
-   - Supports nested grammars and language embedding
+**DOM Styler** - A PrismJS fork with two rendering modes:
 
-2. **Grammar System**:
-   - Hierarchical regex-based patterns
-   - Grammar extension/inheritance (e.g., TS extends JS)
-   - Dynamic grammar insertion for language embedding
+1. **HTML Mode** - Traditional token-based HTML generation with CSS classes
+2. **Range Mode** - CSS Custom Highlight API for native browser highlighting (Chrome 105+, Firefox 111+)
 
-### Boundary Scanner
+The system uses regex-based tokenization inherited from PrismJS, maintaining compatibility with existing language definitions while adding position tracking for range highlighting.
 
-1. **Tokenization Flow**:
-   - Text → Character-by-character scanning → Token stream → HTML/Range output
-   - Uses state machines for accurate boundary detection
-   - Supports nested language contexts and proper exit condition handling
+### Key Components
 
-2. **Scanner System**:
-   - Language-specific scanners with boundary type definitions
-   - Pattern-based tokenizers for syntax highlighting within boundaries
-   - Registry system for modular language support
-   - CSS Custom Highlight API support with HTML fallback
+#### Tokenization Engine
 
-### Colors
+- `src/lib/domstyler.ts` - Core tokenization engine with linked list processing
+- `src/lib/domstyler_global.ts` - Pre-configured global instance
+- `src/lib/tokenize_syntax()` - Main tokenization function
 
-`--color_a` - blue
-`--color_b` - green
-`--color_c` - red
-`--color_d` - purple
-`--color_e` - yellow
-`--color_f` - brown
-`--color_g` - pink
-`--color_h` - orange
-`--color_i` - cyan
+#### Language Definitions
 
-## Performance Characteristics
+- `src/lib/domstyler_lang_ts.ts` - TypeScript/JavaScript
+- `src/lib/domstyler_lang_css.ts` - CSS stylesheets
+- `src/lib/domstyler_lang_html.ts` - HTML/XML markup
+- `src/lib/domstyler_lang_json.ts` - JSON data
+- `src/lib/domstyler_lang_svelte.ts` - Svelte components
+- `src/lib/domstyler_lang_clike.ts` - Base for C-like languages
 
-### DOM Styler
+#### Range Highlighting
 
-- Works in all browsers
+- `src/lib/domstyler_range_builder.ts` - Position calculation from token trees
+- `src/lib/flatten_domstyler_tokens()` - Converts nested tokens to flat array with positions
+- `src/lib/Domstyler_Highlight_Manager` - Manages CSS Custom Highlights per element
 
-### Boundary Scanner
+#### Components
 
-- Character-by-character scanning for accurate boundary detection
-- Separate tokenization phase for syntax highlighting
-- Support for both HTML generation and CSS Custom Highlights
-- Modular architecture with language-specific scanners
+- `src/lib/Domstyler_Code.svelte` - Traditional HTML rendering
+- `src/lib/Domstyler_Range_Code.svelte` - Hybrid component with auto-detection
 
-## Current Performance Bottlenecks
+#### Themes
 
-### DOM Styler
+- `src/lib/domstyler_theme.css` - Traditional CSS classes for HTML mode
+- `src/lib/domstyler_theme_highlight.css` - CSS Custom Highlight API styles
+- `src/lib/domstyler_theme_standalone.css` - Dependency-free theme
 
-1. **Regex compilation** - Patterns recompiled on each use
-2. **Linked list operations** - O(n) traversal for tokens
-3. **Deep cloning** - Grammar extension copies entire trees
-4. **String concatenation** - HTML built via string concat
+## How It Works
 
-### Boundary Scanner
+### Token Tree Structure
 
-1. **Character scanning** - O(n) but could benefit from lookahead optimization
-2. **Token creation** - Efficient single-pass generation
-3. **Language switching** - Boundary detection overhead for nested contexts
+DOM styler creates a hierarchical token tree where tokens can contain nested tokens:
+
+```typescript
+interface Syntax_Token {
+	type: string; // Token type (e.g., 'keyword', 'string')
+	content: string | Syntax_Token_Stream; // Text or nested tokens
+	alias: string | Array<string>; // CSS class aliases
+	length: number; // Token text length
+}
+```
+
+### Position Calculation
+
+Since PrismJS wasn't designed for position tracking, we calculate positions post-tokenization:
+
+```typescript
+// Flatten nested token tree and calculate absolute positions
+const tokens = tokenize_syntax(code, grammar);
+const flatTokens = flatten_domstyler_tokens(tokens);
+// flatTokens now contains: [{type: 'keyword', start: 0, end: 5}, ...]
+```
+
+### CSS Custom Highlights
+
+When supported, the browser's native highlighting is used:
+
+```javascript
+// Create ranges for each token
+const range = document.createRange();
+range.setStart(textNode, token.start);
+range.setEnd(textNode, token.end);
+
+// Add to CSS Highlight
+const highlight = CSS.highlights.get(token.type) || new Highlight();
+highlight.add(range);
+CSS.highlights.set(token.type, highlight);
+```
+
+## Supported Languages
+
+- `ts` - TypeScript
+- `js` - JavaScript
+- `css` - CSS
+- `html` - HTML/XML
+- `json` - JSON
+- `svelte` - Svelte components
+
+## API Reference
+
+### Domstyler
+
+```typescript
+class Domstyler {
+	// Generate HTML with syntax highlighting
+	stylize(text: string, lang: string): string;
+
+	// Get language grammar
+	get_lang(id: string): Grammar;
+
+	// Add new language
+	add_lang(id: string, grammar: Grammar, aliases?: string[]): void;
+}
+```
+
+### domstyler_global
+
+Pre-configured instance with all languages loaded:
+
+```typescript
+import {domstyler_global} from '$lib/domstyler_global.js';
+
+const html = domstyler_global.stylize(code, 'ts');
+```
+
+### Domstyler_Highlight_Manager
+
+Manages CSS Custom Highlights for an element:
+
+```typescript
+const manager = new Domstyler_Highlight_Manager();
+
+// Apply highlights from tokens
+manager.highlight_from_domstyler_tokens(element, tokens);
+
+// Clear highlights
+manager.clear_element_ranges();
+
+// Clean up
+manager.destroy();
+```
+
+## Testing
+
+### Sample Files
+
+Test samples in `src/lib/samples/sample_*.{lang}` are the source of truth.
+
+### Fixtures
+
+Generated fixtures in `src/fixtures/{lang}/`:
+
+- `{lang}_{variant}.json` - Token data and HTML output
+- `{lang}_{variant}.txt` - Human-readable debug output
+
+### Workflow
+
+1. Edit samples in `src/lib/samples/`
+2. Run `gro src/fixtures/update` to regenerate
+3. Run `gro test src/fixtures/check.test.ts` to verify
+4. Review changes with `git diff src/fixtures/`
+
+## Performance
+
+### Benchmarking
+
+```bash
+npm run benchmark
+```
+
+Compares three modes:
+
+- `domstyler_html` - Traditional HTML generation
+- `domstyler_ranges_auto` - Auto-detect browser support
+- `domstyler_ranges_forced` - Force CSS Highlights
+
+### Optimization Notes
+
+- **HTML Mode**: Proven PrismJS approach, good for SSR
+- **Range Mode**: Native browser highlighting, better for large documents
+- **Auto Mode**: Best of both worlds, progressive enhancement
+
+## Color Variables
+
+Theme uses CSS variables from Moss:
+
+- `--color_a` - Keywords, tags
+- `--color_b` - Strings, selectors
+- `--color_c` - Types (TypeScript)
+- `--color_d` - Functions, classes
+- `--color_e` - Numbers, regex
+- `--color_f` - Operators, keywords
+- `--color_g` - Attributes
+- `--color_h` - Properties
+- `--color_i` - Booleans, comments
+
+## Development Guidelines
+
+1. **Maintain PrismJS compatibility** - Language definitions should work with upstream
+2. **Test with fixtures** - All changes must pass fixture tests
+3. **No automated commits** - Manual review required
+4. **Support both modes** - Features should work in HTML and range modes
+5. **Follow patterns** - Use existing language definitions as templates
 
 ## Demo Pages
 
-- `/samples` - DOM Styler examples
-- `/boundary` - Boundary Scanner demo
-- `/compare` - Side-by-side comparison
+- `/domstyler` - Basic DOM styler examples
+- `/test-domstyler-ranges` - Range highlighting demo
+- `/compare` - Side-by-side comparison of modes
 - `/benchmark` - Performance testing
 
-## Test Workflow
+## Migration from Boundary Scanner
 
-The test system uses a fixture-based approach:
+The project previously used a complex two-phase "boundary scanner" system that has been removed in favor of the simpler DOM styler + ranges approach. The benefits:
 
-1. **Sample files** (`src/lib/samples/sample_*.{lang}`) are the source of truth
-2. **Generate fixtures**: `gro src/fixtures/update`
-   - Discovers samples via filesystem search
-   - Generates JSON data + markdown reports
-   - Removes old fixtures before regenerating (clean slate)
-3. **Verify tests**: `gro test src/fixtures/check.test.ts`
-   - Compares runtime output with fixtures
-   - Tests both domstyler and rangestyler
-4. **Review changes**: `git diff src/fixtures/`
-   - Commit expected changes after verification
+- **2000+ lines removed** - Simpler codebase
+- **Single tokenization phase** - Easier to understand
+- **Proven patterns** - PrismJS compatibility
+- **Better performance** - CSS Highlights when supported
+- **Easier language support** - Just add PrismJS-style patterns
 
-### Test Fixtures
+## Troubleshooting
 
-Generated fixtures are stored in `src/fixtures/{lang}/`:
+### Positions Don't Match
 
-- `{lang}_{variant}.json` - Machine-readable test data
-- `{lang}_{variant}.md` - Human-readable report
+The position calculation happens post-tokenization. If positions are wrong:
 
-**Using fixtures for debugging:**
+1. Check `flatten_domstyler_tokens()` logic
+2. Verify token tree structure with debug output
+3. Look for nested tokens that might be miscounted
 
-The generated fixtures are invaluable for debugging pattern matching issues:
+### CSS Highlights Not Working
 
-1. **Check boundaries**: Look at the `boundaries` array to see how text is segmented (e.g., comments vs content)
-2. **Review matches**: The `matches.samples` array shows which patterns matched where
-3. **Compare HTML**: Compare `domstyler_html` vs `rangestyler_html` to spot differences
-4. **Human-readable reports**: The `.md` files provide a visual overview
+1. Check browser support (Chrome 105+, Firefox 111+)
+2. Verify `supports_css_highlight_api()` returns true
+3. Check console for range creation errors
+4. Ensure text node exists and positions are valid
 
-```typescript
-// Example: Debug why a pattern isn't matching
-import {readFileSync} from 'node:fs';
-const fixture = JSON.parse(readFileSync('src/fixtures/css/css_complex.json', 'utf-8'));
+### Adding a New Language
 
-// Check if your expected text was matched
-const matches = fixture.matches.samples;
-const id_selector_match = matches.find((m) => m.text === '#unique_id');
-console.log('ID selector match:', id_selector_match);
+1. Create `src/lib/domstyler_lang_{lang}.ts`
+2. Define grammar patterns (see existing languages)
+3. Register in `domstyler_global.ts`
+4. Add samples in `src/lib/samples/sample_{variant}.{lang}`
+5. Generate fixtures and test
 
-// See all selector matches
-const selectors = matches.filter((m) => m.pattern_name === 'selector');
-console.log('All selectors:', selectors);
-```
+## License
 
-## Planned Optimizations
-
-See `TODO.md`, `TODO_HIGHLIGHT.md`, and `TODO_TESTS.md` for plans:
-
-- Pattern caching
-- Array-based token storage
-- Grammar pre-compilation
-- Multiple implementation strategies for benchmarking
-- Additional sample variants (basic, edge cases)
-
-# important-instruction-reminders
-
-Do what has been asked; nothing more, nothing less.
-NEVER create files unless they're absolutely necessary for achieving your goal.
-ALWAYS prefer editing an existing file to creating a new one.
-NEVER proactively create documentation files (\*.md) or README files. Only create documentation files if explicitly requested by the User.
+Based on PrismJS by Lea Verou (MIT License).
+Fork modifications also under MIT License.

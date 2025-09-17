@@ -1,0 +1,64 @@
+=== TOKENS ===
+<                         [  0-1  ] punctuation
+=                         [ 12-13 ] punctuation
+"                         [ 13-14 ] punctuation
+"                         [ 16-17 ] punctuation
+>                         [ 24-25 ] punctuation
+export                    [ 27-33 ] keyword
+const                     [ 34-39 ] keyword
+HELLO                     [ 40-45 ] constant
+=                         [ 46-47 ] operator
+'world'                   [ 48-55 ] string
+;                         [ 55-56 ] punctuation
+</                        [ 57-59 ] punctuation
+>                         [ 65-66 ] punctuation
+<                         [ 68-69 ] punctuation
+=                         [ 80-81 ] punctuation
+"                         [ 81-82 ] punctuation
+"                         [ 84-85 ] punctuation
+>                         [ 85-86 ] punctuation
+// @ts-expect-error       [ 88-107] comment
+import                    [109-115] keyword
+from                      [122-126] keyword
+'$lib/Thing.svelte'       [127-146] string
+;                         [146-147] punctuation
+import                    [149-155] keyword
+type                      [156-160] keyword
+{                         [161-162] punctuation
+}                         [169-170] punctuation
+from                      [171-175] keyword
+'svelte'                  [176-184] string
+;                         [184-185] punctuation
+const                     [188-193] keyword
+{                         [194-195] punctuation
+,                         [203-204] punctuation
+=                         [213-214] operator
+$bindable                 [215-224] function
+(                         [224-225] punctuation
+true                      [225-229] boolean
+)                         [229-230] punctuation
+,                         [230-231] punctuation
+,                         [242-243] punctuation
+... and 413 more tokens
+
+=== STATS ===
+Total tokens: 453
+Sample length: 2333 characters
+
+Token types:
+  punctuation: 278
+  operator: 49
+  keyword: 40
+  builtin: 17
+  function: 16
+  string: 10
+  comment: 10
+  property: 8
+  selector: 7
+  number: 6
+  constant: 4
+  boolean: 4
+  variable: 1
+  at: 1
+  doctype: 1
+  rule: 1

@@ -1,0 +1,55 @@
+=== TOKENS ===
+{                         [  0-1  ] punctuation
+"string"                  [  3-11 ] property
+:                         [ 11-12 ] operator
+"a string"                [ 13-23 ] string
+,                         [ 23-24 ] punctuation
+"number"                  [ 26-34 ] property
+:                         [ 34-35 ] operator
+12345                     [ 36-41 ] number
+,                         [ 41-42 ] punctuation
+"boolean"                 [ 44-53 ] property
+:                         [ 53-54 ] operator
+true                      [ 55-59 ] boolean
+,                         [ 59-60 ] punctuation
+"null"                    [ 62-68 ] property
+:                         [ 68-69 ] operator
+null                      [ 70-74 ] null
+,                         [ 74-75 ] punctuation
+"empty"                   [ 77-84 ] property
+:                         [ 84-85 ] operator
+""                        [ 86-88 ] string
+,                         [ 88-89 ] punctuation
+"escaped"                 [ 91-100] property
+:                         [100-101] operator
+"quote: \"test\" and backslash: \\" [102-137] string
+,                         [137-138] punctuation
+"object"                  [140-148] property
+:                         [148-149] operator
+{                         [150-151] punctuation
+"array"                   [154-161] property
+:                         [161-162] operator
+[                         [163-164] punctuation
+1                         [164-165] number
+,                         [165-166] punctuation
+"b"                       [167-170] string
+,                         [170-171] punctuation
+false                     [172-177] boolean
+]                         [177-178] punctuation
+,                         [178-179] punctuation
+"strings"                 [182-191] property
+:                         [191-192] operator
+... and 43 more tokens
+
+=== STATS ===
+Total tokens: 83
+Sample length: 327 characters
+
+Token types:
+  punctuation: 37
+  string: 14
+  property: 12
+  operator: 12
+  number: 3
+  boolean: 3
+  null: 2

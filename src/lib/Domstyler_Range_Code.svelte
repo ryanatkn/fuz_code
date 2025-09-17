@@ -1,13 +1,13 @@
 <script lang="ts">
 	import {onDestroy} from 'svelte';
 
-	import {boundary_scanner_global} from '$lib/boundary_scanner_global.js';
-	import {generate_html_from_tokens} from '$lib/boundary_scanner_html_generator.js';
+	import {domstyler_global} from '$lib/domstyler_global.js';
+	import {tokenize_syntax, type Domstyler, type Grammar} from '$lib/domstyler.js';
 	import {
-		Highlight_Manager,
+		Domstyler_Highlight_Manager,
 		supports_css_highlight_api,
-		type Boundaryscanner_Mode,
-	} from '$lib/boundary_scanner_range_builder.js';
+		type Domstyler_Range_Mode,
+	} from '$lib/domstyler_range_builder.js';
 	import {escape_html} from '$lib/helpers.js';
 
 	const {
@@ -16,22 +16,26 @@
 		pre_attrs,
 		code_attrs,
 		mode = 'auto',
+		grammar,
+		domstyler = domstyler_global,
 	}: {
 		content: string;
 		lang?: string;
 		pre_attrs?: any;
 		code_attrs?: any;
-		mode?: Boundaryscanner_Mode;
+		mode?: Domstyler_Range_Mode;
+		grammar?: Grammar | undefined;
+		domstyler?: Domstyler;
 	} = $props();
 
 	let code_element: HTMLElement | undefined = $state();
-	const highlight_manager = new Highlight_Manager();
+	const highlight_manager = new Domstyler_Highlight_Manager();
 
 	const use_ranges = $derived(
 		mode === 'ranges' || (mode === 'auto' && supports_css_highlight_api()),
 	);
 
-	const is_language_supported = $derived(boundary_scanner_global.has_language(lang));
+	const is_language_supported = $derived(domstyler.langs[lang] !== undefined);
 
 	const html_content = $derived.by(() => {
 		if (!content) return '';
@@ -41,8 +45,7 @@
 			return escape_html(content);
 		}
 
-		const tokens = boundary_scanner_global.scan(content, lang);
-		return generate_html_from_tokens(content, tokens);
+		return domstyler.stylize(content, lang, grammar);
 	});
 
 	const update_highlight = () => {
@@ -61,8 +64,11 @@
 			code_element.textContent = content;
 		}
 
-		const tokens = boundary_scanner_global.scan(content, lang);
-		highlight_manager.highlight_from_tokens(code_element, tokens);
+		// Get tokens from DOM styler (they already have position info now)
+		const tokens = tokenize_syntax(content, grammar || domstyler.get_lang(lang));
+
+		// Apply highlights
+		highlight_manager.highlight_from_domstyler_tokens(code_element, tokens);
 	};
 
 	$effect(() => {
@@ -81,6 +87,8 @@
 	></pre>
 
 <style>
+	@import './domstyler_theme_highlight.css';
+
 	.code {
 		background-color: var(--fg_1);
 		border-radius: var(--border_radius_xs);

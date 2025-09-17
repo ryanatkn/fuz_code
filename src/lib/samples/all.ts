@@ -79,7 +79,7 @@ div > p {
 	cursor: pointer;
 }
 
-.background {
+.background  /* comment*/ {
 	background-image: url('data:image/svg+xml...');
 }
 `,

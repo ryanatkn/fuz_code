@@ -2,8 +2,8 @@ import {readFileSync} from 'node:fs';
 import {search_fs} from '@ryanatkn/gro/search_fs.js';
 import {basename, join, relative} from 'node:path';
 import {domstyler_global} from '$lib/domstyler_global.js';
-import {boundary_scanner_global} from '$lib/boundary_scanner_global.js';
-import {generate_html_from_tokens} from '$lib/boundary_scanner_html_generator.js';
+import {tokenize_syntax} from '$lib/domstyler.js';
+import {flatten_domstyler_tokens} from '$lib/domstyler_range_builder.js';
 
 export interface Sample_Spec {
 	lang: string;
@@ -14,9 +14,8 @@ export interface Sample_Spec {
 
 export interface Generated_Output {
 	sample: Sample_Spec;
-	boundaries: Array<any>;
+	tokens: Array<any>;
 	domstyler_html: string;
-	boundary_scanner_html: string;
 }
 
 /**
@@ -51,7 +50,7 @@ export const discover_samples = (): Array<Sample_Spec> => {
 /**
  * Get the fixture path for a given language and variant
  */
-export const get_fixture_path = (lang: string, variant: string, ext: 'json' | 'md'): string => {
+export const get_fixture_path = (lang: string, variant: string, ext: 'json' | 'txt'): string => {
 	return join('fixtures/generated', lang, `${lang}_${variant}.${ext}`);
 };
 
@@ -63,104 +62,67 @@ export const generate_domstyler_output = (sample: Sample_Spec): string => {
 };
 
 /**
- * Generate boundary detection data from boundary scanner
+ * Generate token data from DOM styler
  */
-export const generate_boundary_data = (
-	sample: Sample_Spec,
-): {
-	boundaries: Array<any>;
-} => {
-	// For now, return minimal data structure
-	// TODO: Extract boundary and match info from boundary scanner if needed
-	return {
-		boundaries: [
-			{
-				language: sample.lang,
-				type: 'code',
-				start: 0,
-				end: sample.content.length,
-			},
-		],
-	};
+export const generate_token_data = (sample: Sample_Spec): Array<any> => {
+	// Get tokens from DOM styler and flatten them with positions
+	const grammar = domstyler_global.get_lang(sample.lang);
+	const tokens = tokenize_syntax(sample.content, grammar);
+	const flat_tokens = flatten_domstyler_tokens(tokens);
+
+	return flat_tokens;
 };
 
 /**
- * Generate boundary scanner HTML output for a sample
- */
-export const generate_boundary_scanner_output = (sample: Sample_Spec): string => {
-	try {
-		// Scan and get tokens
-		const tokens = boundary_scanner_global.scan(sample.content, sample.lang);
-
-		// Generate HTML from tokens
-		return generate_html_from_tokens(sample.content, tokens);
-	} catch (error) {
-		console.error(`Boundary scanner error for ${sample.lang}_${sample.variant}:`, error);
-		throw error;
-	}
-};
-
-/**
- * Process a sample and generate all outputs
+ * Process a sample to generate all outputs
  */
 export const process_sample = (sample: Sample_Spec): Generated_Output => {
 	const domstyler_html = generate_domstyler_output(sample);
-	const boundary_data = generate_boundary_data(sample);
-	const boundary_scanner_html = generate_boundary_scanner_output(sample);
+	const tokens = generate_token_data(sample);
 
 	return {
-		sample: {
-			lang: sample.lang,
-			variant: sample.variant,
-			content: sample.content,
-			filepath: sample.filepath,
-		},
-		boundaries: boundary_data.boundaries,
+		sample,
+		tokens,
 		domstyler_html,
-		boundary_scanner_html,
 	};
 };
 
 /**
- * Generate markdown report for a sample
+ * Generate debug text output for a sample
  */
-export const generate_report = (output: Generated_Output): string => {
-	const {sample, boundaries, domstyler_html, boundary_scanner_html} = output;
+export const generate_debug_text = (output: Generated_Output): string => {
+	const {sample, tokens} = output;
 
-	return `# ${sample.lang.toUpperCase()} ${sample.variant.charAt(0).toUpperCase() + sample.variant.slice(1)} Sample Report
+	let debug = '=== TOKENS ===\n';
+	const maxTokens = 40;
+	for (const t of tokens.slice(0, maxTokens)) {
+		const text = sample.content
+			.substring(t.start, t.end)
+			.replace(/\n/g, '\\n')
+			.replace(/\t/g, '\\t');
+		const type = t.type.replace(/^\w+_/, ''); // Remove language prefix
+		// Format: text [start-end] type
+		debug += `${text.padEnd(25)} [${String(t.start).padStart(3)}-${String(t.end).padEnd(3)}] ${type}\n`;
+	}
+	if (tokens.length > maxTokens) {
+		debug += `... and ${tokens.length - maxTokens} more tokens\n`;
+	}
 
-## Sample Info
-- **Language**: ${sample.lang}
-- **Variant**: ${sample.variant}
-- **Source**: ${sample.filepath}
-- **Size**: ${sample.content.length} characters
+	// Add token statistics
+	debug += '\n=== STATS ===\n';
+	debug += `Total tokens: ${tokens.length}\n`;
+	debug += `Sample length: ${sample.content.length} characters\n`;
 
-## Statistics
+	// Count token types
+	const tokenTypes: Record<string, number> = {};
+	for (const token of tokens) {
+		const type = token.type.replace(/^\w+_/, '');
+		tokenTypes[type] = (tokenTypes[type] || 0) + 1;
+	}
+	debug += '\nToken types:\n';
+	for (const [type, count] of Object.entries(tokenTypes).sort((a, b) => b[1] - a[1])) {
+		debug += `  ${type}: ${count}\n`;
+	}
 
-### Boundaries
-- **Total**: ${boundaries.length}
-${boundaries.map((b) => `- ${b.type}: [${b.start}:${b.end}]`).join('\n')}
-
-## Domstyler Output
-\`\`\`html
-${domstyler_html}
-\`\`\`
-
-${
-	boundary_scanner_html
-		? `## Boundary Scanner Output
-\`\`\`html
-${boundary_scanner_html}
-\`\`\`
-
-`
-		: ''
-}
-## Comparison
-- Domstyler size: ${domstyler_html.length} bytes
-- Boundary Scanner size: ${boundary_scanner_html.length} bytes
-
----
-*Generated by src/fixtures/update.task.ts*
-`;
+	return debug;
 };
