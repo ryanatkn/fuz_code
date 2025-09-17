@@ -267,8 +267,3 @@ The position calculation happens post-tokenization. If positions are wrong:
 3. Register in `domstyler_global.ts`
 4. Add samples in `src/lib/samples/sample_{variant}.{lang}`
 5. Generate fixtures and test
-
-## License
-
-Based on PrismJS by Lea Verou (MIT License).
-Fork modifications also under MIT License.
