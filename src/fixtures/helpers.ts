@@ -157,9 +157,11 @@ export const generate_debug_text = (output: Generated_Output): string => {
 			.substring(t.start, t.end)
 			.replace(/\n/g, '\\n')
 			.replace(/\t/g, '\\t');
-		// Format: [start-end] type text
-		const position = `[${String(t.start).padStart(3)}-${String(t.end).padEnd(3)}]`;
-		debug += `${position.padEnd(12)} ${t.type.padEnd(25)} ${text}\n`;
+		// Format: start-end type text
+		const start = String(t.start).padStart(4);
+		const end = String(t.end).padEnd(4);
+		const position = `${start}-${end}`;
+		debug += `${position.padEnd(10)} ${t.type.padEnd(25)} ${text}\n`;
 	}
 
 	// Add token statistics

@@ -46,6 +46,7 @@ export const package_json: Package_Json = {
 		'@types/node': '^24.3.1',
 		eslint: '^9.35.0',
 		'eslint-plugin-svelte': '^3.12.1',
+		'esm-env': '^1.2.2',
 		prettier: '^3.6.2',
 		'prettier-plugin-svelte': '^3.4.0',
 		svelte: '^5.38.7',

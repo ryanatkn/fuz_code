@@ -1,81 +1,81 @@
 === TOKENS ===
-[  0-11 ]    selector                  .some_class
-[ 12-13 ]    punctuation               {
-[ 15-20 ]    property                  color
-[ 20-21 ]    punctuation               :
-[ 25-26 ]    punctuation               ;
-[ 27-28 ]    punctuation               }
-[ 30-42 ]    selector                  .hypen-class
-[ 43-44 ]    punctuation               {
-[ 46-55 ]    property                  font-size
-[ 55-56 ]    punctuation               :
-[ 61-62 ]    punctuation               ;
-[ 63-64 ]    punctuation               }
-[ 66-67 ]    selector                  p
-[ 68-69 ]    punctuation               {
-[ 71-81 ]    property                  box-shadow
-[ 81-82 ]    punctuation               :
-[ 92-96 ]    function                  rgba
-[ 96-97 ]    punctuation               (
-[ 98-99 ]    punctuation               ,
-[101-102]    punctuation               ,
-[104-105]    punctuation               ,
-[109-110]    punctuation               )
-[110-111]    punctuation               ;
-[112-113]    punctuation               }
-[115-128]    comment                   /* comment */
-[130-176]    comment                   /*\nmulti\n.line {\n\ti: 100px\n\n</style>\n\n@media*/
-[178-181]    selector                  #id
-[182-183]    punctuation               {
-[185-201]    property                  background-color
-[201-202]    punctuation               :
-[207-208]    punctuation               ;
-[209-210]    punctuation               }
-[212-219]    selector                  div > p
-[220-221]    punctuation               {
-[223-229]    property                  margin
-[229-230]    punctuation               :
-[235-236]    punctuation               ;
-[237-238]    punctuation               }
-[240-265]    atrule                    @media (max-width: 600px)
-[240-246]    rule                      @media
-[247-248]    punctuation               (
-[248-257]    property                  max-width
-[257-258]    punctuation               :
-[264-265]    punctuation               )
-[266-267]    punctuation               {
-[269-273]    selector                  body
-[274-275]    punctuation               {
-[278-294]    property                  background-color
-[294-295]    punctuation               :
-[305-306]    punctuation               ;
-[308-309]    punctuation               }
-[310-311]    punctuation               }
-[313-363]    comment                   /* patterns in strings are not falsely detected */
-[364-380]    selector                  .content::before
-[381-382]    punctuation               {
-[384-391]    property                  content
-[391-392]    punctuation               :
-[393-423]    string                    '</style> /* not a comment */'
-[423-424]    punctuation               ;
-[425-426]    punctuation               }
-[428-454]    selector                  .attr[title='Click: here']
-[455-456]    punctuation               {
-[458-464]    property                  cursor
-[464-465]    punctuation               :
-[473-474]    punctuation               ;
-[475-476]    punctuation               }
-[491-503]    comment                   /* comment*/
-[504-505]    punctuation               {
-[507-523]    property                  background-image
-[523-524]    punctuation               :
-[525-553]    url                       url('data:image/svg+xml...')
-[525-528]    function                  url
-[528-529]    punctuation               (
-[529-552]    string                    'data:image/svg+xml...'
-[552-553]    punctuation               )
-[553-554]    punctuation               ;
-[555-556]    punctuation               }
+   0-11    selector                  .some_class
+  12-13    punctuation               {
+  15-20    property                  color
+  20-21    punctuation               :
+  25-26    punctuation               ;
+  27-28    punctuation               }
+  30-42    selector                  .hypen-class
+  43-44    punctuation               {
+  46-55    property                  font-size
+  55-56    punctuation               :
+  61-62    punctuation               ;
+  63-64    punctuation               }
+  66-67    selector                  p
+  68-69    punctuation               {
+  71-81    property                  box-shadow
+  81-82    punctuation               :
+  92-96    function                  rgba
+  96-97    punctuation               (
+  98-99    punctuation               ,
+ 101-102   punctuation               ,
+ 104-105   punctuation               ,
+ 109-110   punctuation               )
+ 110-111   punctuation               ;
+ 112-113   punctuation               }
+ 115-128   comment                   /* comment */
+ 130-176   comment                   /*\nmulti\n.line {\n\ti: 100px\n\n</style>\n\n@media*/
+ 178-181   selector                  #id
+ 182-183   punctuation               {
+ 185-201   property                  background-color
+ 201-202   punctuation               :
+ 207-208   punctuation               ;
+ 209-210   punctuation               }
+ 212-219   selector                  div > p
+ 220-221   punctuation               {
+ 223-229   property                  margin
+ 229-230   punctuation               :
+ 235-236   punctuation               ;
+ 237-238   punctuation               }
+ 240-265   atrule                    @media (max-width: 600px)
+ 240-246   rule                      @media
+ 247-248   punctuation               (
+ 248-257   property                  max-width
+ 257-258   punctuation               :
+ 264-265   punctuation               )
+ 266-267   punctuation               {
+ 269-273   selector                  body
+ 274-275   punctuation               {
+ 278-294   property                  background-color
+ 294-295   punctuation               :
+ 305-306   punctuation               ;
+ 308-309   punctuation               }
+ 310-311   punctuation               }
+ 313-363   comment                   /* patterns in strings are not falsely detected */
+ 364-380   selector                  .content::before
+ 381-382   punctuation               {
+ 384-391   property                  content
+ 391-392   punctuation               :
+ 393-423   string                    '</style> /* not a comment */'
+ 423-424   punctuation               ;
+ 425-426   punctuation               }
+ 428-454   selector                  .attr[title='Click: here']
+ 455-456   punctuation               {
+ 458-464   property                  cursor
+ 464-465   punctuation               :
+ 473-474   punctuation               ;
+ 475-476   punctuation               }
+ 491-503   comment                   /* comment*/
+ 504-505   punctuation               {
+ 507-523   property                  background-image
+ 523-524   punctuation               :
+ 525-553   url                       url('data:image/svg+xml...')
+ 525-528   function                  url
+ 528-529   punctuation               (
+ 529-552   string                    'data:image/svg+xml...'
+ 552-553   punctuation               )
+ 553-554   punctuation               ;
+ 555-556   punctuation               }
 
 === STATS ===
 Total tokens: 77
