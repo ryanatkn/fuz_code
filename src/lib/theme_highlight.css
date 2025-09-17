@@ -99,6 +99,19 @@
 	color: var(--color_a_5);
 }
 
+/* Regex-specific tokens */
+::highlight(regex_delimiter) {
+	color: var(--text_color_5);
+}
+
+::highlight(regex_flags) {
+	color: var(--color_e_5);
+}
+
+::highlight(regex_source) {
+	color: var(--color_e_5);
+}
+
 ::highlight(operator) {
 	color: var(--text_color_5);
 }
@@ -133,4 +146,17 @@
 
 ::highlight(function_variable) {
 	color: var(--color_d_5);
+}
+
+/* Additional tokens that may appear without prefixes */
+::highlight(delimiter) {
+	color: var(--text_color_5);
+}
+
+::highlight(source) {
+	color: var(--color_e_5);
+}
+
+::highlight(flags) {
+	color: var(--color_e_5);
 }

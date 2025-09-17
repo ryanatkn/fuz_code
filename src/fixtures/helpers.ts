@@ -100,9 +100,8 @@ export const generate_debug_text = (output: Generated_Output): string => {
 			.substring(t.start, t.end)
 			.replace(/\n/g, '\\n')
 			.replace(/\t/g, '\\t');
-		const type = t.type.replace(/^\w+_/, ''); // Remove language prefix
 		// Format: text [start-end] type
-		debug += `${text.padEnd(25)} [${String(t.start).padStart(3)}-${String(t.end).padEnd(3)}] ${type}\n`;
+		debug += `${text.padEnd(25)} [${String(t.start).padStart(3)}-${String(t.end).padEnd(3)}] ${t.type}\n`;
 	}
 	if (tokens.length > maxTokens) {
 		debug += `... and ${tokens.length - maxTokens} more tokens\n`;
@@ -116,7 +115,7 @@ export const generate_debug_text = (output: Generated_Output): string => {
 	// Count token types
 	const tokenTypes: Record<string, number> = {};
 	for (const token of tokens) {
-		const type = token.type.replace(/^\w+_/, '');
+		const {type} = token;
 		tokenTypes[type] = (tokenTypes[type] || 0) + 1;
 	}
 	debug += '\nToken types:\n';
