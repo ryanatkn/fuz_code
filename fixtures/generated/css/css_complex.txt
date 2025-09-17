@@ -37,12 +37,12 @@ margin                    [223-229] property
 :                         [229-230] punctuation
 ;                         [235-236] punctuation
 }                         [237-238] punctuation
+@media (max-width: 600px) [240-265] atrule
 @media                    [240-246] rule
-(                         [247-248] punctuation
-... and 35 more tokens
+... and 37 more tokens
 
 === STATS ===
-Total tokens: 75
+Total tokens: 77
 Sample length: 557 characters
 
 Token types:
@@ -52,4 +52,6 @@ Token types:
   comment: 4
   function: 2
   string: 2
+  atrule: 1
   rule: 1
+  url: 1

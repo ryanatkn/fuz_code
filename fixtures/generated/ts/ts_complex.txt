@@ -13,6 +13,7 @@ true                      [ 40-44 ] boolean
 ;                         [ 44-45 ] punctuation
 export                    [ 47-53 ] keyword
 type                      [ 54-58 ] keyword
+Some_Type                 [ 59-68 ] class_name
 =                         [ 69-70 ] operator
 1                         [ 71-72 ] number
 |                         [ 73-74 ] operator
@@ -21,6 +22,7 @@ type                      [ 54-58 ] keyword
 true                      [ 81-85 ] boolean
 ;                         [ 85-86 ] punctuation
 class                     [ 88-93 ] keyword
+D                         [ 94-95 ] class_name
 D                         [ 94-95 ] constant
 {                         [ 96-97 ] punctuation
 :                         [101-102] operator
@@ -37,12 +39,10 @@ $state                    [136-142] function
 false                     [143-148] boolean
 )                         [148-149] punctuation
 ;                         [149-150] punctuation
-constructor               [153-164] function
-(                         [164-165] punctuation
-... and 188 more tokens
+... and 202 more tokens
 
 === STATS ===
-Total tokens: 228
+Total tokens: 242
 Sample length: 1327 characters
 
 Token types:
@@ -56,8 +56,12 @@ Token types:
   interpolation_punctuation: 8
   template_punctuation: 6
   number: 5
+  class_name: 5
   boolean: 4
+  interpolation: 4
   regex_delimiter: 4
+  template_string: 3
   constant: 2
+  regex: 2
   regex_source: 2
   regex_flags: 1

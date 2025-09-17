@@ -2,7 +2,12 @@ import type {Task} from '@ryanatkn/gro';
 import {writeFileSync, mkdirSync, rmSync, existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {format_file} from '@ryanatkn/gro/format_file.js';
-import {discover_samples, process_sample, generate_debug_text, get_fixture_path} from './helpers.js';
+import {
+	discover_samples,
+	process_sample,
+	generate_debug_text,
+	get_fixture_path,
+} from './helpers.js';
 
 export const task: Task = {
 	summary: 'update all test fixtures from sample files',

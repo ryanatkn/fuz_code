@@ -127,7 +127,7 @@ export const measurement_phase = async (
 			onProgress();
 		}
 
-		if (typeof globalThis.gc !== 'undefined') {
+		if (globalThis.gc) {
 			globalThis.gc();
 		}
 	}

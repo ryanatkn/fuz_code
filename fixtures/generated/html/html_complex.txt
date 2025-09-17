@@ -1,57 +1,64 @@
 === TOKENS ===
 <!doctype html>           [  0-15 ] doctype
+<div class="test">        [ 17-35 ] tag
+<div                      [ 17-21 ] tag
 <                         [ 17-18 ] punctuation
+class                     [ 22-27 ] attr_name
+="test"                   [ 27-34 ] attr_value
 =                         [ 27-28 ] punctuation
 "                         [ 28-29 ] punctuation
 "                         [ 33-34 ] punctuation
 >                         [ 34-35 ] punctuation
+<p>                       [ 37-40 ] tag
+<p                        [ 37-39 ] tag
 <                         [ 37-38 ] punctuation
 >                         [ 39-40 ] punctuation
+</p>                      [ 52-56 ] tag
+</p                       [ 52-55 ] tag
 </                        [ 52-54 ] punctuation
 >                         [ 55-56 ] punctuation
+</div>                    [ 57-63 ] tag
+</div                     [ 57-62 ] tag
 </                        [ 57-59 ] punctuation
 >                         [ 62-63 ] punctuation
+<p class="some_class hypen-class"> [ 65-99 ] tag
+<p                        [ 65-67 ] tag
 <                         [ 65-66 ] punctuation
+class                     [ 68-73 ] attr_name
+="some_class hypen-class" [ 73-98 ] attr_value
 =                         [ 73-74 ] punctuation
 "                         [ 74-75 ] punctuation
 "                         [ 97-98 ] punctuation
 >                         [ 98-99 ] punctuation
+<span class="a b c">      [104-124] tag
+<span                     [104-109] tag
 <                         [104-105] punctuation
+class                     [110-115] attr_name
+="a b c"                  [115-123] attr_value
 =                         [115-116] punctuation
 "                         [116-117] punctuation
 "                         [122-123] punctuation
 >                         [123-124] punctuation
-</                        [128-130] punctuation
->                         [134-135] punctuation
-</                        [135-137] punctuation
->                         [138-139] punctuation
-<                         [141-142] punctuation
-=                         [153-154] punctuation
-"                         [154-155] punctuation
-"                         [161-162] punctuation
->                         [171-172] punctuation
-</                        [180-182] punctuation
->                         [188-189] punctuation
-<!-- comment <div>a<br /> b</div> <script> --> [191-237] comment
-<                         [239-240] punctuation
-/>                        [243-245] punctuation
-<                         [247-248] punctuation
-/>                        [251-253] punctuation
-<                         [255-256] punctuation
-=                         [263-264] punctuation
-... and 44 more tokens
+... and 111 more tokens
 
 === STATS ===
-Total tokens: 84
+Total tokens: 151
 Sample length: 541 characters
 
 Token types:
   punctuation: 75
+  tag: 46
+  attr_name: 9
+  attr_value: 8
   string: 2
   doctype: 1
   comment: 1
+  script: 1
+  lang_js: 1
   keyword: 1
   operator: 1
+  style: 1
+  lang_css: 1
   selector: 1
   property: 1
   cdata: 1

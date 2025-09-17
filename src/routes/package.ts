@@ -152,9 +152,7 @@ export const src_json: Src_Json = {
 			path: 'domstyler_range_builder.ts',
 			declarations: [
 				{name: 'Domstyler_Range_Mode', kind: 'type'},
-				{name: 'Flat_Token', kind: 'type'},
 				{name: 'supports_css_highlight_api', kind: 'function'},
-				{name: 'flatten_domstyler_tokens', kind: 'function'},
 				{name: 'Domstyler_Highlight_Manager', kind: 'class'},
 			],
 		},

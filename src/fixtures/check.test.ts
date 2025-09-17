@@ -90,18 +90,37 @@ describe('generated fixtures match runtime', () => {
 				 */
 				const runtime_output = process_sample(sample);
 
-				// Verify no overlapping tokens
-				let lastEnd = 0;
-				for (const token of runtime_output.tokens) {
+				// Verify tokens are properly nested (overlapping is ok if fully contained)
+				const tokensByStart = [...runtime_output.tokens].sort((a, b) =>
+					a.start !== b.start ? a.start - b.start : b.end - a.end,
+				);
+
+				for (let i = 0; i < tokensByStart.length; i++) {
+					const token = tokensByStart[i];
+
+					// Check bounds
 					assert.ok(
-						token.start >= lastEnd,
-						`Token overlap detected at position ${token.start} (previous ended at ${lastEnd})`,
+						token.start >= 0 && token.end <= sample.content.length,
+						`Token ${token.type} extends beyond content at position ${token.end} (content length: ${sample.content.length})`,
 					);
-					assert.ok(
-						token.end <= sample.content.length,
-						`Token extends beyond content at position ${token.end} (content length: ${sample.content.length})`,
-					);
-					lastEnd = Math.max(lastEnd, token.end);
+
+					// Check that any overlapping tokens are properly nested
+					for (let j = i + 1; j < tokensByStart.length; j++) {
+						const other = tokensByStart[j];
+						if (other.start >= token.end) break; // No more overlaps possible
+
+						// If tokens overlap, one must fully contain the other
+						if (other.start < token.end) {
+							const properlyNested =
+								(token.start <= other.start && token.end >= other.end) || // token contains other
+								(other.start <= token.start && other.end >= token.end); // other contains token
+
+							assert.ok(
+								properlyNested,
+								`Invalid overlap: token ${token.type} [${token.start}-${token.end}] partially overlaps with ${other.type} [${other.start}-${other.end}]`,
+							);
+						}
+					}
 				}
 			});
 

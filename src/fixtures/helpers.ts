@@ -2,8 +2,7 @@ import {readFileSync} from 'node:fs';
 import {search_fs} from '@ryanatkn/gro/search_fs.js';
 import {basename, join, relative} from 'node:path';
 import {syntax_styler} from '$lib/domstyler_global.js';
-import {tokenize_syntax} from '$lib/syntax_styler.js';
-import {flatten_domstyler_tokens} from '$lib/domstyler_range_builder.js';
+import {tokenize_syntax, type Syntax_Token_Stream, Syntax_Token} from '$lib/syntax_styler.js';
 
 export interface Sample_Spec {
 	lang: string;
@@ -62,13 +61,71 @@ export const generate_domstyler_output = (sample: Sample_Spec): string => {
 };
 
 /**
+ * Extract all tokens with positions for fixture generation
+ */
+const extract_all_tokens = (
+	tokens: Syntax_Token_Stream,
+	offset: number = 0,
+): Array<{type: string; start: number; end: number}> => {
+	const result: Array<{type: string; start: number; end: number}> = [];
+	let pos = offset;
+
+	for (const token of tokens) {
+		if (typeof token === 'string') {
+			// Plain text, advance position
+			pos += token.length;
+		} else if (token instanceof Syntax_Token) {
+			const start = pos;
+			const length = get_token_length(token);
+			const end = start + length;
+
+			// Add this token
+			result.push({
+				type: token.type,
+				start,
+				end,
+			});
+
+			// Process nested tokens
+			if (Array.isArray(token.content)) {
+				const nested = extract_all_tokens(token.content, start);
+				result.push(...nested);
+			}
+
+			pos = end;
+		}
+	}
+
+	return result;
+};
+
+/**
+ * Calculate the total text length of a token
+ */
+const get_token_length = (token: Syntax_Token): number => {
+	if (typeof token.content === 'string') {
+		return token.content.length;
+	}
+
+	let length = 0;
+	for (const item of token.content) {
+		if (typeof item === 'string') {
+			length += item.length;
+		} else {
+			length += get_token_length(item);
+		}
+	}
+	return length;
+};
+
+/**
  * Generate token data from DOM styler
  */
 export const generate_token_data = (sample: Sample_Spec): Array<any> => {
-	// Get tokens from DOM styler and flatten them with positions
+	// Get tokens from DOM styler and extract all with positions
 	const grammar = syntax_styler.get_lang(sample.lang);
 	const tokens = tokenize_syntax(sample.content, grammar);
-	const flat_tokens = flatten_domstyler_tokens(tokens);
+	const flat_tokens = extract_all_tokens(tokens);
 
 	return flat_tokens;
 };

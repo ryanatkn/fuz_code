@@ -1,22 +1,37 @@
 === TOKENS ===
+<script lang="ts" module> [  0-25 ] tag
+<script                   [  0-7  ] tag
 <                         [  0-1  ] punctuation
+lang                      [  8-12 ] attr_name
+="ts"                     [ 12-17 ] attr_value
 =                         [ 12-13 ] punctuation
 "                         [ 13-14 ] punctuation
 "                         [ 16-17 ] punctuation
+module                    [ 18-24 ] attr_name
 >                         [ 24-25 ] punctuation
+\n\texport const HELLO = 'world';\n [ 25-57 ] script
+\n\texport const HELLO = 'world';\n [ 25-57 ] lang_ts
 export                    [ 27-33 ] keyword
 const                     [ 34-39 ] keyword
 HELLO                     [ 40-45 ] constant
 =                         [ 46-47 ] operator
 'world'                   [ 48-55 ] string
 ;                         [ 55-56 ] punctuation
+</script>                 [ 57-66 ] tag
+</script                  [ 57-65 ] tag
 </                        [ 57-59 ] punctuation
 >                         [ 65-66 ] punctuation
+<script lang="ts">        [ 68-86 ] tag
+<script                   [ 68-75 ] tag
 <                         [ 68-69 ] punctuation
+lang                      [ 76-80 ] attr_name
+="ts"                     [ 80-85 ] attr_value
 =                         [ 80-81 ] punctuation
 "                         [ 81-82 ] punctuation
 "                         [ 84-85 ] punctuation
 >                         [ 85-86 ] punctuation
+\n\t// @ts-expect-error\n\timport Thing from '$lib/Thing.svelte';\n\timport type {Snippet} from 'svelte';\n\n\tconst {\n\t\tthing,\n\t\tbound = $bindable(true),\n\t\tchildren,\n\t}: {\n\t\tthing: Record<string, any>;\n\t\tbound?: boolean;\n\t\tchildren: Snippet;\n\t} = $props();\n\n\tconst thing_keys = $derived(Object.keys(thing));\n\n\tconst a = 1;\n\n\tconst b = 'b';\n\n\tlet c: boolean = $state(true);\n\n\texport type Some_Type = 1 | 'b' | true;\n\n\tclass D {\n\t\td1: string = 'd';\n\t\td2: number;\n\t\td3 = $state(false);\n\n\t\tconstructor(d2: number) {\n\t\t\tthis.d2 = d2;\n\t\t}\n\n\t\tclass_method(): string {\n\t\t\treturn `Hello, ${this.d1}`;\n\t\t}\n\n\t\tinstance_method = () => {\n\t\t\t/* ... */\n\t\t\tthis.#private_method();\n\t\t\t// foo\n\t\t};\n\n\t\t#private_method() {\n\t\t\tthrow new Error(`${this.d1} etc`);\n\t\t}\n\n\t\tprotected protected_method() {\n\t\t\tconsole.log(new Date(123)); // eslint-disable-line no-console\n\t\t}\n\t}\n\n\t// comment\n\n\t/*\n\tother comment\n\n\tconst comment = false;\n\t*/\n\n\t/**\n\t * JSDoc comment\n\t */\n\n\texport interface Some_E {\n\t\tname: string;\n\t\tage: number;\n\t}\n\n\texport const some_e: Some_E = {name: 'A. H.', age: 100};\n\n\texport function add(x: number, y: number): number {\n\t\treturn x + y;\n\t}\n\n\texport const plus = (a: any, b: any): any => a + b;\n [ 86-1268] script
+\n\t// @ts-expect-error\n\timport Thing from '$lib/Thing.svelte';\n\timport type {Snippet} from 'svelte';\n\n\tconst {\n\t\tthing,\n\t\tbound = $bindable(true),\n\t\tchildren,\n\t}: {\n\t\tthing: Record<string, any>;\n\t\tbound?: boolean;\n\t\tchildren: Snippet;\n\t} = $props();\n\n\tconst thing_keys = $derived(Object.keys(thing));\n\n\tconst a = 1;\n\n\tconst b = 'b';\n\n\tlet c: boolean = $state(true);\n\n\texport type Some_Type = 1 | 'b' | true;\n\n\tclass D {\n\t\td1: string = 'd';\n\t\td2: number;\n\t\td3 = $state(false);\n\n\t\tconstructor(d2: number) {\n\t\t\tthis.d2 = d2;\n\t\t}\n\n\t\tclass_method(): string {\n\t\t\treturn `Hello, ${this.d1}`;\n\t\t}\n\n\t\tinstance_method = () => {\n\t\t\t/* ... */\n\t\t\tthis.#private_method();\n\t\t\t// foo\n\t\t};\n\n\t\t#private_method() {\n\t\t\tthrow new Error(`${this.d1} etc`);\n\t\t}\n\n\t\tprotected protected_method() {\n\t\t\tconsole.log(new Date(123)); // eslint-disable-line no-console\n\t\t}\n\t}\n\n\t// comment\n\n\t/*\n\tother comment\n\n\tconst comment = false;\n\t*/\n\n\t/**\n\t * JSDoc comment\n\t */\n\n\texport interface Some_E {\n\t\tname: string;\n\t\tage: number;\n\t}\n\n\texport const some_e: Some_E = {name: 'A. H.', age: 100};\n\n\texport function add(x: number, y: number): number {\n\t\treturn x + y;\n\t}\n\n\texport const plus = (a: any, b: any): any => a + b;\n [ 86-1268] lang_ts
 // @ts-expect-error       [ 88-107] comment
 import                    [109-115] keyword
 from                      [122-126] keyword
@@ -24,43 +39,41 @@ from                      [122-126] keyword
 ;                         [146-147] punctuation
 import                    [149-155] keyword
 type                      [156-160] keyword
-{                         [161-162] punctuation
-}                         [169-170] punctuation
-from                      [171-175] keyword
-'svelte'                  [176-184] string
-;                         [184-185] punctuation
-const                     [188-193] keyword
-{                         [194-195] punctuation
-,                         [203-204] punctuation
-=                         [213-214] operator
-$bindable                 [215-224] function
-(                         [224-225] punctuation
-true                      [225-229] boolean
-)                         [229-230] punctuation
-,                         [230-231] punctuation
-,                         [242-243] punctuation
-... and 413 more tokens
+... and 536 more tokens
 
 === STATS ===
-Total tokens: 453
+Total tokens: 576
 Sample length: 2333 characters
 
 Token types:
   punctuation: 270
+  tag: 60
   operator: 49
   keyword: 40
+  lang_ts: 19
   builtin: 17
+  attr_name: 16
   function: 16
+  attr_value: 11
   string: 10
   comment: 10
   property: 8
   selector: 7
   number: 6
+  class_name: 5
   constant: 4
   boolean: 4
   template_punctuation: 4
   interpolation_punctuation: 4
+  script: 2
+  template_string: 2
+  interpolation: 2
+  each: 2
   function_variable: 1
+  decorator: 1
   at: 1
   doctype: 1
+  style: 1
+  lang_css: 1
+  atrule: 1
   rule: 1
