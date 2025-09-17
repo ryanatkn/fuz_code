@@ -108,14 +108,6 @@
       "svelte": "./dist/Code.svelte",
       "default": "./dist/Code.svelte"
     },
-    "./domstyler_global.js": {
-      "types": "./dist/domstyler_global.d.ts",
-      "default": "./dist/domstyler_global.js"
-    },
-    "./highlight_manager.js": {
-      "types": "./dist/highlight_manager.d.ts",
-      "default": "./dist/highlight_manager.js"
-    },
     "./grammar_clike.js": {
       "types": "./dist/grammar_clike.d.ts",
       "default": "./dist/grammar_clike.js"
@@ -143,6 +135,10 @@
     "./grammar_ts.js": {
       "types": "./dist/grammar_ts.d.ts",
       "default": "./dist/grammar_ts.js"
+    },
+    "./highlight_manager.js": {
+      "types": "./dist/highlight_manager.d.ts",
+      "default": "./dist/highlight_manager.js"
     },
     "./run_benchmark.js": {
       "types": "./dist/run_benchmark.d.ts",
@@ -173,6 +169,10 @@
     "./samples/sample_complex.js": {
       "types": "./dist/samples/sample_complex.d.ts",
       "default": "./dist/samples/sample_complex.js"
+    },
+    "./syntax_styler_global.js": {
+      "types": "./dist/syntax_styler_global.d.ts",
+      "default": "./dist/syntax_styler_global.js"
     },
     "./syntax_styler.js": {
       "types": "./dist/syntax_styler.d.ts",

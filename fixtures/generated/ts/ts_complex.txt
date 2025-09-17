@@ -1,45 +1,246 @@
 === TOKENS ===
-const                     [  0-5  ] keyword
-=                         [  8-9  ] operator
-1                         [ 10-11 ] number
-;                         [ 11-12 ] punctuation
-const                     [ 14-19 ] keyword
-=                         [ 22-23 ] operator
-'b'                       [ 24-27 ] string
-;                         [ 27-28 ] punctuation
-const                     [ 30-35 ] keyword
-=                         [ 38-39 ] operator
-true                      [ 40-44 ] boolean
-;                         [ 44-45 ] punctuation
-export                    [ 47-53 ] keyword
-type                      [ 54-58 ] keyword
-Some_Type                 [ 59-68 ] class_name
-=                         [ 69-70 ] operator
-1                         [ 71-72 ] number
-|                         [ 73-74 ] operator
-'b'                       [ 75-78 ] string
-|                         [ 79-80 ] operator
-true                      [ 81-85 ] boolean
-;                         [ 85-86 ] punctuation
-class                     [ 88-93 ] keyword
-D                         [ 94-95 ] class_name
-D                         [ 94-95 ] constant
-{                         [ 96-97 ] punctuation
-:                         [101-102] operator
-string                    [103-109] builtin
-=                         [110-111] operator
-'d'                       [112-115] string
-;                         [115-116] punctuation
-:                         [120-121] operator
-number                    [122-128] builtin
-;                         [128-129] punctuation
-=                         [134-135] operator
-$state                    [136-142] function
-(                         [142-143] punctuation
-false                     [143-148] boolean
-)                         [148-149] punctuation
-;                         [149-150] punctuation
-... and 202 more tokens
+[  0-5  ]    keyword                   const
+[  8-9  ]    operator                  =
+[ 10-11 ]    number                    1
+[ 11-12 ]    punctuation               ;
+[ 14-19 ]    keyword                   const
+[ 22-23 ]    operator                  =
+[ 24-27 ]    string                    'b'
+[ 27-28 ]    punctuation               ;
+[ 30-35 ]    keyword                   const
+[ 38-39 ]    operator                  =
+[ 40-44 ]    boolean                   true
+[ 44-45 ]    punctuation               ;
+[ 47-53 ]    keyword                   export
+[ 54-58 ]    keyword                   type
+[ 59-68 ]    class_name                Some_Type
+[ 69-70 ]    operator                  =
+[ 71-72 ]    number                    1
+[ 73-74 ]    operator                  |
+[ 75-78 ]    string                    'b'
+[ 79-80 ]    operator                  |
+[ 81-85 ]    boolean                   true
+[ 85-86 ]    punctuation               ;
+[ 88-93 ]    keyword                   class
+[ 94-95 ]    class_name                D
+[ 94-95 ]    constant                  D
+[ 96-97 ]    punctuation               {
+[101-102]    operator                  :
+[103-109]    builtin                   string
+[110-111]    operator                  =
+[112-115]    string                    'd'
+[115-116]    punctuation               ;
+[120-121]    operator                  :
+[122-128]    builtin                   number
+[128-129]    punctuation               ;
+[134-135]    operator                  =
+[136-142]    function                  $state
+[142-143]    punctuation               (
+[143-148]    boolean                   false
+[148-149]    punctuation               )
+[149-150]    punctuation               ;
+[153-164]    function                  constructor
+[164-165]    punctuation               (
+[167-168]    operator                  :
+[169-175]    builtin                   number
+[175-176]    punctuation               )
+[177-178]    punctuation               {
+[181-185]    keyword                   this
+[185-186]    punctuation               .
+[189-190]    operator                  =
+[193-194]    punctuation               ;
+[196-197]    punctuation               }
+[200-212]    function                  class_method
+[212-213]    punctuation               (
+[213-214]    punctuation               )
+[214-215]    operator                  :
+[216-222]    builtin                   string
+[223-224]    punctuation               {
+[227-233]    keyword                   return
+[234-253]    template_string           `Hello, ${this.d1}`
+[234-235]    template_punctuation      `
+[235-242]    string                    Hello, 
+[242-252]    interpolation             ${this.d1}
+[242-244]    interpolation_punctuation ${
+[244-248]    keyword                   this
+[248-249]    punctuation               .
+[251-252]    interpolation_punctuation }
+[252-253]    template_punctuation      `
+[253-254]    punctuation               ;
+[256-257]    punctuation               }
+[276-277]    operator                  =
+[278-279]    punctuation               (
+[279-280]    punctuation               )
+[280-281]    operator                  :
+[282-286]    keyword                   void
+[287-289]    operator                  =>
+[290-291]    punctuation               {
+[294-303]    comment                   /* ... */
+[306-310]    keyword                   this
+[310-311]    punctuation               .
+[311-326]    function                  #private_method
+[326-327]    punctuation               (
+[327-328]    punctuation               )
+[328-329]    punctuation               ;
+[332-338]    comment                   // foo
+[340-341]    punctuation               }
+[341-342]    punctuation               ;
+[345-360]    function                  #private_method
+[360-361]    punctuation               (
+[361-362]    punctuation               )
+[363-364]    punctuation               {
+[367-372]    keyword                   throw
+[373-376]    keyword                   new
+[377-382]    class_name                Error
+[382-383]    punctuation               (
+[383-419]    template_string           `${this.d1} \n\t\t\tmultiline\n\t\t\tetc\n\t\t`
+[383-384]    template_punctuation      `
+[384-394]    interpolation             ${this.d1}
+[384-386]    interpolation_punctuation ${
+[386-390]    keyword                   this
+[390-391]    punctuation               .
+[393-394]    interpolation_punctuation }
+[394-418]    string                     \n\t\t\tmultiline\n\t\t\tetc\n\t\t
+[418-419]    template_punctuation      `
+[419-420]    punctuation               )
+[420-421]    punctuation               ;
+[423-424]    punctuation               }
+[427-436]    keyword                   protected
+[437-453]    function                  protected_method
+[453-454]    punctuation               (
+[454-455]    punctuation               )
+[455-456]    operator                  :
+[457-461]    keyword                   void
+[462-463]    punctuation               {
+[466-473]    builtin                   console
+[473-474]    punctuation               .
+[474-477]    function                  log
+[477-478]    punctuation               (
+[478-481]    keyword                   new
+[482-486]    class_name                Date
+[486-487]    punctuation               (
+[487-488]    punctuation               )
+[488-489]    punctuation               )
+[489-490]    punctuation               ;
+[491-524]    comment                   // eslint-disable-line no-console
+[526-527]    punctuation               }
+[528-529]    punctuation               }
+[531-537]    keyword                   export
+[538-539]    punctuation               {
+[540-541]    punctuation               ,
+[543-544]    punctuation               ,
+[546-547]    punctuation               ,
+[548-549]    constant                  D
+[549-550]    punctuation               }
+[550-551]    punctuation               ;
+[553-563]    comment                   // comment
+[565-608]    comment                   /*\nother comment\n\nconst comment = false;\n*/
+[610-634]    comment                   /**\n * JSDoc comment\n */
+[636-642]    keyword                   export
+[643-652]    keyword                   interface
+[653-659]    class_name                Some_E
+[660-661]    punctuation               {
+[667-668]    operator                  :
+[669-675]    builtin                   string
+[675-676]    punctuation               ;
+[681-682]    operator                  :
+[683-689]    builtin                   number
+[689-690]    punctuation               ;
+[691-692]    punctuation               }
+[694-700]    keyword                   export
+[701-706]    keyword                   const
+[713-714]    operator                  :
+[722-723]    operator                  =
+[724-725]    punctuation               {
+[729-730]    operator                  :
+[731-738]    string                    'A. H.'
+[738-739]    punctuation               ,
+[743-744]    operator                  :
+[745-748]    number                    100
+[748-749]    punctuation               }
+[749-750]    punctuation               ;
+[752-758]    keyword                   export
+[759-767]    keyword                   function
+[768-771]    function                  add
+[771-772]    punctuation               (
+[773-774]    operator                  :
+[775-781]    builtin                   number
+[781-782]    punctuation               ,
+[784-785]    operator                  :
+[786-792]    builtin                   number
+[792-793]    punctuation               )
+[793-794]    operator                  :
+[795-801]    builtin                   number
+[802-803]    punctuation               {
+[805-811]    keyword                   return
+[814-815]    operator                  +
+[817-818]    punctuation               ;
+[819-820]    punctuation               }
+[822-828]    keyword                   export
+[829-834]    keyword                   const
+[840-841]    operator                  =
+[842-843]    punctuation               (
+[844-845]    operator                  :
+[846-849]    builtin                   any
+[849-850]    punctuation               ,
+[852-853]    operator                  :
+[854-857]    builtin                   any
+[857-858]    punctuation               )
+[858-859]    operator                  :
+[860-863]    builtin                   any
+[864-866]    operator                  =>
+[869-870]    operator                  +
+[872-873]    punctuation               ;
+[875-897]    comment                   // boundary test cases
+[898-904]    keyword                   export
+[905-910]    keyword                   const
+[929-930]    operator                  =
+[931-960]    string                    'const class function string'
+[960-961]    punctuation               ;
+[962-968]    keyword                   export
+[969-974]    keyword                   const
+[992-993]    operator                  =
+[994-1020]   string                    '// this is not a comment'
+[1020-1021]  punctuation               ;
+[1022-1028]  keyword                   export
+[1029-1034]  keyword                   const
+[1054-1055]  operator                  =
+[1056-1085]  template_string           `Value: ${1 + 2} and ${true}`
+[1056-1057]  template_punctuation      `
+[1057-1064]  string                    Value: 
+[1064-1072]  interpolation             ${1 + 2}
+[1064-1066]  interpolation_punctuation ${
+[1066-1067]  number                    1
+[1068-1069]  operator                  +
+[1070-1071]  number                    2
+[1071-1072]  interpolation_punctuation }
+[1072-1077]  string                     and 
+[1077-1084]  interpolation             ${true}
+[1077-1079]  interpolation_punctuation ${
+[1079-1083]  boolean                   true
+[1083-1084]  interpolation_punctuation }
+[1084-1085]  template_punctuation      `
+[1085-1086]  punctuation               ;
+[1088-1120]  comment                   // regex that looks like comment
+[1121-1127]  keyword                   export
+[1128-1133]  keyword                   const
+[1140-1141]  operator                  =
+[1142-1151]  regex                     /\/\/.*/g
+[1142-1143]  regex_delimiter           /
+[1143-1149]  regex_source              \/\/.*
+[1149-1150]  regex_delimiter           /
+[1150-1151]  regex_flags               g
+[1151-1152]  punctuation               ;
+[1153-1159]  keyword                   export
+[1160-1165]  keyword                   const
+[1180-1181]  operator                  =
+[1182-1215]  regex                     /^(?:\/\*.*?\*\/|\/\/.*|[^\/])+$/
+[1182-1183]  regex_delimiter           /
+[1183-1214]  regex_source              ^(?:\/\*.*?\*\/|\/\/.*|[^\/])+$
+[1214-1215]  regex_delimiter           /
+[1215-1216]  punctuation               ;
+[1218-1274]  comment                   // string in comment should not be highlighted as string
+[1275-1326]  comment                   // const commented = "this string is in a comment";
 
 === STATS ===
 Total tokens: 242

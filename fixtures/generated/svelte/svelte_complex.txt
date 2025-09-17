@@ -1,45 +1,580 @@
 === TOKENS ===
-<script lang="ts" module> [  0-25 ] tag
-<script                   [  0-7  ] tag
-<                         [  0-1  ] punctuation
-lang                      [  8-12 ] attr_name
-="ts"                     [ 12-17 ] attr_value
-=                         [ 12-13 ] punctuation
-"                         [ 13-14 ] punctuation
-"                         [ 16-17 ] punctuation
-module                    [ 18-24 ] attr_name
->                         [ 24-25 ] punctuation
-\n\texport const HELLO = 'world';\n [ 25-57 ] script
-\n\texport const HELLO = 'world';\n [ 25-57 ] lang_ts
-export                    [ 27-33 ] keyword
-const                     [ 34-39 ] keyword
-HELLO                     [ 40-45 ] constant
-=                         [ 46-47 ] operator
-'world'                   [ 48-55 ] string
-;                         [ 55-56 ] punctuation
-</script>                 [ 57-66 ] tag
-</script                  [ 57-65 ] tag
-</                        [ 57-59 ] punctuation
->                         [ 65-66 ] punctuation
-<script lang="ts">        [ 68-86 ] tag
-<script                   [ 68-75 ] tag
-<                         [ 68-69 ] punctuation
-lang                      [ 76-80 ] attr_name
-="ts"                     [ 80-85 ] attr_value
-=                         [ 80-81 ] punctuation
-"                         [ 81-82 ] punctuation
-"                         [ 84-85 ] punctuation
->                         [ 85-86 ] punctuation
-\n\t// @ts-expect-error\n\timport Thing from '$lib/Thing.svelte';\n\timport type {Snippet} from 'svelte';\n\n\tconst {\n\t\tthing,\n\t\tbound = $bindable(true),\n\t\tchildren,\n\t}: {\n\t\tthing: Record<string, any>;\n\t\tbound?: boolean;\n\t\tchildren: Snippet;\n\t} = $props();\n\n\tconst thing_keys = $derived(Object.keys(thing));\n\n\tconst a = 1;\n\n\tconst b = 'b';\n\n\tlet c: boolean = $state(true);\n\n\texport type Some_Type = 1 | 'b' | true;\n\n\tclass D {\n\t\td1: string = 'd';\n\t\td2: number;\n\t\td3 = $state(false);\n\n\t\tconstructor(d2: number) {\n\t\t\tthis.d2 = d2;\n\t\t}\n\n\t\tclass_method(): string {\n\t\t\treturn `Hello, ${this.d1}`;\n\t\t}\n\n\t\tinstance_method = () => {\n\t\t\t/* ... */\n\t\t\tthis.#private_method();\n\t\t\t// foo\n\t\t};\n\n\t\t#private_method() {\n\t\t\tthrow new Error(`${this.d1} etc`);\n\t\t}\n\n\t\tprotected protected_method() {\n\t\t\tconsole.log(new Date(123)); // eslint-disable-line no-console\n\t\t}\n\t}\n\n\t// comment\n\n\t/*\n\tother comment\n\n\tconst comment = false;\n\t*/\n\n\t/**\n\t * JSDoc comment\n\t */\n\n\texport interface Some_E {\n\t\tname: string;\n\t\tage: number;\n\t}\n\n\texport const some_e: Some_E = {name: 'A. H.', age: 100};\n\n\texport function add(x: number, y: number): number {\n\t\treturn x + y;\n\t}\n\n\texport const plus = (a: any, b: any): any => a + b;\n [ 86-1268] script
-\n\t// @ts-expect-error\n\timport Thing from '$lib/Thing.svelte';\n\timport type {Snippet} from 'svelte';\n\n\tconst {\n\t\tthing,\n\t\tbound = $bindable(true),\n\t\tchildren,\n\t}: {\n\t\tthing: Record<string, any>;\n\t\tbound?: boolean;\n\t\tchildren: Snippet;\n\t} = $props();\n\n\tconst thing_keys = $derived(Object.keys(thing));\n\n\tconst a = 1;\n\n\tconst b = 'b';\n\n\tlet c: boolean = $state(true);\n\n\texport type Some_Type = 1 | 'b' | true;\n\n\tclass D {\n\t\td1: string = 'd';\n\t\td2: number;\n\t\td3 = $state(false);\n\n\t\tconstructor(d2: number) {\n\t\t\tthis.d2 = d2;\n\t\t}\n\n\t\tclass_method(): string {\n\t\t\treturn `Hello, ${this.d1}`;\n\t\t}\n\n\t\tinstance_method = () => {\n\t\t\t/* ... */\n\t\t\tthis.#private_method();\n\t\t\t// foo\n\t\t};\n\n\t\t#private_method() {\n\t\t\tthrow new Error(`${this.d1} etc`);\n\t\t}\n\n\t\tprotected protected_method() {\n\t\t\tconsole.log(new Date(123)); // eslint-disable-line no-console\n\t\t}\n\t}\n\n\t// comment\n\n\t/*\n\tother comment\n\n\tconst comment = false;\n\t*/\n\n\t/**\n\t * JSDoc comment\n\t */\n\n\texport interface Some_E {\n\t\tname: string;\n\t\tage: number;\n\t}\n\n\texport const some_e: Some_E = {name: 'A. H.', age: 100};\n\n\texport function add(x: number, y: number): number {\n\t\treturn x + y;\n\t}\n\n\texport const plus = (a: any, b: any): any => a + b;\n [ 86-1268] lang_ts
-// @ts-expect-error       [ 88-107] comment
-import                    [109-115] keyword
-from                      [122-126] keyword
-'$lib/Thing.svelte'       [127-146] string
-;                         [146-147] punctuation
-import                    [149-155] keyword
-type                      [156-160] keyword
-... and 536 more tokens
+[  0-25 ]    tag                       <script lang="ts" module>
+[  0-7  ]    tag                       <script
+[  0-1  ]    punctuation               <
+[  8-12 ]    attr_name                 lang
+[ 12-17 ]    attr_value                ="ts"
+[ 12-13 ]    punctuation               =
+[ 13-14 ]    punctuation               "
+[ 16-17 ]    punctuation               "
+[ 18-24 ]    attr_name                 module
+[ 24-25 ]    punctuation               >
+[ 25-57 ]    script                    \n\texport const HELLO = 'world';\n
+[ 25-57 ]    lang_ts                   \n\texport const HELLO = 'world';\n
+[ 27-33 ]    keyword                   export
+[ 34-39 ]    keyword                   const
+[ 40-45 ]    constant                  HELLO
+[ 46-47 ]    operator                  =
+[ 48-55 ]    string                    'world'
+[ 55-56 ]    punctuation               ;
+[ 57-66 ]    tag                       </script>
+[ 57-65 ]    tag                       </script
+[ 57-59 ]    punctuation               </
+[ 65-66 ]    punctuation               >
+[ 68-86 ]    tag                       <script lang="ts">
+[ 68-75 ]    tag                       <script
+[ 68-69 ]    punctuation               <
+[ 76-80 ]    attr_name                 lang
+[ 80-85 ]    attr_value                ="ts"
+[ 80-81 ]    punctuation               =
+[ 81-82 ]    punctuation               "
+[ 84-85 ]    punctuation               "
+[ 85-86 ]    punctuation               >
+[ 86-1268]   script                    \n\t// @ts-expect-error\n\timport Thing from '$lib/Thing.svelte';\n\timport type {Snippet} from 'svelte';\n\n\tconst {\n\t\tthing,\n\t\tbound = $bindable(true),\n\t\tchildren,\n\t}: {\n\t\tthing: Record<string, any>;\n\t\tbound?: boolean;\n\t\tchildren: Snippet;\n\t} = $props();\n\n\tconst thing_keys = $derived(Object.keys(thing));\n\n\tconst a = 1;\n\n\tconst b = 'b';\n\n\tlet c: boolean = $state(true);\n\n\texport type Some_Type = 1 | 'b' | true;\n\n\tclass D {\n\t\td1: string = 'd';\n\t\td2: number;\n\t\td3 = $state(false);\n\n\t\tconstructor(d2: number) {\n\t\t\tthis.d2 = d2;\n\t\t}\n\n\t\tclass_method(): string {\n\t\t\treturn `Hello, ${this.d1}`;\n\t\t}\n\n\t\tinstance_method = () => {\n\t\t\t/* ... */\n\t\t\tthis.#private_method();\n\t\t\t// foo\n\t\t};\n\n\t\t#private_method() {\n\t\t\tthrow new Error(`${this.d1} etc`);\n\t\t}\n\n\t\tprotected protected_method() {\n\t\t\tconsole.log(new Date(123)); // eslint-disable-line no-console\n\t\t}\n\t}\n\n\t// comment\n\n\t/*\n\tother comment\n\n\tconst comment = false;\n\t*/\n\n\t/**\n\t * JSDoc comment\n\t */\n\n\texport interface Some_E {\n\t\tname: string;\n\t\tage: number;\n\t}\n\n\texport const some_e: Some_E = {name: 'A. H.', age: 100};\n\n\texport function add(x: number, y: number): number {\n\t\treturn x + y;\n\t}\n\n\texport const plus = (a: any, b: any): any => a + b;\n
+[ 86-1268]   lang_ts                   \n\t// @ts-expect-error\n\timport Thing from '$lib/Thing.svelte';\n\timport type {Snippet} from 'svelte';\n\n\tconst {\n\t\tthing,\n\t\tbound = $bindable(true),\n\t\tchildren,\n\t}: {\n\t\tthing: Record<string, any>;\n\t\tbound?: boolean;\n\t\tchildren: Snippet;\n\t} = $props();\n\n\tconst thing_keys = $derived(Object.keys(thing));\n\n\tconst a = 1;\n\n\tconst b = 'b';\n\n\tlet c: boolean = $state(true);\n\n\texport type Some_Type = 1 | 'b' | true;\n\n\tclass D {\n\t\td1: string = 'd';\n\t\td2: number;\n\t\td3 = $state(false);\n\n\t\tconstructor(d2: number) {\n\t\t\tthis.d2 = d2;\n\t\t}\n\n\t\tclass_method(): string {\n\t\t\treturn `Hello, ${this.d1}`;\n\t\t}\n\n\t\tinstance_method = () => {\n\t\t\t/* ... */\n\t\t\tthis.#private_method();\n\t\t\t// foo\n\t\t};\n\n\t\t#private_method() {\n\t\t\tthrow new Error(`${this.d1} etc`);\n\t\t}\n\n\t\tprotected protected_method() {\n\t\t\tconsole.log(new Date(123)); // eslint-disable-line no-console\n\t\t}\n\t}\n\n\t// comment\n\n\t/*\n\tother comment\n\n\tconst comment = false;\n\t*/\n\n\t/**\n\t * JSDoc comment\n\t */\n\n\texport interface Some_E {\n\t\tname: string;\n\t\tage: number;\n\t}\n\n\texport const some_e: Some_E = {name: 'A. H.', age: 100};\n\n\texport function add(x: number, y: number): number {\n\t\treturn x + y;\n\t}\n\n\texport const plus = (a: any, b: any): any => a + b;\n
+[ 88-107]    comment                   // @ts-expect-error
+[109-115]    keyword                   import
+[122-126]    keyword                   from
+[127-146]    string                    '$lib/Thing.svelte'
+[146-147]    punctuation               ;
+[149-155]    keyword                   import
+[156-160]    keyword                   type
+[161-162]    punctuation               {
+[169-170]    punctuation               }
+[171-175]    keyword                   from
+[176-184]    string                    'svelte'
+[184-185]    punctuation               ;
+[188-193]    keyword                   const
+[194-195]    punctuation               {
+[203-204]    punctuation               ,
+[213-214]    operator                  =
+[215-224]    function                  $bindable
+[224-225]    punctuation               (
+[225-229]    boolean                   true
+[229-230]    punctuation               )
+[230-231]    punctuation               ,
+[242-243]    punctuation               ,
+[245-246]    punctuation               }
+[246-247]    operator                  :
+[248-249]    punctuation               {
+[257-258]    operator                  :
+[265-266]    operator                  <
+[266-272]    builtin                   string
+[272-273]    punctuation               ,
+[274-277]    builtin                   any
+[277-278]    operator                  >
+[278-279]    punctuation               ;
+[287-288]    operator                  ?
+[288-289]    operator                  :
+[290-297]    builtin                   boolean
+[297-298]    punctuation               ;
+[309-310]    operator                  :
+[318-319]    punctuation               ;
+[321-322]    punctuation               }
+[323-324]    operator                  =
+[325-331]    function                  $props
+[331-332]    punctuation               (
+[332-333]    punctuation               )
+[333-334]    punctuation               ;
+[337-342]    keyword                   const
+[354-355]    operator                  =
+[356-364]    function                  $derived
+[364-365]    punctuation               (
+[371-372]    punctuation               .
+[372-376]    function                  keys
+[376-377]    punctuation               (
+[382-383]    punctuation               )
+[383-384]    punctuation               )
+[384-385]    punctuation               ;
+[388-393]    keyword                   const
+[396-397]    operator                  =
+[398-399]    number                    1
+[399-400]    punctuation               ;
+[403-408]    keyword                   const
+[411-412]    operator                  =
+[413-416]    string                    'b'
+[416-417]    punctuation               ;
+[420-423]    keyword                   let
+[425-426]    operator                  :
+[427-434]    builtin                   boolean
+[435-436]    operator                  =
+[437-443]    function                  $state
+[443-444]    punctuation               (
+[444-448]    boolean                   true
+[448-449]    punctuation               )
+[449-450]    punctuation               ;
+[453-459]    keyword                   export
+[460-464]    keyword                   type
+[465-474]    class_name                Some_Type
+[475-476]    operator                  =
+[477-478]    number                    1
+[479-480]    operator                  |
+[481-484]    string                    'b'
+[485-486]    operator                  |
+[487-491]    boolean                   true
+[491-492]    punctuation               ;
+[495-500]    keyword                   class
+[501-502]    class_name                D
+[501-502]    constant                  D
+[503-504]    punctuation               {
+[509-510]    operator                  :
+[511-517]    builtin                   string
+[518-519]    operator                  =
+[520-523]    string                    'd'
+[523-524]    punctuation               ;
+[529-530]    operator                  :
+[531-537]    builtin                   number
+[537-538]    punctuation               ;
+[544-545]    operator                  =
+[546-552]    function                  $state
+[552-553]    punctuation               (
+[553-558]    boolean                   false
+[558-559]    punctuation               )
+[559-560]    punctuation               ;
+[564-575]    function                  constructor
+[575-576]    punctuation               (
+[578-579]    operator                  :
+[580-586]    builtin                   number
+[586-587]    punctuation               )
+[588-589]    punctuation               {
+[593-597]    keyword                   this
+[597-598]    punctuation               .
+[601-602]    operator                  =
+[605-606]    punctuation               ;
+[609-610]    punctuation               }
+[614-626]    function                  class_method
+[626-627]    punctuation               (
+[627-628]    punctuation               )
+[628-629]    operator                  :
+[630-636]    builtin                   string
+[637-638]    punctuation               {
+[642-648]    keyword                   return
+[649-668]    template_string           `Hello, ${this.d1}`
+[649-650]    template_punctuation      `
+[650-657]    string                    Hello, 
+[657-667]    interpolation             ${this.d1}
+[657-659]    interpolation_punctuation ${
+[659-663]    keyword                   this
+[663-664]    punctuation               .
+[666-667]    interpolation_punctuation }
+[667-668]    template_punctuation      `
+[668-669]    punctuation               ;
+[672-673]    punctuation               }
+[677-692]    function_variable         instance_method
+[693-694]    operator                  =
+[695-696]    punctuation               (
+[696-697]    punctuation               )
+[698-700]    operator                  =>
+[701-702]    punctuation               {
+[706-715]    comment                   /* ... */
+[719-723]    keyword                   this
+[723-724]    punctuation               .
+[724-739]    function                  #private_method
+[739-740]    punctuation               (
+[740-741]    punctuation               )
+[741-742]    punctuation               ;
+[746-752]    comment                   // foo
+[755-756]    punctuation               }
+[756-757]    punctuation               ;
+[761-776]    function                  #private_method
+[776-777]    punctuation               (
+[777-778]    punctuation               )
+[779-780]    punctuation               {
+[784-789]    keyword                   throw
+[790-793]    keyword                   new
+[794-799]    class_name                Error
+[799-800]    punctuation               (
+[800-816]    template_string           `${this.d1} etc`
+[800-801]    template_punctuation      `
+[801-811]    interpolation             ${this.d1}
+[801-803]    interpolation_punctuation ${
+[803-807]    keyword                   this
+[807-808]    punctuation               .
+[810-811]    interpolation_punctuation }
+[811-815]    string                     etc
+[815-816]    template_punctuation      `
+[816-817]    punctuation               )
+[817-818]    punctuation               ;
+[821-822]    punctuation               }
+[826-835]    keyword                   protected
+[836-852]    function                  protected_method
+[852-853]    punctuation               (
+[853-854]    punctuation               )
+[855-856]    punctuation               {
+[860-867]    builtin                   console
+[867-868]    punctuation               .
+[868-871]    function                  log
+[871-872]    punctuation               (
+[872-875]    keyword                   new
+[876-880]    class_name                Date
+[880-881]    punctuation               (
+[881-884]    number                    123
+[884-885]    punctuation               )
+[885-886]    punctuation               )
+[886-887]    punctuation               ;
+[888-921]    comment                   // eslint-disable-line no-console
+[924-925]    punctuation               }
+[927-928]    punctuation               }
+[931-941]    comment                   // comment
+[944-990]    comment                   /*\n\tother comment\n\n\tconst comment = false;\n\t*/
+[993-1019]   comment                   /**\n\t * JSDoc comment\n\t */
+[1022-1028]  keyword                   export
+[1029-1038]  keyword                   interface
+[1039-1045]  class_name                Some_E
+[1046-1047]  punctuation               {
+[1054-1055]  operator                  :
+[1056-1062]  builtin                   string
+[1062-1063]  punctuation               ;
+[1069-1070]  operator                  :
+[1071-1077]  builtin                   number
+[1077-1078]  punctuation               ;
+[1080-1081]  punctuation               }
+[1084-1090]  keyword                   export
+[1091-1096]  keyword                   const
+[1103-1104]  operator                  :
+[1112-1113]  operator                  =
+[1114-1115]  punctuation               {
+[1119-1120]  operator                  :
+[1121-1128]  string                    'A. H.'
+[1128-1129]  punctuation               ,
+[1133-1134]  operator                  :
+[1135-1138]  number                    100
+[1138-1139]  punctuation               }
+[1139-1140]  punctuation               ;
+[1143-1149]  keyword                   export
+[1150-1158]  keyword                   function
+[1159-1162]  function                  add
+[1162-1163]  punctuation               (
+[1164-1165]  operator                  :
+[1166-1172]  builtin                   number
+[1172-1173]  punctuation               ,
+[1175-1176]  operator                  :
+[1177-1183]  builtin                   number
+[1183-1184]  punctuation               )
+[1184-1185]  operator                  :
+[1186-1192]  builtin                   number
+[1193-1194]  punctuation               {
+[1197-1203]  keyword                   return
+[1206-1207]  operator                  +
+[1209-1210]  punctuation               ;
+[1212-1213]  punctuation               }
+[1216-1222]  keyword                   export
+[1223-1228]  keyword                   const
+[1234-1235]  operator                  =
+[1236-1237]  punctuation               (
+[1238-1239]  operator                  :
+[1240-1243]  builtin                   any
+[1243-1244]  punctuation               ,
+[1246-1247]  operator                  :
+[1248-1251]  builtin                   any
+[1251-1252]  punctuation               )
+[1252-1253]  operator                  :
+[1254-1257]  builtin                   any
+[1258-1260]  operator                  =>
+[1263-1264]  operator                  +
+[1266-1267]  punctuation               ;
+[1268-1277]  tag                       </script>
+[1268-1276]  tag                       </script
+[1268-1270]  punctuation               </
+[1276-1277]  punctuation               >
+[1279-1283]  tag                       <h1>
+[1279-1282]  tag                       <h1
+[1279-1280]  punctuation               <
+[1282-1283]  punctuation               >
+[1289-1296]  lang_ts                   {HELLO}
+[1289-1290]  punctuation               {
+[1290-1295]  constant                  HELLO
+[1295-1296]  punctuation               }
+[1297-1302]  tag                       </h1>
+[1297-1301]  tag                       </h1
+[1297-1299]  punctuation               </
+[1301-1302]  punctuation               >
+[1304-1335]  each                      {#each thing_keys as key (key)}
+[1304-1305]  punctuation               {
+[1305-1310]  keyword                   #each
+[1311-1322]  lang_ts                   thing_keys 
+[1322-1324]  keyword                   as
+[1325-1329]  lang_ts                   key 
+[1329-1334]  lang_ts                   (key)
+[1329-1330]  punctuation               (
+[1333-1334]  punctuation               )
+[1334-1335]  punctuation               }
+[1337-1364]  lang_ts                   {@const value = thing[key]}
+[1337-1338]  punctuation               {
+[1339-1344]  keyword                   const
+[1351-1352]  operator                  =
+[1358-1359]  punctuation               [
+[1362-1363]  punctuation               ]
+[1363-1364]  punctuation               }
+[1366-1373]  lang_ts                   {value}
+[1366-1367]  punctuation               {
+[1372-1373]  punctuation               }
+[1374-1381]  each                      {/each}
+[1374-1375]  punctuation               {
+[1375-1380]  keyword                   /each
+[1380-1381]  punctuation               }
+[1383-1390]  lang_ts                   {#if c}
+[1383-1384]  punctuation               {
+[1385-1387]  keyword                   if
+[1389-1390]  punctuation               }
+[1392-1433]  tag                       <Thing string_prop="a" number_prop={1} />
+[1392-1398]  tag                       <Thing
+[1392-1393]  punctuation               <
+[1399-1410]  attr_name                 string_prop
+[1410-1414]  attr_value                ="a"
+[1410-1411]  punctuation               =
+[1411-1412]  punctuation               "
+[1413-1414]  punctuation               "
+[1415-1427]  attr_name                 number_prop=
+[1427-1430]  lang_ts                   {1}
+[1427-1428]  punctuation               {
+[1428-1429]  number                    1
+[1429-1430]  punctuation               }
+[1431-1433]  punctuation               />
+[1434-1441]  lang_ts                   {:else}
+[1434-1435]  punctuation               {
+[1435-1436]  operator                  :
+[1436-1440]  keyword                   else
+[1440-1441]  punctuation               }
+[1443-1507]  tag                       <Thing string_prop="b" number_prop={2} onthing={() => (c = !c)}>
+[1443-1449]  tag                       <Thing
+[1443-1444]  punctuation               <
+[1450-1461]  attr_name                 string_prop
+[1461-1465]  attr_value                ="b"
+[1461-1462]  punctuation               =
+[1462-1463]  punctuation               "
+[1464-1465]  punctuation               "
+[1466-1478]  attr_name                 number_prop=
+[1478-1481]  lang_ts                   {2}
+[1478-1479]  punctuation               {
+[1479-1480]  number                    2
+[1480-1481]  punctuation               }
+[1482-1490]  attr_name                 onthing=
+[1490-1506]  lang_ts                   {() => (c = !c)}
+[1490-1491]  punctuation               {
+[1491-1492]  punctuation               (
+[1492-1493]  punctuation               )
+[1494-1496]  operator                  =>
+[1497-1498]  punctuation               (
+[1500-1501]  operator                  =
+[1502-1503]  operator                  !
+[1504-1505]  punctuation               )
+[1505-1506]  punctuation               }
+[1506-1507]  punctuation               >
+[1510-1530]  lang_ts                   {@render children()}
+[1510-1511]  punctuation               {
+[1511-1518]  decorator                 @render
+[1511-1512]  at                        @
+[1512-1518]  function                  render
+[1519-1527]  function                  children
+[1527-1528]  punctuation               (
+[1528-1529]  punctuation               )
+[1529-1530]  punctuation               }
+[1532-1540]  tag                       </Thing>
+[1532-1539]  tag                       </Thing
+[1532-1534]  punctuation               </
+[1539-1540]  punctuation               >
+[1541-1546]  lang_ts                   {/if}
+[1541-1542]  punctuation               {
+[1542-1543]  operator                  /
+[1543-1545]  keyword                   if
+[1545-1546]  punctuation               }
+[1548-1563]  doctype                   <!DOCTYPE html>
+[1565-1606]  tag                       <div class="test special" id="unique_id">
+[1565-1569]  tag                       <div
+[1565-1566]  punctuation               <
+[1570-1575]  attr_name                 class
+[1575-1590]  attr_value                ="test special"
+[1575-1576]  punctuation               =
+[1576-1577]  punctuation               "
+[1589-1590]  punctuation               "
+[1591-1593]  attr_name                 id
+[1593-1605]  attr_value                ="unique_id"
+[1593-1594]  punctuation               =
+[1594-1595]  punctuation               "
+[1604-1605]  punctuation               "
+[1605-1606]  punctuation               >
+[1608-1611]  tag                       <p>
+[1608-1610]  tag                       <p
+[1608-1609]  punctuation               <
+[1610-1611]  punctuation               >
+[1623-1627]  tag                       </p>
+[1623-1626]  tag                       </p
+[1623-1625]  punctuation               </
+[1626-1627]  punctuation               >
+[1628-1634]  tag                       </div>
+[1628-1633]  tag                       </div
+[1628-1630]  punctuation               </
+[1633-1634]  punctuation               >
+[1636-1670]  tag                       <p class="some_class hypen-class">
+[1636-1638]  tag                       <p
+[1636-1637]  punctuation               <
+[1639-1644]  attr_name                 class
+[1644-1669]  attr_value                ="some_class hypen-class"
+[1644-1645]  punctuation               =
+[1645-1646]  punctuation               "
+[1668-1669]  punctuation               "
+[1669-1670]  punctuation               >
+[1677-1697]  tag                       <span class="a b c">
+[1677-1682]  tag                       <span
+[1677-1678]  punctuation               <
+[1683-1688]  attr_name                 class
+[1688-1696]  attr_value                ="a b c"
+[1688-1689]  punctuation               =
+[1689-1690]  punctuation               "
+[1695-1696]  punctuation               "
+[1696-1697]  punctuation               >
+[1701-1708]  tag                       </span>
+[1701-1707]  tag                       </span
+[1701-1703]  punctuation               </
+[1707-1708]  punctuation               >
+[1709-1713]  tag                       </p>
+[1709-1712]  tag                       </p
+[1709-1711]  punctuation               </
+[1712-1713]  punctuation               >
+[1715-1746]  tag                       <button type="button" disabled>
+[1715-1722]  tag                       <button
+[1715-1716]  punctuation               <
+[1723-1727]  attr_name                 type
+[1727-1736]  attr_value                ="button"
+[1727-1728]  punctuation               =
+[1728-1729]  punctuation               "
+[1735-1736]  punctuation               "
+[1737-1745]  attr_name                 disabled
+[1745-1746]  punctuation               >
+[1756-1765]  tag                       </button>
+[1756-1764]  tag                       </button
+[1756-1758]  punctuation               </
+[1764-1765]  punctuation               >
+[1767-1804]  comment                   <!-- comment <div>a<br /> b</div> -->
+[1805-1808]  lang_ts                   {a}
+[1805-1806]  punctuation               {
+[1807-1808]  punctuation               }
+[1809-1812]  lang_ts                   {b}
+[1809-1810]  punctuation               {
+[1811-1812]  punctuation               }
+[1813-1820]  lang_ts                   {bound}
+[1813-1814]  punctuation               {
+[1819-1820]  punctuation               }
+[1821-1824]  lang_ts                   {D}
+[1821-1822]  punctuation               {
+[1822-1823]  constant                  D
+[1823-1824]  punctuation               }
+[1826-1832]  tag                       <br />
+[1826-1829]  tag                       <br
+[1826-1827]  punctuation               <
+[1830-1832]  punctuation               />
+[1834-1840]  tag                       <hr />
+[1834-1837]  tag                       <hr
+[1834-1835]  punctuation               <
+[1838-1840]  punctuation               />
+[1842-1878]  tag                       <img src="image.jpg" alt="access" />
+[1842-1846]  tag                       <img
+[1842-1843]  punctuation               <
+[1847-1850]  attr_name                 src
+[1850-1862]  attr_value                ="image.jpg"
+[1850-1851]  punctuation               =
+[1851-1852]  punctuation               "
+[1861-1862]  punctuation               "
+[1863-1866]  attr_name                 alt
+[1866-1875]  attr_value                ="access"
+[1866-1867]  punctuation               =
+[1867-1868]  punctuation               "
+[1874-1875]  punctuation               "
+[1876-1878]  punctuation               />
+[1880-1884]  tag                       <ul>
+[1880-1883]  tag                       <ul
+[1880-1881]  punctuation               <
+[1883-1884]  punctuation               >
+[1886-1890]  tag                       <li>
+[1886-1889]  tag                       <li
+[1886-1887]  punctuation               <
+[1889-1890]  punctuation               >
+[1901-1906]  tag                       </li>
+[1901-1905]  tag                       </li
+[1901-1903]  punctuation               </
+[1905-1906]  punctuation               >
+[1908-1912]  tag                       <li>
+[1908-1911]  tag                       <li
+[1908-1909]  punctuation               <
+[1911-1912]  punctuation               >
+[1923-1928]  tag                       </li>
+[1923-1927]  tag                       </li
+[1923-1925]  punctuation               </
+[1927-1928]  punctuation               >
+[1929-1934]  tag                       </ul>
+[1929-1933]  tag                       </ul
+[1929-1931]  punctuation               </
+[1933-1934]  punctuation               >
+[1936-1943]  tag                       <style>
+[1936-1942]  tag                       <style
+[1936-1937]  punctuation               <
+[1942-1943]  punctuation               >
+[1943-2324]  style                     \n\t.some_class {\n\t\tcolor: red;\n\t}\n\n\t.hypen-class {\n\t\tfont-size: 16px;\n\t}\n\n\tp {\n\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t}\n\n\t/* comment */\n\n\t/*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/\n\n\t#unique_id {\n\t\tbackground-color: blue;\n\t}\n\n\tdiv > p {\n\t\tmargin: 10px;\n\t}\n\n\t@media (max-width: 600px) {\n\t\t:global(body) {\n\t\t\tbackground-color: lightblue;\n\t\t}\n\t}\n\n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
+[1943-2324]  lang_css                  \n\t.some_class {\n\t\tcolor: red;\n\t}\n\n\t.hypen-class {\n\t\tfont-size: 16px;\n\t}\n\n\tp {\n\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t}\n\n\t/* comment */\n\n\t/*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/\n\n\t#unique_id {\n\t\tbackground-color: blue;\n\t}\n\n\tdiv > p {\n\t\tmargin: 10px;\n\t}\n\n\t@media (max-width: 600px) {\n\t\t:global(body) {\n\t\t\tbackground-color: lightblue;\n\t\t}\n\t}\n\n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
+[1945-1956]  selector                  .some_class
+[1957-1958]  punctuation               {
+[1961-1966]  property                  color
+[1966-1967]  punctuation               :
+[1971-1972]  punctuation               ;
+[1974-1975]  punctuation               }
+[1978-1990]  selector                  .hypen-class
+[1991-1992]  punctuation               {
+[1995-2004]  property                  font-size
+[2004-2005]  punctuation               :
+[2010-2011]  punctuation               ;
+[2013-2014]  punctuation               }
+[2017-2018]  selector                  p
+[2019-2020]  punctuation               {
+[2023-2033]  property                  box-shadow
+[2033-2034]  punctuation               :
+[2044-2048]  function                  rgba
+[2048-2049]  punctuation               (
+[2050-2051]  punctuation               ,
+[2053-2054]  punctuation               ,
+[2056-2057]  punctuation               ,
+[2061-2062]  punctuation               )
+[2062-2063]  punctuation               ;
+[2065-2066]  punctuation               }
+[2069-2082]  comment                   /* comment */
+[2085-2117]  comment                   /*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/
+[2120-2130]  selector                  #unique_id
+[2131-2132]  punctuation               {
+[2135-2151]  property                  background-color
+[2151-2152]  punctuation               :
+[2157-2158]  punctuation               ;
+[2160-2161]  punctuation               }
+[2164-2171]  selector                  div > p
+[2172-2173]  punctuation               {
+[2176-2182]  property                  margin
+[2182-2183]  punctuation               :
+[2188-2189]  punctuation               ;
+[2191-2192]  punctuation               }
+[2195-2220]  atrule                    @media (max-width: 600px)
+[2195-2201]  rule                      @media
+[2202-2203]  punctuation               (
+[2203-2212]  property                  max-width
+[2212-2213]  punctuation               :
+[2219-2220]  punctuation               )
+[2221-2222]  punctuation               {
+[2225-2238]  selector                  :global(body)
+[2239-2240]  punctuation               {
+[2244-2260]  property                  background-color
+[2260-2261]  punctuation               :
+[2271-2272]  punctuation               ;
+[2275-2276]  punctuation               }
+[2278-2279]  punctuation               }
+[2282-2298]  selector                  .special::before
+[2299-2300]  punctuation               {
+[2303-2310]  property                  content
+[2310-2311]  punctuation               :
+[2312-2319]  string                    '< & >'
+[2319-2320]  punctuation               ;
+[2322-2323]  punctuation               }
+[2324-2332]  tag                       </style>
+[2324-2331]  tag                       </style
+[2324-2326]  punctuation               </
+[2331-2332]  punctuation               >
 
 === STATS ===
 Total tokens: 576

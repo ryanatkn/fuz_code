@@ -75,14 +75,6 @@ export const package_json: Package_Json = {
 			svelte: './dist/Code.svelte',
 			default: './dist/Code.svelte',
 		},
-		'./domstyler_global.js': {
-			types: './dist/domstyler_global.d.ts',
-			default: './dist/domstyler_global.js',
-		},
-		'./highlight_manager.js': {
-			types: './dist/highlight_manager.d.ts',
-			default: './dist/highlight_manager.js',
-		},
 		'./grammar_clike.js': {types: './dist/grammar_clike.d.ts', default: './dist/grammar_clike.js'},
 		'./grammar_css.js': {types: './dist/grammar_css.d.ts', default: './dist/grammar_css.js'},
 		'./grammar_js.js': {types: './dist/grammar_js.d.ts', default: './dist/grammar_js.js'},
@@ -96,6 +88,10 @@ export const package_json: Package_Json = {
 			default: './dist/grammar_svelte.js',
 		},
 		'./grammar_ts.js': {types: './dist/grammar_ts.d.ts', default: './dist/grammar_ts.js'},
+		'./highlight_manager.js': {
+			types: './dist/highlight_manager.d.ts',
+			default: './dist/highlight_manager.js',
+		},
 		'./run_benchmark.js': {types: './dist/run_benchmark.d.ts', default: './dist/run_benchmark.js'},
 		'./samples/all.gen.js': {
 			types: './dist/samples/all.gen.d.ts',
@@ -113,6 +109,10 @@ export const package_json: Package_Json = {
 		'./samples/sample_complex.js': {
 			types: './dist/samples/sample_complex.d.ts',
 			default: './dist/samples/sample_complex.js',
+		},
+		'./syntax_styler_global.js': {
+			types: './dist/syntax_styler_global.d.ts',
+			default: './dist/syntax_styler_global.js',
 		},
 		'./syntax_styler.js': {types: './dist/syntax_styler.d.ts', default: './dist/syntax_styler.js'},
 		'./theme_highlight.css': {default: './dist/theme_highlight.css'},
@@ -144,18 +144,6 @@ export const src_json: Src_Json = {
 			],
 		},
 		'./Code.svelte': {path: 'Code.svelte', declarations: [{name: 'default', kind: 'component'}]},
-		'./domstyler_global.js': {
-			path: 'domstyler_global.ts',
-			declarations: [{name: 'syntax_styler', kind: 'variable'}],
-		},
-		'./highlight_manager.js': {
-			path: 'highlight_manager.ts',
-			declarations: [
-				{name: 'Domstyler_Range_Mode', kind: 'type'},
-				{name: 'supports_css_highlight_api', kind: 'function'},
-				{name: 'Highlight_Manager', kind: 'class'},
-			],
-		},
 		'./grammar_clike.js': {
 			path: 'grammar_clike.ts',
 			declarations: [{name: 'add_grammar_clike', kind: 'function'}],
@@ -190,6 +178,14 @@ export const src_json: Src_Json = {
 		'./grammar_ts.js': {
 			path: 'grammar_ts.ts',
 			declarations: [{name: 'add_grammar_ts', kind: 'function'}],
+		},
+		'./highlight_manager.js': {
+			path: 'highlight_manager.ts',
+			declarations: [
+				{name: 'Domstyler_Range_Mode', kind: 'type'},
+				{name: 'supports_css_highlight_api', kind: 'function'},
+				{name: 'Highlight_Manager', kind: 'class'},
+			],
 		},
 		'./run_benchmark.js': {path: 'run_benchmark.ts'},
 		'./samples/all.gen.js': {
@@ -236,11 +232,15 @@ export const src_json: Src_Json = {
 				{name: 'complex_regex', kind: 'variable'},
 			],
 		},
+		'./syntax_styler_global.js': {
+			path: 'syntax_styler_global.ts',
+			declarations: [{name: 'syntax_styler', kind: 'variable'}],
+		},
 		'./syntax_styler.js': {
 			path: 'syntax_styler.ts',
 			declarations: [
 				{name: 'Add_Grammar', kind: 'type'},
-				{name: 'Domstyler', kind: 'class'},
+				{name: 'Syntax_Styler', kind: 'class'},
 				{name: 'Grammar_Value', kind: 'type'},
 				{name: 'Grammar', kind: 'type'},
 				{name: 'Grammar_Token', kind: 'type'},

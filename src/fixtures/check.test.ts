@@ -68,14 +68,14 @@ describe('generated fixtures match runtime', () => {
 				const runtime_output = process_sample(sample);
 
 				assert.strictEqual(
-					runtime_output.domstyler_html,
-					fixture.domstyler_html,
-					`Domstyler output mismatch for ${sample.lang}_${sample.variant}`,
+					runtime_output.html,
+					fixture.html,
+					`HTML output mismatch for ${sample.lang}_${sample.variant}`,
 				);
 
 				// TODO: Additional assertions
-				// assert(calculate_coverage(sample.content, runtime_output.domstyler_html) > 0.95);
-				// assert(validate_no_overlaps(extract_tokens(runtime_output.domstyler_html)));
+				// assert(calculate_coverage(sample.content, runtime_output.html) > 0.95);
+				// assert(validate_no_overlaps(extract_tokens(runtime_output.html)));
 			});
 
 			test('token positions are valid', () => {

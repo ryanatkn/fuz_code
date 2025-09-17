@@ -14,7 +14,7 @@ export interface Sample_Spec {
 export interface Generated_Output {
 	sample: Sample_Spec;
 	tokens: Array<any>;
-	domstyler_html: string;
+	html: string;
 }
 
 /**
@@ -134,13 +134,13 @@ export const generate_token_data = (sample: Sample_Spec): Array<any> => {
  * Process a sample to generate all outputs
  */
 export const process_sample = (sample: Sample_Spec): Generated_Output => {
-	const domstyler_html = generate_domstyler_output(sample);
+	const html = generate_domstyler_output(sample);
 	const tokens = generate_token_data(sample);
 
 	return {
 		sample,
 		tokens,
-		domstyler_html,
+		html,
 	};
 };
 
@@ -151,17 +151,15 @@ export const generate_debug_text = (output: Generated_Output): string => {
 	const {sample, tokens} = output;
 
 	let debug = '=== TOKENS ===\n';
-	const maxTokens = 40;
-	for (const t of tokens.slice(0, maxTokens)) {
+	// Show all tokens, no elision
+	for (const t of tokens) {
 		const text = sample.content
 			.substring(t.start, t.end)
 			.replace(/\n/g, '\\n')
 			.replace(/\t/g, '\\t');
-		// Format: text [start-end] type
-		debug += `${text.padEnd(25)} [${String(t.start).padStart(3)}-${String(t.end).padEnd(3)}] ${t.type}\n`;
-	}
-	if (tokens.length > maxTokens) {
-		debug += `... and ${tokens.length - maxTokens} more tokens\n`;
+		// Format: [start-end] type text
+		const position = `[${String(t.start).padStart(3)}-${String(t.end).padEnd(3)}]`;
+		debug += `${position.padEnd(12)} ${t.type.padEnd(25)} ${text}\n`;
 	}
 
 	// Add token statistics
