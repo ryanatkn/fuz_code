@@ -54,9 +54,9 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 #### Range Highlighting
 
-- `src/lib/domstyler_range_builder.ts` - Position calculation from token trees
+- `src/lib/highlight_manager.ts` - Position calculation from token trees
 - `src/lib/flatten_domstyler_tokens()` - Converts nested tokens to flat array with positions
-- `src/lib/Domstyler_Highlight_Manager` - Manages CSS Custom Highlights per element
+- `src/lib/Highlight_Manager` - Manages CSS Custom Highlights per element
 
 #### Components
 
@@ -147,12 +147,12 @@ import {domstyler_global} from '$lib/domstyler_global.js';
 const html = domstyler_global.stylize(code, 'ts');
 ```
 
-### Domstyler_Highlight_Manager
+### Highlight_Manager
 
 Manages CSS Custom Highlights for an element:
 
 ```typescript
-const manager = new Domstyler_Highlight_Manager();
+const manager = new Highlight_Manager();
 
 // Apply highlights from tokens
 manager.highlight_from_domstyler_tokens(element, tokens);

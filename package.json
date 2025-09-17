@@ -112,9 +112,9 @@
       "types": "./dist/domstyler_global.d.ts",
       "default": "./dist/domstyler_global.js"
     },
-    "./domstyler_range_builder.js": {
-      "types": "./dist/domstyler_range_builder.d.ts",
-      "default": "./dist/domstyler_range_builder.js"
+    "./highlight_manager.js": {
+      "types": "./dist/highlight_manager.d.ts",
+      "default": "./dist/highlight_manager.js"
     },
     "./grammar_clike.js": {
       "types": "./dist/grammar_clike.d.ts",

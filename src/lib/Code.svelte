@@ -5,10 +5,10 @@
 	import {syntax_styler} from '$lib/syntax_styler_global.js';
 	import {tokenize_syntax, type Syntax_Styler, type Grammar} from '$lib/syntax_styler.js';
 	import {
-		Domstyler_Highlight_Manager,
+		Highlight_Manager,
 		supports_css_highlight_api,
 		type Domstyler_Range_Mode,
-	} from '$lib/domstyler_range_builder.js';
+	} from '$lib/highlight_manager.js';
 
 	// TODO best way to handle SSR?
 
@@ -35,7 +35,7 @@
 	} = $props();
 
 	let code_element: HTMLElement | undefined = $state();
-	const highlight_manager = new Domstyler_Highlight_Manager();
+	const highlight_manager = new Highlight_Manager();
 
 	const use_ranges = $derived(
 		mode === 'ranges' || (mode === 'auto' && supports_css_highlight_api()),

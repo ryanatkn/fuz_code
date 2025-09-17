@@ -79,9 +79,9 @@ export const package_json: Package_Json = {
 			types: './dist/domstyler_global.d.ts',
 			default: './dist/domstyler_global.js',
 		},
-		'./domstyler_range_builder.js': {
-			types: './dist/domstyler_range_builder.d.ts',
-			default: './dist/domstyler_range_builder.js',
+		'./highlight_manager.js': {
+			types: './dist/highlight_manager.d.ts',
+			default: './dist/highlight_manager.js',
 		},
 		'./grammar_clike.js': {types: './dist/grammar_clike.d.ts', default: './dist/grammar_clike.js'},
 		'./grammar_css.js': {types: './dist/grammar_css.d.ts', default: './dist/grammar_css.js'},
@@ -148,12 +148,12 @@ export const src_json: Src_Json = {
 			path: 'domstyler_global.ts',
 			declarations: [{name: 'syntax_styler', kind: 'variable'}],
 		},
-		'./domstyler_range_builder.js': {
-			path: 'domstyler_range_builder.ts',
+		'./highlight_manager.js': {
+			path: 'highlight_manager.ts',
 			declarations: [
 				{name: 'Domstyler_Range_Mode', kind: 'type'},
 				{name: 'supports_css_highlight_api', kind: 'function'},
-				{name: 'Domstyler_Highlight_Manager', kind: 'class'},
+				{name: 'Highlight_Manager', kind: 'class'},
 			],
 		},
 		'./grammar_clike.js': {

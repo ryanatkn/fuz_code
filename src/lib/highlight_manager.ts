@@ -12,7 +12,7 @@ export const supports_css_highlight_api = (): boolean =>
  * Highlight Manager - Manages highlights for a single element
  * Tracks ranges per element and only removes its own ranges when clearing
  */
-export class Domstyler_Highlight_Manager {
+export class Highlight_Manager {
 	private element_ranges: Map<string, Array<Range>>;
 
 	constructor() {
