@@ -98,9 +98,9 @@ export const package_json: Package_Json = {
 			svelte: './dist/Domstyler_Range_Code.svelte',
 			default: './dist/Domstyler_Range_Code.svelte',
 		},
-		'./domstyler_theme_highlight.css': {default: './dist/domstyler_theme_highlight.css'},
-		'./domstyler_theme_standalone.css': {default: './dist/domstyler_theme_standalone.css'},
-		'./domstyler_theme.css': {default: './dist/domstyler_theme.css'},
+		'./theme_highlight.css': {default: './dist/theme_highlight.css'},
+		'./theme_standalone.css': {default: './dist/theme_standalone.css'},
+		'./theme.css': {default: './dist/theme.css'},
 		'./domstyler.js': {types: './dist/domstyler.d.ts', default: './dist/domstyler.js'},
 		'./helpers.js': {types: './dist/helpers.d.ts', default: './dist/helpers.js'},
 		'./run_benchmark.js': {types: './dist/run_benchmark.d.ts', default: './dist/run_benchmark.js'},
@@ -200,16 +200,16 @@ export const src_json: Src_Json = {
 			path: 'Domstyler_Range_Code.svelte',
 			declarations: [{name: 'default', kind: 'component'}],
 		},
-		'./domstyler_theme_highlight.css': {
-			path: 'domstyler_theme_highlight.css',
+		'./theme_highlight.css': {
+			path: 'theme_highlight.css',
 			declarations: [{name: 'default', kind: 'css'}],
 		},
-		'./domstyler_theme_standalone.css': {
-			path: 'domstyler_theme_standalone.css',
+		'./theme_standalone.css': {
+			path: 'theme_standalone.css',
 			declarations: [{name: 'default', kind: 'css'}],
 		},
-		'./domstyler_theme.css': {
-			path: 'domstyler_theme.css',
+		'./theme.css': {
+			path: 'theme.css',
 			declarations: [{name: 'default', kind: 'css'}],
 		},
 		'./domstyler.js': {

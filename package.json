@@ -149,14 +149,14 @@
       "svelte": "./dist/Domstyler_Range_Code.svelte",
       "default": "./dist/Domstyler_Range_Code.svelte"
     },
-    "./domstyler_theme_highlight.css": {
-      "default": "./dist/domstyler_theme_highlight.css"
+    "./theme_highlight.css": {
+      "default": "./dist/theme_highlight.css"
     },
-    "./domstyler_theme_standalone.css": {
-      "default": "./dist/domstyler_theme_standalone.css"
+    "./theme_standalone.css": {
+      "default": "./dist/theme_standalone.css"
     },
-    "./domstyler_theme.css": {
-      "default": "./dist/domstyler_theme.css"
+    "./theme.css": {
+      "default": "./dist/theme.css"
     },
     "./domstyler.js": {
       "types": "./dist/domstyler.d.ts",

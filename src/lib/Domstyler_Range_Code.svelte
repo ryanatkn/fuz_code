@@ -87,7 +87,7 @@
 	></pre>
 
 <style>
-	@import './domstyler_theme_highlight.css';
+	@import './theme_highlight.css';
 
 	.code {
 		background-color: var(--fg_1);

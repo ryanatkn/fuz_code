@@ -65,9 +65,9 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 #### Themes
 
-- `src/lib/domstyler_theme.css` - Traditional CSS classes for HTML mode
-- `src/lib/domstyler_theme_highlight.css` - CSS Custom Highlight API styles
-- `src/lib/domstyler_theme_standalone.css` - Dependency-free theme
+- `src/lib/theme.css` - Traditional CSS classes for HTML mode
+- `src/lib/theme_highlight.css` - CSS Custom Highlight API styles
+- `src/lib/theme_standalone.css` - Dependency-free theme
 
 ## How It Works
 

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import '@ryanatkn/moss/style.css';
 	import '@ryanatkn/moss/theme.css';
-	import '$lib/domstyler_theme.css';
-	import '$lib/domstyler_theme_highlight.css';
+	import '$lib/theme.css';
+	import '$lib/theme_highlight.css';
 	import '$routes/moss.css';
 
 	import Themed from '@ryanatkn/fuz/Themed.svelte';
