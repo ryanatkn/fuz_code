@@ -79,6 +79,15 @@ export const package_json: Package_Json = {
 			types: './dist/domstyler_global.d.ts',
 			default: './dist/domstyler_global.js',
 		},
+		'./domstyler_range_builder.js': {
+			types: './dist/domstyler_range_builder.d.ts',
+			default: './dist/domstyler_range_builder.js',
+		},
+		'./Domstyler_Range_Code.svelte': {
+			types: './dist/Domstyler_Range_Code.svelte.d.ts',
+			svelte: './dist/Domstyler_Range_Code.svelte',
+			default: './dist/Domstyler_Range_Code.svelte',
+		},
 		'./grammar_clike.js': {types: './dist/grammar_clike.d.ts', default: './dist/grammar_clike.js'},
 		'./grammar_css.js': {types: './dist/grammar_css.d.ts', default: './dist/grammar_css.js'},
 		'./grammar_html.js': {types: './dist/grammar_html.d.ts', default: './dist/grammar_html.js'},
@@ -89,19 +98,6 @@ export const package_json: Package_Json = {
 			default: './dist/grammar_svelte.js',
 		},
 		'./grammar_ts.js': {types: './dist/grammar_ts.d.ts', default: './dist/grammar_ts.js'},
-		'./domstyler_range_builder.js': {
-			types: './dist/domstyler_range_builder.d.ts',
-			default: './dist/domstyler_range_builder.js',
-		},
-		'./Domstyler_Range_Code.svelte': {
-			types: './dist/Domstyler_Range_Code.svelte.d.ts',
-			svelte: './dist/Domstyler_Range_Code.svelte',
-			default: './dist/Domstyler_Range_Code.svelte',
-		},
-		'./theme_highlight.css': {default: './dist/theme_highlight.css'},
-		'./theme_standalone.css': {default: './dist/theme_standalone.css'},
-		'./theme.css': {default: './dist/theme.css'},
-		'./domstyler.js': {types: './dist/domstyler.d.ts', default: './dist/domstyler.js'},
 		'./helpers.js': {types: './dist/helpers.d.ts', default: './dist/helpers.js'},
 		'./run_benchmark.js': {types: './dist/run_benchmark.d.ts', default: './dist/run_benchmark.js'},
 		'./samples/all.gen.js': {
@@ -121,6 +117,10 @@ export const package_json: Package_Json = {
 			types: './dist/samples/sample_complex.d.ts',
 			default: './dist/samples/sample_complex.js',
 		},
+		'./syntax_styler.js': {types: './dist/syntax_styler.d.ts', default: './dist/syntax_styler.js'},
+		'./theme_highlight.css': {default: './dist/theme_highlight.css'},
+		'./theme_standalone.css': {default: './dist/theme_standalone.css'},
+		'./theme.css': {default: './dist/theme.css'},
 	},
 } as any;
 
@@ -150,6 +150,20 @@ export const src_json: Src_Json = {
 		'./domstyler_global.js': {
 			path: 'domstyler_global.ts',
 			declarations: [{name: 'domstyler_global', kind: 'variable'}],
+		},
+		'./domstyler_range_builder.js': {
+			path: 'domstyler_range_builder.ts',
+			declarations: [
+				{name: 'Domstyler_Range_Mode', kind: 'type'},
+				{name: 'Flat_Token', kind: 'type'},
+				{name: 'supports_css_highlight_api', kind: 'function'},
+				{name: 'flatten_domstyler_tokens', kind: 'function'},
+				{name: 'Domstyler_Highlight_Manager', kind: 'class'},
+			],
+		},
+		'./Domstyler_Range_Code.svelte': {
+			path: 'Domstyler_Range_Code.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
 		},
 		'./grammar_clike.js': {
 			path: 'grammar_clike.ts',
@@ -185,51 +199,6 @@ export const src_json: Src_Json = {
 		'./grammar_ts.js': {
 			path: 'grammar_ts.ts',
 			declarations: [{name: 'add_domstyler_grammar_ts', kind: 'function'}],
-		},
-		'./domstyler_range_builder.js': {
-			path: 'domstyler_range_builder.ts',
-			declarations: [
-				{name: 'Domstyler_Range_Mode', kind: 'type'},
-				{name: 'Flat_Token', kind: 'type'},
-				{name: 'supports_css_highlight_api', kind: 'function'},
-				{name: 'flatten_domstyler_tokens', kind: 'function'},
-				{name: 'Domstyler_Highlight_Manager', kind: 'class'},
-			],
-		},
-		'./Domstyler_Range_Code.svelte': {
-			path: 'Domstyler_Range_Code.svelte',
-			declarations: [{name: 'default', kind: 'component'}],
-		},
-		'./theme_highlight.css': {
-			path: 'theme_highlight.css',
-			declarations: [{name: 'default', kind: 'css'}],
-		},
-		'./theme_standalone.css': {
-			path: 'theme_standalone.css',
-			declarations: [{name: 'default', kind: 'css'}],
-		},
-		'./theme.css': {
-			path: 'theme.css',
-			declarations: [{name: 'default', kind: 'css'}],
-		},
-		'./domstyler.js': {
-			path: 'domstyler.ts',
-			declarations: [
-				{name: 'Add_Domstyler_Grammar', kind: 'type'},
-				{name: 'Domstyler', kind: 'class'},
-				{name: 'Grammar_Value', kind: 'type'},
-				{name: 'Grammar', kind: 'type'},
-				{name: 'Grammar_Token', kind: 'type'},
-				{name: 'tokenize_syntax', kind: 'function'},
-				{name: 'Syntax_Token', kind: 'class'},
-				{name: 'Syntax_Token_Stream', kind: 'type'},
-				{name: 'Hook_Before_Tokenize_Callback', kind: 'type'},
-				{name: 'Hook_After_Tokenize_Callback', kind: 'type'},
-				{name: 'Hook_Wrap_Callback', kind: 'type'},
-				{name: 'Hook_Before_Tokenize_Callback_Context', kind: 'type'},
-				{name: 'Hook_After_Tokenize_Callback_Context', kind: 'type'},
-				{name: 'Hook_Wrap_Callback_Context', kind: 'type'},
-			],
 		},
 		'./helpers.js': {path: 'helpers.ts', declarations: [{name: 'escape_html', kind: 'function'}]},
 		'./run_benchmark.js': {path: 'run_benchmark.ts'},
@@ -277,6 +246,34 @@ export const src_json: Src_Json = {
 				{name: 'complex_regex', kind: 'variable'},
 			],
 		},
+		'./syntax_styler.js': {
+			path: 'syntax_styler.ts',
+			declarations: [
+				{name: 'Add_Domstyler_Grammar', kind: 'type'},
+				{name: 'Domstyler', kind: 'class'},
+				{name: 'Grammar_Value', kind: 'type'},
+				{name: 'Grammar', kind: 'type'},
+				{name: 'Grammar_Token', kind: 'type'},
+				{name: 'tokenize_syntax', kind: 'function'},
+				{name: 'Syntax_Token', kind: 'class'},
+				{name: 'Syntax_Token_Stream', kind: 'type'},
+				{name: 'Hook_Before_Tokenize_Callback', kind: 'type'},
+				{name: 'Hook_After_Tokenize_Callback', kind: 'type'},
+				{name: 'Hook_Wrap_Callback', kind: 'type'},
+				{name: 'Hook_Before_Tokenize_Callback_Context', kind: 'type'},
+				{name: 'Hook_After_Tokenize_Callback_Context', kind: 'type'},
+				{name: 'Hook_Wrap_Callback_Context', kind: 'type'},
+			],
+		},
+		'./theme_highlight.css': {
+			path: 'theme_highlight.css',
+			declarations: [{name: 'default', kind: 'css'}],
+		},
+		'./theme_standalone.css': {
+			path: 'theme_standalone.css',
+			declarations: [{name: 'default', kind: 'css'}],
+		},
+		'./theme.css': {path: 'theme.css', declarations: [{name: 'default', kind: 'css'}]},
 	},
 } as any;
 

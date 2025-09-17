@@ -1,4 +1,4 @@
-import {Syntax_Token, type Syntax_Token_Stream} from './domstyler.js';
+import {Syntax_Token, type Syntax_Token_Stream} from './syntax_styler.js';
 
 export type Domstyler_Range_Mode = 'auto' | 'ranges' | 'html';
 

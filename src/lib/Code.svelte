@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 
-	import {Domstyler, type Grammar} from '$lib/domstyler.js';
+	import {Domstyler, type Grammar} from '$lib/syntax_styler.js';
 	import {domstyler_global} from '$lib/domstyler_global.js';
 
 	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime

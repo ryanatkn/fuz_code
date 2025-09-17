@@ -1,4 +1,4 @@
-import type {Domstyler, Add_Domstyler_Grammar, Grammar, Grammar_Token} from '$lib/domstyler.js';
+import type {Domstyler, Add_Domstyler_Grammar, Grammar, Grammar_Token} from '$lib/syntax_styler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)

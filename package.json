@@ -112,6 +112,15 @@
       "types": "./dist/domstyler_global.d.ts",
       "default": "./dist/domstyler_global.js"
     },
+    "./domstyler_range_builder.js": {
+      "types": "./dist/domstyler_range_builder.d.ts",
+      "default": "./dist/domstyler_range_builder.js"
+    },
+    "./Domstyler_Range_Code.svelte": {
+      "types": "./dist/Domstyler_Range_Code.svelte.d.ts",
+      "svelte": "./dist/Domstyler_Range_Code.svelte",
+      "default": "./dist/Domstyler_Range_Code.svelte"
+    },
     "./grammar_clike.js": {
       "types": "./dist/grammar_clike.d.ts",
       "default": "./dist/grammar_clike.js"
@@ -139,28 +148,6 @@
     "./grammar_ts.js": {
       "types": "./dist/grammar_ts.d.ts",
       "default": "./dist/grammar_ts.js"
-    },
-    "./domstyler_range_builder.js": {
-      "types": "./dist/domstyler_range_builder.d.ts",
-      "default": "./dist/domstyler_range_builder.js"
-    },
-    "./Domstyler_Range_Code.svelte": {
-      "types": "./dist/Domstyler_Range_Code.svelte.d.ts",
-      "svelte": "./dist/Domstyler_Range_Code.svelte",
-      "default": "./dist/Domstyler_Range_Code.svelte"
-    },
-    "./theme_highlight.css": {
-      "default": "./dist/theme_highlight.css"
-    },
-    "./theme_standalone.css": {
-      "default": "./dist/theme_standalone.css"
-    },
-    "./theme.css": {
-      "default": "./dist/theme.css"
-    },
-    "./domstyler.js": {
-      "types": "./dist/domstyler.d.ts",
-      "default": "./dist/domstyler.js"
     },
     "./helpers.js": {
       "types": "./dist/helpers.d.ts",
@@ -195,6 +182,19 @@
     "./samples/sample_complex.js": {
       "types": "./dist/samples/sample_complex.d.ts",
       "default": "./dist/samples/sample_complex.js"
+    },
+    "./syntax_styler.js": {
+      "types": "./dist/syntax_styler.d.ts",
+      "default": "./dist/syntax_styler.js"
+    },
+    "./theme_highlight.css": {
+      "default": "./dist/theme_highlight.css"
+    },
+    "./theme_standalone.css": {
+      "default": "./dist/theme_standalone.css"
+    },
+    "./theme.css": {
+      "default": "./dist/theme.css"
     }
   }
 }

@@ -1,4 +1,4 @@
-import type {Add_Domstyler_Grammar, Grammar} from '$lib/domstyler.js';
+import type {Add_Domstyler_Grammar, Grammar} from '$lib/syntax_styler.js';
 import {
 	domstyler_grammar_markup_add_attribute,
 	domstyler_grammar_markup_add_inlined,

@@ -2,7 +2,7 @@
 	import {onDestroy} from 'svelte';
 
 	import {domstyler_global} from '$lib/domstyler_global.js';
-	import {tokenize_syntax, type Domstyler, type Grammar} from '$lib/domstyler.js';
+	import {tokenize_syntax, type Domstyler, type Grammar} from '$lib/syntax_styler.js';
 	import {
 		Domstyler_Highlight_Manager,
 		supports_css_highlight_api,

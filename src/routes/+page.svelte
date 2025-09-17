@@ -27,9 +27,7 @@
 		<section class="box gap_xl3 font_size_xl2">
 			<div class="panel box p_lg gap_sm">
 				<!-- TODO large variants of the chip? using `--font_size`? -->
-				<a href={resolve('/domstyler')} class="chip px_xl py_sm">domstyler</a>
-				<a href={resolve('/test-domstyler-ranges')} class="chip px_xl py_sm">range highlighting</a>
-				<a href={resolve('/compare')} class="chip px_xl py_sm">compare</a>
+				<a href={resolve('/samples')} class="chip px_xl py_sm">samples</a>
 				<a href={resolve('/benchmark')} class="chip px_xl py_sm">benchmark</a>
 				<a href={resolve('/about')} class="chip px_xl py_sm">about</a>
 			</div>

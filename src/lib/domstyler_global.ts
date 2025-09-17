@@ -1,4 +1,4 @@
-import {Domstyler} from '$lib/domstyler.js';
+import {Domstyler} from '$lib/syntax_styler.js';
 import {add_domstyler_grammar_markup} from '$lib/grammar_html.js';
 import {add_domstyler_grammar_css} from '$lib/grammar_css.js';
 import {add_domstyler_grammar_clike} from '$lib/grammar_clike.js';

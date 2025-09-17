@@ -2,7 +2,7 @@ import {readFileSync} from 'node:fs';
 import {search_fs} from '@ryanatkn/gro/search_fs.js';
 import {basename, join, relative} from 'node:path';
 import {domstyler_global} from '$lib/domstyler_global.js';
-import {tokenize_syntax} from '$lib/domstyler.js';
+import {tokenize_syntax} from '$lib/syntax_styler.js';
 import {flatten_domstyler_tokens} from '$lib/domstyler_range_builder.js';
 
 export interface Sample_Spec {
