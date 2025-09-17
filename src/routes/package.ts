@@ -66,8 +66,207 @@ export const package_json: Package_Json = {
 	},
 	sideEffects: ['**/*.css'],
 	files: ['dist', 'src/lib/**/*.ts', '!src/lib/**/*.test.*', '!dist/**/*.test.*'],
+	exports: {
+		'./package.json': './package.json',
+		'./benchmark.js': {types: './dist/benchmark.d.ts', default: './dist/benchmark.js'},
+		'./code_sample.js': {types: './dist/code_sample.d.ts', default: './dist/code_sample.js'},
+		'./Code.svelte': {
+			types: './dist/Code.svelte.d.ts',
+			svelte: './dist/Code.svelte',
+			default: './dist/Code.svelte',
+		},
+		'./domstyler_global.js': {
+			types: './dist/domstyler_global.d.ts',
+			default: './dist/domstyler_global.js',
+		},
+		'./domstyler_range_builder.js': {
+			types: './dist/domstyler_range_builder.d.ts',
+			default: './dist/domstyler_range_builder.js',
+		},
+		'./grammar_clike.js': {types: './dist/grammar_clike.d.ts', default: './dist/grammar_clike.js'},
+		'./grammar_css.js': {types: './dist/grammar_css.d.ts', default: './dist/grammar_css.js'},
+		'./grammar_js.js': {types: './dist/grammar_js.d.ts', default: './dist/grammar_js.js'},
+		'./grammar_json.js': {types: './dist/grammar_json.d.ts', default: './dist/grammar_json.js'},
+		'./grammar_markup.js': {
+			types: './dist/grammar_markup.d.ts',
+			default: './dist/grammar_markup.js',
+		},
+		'./grammar_svelte.js': {
+			types: './dist/grammar_svelte.d.ts',
+			default: './dist/grammar_svelte.js',
+		},
+		'./grammar_ts.js': {types: './dist/grammar_ts.d.ts', default: './dist/grammar_ts.js'},
+		'./run_benchmark.js': {types: './dist/run_benchmark.d.ts', default: './dist/run_benchmark.js'},
+		'./samples/all.gen.js': {
+			types: './dist/samples/all.gen.d.ts',
+			default: './dist/samples/all.gen.js',
+		},
+		'./samples/all.js': {types: './dist/samples/all.d.ts', default: './dist/samples/all.js'},
+		'./samples/sample_complex.css': {default: './dist/samples/sample_complex.css'},
+		'./samples/sample_complex.html': {default: './dist/samples/sample_complex.html'},
+		'./samples/sample_complex.json': {default: './dist/samples/sample_complex.json'},
+		'./samples/sample_complex.svelte': {
+			types: './dist/samples/sample_complex.svelte.d.ts',
+			svelte: './dist/samples/sample_complex.svelte',
+			default: './dist/samples/sample_complex.svelte',
+		},
+		'./samples/sample_complex.js': {
+			types: './dist/samples/sample_complex.d.ts',
+			default: './dist/samples/sample_complex.js',
+		},
+		'./syntax_styler.js': {types: './dist/syntax_styler.d.ts', default: './dist/syntax_styler.js'},
+		'./theme_highlight.css': {default: './dist/theme_highlight.css'},
+		'./theme_standalone.css': {default: './dist/theme_standalone.css'},
+		'./theme.css': {default: './dist/theme.css'},
+	},
 } as any;
 
-export const src_json: Src_Json = {name: '@ryanatkn/fuz_code', version: '0.24.0'} as any;
+export const src_json: Src_Json = {
+	name: '@ryanatkn/fuz_code',
+	version: '0.24.0',
+	modules: {
+		'./package.json': {path: 'package.json', declarations: [{name: 'default', kind: 'json'}]},
+		'./benchmark.js': {
+			path: 'benchmark.ts',
+			declarations: [
+				{name: 'Benchmark_Result', kind: 'type'},
+				{name: 'run_benchmark', kind: 'function'},
+				{name: 'format_benchmark_results', kind: 'function'},
+				{name: 'run_and_print_benchmark', kind: 'function'},
+			],
+		},
+		'./code_sample.js': {
+			path: 'code_sample.ts',
+			declarations: [
+				{name: 'Code_Sample', kind: 'type'},
+				{name: 'sample_langs', kind: 'variable'},
+				{name: 'Sample_Lang', kind: 'type'},
+			],
+		},
+		'./Code.svelte': {path: 'Code.svelte', declarations: [{name: 'default', kind: 'component'}]},
+		'./domstyler_global.js': {
+			path: 'domstyler_global.ts',
+			declarations: [{name: 'syntax_styler', kind: 'variable'}],
+		},
+		'./domstyler_range_builder.js': {
+			path: 'domstyler_range_builder.ts',
+			declarations: [
+				{name: 'Domstyler_Range_Mode', kind: 'type'},
+				{name: 'Flat_Token', kind: 'type'},
+				{name: 'supports_css_highlight_api', kind: 'function'},
+				{name: 'flatten_domstyler_tokens', kind: 'function'},
+				{name: 'Domstyler_Highlight_Manager', kind: 'class'},
+			],
+		},
+		'./grammar_clike.js': {
+			path: 'grammar_clike.ts',
+			declarations: [{name: 'add_grammar_clike', kind: 'function'}],
+		},
+		'./grammar_css.js': {
+			path: 'grammar_css.ts',
+			declarations: [{name: 'add_grammar_css', kind: 'function'}],
+		},
+		'./grammar_js.js': {
+			path: 'grammar_js.ts',
+			declarations: [{name: 'add_grammar_js', kind: 'function'}],
+		},
+		'./grammar_json.js': {
+			path: 'grammar_json.ts',
+			declarations: [{name: 'add_grammar_json', kind: 'function'}],
+		},
+		'./grammar_markup.js': {
+			path: 'grammar_markup.ts',
+			declarations: [
+				{name: 'add_grammar_markup', kind: 'function'},
+				{name: 'domstyler_grammar_markup_add_inlined', kind: 'function'},
+				{name: 'domstyler_grammar_markup_add_attribute', kind: 'function'},
+			],
+		},
+		'./grammar_svelte.js': {
+			path: 'grammar_svelte.ts',
+			declarations: [
+				{name: 'add_grammar_svelte', kind: 'function'},
+				{name: 'domstyler_grammar_svelte_add_inlined', kind: 'function'},
+			],
+		},
+		'./grammar_ts.js': {
+			path: 'grammar_ts.ts',
+			declarations: [{name: 'add_grammar_ts', kind: 'function'}],
+		},
+		'./run_benchmark.js': {path: 'run_benchmark.ts'},
+		'./samples/all.gen.js': {
+			path: 'samples/all.gen.ts',
+			declarations: [{name: 'gen', kind: 'function'}],
+		},
+		'./samples/all.js': {
+			path: 'samples/all.ts',
+			declarations: [
+				{name: 'Sample_Key', kind: 'type'},
+				{name: 'samples', kind: 'variable'},
+				{name: 'sample_langs', kind: 'variable'},
+			],
+		},
+		'./samples/sample_complex.css': {
+			path: 'samples/sample_complex.css',
+			declarations: [{name: 'default', kind: 'css'}],
+		},
+		'./samples/sample_complex.html': {path: 'samples/sample_complex.html'},
+		'./samples/sample_complex.json': {
+			path: 'samples/sample_complex.json',
+			declarations: [{name: 'default', kind: 'json'}],
+		},
+		'./samples/sample_complex.svelte': {
+			path: 'samples/sample_complex.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
+		'./samples/sample_complex.js': {
+			path: 'samples/sample_complex.ts',
+			declarations: [
+				{name: 'add', kind: 'function'},
+				{name: 'Some_Type', kind: 'type'},
+				{name: 'a', kind: 'variable'},
+				{name: 'b', kind: 'variable'},
+				{name: 'c', kind: 'variable'},
+				{name: 'D', kind: 'class'},
+				{name: 'Some_E', kind: 'type'},
+				{name: 'some_e', kind: 'variable'},
+				{name: 'plus', kind: 'function'},
+				{name: 'str_with_keywords', kind: 'variable'},
+				{name: 'str_with_comment', kind: 'variable'},
+				{name: 'template_with_expr', kind: 'variable'},
+				{name: 'regex', kind: 'variable'},
+				{name: 'complex_regex', kind: 'variable'},
+			],
+		},
+		'./syntax_styler.js': {
+			path: 'syntax_styler.ts',
+			declarations: [
+				{name: 'Add_Grammar', kind: 'type'},
+				{name: 'Domstyler', kind: 'class'},
+				{name: 'Grammar_Value', kind: 'type'},
+				{name: 'Grammar', kind: 'type'},
+				{name: 'Grammar_Token', kind: 'type'},
+				{name: 'tokenize_syntax', kind: 'function'},
+				{name: 'Syntax_Token', kind: 'class'},
+				{name: 'Syntax_Token_Stream', kind: 'type'},
+				{name: 'Hook_Before_Tokenize_Callback', kind: 'type'},
+				{name: 'Hook_After_Tokenize_Callback', kind: 'type'},
+				{name: 'Hook_Wrap_Callback', kind: 'type'},
+				{name: 'Hook_Before_Tokenize_Callback_Context', kind: 'type'},
+				{name: 'Hook_After_Tokenize_Callback_Context', kind: 'type'},
+				{name: 'Hook_Wrap_Callback_Context', kind: 'type'},
+			],
+		},
+		'./theme_highlight.css': {
+			path: 'theme_highlight.css',
+			declarations: [{name: 'default', kind: 'css'}],
+		},
+		'./theme_standalone.css': {
+			path: 'theme_standalone.css',
+			declarations: [{name: 'default', kind: 'css'}],
+		},
+		'./theme.css': {path: 'theme.css', declarations: [{name: 'default', kind: 'css'}]},
+	},
+} as any;
 
 // generated by src/routes/package.gen.ts

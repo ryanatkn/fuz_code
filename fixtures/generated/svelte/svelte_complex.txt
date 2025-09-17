@@ -46,7 +46,7 @@ Total tokens: 453
 Sample length: 2333 characters
 
 Token types:
-  punctuation: 278
+  punctuation: 270
   operator: 49
   keyword: 40
   builtin: 17
@@ -58,7 +58,9 @@ Token types:
   number: 6
   constant: 4
   boolean: 4
-  variable: 1
+  template_punctuation: 4
+  interpolation_punctuation: 4
+  function_variable: 1
   at: 1
   doctype: 1
   rule: 1

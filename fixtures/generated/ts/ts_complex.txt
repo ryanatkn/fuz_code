@@ -46,16 +46,18 @@ Total tokens: 228
 Sample length: 1327 characters
 
 Token types:
-  punctuation: 93
+  punctuation: 79
   operator: 39
   keyword: 37
   builtin: 13
   string: 10
   comment: 10
   function: 8
+  interpolation_punctuation: 8
+  template_punctuation: 6
   number: 5
   boolean: 4
-  delimiter: 4
+  regex_delimiter: 4
   constant: 2
-  source: 2
-  flags: 1
+  regex_source: 2
+  regex_flags: 1
