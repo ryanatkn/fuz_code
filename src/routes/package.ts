@@ -79,33 +79,33 @@ export const package_json: Package_Json = {
 			types: './dist/domstyler_global.d.ts',
 			default: './dist/domstyler_global.js',
 		},
-		'./domstyler_lang_clike.js': {
-			types: './dist/domstyler_lang_clike.d.ts',
-			default: './dist/domstyler_lang_clike.js',
+		'./grammar_clike.js': {
+			types: './dist/grammar_clike.d.ts',
+			default: './dist/grammar_clike.js',
 		},
-		'./domstyler_lang_css.js': {
-			types: './dist/domstyler_lang_css.d.ts',
-			default: './dist/domstyler_lang_css.js',
+		'./grammar_css.js': {
+			types: './dist/grammar_css.d.ts',
+			default: './dist/grammar_css.js',
 		},
-		'./domstyler_lang_html.js': {
-			types: './dist/domstyler_lang_html.d.ts',
-			default: './dist/domstyler_lang_html.js',
+		'./grammar_html.js': {
+			types: './dist/grammar_html.d.ts',
+			default: './dist/grammar_html.js',
 		},
-		'./domstyler_lang_js.js': {
-			types: './dist/domstyler_lang_js.d.ts',
-			default: './dist/domstyler_lang_js.js',
+		'./grammar_js.js': {
+			types: './dist/grammar_js.d.ts',
+			default: './dist/grammar_js.js',
 		},
-		'./domstyler_lang_json.js': {
-			types: './dist/domstyler_lang_json.d.ts',
-			default: './dist/domstyler_lang_json.js',
+		'./grammar_json.js': {
+			types: './dist/grammar_json.d.ts',
+			default: './dist/grammar_json.js',
 		},
-		'./domstyler_lang_svelte.js': {
-			types: './dist/domstyler_lang_svelte.d.ts',
-			default: './dist/domstyler_lang_svelte.js',
+		'./grammar_svelte.js': {
+			types: './dist/grammar_svelte.d.ts',
+			default: './dist/grammar_svelte.js',
 		},
-		'./domstyler_lang_ts.js': {
-			types: './dist/domstyler_lang_ts.d.ts',
-			default: './dist/domstyler_lang_ts.js',
+		'./grammar_ts.js': {
+			types: './dist/grammar_ts.d.ts',
+			default: './dist/grammar_ts.js',
 		},
 		'./domstyler_range_builder.js': {
 			types: './dist/domstyler_range_builder.d.ts',
@@ -169,39 +169,39 @@ export const src_json: Src_Json = {
 			path: 'domstyler_global.ts',
 			declarations: [{name: 'domstyler_global', kind: 'variable'}],
 		},
-		'./domstyler_lang_clike.js': {
-			path: 'domstyler_lang_clike.ts',
+		'./grammar_clike.js': {
+			path: 'grammar_clike.ts',
 			declarations: [{name: 'add_domstyler_grammar_clike', kind: 'function'}],
 		},
-		'./domstyler_lang_css.js': {
-			path: 'domstyler_lang_css.ts',
+		'./grammar_css.js': {
+			path: 'grammar_css.ts',
 			declarations: [{name: 'add_domstyler_grammar_css', kind: 'function'}],
 		},
-		'./domstyler_lang_html.js': {
-			path: 'domstyler_lang_html.ts',
+		'./grammar_html.js': {
+			path: 'grammar_html.ts',
 			declarations: [
 				{name: 'add_domstyler_grammar_markup', kind: 'function'},
 				{name: 'domstyler_grammar_markup_add_inlined', kind: 'function'},
 				{name: 'domstyler_grammar_markup_add_attribute', kind: 'function'},
 			],
 		},
-		'./domstyler_lang_js.js': {
-			path: 'domstyler_lang_js.ts',
+		'./grammar_js.js': {
+			path: 'grammar_js.ts',
 			declarations: [{name: 'add_domstyler_grammar_js', kind: 'function'}],
 		},
-		'./domstyler_lang_json.js': {
-			path: 'domstyler_lang_json.ts',
+		'./grammar_json.js': {
+			path: 'grammar_json.ts',
 			declarations: [{name: 'add_domstyler_grammar_json', kind: 'function'}],
 		},
-		'./domstyler_lang_svelte.js': {
-			path: 'domstyler_lang_svelte.ts',
+		'./grammar_svelte.js': {
+			path: 'grammar_svelte.ts',
 			declarations: [
 				{name: 'add_domstyler_grammar_svelte', kind: 'function'},
 				{name: 'domstyler_grammar_svelte_add_inlined', kind: 'function'},
 			],
 		},
-		'./domstyler_lang_ts.js': {
-			path: 'domstyler_lang_ts.ts',
+		'./grammar_ts.js': {
+			path: 'grammar_ts.ts',
 			declarations: [{name: 'add_domstyler_grammar_ts', kind: 'function'}],
 		},
 		'./domstyler_range_builder.js': {

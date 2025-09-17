@@ -45,12 +45,12 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 #### Language Definitions
 
-- `src/lib/domstyler_lang_ts.ts` - TypeScript/JavaScript
-- `src/lib/domstyler_lang_css.ts` - CSS stylesheets
-- `src/lib/domstyler_lang_html.ts` - HTML/XML markup
-- `src/lib/domstyler_lang_json.ts` - JSON data
-- `src/lib/domstyler_lang_svelte.ts` - Svelte components
-- `src/lib/domstyler_lang_clike.ts` - Base for C-like languages
+- `src/lib/grammar_ts.ts` - TypeScript/JavaScript
+- `src/lib/grammar_css.ts` - CSS stylesheets
+- `src/lib/grammar_html.ts` - HTML/XML markup
+- `src/lib/grammar_json.ts` - JSON data
+- `src/lib/grammar_svelte.ts` - Svelte components
+- `src/lib/grammar_clike.ts` - Base for C-like languages
 
 #### Range Highlighting
 
@@ -262,7 +262,7 @@ The position calculation happens post-tokenization. If positions are wrong:
 
 ### Adding a New Language
 
-1. Create `src/lib/domstyler_lang_{lang}.ts`
+1. Create `src/lib/grammar_{lang}.ts`
 2. Define grammar patterns (see existing languages)
 3. Register in `domstyler_global.ts`
 4. Add samples in `src/lib/samples/sample_{variant}.{lang}`
