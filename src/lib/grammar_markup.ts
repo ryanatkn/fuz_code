@@ -9,7 +9,7 @@ import type {Syntax_Styler, Add_Grammar, Grammar, Grammar_Token} from '$lib/synt
  * @see LICENSE
  */
 export const add_grammar_markup: Add_Grammar = (domstyler) => {
-	const domstyler_grammar_markup = {
+	const grammar_markup = {
 		comment: {
 			pattern: /<!--(?:(?!<!--)[\s\S])*?-->/,
 			greedy: true,
@@ -73,9 +73,9 @@ export const add_grammar_markup: Add_Grammar = (domstyler) => {
 		],
 	} satisfies Grammar;
 
-	domstyler_grammar_markup.tag.inside.attr_value.inside.entity = domstyler_grammar_markup.entity;
+	grammar_markup.tag.inside.attr_value.inside.entity = grammar_markup.entity;
 
-	domstyler.add_lang('markup', domstyler_grammar_markup, ['html', 'mathml', 'svg']);
+	domstyler.add_lang('markup', grammar_markup, ['html', 'mathml', 'svg']);
 	domstyler.add_extended_lang('markup', 'xml', {}, ['ssml', 'atom', 'rss']);
 };
 
@@ -88,9 +88,9 @@ export const add_grammar_markup: Add_Grammar = (domstyler) => {
  * case insensitive.
  * @param lang - The language key.
  * @example
- * domstyler_grammar_markup_add_inlined(domstyler, 'style', 'css');
+ * grammar_markup_add_inlined(domstyler, 'style', 'css');
  */
-export const domstyler_grammar_markup_add_inlined = (
+export const grammar_markup_add_inlined = (
 	domstyler: Syntax_Styler,
 	tag_name: string,
 	lang: string,
@@ -98,7 +98,7 @@ export const domstyler_grammar_markup_add_inlined = (
 ): void => {
 	const lang_key = 'lang_' + lang;
 
-	domstyler.domstyler_grammar_insert_before(inside_lang, 'cdata', {
+	domstyler.grammar_insert_before(inside_lang, 'cdata', {
 		[tag_name]: {
 			pattern: RegExp(
 				/(<__[^>]*>)(?:<!\[CDATA\[(?:[^\]]|\](?!\]>))*\]\]>|(?!<!\[CDATA\[)[\s\S])*?(?=<\/__>)/.source.replace(
@@ -141,9 +141,9 @@ export const domstyler_grammar_markup_add_inlined = (
  * case insensitive.
  * @param lang - The language key.
  * @example
- * domstyler_grammar_markup_add_attribute(domstyler, 'style', 'css');
+ * grammar_markup_add_attribute(domstyler, 'style', 'css');
  */
-export const domstyler_grammar_markup_add_attribute = (
+export const grammar_markup_add_attribute = (
 	domstyler: Syntax_Styler,
 	attr_name: string,
 	lang: string,

@@ -118,7 +118,7 @@ export class Syntax_Styler {
 	 * before existing tokens. For the CSS example above, you would use it like this:
 	 *
 	 * ```js
-	 * domstyler_grammar_insert_before('markup', 'cdata', {
+	 * grammar_insert_before('markup', 'cdata', {
 	 *     'style': {
 	 *         // token
 	 *     }
@@ -133,7 +133,7 @@ export class Syntax_Styler {
 	 * This behavior can be used to insert tokens after `before`:
 	 *
 	 * ```js
-	 * domstyler_grammar_insert_before('markup', 'comment', {
+	 * grammar_insert_before('markup', 'comment', {
 	 *     'comment': syntax_styler.get_lang('markup').comment,
 	 *     // tokens after 'comment'
 	 * });
@@ -155,7 +155,7 @@ export class Syntax_Styler {
 	 *
 	 * ```js
 	 * var oldMarkup = domstyler.get_lang('markup');
-	 * var newMarkup = domstyler_grammar_insert_before('markup', 'comment', { ... });
+	 * var newMarkup = grammar_insert_before('markup', 'comment', { ... });
 	 *
 	 * assert(oldMarkup !== domstyler.get_lang('markup'));
 	 * assert(newMarkup === domstyler.get_lang('markup'));
@@ -172,7 +172,7 @@ export class Syntax_Styler {
 	 *
 	 * @returns the new grammar object
 	 */
-	domstyler_grammar_insert_before(
+	grammar_insert_before(
 		inside: string,
 		before: string,
 		insert: Grammar,

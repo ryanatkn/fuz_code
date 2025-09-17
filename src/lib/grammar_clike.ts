@@ -9,7 +9,7 @@ import type {Add_Grammar, Grammar} from '$lib/syntax_styler.js';
  * @see LICENSE
  */
 export const add_grammar_clike: Add_Grammar = (domstyler) => {
-	const domstyler_grammar_clike = {
+	const grammar_clike = {
 		comment: [
 			{
 				pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
@@ -43,5 +43,5 @@ export const add_grammar_clike: Add_Grammar = (domstyler) => {
 		punctuation: /[{}[\];(),.:]/,
 	} satisfies Grammar;
 
-	domstyler.add_lang('clike', domstyler_grammar_clike);
+	domstyler.add_lang('clike', grammar_clike);
 };

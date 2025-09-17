@@ -1,8 +1,5 @@
 import type {Add_Grammar} from '$lib/syntax_styler.js';
-import {
-	domstyler_grammar_markup_add_attribute,
-	domstyler_grammar_markup_add_inlined,
-} from '$lib/grammar_markup.js';
+import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -13,11 +10,11 @@ import {
  * @see LICENSE
  */
 export const add_grammar_js: Add_Grammar = (domstyler) => {
-	const domstyler_grammar_clike = domstyler.get_lang('clike');
+	const grammar_clike = domstyler.get_lang('clike');
 
-	const domstyler_grammar_js = domstyler.add_extended_lang('clike', 'js', {
+	const grammar_js = domstyler.add_extended_lang('clike', 'js', {
 		class_name: [
-			domstyler_grammar_clike.class_name,
+			grammar_clike.class_name,
 			{
 				pattern:
 					/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:constructor|prototype))/,
@@ -69,10 +66,10 @@ export const add_grammar_js: Add_Grammar = (domstyler) => {
 			/--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/,
 	});
 
-	(domstyler_grammar_js as any).class_name[0].pattern =
+	(grammar_js as any).class_name[0].pattern =
 		/(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/;
 
-	domstyler.domstyler_grammar_insert_before('js', 'keyword', {
+	domstyler.grammar_insert_before('js', 'keyword', {
 		regex: {
 			pattern: RegExp(
 				// lookbehind
@@ -116,30 +113,30 @@ export const add_grammar_js: Add_Grammar = (domstyler) => {
 				pattern:
 					/(function(?:\s+(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)?\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\))/,
 				lookbehind: true,
-				inside: domstyler_grammar_js,
+				inside: grammar_js,
 			},
 			{
 				pattern:
 					/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$a-z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*=>)/i,
 				lookbehind: true,
-				inside: domstyler_grammar_js,
+				inside: grammar_js,
 			},
 			{
 				pattern: /(\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*=>)/,
 				lookbehind: true,
-				inside: domstyler_grammar_js,
+				inside: grammar_js,
 			},
 			{
 				pattern:
 					/((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*)\(\s*|\]\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*\{)/,
 				lookbehind: true,
-				inside: domstyler_grammar_js,
+				inside: grammar_js,
 			},
 		],
 		constant: /\b[A-Z](?:[A-Z_]|\dx?)*\b/,
 	});
 
-	domstyler.domstyler_grammar_insert_before('js', 'string', {
+	domstyler.grammar_insert_before('js', 'string', {
 		hashbang: {
 			pattern: /^#!.*/,
 			greedy: true,
@@ -161,7 +158,7 @@ export const add_grammar_js: Add_Grammar = (domstyler) => {
 							pattern: /^\$\{|\}$/,
 							alias: 'punctuation',
 						},
-						rest: domstyler_grammar_js as any, // TODO try to fix this type
+						rest: grammar_js as any, // TODO try to fix this type
 					},
 				},
 				string: /[\s\S]+/,
@@ -175,7 +172,7 @@ export const add_grammar_js: Add_Grammar = (domstyler) => {
 		},
 	});
 
-	domstyler.domstyler_grammar_insert_before('js', 'operator', {
+	domstyler.grammar_insert_before('js', 'operator', {
 		literal_property: {
 			pattern: /((?:^|[,{])[ \t]*)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*:)/m,
 			lookbehind: true,
@@ -183,11 +180,11 @@ export const add_grammar_js: Add_Grammar = (domstyler) => {
 		},
 	});
 
-	domstyler_grammar_markup_add_inlined(domstyler, 'script', 'js');
+	grammar_markup_add_inlined(domstyler, 'script', 'js');
 
 	// add attribute support for all DOM events.
 	// https://developer.mozilla.org/en-US/docs/Web/Events#Standard_events
-	domstyler_grammar_markup_add_attribute(
+	grammar_markup_add_attribute(
 		domstyler,
 		/on(?:abort|blur|change|click|composition(?:end|start|update)|dblclick|error|focus(?:in|out)?|key(?:down|up)|load|mouse(?:down|enter|leave|move|out|over|up)|reset|resize|scroll|select|slotchange|submit|unload|wheel)/
 			.source,

@@ -1,8 +1,5 @@
 import type {Add_Grammar, Grammar} from '$lib/syntax_styler.js';
-import {
-	domstyler_grammar_markup_add_attribute,
-	domstyler_grammar_markup_add_inlined,
-} from '$lib/grammar_markup.js';
+import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
 var string = /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/;
 
@@ -15,7 +12,7 @@ var string = /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\
  * @see LICENSE
  */
 export const add_grammar_css: Add_Grammar = (domstyler) => {
-	const domstyler_grammar_css = {
+	const grammar_css = {
 		comment: /\/\*[\s\S]*?\*\//,
 		atrule: {
 			pattern: RegExp(
@@ -78,10 +75,10 @@ export const add_grammar_css: Add_Grammar = (domstyler) => {
 		punctuation: /[(){};:,]/,
 	} satisfies Grammar;
 
-	domstyler_grammar_css.atrule.inside.rest = domstyler_grammar_css;
+	grammar_css.atrule.inside.rest = grammar_css;
 
-	domstyler.add_lang('css', domstyler_grammar_css);
+	domstyler.add_lang('css', grammar_css);
 
-	domstyler_grammar_markup_add_inlined(domstyler, 'style', 'css');
-	domstyler_grammar_markup_add_attribute(domstyler, 'style', 'css');
+	grammar_markup_add_inlined(domstyler, 'style', 'css');
+	grammar_markup_add_attribute(domstyler, 'style', 'css');
 };

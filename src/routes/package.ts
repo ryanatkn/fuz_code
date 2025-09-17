@@ -176,15 +176,15 @@ export const src_json: Src_Json = {
 			path: 'grammar_markup.ts',
 			declarations: [
 				{name: 'add_grammar_markup', kind: 'function'},
-				{name: 'domstyler_grammar_markup_add_inlined', kind: 'function'},
-				{name: 'domstyler_grammar_markup_add_attribute', kind: 'function'},
+				{name: 'grammar_markup_add_inlined', kind: 'function'},
+				{name: 'grammar_markup_add_attribute', kind: 'function'},
 			],
 		},
 		'./grammar_svelte.js': {
 			path: 'grammar_svelte.ts',
 			declarations: [
 				{name: 'add_grammar_svelte', kind: 'function'},
-				{name: 'domstyler_grammar_svelte_add_inlined', kind: 'function'},
+				{name: 'grammar_svelte_add_inlined', kind: 'function'},
 			],
 		},
 		'./grammar_ts.js': {
