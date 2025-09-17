@@ -170,38 +170,38 @@ export const src_json: Src_Json = {
 		},
 		'./grammar_clike.js': {
 			path: 'grammar_clike.ts',
-			declarations: [{name: 'add_domstyler_grammar_clike', kind: 'function'}],
+			declarations: [{name: 'add_grammar_clike', kind: 'function'}],
 		},
 		'./grammar_css.js': {
 			path: 'grammar_css.ts',
-			declarations: [{name: 'add_domstyler_grammar_css', kind: 'function'}],
+			declarations: [{name: 'add_grammar_css', kind: 'function'}],
 		},
 		'./grammar_markup.js': {
 			path: 'grammar_markup.ts',
 			declarations: [
-				{name: 'add_domstyler_grammar_markup', kind: 'function'},
+				{name: 'add_grammar_markup', kind: 'function'},
 				{name: 'domstyler_grammar_markup_add_inlined', kind: 'function'},
 				{name: 'domstyler_grammar_markup_add_attribute', kind: 'function'},
 			],
 		},
 		'./grammar_js.js': {
 			path: 'grammar_js.ts',
-			declarations: [{name: 'add_domstyler_grammar_js', kind: 'function'}],
+			declarations: [{name: 'add_grammar_js', kind: 'function'}],
 		},
 		'./grammar_json.js': {
 			path: 'grammar_json.ts',
-			declarations: [{name: 'add_domstyler_grammar_json', kind: 'function'}],
+			declarations: [{name: 'add_grammar_json', kind: 'function'}],
 		},
 		'./grammar_svelte.js': {
 			path: 'grammar_svelte.ts',
 			declarations: [
-				{name: 'add_domstyler_grammar_svelte', kind: 'function'},
+				{name: 'add_grammar_svelte', kind: 'function'},
 				{name: 'domstyler_grammar_svelte_add_inlined', kind: 'function'},
 			],
 		},
 		'./grammar_ts.js': {
 			path: 'grammar_ts.ts',
-			declarations: [{name: 'add_domstyler_grammar_ts', kind: 'function'}],
+			declarations: [{name: 'add_grammar_ts', kind: 'function'}],
 		},
 		'./helpers.js': {path: 'helpers.ts', declarations: [{name: 'escape_html', kind: 'function'}]},
 		'./run_benchmark.js': {path: 'run_benchmark.ts'},
@@ -252,7 +252,7 @@ export const src_json: Src_Json = {
 		'./syntax_styler.js': {
 			path: 'syntax_styler.ts',
 			declarations: [
-				{name: 'Add_Domstyler_Grammar', kind: 'type'},
+				{name: 'Add_Grammar', kind: 'type'},
 				{name: 'Domstyler', kind: 'class'},
 				{name: 'Grammar_Value', kind: 'type'},
 				{name: 'Grammar', kind: 'type'},

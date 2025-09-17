@@ -1,4 +1,4 @@
-import type {Domstyler, Add_Domstyler_Grammar, Grammar, Grammar_Token} from '$lib/syntax_styler.js';
+import type {Domstyler, Add_Grammar, Grammar, Grammar_Token} from '$lib/syntax_styler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,7 +8,7 @@ import type {Domstyler, Add_Domstyler_Grammar, Grammar, Grammar_Token} from '$li
  *
  * @see LICENSE
  */
-export const add_domstyler_grammar_markup: Add_Domstyler_Grammar = (domstyler) => {
+export const add_grammar_markup: Add_Grammar = (domstyler) => {
 	const domstyler_grammar_markup = {
 		comment: {
 			pattern: /<!--(?:(?!<!--)[\s\S])*?-->/,

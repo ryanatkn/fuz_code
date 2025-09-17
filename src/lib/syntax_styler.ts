@@ -1,4 +1,4 @@
-export type Add_Domstyler_Grammar = (domstyler: Domstyler) => void;
+export type Add_Grammar = (domstyler: Domstyler) => void;
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -17,7 +17,7 @@ export class Domstyler {
 	// TODO this API? problem is the grammars rely on mutating existing grammars in the `syntax_styler`,
 	// so for now adding grammars will remain inherently stateful
 	// export interface Syntax_Styler_Options {
-	// 	grammars?: Add_Domstyler_Grammar[];
+	// 	grammars?: Add_Grammar[];
 	// }
 	// options: Syntax_Styler_Options = {}
 	// const {grammars} = options;

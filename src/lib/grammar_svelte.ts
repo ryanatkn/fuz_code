@@ -1,4 +1,4 @@
-import type {Add_Domstyler_Grammar, Grammar_Token, Domstyler} from '$lib/syntax_styler.js';
+import type {Add_Grammar, Grammar_Token, Domstyler} from '$lib/syntax_styler.js';
 import {domstyler_grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
 const blocks = '(if|else if|await|then|catch|each|html|debug)';
@@ -11,7 +11,7 @@ const blocks = '(if|else if|await|then|catch|each|html|debug)';
  *
  * @see LICENSE
  */
-export const add_domstyler_grammar_svelte: Add_Domstyler_Grammar = (domstyler) => {
+export const add_grammar_svelte: Add_Grammar = (domstyler) => {
 	const domstyler_grammar_ts = domstyler.get_lang('ts');
 
 	const domstyler_grammar_svelte = domstyler.add_extended_lang('markup', 'svelte', {

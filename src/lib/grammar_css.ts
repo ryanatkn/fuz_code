@@ -1,4 +1,4 @@
-import type {Add_Domstyler_Grammar, Grammar} from '$lib/syntax_styler.js';
+import type {Add_Grammar, Grammar} from '$lib/syntax_styler.js';
 import {
 	domstyler_grammar_markup_add_attribute,
 	domstyler_grammar_markup_add_inlined,
@@ -14,7 +14,7 @@ var string = /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\
  *
  * @see LICENSE
  */
-export const add_domstyler_grammar_css: Add_Domstyler_Grammar = (domstyler) => {
+export const add_grammar_css: Add_Grammar = (domstyler) => {
 	const domstyler_grammar_css = {
 		comment: /\/\*[\s\S]*?\*\//,
 		atrule: {

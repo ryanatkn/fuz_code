@@ -1,151 +1,142 @@
-# Architecture Simplification Plan
+# Current Status - Architecture Simplification Complete
 
-## Problem Statement
+## ✅ Completed Migration
 
-The boundary scanner system has become too complex:
-- 400+ lines of stateful CSS scanner code with context stacks
-- Duplicate parsing logic (skip vs scan methods)
-- Manual character-by-character parsing recreating what regex patterns handle naturally
-- Two-phase architecture (boundaries then tokenization) adds complexity without sufficient benefit
-- Edge cases proliferating (comments in selectors, strings in selectors, etc.)
+Successfully migrated from the complex boundary scanner system to a simplified DOM styler + ranges approach:
 
-We're essentially building a parser manually, which is what PrismJS/DOM styler was designed to avoid.
+- **Removed 2000+ lines** of boundary scanner code (26 files deleted)
+- **Unified tokenization** using DOM styler (PrismJS fork)
+- **Added range highlighting** via CSS Custom Highlight API
+- **Maintained backwards compatibility** with existing language definitions
 
-## Solution: Extend DOM Styler with Range Highlighting
+## 🔧 Remaining Issues
 
-### Core Idea
-- Use the battle-tested DOM styler (PrismJS fork) for tokenization
-- Add CSS Custom Highlight API support on top of DOM styler tokens
-- Delete the complex boundary scanner system
-- Keep it simple: one proven tokenization engine, with optional performance optimization
+### 1. Markup Not Highlighted with Ranges
 
-## Files to KEEP
+**Problem**: HTML/markup content doesn't get highlighted when using range mode.
 
-### Range/Highlight API Support
-- `src/lib/boundary_scanner_range_builder.ts` - CSS Custom Highlight API integration
-- Any other range/highlight API utilities that work with token positions
+**Symptoms**:
+- Range mode works for TypeScript, CSS, JSON
+- HTML content shows plain text in range mode
+- HTML mode works correctly
 
-### Reference Implementation
-- `src/lib/Boundaryscanner_Code.svelte` - Use as reference for new component design
+**Likely Cause**:
+- Token flattening may not handle HTML's nested structure correctly
+- Position calculation might be off for self-closing tags or attributes
 
-## Files to DELETE
+**Files to Check**:
+- `src/lib/domstyler_range_builder.ts` - `flatten_domstyler_tokens()` function
+- `src/lib/grammar_markup.ts` - Token structure from HTML grammar
 
-### Boundary Scanner Core (~1000 lines)
-- `src/lib/boundary_scanner_base.ts`
-- `src/lib/boundary_scanner_orchestrator.ts`
-- `src/lib/boundary_scanner_registry.ts`
-- `src/lib/boundary_scanner_types.ts`
-- `src/lib/boundary_scanner_global.ts`
+### 2. Theme Discrepancies
 
-### Language Scanners (~800 lines)
-- `src/lib/boundary_scanner_css.ts` (400+ lines of complexity!)
-- `src/lib/boundary_scanner_html.ts`
-- `src/lib/boundary_scanner_json.ts`
-- `src/lib/boundary_scanner_ts.ts`
+**Problem**: Inconsistencies between `theme.css` and `theme_highlight.css`
 
-### Tokenizers (~400 lines)
-- `src/lib/boundary_tokenizer_types.ts`
-- `src/lib/boundary_tokenizer_css.ts`
-- `src/lib/boundary_tokenizer_html.ts`
-- `src/lib/boundary_tokenizer_json.ts`
-- `src/lib/boundary_tokenizer_ts.ts`
+**Current Mapping Issues**:
 
-### Other
-- `src/lib/boundary_scanner_html_generator.ts`
-- `src/lib/boundary_scanner.test.ts`
-- Remove boundary scanner routes/demos
+#### theme.css (Traditional)
+```css
+.token.comment { color: var(--text_color_5); }
+.token.property { color: var(--color_a_5); }
+.token.string { color: var(--color_b_5); }
+.token.function { color: var(--color_d_5); }
+.token.number { color: var(--color_e_5); }
+.token.keyword { color: var(--color_f_5); }
+```
 
-## New Implementation
+#### theme_highlight.css (Ranges)
+```css
+::highlight(comment) { /* needs color */ }
+::highlight(property) { /* needs color */ }
+/* Many token types missing */
+/* Some token types use wrong colors */
+```
 
-### 1. Create `Domstyler_Range_Code.svelte`
-New component that:
-- Uses DOM styler for tokenization (proven, battle-tested)
-- Converts DOM styler tokens to ranges for CSS Custom Highlight API
-- Falls back to HTML generation when API not supported
-- Similar structure to `Boundaryscanner_Code.svelte` but simpler
+**Discrepancies Found**:
+1. Missing highlight definitions for many token types
+2. Color assignments don't match between themes
+3. Compound tokens (e.g., `template-string` vs `template_string`) inconsistent
+4. Language-prefixed tokens not handled uniformly
 
-### 2. Create `domstyler_range_builder.ts`
-- Takes DOM styler tokens
-- Builds CSS Custom Highlight ranges
-- Reuse logic from `boundary_scanner_range_builder.ts`
+### 3. File Naming Inconsistencies
 
-### 3. Update DOM Styler Token Format
-- Ensure DOM styler provides position information (start/end)
-- May need minor modifications to track positions during tokenization
+After refactoring, we have inconsistent naming:
+- `domstyler_*` files renamed to `grammar_*` for language definitions
+- `domstyler.ts` renamed to `syntax_styler.ts`
+- But still have `domstyler_global.ts`, `domstyler_range_builder.ts`
+- Component named `Domstyler_Range_Code.svelte` but imports from mixed names
 
-## Implementation Steps
+## 📋 Action Items
 
-1. **Create new component** `Domstyler_Range_Code.svelte`
-   - Start with copy of `Boundaryscanner_Code.svelte`
-   - Replace boundary scanner with DOM styler
+### High Priority
 
-2. **Add position tracking** to DOM styler if needed
-   - Tokens need start/end positions for range building
-   - Should be straightforward addition
+1. **Fix markup highlighting in range mode**
+   - Debug why HTML tokens aren't creating proper ranges
+   - Test with simple HTML samples first
+   - Check if positions are calculated correctly for nested tags
 
-3. **Port range builder**
-   - Adapt `boundary_scanner_range_builder.ts` to work with DOM styler tokens
-   - Create `domstyler_range_builder.ts`
+2. **Reconcile theme files**
+   - Audit all token types from both themes
+   - Create mapping table of token type → color
+   - Ensure both themes use same color for same token type
+   - Add missing ::highlight() definitions
 
-4. **Test new implementation**
-   - Verify syntax highlighting works
-   - Verify CSS Custom Highlight API works where supported
-   - Compare performance (should be similar or better)
+3. **Standardize file naming**
+   - Decide on consistent naming scheme
+   - Either keep "domstyler" prefix or migrate fully to descriptive names
+   - Update all imports and references
 
-5. **Delete boundary scanner code**
-   - Remove all files listed above
-   - Update imports and demos
-   - Update documentation
+### Medium Priority
 
-6. **Update tests and fixtures**
-   - Fixtures can be simplified (no more two-phase output)
-   - Tests focus on DOM styler output
+4. **Update fixtures**
+   - Regenerate all fixtures with new token format
+   - Verify position data is correct
+   - Add specific HTML range tests
 
-## Benefits
+5. **Performance testing**
+   - Benchmark HTML vs Range modes
+   - Test with large files
+   - Verify no memory leaks in highlight manager
 
-### Immediate
-- **-2000+ lines of code** to maintain
-- Simpler mental model (one tokenization phase)
-- Proven patterns handle edge cases
+### Low Priority
 
-### Long-term
-- Easier to add new languages (just PrismJS-style patterns)
-- Less bugs (using battle-tested code)
-- Better community understanding (PrismJS patterns are well-known)
+6. **Documentation cleanup**
+   - Update inline comments
+   - Add JSDoc where missing
+   - Create examples for each language
 
-### Performance
-- CSS Custom Highlight API still provides performance boost where supported
-- DOM styler may be slightly slower but:
-  - Not the bottleneck for typical use
-  - Difference is milliseconds
-  - Code simplicity worth the trade-off
+## 🐛 Known Bugs
 
-## Risks and Mitigations
+1. **HTML range highlighting fails silently**
+   - No error in console
+   - Falls back to no highlighting instead of HTML mode
 
-### Risk: Performance regression
-**Mitigation**: Profile actual usage - syntax highlighting is rarely the bottleneck
+2. **Token position overlap possible**
+   - Nested tokens might create overlapping ranges
+   - CSS Highlight API may not handle this well
 
-### Risk: Feature parity
-**Mitigation**: DOM styler already handles all our use cases (it's what we forked from)
+3. **Theme switching issues**
+   - Switching between HTML and range mode doesn't update colors immediately
+   - May need to clear and re-apply highlights
 
-### Risk: Migration effort
-**Mitigation**: Can be done incrementally - new component first, then delete old code
+## 📊 Testing Status
 
-## Success Metrics
+- ✅ TypeScript highlighting works in both modes
+- ✅ CSS highlighting works in both modes
+- ✅ JSON highlighting works in both modes
+- ❌ HTML highlighting broken in range mode
+- ❌ Svelte highlighting broken in range mode (depends on HTML)
+- ⚠️ Fixture tests need regeneration
 
-- Code reduction: 2000+ lines removed
-- Complexity: No more manual parsing state machines
-- Maintainability: Standard PrismJS patterns
-- Performance: CSS Custom Highlight API still works
-- Tests: All existing tests pass with simpler implementation
+## 🎯 Next Steps
 
-## Timeline
+1. **Immediate**: Fix HTML range highlighting
+2. **Today**: Reconcile theme colors
+3. **This Week**: Standardize naming, regenerate fixtures
+4. **Future**: Add more languages, optimize performance
 
-1. **Phase 1** (1-2 days): Create new component with DOM styler + ranges
-2. **Phase 2** (1 day): Test and verify feature parity
-3. **Phase 3** (1 day): Delete boundary scanner code
-4. **Phase 4** (1 day): Update docs and demos
+## 📝 Notes
 
-## Conclusion
+The architecture simplification was successful, but we introduced some regressions that need fixing. The core approach is sound - we just need to iron out the implementation details, especially around HTML tokenization and theme consistency.
 
-We tried to build something better than PrismJS but ended up recreating a parser manually. The complexity isn't justified. Let's use the proven solution (DOM styler) and add our performance optimization (CSS Custom Highlight API) on top. Simpler is better.
+The position calculation approach (post-tokenization flattening) works well for most languages but may need special handling for markup languages with their more complex nesting structure.
