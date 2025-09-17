@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Breadcrumb from '@ryanatkn/fuz/Breadcrumb.svelte';
 
-	import Domstyler_Code from '$lib/Domstyler_Code.svelte';
+	import Code from '$lib/Code.svelte';
 	import Footer from '$routes/Footer.svelte';
 	import {samples} from '$lib/samples/all.js';
 </script>
@@ -19,7 +19,7 @@
 		{#each Object.values(samples) as { content, lang } (lang)}
 			<div>
 				<h2>{lang}</h2>
-				<pre><Domstyler_Code {content} {lang} /></pre>
+				<pre><Code {content} {lang} /></pre>
 			</div>
 		{/each}
 	</section>

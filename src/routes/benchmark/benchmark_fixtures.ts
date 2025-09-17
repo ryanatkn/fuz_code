@@ -1,10 +1,10 @@
-import Domstyler_Code from '$lib/Domstyler_Code.svelte';
+import Code from '$lib/Code.svelte';
 import Domstyler_Range_Code from '$lib/Domstyler_Range_Code.svelte';
 import type {Benchmarked_Implementation} from './benchmark_types.js';
 
 // Implementation configurations
 export const implementations: Benchmarked_Implementation[] = [
-	{name: 'domstyler_html', component: Domstyler_Code, mode: null},
+	{name: 'domstyler_html', component: Code, mode: null},
 	{name: 'domstyler_ranges_auto', component: Domstyler_Range_Code, mode: 'auto'},
 	{name: 'domstyler_ranges_forced', component: Domstyler_Range_Code, mode: 'ranges'},
 ];

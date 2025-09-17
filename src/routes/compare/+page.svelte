@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Breadcrumb from '@ryanatkn/fuz/Breadcrumb.svelte';
 
-	import Domstyler_Code from '$lib/Domstyler_Code.svelte';
+	import Code from '$lib/Code.svelte';
 	import Domstyler_Range_Code from '$lib/Domstyler_Range_Code.svelte';
 	import {samples} from '$lib/samples/all.js';
 	import Footer from '$routes/Footer.svelte';
@@ -15,7 +15,7 @@
 			<div class="display_flex justify_content_center flex_wrap gap_sm py_xl5">
 				<div>
 					<h3>domstyler (html)</h3>
-					<Domstyler_Code content={sample.content} lang={sample.lang} />
+					<Code content={sample.content} lang={sample.lang} />
 				</div>
 				<div>
 					<h3>domstyler + ranges (auto)</h3>

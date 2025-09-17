@@ -60,7 +60,7 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 #### Components
 
-- `src/lib/Domstyler_Code.svelte` - Traditional HTML rendering
+- `src/lib/Code.svelte` - Traditional HTML rendering
 - `src/lib/Domstyler_Range_Code.svelte` - Hybrid component with auto-detection
 
 #### Themes

@@ -3,7 +3,7 @@
 	// import Docs_Item from '@ryanatkn/fuz/Docs_Item.svelte';
 	// import Tome_Link from '@ryanatkn/fuz/Tome_Link.svelte';
 	import Tome_Link from '$routes/Tome_Link.svelte';
-	import Domstyler_Code from '$lib/Domstyler_Code.svelte';
+	import Code from '$lib/Code.svelte';
 
 	// TODO what convention? `Docs_Tome`? Maybe just `Tome`? `/tomes`? both? what other options?
 
@@ -23,18 +23,18 @@
 		<a href="https://lea.verou.me/">Lea Verou</a>.
 	</p>
 	<p>To use it, import the default theme or your own:</p>
-	<Domstyler_Code
+	<Code
 		lang="ts"
 		content="// +layout.svelte
 import '@ryanatkn/fuz_code/theme.css'; // add this"
 	/>
 	<p>then use <Tome_Link name="Code" />:</p>
-	<Domstyler_Code
+	<Code
 		content={'<' +
-			`script>\n\t// Something.svelte\n\timport Domstyler_Code from '@ryanatkn/fuz_code/Domstyler_Code.svelte';\n</script>\n\n<Domstyler_Code content="<header>hello world</header>" />`}
+			`script>\n\t// Something.svelte\n\timport Code from '@ryanatkn/fuz_code/Code.svelte';\n</script>\n\n<Code content="<header>hello world</header>" />`}
 	/>
 	<p>outputs:</p>
-	<Domstyler_Code content="<header>hello world</header>" />
+	<Code content="<header>hello world</header>" />
 </section>
 <section>
 	<aside>
@@ -52,11 +52,11 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 		by <a href="https://github.com/pngwn">@pngwn</a>:
 	</p>
 	<div class="mb_lg">
-		<Domstyler_Code content={'<Domstyler_Code content="<scr..." />'} />
+		<Code content={'<Code content="<scr..." />'} />
 	</div>
 	<p>styled:</p>
 	<div>
-		<Domstyler_Code
+		<Code
 			content={'<' +
 				`script lang="ts">
 	import Card from '@fuz.dev/fuz-library/Card.svelte';
@@ -74,12 +74,10 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 		<Tome_Link name="Code" /> supports TypeScript with <code>lang="ts"</code>:
 	</p>
 	<div class="mb_lg">
-		<Domstyler_Code
-			content={`<Domstyler_Code lang="ts" content="export type A<T> = ('b' | 3) & T;" />`}
-		/>
+		<Code content={`<Code lang="ts" content="export type A<T> = ('b' | 3) & T;" />`} />
 	</div>
 	<div>
-		<Domstyler_Code lang="ts" content={`export type A<T> = ('b' | 3) & T;`} />
+		<Code lang="ts" content={`export type A<T> = ('b' | 3) & T;`} />
 	</div>
 </section>
 <section>
@@ -87,24 +85,22 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 		Passing <code>lang={'{'}null}</code> disables syntax styling:
 	</p>
 	<div class="mb_lg">
-		<Domstyler_Code
-			content={'<Domstyler_Code lang={null} content="<aside>all is gray</aside>" />'}
-		/>
+		<Code content={'<Code lang={null} content="<aside>all is gray</aside>" />'} />
 	</div>
-	<Domstyler_Code lang={null} content={`<aside>all is gray</aside>`} />
+	<Code lang={null} content={`<aside>all is gray</aside>`} />
 </section>
 <section>
 	<p>
 		<Tome_Link name="Code" /> is a block by default:
 	</p>
-	<div>ab<Domstyler_Code content="c" /></div>
-	<Domstyler_Code content={'<div>ab<Domstyler_Code content="c" /></div>'} />
+	<div>ab<Code content="c" /></div>
+	<Code content={'<div>ab<Code content="c" /></div>'} />
 </section>
 <section>
 	<p>
-		<Tome_Link name="Code" /> can be inlined with <Domstyler_Code
+		<Tome_Link name="Code" /> can be inlined with <Code
 			inline
-			content={`<Domstyler_Code inline content="..." />`}
+			content={`<Code inline content="..." />`}
 		/>
 	</p>
 </section>
