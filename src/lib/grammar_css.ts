@@ -2,7 +2,7 @@ import type {Add_Domstyler_Grammar, Grammar} from '$lib/syntax_styler.js';
 import {
 	domstyler_grammar_markup_add_attribute,
 	domstyler_grammar_markup_add_inlined,
-} from '$lib/grammar_html.js';
+} from '$lib/grammar_markup.js';
 
 var string = /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/;
 

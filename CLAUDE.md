@@ -47,7 +47,7 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 - `src/lib/grammar_ts.ts` - TypeScript/JavaScript
 - `src/lib/grammar_css.ts` - CSS stylesheets
-- `src/lib/grammar_html.ts` - HTML/XML markup
+- `src/lib/grammar_markup.ts` - HTML/XML markup
 - `src/lib/grammar_json.ts` - JSON data
 - `src/lib/grammar_svelte.ts` - Svelte components
 - `src/lib/grammar_clike.ts` - Base for C-like languages

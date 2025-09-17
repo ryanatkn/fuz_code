@@ -129,9 +129,9 @@
       "types": "./dist/grammar_css.d.ts",
       "default": "./dist/grammar_css.js"
     },
-    "./grammar_html.js": {
-      "types": "./dist/grammar_html.d.ts",
-      "default": "./dist/grammar_html.js"
+    "./grammar_markup.js": {
+      "types": "./dist/grammar_markup.d.ts",
+      "default": "./dist/grammar_markup.js"
     },
     "./grammar_js.js": {
       "types": "./dist/grammar_js.d.ts",

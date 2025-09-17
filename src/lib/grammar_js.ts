@@ -2,7 +2,7 @@ import type {Add_Domstyler_Grammar} from '$lib/syntax_styler.js';
 import {
 	domstyler_grammar_markup_add_attribute,
 	domstyler_grammar_markup_add_inlined,
-} from '$lib/grammar_html.js';
+} from '$lib/grammar_markup.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)

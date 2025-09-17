@@ -1,5 +1,5 @@
 import type {Add_Domstyler_Grammar, Grammar_Token, Domstyler} from '$lib/syntax_styler.js';
-import {domstyler_grammar_markup_add_inlined} from '$lib/grammar_html.js';
+import {domstyler_grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
 const blocks = '(if|else if|await|then|catch|each|html|debug)';
 

@@ -90,7 +90,10 @@ export const package_json: Package_Json = {
 		},
 		'./grammar_clike.js': {types: './dist/grammar_clike.d.ts', default: './dist/grammar_clike.js'},
 		'./grammar_css.js': {types: './dist/grammar_css.d.ts', default: './dist/grammar_css.js'},
-		'./grammar_html.js': {types: './dist/grammar_html.d.ts', default: './dist/grammar_html.js'},
+		'./grammar_markup.js': {
+			types: './dist/grammar_markup.d.ts',
+			default: './dist/grammar_markup.js',
+		},
 		'./grammar_js.js': {types: './dist/grammar_js.d.ts', default: './dist/grammar_js.js'},
 		'./grammar_json.js': {types: './dist/grammar_json.d.ts', default: './dist/grammar_json.js'},
 		'./grammar_svelte.js': {
@@ -173,8 +176,8 @@ export const src_json: Src_Json = {
 			path: 'grammar_css.ts',
 			declarations: [{name: 'add_domstyler_grammar_css', kind: 'function'}],
 		},
-		'./grammar_html.js': {
-			path: 'grammar_html.ts',
+		'./grammar_markup.js': {
+			path: 'grammar_markup.ts',
 			declarations: [
 				{name: 'add_domstyler_grammar_markup', kind: 'function'},
 				{name: 'domstyler_grammar_markup_add_inlined', kind: 'function'},
