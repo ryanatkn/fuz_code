@@ -13,7 +13,7 @@ export interface Benchmark_Result {
 
 export const run_benchmark = async (filter?: string): Promise<Array<Benchmark_Result>> => {
 	const bench = new Bench({
-		time: 5000,
+		time: 10000,
 		warmupTime: 1000,
 		warmupIterations: 50,
 	});
