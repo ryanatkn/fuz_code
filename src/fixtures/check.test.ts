@@ -21,12 +21,6 @@ import {sample_langs} from '$lib/code_sample.js';
  * - All expected tokens are present
  */
 
-// TODO: Helper functions for semantic comparison
-// function extract_token_positions(html: string): Array<{start: number, end: number, type: string}>
-// function compare_semantic_equivalence(html1: string, html2: string): boolean
-// function calculate_coverage(content: string, html: string): number
-// function validate_no_overlaps(tokens: Array<Token>): boolean
-
 describe('generated fixtures match runtime', () => {
 	// Discover all sample files using helper
 	const samples = discover_samples();
