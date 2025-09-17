@@ -1,4 +1,4 @@
-import type {Domstyler, Add_Grammar, Grammar, Grammar_Token} from '$lib/syntax_styler.js';
+import type {Syntax_Styler, Add_Grammar, Grammar, Grammar_Token} from '$lib/syntax_styler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -91,7 +91,7 @@ export const add_grammar_markup: Add_Grammar = (domstyler) => {
  * domstyler_grammar_markup_add_inlined(domstyler, 'style', 'css');
  */
 export const domstyler_grammar_markup_add_inlined = (
-	domstyler: Domstyler,
+	domstyler: Syntax_Styler,
 	tag_name: string,
 	lang: string,
 	inside_lang = 'markup',
@@ -144,7 +144,7 @@ export const domstyler_grammar_markup_add_inlined = (
  * domstyler_grammar_markup_add_attribute(domstyler, 'style', 'css');
  */
 export const domstyler_grammar_markup_add_attribute = (
-	domstyler: Domstyler,
+	domstyler: Syntax_Styler,
 	attr_name: string,
 	lang: string,
 ): void => {

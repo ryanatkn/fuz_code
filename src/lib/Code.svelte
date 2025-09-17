@@ -2,8 +2,8 @@
 	import {onDestroy} from 'svelte';
 	import type {Snippet} from 'svelte';
 
-	import {syntax_styler} from '$lib/domstyler_global.js';
-	import {tokenize_syntax, type Domstyler, type Grammar} from '$lib/syntax_styler.js';
+	import {syntax_styler} from '$lib/syntax_styler_global.js';
+	import {tokenize_syntax, type Syntax_Styler, type Grammar} from '$lib/syntax_styler.js';
 	import {
 		Domstyler_Highlight_Manager,
 		supports_css_highlight_api,
@@ -30,7 +30,7 @@
 		code_attrs?: any;
 		grammar?: Grammar | undefined;
 		inline?: boolean;
-		domstyler?: Domstyler;
+		domstyler?: Syntax_Styler;
 		children?: Snippet<[markup: string]>;
 	} = $props();
 

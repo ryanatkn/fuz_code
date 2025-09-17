@@ -1,6 +1,6 @@
 import {Bench} from 'tinybench';
 import {samples as all_samples} from '$lib/samples/all.js';
-import {syntax_styler} from '$lib/domstyler_global.js';
+import {syntax_styler} from '$lib/syntax_styler_global.js';
 
 /* eslint-disable no-console */
 

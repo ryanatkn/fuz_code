@@ -1,7 +1,7 @@
 import {readFileSync} from 'node:fs';
 import {search_fs} from '@ryanatkn/gro/search_fs.js';
 import {basename, join, relative} from 'node:path';
-import {syntax_styler} from '$lib/domstyler_global.js';
+import {syntax_styler} from '$lib/syntax_styler_global.js';
 import {tokenize_syntax, type Syntax_Token_Stream, Syntax_Token} from '$lib/syntax_styler.js';
 
 export interface Sample_Spec {

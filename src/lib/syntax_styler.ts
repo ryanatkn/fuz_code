@@ -1,4 +1,4 @@
-export type Add_Grammar = (domstyler: Domstyler) => void;
+export type Add_Grammar = (domstyler: Syntax_Styler) => void;
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,7 +8,7 @@ export type Add_Grammar = (domstyler: Domstyler) => void;
  *
  * @see LICENSE
  */
-export class Domstyler {
+export class Syntax_Styler {
 	langs: Record<string, Grammar | undefined> = {
 		plaintext: {},
 	};
