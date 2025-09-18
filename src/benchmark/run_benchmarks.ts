@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {run_and_print_benchmark} from '$lib/benchmark.js';
+import {run_and_print_benchmark} from './benchmarks.js';
 
 const filter = process.argv[2];
 

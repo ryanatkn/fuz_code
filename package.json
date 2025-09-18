@@ -24,8 +24,8 @@
     "test": "gro test",
     "preview": "vite preview",
     "deploy": "gro deploy",
-    "update-generated-fixtures": "gro src/fixtures/update",
-    "benchmark": "vite-node src/lib/run_benchmark.ts"
+    "benchmark": "gro run src/benchmark/run_benchmarks.ts",
+    "update-generated-fixtures": "gro src/fixtures/update"
   },
   "type": "module",
   "engines": {

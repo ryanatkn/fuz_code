@@ -1,4 +1,5 @@
 import {Bench} from 'tinybench';
+
 import {samples as all_samples} from '$lib/samples/all.js';
 import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 
