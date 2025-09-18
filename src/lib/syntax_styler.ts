@@ -527,17 +527,13 @@ const match_grammar = (
 			var greedy = !!pattern_obj.greedy;
 			var alias = pattern_obj.alias;
 
-			// Create pattern with global flag if needed, WITHOUT mutating the original
-			var pattern: RegExp;
-			if (greedy && pattern_obj.pattern && !pattern_obj.pattern.global) {
+			if (greedy && !pattern_obj.pattern.global) {
 				// Without the global flag, lastIndex won't work
-				// Create new pattern with global flag (don't mutate original)
 				var flags = pattern_obj.pattern.toString().match(/[imsuy]*$/)[0];
-				pattern = RegExp(pattern_obj.pattern.source, flags + 'g');
-			} else {
-				// Use original pattern as-is
-				pattern = pattern_obj.pattern || pattern_obj;
+				pattern_obj.pattern = RegExp(pattern_obj.pattern.source, flags + 'g');
 			}
+
+			var pattern: RegExp = pattern_obj.pattern || pattern_obj;
 
 			for (
 				// iterate the token list and keep track of the current token/string position
