@@ -55,8 +55,8 @@ export const measurement_phase = async (
 	config: Benchmark_Config,
 	recent_timings: number[],
 	harness: Benchmark_Harness_Controller,
-	onProgress?: () => void,
-	shouldStop?: () => boolean,
+	on_progress?: () => void,
+	should_stop?: () => boolean,
 ): Promise<Measurement_Data> => {
 	const times: number[] = [];
 	const stability_checks = [];
@@ -64,7 +64,7 @@ export const measurement_phase = async (
 
 	for (let i = 0; i < config.iterations; i++) {
 		// Check for stop signal
-		if (shouldStop?.()) {
+		if (should_stop?.()) {
 			console.log('[Measurement] Stopped by user');
 			break;
 		}
@@ -123,8 +123,8 @@ export const measurement_phase = async (
 			timestamps.push(Date.now());
 		}
 
-		if (onProgress) {
-			onProgress();
+		if (on_progress) {
+			on_progress();
 		}
 
 		if (globalThis.gc) {
@@ -141,11 +141,11 @@ export const run_all_benchmarks = async (
 	config: Benchmark_Config,
 	harness: Benchmark_Harness_Controller,
 	callbacks?: Progress_Callbacks,
-	customImplementations?: Benchmarked_Implementation[],
-	customLanguages?: string[],
+	custom_implementations?: Benchmarked_Implementation[],
+	custom_languages?: string[],
 ): Promise<Benchmark_State> => {
-	const impls = customImplementations || implementations;
-	const langs = customLanguages || languages;
+	const impls = custom_implementations || implementations;
+	const langs = custom_languages || languages;
 	const results: Benchmark_Result[] = [];
 	const warnings: string[] = [];
 	const recent_timings: number[] = [];

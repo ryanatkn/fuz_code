@@ -14,7 +14,7 @@
 		iterations: 10,
 		warmup_count: 3,
 		cooldown_ms: 100,
-		content_multiplier: 20, // 100
+		content_multiplier: 20, // 100 is hanging at CSS in html mode
 	});
 
 	// UI state

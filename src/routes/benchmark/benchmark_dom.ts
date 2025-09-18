@@ -1,5 +1,3 @@
-import {tick} from 'svelte';
-
 // Ensure browser paint has completed
 export const ensure_paint = (): Promise<void> => {
 	return new Promise((resolve) => {
@@ -9,18 +7,6 @@ export const ensure_paint = (): Promise<void> => {
 			});
 		});
 	});
-};
-
-// DOM settlement utilities
-export const await_settlement = async (): Promise<void> => {
-	// Wait for Svelte to finish updates
-	await tick();
-
-	// Double RAF for paint completion
-	await ensure_paint();
-
-	// Microtask flush
-	await Promise.resolve();
 };
 
 // Inter-test cooldown with randomization

@@ -63,8 +63,8 @@
 		<table>
 			<thead>
 				<tr>
-					<th>Implementation</th>
 					<th>Language</th>
+					<th>Implementation</th>
 					<th>Mean (ms)</th>
 					<th>Median (ms)</th>
 					<th>Std Dev</th>
@@ -79,8 +79,8 @@
 			<tbody>
 				{#each results as result}
 					<tr>
-						<td>{result.implementation}</td>
 						<td>{result.language}</td>
+						<td>{result.implementation}</td>
 						<td>{fmt(result.mean)}</td>
 						<td>{fmt(result.median)}</td>
 						<td>{fmt(result.std_dev)}</td>

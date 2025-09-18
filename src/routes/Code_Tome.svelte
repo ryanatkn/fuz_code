@@ -8,6 +8,8 @@
 	// TODO what convention? `Docs_Tome`? Maybe just `Tome`? `/tomes`? both? what other options?
 
 	// const LIBRARY_ITEM_NAME = 'Code';
+
+	// TODO BLOCK show supported languages after the lang="ts" part
 </script>
 
 <!-- eslint-disable svelte/no-useless-mustaches -->

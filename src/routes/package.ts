@@ -25,8 +25,8 @@ export const package_json: Package_Json = {
 		test: 'gro test',
 		preview: 'vite preview',
 		deploy: 'gro deploy',
+		benchmark: 'gro run src/benchmark/run_benchmarks.ts',
 		'update-generated-fixtures': 'gro src/fixtures/update',
-		benchmark: 'vite-node src/lib/run_benchmark.ts',
 	},
 	type: 'module',
 	engines: {node: '>=22.15'},
@@ -69,7 +69,6 @@ export const package_json: Package_Json = {
 	files: ['dist', 'src/lib/**/*.ts', '!src/lib/**/*.test.*', '!dist/**/*.test.*'],
 	exports: {
 		'./package.json': './package.json',
-		'./benchmark.js': {types: './dist/benchmark.d.ts', default: './dist/benchmark.js'},
 		'./code_sample.js': {types: './dist/code_sample.d.ts', default: './dist/code_sample.js'},
 		'./Code.svelte': {
 			types: './dist/Code.svelte.d.ts',
@@ -93,7 +92,6 @@ export const package_json: Package_Json = {
 			types: './dist/highlight_manager.d.ts',
 			default: './dist/highlight_manager.js',
 		},
-		'./run_benchmark.js': {types: './dist/run_benchmark.d.ts', default: './dist/run_benchmark.js'},
 		'./samples/all.gen.js': {
 			types: './dist/samples/all.gen.d.ts',
 			default: './dist/samples/all.gen.js',
@@ -127,15 +125,6 @@ export const src_json: Src_Json = {
 	version: '0.24.0',
 	modules: {
 		'./package.json': {path: 'package.json', declarations: [{name: 'default', kind: 'json'}]},
-		'./benchmark.js': {
-			path: 'benchmark.ts',
-			declarations: [
-				{name: 'Benchmark_Result', kind: 'type'},
-				{name: 'run_benchmark', kind: 'function'},
-				{name: 'format_benchmark_results', kind: 'function'},
-				{name: 'run_and_print_benchmark', kind: 'function'},
-			],
-		},
 		'./code_sample.js': {
 			path: 'code_sample.ts',
 			declarations: [
@@ -188,7 +177,6 @@ export const src_json: Src_Json = {
 				{name: 'Highlight_Manager', kind: 'class'},
 			],
 		},
-		'./run_benchmark.js': {path: 'run_benchmark.ts'},
 		'./samples/all.gen.js': {
 			path: 'samples/all.gen.ts',
 			declarations: [{name: 'gen', kind: 'function'}],

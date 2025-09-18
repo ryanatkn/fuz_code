@@ -96,10 +96,6 @@
   ],
   "exports": {
     "./package.json": "./package.json",
-    "./benchmark.js": {
-      "types": "./dist/benchmark.d.ts",
-      "default": "./dist/benchmark.js"
-    },
     "./code_sample.js": {
       "types": "./dist/code_sample.d.ts",
       "default": "./dist/code_sample.js"
@@ -140,10 +136,6 @@
     "./highlight_manager.js": {
       "types": "./dist/highlight_manager.d.ts",
       "default": "./dist/highlight_manager.js"
-    },
-    "./run_benchmark.js": {
-      "types": "./dist/run_benchmark.d.ts",
-      "default": "./dist/run_benchmark.js"
     },
     "./samples/all.gen.js": {
       "types": "./dist/samples/all.gen.d.ts",
