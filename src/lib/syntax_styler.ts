@@ -383,7 +383,7 @@ export interface Grammar_Token {
  *
  * @example
  * var code = `var foo = 0;`;
- * var tokens = tokenize_syntax(code, Domstyler.langs.js);
+ * var tokens = tokenize_syntax(code, Syntax_Styler.langs.js);
  * for (var token of tokens) {
  *     if (token instanceof Syntax_Token && token.type === 'number') {
  *         console.log(`Found numeric literal: ${token.content}`);
