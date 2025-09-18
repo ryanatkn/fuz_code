@@ -43,12 +43,12 @@ describe('grammar mutation behavior', () => {
 		}
 
 		// Verify mutation happened (documenting expected behavior)
-		for (const [lang, original_flags] of before_flags) {
+		for (const lang of before_flags.keys()) {
 			const grammar = syntax_styler.get_lang(lang);
 			const new_flags = (grammar.string as any).pattern.flags;
 			assert.ok(
 				new_flags.includes('g'),
-				`${lang} string pattern should have global flag after use`
+				`${lang} string pattern should have global flag after use`,
 			);
 		}
 	});
@@ -433,7 +433,7 @@ describe('pattern flag edge cases', () => {
 		);
 		assert.equal(
 			(grammar.case_insensitive as any).pattern.flags,
-			'gi',  // Now has both flags
+			'gi', // Now has both flags
 			'Pattern gains global flag',
 		);
 	});
