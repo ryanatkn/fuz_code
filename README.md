@@ -13,7 +13,7 @@ The main changes:
 - has a minimal and explicit API to generate stylized HTML, and knows nothing about the DOM
 - uses stateless ES modules, instead of globals with side effects and pseudo-module behaviors
 - has various incompatible changes, so using Prism grammars requires some tweaks
-- smaller (by 7kB minified and 3kB gzipped, ~1/3 less) and [faster](#benchmarks)
+- smaller (by 7kB minified and 3kB gzipped, ~1/3 less)
 - written in TypeScript
 - is a fork, see the [MIT license](https://github.com/ryanatkn/fuz_code/blob/main/LICENSE)
 
@@ -127,17 +127,6 @@ Please open issues if you need any help.
 - add some useful plugins, flesh out the API (start with line emphasis)
 - improve the TypeScript grammar to tokenize types
 - improve the grammars in subtle ways
-
-## Benchmarks
-
-Performance is prioritized for dynamic runtime usage, as opposed to static pre-generation.
-See [`./benchmark/`](./benchmark/) for detailed benchmarking setup and results.
-
-To run the benchmarks:
-
-```bash
-npm run benchmark
-```
 
 ## License [🐦](https://wikipedia.org/wiki/Free_and_open-source_software)
 

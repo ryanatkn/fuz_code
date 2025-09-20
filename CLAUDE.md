@@ -22,6 +22,7 @@ gro test                            # Run all tests
 gro test src/fixtures/check.test.ts # Verify fixture generation
 gro src/fixtures/update             # Regenerate fixtures
 npm run benchmark                   # Run performance benchmarks
+npm run benchmark-compare           # Compare performance with Prism and Shiki
 ```
 
 ## Architecture
@@ -194,6 +195,7 @@ npm run benchmark-compare   # Compare with Prism and Shiki
 **Internal benchmark** tests fuz_code performance across all sample files with small and large (100x) content.
 
 **Comparison benchmark** (`./benchmark/compare/`) tests fuz_code against:
+
 - Prism - Similar regex-based approach
 - Shiki JS - JavaScript regex engine
 - Shiki Oniguruma - Full TextMate grammar engine
