@@ -1,122 +1,46 @@
 # Syntax Highlighting Performance Comparison
 
-Comparing fuz_code vs Prism vs Shiki across multiple languages and content sizes.
-
-## Setup
-
-This benchmark compares four implementations:
-
-- **fuz_code**: The main project's syntax highlighter
-- **Prism**: Established regex-based highlighter
-- **Shiki JS**: Shiki with JavaScript regex engine
-- **Shiki Oniguruma**: Shiki with full TextMate engine
-
-## Test Matrix
-
-**Languages tested:**
-
-- TypeScript (`ts`)
-- CSS (`css`)
-- HTML (`html`)
-- JSON (`json`)
-- Svelte (`svelte`)
-
-**Content sizes:**
-
-- **small**: Original sample files (~100-500 lines)
-- **large**: 100x repetition of sample content
-
-## Running the Benchmark
-
-```bash
-# Run all languages
-npm run benchmark-compare
-
-# Filter by language
-npm run benchmark-compare ts
-npm run benchmark-compare css
-```
-
 ## Results
 
-_(Results will be generated when benchmark is run)_
-
-## Notes
-
-- **Performance context**: These results reflect runtime syntax highlighting performance
-- **Fair comparison**: All implementations use the same sample content
-- **Engine differences**:
-  - fuz_code & Prism use JavaScript regex engines
-  - Shiki JS uses JavaScript regex (similar performance profile)
-  - Shiki Oniguruma uses WebAssembly TextMate engine (more accurate, slower)
-- **Use cases**: Different tools optimized for different scenarios
-  - fuz_code: Optimized for runtime usage
-  - Prism: General-purpose, established ecosystem
-  - Shiki: Primarily designed for build-time usage
-
-## Environment
-
-- Node.js version and system specs will vary
-- Benchmark uses `tinybench` with 5s runtime per test
-- Results include ops/sec, mean time, and sample count
-
-## Results
-
-| Implementation | Language  | Content Size | Ops/sec  | Mean Time (ms) | Samples |
-| -------------- | --------- | ------------ | -------- | -------------- | ------- |
-| fuz            | code      | css          | 26273.45 | 0.0416         | 120278  |
-| fuz            | code      | css          | 226.93   | 4.5105         | 1109    |
-| fuz            | code      | html         | 11995.02 | 0.0918         | 54491   |
-| fuz            | code      | html         | 84.50    | 12.2158        | 410     |
-| fuz            | code      | json         | 29091.49 | 0.0386         | 129534  |
-| fuz            | code      | json         | 240.52   | 4.2820         | 1168    |
-| fuz            | code      | svelte       | 2345.87  | 0.4445         | 11250   |
-| fuz            | code      | svelte       | 13.76    | 73.3339        | 69      |
-| fuz            | code      | ts           | 5396.05  | 0.1953         | 25606   |
-| fuz            | code      | ts           | 31.72    | 32.0142        | 157     |
-| prism          | css       | large        | 185.40   | 5.5851         | 896     |
-| prism          | css       | small        | 23556.26 | 0.0466         | 107390  |
-| prism          | html      | large        | 88.14    | 11.6189        | 431     |
-| prism          | html      | small        | 12839.92 | 0.0860         | 58121   |
-| shiki          | js        | css          | 1366.69  | 0.7446         | 6716    |
-| shiki          | js        | css          | 13.80    | 72.6286        | 69      |
-| shiki          | js        | html         | 794.03   | 1.2694         | 3939    |
-| shiki          | js        | html         | 8.01     | 124.9942       | 64      |
-| shiki          | js        | json         | 1949.40  | 0.5263         | 9501    |
-| shiki          | js        | json         | 19.04    | 52.6481        | 95      |
-| shiki          | js        | svelte       | 50.85    | 19.6725        | 255     |
-| shiki          | js        | svelte       | 0.49     | 2030.3752      | 64      |
-| shiki          | js        | ts           | 140.29   | 7.1358         | 701     |
-| shiki          | js        | ts           | 1.39     | 721.4038       | 64      |
-| prism          | json      | large        | 195.73   | 5.3808         | 930     |
-| prism          | json      | small        | 26472.38 | 0.0423         | 118284  |
-| shiki          | oniguruma | css          | 646.98   | 1.5523         | 3221    |
-| shiki          | oniguruma | css          | 6.55     | 152.7431       | 64      |
-| shiki          | oniguruma | html         | 785.87   | 1.2810         | 3904    |
-| shiki          | oniguruma | html         | 7.99     | 125.1391       | 64      |
-| shiki          | oniguruma | json         | 1799.58  | 0.5658         | 8838    |
-| shiki          | oniguruma | json         | 17.80    | 56.2871        | 89      |
-| shiki          | oniguruma | svelte       | 60.83    | 16.4459        | 305     |
-| shiki          | oniguruma | svelte       | 0.58     | 1711.3046      | 64      |
-| shiki          | oniguruma | ts           | 204.70   | 4.8918         | 1023    |
-| shiki          | oniguruma | ts           | 1.96     | 511.7807       | 64      |
-| prism          | svelte    | large        | 11.59    | 86.7170        | 64      |
-| prism          | svelte    | small        | 2040.72  | 0.5084         | 9835    |
-| prism          | ts        | large        | 22.29    | 45.1674        | 111     |
-| prism          | ts        | small        | 4697.92  | 0.2224         | 22479   |
-
-## Summary
-
-- **fuz**: 7569.93 avg ops/sec, 12.7168ms avg time
-- **prism**: 7011.04 avg ops/sec, 15.5375ms avg time
-- **shiki**: 393.84 avg ops/sec, 280.6695ms avg time
-
-## Notes
-
-- **fuz_code**: Optimized for runtime usage with regex-based tokenization
-- **Prism**: Established regex-based highlighter, similar approach to fuz_code
-- **Shiki JS**: JavaScript regex engine, lighter than Oniguruma
-- **Shiki Oniguruma**: Full TextMate engine, more accurate but slower
-- **Content sizes**: "small" = original samples, "large" = 100x repetition
-
-Generated: 2025-09-20T13:29:39.672Z
+| Language | Content Size | Implementation  | %    | Ops/sec  | Mean Time (ms) | Samples | Total (ms) |
+| -------- | ------------ | --------------- | ---- | -------- | -------------- | ------- | ---------- |
+| css      | small        | fuz_code        | 100% | 26158.09 | 0.0427         | 234426  | 10000.0    |
+| css      | small        | prism           | 90%  | 23484.90 | 0.0478         | 209059  | 10000.0    |
+| css      | small        | shiki_js        | 5%   | 1327.34  | 0.7699         | 12989   | 10000.0    |
+| css      | small        | shiki_oniguruma | 2%   | 621.90   | 1.6248         | 6155    | 10000.6    |
+| css      | large        | fuz_code        | 100% | 223.32   | 4.6281         | 2161    | 10001.3    |
+| css      | large        | prism           | 82%  | 183.72   | 5.6730         | 1763    | 10001.5    |
+| css      | large        | shiki_js        | 6%   | 13.59    | 73.7463        | 136     | 10029.5    |
+| css      | large        | shiki_oniguruma | 3%   | 6.45     | 155.0611       | 65      | 10079.0    |
+| html     | small        | prism           | 100% | 12755.60 | 0.0872         | 114669  | 10000.1    |
+| html     | small        | fuz_code        | 95%  | 12171.61 | 0.0917         | 109036  | 10000.0    |
+| html     | small        | shiki_js        | 6%   | 781.23   | 1.2930         | 7734    | 10000.4    |
+| html     | small        | shiki_oniguruma | 6%   | 768.87   | 1.3152         | 7604    | 10000.7    |
+| html     | large        | prism           | 100% | 86.72    | 11.8917        | 841     | 10000.9    |
+| html     | large        | fuz_code        | 94%  | 81.75    | 12.8460        | 779     | 10007.0    |
+| html     | large        | shiki_js        | 9%   | 8.09     | 123.7635       | 81      | 10024.8    |
+| html     | large        | shiki_oniguruma | 9%   | 7.75     | 129.2517       | 78      | 10081.6    |
+| json     | small        | fuz_code        | 100% | 29618.39 | 0.0388         | 257616  | 10000.0    |
+| json     | small        | prism           | 88%  | 26112.07 | 0.0430         | 232559  | 10000.0    |
+| json     | small        | shiki_js        | 7%   | 1933.63  | 0.5351         | 18691   | 10000.8    |
+| json     | small        | shiki_oniguruma | 6%   | 1766.19  | 0.5837         | 17132   | 10000.0    |
+| json     | large        | fuz_code        | 100% | 243.97   | 4.2315         | 2364    | 10003.2    |
+| json     | large        | prism           | 78%  | 189.88   | 5.6221         | 1779    | 10001.8    |
+| json     | large        | shiki_js        | 8%   | 18.52    | 54.1609        | 185     | 10019.8    |
+| json     | large        | shiki_oniguruma | 7%   | 16.93    | 59.3025        | 169     | 10022.1    |
+| svelte   | small        | fuz_code        | 100% | 2267.74  | 0.4721         | 21184   | 10000.0    |
+| svelte   | small        | prism           | 90%  | 2043.19  | 0.5110         | 19571   | 10000.3    |
+| svelte   | small        | shiki_oniguruma | 3%   | 65.99    | 15.1656        | 660     | 10009.3    |
+| svelte   | small        | shiki_js        | 2%   | 53.46    | 18.7112        | 535     | 10010.5    |
+| svelte   | large        | fuz_code        | 100% | 14.15    | 71.3003        | 141     | 10053.3    |
+| svelte   | large        | prism           | 81%  | 11.46    | 87.8017        | 114     | 10009.4    |
+| svelte   | large        | shiki_oniguruma | 4%   | 0.62     | 1615.1240      | 7       | 11305.9    |
+| svelte   | large        | shiki_js        | 4%   | 0.50     | 1991.9609      | 6       | 11951.8    |
+| ts       | small        | fuz_code        | 100% | 5257.39  | 0.2009         | 49789   | 10000.2    |
+| ts       | small        | prism           | 90%  | 4745.15  | 0.2203         | 45384   | 10000.1    |
+| ts       | small        | shiki_oniguruma | 4%   | 199.88   | 5.0115         | 1996    | 10002.9    |
+| ts       | small        | shiki_js        | 3%   | 135.34   | 7.4001         | 1352    | 10004.9    |
+| ts       | large        | fuz_code        | 100% | 31.25    | 32.4047        | 309     | 10013.1    |
+| ts       | large        | prism           | 73%  | 22.91    | 43.9850        | 228     | 10028.6    |
+| ts       | large        | shiki_oniguruma | 6%   | 1.95     | 511.8613       | 20      | 10237.2    |
+| ts       | large        | shiki_js        | 4%   | 1.36     | 736.0991       | 14      | 10305.4    |

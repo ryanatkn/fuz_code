@@ -187,13 +187,18 @@ Generated fixtures in `src/fixtures/{lang}/`:
 ### Benchmarking
 
 ```bash
-npm run benchmark
+npm run benchmark           # Internal performance benchmark
+npm run benchmark-compare   # Compare with Prism and Shiki
 ```
 
-Compares the two modes:
+**Internal benchmark** tests fuz_code performance across all sample files with small and large (100x) content.
 
-- `syntax_html` - Traditional HTML generation
-- `syntax_ranges` - Force CSS Highlights
+**Comparison benchmark** (`./benchmark/compare/`) tests fuz_code against:
+- Prism - Similar regex-based approach
+- Shiki JS - JavaScript regex engine
+- Shiki Oniguruma - Full TextMate grammar engine
+
+Results show relative performance (% of fastest) for each language and content size.
 
 ### Optimization Notes
 

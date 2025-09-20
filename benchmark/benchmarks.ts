@@ -5,6 +5,11 @@ import {syntax_styler_global} from '../src/lib/syntax_styler_global.js';
 
 /* eslint-disable no-console */
 
+const BENCHMARK_TIME = 10000;
+const WARMUP_TIME = 1000;
+const WARMUP_ITERATIONS = 50;
+const LARGE_CONTENT_MULTIPLIER = 100;
+
 export interface Benchmark_Result {
 	name: string;
 	ops_per_sec: number;
@@ -14,9 +19,9 @@ export interface Benchmark_Result {
 
 export const run_benchmark = async (filter?: string): Promise<Array<Benchmark_Result>> => {
 	const bench = new Bench({
-		time: 10000,
-		warmupTime: 1000,
-		warmupIterations: 50,
+		time: BENCHMARK_TIME,
+		warmupTime: WARMUP_TIME,
+		warmupIterations: WARMUP_ITERATIONS,
 	});
 
 	const samples = Object.values(all_samples);
@@ -44,7 +49,7 @@ export const run_benchmark = async (filter?: string): Promise<Array<Benchmark_Re
 			continue;
 		}
 
-		const large_content = sample.content.repeat(100);
+		const large_content = sample.content.repeat(LARGE_CONTENT_MULTIPLIER);
 
 		bench.add(`large:${sample.name}`, () => {
 			syntax_styler_global.stylize(large_content, sample.lang);

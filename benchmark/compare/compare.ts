@@ -26,6 +26,12 @@ import {syntax_styler_global} from '../../src/lib/syntax_styler_global.js';
 
 /* eslint-disable no-console */
 
+const BENCHMARK_TIME = 10000; //  10000
+const WARMUP_TIME = 1000; //  1000
+const WARMUP_ITERATIONS = 20; //  20
+const LARGE_CONTENT_MULTIPLIER = 100; //  100
+const MIN_ITERATIONS = 3; // Tiny minimum samples cause of Shiki's pathological cases with TS
+
 export interface Comparison_Result {
 	implementation: string;
 	language: string;
@@ -33,9 +39,9 @@ export interface Comparison_Result {
 	mean_time: number;
 	samples: number;
 	content_size: 'small' | 'large';
+	total_time: number;
 }
 
-// Language mapping between different systems
 const LANGUAGE_MAP = {
 	ts: {
 		prism: 'typescript',
@@ -71,7 +77,6 @@ const LANGUAGE_MAP = {
 
 type SupportedLanguage = keyof typeof LANGUAGE_MAP;
 
-// Setup Shiki highlighters
 const setupShiki = async () => {
 	const langs = [typescript, javascript, css, html, json, svelte];
 
@@ -90,22 +95,22 @@ const setupShiki = async () => {
 	return {shiki_js, shiki_oniguruma};
 };
 
-// Get sample content for a language
 const getSampleContent = (lang: SupportedLanguage, large = false) => {
 	const sample = Object.values(all_samples).find((s) => s.lang === LANGUAGE_MAP[lang].fuz);
 	if (!sample) {
 		throw new Error(`No sample found for language: ${lang}`);
 	}
-	return large ? sample.content.repeat(100) : sample.content;
+	return large ? sample.content.repeat(LARGE_CONTENT_MULTIPLIER) : sample.content;
 };
 
 export const run_comparison_benchmark = async (
 	filter?: string,
 ): Promise<Array<Comparison_Result>> => {
 	const bench = new Bench({
-		time: 5000,
-		warmupTime: 1000,
-		warmupIterations: 20,
+		time: BENCHMARK_TIME,
+		warmupTime: WARMUP_TIME,
+		warmupIterations: WARMUP_ITERATIONS,
+		iterations: MIN_ITERATIONS,
 	});
 
 	// Setup Shiki
@@ -166,14 +171,42 @@ export const run_comparison_benchmark = async (
 
 	for (const task of bench.tasks) {
 		if (task.result) {
-			const [implementation, language, size] = task.name.split('_');
+			// Parse benchmark name: implementation_language_size
+			// Handle multi-word implementations like 'fuz_code' and 'shiki_js'
+			const parts = task.name.split('_');
+			let implementation: string;
+			let language: string;
+			let content_size: 'small' | 'large';
+
+			if (task.name.startsWith('fuz_code_')) {
+				implementation = 'fuz_code';
+				language = parts[2];
+				content_size = parts[3] as 'small' | 'large';
+			} else if (task.name.startsWith('shiki_js_')) {
+				implementation = 'shiki_js';
+				language = parts[2];
+				content_size = parts[3] as 'small' | 'large';
+			} else if (task.name.startsWith('shiki_oniguruma_')) {
+				implementation = 'shiki_oniguruma';
+				language = parts[2];
+				content_size = parts[3] as 'small' | 'large';
+			} else if (task.name.startsWith('prism_')) {
+				implementation = 'prism';
+				language = parts[1];
+				content_size = parts[2] as 'small' | 'large';
+			} else {
+				console.warn(`Unknown benchmark name format: ${task.name}`);
+				continue;
+			}
+
 			results.push({
 				implementation,
 				language,
 				ops_per_sec: task.result.throughput.mean,
 				mean_time: task.result.latency.mean,
 				samples: task.result.latency.samples.length,
-				content_size: size as 'small' | 'large',
+				content_size,
+				total_time: task.result.totalTime,
 			});
 		}
 	}
@@ -189,56 +222,47 @@ export const format_comparison_results = (results: Array<Comparison_Result>): st
 		'',
 		'## Results',
 		'',
-		'| Implementation | Language | Content Size | Ops/sec | Mean Time (ms) | Samples |',
-		'|----------------|----------|--------------|---------|----------------|---------|',
+		'| Language+Size | Impl | % | Ops/sec | Mean Time (ms) | Samples | Total (ms) |',
+		'|---------------|------|---|---------|----------------|---------|------------|',
 	];
 
-	// Sort results for better readability
+	// Group results by language+size to find fastest in each group
+	const grouped = new Map<string, Array<Comparison_Result>>();
+	for (const result of results) {
+		const key = `${result.language}_${result.content_size}`;
+		const group = grouped.get(key) || [];
+		group.push(result);
+		grouped.set(key, group);
+	}
+
+	// Calculate fastest ops/sec for each group
+	const fastest_by_group = new Map<string, number>();
+	for (const [key, group] of grouped) {
+		const fastest = Math.max(...group.map((r) => r.ops_per_sec));
+		fastest_by_group.set(key, fastest);
+	}
+
+	// Sort by: language -> content_size (small first) -> ops/sec (fastest first)
 	const sorted_results = results.sort((a, b) => {
 		if (a.language !== b.language) return a.language.localeCompare(b.language);
-		if (a.content_size !== b.content_size) return a.content_size.localeCompare(b.content_size);
+		if (a.content_size !== b.content_size) return a.content_size === 'small' ? -1 : 1;
 		return b.ops_per_sec - a.ops_per_sec; // Fastest first
 	});
 
 	for (const result of sorted_results) {
-		const impl = result.implementation.replace('_', ' ');
+		const group_key = `${result.language}_${result.content_size}`;
+		const fastest = fastest_by_group.get(group_key) || 1;
+		const percent = ((result.ops_per_sec / fastest) * 100).toFixed(0);
+
 		const ops = result.ops_per_sec.toFixed(2);
 		const time = result.mean_time.toFixed(4);
+		// Use this to diagnose pathological cases to tweak `MIN_ITERATIONS`
+		// const total_time = result.total_time.toFixed(1);
+
 		lines.push(
-			`| ${impl} | ${result.language} | ${result.content_size} | ${ops} | ${time} | ${result.samples} |`,
+			`| ${result.language} ${result.content_size} | ${result.implementation} | ${percent}% | ${ops} | ${time} | ${result.samples} |`,
 		);
 	}
-
-	lines.push('');
-	lines.push('## Summary');
-	lines.push('');
-
-	// Calculate averages by implementation
-	const by_impl = new Map<string, Array<Comparison_Result>>();
-	for (const result of results) {
-		const impl_results = by_impl.get(result.implementation) || [];
-		impl_results.push(result);
-		by_impl.set(result.implementation, impl_results);
-	}
-
-	for (const [impl, impl_results] of by_impl) {
-		const avg_ops = impl_results.reduce((sum, r) => sum + r.ops_per_sec, 0) / impl_results.length;
-		const avg_time = impl_results.reduce((sum, r) => sum + r.mean_time, 0) / impl_results.length;
-		lines.push(
-			`- **${impl.replace('_', ' ')}**: ${avg_ops.toFixed(2)} avg ops/sec, ${avg_time.toFixed(4)}ms avg time`,
-		);
-	}
-
-	lines.push('');
-	lines.push('## Notes');
-	lines.push('');
-	lines.push('- **fuz_code**: Optimized for runtime usage with regex-based tokenization');
-	lines.push('- **Prism**: Established regex-based highlighter, similar approach to fuz_code');
-	lines.push('- **Shiki JS**: JavaScript regex engine, lighter than Oniguruma');
-	lines.push('- **Shiki Oniguruma**: Full TextMate engine, more accurate but slower');
-	lines.push('- **Content sizes**: "small" = original samples, "large" = 100x repetition');
-	lines.push('');
-	lines.push(`Generated: ${new Date().toISOString()}`);
 
 	return lines.join('\n');
 };
