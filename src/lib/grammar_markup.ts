@@ -20,7 +20,8 @@ export const add_grammar_markup: Add_Grammar = (syntax_styler) => {
 		},
 		// https://www.w3.org/TR/xml/#NT-doctypedecl
 		doctype: {
-			pattern: /<!DOCTYPE.*>/i, // vastly simplified compared to the original implementation, but may be lacking in some cases
+			pattern: /<!DOCTYPE[^>]*>/i,
+			greedy: true,
 		},
 		cdata: {
 			pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
