@@ -1,8 +1,7 @@
 import {Bench} from 'tinybench';
 
-import {samples as all_samples} from '$lib/samples/all.js';
-import {syntax_styler_global} from '$lib/syntax_styler_global.js';
-import {generate_large_content} from './generate_benchmark_content.js';
+import {samples as all_samples} from '../src/lib/samples/all.js';
+import {syntax_styler_global} from '../src/lib/syntax_styler_global.js';
 
 /* eslint-disable no-console */
 
@@ -32,15 +31,20 @@ export const run_benchmark = async (filter?: string): Promise<Array<Benchmark_Re
 		});
 	}
 
-	// Add large content benchmarks (100x multiplier) for all languages with complex samples
+	// Add large content benchmarks (100x repetition)
 	const complex_samples = Object.values(all_samples).filter((s) => s.name.includes('complex'));
 	for (const sample of complex_samples) {
 		// Skip if filter is specified and doesn't match this sample
-		if (filter && !sample.name.includes(filter) && !sample.lang.includes(filter) && filter !== sample.lang) {
+		if (
+			filter &&
+			!sample.name.includes(filter) &&
+			!sample.lang.includes(filter) &&
+			filter !== sample.lang
+		) {
 			continue;
 		}
 
-		const large_content = generate_large_content(sample.content, sample.lang, 100);
+		const large_content = sample.content.repeat(100);
 
 		bench.add(`large:${sample.name}`, () => {
 			syntax_styler_global.stylize(large_content, sample.lang);

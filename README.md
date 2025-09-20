@@ -130,84 +130,13 @@ Please open issues if you need any help.
 
 ## Benchmarks
 
-Performance is a high priority to best support runtime usage.
-This project is still early and there are more gains to be had.
+Performance is prioritized for dynamic runtime usage, as opposed to static pre-generation.
+See [`./benchmark/`](./benchmark/) for detailed benchmarking setup and results.
 
-Note that this benchmark is somewhat unfair to Shiki
-because it's not designed for runtime usage,
-and it probably does a significantly better job at the task at hand
-because it uses TextMate grammars.
-
-Results styling the Svelte sample:
-
-| Task name               | Throughput average (ops/s) | Throughput median (ops/s) | Samples |
-| ----------------------- | -------------------------- | ------------------------- | ------- |
-| syntax_styler.stylize   | 3149 ± 0.56%               | 3333                      | 6004    |
-| Prism.highlight         | 2748 ± 0.51%               | 2500                      | 5293    |
-| Shiki engine/javascript | 69 ± 0.59%                 | 69                        | 138     |
-| Shiki engine/oniguruma  | 41 ± 0.27%                 | 40                        | 82      |
-
-Directly runnable benchmarks are not included yet -
-I don't know if I'll add them here or make a separate project.
-
-To run the benchmarks yourself:
+To run the benchmarks:
 
 ```bash
-npm i -D shiki prismjs prism-svelte @types/prismjs @ryanatkn/fuz_code
-```
-
-Then add this file and import it somewhere like `$routes/+page.svelte`:
-
-```ts
-// $lib/benchmark.ts
-
-import {Bench} from 'tinybench';
-import Prism from 'prismjs';
-import 'prism-svelte';
-import {createHighlighterCoreSync} from 'shiki/core';
-import {createJavaScriptRegexEngine} from 'shiki/engine/javascript';
-import svelte_shiki from 'shiki/langs/svelte.mjs';
-import nord from 'shiki/themes/nord.mjs';
-import {createOnigurumaEngine} from 'shiki/engine/oniguruma';
-
-import {syntax_styler} from '$lib/index.js';
-import {samples} from '$lib/samples/all.js';
-
-const sample_svelte_code = samples.svelte_complex.content;
-
-console.log('benchmarking');
-const bench = new Bench({name: 'syntax styling', time: 2000});
-
-const shiki_highlighter_js = createHighlighterCoreSync({
-	themes: [nord],
-	langs: [svelte_shiki],
-	engine: createJavaScriptRegexEngine(),
-});
-
-const shiki_highlighter_builtin = createHighlighterCoreSync({
-	themes: [nord],
-	langs: [svelte_shiki],
-	engine: await createOnigurumaEngine(import('shiki/wasm')),
-});
-
-bench
-	.add('syntax_styler.stylize', () => {
-		syntax_styler.stylize(sample_svelte_code, 'svelte');
-	})
-	.add('Prism.highlight', () => {
-		Prism.highlight(sample_svelte_code, Prism.langs.svelte, 'svelte');
-	})
-	.add('Shiki engine/javascript', () => {
-		shiki_highlighter_js.codeToHtml(sample_svelte_code, {lang: 'svelte', theme: 'nord'});
-	})
-	.add('Shiki engine/oniguruma', () => {
-		shiki_highlighter_builtin.codeToHtml(sample_svelte_code, {lang: 'svelte', theme: 'nord'});
-	});
-
-await bench.run();
-
-console.log(bench.name);
-console.table(bench.table());
+npm run benchmark
 ```
 
 ## License [🐦](https://wikipedia.org/wiki/Free_and_open-source_software)
