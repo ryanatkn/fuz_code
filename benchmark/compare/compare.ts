@@ -23,6 +23,7 @@ import nord from 'shiki/themes/nord.mjs';
 // Fuz Code imports
 import {samples as all_samples} from '../../src/lib/samples/all.js';
 import {syntax_styler_global} from '../../src/lib/syntax_styler_global.js';
+import {tokenize_syntax} from '../../src/lib/syntax_styler.js';
 
 /* eslint-disable no-console */
 
@@ -40,6 +41,7 @@ export interface Comparison_Result {
 	samples: number;
 	content_size: 'small' | 'large';
 	total_time: number;
+	operation: 'tokenize' | 'stylize';
 }
 
 const LANGUAGE_MAP = {
@@ -137,27 +139,41 @@ export const run_comparison_benchmark = async (
 			const content = getSampleContent(lang, large);
 			const size_label = large ? 'large' : 'small';
 
-			// Fuz Code benchmark
-			bench.add(`fuz_code_${lang}_${size_label}`, () => {
+			// Tokenization benchmarks (fuz_code and Prism only)
+			// Fuz Code tokenize benchmark
+			bench.add(`fuz_code_tokenize_${lang}_${size_label}`, () => {
+				tokenize_syntax(content, syntax_styler_global.get_lang(fuz_lang));
+			});
+
+			// Prism tokenize benchmark
+			if (Prism.languages[prism_lang]) {
+				bench.add(`prism_tokenize_${lang}_${size_label}`, () => {
+					Prism.tokenize(content, Prism.languages[prism_lang]);
+				});
+			}
+
+			// Stylization benchmarks (all implementations)
+			// Fuz Code stylize benchmark
+			bench.add(`fuz_code_stylize_${lang}_${size_label}`, () => {
 				syntax_styler_global.stylize(content, fuz_lang);
 			});
 
-			// Prism benchmark
+			// Prism stylize benchmark
 			if (Prism.languages[prism_lang]) {
-				bench.add(`prism_${lang}_${size_label}`, () => {
+				bench.add(`prism_stylize_${lang}_${size_label}`, () => {
 					Prism.highlight(content, Prism.languages[prism_lang], prism_lang);
 				});
 			} else {
-				console.warn(`Prism language not available: ${prism_lang}`);
+				throw new Error(`Prism language not available: ${prism_lang}`);
 			}
 
 			// Shiki JavaScript engine benchmark
-			bench.add(`shiki_js_${lang}_${size_label}`, () => {
+			bench.add(`shiki_js_stylize_${lang}_${size_label}`, () => {
 				shiki_js.codeToHtml(content, {lang: shiki_lang, theme: 'nord'});
 			});
 
 			// Shiki Oniguruma engine benchmark
-			bench.add(`shiki_oniguruma_${lang}_${size_label}`, () => {
+			bench.add(`shiki_oniguruma_stylize_${lang}_${size_label}`, () => {
 				shiki_oniguruma.codeToHtml(content, {lang: shiki_lang, theme: 'nord'});
 			});
 		}
@@ -171,29 +187,44 @@ export const run_comparison_benchmark = async (
 
 	for (const task of bench.tasks) {
 		if (task.result) {
-			// Parse benchmark name: implementation_language_size
+			// Parse benchmark name: implementation_operation_language_size
 			// Handle multi-word implementations like 'fuz_code' and 'shiki_js'
 			const parts = task.name.split('_');
 			let implementation: string;
+			let operation: 'tokenize' | 'stylize';
 			let language: string;
 			let content_size: 'small' | 'large';
 
-			if (task.name.startsWith('fuz_code_')) {
+			if (task.name.startsWith('fuz_code_tokenize_')) {
 				implementation = 'fuz_code';
-				language = parts[2];
-				content_size = parts[3] as 'small' | 'large';
-			} else if (task.name.startsWith('shiki_js_')) {
-				implementation = 'shiki_js';
-				language = parts[2];
-				content_size = parts[3] as 'small' | 'large';
-			} else if (task.name.startsWith('shiki_oniguruma_')) {
-				implementation = 'shiki_oniguruma';
-				language = parts[2];
-				content_size = parts[3] as 'small' | 'large';
-			} else if (task.name.startsWith('prism_')) {
+				operation = 'tokenize';
+				language = parts[3];
+				content_size = parts[4] as 'small' | 'large';
+			} else if (task.name.startsWith('fuz_code_stylize_')) {
+				implementation = 'fuz_code';
+				operation = 'stylize';
+				language = parts[3];
+				content_size = parts[4] as 'small' | 'large';
+			} else if (task.name.startsWith('prism_tokenize_')) {
 				implementation = 'prism';
-				language = parts[1];
-				content_size = parts[2] as 'small' | 'large';
+				operation = 'tokenize';
+				language = parts[2];
+				content_size = parts[3] as 'small' | 'large';
+			} else if (task.name.startsWith('prism_stylize_')) {
+				implementation = 'prism';
+				operation = 'stylize';
+				language = parts[2];
+				content_size = parts[3] as 'small' | 'large';
+			} else if (task.name.startsWith('shiki_js_stylize_')) {
+				implementation = 'shiki_js';
+				operation = 'stylize';
+				language = parts[3];
+				content_size = parts[4] as 'small' | 'large';
+			} else if (task.name.startsWith('shiki_oniguruma_stylize_')) {
+				implementation = 'shiki_oniguruma';
+				operation = 'stylize';
+				language = parts[3];
+				content_size = parts[4] as 'small' | 'large';
 			} else {
 				console.warn(`Unknown benchmark name format: ${task.name}`);
 				continue;
@@ -207,6 +238,7 @@ export const run_comparison_benchmark = async (
 				samples: task.result.latency.samples.length,
 				content_size,
 				total_time: task.result.totalTime,
+				operation,
 			});
 		}
 	}
@@ -222,14 +254,14 @@ export const format_comparison_results = (results: Array<Comparison_Result>): st
 		'',
 		'## Results',
 		'',
-		'| Language+Size | Impl | % | Ops/sec | Mean Time (ms) | Samples | Total (ms) |',
-		'|---------------|------|---|---------|----------------|---------|------------|',
+		'| Language+Operation+Size | Implementation | % | Ops/sec | Mean Time (ms) |',
+		'|-------------------------|----------------|---|---------|----------------|',
 	];
 
-	// Group results by language+size to find fastest in each group
+	// Group results by language+operation+size to find fastest in each group
 	const grouped = new Map<string, Array<Comparison_Result>>();
 	for (const result of results) {
-		const key = `${result.language}_${result.content_size}`;
+		const key = `${result.language}_${result.operation}_${result.content_size}`;
 		const group = grouped.get(key) || [];
 		group.push(result);
 		grouped.set(key, group);
@@ -242,15 +274,16 @@ export const format_comparison_results = (results: Array<Comparison_Result>): st
 		fastest_by_group.set(key, fastest);
 	}
 
-	// Sort by: language -> content_size (small first) -> ops/sec (fastest first)
+	// Sort by: language -> operation (tokenize first) -> content_size (small first) -> ops/sec (fastest first)
 	const sorted_results = results.sort((a, b) => {
 		if (a.language !== b.language) return a.language.localeCompare(b.language);
+		if (a.operation !== b.operation) return a.operation === 'tokenize' ? -1 : 1;
 		if (a.content_size !== b.content_size) return a.content_size === 'small' ? -1 : 1;
 		return b.ops_per_sec - a.ops_per_sec; // Fastest first
 	});
 
 	for (const result of sorted_results) {
-		const group_key = `${result.language}_${result.content_size}`;
+		const group_key = `${result.language}_${result.operation}_${result.content_size}`;
 		const fastest = fastest_by_group.get(group_key) || 1;
 		const percent = ((result.ops_per_sec / fastest) * 100).toFixed(0);
 
@@ -260,7 +293,7 @@ export const format_comparison_results = (results: Array<Comparison_Result>): st
 		// const total_time = result.total_time.toFixed(1);
 
 		lines.push(
-			`| ${result.language} ${result.content_size} | ${result.implementation} | ${percent}% | ${ops} | ${time} | ${result.samples} |`,
+			`| ${result.language} ${result.operation} ${result.content_size} | ${result.implementation} | ${percent}% | ${ops} | ${time} |`,
 		);
 	}
 
