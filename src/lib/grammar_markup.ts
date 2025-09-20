@@ -14,7 +14,7 @@ export const add_grammar_markup: Add_Grammar = (syntax_styler) => {
 			pattern: /<!--(?:(?!<!--)[\s\S])*?-->/,
 			greedy: true,
 		},
-		prolog: {
+		processing_instruction: {
 			pattern: /<\?[\s\S]+?\?>/,
 			greedy: true,
 		},

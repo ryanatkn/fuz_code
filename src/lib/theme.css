@@ -8,7 +8,7 @@ This is the default CSS file that styles the output HTML of `stylize`.
 
 .token.comment,
 .token.attr_equals,
-.token.prolog,
+.token.processing_instruction,
 .token.doctype,
 .token.cdata,
 .token.punctuation {
