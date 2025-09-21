@@ -560,14 +560,3 @@ describe('tokenization consistency', () => {
 		assert.ok(result.includes(long_content), 'Should preserve long string content');
 	});
 });
-
-// Future test ideas:
-// - Test cache hit rate improvements after implementation
-// - Test cache handles different flag combinations
-// - Test cache size remains bounded
-// - Test clear_pattern_cache resets everything
-// - Test patterns with all possible regex flags (gimsuvy)
-// - Test pattern cache effectiveness with large files
-// - Test memory usage before/after cache implementation
-// - Test that cached patterns are reused across different text inputs
-// - Test circular grammar references don't break caching

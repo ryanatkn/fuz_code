@@ -1,5 +1,7 @@
 <script lang="ts">
+	import Copy_To_Clipboard from '@ryanatkn/fuz/Copy_To_Clipboard.svelte';
 	import {fmt} from './benchmark_stats.js';
+	import {RESULT_COLUMNS, results_to_markdown} from './benchmark_results.js';
 	import type {Benchmark_Result, Summary_Stats} from './benchmark_types.js';
 
 	const {
@@ -63,43 +65,29 @@
 		<table>
 			<thead>
 				<tr>
-					<th>Language</th>
-					<th>Implementation</th>
-					<th>Mean (ms)</th>
-					<th>Median (ms)</th>
-					<th>Std Dev</th>
-					<th>CV</th>
-					<th>P95 (ms)</th>
-					<th>Ops/sec</th>
-					<th>Outliers</th>
-					<th>Failed</th>
-					<th>Stability</th>
+					{#each RESULT_COLUMNS as column}
+						<th>{column.header}</th>
+					{/each}
 				</tr>
 			</thead>
 			<tbody>
 				{#each results as result}
 					<tr>
-						<td>{result.language}</td>
-						<td>{result.implementation}</td>
-						<td>{fmt(result.mean)}</td>
-						<td>{fmt(result.median)}</td>
-						<td>{fmt(result.std_dev)}</td>
-						<td class:warning={result.cv > 0.15}>{fmt(result.cv * 100, 1)}%</td>
-						<td>{fmt(result.p95)}</td>
-						<td>{fmt(result.ops_per_second, 0)}</td>
-						<td class:warning={result.outlier_ratio > 0.1}>
-							{result.outliers}/{result.raw_sample_size}
-						</td>
-						<td class:warning={result.failed_iterations > 0}>
-							{result.failed_iterations}
-						</td>
-						<td class:good={result.stability_ratio > 0.9}>
-							{fmt(result.stability_ratio * 100, 0)}%
-						</td>
+						{#each RESULT_COLUMNS as column}
+							<td class={column.class?.(result[column.key], result) || ''}>
+								{column.format(result[column.key], result)}
+							</td>
+						{/each}
 					</tr>
 				{/each}
 			</tbody>
 		</table>
+
+		<div class="mt_md">
+			<Copy_To_Clipboard text={results_to_markdown(results)}>
+				copy results as markdown
+			</Copy_To_Clipboard>
+		</div>
 
 		<div>
 			<h3>Legend</h3>
