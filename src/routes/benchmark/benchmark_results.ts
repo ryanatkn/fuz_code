@@ -57,7 +57,7 @@ export const RESULT_COLUMNS: Result_Column[] = [
 		header: 'Outliers',
 		key: 'outliers',
 		format: (v, result) => `${v}/${result.raw_sample_size}`,
-		class: (v, result) => (result.outlier_ratio > 0.1 ? 'warning' : ''),
+		class: (_v, result) => (result.outlier_ratio > 0.1 ? 'warning' : ''),
 	},
 	{
 		header: 'Failed',
