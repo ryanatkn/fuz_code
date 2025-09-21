@@ -32,13 +32,14 @@ but there are two optional dependencies:
 Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is much lighter
 (with its faster `shiki/engine/javascript`, 503kB minified to 16kB, 63kb gzipped to 5.6kB),
-and [vastly faster](#benchmarks)
+and [vastly faster](./benchmark/compare/results.md)
 for runtime usage because it uses JS regexps instead of
 the [Onigurama regexp engine](https://shiki.matsu.io/guide/regex-engines)
 used by TextMate grammars.
 Shiki also has 38 dependencies instead of 0.
-However this is not a fair comparison because Shiki is designed mainly for buildtime usage,
-and Prism grammars are much simpler and less powerful than TextMate's.
+However this is not a fair comparison because
+Prism grammars are much simpler and less powerful than TextMate's,
+and Shiki is designed mainly for buildtime usage.
 
 ## Usage
 
