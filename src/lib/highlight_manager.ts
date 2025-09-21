@@ -1,4 +1,4 @@
-import {Syntax_Token, type Syntax_Token_Stream} from './syntax_styler.js';
+import {Syntax_Token, type Syntax_Token_Stream} from './syntax_token.js';
 
 export type Highlight_Mode = 'auto' | 'ranges' | 'html';
 

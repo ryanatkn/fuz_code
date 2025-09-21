@@ -6,7 +6,8 @@
 	import {onDestroy, type Snippet} from 'svelte';
 
 	import {syntax_styler_global} from '$lib/syntax_styler_global.js';
-	import {tokenize_syntax, type Syntax_Styler, type Grammar} from '$lib/syntax_styler.js';
+	import type {Syntax_Styler, Grammar} from '$lib/syntax_styler.js';
+	import {tokenize_syntax} from '$lib/tokenize_syntax.js';
 	import {
 		Highlight_Manager,
 		supports_css_highlight_api,

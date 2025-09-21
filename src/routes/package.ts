@@ -148,9 +148,6 @@ export const src_json: Src_Json = {
 				{name: 'Grammar_Value', kind: 'type'},
 				{name: 'Grammar', kind: 'type'},
 				{name: 'Grammar_Token', kind: 'type'},
-				{name: 'tokenize_syntax', kind: 'function'},
-				{name: 'Syntax_Token', kind: 'class'},
-				{name: 'Syntax_Token_Stream', kind: 'type'},
 				{name: 'Hook_Before_Tokenize_Callback', kind: 'type'},
 				{name: 'Hook_After_Tokenize_Callback', kind: 'type'},
 				{name: 'Hook_Wrap_Callback', kind: 'type'},
@@ -158,6 +155,17 @@ export const src_json: Src_Json = {
 				{name: 'Hook_After_Tokenize_Callback_Context', kind: 'type'},
 				{name: 'Hook_Wrap_Callback_Context', kind: 'type'},
 			],
+		},
+		'./syntax_token.js': {
+			path: 'syntax_token.ts',
+			declarations: [
+				{name: 'Syntax_Token', kind: 'class'},
+				{name: 'Syntax_Token_Stream', kind: 'type'},
+			],
+		},
+		'./tokenize_syntax.js': {
+			path: 'tokenize_syntax.ts',
+			declarations: [{name: 'tokenize_syntax', kind: 'function'}],
 		},
 		'./Code.svelte': {path: 'Code.svelte', declarations: [{name: 'default', kind: 'component'}]},
 		'./theme_variables.css': {
