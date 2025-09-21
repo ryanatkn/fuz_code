@@ -68,7 +68,7 @@ import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 // Direct usage
 const html = syntax_styler_global.stylize(code, 'ts');
 
-// Get raw tokens for custom processing
+// Get raw tokens
 import {tokenize_syntax} from '$lib/tokenize_syntax.js';
 const tokens = tokenize_syntax(code, syntax_styler_global.get_lang('ts'));
 ```
