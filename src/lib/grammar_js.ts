@@ -1,4 +1,4 @@
-import type {Add_Grammar} from '$lib/syntax_styler.js';
+import type {Add_Syntax_Grammar} from '$lib/syntax_styler.js';
 import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
 /**
@@ -9,7 +9,7 @@ import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/gra
  *
  * @see LICENSE
  */
-export const add_grammar_js: Add_Grammar = (syntax_styler) => {
+export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 	const grammar_clike = syntax_styler.get_lang('clike');
 
 	const grammar_js = syntax_styler.add_extended_lang('clike', 'js', {

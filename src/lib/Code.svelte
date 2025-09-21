@@ -6,7 +6,7 @@
 	import {onDestroy, type Snippet} from 'svelte';
 
 	import {syntax_styler_global} from '$lib/syntax_styler_global.js';
-	import type {Syntax_Styler, Grammar} from '$lib/syntax_styler.js';
+	import type {Syntax_Styler, Syntax_Grammar} from '$lib/syntax_styler.js';
 	import {tokenize_syntax} from '$lib/tokenize_syntax.js';
 	import {
 		Highlight_Manager,
@@ -30,7 +30,7 @@
 		mode?: Highlight_Mode;
 		pre_attrs?: any;
 		code_attrs?: any;
-		grammar?: Grammar | undefined;
+		grammar?: Syntax_Grammar | undefined;
 		inline?: boolean;
 		syntax_styler?: Syntax_Styler;
 		children?: Snippet<[markup: string]>;

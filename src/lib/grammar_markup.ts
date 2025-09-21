@@ -1,4 +1,9 @@
-import type {Syntax_Styler, Add_Grammar, Grammar, Grammar_Token} from '$lib/syntax_styler.js';
+import type {
+	Syntax_Styler,
+	Add_Syntax_Grammar,
+	Syntax_Grammar,
+	Syntax_Grammar_Token,
+} from '$lib/syntax_styler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,7 +13,7 @@ import type {Syntax_Styler, Add_Grammar, Grammar, Grammar_Token} from '$lib/synt
  *
  * @see LICENSE
  */
-export const add_grammar_markup: Add_Grammar = (syntax_styler) => {
+export const add_grammar_markup: Add_Syntax_Grammar = (syntax_styler) => {
 	const grammar_markup = {
 		comment: {
 			pattern: /<!--(?:(?!<!--)[\s\S])*?-->/,
@@ -72,7 +77,7 @@ export const add_grammar_markup: Add_Grammar = (syntax_styler) => {
 			},
 			/&#x?[\da-f]{1,8};/i,
 		],
-	} satisfies Grammar;
+	} satisfies Syntax_Grammar;
 
 	grammar_markup.tag.inside.attr_value.inside.entity = grammar_markup.entity;
 
@@ -146,8 +151,8 @@ export const grammar_markup_add_attribute = (
 	lang: string,
 ): void => {
 	(
-		(syntax_styler.get_lang('markup').tag as Grammar_Token).inside!
-			.special_attr as Array<Grammar_Token>
+		(syntax_styler.get_lang('markup').tag as Syntax_Grammar_Token).inside!
+			.special_attr as Array<Syntax_Grammar_Token>
 	).push({
 		pattern: RegExp(
 			/(^|["'\s])/.source +

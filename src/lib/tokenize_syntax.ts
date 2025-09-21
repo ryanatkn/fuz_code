@@ -1,4 +1,4 @@
-import type {Grammar} from './syntax_styler.js';
+import type {Syntax_Grammar} from './syntax_styler.js';
 import {Syntax_Token, type Syntax_Token_Stream} from './syntax_token.js';
 
 /**
@@ -25,7 +25,7 @@ import {Syntax_Token, type Syntax_Token_Stream} from './syntax_token.js';
  *     }
  * }
  */
-export const tokenize_syntax = (text: string, grammar: Grammar): Syntax_Token_Stream => {
+export const tokenize_syntax = (text: string, grammar: Syntax_Grammar): Syntax_Token_Stream => {
 	var {rest} = grammar;
 	if (rest) {
 		for (var token in rest) {

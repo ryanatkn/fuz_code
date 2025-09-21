@@ -1,4 +1,4 @@
-import type {Add_Grammar, Grammar_Token, Syntax_Styler} from '$lib/syntax_styler.js';
+import type {Add_Syntax_Grammar, Syntax_Grammar_Token, Syntax_Styler} from '$lib/syntax_styler.js';
 import {grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
 const blocks = '(if|else if|await|then|catch|each|html|debug)';
@@ -11,7 +11,7 @@ const blocks = '(if|else if|await|then|catch|each|html|debug)';
  *
  * @see LICENSE
  */
-export const add_grammar_svelte: Add_Grammar = (syntax_styler) => {
+export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.get_lang('ts');
 
 	const grammar_svelte = syntax_styler.add_extended_lang('markup', 'svelte', {
@@ -101,8 +101,9 @@ export const add_grammar_svelte: Add_Grammar = (syntax_styler) => {
 	});
 
 	// oof lol
-	((grammar_svelte.tag as Grammar_Token).inside!.attr_value as Grammar_Token).inside!.entity =
-		grammar_svelte.entity;
+	(
+		(grammar_svelte.tag as Syntax_Grammar_Token).inside!.attr_value as Syntax_Grammar_Token
+	).inside!.entity = grammar_svelte.entity;
 
 	grammar_svelte_add_inlined(syntax_styler, 'style', 'css');
 	grammar_svelte_add_inlined(syntax_styler, 'script', 'ts');

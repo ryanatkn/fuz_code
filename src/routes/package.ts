@@ -143,11 +143,11 @@ export const src_json: Src_Json = {
 		'./syntax_styler.js': {
 			path: 'syntax_styler.ts',
 			declarations: [
-				{name: 'Add_Grammar', kind: 'type'},
+				{name: 'Add_Syntax_Grammar', kind: 'type'},
 				{name: 'Syntax_Styler', kind: 'class'},
-				{name: 'Grammar_Value', kind: 'type'},
-				{name: 'Grammar', kind: 'type'},
-				{name: 'Grammar_Token', kind: 'type'},
+				{name: 'Syntax_Grammar_Value', kind: 'type'},
+				{name: 'Syntax_Grammar', kind: 'type'},
+				{name: 'Syntax_Grammar_Token', kind: 'type'},
 				{name: 'Hook_Before_Tokenize_Callback', kind: 'type'},
 				{name: 'Hook_After_Tokenize_Callback', kind: 'type'},
 				{name: 'Hook_Wrap_Callback', kind: 'type'},

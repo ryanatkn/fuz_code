@@ -1,7 +1,7 @@
 import {Syntax_Token, type Syntax_Token_Stream} from './syntax_token.js';
 import {tokenize_syntax} from './tokenize_syntax.js';
 
-export type Add_Grammar = (syntax_styler: Syntax_Styler) => void;
+export type Add_Syntax_Grammar = (syntax_styler: Syntax_Styler) => void;
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -12,7 +12,7 @@ export type Add_Grammar = (syntax_styler: Syntax_Styler) => void;
  * @see LICENSE
  */
 export class Syntax_Styler {
-	langs: Record<string, Grammar | undefined> = {
+	langs: Record<string, Syntax_Grammar | undefined> = {
 		plaintext: {},
 	};
 
@@ -32,7 +32,7 @@ export class Syntax_Styler {
 	// }
 	// }
 
-	add_lang(id: string, grammar: Grammar, aliases?: Array<string>): void {
+	add_lang(id: string, grammar: Syntax_Grammar, aliases?: Array<string>): void {
 		this.langs[id] = grammar;
 		if (aliases !== undefined) {
 			for (var alias of aliases) {
@@ -44,15 +44,15 @@ export class Syntax_Styler {
 	add_extended_lang(
 		base_id: string,
 		extension_id: string,
-		extension: Grammar,
+		extension: Syntax_Grammar,
 		aliases?: Array<string>,
-	): Grammar {
+	): Syntax_Grammar {
 		var grammar = this.extend_grammar(base_id, extension);
 		this.add_lang(extension_id, grammar, aliases);
 		return grammar;
 	}
 
-	get_lang(id: string): Grammar {
+	get_lang(id: string): Syntax_Grammar {
 		var lang = this.langs[id];
 		if (lang === undefined) {
 			throw Error(`The language "${id}" has no grammar.`);
@@ -84,7 +84,11 @@ export class Syntax_Styler {
 	 * @example
 	 * stylize('var foo = false;', 'ts', custom_grammar);
 	 */
-	stylize(text: string, lang: string, grammar: Grammar | undefined = this.get_lang(lang)): string {
+	stylize(
+		text: string,
+		lang: string,
+		grammar: Syntax_Grammar | undefined = this.get_lang(lang),
+	): string {
 		var ctx: Hook_Before_Tokenize_Callback_Context = {
 			code: text,
 			grammar,
@@ -178,11 +182,11 @@ export class Syntax_Styler {
 	grammar_insert_before(
 		inside: string,
 		before: string,
-		insert: Grammar,
+		insert: Syntax_Grammar,
 		root: Record<string, any> = this.langs,
-	): Grammar {
+	): Syntax_Grammar {
 		var grammar = root[inside];
-		var updated: Grammar = {};
+		var updated: Syntax_Grammar = {};
 
 		for (var token in grammar) {
 			if (token === before) {
@@ -290,7 +294,7 @@ export class Syntax_Styler {
 	 * @param extension - The new tokens to append.
 	 * @returns the new grammar
 	 */
-	extend_grammar(base_id: string, extension: Grammar): Grammar {
+	extend_grammar(base_id: string, extension: Syntax_Grammar): Syntax_Grammar {
 		return {...deep_clone(this.get_lang(base_id)), ...extension};
 	}
 
@@ -329,9 +333,11 @@ export class Syntax_Styler {
 	}
 }
 
-export type Grammar_Value = RegExp | Grammar_Token | Array<Grammar_Value>;
+export type Syntax_Grammar_Value = RegExp | Syntax_Grammar_Token | Array<Syntax_Grammar_Value>;
 
-export type Grammar = Record<string, Grammar_Value> & {rest?: Grammar | undefined};
+export type Syntax_Grammar = Record<string, Syntax_Grammar_Value> & {
+	rest?: Syntax_Grammar | undefined;
+};
 
 /**
  * The expansion of a simple `RegExp` literal to support additional properties.
@@ -343,7 +349,7 @@ export type Grammar = Record<string, Grammar_Value> & {rest?: Grammar | undefine
  * Note: This can cause infinite recursion. Be careful when you embed different languages or even the same language into
  * each another.
  */
-export interface Grammar_Token {
+export interface Syntax_Grammar_Token {
 	/**
 	 * The regular expression of the token.
 	 */
@@ -366,7 +372,7 @@ export interface Grammar_Token {
 	/**
 	 * The nested grammar of this token.
 	 */
-	inside?: Grammar | null;
+	inside?: Syntax_Grammar | null;
 }
 
 const depth_first_search = (
@@ -397,13 +403,13 @@ export type Hook_Wrap_Callback = (ctx: Hook_Wrap_Callback_Context) => void;
 
 export interface Hook_Before_Tokenize_Callback_Context {
 	code: string;
-	grammar: Grammar;
+	grammar: Syntax_Grammar;
 	lang: string;
 	tokens: undefined;
 }
 export interface Hook_After_Tokenize_Callback_Context {
 	code: string;
-	grammar: Grammar;
+	grammar: Syntax_Grammar;
 	lang: string;
 	tokens: Syntax_Token_Stream;
 }
