@@ -12,6 +12,9 @@ The main changes:
 
 - has a minimal and explicit API to generate stylized HTML, and knows nothing about the DOM
 - uses stateless ES modules, instead of globals with side effects and pseudo-module behaviors
+- integrates with the
+  [CSS Custom Highlight API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API)
+  when available
 - has various incompatible changes, so using Prism grammars requires some tweaks
 - smaller (by 7kB minified and 3kB gzipped, ~1/3 less)
 - written in TypeScript
@@ -57,7 +60,7 @@ npm i -D @ryanatkn/fuz_code
 <!-- select a lang -->
 <Code content={ts_code} lang="ts" />
 
-<!-- Force specific rendering mode -->
+<!-- force specific rendering mode -->
 <Code content={code} mode="html" />
 <Code content={code} mode="ranges" />
 ```
