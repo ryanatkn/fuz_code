@@ -25,6 +25,10 @@ import {samples as all_samples} from '../../src/lib/samples/all.js';
 import {syntax_styler_global} from '../../src/lib/syntax_styler_global.js';
 import {tokenize_syntax} from '../../src/lib/syntax_styler.js';
 
+// TODO this is a workaround for eslint failng without `"benchmark/**/*.ts"` in tsconfig.json
+// the better fix would probably be configuring it correctly but
+// @ts-nocheck
+
 /* eslint-disable no-console */
 
 const BENCHMARK_TIME = 10000; //  10000
