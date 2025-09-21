@@ -33,7 +33,7 @@
 			</div>
 		</section>
 		<section class="panel">
-			<div class="bg shadow_sm border_radius_xs">
+			<div class="bg shadow_sm border_radius_xs p_xl2">
 				<Code_Tome />
 			</div>
 		</section>

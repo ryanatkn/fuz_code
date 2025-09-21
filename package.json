@@ -181,6 +181,9 @@
     "./theme_standalone.css": {
       "default": "./dist/theme_standalone.css"
     },
+    "./theme_variables.css": {
+      "default": "./dist/theme_variables.css"
+    },
     "./theme.css": {
       "default": "./dist/theme.css"
     }

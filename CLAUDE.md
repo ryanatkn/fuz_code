@@ -64,9 +64,8 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 #### Themes
 
-- `src/lib/theme.css` - Traditional CSS classes for HTML mode
-- `src/lib/theme_highlight.css` - CSS Custom Highlight API styles
-- `src/lib/theme_standalone.css` - Dependency-free theme
+- `src/lib/theme.css` - Traditional CSS classes for HTML mode (requires Moss or theme_variables.css)
+- `src/lib/theme_variables.css` - CSS variable definitions for non-Moss users
 
 ## How It Works
 

@@ -66,16 +66,12 @@ on my CSS library [Moss](https://github.com/ryanatkn/moss)
 for [color-scheme](https://moss.ryanatkn.com/docs/themes) awareness.
 See the [Moss docs](https://moss.ryanatkn.com/) for its usage.
 
-[A dependency-free version](src/lib/theme_standalone.css) of the default theme is provided,
-but note that the colors are staticly defined instead of using
-Moss' [style variables](https://moss.ryanatkn.com/docs/variables).
-They use [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark)
-which means they're hardcoded to the inferred `color-scheme`,
-rather than being settable by a user option unlike the Moss version. This could be improved using a class convention like `.dark`.
+If you're not using Moss, import `theme_variables.css` alongside `theme.css`:
 
 ```ts
-// no dependencies:
-import '@ryanatkn/fuz_code/theme_standalone.css';
+// Without Moss:
+import '@ryanatkn/fuz_code/theme.css';
+import '@ryanatkn/fuz_code/theme_variables.css';
 ```
 
 ### Modules
@@ -85,8 +81,10 @@ import '@ryanatkn/fuz_code/theme_standalone.css';
 - [@ryanatkn/fuz_code/syntax_styler.js](src/lib/syntax_styler.ts) - utilities for custom grammars
 - [@ryanatkn/fuz_code/theme.css](src/lib/theme.css) -
   default theme that depends on [Moss](https://github.com/ryanatkn/moss)
+- [@ryanatkn/fuz_code/theme_variables.css](src/lib/theme_variables.css) -
+  CSS variables for non-Moss users
 - [@ryanatkn/fuz_code/theme_standalone.css](src/lib/theme_standalone.css) -
-  default theme with no dependencies
+  legacy standalone theme (deprecated, use theme_variables.css + theme.css instead)
 - [@ryanatkn/fuz_code/Code.svelte](src/lib/Code.svelte) -
   Svelte component with a convenient API
 

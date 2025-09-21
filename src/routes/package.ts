@@ -118,6 +118,7 @@ export const package_json: Package_Json = {
 		'./theme_highlight.css': {default: './dist/theme_highlight.css'},
 		'./theme_merged.css': {default: './dist/theme_merged.css'},
 		'./theme_standalone.css': {default: './dist/theme_standalone.css'},
+		'./theme_variables.css': {default: './dist/theme_variables.css'},
 		'./theme.css': {default: './dist/theme.css'},
 	},
 } as any;
@@ -256,6 +257,10 @@ export const src_json: Src_Json = {
 		},
 		'./theme_standalone.css': {
 			path: 'theme_standalone.css',
+			declarations: [{name: 'default', kind: 'css'}],
+		},
+		'./theme_variables.css': {
+			path: 'theme_variables.css',
 			declarations: [{name: 'default', kind: 'css'}],
 		},
 		'./theme.css': {path: 'theme.css', declarations: [{name: 'default', kind: 'css'}]},
