@@ -38,7 +38,7 @@ export const package_json: Package_Json = {
 		'@ryanatkn/belt': '^0.34.1',
 		'@ryanatkn/eslint-config': '^0.8.0',
 		'@ryanatkn/fuz': '^0.145.0',
-		'@ryanatkn/gro': '^0.164.1',
+		'@ryanatkn/gro': '^0.165.0',
 		'@ryanatkn/moss': '^0.33.0',
 		'@sveltejs/adapter-static': '^3.0.9',
 		'@sveltejs/kit': '^2.37.1',
@@ -70,53 +70,14 @@ export const package_json: Package_Json = {
 	files: ['dist', 'src/lib/**/*.ts', '!src/lib/**/*.test.*', '!dist/**/*.test.*'],
 	exports: {
 		'./package.json': './package.json',
-		'./code_sample.js': {types: './dist/code_sample.d.ts', default: './dist/code_sample.js'},
-		'./Code.svelte': {
-			types: './dist/Code.svelte.d.ts',
-			svelte: './dist/Code.svelte',
-			default: './dist/Code.svelte',
+		'./*.js': {types: './dist/*.d.ts', default: './dist/*.js'},
+		'./*.svelte': {
+			types: './dist/*.svelte.d.ts',
+			svelte: './dist/*.svelte',
+			default: './dist/*.svelte',
 		},
-		'./grammar_clike.js': {types: './dist/grammar_clike.d.ts', default: './dist/grammar_clike.js'},
-		'./grammar_css.js': {types: './dist/grammar_css.d.ts', default: './dist/grammar_css.js'},
-		'./grammar_js.js': {types: './dist/grammar_js.d.ts', default: './dist/grammar_js.js'},
-		'./grammar_json.js': {types: './dist/grammar_json.d.ts', default: './dist/grammar_json.js'},
-		'./grammar_markup.js': {
-			types: './dist/grammar_markup.d.ts',
-			default: './dist/grammar_markup.js',
-		},
-		'./grammar_svelte.js': {
-			types: './dist/grammar_svelte.d.ts',
-			default: './dist/grammar_svelte.js',
-		},
-		'./grammar_ts.js': {types: './dist/grammar_ts.d.ts', default: './dist/grammar_ts.js'},
-		'./highlight_manager.js': {
-			types: './dist/highlight_manager.d.ts',
-			default: './dist/highlight_manager.js',
-		},
-		'./samples/all.gen.js': {
-			types: './dist/samples/all.gen.d.ts',
-			default: './dist/samples/all.gen.js',
-		},
-		'./samples/all.js': {types: './dist/samples/all.d.ts', default: './dist/samples/all.js'},
-		'./samples/sample_complex.css': {default: './dist/samples/sample_complex.css'},
-		'./samples/sample_complex.html': {default: './dist/samples/sample_complex.html'},
-		'./samples/sample_complex.json': {default: './dist/samples/sample_complex.json'},
-		'./samples/sample_complex.svelte': {
-			types: './dist/samples/sample_complex.svelte.d.ts',
-			svelte: './dist/samples/sample_complex.svelte',
-			default: './dist/samples/sample_complex.svelte',
-		},
-		'./samples/sample_complex.js': {
-			types: './dist/samples/sample_complex.d.ts',
-			default: './dist/samples/sample_complex.js',
-		},
-		'./syntax_styler_global.js': {
-			types: './dist/syntax_styler_global.d.ts',
-			default: './dist/syntax_styler_global.js',
-		},
-		'./syntax_styler.js': {types: './dist/syntax_styler.d.ts', default: './dist/syntax_styler.js'},
-		'./theme_variables.css': {default: './dist/theme_variables.css'},
-		'./theme.css': {default: './dist/theme.css'},
+		'./*.json': {types: './dist/*.json.d.ts', default: './dist/*.json'},
+		'./*.css': {default: './dist/*.css'},
 	},
 } as any;
 
@@ -124,7 +85,6 @@ export const src_json: Src_Json = {
 	name: '@ryanatkn/fuz_code',
 	version: '0.24.0',
 	modules: {
-		'./package.json': {path: 'package.json', declarations: [{name: 'default', kind: 'json'}]},
 		'./code_sample.js': {
 			path: 'code_sample.ts',
 			declarations: [
@@ -133,7 +93,6 @@ export const src_json: Src_Json = {
 				{name: 'Sample_Lang', kind: 'type'},
 			],
 		},
-		'./Code.svelte': {path: 'Code.svelte', declarations: [{name: 'default', kind: 'component'}]},
 		'./grammar_clike.js': {
 			path: 'grammar_clike.ts',
 			declarations: [{name: 'add_grammar_clike', kind: 'function'}],
@@ -177,50 +136,6 @@ export const src_json: Src_Json = {
 				{name: 'Highlight_Manager', kind: 'class'},
 			],
 		},
-		'./samples/all.gen.js': {
-			path: 'samples/all.gen.ts',
-			declarations: [{name: 'gen', kind: 'function'}],
-		},
-		'./samples/all.js': {
-			path: 'samples/all.ts',
-			declarations: [
-				{name: 'Sample_Key', kind: 'type'},
-				{name: 'samples', kind: 'variable'},
-				{name: 'sample_langs', kind: 'variable'},
-			],
-		},
-		'./samples/sample_complex.css': {
-			path: 'samples/sample_complex.css',
-			declarations: [{name: 'default', kind: 'css'}],
-		},
-		'./samples/sample_complex.html': {path: 'samples/sample_complex.html'},
-		'./samples/sample_complex.json': {
-			path: 'samples/sample_complex.json',
-			declarations: [{name: 'default', kind: 'json'}],
-		},
-		'./samples/sample_complex.svelte': {
-			path: 'samples/sample_complex.svelte',
-			declarations: [{name: 'default', kind: 'component'}],
-		},
-		'./samples/sample_complex.js': {
-			path: 'samples/sample_complex.ts',
-			declarations: [
-				{name: 'add', kind: 'function'},
-				{name: 'Some_Type', kind: 'type'},
-				{name: 'a', kind: 'variable'},
-				{name: 'b', kind: 'variable'},
-				{name: 'c', kind: 'variable'},
-				{name: 'D', kind: 'class'},
-				{name: 'Some_E', kind: 'type'},
-				{name: 'some_e', kind: 'variable'},
-				{name: 'plus', kind: 'function'},
-				{name: 'str_with_keywords', kind: 'variable'},
-				{name: 'str_with_comment', kind: 'variable'},
-				{name: 'template_with_expr', kind: 'variable'},
-				{name: 'regex', kind: 'variable'},
-				{name: 'complex_regex', kind: 'variable'},
-			],
-		},
 		'./syntax_styler_global.js': {
 			path: 'syntax_styler_global.ts',
 			declarations: [{name: 'syntax_styler_global', kind: 'variable'}],
@@ -244,6 +159,7 @@ export const src_json: Src_Json = {
 				{name: 'Hook_Wrap_Callback_Context', kind: 'type'},
 			],
 		},
+		'./Code.svelte': {path: 'Code.svelte', declarations: [{name: 'default', kind: 'component'}]},
 		'./theme_variables.css': {
 			path: 'theme_variables.css',
 			declarations: [{name: 'default', kind: 'css'}],
