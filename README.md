@@ -47,10 +47,30 @@ npm i -D @ryanatkn/fuz_code
 ```
 
 ```ts
-import {syntax_styler} from '@ryanatkn/fuz_code';
+import {syntax_styler_global} from '@ryanatkn/fuz_code/syntax_styler_global.js';
 
-syntax_styler.stylize('<h1>hello world</h1>', 'svelte');
+syntax_styler_global.stylize('<h1>hello world</h1>', 'svelte');
 ```
+
+```svelte
+<script>
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
+</script>
+
+<!-- Auto-detect: uses CSS Highlights if available, else HTML -->
+<Code content={sourceCode} lang="ts" />
+
+<!-- Force HTML generation (always works) -->
+<Code content={sourceCode} lang="ts" mode="html" />
+
+<!-- Force CSS Highlights (requires browser support) -->
+<Code content={sourceCode} lang="ts" mode="ranges" />
+```
+
+By default the `Code` component automatically uses the
+[CSS Custom Highlight API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API)
+when available for improved performance,
+falling back to HTML generation for non-browser runtimes and older browsers.
 
 Themes are just CSS files, so they work with any JS framework.
 
@@ -76,21 +96,24 @@ import '@ryanatkn/fuz_code/theme_variables.css';
 
 ### Modules
 
-- [@ryanatkn/fuz_code](src/lib/index.ts) - index with default grammars,
-  use this as a guide if you want custom grammars
-- [@ryanatkn/fuz_code/syntax_styler.js](src/lib/syntax_styler.ts) - utilities for custom grammars
+- [@ryanatkn/fuz_code/syntax_styler_global.js](src/lib/syntax_styler_global.ts) - pre-configured instance with all grammars
+- [@ryanatkn/fuz_code/syntax_styler.js](src/lib/syntax_styler.ts) - base class for custom grammars
 - [@ryanatkn/fuz_code/theme.css](src/lib/theme.css) -
   default theme that depends on [Moss](https://github.com/ryanatkn/moss)
 - [@ryanatkn/fuz_code/theme_variables.css](src/lib/theme_variables.css) -
   CSS variables for non-Moss users
 - [@ryanatkn/fuz_code/Code.svelte](src/lib/Code.svelte) -
-  Svelte component with a convenient API
+  Svelte component supporting both HTML generation and native browser highlights
+- [@ryanatkn/fuz_code/highlight_manager.js](src/lib/highlight_manager.ts) -
+  uses the browser [`Highlight`](https://developer.mozilla.org/en-US/docs/Web/API/Highlight)
+  and [`Range`](https://developer.mozilla.org/en-US/docs/Web/API/Range) APIs
+  as a faster alternative to generating spans with classes
 
 I encourage you to poke around [`src/lib`](src/lib) if you're interested in using fuz_code.
 
 ### Grammars
 
-Enabled [by default](src/lib/index.ts):
+Enabled by default in `syntax_styler_global`:
 
 - [`markup`](src/lib/grammar_markup.ts) (html, xml, etc)
 - [`svelte`](src/lib/grammar_svelte.ts)

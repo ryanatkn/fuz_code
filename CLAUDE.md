@@ -103,7 +103,7 @@ When supported, the browser's native highlighting is used:
 
 ```javascript
 // Create ranges for each token
-const range = document.createRange();
+const range = new Range();
 range.setStart(textNode, token.start);
 range.setEnd(textNode, token.end);
 

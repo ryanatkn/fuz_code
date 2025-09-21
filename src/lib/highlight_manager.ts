@@ -46,7 +46,7 @@ export class Highlight_Manager {
 
 			// Create range for EVERY token - no complex logic
 			try {
-				const range = document.createRange();
+				const range = new Range();
 				range.setStart(text_node, start);
 				range.setEnd(text_node, end);
 
