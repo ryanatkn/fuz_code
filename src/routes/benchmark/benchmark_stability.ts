@@ -52,7 +52,7 @@ export const get_instability_reason = (stability: Stability_Check): string => {
 	return 'unknown';
 };
 export const extended_cooldown = async (reason: string): Promise<void> => {
-	console.log(`System instability: ${reason}, waiting...`);
+	console.log(`System instability: ${reason}, waiting...`); // eslint-disable-line no-console
 	await new Promise((resolve) =>
 		setTimeout(resolve, COOLDOWN_TIMES[reason] || COOLDOWN_TIMES.unknown),
 	);

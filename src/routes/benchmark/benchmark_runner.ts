@@ -1,5 +1,3 @@
-// Core benchmark execution functions
-
 import type {
 	Benchmarked_Implementation,
 	Measurement_Data,
@@ -19,6 +17,8 @@ import {
 } from './benchmark_stability.js';
 import {implementations, languages, pre_generate_large_contents} from './benchmark_fixtures.js';
 import {analyze_results, calculate_summary, check_high_variance} from './benchmark_stats.js';
+
+/* eslint-disable no-await-in-loop no-console */
 
 // Timing validation constants
 const MIN_VALID_TIMING_MS = 0.01;

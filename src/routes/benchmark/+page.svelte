@@ -6,6 +6,8 @@
 	import {implementations, languages} from './benchmark_fixtures.js';
 	import type {Benchmark_Config, Benchmark_State} from './benchmark_types.js';
 
+	/* eslint-disable no-console */
+
 	// To run Chromium with `gc` enabled:
 	// `chromium --js-flags="--expose-gc"`
 

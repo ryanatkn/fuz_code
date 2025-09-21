@@ -223,7 +223,7 @@ export const calculate_summary = (
 
 	// Group results by implementation
 	for (const result of results) {
-		if (!by_impl[result.implementation]) {
+		if (!(by_impl as Record<string, Array<Benchmark_Result> | undefined>)[result.implementation]) {
 			by_impl[result.implementation] = [];
 		}
 		by_impl[result.implementation].push(result);
@@ -248,7 +248,7 @@ export const calculate_summary = (
 	}
 
 	// Calculate relative performance
-	const baseline_mean = summary.syntax_html?.avg_mean || 1;
+	const baseline_mean = summary.syntax_html.avg_mean || 1;
 	for (const impl of Object.keys(summary)) {
 		summary[impl].relative_speed = baseline_mean / summary[impl].avg_mean;
 		summary[impl].improvement = (summary[impl].relative_speed - 1) * 100;

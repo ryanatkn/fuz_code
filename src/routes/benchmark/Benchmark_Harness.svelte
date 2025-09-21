@@ -5,6 +5,8 @@
 	import Benchmark_Instance from './Benchmark_Instance.svelte';
 	import {ensure_paint} from './benchmark_dom.js';
 
+	/* eslint-disable no-console */
+
 	const RENDER_TIMEOUT_MS = 10000;
 
 	let current_component: Component<Benchmark_Component_Props> | null = $state(null);

@@ -56,7 +56,7 @@ export class Highlight_Manager {
 				}
 				ranges_by_type.get(type)!.push(range);
 			} catch (e) {
-				console.error(`Failed to create range for ${token.type}:`, e);
+				throw new Error(`Failed to create range for ${token.type}: ${e}`);
 			}
 
 			// Process nested tokens
@@ -103,8 +103,7 @@ export class Highlight_Manager {
 		}
 
 		if (!text_node) {
-			console.error('no text node to highlight');
-			return;
+			throw new Error('no text node to highlight');
 		}
 
 		// Clear existing highlights
@@ -140,8 +139,7 @@ export class Highlight_Manager {
 		for (const [name, ranges] of this.element_ranges) {
 			const highlight = CSS.highlights.get(name);
 			if (!highlight) {
-				console.error('Expected to find CSS highlight:', name);
-				continue;
+				throw new Error('Expected to find CSS highlight: ' + name);
 			}
 			// Remove only this element's ranges
 			for (const range of ranges) {

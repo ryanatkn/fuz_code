@@ -202,8 +202,6 @@ describe('concurrent tokenization safety', () => {
 	});
 });
 
-describe('specific mutation bug scenarios', () => {});
-
 describe('tokenization correctness', () => {
 	test('produces consistent output for common patterns', () => {
 		const samples_to_test = [
