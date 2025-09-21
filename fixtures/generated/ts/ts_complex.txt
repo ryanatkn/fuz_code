@@ -205,7 +205,7 @@
 1022-1028  keyword                   export
 1029-1034  keyword                   const
 1054-1055  operator                  =
-1056-1085  template_string           `Value: ${1 + 2} and ${true}`
+1056-1073  template_string           `Value: ${1 + 2}`
 1056-1057  template_punctuation      `
 1057-1064  string                    Value: 
 1064-1072  interpolation             ${1 + 2}
@@ -214,54 +214,49 @@
 1068-1069  operator                  +
 1070-1071  number                    2
 1071-1072  interpolation_punctuation }
-1072-1077  string                     and 
-1077-1084  interpolation             ${true}
-1077-1079  interpolation_punctuation ${
-1079-1083  boolean                   true
-1083-1084  interpolation_punctuation }
-1084-1085  template_punctuation      `
-1085-1086  punctuation               ;
-1088-1120  comment                   // regex that looks like comment
-1121-1127  keyword                   export
-1128-1133  keyword                   const
-1140-1141  operator                  =
-1142-1151  regex                     /\/\/.*/g
-1142-1143  regex_delimiter           /
-1143-1149  regex_source              \/\/.*
-1149-1150  regex_delimiter           /
-1150-1151  regex_flags               g
-1151-1152  punctuation               ;
-1153-1159  keyword                   export
-1160-1165  keyword                   const
-1180-1181  operator                  =
-1182-1215  regex                     /^(?:\/\*.*?\*\/|\/\/.*|[^\/])+$/
-1182-1183  regex_delimiter           /
-1183-1214  regex_source              ^(?:\/\*.*?\*\/|\/\/.*|[^\/])+$
-1214-1215  regex_delimiter           /
-1215-1216  punctuation               ;
-1218-1274  comment                   // string in comment should not be highlighted as string
-1275-1326  comment                   // const commented = "this string is in a comment";
+1072-1073  template_punctuation      `
+1073-1074  punctuation               ;
+1076-1108  comment                   // regex that looks like comment
+1109-1115  keyword                   export
+1116-1121  keyword                   const
+1128-1129  operator                  =
+1130-1139  regex                     /\/\/.*/g
+1130-1131  regex_delimiter           /
+1131-1137  regex_source              \/\/.*
+1137-1138  regex_delimiter           /
+1138-1139  regex_flags               g
+1139-1140  punctuation               ;
+1141-1147  keyword                   export
+1148-1153  keyword                   const
+1168-1169  operator                  =
+1170-1202  regex                     /^(?:\/\*.*?\*\/|\/\/.*|[^/])+$/
+1170-1171  regex_delimiter           /
+1171-1201  regex_source              ^(?:\/\*.*?\*\/|\/\/.*|[^/])+$
+1201-1202  regex_delimiter           /
+1202-1203  punctuation               ;
+1205-1261  comment                   // string in comment should not be highlighted as string
+1262-1313  comment                   // const commented = "this string is in a comment";
 
 === STATS ===
-Total tokens: 242
-Sample length: 1327 characters
+Total tokens: 237
+Sample length: 1314 characters
 
 Token types:
   punctuation: 79
   operator: 39
   keyword: 37
   builtin: 13
-  string: 10
   comment: 10
+  string: 9
   function: 8
-  interpolation_punctuation: 8
   template_punctuation: 6
+  interpolation_punctuation: 6
   number: 5
   class_name: 5
-  boolean: 4
-  interpolation: 4
   regex_delimiter: 4
+  boolean: 3
   template_string: 3
+  interpolation: 3
   constant: 2
   regex: 2
   regex_source: 2
