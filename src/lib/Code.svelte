@@ -1,10 +1,9 @@
-<script module>
+<script lang="ts" module>
 	const supports_ranges = supports_css_highlight_api();
 </script>
 
 <script lang="ts">
-	import {onDestroy} from 'svelte';
-	import type {Snippet} from 'svelte';
+	import {onDestroy, type Snippet} from 'svelte';
 
 	import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 	import {tokenize_syntax, type Syntax_Styler, type Grammar} from '$lib/syntax_styler.js';
@@ -56,7 +55,7 @@
 		}
 
 		if (!is_language_supported) {
-			console.error('unsupported language', lang);
+			console.error('unsupported language', lang); // eslint-disable-line no-console
 			return content;
 		}
 

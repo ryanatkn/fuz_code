@@ -5,9 +5,11 @@ import type {Code_Sample} from '$lib/code_sample.js';
 /* eslint-disable no-console */
 
 // Find appropriate sample for a language
-export const find_sample = (samples: Record<string, Code_Sample>, lang: string) => {
-	return Object.values(samples).find((s) => s.lang === lang && s.name.includes('complex'));
-};
+export const find_sample = (
+	samples: Record<string, Code_Sample>,
+	lang: string,
+): Code_Sample | undefined =>
+	Object.values(samples).find((s) => s.lang === lang && s.name.includes('complex'));
 
 // Simple pre-generation using content.repeat()
 export const pre_generate_large_contents = (

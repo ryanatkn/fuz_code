@@ -30,7 +30,7 @@
 	let benchmark_state: Benchmark_State | null = $state.raw(null);
 
 	// Harness component reference
-	let harness: Benchmark_Harness | null = null;
+	let harness: Benchmark_Harness | undefined;
 
 	// Run benchmark suite
 	const run_benchmarks = async () => {
@@ -38,7 +38,7 @@
 		if (running) return;
 
 		running = true;
-		should_stop = false;
+		should_stop = false as boolean;
 		current_test = '';
 		progress = 0;
 

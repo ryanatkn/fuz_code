@@ -1,6 +1,6 @@
 <script lang="ts">
-	import {onMount} from 'svelte';
-	import type {Component} from 'svelte';
+	import {onMount, type Component} from 'svelte';
+
 	import type {Benchmark_Component_Props} from './benchmark_types.js';
 	import {ensure_paint} from './benchmark_dom.js';
 
@@ -10,7 +10,11 @@
 		on_render_complete?: () => void;
 	}
 
-	const {Benchmarked_Component = null, props = null, on_render_complete = () => {}}: Props = $props();
+	const {
+		Benchmarked_Component = null,
+		props = null,
+		on_render_complete = () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+	}: Props = $props();
 
 	let container_el: HTMLDivElement;
 
@@ -23,7 +27,7 @@
 		const rect = code_el!.getBoundingClientRect();
 		const height = code_el!.offsetHeight;
 		if (rect.width <= 0 || height <= 0) {
-			console.error('Unexpected negative dimensions');
+			console.error('Unexpected negative dimensions'); // eslint-disable-line no-console
 		}
 
 		await ensure_paint();

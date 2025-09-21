@@ -66,7 +66,7 @@
 			await cleanup();
 		}
 	};
-	export const cleanup = async () => {
+	export const cleanup = async (): Promise<void> => {
 		current_component = null;
 		current_props = null;
 		render_resolver = null;

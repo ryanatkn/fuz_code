@@ -67,11 +67,11 @@ export const plus = (a: any, b: any): any => a + b;
 // boundary test cases
 export const str_with_keywords = 'const class function string';
 export const str_with_comment = '// this is not a comment';
-export const template_with_expr = `Value: ${1 + 2} and ${true}`;
+export const template_with_expr = `Value: ${1 + 2}`;
 
 // regex that looks like comment
 export const regex = /\/\/.*/g;
-export const complex_regex = /^(?:\/\*.*?\*\/|\/\/.*|[^\/])+$/;
+export const complex_regex = /^(?:\/\*.*?\*\/|\/\/.*|[^/])+$/;
 
 // string in comment should not be highlighted as string
 // const commented = "this string is in a comment";

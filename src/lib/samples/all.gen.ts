@@ -59,8 +59,7 @@ export const gen: Gen = ({origin_path}) => {
 
 	return `${banner}
 
-		import type {Code_Sample} from '$lib/code_sample.js';
-		import {sample_langs} from '$lib/code_sample.js';
+		import {sample_langs, type Code_Sample} from '$lib/code_sample.js';
 
 		export type Sample_Key = ${type_keys};
 

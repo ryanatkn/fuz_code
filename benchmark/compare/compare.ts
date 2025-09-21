@@ -146,6 +146,7 @@ export const run_comparison_benchmark = async (
 			});
 
 			// Prism tokenize benchmark
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			if (Prism.languages[prism_lang]) {
 				bench.add(`prism_tokenize_${lang}_${size_label}`, () => {
 					Prism.tokenize(content, Prism.languages[prism_lang]);
@@ -159,6 +160,7 @@ export const run_comparison_benchmark = async (
 			});
 
 			// Prism stylize benchmark
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			if (Prism.languages[prism_lang]) {
 				bench.add(`prism_stylize_${lang}_${size_label}`, () => {
 					Prism.highlight(content, Prism.languages[prism_lang], prism_lang);
@@ -167,7 +169,7 @@ export const run_comparison_benchmark = async (
 				throw new Error(`Prism language not available: ${prism_lang}`);
 			}
 
-			// Shiki JavaScript engine benchmark
+			// Shiki JS engine benchmark
 			bench.add(`shiki_js_stylize_${lang}_${size_label}`, () => {
 				shiki_js.codeToHtml(content, {lang: shiki_lang, theme: 'nord'});
 			});

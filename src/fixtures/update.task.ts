@@ -43,7 +43,7 @@ export const task: Task = {
 			// Write JSON file
 			const json_path = get_fixture_path(sample.lang, sample.variant, 'json');
 			const json_content = JSON.stringify(output);
-			const formatted_json = await format_file(json_content, {filepath: json_path});
+			const formatted_json = await format_file(json_content, {filepath: json_path}); // eslint-disable-line no-await-in-loop
 			writeFileSync(json_path, formatted_json);
 			console.log(`  → ${json_path}`); // eslint-disable-line no-console
 
