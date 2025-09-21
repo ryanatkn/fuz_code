@@ -150,7 +150,7 @@ export const run_comparison_benchmark = async (
 			});
 
 			// Prism tokenize benchmark
-			if (Prism.languages[prism_lang]) {
+			if ((Prism.languages as any)[prism_lang]) {
 				bench.add(`prism_tokenize_${lang}_${size_label}`, () => {
 					Prism.tokenize(content, Prism.languages[prism_lang]);
 				});
@@ -163,7 +163,7 @@ export const run_comparison_benchmark = async (
 			});
 
 			// Prism stylize benchmark
-			if (Prism.languages[prism_lang]) {
+			if ((Prism.languages as any)[prism_lang]) {
 				bench.add(`prism_stylize_${lang}_${size_label}`, () => {
 					Prism.highlight(content, Prism.languages[prism_lang], prism_lang);
 				});
