@@ -801,3 +801,5 @@ const deep_clone = <T>(o: T, visited: Map<number, any> = new Map()): T => {
 		return o;
 	}
 };
+
+// TODO BLOCK document in CLAUDE.md and the README.md more manual patterns, and refactor this module to extract tokenization
