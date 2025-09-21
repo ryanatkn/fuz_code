@@ -318,7 +318,7 @@ describe('edge cases', () => {
 });
 
 describe('specific grammar patterns', () => {
-	test('JavaScript template literals with nested expressions', () => {
+	test('JS template literals with nested expressions', () => {
 		const code = '`Hello ${name}, you have ${count} ${count === 1 ? "item" : "items"}`';
 		const result = syntax_styler_global.stylize(code, 'js');
 		assert.ok(result.includes('template'), 'Should recognize template literal');

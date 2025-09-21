@@ -1,6 +1,6 @@
 <script lang="ts">
-	import {tick} from 'svelte';
-	import type {Component} from 'svelte';
+	import {tick, type Component} from 'svelte';
+
 	import type {Benchmark_Component_Props} from './benchmark_types.js';
 	import Benchmark_Instance from './Benchmark_Instance.svelte';
 	import {ensure_paint} from './benchmark_dom.js';

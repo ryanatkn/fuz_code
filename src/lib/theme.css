@@ -108,7 +108,7 @@
 
 /* TODO some of these should probably be used, others are unnecessary */
 
-/* TypeScript/JavaScript specific */
+/* TypeScript/JS specific */
 /* .token.template_string,
 ::highlight(template_string) {
 	color: var(--color_b_5);

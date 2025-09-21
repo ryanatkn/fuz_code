@@ -50,7 +50,7 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 #### Language Definitions
 
-- `src/lib/grammar_ts.ts` - TypeScript/JavaScript
+- `src/lib/grammar_ts.ts` - TypeScript/JS
 - `src/lib/grammar_css.ts` - CSS stylesheets
 - `src/lib/grammar_markup.ts` - HTML/XML markup
 - `src/lib/grammar_json.ts` - JSON data
@@ -101,7 +101,7 @@ highlight_manager.highlight_from_syntax_tokens(element, tokens);
 
 When supported, the browser's native highlighting is used:
 
-```javascript
+```JS
 // Create ranges for each token
 const range = new Range();
 range.setStart(textNode, token.start);
@@ -116,7 +116,7 @@ CSS.highlights.set(token.type, highlight);
 ## Supported Languages
 
 - `ts` - TypeScript
-- `js` - JavaScript
+- `js` - JS
 - `css` - CSS
 - `html` - HTML/XML
 - `json` - JSON
@@ -198,7 +198,7 @@ npm run benchmark-compare   # Compare with Prism and Shiki
 **Comparison benchmark** (`./benchmark/compare/`) tests fuz_code against:
 
 - Prism - Similar regex-based approach
-- Shiki JS - JavaScript regex engine
+- Shiki JS - JS regex engine
 - Shiki Oniguruma - Full TextMate grammar engine
 
 Results show relative performance (% of fastest) for each language and content size.

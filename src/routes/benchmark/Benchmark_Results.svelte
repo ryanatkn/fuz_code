@@ -30,7 +30,8 @@
 	<section>
 		<h2>Summary</h2>
 		<div>
-			{#each Object.entries(summary) as [impl, stats]}
+			{#each Object.entries(summary) as entry (entry)}
+				{@const [impl, stats] = entry}
 				<div>
 					<h3>{impl}</h3>
 					<div>
@@ -65,15 +66,15 @@
 		<table>
 			<thead>
 				<tr>
-					{#each RESULT_COLUMNS as column}
+					{#each RESULT_COLUMNS as column (column)}
 						<th>{column.header}</th>
 					{/each}
 				</tr>
 			</thead>
 			<tbody>
-				{#each results as result}
+				{#each results as result (result)}
 					<tr>
-						{#each RESULT_COLUMNS as column}
+						{#each RESULT_COLUMNS as column (column)}
 							<td class={column.class?.(result[column.key], result) || ''}>
 								{column.format(result[column.key], result)}
 							</td>
