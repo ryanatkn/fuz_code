@@ -175,6 +175,9 @@
     "./theme_highlight.css": {
       "default": "./dist/theme_highlight.css"
     },
+    "./theme_merged.css": {
+      "default": "./dist/theme_merged.css"
+    },
     "./theme_standalone.css": {
       "default": "./dist/theme_standalone.css"
     },

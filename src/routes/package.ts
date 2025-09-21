@@ -116,6 +116,7 @@ export const package_json: Package_Json = {
 		},
 		'./syntax_styler.js': {types: './dist/syntax_styler.d.ts', default: './dist/syntax_styler.js'},
 		'./theme_highlight.css': {default: './dist/theme_highlight.css'},
+		'./theme_merged.css': {default: './dist/theme_merged.css'},
 		'./theme_standalone.css': {default: './dist/theme_standalone.css'},
 		'./theme.css': {default: './dist/theme.css'},
 	},
@@ -247,6 +248,10 @@ export const src_json: Src_Json = {
 		},
 		'./theme_highlight.css': {
 			path: 'theme_highlight.css',
+			declarations: [{name: 'default', kind: 'css'}],
+		},
+		'./theme_merged.css': {
+			path: 'theme_merged.css',
 			declarations: [{name: 'default', kind: 'css'}],
 		},
 		'./theme_standalone.css': {
