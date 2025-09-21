@@ -25,9 +25,9 @@ but there are two optional dependencies:
   based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
   and a [Svelte component](src/lib/Code.svelte) for convenient usage.
 - The [default theme](src/lib/theme.css) integrates
-  with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference.
-  A [zero-dependency theme](src/lib/theme_standalone.css)
-  is also provided that uses the less-customizable `light-dark()`, see below for more.
+  with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference,
+  and [theme_variables.css](src/lib/theme_variables.css)
+  is also included that uses the less-customizable `light-dark()`.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is much lighter
@@ -83,8 +83,6 @@ import '@ryanatkn/fuz_code/theme_variables.css';
   default theme that depends on [Moss](https://github.com/ryanatkn/moss)
 - [@ryanatkn/fuz_code/theme_variables.css](src/lib/theme_variables.css) -
   CSS variables for non-Moss users
-- [@ryanatkn/fuz_code/theme_standalone.css](src/lib/theme_standalone.css) -
-  legacy standalone theme (deprecated, use theme_variables.css + theme.css instead)
 - [@ryanatkn/fuz_code/Code.svelte](src/lib/Code.svelte) -
   Svelte component with a convenient API
 
