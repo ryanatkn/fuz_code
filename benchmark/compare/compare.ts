@@ -26,7 +26,7 @@ import {syntax_styler_global} from '../../src/lib/syntax_styler_global.js';
 import {tokenize_syntax} from '../../src/lib/syntax_styler.js';
 
 // TODO this is a workaround for eslint failng without `"benchmark/**/*.ts"` in tsconfig.json
-// the better fix would probably be configuring it correctly but
+// The better fix would probably be configuring it correctly.
 // @ts-nocheck
 
 /* eslint-disable no-console */
