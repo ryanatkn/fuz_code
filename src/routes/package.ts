@@ -5,7 +5,7 @@ import type {Src_Json} from '@ryanatkn/belt/src_json.js';
 
 export const package_json: Package_Json = {
 	name: '@ryanatkn/fuz_code',
-	version: '0.24.0',
+	version: '0.25.0',
 	description: 'syntax styling utilities and components for TypeScript, Svelte, SvelteKit',
 	glyph: '🎨',
 	logo: 'logo.svg',
@@ -83,7 +83,7 @@ export const package_json: Package_Json = {
 
 export const src_json: Src_Json = {
 	name: '@ryanatkn/fuz_code',
-	version: '0.24.0',
+	version: '0.25.0',
 	modules: {
 		'./code_sample.js': {
 			path: 'code_sample.ts',
