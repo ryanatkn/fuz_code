@@ -29,9 +29,9 @@ export interface Stability_Check {
 }
 
 export interface Measurement_Data {
-	times: number[];
-	stability_checks: Stability_Check[];
-	timestamps: number[];
+	times: Array<number>;
+	stability_checks: Array<Stability_Check>;
+	timestamps: Array<number>;
 }
 
 export interface Benchmark_Stats {
@@ -87,7 +87,7 @@ export interface Progress_Callbacks {
 
 // Benchmark runner state
 export interface Benchmark_State {
-	results: Benchmark_Result[];
-	warnings: string[];
+	results: Array<Benchmark_Result>;
+	warnings: Array<string>;
 	summary: Record<string, Summary_Stats> | null;
 }

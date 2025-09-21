@@ -53,12 +53,12 @@ export const measurement_phase = async (
 	content: string,
 	lang: string,
 	config: Benchmark_Config,
-	recent_timings: number[],
+	recent_timings: Array<number>,
 	harness: Benchmark_Harness_Controller,
 	on_progress?: () => void,
 	should_stop?: () => boolean,
 ): Promise<Measurement_Data> => {
-	const times: number[] = [];
+	const times: Array<number> = [];
 	const stability_checks = [];
 	const timestamps = [];
 
@@ -142,13 +142,13 @@ export const run_all_benchmarks = async (
 	harness: Benchmark_Harness_Controller,
 	callbacks?: Progress_Callbacks,
 	custom_implementations?: Benchmarked_Implementation[],
-	custom_languages?: string[],
+	custom_languages?: Array<string>,
 ): Promise<Benchmark_State> => {
 	const impls = custom_implementations || implementations;
 	const langs = custom_languages || languages;
-	const results: Benchmark_Result[] = [];
-	const warnings: string[] = [];
-	const recent_timings: number[] = [];
+	const results: Array<Benchmark_Result> = [];
+	const warnings: Array<string> = [];
+	const recent_timings: Array<number> = [];
 
 	const total_tests = impls.length * langs.length;
 	const total_iterations = total_tests * config.iterations;

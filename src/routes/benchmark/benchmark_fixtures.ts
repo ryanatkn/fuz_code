@@ -10,7 +10,7 @@ export const find_sample = (samples: Record<string, Code_Sample>, lang: string) 
 // Simple pre-generation using content.repeat()
 export const pre_generate_large_contents = (
 	samples: Record<string, Code_Sample>,
-	langs: readonly string[],
+	langs: readonly Array<string>,
 	multiplier: number,
 ): Map<string, string> => {
 	const large_contents = new Map<string, string>();
@@ -30,7 +30,7 @@ export const pre_generate_large_contents = (
 	return large_contents;
 };
 
-export const implementations: Benchmarked_Implementation[] = [
+export const implementations: Array<Benchmarked_Implementation> = [
 	{name: 'html', component: Code, mode: 'html'},
 	{name: 'ranges', component: Code, mode: 'ranges'},
 ];

@@ -121,7 +121,7 @@ export const run_comparison_benchmark = async (
 	console.log('Shiki setup complete');
 
 	// Determine languages to test
-	const supported_languages: SupportedLanguage[] = ['ts', 'css', 'html', 'json', 'svelte'];
+	const supported_languages: Array<SupportedLanguage> = ['ts', 'css', 'html', 'json', 'svelte'];
 	const languages_to_test = filter
 		? supported_languages.filter((lang) => lang === filter || lang.includes(filter))
 		: supported_languages;

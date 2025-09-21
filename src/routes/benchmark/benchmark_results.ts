@@ -11,7 +11,7 @@ export interface Result_Column {
 	class?: (value: any, result: Benchmark_Result) => string;
 }
 
-export const RESULT_COLUMNS: Result_Column[] = [
+export const RESULT_COLUMNS: Array<Result_Column> = [
 	{
 		header: 'Language',
 		key: 'language',
@@ -76,7 +76,7 @@ export const RESULT_COLUMNS: Result_Column[] = [
 /**
  * Convert benchmark results to a markdown table
  */
-export const results_to_markdown = (results: Benchmark_Result[]): string => {
+export const results_to_markdown = (results: Array<Benchmark_Result>): string => {
 	if (results.length === 0) return '';
 
 	// Header

@@ -135,7 +135,7 @@ class Syntax_Styler {
 	get_lang(id: string): Grammar;
 
 	// Add new language
-	add_lang(id: string, grammar: Grammar, aliases?: string[]): void;
+	add_lang(id: string, grammar: Grammar, aliases?: Array<string>): void;
 }
 ```
 

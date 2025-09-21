@@ -9,9 +9,9 @@
 		summary = null,
 		warnings = [],
 	}: {
-		results: Benchmark_Result[];
+		results: Array<Benchmark_Result>;
 		summary: Record<string, Summary_Stats> | null;
-		warnings: string[];
+		warnings: Array<string>;
 	} = $props();
 </script>
 

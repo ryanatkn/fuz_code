@@ -11,7 +11,7 @@ const COOLDOWN_TIMES: Record<string, number> = {
 	high_jitter: 300,
 	unknown: 300,
 };
-export const calculate_timing_jitter = (recent_timings: number[]): number => {
+export const calculate_timing_jitter = (recent_timings: Array<number>): number => {
 	if (recent_timings.length < MIN_SAMPLES_FOR_JITTER) return 0;
 
 	const recent = recent_timings.slice(-RECENT_SAMPLE_COUNT);
@@ -22,7 +22,7 @@ export const calculate_timing_jitter = (recent_timings: number[]): number => {
 	return std_dev / mean;
 };
 export const check_system_stability = async (
-	recent_timings: number[],
+	recent_timings: Array<number>,
 ): Promise<Stability_Check> => {
 	const lag_start = performance.now();
 	await new Promise((resolve) => setTimeout(resolve, 0));

@@ -169,7 +169,7 @@ describe('concurrent tokenization safety', () => {
 		const code = '"string1" + "string2" + "string3"';
 
 		// Tokenize multiple times
-		const results: string[] = [];
+		const results: Array<string> = [];
 		for (let i = 0; i < 10; i++) {
 			results.push(syntax_styler_global.stylize(code, 'js'));
 		}
@@ -282,7 +282,7 @@ describe('edge cases', () => {
 
 	test('handles very large files', () => {
 		// Generate large file
-		const lines: string[] = [];
+		const lines: Array<string> = [];
 		for (let i = 0; i < 1000; i++) {
 			lines.push(`const var${i} = "string${i}"; // comment ${i}`);
 		}
@@ -443,7 +443,7 @@ describe('pattern flag edge cases', () => {
 		const grammar = syntax_styler.get_lang('js');
 
 		// Get non-greedy patterns (keyword is an array of patterns)
-		const keyword_patterns = grammar.keyword as any[];
+		const keyword_patterns = grammar.keyword as Array<any>;
 		const original_first = keyword_patterns[0];
 		const original_second = keyword_patterns[1];
 

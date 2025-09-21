@@ -24,7 +24,7 @@ const MS_PER_SECOND = 1000;
 const MIN_SAMPLE_SIZE = 3;
 
 // Calculate median
-const calculate_median = (sorted_array: number[]): number => {
+const calculate_median = (sorted_array: Array<number>): number => {
 	const mid = Math.floor(sorted_array.length / 2);
 	return sorted_array.length % 2 === 0
 		? (sorted_array[mid - 1] + sorted_array[mid]) / 2
@@ -33,10 +33,10 @@ const calculate_median = (sorted_array: number[]): number => {
 
 // Outlier detection using MAD (Median Absolute Deviation) method
 export const detect_outliers = (
-	times: number[],
+	times: Array<number>,
 ): {
-	cleaned_times: number[];
-	outliers: number[];
+	cleaned_times: Array<number>;
+	outliers: Array<number>;
 } => {
 	if (times.length < MIN_SAMPLE_SIZE) {
 		return {cleaned_times: times, outliers: []};
@@ -62,8 +62,8 @@ export const detect_outliers = (
 		const lower_bound = q1 - IQR_MULTIPLIER * iqr;
 		const upper_bound = q3 + IQR_MULTIPLIER * iqr;
 
-		const cleaned_times: number[] = [];
-		const outliers: number[] = [];
+		const cleaned_times: Array<number> = [];
+		const outliers: Array<number> = [];
 
 		for (const time of times) {
 			if (time < lower_bound || time > upper_bound) {
@@ -77,8 +77,8 @@ export const detect_outliers = (
 	}
 
 	// Use modified Z-score with MAD
-	const cleaned_times: number[] = [];
-	const outliers: number[] = [];
+	const cleaned_times: Array<number> = [];
+	const outliers: Array<number> = [];
 
 	for (const time of times) {
 		const modified_z_score = (MAD_CONSTANT * (time - median)) / mad;
@@ -131,7 +131,7 @@ export const detect_outliers = (
 // Statistical analysis
 export const analyze_results = (data: Measurement_Data): Benchmark_Stats => {
 	// Filter out invalid values (failed iterations)
-	const valid_times: number[] = [];
+	const valid_times: Array<number> = [];
 	let failed_count = 0;
 
 	for (const t of data.times) {
@@ -216,8 +216,10 @@ export const analyze_results = (data: Measurement_Data): Benchmark_Stats => {
 };
 
 // Calculate summary across all tests
-export const calculate_summary = (results: Benchmark_Result[]): Record<string, Summary_Stats> => {
-	const by_impl: Record<string, Benchmark_Result[]> = {};
+export const calculate_summary = (
+	results: Array<Benchmark_Result>,
+): Record<string, Summary_Stats> => {
+	const by_impl: Record<string, Array<Benchmark_Result>> = {};
 
 	// Group results by implementation
 	for (const result of results) {
@@ -256,8 +258,11 @@ export const calculate_summary = (results: Benchmark_Result[]): Record<string, S
 };
 
 // Check for high variance
-export const check_high_variance = (results: Benchmark_Result[], threshold = 0.15): string[] => {
-	const warnings: string[] = [];
+export const check_high_variance = (
+	results: Array<Benchmark_Result>,
+	threshold = 0.15,
+): Array<string> => {
+	const warnings: Array<string> = [];
 
 	for (const result of results) {
 		if (result.cv > threshold) {
