@@ -129,6 +129,7 @@ Enabled by default in `syntax_styler_global`:
 Docs are a work in progress:
 
 - this readme has basic usage instructions
+- [CLAUDE.md](./CLAUDE.md) has more high-level docs including benchmarks
 - [code.fuz.dev](https://code.fuz.dev/) has usage examples with the Svelte component
 - [samples](https://code.fuz.dev/samples) on the website
   (also see the [sample files](src/lib/samples/))
