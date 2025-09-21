@@ -1,5 +1,5 @@
 // TODO this is a workaround for eslint failng without `"benchmark/**/*.ts"` in tsconfig.json
-// The better fix would probably be configuring it correctly.
+// This allows CI to pass without running `npm install` for the benchmarks.
 // @ts-nocheck
 
 import {Bench} from 'tinybench';
