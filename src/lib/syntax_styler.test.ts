@@ -57,10 +57,10 @@ describe('grammar mutation behavior', () => {
 		const syntax_styler = create_styler_with_grammars();
 
 		// Collect all greedy patterns
-		const greedy_patterns = new Map<
+		const greedy_patterns: Map<
 			string,
 			Array<{path: string; pattern: RegExp; source: string; flags: string}>
-		>();
+		> = new Map();
 		const languages = ['js', 'ts', 'css', 'html', 'json', 'svelte'];
 
 		for (const lang of languages) {

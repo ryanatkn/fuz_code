@@ -141,7 +141,7 @@ export const run_all_benchmarks = async (
 	config: Benchmark_Config,
 	harness: Benchmark_Harness_Controller,
 	callbacks?: Progress_Callbacks,
-	custom_implementations?: Benchmarked_Implementation[],
+	custom_implementations?: Array<Benchmarked_Implementation>,
 	custom_languages?: Array<string>,
 ): Promise<Benchmark_State> => {
 	const impls = custom_implementations || implementations;

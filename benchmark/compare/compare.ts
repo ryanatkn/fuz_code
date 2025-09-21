@@ -259,7 +259,7 @@ export const format_comparison_results = (results: Array<Comparison_Result>): st
 	];
 
 	// Group results by language+operation+size to find fastest in each group
-	const grouped = new Map<string, Array<Comparison_Result>>();
+	const grouped: Map<string, Array<Comparison_Result>> = new Map();
 	for (const result of results) {
 		const key = `${result.language}_${result.operation}_${result.content_size}`;
 		const group = grouped.get(key) || [];
@@ -268,7 +268,7 @@ export const format_comparison_results = (results: Array<Comparison_Result>): st
 	}
 
 	// Calculate fastest ops/sec for each group
-	const fastest_by_group = new Map<string, number>();
+	const fastest_by_group: Map<string, number> = new Map();
 	for (const [key, group] of grouped) {
 		const fastest = Math.max(...group.map((r) => r.ops_per_sec));
 		fastest_by_group.set(key, fastest);

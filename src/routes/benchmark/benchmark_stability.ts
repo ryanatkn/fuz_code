@@ -16,7 +16,7 @@ export const calculate_timing_jitter = (recent_timings: Array<number>): number =
 
 	const recent = recent_timings.slice(-RECENT_SAMPLE_COUNT);
 	const mean = recent.reduce((a, b) => a + b, 0) / recent.length;
-	const variance = recent.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / recent.length;
+	const variance = recent.reduce((sum, val) => sum + (val - mean) ** 2, 0) / recent.length;
 	const std_dev = Math.sqrt(variance);
 
 	return std_dev / mean;

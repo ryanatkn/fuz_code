@@ -25,7 +25,7 @@
 	): Promise<number> => {
 		iteration_key++;
 
-		const render_promise = new Promise<void>((resolve, reject) => {
+		const render_promise: Promise<void> = new Promise((resolve, reject) => {
 			render_resolver = resolve;
 
 			active_timeout_id = setTimeout(() => {

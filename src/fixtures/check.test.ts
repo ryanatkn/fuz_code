@@ -143,7 +143,7 @@ describe('generated fixtures match runtime', () => {
 
 describe('all expected languages are tested', () => {
 	test('sample files exist for all supported languages', () => {
-		const found_languages = new Set<string>();
+		const found_languages: Set<string> = new Set();
 
 		const samples = discover_samples();
 		for (const sample of samples) {

@@ -10,7 +10,7 @@
 		on_render_complete?: () => void;
 	}
 
-	let {Benchmarked_Component = null, props = null, on_render_complete = () => {}}: Props = $props();
+	const {Benchmarked_Component = null, props = null, on_render_complete = () => {}}: Props = $props();
 
 	let container_el: HTMLDivElement;
 

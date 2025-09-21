@@ -19,7 +19,7 @@
 	<section class="panel p_md warning">
 		<h3 class="mt_0">⚠️ Warnings</h3>
 		<ul>
-			{#each warnings as warning}
+			{#each warnings as warning (warning)}
 				<li>{warning}</li>
 			{/each}
 		</ul>

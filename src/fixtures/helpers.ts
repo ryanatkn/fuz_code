@@ -29,7 +29,7 @@ export const discover_samples = (): Array<Sample_Spec> => {
 
 	for (const file of sample_files) {
 		const filename = basename(file.id);
-		const match = filename.match(/sample_([^.]+)\.(.+)$/);
+		const match = /sample_([^.]+)\.(.+)$/.exec(filename);
 		if (!match) continue;
 
 		const [, variant, lang] = match;

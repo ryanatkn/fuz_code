@@ -172,7 +172,7 @@ export const analyze_results = (data: Measurement_Data): Benchmark_Stats => {
 	const median = calculate_median(final_sorted);
 
 	const variance =
-		cleaned_times.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / cleaned_times.length;
+		cleaned_times.reduce((sum, val) => sum + (val - mean) ** 2, 0) / cleaned_times.length;
 	const std_dev = Math.sqrt(variance);
 
 	const min = final_sorted[0];
@@ -251,7 +251,7 @@ export const calculate_summary = (
 	const baseline_mean = summary.syntax_html?.avg_mean || 1;
 	for (const impl of Object.keys(summary)) {
 		summary[impl].relative_speed = baseline_mean / summary[impl].avg_mean;
-		summary[impl].improvement = (summary[impl].relative_speed! - 1) * 100;
+		summary[impl].improvement = (summary[impl].relative_speed - 1) * 100;
 	}
 
 	return summary;

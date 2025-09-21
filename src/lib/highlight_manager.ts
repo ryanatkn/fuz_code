@@ -111,7 +111,7 @@ export class Highlight_Manager {
 		this.clear_element_ranges();
 
 		// Create ranges for all tokens - simple direct traversal
-		const ranges_by_type = new Map<string, Array<Range>>();
+		const ranges_by_type: Map<string, Array<Range>> = new Map();
 		this.#create_all_ranges(tokens, text_node, ranges_by_type, 0);
 
 		// Apply highlights

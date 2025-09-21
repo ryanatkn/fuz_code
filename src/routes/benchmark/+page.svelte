@@ -10,7 +10,7 @@
 	// `chromium --js-flags="--expose-gc"`
 
 	// Configuration
-	let config: Benchmark_Config = $state({
+	const config: Benchmark_Config = $state({
 		iterations: 10,
 		warmup_count: 3,
 		cooldown_ms: 100,
@@ -111,7 +111,7 @@
 			{running ? 'running...' : 'run benchmarks'}
 		</button>
 		{#if running}
-			<button type="button" onclick={stop_benchmarks} style="margin-left: 1rem;">
+			<button type="button" onclick={stop_benchmarks} style:margin-left="1rem">
 				stop benchmark
 			</button>
 		{/if}

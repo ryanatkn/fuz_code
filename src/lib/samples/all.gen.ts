@@ -16,7 +16,7 @@ export const gen: Gen = ({origin_path}) => {
 	for (const file of sample_files) {
 		// Parse filename: sample_complex.ts → {variant: 'complex', lang: 'ts'}
 		const filename = basename(file.id);
-		const match = filename.match(/sample_([^.]+)\.(.+)$/);
+		const match = /sample_([^.]+)\.(.+)$/.exec(filename);
 		if (!match) continue;
 
 		const [, variant, lang] = match;

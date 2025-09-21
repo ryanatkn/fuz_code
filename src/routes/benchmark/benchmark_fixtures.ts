@@ -10,10 +10,10 @@ export const find_sample = (samples: Record<string, Code_Sample>, lang: string) 
 // Simple pre-generation using content.repeat()
 export const pre_generate_large_contents = (
 	samples: Record<string, Code_Sample>,
-	langs: readonly Array<string>,
+	langs: ReadonlyArray<string>,
 	multiplier: number,
 ): Map<string, string> => {
-	const large_contents = new Map<string, string>();
+	const large_contents: Map<string, string> = new Map();
 
 	for (const lang of langs) {
 		const sample = find_sample(samples, lang);
