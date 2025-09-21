@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.25.0
+
+### Minor Changes
+
+- add range highlighting ([#12](https://github.com/ryanatkn/fuz_code/pull/12))
+
 ## 0.24.0
 
 ### Minor Changes
