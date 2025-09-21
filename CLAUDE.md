@@ -3,22 +3,9 @@
 A performance-focused fork of PrismJS for syntax highlighting,
 optimized for runtime use with optional CSS Custom Highlight API support.
 
-## Quick Start
+## Usage
 
-```typescript
-import Code from '$lib/Code.svelte';
-import {syntax_styler_global} from '$lib/syntax_styler_global.js';
-
-// Auto-detects and uses CSS Highlight API when available
-<Code content={code} lang="ts" />
-
-// Force specific rendering mode
-<Code content={code} lang="ts" mode="html" />    // Traditional HTML
-<Code content={code} lang="ts" mode="ranges" />  // CSS Highlights
-
-// Direct usage
-const html = syntax_styler_global.stylize(code, 'ts');
-```
+See [README.md](./README.md).
 
 ## Commands
 
