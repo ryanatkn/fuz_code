@@ -4,19 +4,19 @@
 
 | Sample               | Ops/sec  | Mean Time (ms) | Samples |
 | -------------------- | -------- | -------------- | ------- |
-| json_complex         | 29707.28 | 0.0342         | 292265  |
-| css_complex          | 26703.36 | 0.0379         | 263940  |
-| ts_complex           | 5496.57  | 0.1830         | 54637   |
-| html_complex         | 12288.62 | 0.0823         | 121459  |
-| svelte_complex       | 2423.58  | 0.4155         | 24066   |
-| large:json_complex   | 264.05   | 3.8202         | 2618    |
-| large:css_complex    | 232.02   | 4.3518         | 2298    |
-| large:ts_complex     | 31.75    | 31.9106        | 314     |
-| large:html_complex   | 85.34    | 11.8801        | 842     |
-| large:svelte_complex | 13.46    | 75.2167        | 133     |
+| json_complex         | 29821.82 | 0.0341         | 293671  |
+| css_complex          | 26826.07 | 0.0381         | 262506  |
+| ts_complex           | 5479.79  | 0.1845         | 54198   |
+| html_complex         | 12268.33 | 0.0832         | 120121  |
+| svelte_complex       | 2404.65  | 0.4203         | 23791   |
+| large:json_complex   | 258.37   | 3.9305         | 2545    |
+| large:css_complex    | 239.62   | 4.2260         | 2367    |
+| large:ts_complex     | 30.66    | 33.1579        | 302     |
+| large:html_complex   | 84.14    | 12.1397        | 824     |
+| large:svelte_complex | 13.55    | 74.7600        | 134     |
 
 **Total samples benchmarked:** 10
-**Average ops/sec:** 7724.60
+**Average ops/sec:** 7742.70
 
 ## Browser Benchmark Results
 
