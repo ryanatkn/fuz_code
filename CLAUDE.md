@@ -6,6 +6,7 @@ A performance-focused fork of PrismJS for syntax highlighting, optimized for run
 
 ```typescript
 import Code from '$lib/Code.svelte';
+import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 
 // Auto-detects and uses CSS Highlight API when available
 <Code content={code} lang="ts" />
@@ -13,6 +14,9 @@ import Code from '$lib/Code.svelte';
 // Force specific rendering mode
 <Code content={code} lang="ts" mode="html" />    // Traditional HTML
 <Code content={code} lang="ts" mode="ranges" />  // CSS Highlights
+
+// Direct usage
+const html = syntax_styler_global.stylize(code, 'ts');
 ```
 
 ## Commands
@@ -20,7 +24,7 @@ import Code from '$lib/Code.svelte';
 ```bash
 gro test                            # Run all tests
 gro test src/fixtures/check.test.ts # Verify fixture generation
-gro src/fixtures/update             # Regenerate fixtures
+npm run update-generated-fixtures   # Regenerate fixtures
 npm run benchmark                   # Run performance benchmarks
 npm run benchmark-compare           # Compare performance with Prism and Shiki
 ```
@@ -42,7 +46,7 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 - `src/lib/syntax_styler.ts` - Core tokenization engine with linked list processing
 - `src/lib/syntax_styler_global.ts` - Pre-configured global instance
-- `src/lib/tokenize_syntax()` - Main tokenization function
+- `tokenize_syntax()` from `src/lib/syntax_styler.ts` - Main tokenization function
 
 #### Language Definitions
 
@@ -135,9 +139,7 @@ class Syntax_Styler {
 }
 ```
 
-### syntax_styler_global
-
-Pre-configured instance with all languages loaded:
+### Pre-configured instance
 
 ```typescript
 import {syntax_styler_global} from '$lib/syntax_styler_global.js';
@@ -178,7 +180,7 @@ Generated fixtures in `src/fixtures/{lang}/`:
 ### Workflow
 
 1. Edit samples in `src/lib/samples/`
-2. Run `gro src/fixtures/update` to regenerate
+2. Run `npm run update-generated-fixtures` to regenerate
 3. Run `gro test src/fixtures/check.test.ts` to verify
 4. Review changes with `git diff src/fixtures/`
 
@@ -231,28 +233,16 @@ Theme uses CSS variables from Moss:
 
 ## Demo Pages
 
-- `/domstyler` - Basic DOM styler examples
-- `/test-domstyler-ranges` - Range highlighting demo
-- `/compare` - Side-by-side comparison of modes
+- `/samples` - Code samples in all supported languages
 - `/benchmark` - Performance testing
-
-## Migration from Boundary Scanner
-
-The project previously used a complex two-phase "boundary scanner" system that has been removed in favor of the simpler DOM styler + ranges approach. The benefits:
-
-- **2000+ lines removed** - Simpler codebase
-- **Single tokenization phase** - Easier to understand
-- **Proven patterns** - PrismJS compatibility
-- **Better performance** - CSS Highlights when supported
-- **Easier language support** - Just add PrismJS-style patterns
 
 ## Troubleshooting
 
 ### Positions Don't Match
 
-The position calculation happens post-tokenization. If positions are wrong:
+The position calculation happens during range creation. If positions are wrong:
 
-1. Check `flatten_domstyler_tokens()` logic
+1. Check `highlight_manager.ts` range creation logic
 2. Verify token tree structure with debug output
 3. Look for nested tokens that might be miscounted
 
@@ -267,6 +257,6 @@ The position calculation happens post-tokenization. If positions are wrong:
 
 1. Create `src/lib/grammar_{lang}.ts`
 2. Define grammar patterns (see existing languages)
-3. Register in `domstyler_global.ts`
+3. Register in `syntax_styler_global.ts`
 4. Add samples in `src/lib/samples/sample_{variant}.{lang}`
 5. Generate fixtures and test
