@@ -1,6 +1,7 @@
 # fuz_code - Syntax Highlighter
 
-A performance-focused fork of PrismJS for syntax highlighting, optimized for runtime use with optional CSS Custom Highlight API support.
+A performance-focused fork of PrismJS for syntax highlighting,
+optimized for runtime use with optional CSS Custom Highlight API support.
 
 ## Quick Start
 
@@ -36,7 +37,7 @@ npm run benchmark-compare           # Compare performance with Prism and Shiki
 **Syntax Styler** - A PrismJS fork with two rendering modes:
 
 1. **HTML Mode** - Traditional token-based HTML generation with CSS classes
-2. **Range Mode** - CSS Custom Highlight API for native browser highlighting (Chrome 105+, Firefox 111+)
+2. **Range Mode** - CSS Custom Highlight API for native browser highlighting
 
 The system uses regex-based tokenization inherited from PrismJS, maintaining compatibility with existing language definitions while adding position tracking for range highlighting.
 
@@ -245,13 +246,6 @@ The position calculation happens during range creation. If positions are wrong:
 1. Check `highlight_manager.ts` range creation logic
 2. Verify token tree structure with debug output
 3. Look for nested tokens that might be miscounted
-
-### CSS Highlights Not Working
-
-1. Check browser support (Chrome 105+, Firefox 111+)
-2. Verify `supports_css_highlight_api()` returns true
-3. Check console for range creation errors
-4. Ensure text node exists and positions are valid
 
 ### Adding a New Language
 
