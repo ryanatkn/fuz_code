@@ -14,6 +14,7 @@
 
 <!-- <Docs_Item name={LIBRARY_ITEM_NAME}> -->
 <section>
+	<h2 class="mt_0">Usage</h2>
 	<p>
 		The
 		<Tome_Link name="Code" />
@@ -36,6 +37,19 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 	<Code content="<header>hello world</header>" />
 </section>
 <section>
+	<h3>Dependencies</h3>
+	<p>
+		By default fuz_code depends on my CSS framework <a href="https://moss.ryanatkn.com">Moss</a>. If
+		you're not using it, import <code>theme_variables.css</code>:
+	</p>
+	<Code
+		lang="ts"
+		content="// +layout.svelte
+import '@ryanatkn/fuz_code/theme.css';
+import '@ryanatkn/fuz_code/theme_variables.css'; // also this if not using Moss"
+	/>
+</section>
+<section>
 	<aside>
 		⚠️ Performing syntax styling at runtime like this is often wasteful. The plan is to provide a
 		Vite plugin to optimize static cases. For now you can use <code>lang={'{'}null}</code> with pre-highligted
@@ -43,6 +57,7 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 	</aside>
 </section>
 <section>
+	<h3>Svelte support</h3>
 	<p>
 		<Tome_Link name="Code" /> styles
 		<a href="https://svelte.dev/">Svelte</a>
@@ -69,6 +84,7 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 	</div>
 </section>
 <section>
+	<h3>TypeScript support</h3>
 	<p>
 		<Tome_Link name="Code" /> supports TypeScript with <code>lang="ts"</code>:
 	</p>
@@ -80,6 +96,7 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 	</div>
 </section>
 <section>
+	<h3>Fallback to no styling</h3>
 	<p>
 		Passing <code>lang={'{'}null}</code> disables syntax styling:
 	</p>
@@ -89,28 +106,15 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 	<Code lang={null} content={`<aside>all is gray</aside>`} />
 </section>
 <section>
+	<h3>Layout</h3>
 	<p>
 		<Tome_Link name="Code" /> is a block by default:
 	</p>
 	<div>ab<Code content="c" /></div>
 	<Code content={'<div>ab<Code content="c" /></div>'} />
-</section>
-<section>
 	<p>
-		<Tome_Link name="Code" /> can be inlined with <Code
-			inline
-			content={`<Code inline content="..." />`}
-		/>
+		It can be inlined with <Code inline content={`<Code inline content="..." />`} />
 	</p>
 </section>
 
 <!-- </DocsItem> -->
-
-<style>
-	section {
-		/* TODO not sure about this -- maybe make it a util class? or a component? */
-		padding: var(--space_xl2);
-		display: flex;
-		flex-direction: column;
-	}
-</style>

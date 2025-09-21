@@ -13,7 +13,7 @@ The main changes:
 - has a minimal and explicit API to generate stylized HTML, and knows nothing about the DOM
 - uses stateless ES modules, instead of globals with side effects and pseudo-module behaviors
 - has various incompatible changes, so using Prism grammars requires some tweaks
-- smaller (by 7kB minified and 3kB gzipped, ~1/3 less) and [faster](#benchmarks)
+- smaller (by 7kB minified and 3kB gzipped, ~1/3 less)
 - written in TypeScript
 - is a fork, see the [MIT license](https://github.com/ryanatkn/fuz_code/blob/main/LICENSE)
 
@@ -25,20 +25,21 @@ but there are two optional dependencies:
   based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
   and a [Svelte component](src/lib/Code.svelte) for convenient usage.
 - The [default theme](src/lib/theme.css) integrates
-  with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference.
-  A [zero-dependency theme](src/lib/theme_standalone.css)
-  is also provided that uses the less-customizable `light-dark()`, see below for more.
+  with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference,
+  and [theme_variables.css](src/lib/theme_variables.css)
+  is also included that uses the less-customizable `light-dark()`.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is much lighter
 (with its faster `shiki/engine/javascript`, 503kB minified to 16kB, 63kb gzipped to 5.6kB),
-and [vastly faster](#benchmarks)
+and [vastly faster](./benchmark/compare/results.md)
 for runtime usage because it uses JS regexps instead of
 the [Onigurama regexp engine](https://shiki.matsu.io/guide/regex-engines)
 used by TextMate grammars.
 Shiki also has 38 dependencies instead of 0.
-However this is not a fair comparison because Shiki is designed mainly for buildtime usage,
-and Prism grammars are much simpler and less powerful than TextMate's.
+However this is not a fair comparison because
+Prism grammars are much simpler and less powerful than TextMate's,
+and Shiki is designed mainly for buildtime usage.
 
 ## Usage
 
@@ -47,10 +48,30 @@ npm i -D @ryanatkn/fuz_code
 ```
 
 ```ts
-import {syntax_styler} from '@ryanatkn/fuz_code';
+import {syntax_styler_global} from '@ryanatkn/fuz_code/syntax_styler_global.js';
 
-syntax_styler.stylize('<h1>hello world</h1>', 'svelte');
+syntax_styler_global.stylize('<h1>hello world</h1>', 'svelte');
 ```
+
+```svelte
+<script>
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
+</script>
+
+<!-- Auto-detect: uses CSS Highlights if available, else HTML -->
+<Code content={sourceCode} lang="ts" />
+
+<!-- Force HTML generation (always works) -->
+<Code content={sourceCode} lang="ts" mode="html" />
+
+<!-- Force CSS Highlights (requires browser support) -->
+<Code content={sourceCode} lang="ts" mode="ranges" />
+```
+
+By default the `Code` component automatically uses the
+[CSS Custom Highlight API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API)
+when available for improved performance,
+falling back to HTML generation for non-browser runtimes and older browsers.
 
 Themes are just CSS files, so they work with any JS framework.
 
@@ -66,35 +87,34 @@ on my CSS library [Moss](https://github.com/ryanatkn/moss)
 for [color-scheme](https://moss.ryanatkn.com/docs/themes) awareness.
 See the [Moss docs](https://moss.ryanatkn.com/) for its usage.
 
-[A dependency-free version](src/lib/theme_standalone.css) of the default theme is provided,
-but note that the colors are staticly defined instead of using
-Moss' [style variables](https://moss.ryanatkn.com/docs/variables).
-They use [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark)
-which means they're hardcoded to the inferred `color-scheme`,
-rather than being settable by a user option unlike the Moss version. This could be improved using a class convention like `.dark`.
+If you're not using Moss, import `theme_variables.css` alongside `theme.css`:
 
 ```ts
-// no dependencies:
-import '@ryanatkn/fuz_code/theme_standalone.css';
+// Without Moss:
+import '@ryanatkn/fuz_code/theme.css';
+import '@ryanatkn/fuz_code/theme_variables.css';
 ```
 
 ### Modules
 
-- [@ryanatkn/fuz_code](src/lib/index.ts) - index with default grammars,
-  use this as a guide if you want custom grammars
-- [@ryanatkn/fuz_code/syntax_styler.js](src/lib/syntax_styler.ts) - utilities for custom grammars
+- [@ryanatkn/fuz_code/syntax_styler_global.js](src/lib/syntax_styler_global.ts) - pre-configured instance with all grammars
+- [@ryanatkn/fuz_code/syntax_styler.js](src/lib/syntax_styler.ts) - base class for custom grammars
 - [@ryanatkn/fuz_code/theme.css](src/lib/theme.css) -
   default theme that depends on [Moss](https://github.com/ryanatkn/moss)
-- [@ryanatkn/fuz_code/theme_standalone.css](src/lib/theme_standalone.css) -
-  default theme with no dependencies
+- [@ryanatkn/fuz_code/theme_variables.css](src/lib/theme_variables.css) -
+  CSS variables for non-Moss users
 - [@ryanatkn/fuz_code/Code.svelte](src/lib/Code.svelte) -
-  Svelte component with a convenient API
+  Svelte component supporting both HTML generation and native browser highlights
+- [@ryanatkn/fuz_code/highlight_manager.js](src/lib/highlight_manager.ts) -
+  uses the browser [`Highlight`](https://developer.mozilla.org/en-US/docs/Web/API/Highlight)
+  and [`Range`](https://developer.mozilla.org/en-US/docs/Web/API/Range) APIs
+  as a faster alternative to generating spans with classes
 
 I encourage you to poke around [`src/lib`](src/lib) if you're interested in using fuz_code.
 
 ### Grammars
 
-Enabled [by default](src/lib/index.ts):
+Enabled by default in `syntax_styler_global`:
 
 - [`markup`](src/lib/grammar_markup.ts) (html, xml, etc)
 - [`svelte`](src/lib/grammar_svelte.ts)
@@ -109,10 +129,10 @@ Enabled [by default](src/lib/index.ts):
 Docs are a work in progress:
 
 - this readme has basic usage instructions
+- [CLAUDE.md](./CLAUDE.md) has more high-level docs including benchmarks
 - [code.fuz.dev](https://code.fuz.dev/) has usage examples with the Svelte component
 - [samples](https://code.fuz.dev/samples) on the website
-  (also see the [inputs](src/lib/code_sample_inputs.ts)
-  and [outputs](src/lib/code_sample_outputs.ts))
+  (also see the [sample files](src/lib/samples/))
 - [tests](src/lib/syntax_styler.test.ts)
 
 Please open issues if you need any help.
@@ -128,86 +148,6 @@ Please open issues if you need any help.
 - add some useful plugins, flesh out the API (start with line emphasis)
 - improve the TypeScript grammar to tokenize types
 - improve the grammars in subtle ways
-
-## Benchmarks
-
-Performance is a high priority to best support runtime usage.
-This project is still early and there are more gains to be had.
-
-Note that this benchmark is somewhat unfair to Shiki
-because it's not designed for runtime usage,
-and it probably does a significantly better job at the task at hand
-because it uses TextMate grammars.
-
-Results styling the [Svelte sample](src/lib/code_sample_inputs.ts):
-
-| Task name               | Throughput average (ops/s) | Throughput median (ops/s) | Samples |
-| ----------------------- | -------------------------- | ------------------------- | ------- |
-| syntax_styler.stylize   | 3149 ± 0.56%               | 3333                      | 6004    |
-| Prism.highlight         | 2748 ± 0.51%               | 2500                      | 5293    |
-| Shiki engine/javascript | 69 ± 0.59%                 | 69                        | 138     |
-| Shiki engine/oniguruma  | 41 ± 0.27%                 | 40                        | 82      |
-
-Directly runnable benchmarks are not included yet -
-I don't know if I'll add them here or make a separate project.
-
-To run the benchmarks yourself:
-
-```bash
-npm i -D shiki prismjs prism-svelte @types/prismjs @ryanatkn/fuz_code
-```
-
-Then add this file and import it somewhere like `$routes/+page.svelte`:
-
-```ts
-// $lib/benchmark.ts
-
-import {Bench} from 'tinybench';
-import Prism from 'prismjs';
-import 'prism-svelte';
-import {createHighlighterCoreSync} from 'shiki/core';
-import {createJavaScriptRegexEngine} from 'shiki/engine/javascript';
-import svelte_shiki from 'shiki/langs/svelte.mjs';
-import nord from 'shiki/themes/nord.mjs';
-import {createOnigurumaEngine} from 'shiki/engine/oniguruma';
-
-import {syntax_styler} from '$lib/index.js';
-import {sample_svelte_code} from '$lib/code_sample_inputs.js';
-
-console.log('benchmarking');
-const bench = new Bench({name: 'syntax styling', time: 2000});
-
-const shiki_highlighter_js = createHighlighterCoreSync({
-	themes: [nord],
-	langs: [svelte_shiki],
-	engine: createJavaScriptRegexEngine(),
-});
-
-const shiki_highlighter_builtin = createHighlighterCoreSync({
-	themes: [nord],
-	langs: [svelte_shiki],
-	engine: await createOnigurumaEngine(import('shiki/wasm')),
-});
-
-bench
-	.add('syntax_styler.stylize', () => {
-		syntax_styler.stylize(sample_svelte_code, 'svelte');
-	})
-	.add('Prism.highlight', () => {
-		Prism.highlight(sample_svelte_code, Prism.langs.svelte, 'svelte');
-	})
-	.add('Shiki engine/javascript', () => {
-		shiki_highlighter_js.codeToHtml(sample_svelte_code, {lang: 'svelte', theme: 'nord'});
-	})
-	.add('Shiki engine/oniguruma', () => {
-		shiki_highlighter_builtin.codeToHtml(sample_svelte_code, {lang: 'svelte', theme: 'nord'});
-	});
-
-await bench.run();
-
-console.log(bench.name);
-console.table(bench.table());
-```
 
 ## License [🐦](https://wikipedia.org/wiki/Free_and_open-source_software)
 

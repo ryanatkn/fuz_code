@@ -25,6 +25,9 @@ export const package_json: Package_Json = {
 		test: 'gro test',
 		preview: 'vite preview',
 		deploy: 'gro deploy',
+		benchmark: 'gro run benchmark/run_benchmarks.ts',
+		'benchmark-compare': 'gro run benchmark/compare/run_compare.ts',
+		'update-generated-fixtures': 'gro src/fixtures/update',
 	},
 	type: 'module',
 	engines: {node: '>=22.15'},
@@ -35,7 +38,7 @@ export const package_json: Package_Json = {
 		'@ryanatkn/belt': '^0.34.1',
 		'@ryanatkn/eslint-config': '^0.8.0',
 		'@ryanatkn/fuz': '^0.145.0',
-		'@ryanatkn/gro': '^0.164.1',
+		'@ryanatkn/gro': '^0.165.0',
 		'@ryanatkn/moss': '^0.33.0',
 		'@sveltejs/adapter-static': '^3.0.9',
 		'@sveltejs/kit': '^2.37.1',
@@ -44,10 +47,12 @@ export const package_json: Package_Json = {
 		'@types/node': '^24.3.1',
 		eslint: '^9.35.0',
 		'eslint-plugin-svelte': '^3.12.1',
+		'esm-env': '^1.2.2',
 		prettier: '^3.6.2',
 		'prettier-plugin-svelte': '^3.4.0',
 		svelte: '^5.38.7',
 		'svelte-check': '^4.3.1',
+		tinybench: '^5.0.1',
 		tslib: '^2.8.1',
 		typescript: '^5.9.2',
 		'typescript-eslint': '^8.42.0',
@@ -64,37 +69,15 @@ export const package_json: Package_Json = {
 	sideEffects: ['**/*.css'],
 	files: ['dist', 'src/lib/**/*.ts', '!src/lib/**/*.test.*', '!dist/**/*.test.*'],
 	exports: {
-		'.': {types: './dist/index.d.ts', default: './dist/index.js'},
 		'./package.json': './package.json',
-		'./code_sample_inputs.js': {
-			types: './dist/code_sample_inputs.d.ts',
-			default: './dist/code_sample_inputs.js',
+		'./*.js': {types: './dist/*.d.ts', default: './dist/*.js'},
+		'./*.svelte': {
+			types: './dist/*.svelte.d.ts',
+			svelte: './dist/*.svelte',
+			default: './dist/*.svelte',
 		},
-		'./code_sample_outputs.js': {
-			types: './dist/code_sample_outputs.d.ts',
-			default: './dist/code_sample_outputs.js',
-		},
-		'./Code.svelte': {
-			types: './dist/Code.svelte.d.ts',
-			svelte: './dist/Code.svelte',
-			default: './dist/Code.svelte',
-		},
-		'./grammar_clike.js': {types: './dist/grammar_clike.d.ts', default: './dist/grammar_clike.js'},
-		'./grammar_css.js': {types: './dist/grammar_css.d.ts', default: './dist/grammar_css.js'},
-		'./grammar_js.js': {types: './dist/grammar_js.d.ts', default: './dist/grammar_js.js'},
-		'./grammar_json.js': {types: './dist/grammar_json.d.ts', default: './dist/grammar_json.js'},
-		'./grammar_markup.js': {
-			types: './dist/grammar_markup.d.ts',
-			default: './dist/grammar_markup.js',
-		},
-		'./grammar_svelte.js': {
-			types: './dist/grammar_svelte.d.ts',
-			default: './dist/grammar_svelte.js',
-		},
-		'./grammar_ts.js': {types: './dist/grammar_ts.d.ts', default: './dist/grammar_ts.js'},
-		'./syntax_styler.js': {types: './dist/syntax_styler.d.ts', default: './dist/syntax_styler.js'},
-		'./theme_standalone.css': {default: './dist/theme_standalone.css'},
-		'./theme.css': {default: './dist/theme.css'},
+		'./*.json': {types: './dist/*.json.d.ts', default: './dist/*.json'},
+		'./*.css': {default: './dist/*.css'},
 	},
 } as any;
 
@@ -102,30 +85,14 @@ export const src_json: Src_Json = {
 	name: '@ryanatkn/fuz_code',
 	version: '0.24.0',
 	modules: {
-		'.': {path: 'index.ts', declarations: [{name: 'syntax_styler', kind: 'variable'}]},
-		'./package.json': {path: 'package.json', declarations: [{name: 'default', kind: 'json'}]},
-		'./code_sample_inputs.js': {
-			path: 'code_sample_inputs.ts',
+		'./code_sample.js': {
+			path: 'code_sample.ts',
 			declarations: [
-				{name: 'sample_json_code', kind: 'variable'},
-				{name: 'sample_html_code', kind: 'variable'},
-				{name: 'sample_css_code', kind: 'variable'},
-				{name: 'sample_ts_code', kind: 'variable'},
-				{name: 'sample_svelte_code', kind: 'variable'},
-				{name: 'samples', kind: 'variable'},
+				{name: 'Code_Sample', kind: 'type'},
+				{name: 'sample_langs', kind: 'variable'},
+				{name: 'Sample_Lang', kind: 'type'},
 			],
 		},
-		'./code_sample_outputs.js': {
-			path: 'code_sample_outputs.ts',
-			declarations: [
-				{name: 'styled_json_code', kind: 'variable'},
-				{name: 'styled_html_code', kind: 'variable'},
-				{name: 'styled_css_code', kind: 'variable'},
-				{name: 'styled_ts_code', kind: 'variable'},
-				{name: 'styled_svelte_code', kind: 'variable'},
-			],
-		},
-		'./Code.svelte': {path: 'Code.svelte', declarations: [{name: 'default', kind: 'component'}]},
 		'./grammar_clike.js': {
 			path: 'grammar_clike.ts',
 			declarations: [{name: 'add_grammar_clike', kind: 'function'}],
@@ -161,6 +128,18 @@ export const src_json: Src_Json = {
 			path: 'grammar_ts.ts',
 			declarations: [{name: 'add_grammar_ts', kind: 'function'}],
 		},
+		'./highlight_manager.js': {
+			path: 'highlight_manager.ts',
+			declarations: [
+				{name: 'Highlight_Mode', kind: 'type'},
+				{name: 'supports_css_highlight_api', kind: 'function'},
+				{name: 'Highlight_Manager', kind: 'class'},
+			],
+		},
+		'./syntax_styler_global.js': {
+			path: 'syntax_styler_global.ts',
+			declarations: [{name: 'syntax_styler_global', kind: 'variable'}],
+		},
 		'./syntax_styler.js': {
 			path: 'syntax_styler.ts',
 			declarations: [
@@ -180,8 +159,9 @@ export const src_json: Src_Json = {
 				{name: 'Hook_Wrap_Callback_Context', kind: 'type'},
 			],
 		},
-		'./theme_standalone.css': {
-			path: 'theme_standalone.css',
+		'./Code.svelte': {path: 'Code.svelte', declarations: [{name: 'default', kind: 'component'}]},
+		'./theme_variables.css': {
+			path: 'theme_variables.css',
 			declarations: [{name: 'default', kind: 'css'}],
 		},
 		'./theme.css': {path: 'theme.css', declarations: [{name: 'default', kind: 'css'}]},

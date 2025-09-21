@@ -1,0 +1,174 @@
+=== TOKENS ===
+   0-15    doctype                   <!doctype html>
+  17-35    tag                       <div class="test">
+  17-21    tag                       <div
+  17-18    punctuation               <
+  22-27    attr_name                 class
+  27-34    attr_value                ="test"
+  27-28    punctuation               =
+  28-29    punctuation               "
+  33-34    punctuation               "
+  34-35    punctuation               >
+  37-40    tag                       <p>
+  37-39    tag                       <p
+  37-38    punctuation               <
+  39-40    punctuation               >
+  52-56    tag                       </p>
+  52-55    tag                       </p
+  52-54    punctuation               </
+  55-56    punctuation               >
+  57-63    tag                       </div>
+  57-62    tag                       </div
+  57-59    punctuation               </
+  62-63    punctuation               >
+  65-99    tag                       <p class="some_class hypen-class">
+  65-67    tag                       <p
+  65-66    punctuation               <
+  68-73    attr_name                 class
+  73-98    attr_value                ="some_class hypen-class"
+  73-74    punctuation               =
+  74-75    punctuation               "
+  97-98    punctuation               "
+  98-99    punctuation               >
+ 104-124   tag                       <span class="a b c">
+ 104-109   tag                       <span
+ 104-105   punctuation               <
+ 110-115   attr_name                 class
+ 115-123   attr_value                ="a b c"
+ 115-116   punctuation               =
+ 116-117   punctuation               "
+ 122-123   punctuation               "
+ 123-124   punctuation               >
+ 128-135   tag                       </span>
+ 128-134   tag                       </span
+ 128-130   punctuation               </
+ 134-135   punctuation               >
+ 135-139   tag                       </p>
+ 135-138   tag                       </p
+ 135-137   punctuation               </
+ 138-139   punctuation               >
+ 141-172   tag                       <button type="button" disabled>
+ 141-148   tag                       <button
+ 141-142   punctuation               <
+ 149-153   attr_name                 type
+ 153-162   attr_value                ="button"
+ 153-154   punctuation               =
+ 154-155   punctuation               "
+ 161-162   punctuation               "
+ 163-171   attr_name                 disabled
+ 171-172   punctuation               >
+ 180-189   tag                       </button>
+ 180-188   tag                       </button
+ 180-182   punctuation               </
+ 188-189   punctuation               >
+ 191-237   comment                   <!-- comment <div>a<br /> b</div> <script> -->
+ 239-245   tag                       <br />
+ 239-242   tag                       <br
+ 239-240   punctuation               <
+ 243-245   punctuation               />
+ 247-253   tag                       <hr />
+ 247-250   tag                       <hr
+ 247-248   punctuation               <
+ 251-253   punctuation               />
+ 255-291   tag                       <img src="image.jpg" alt="access" />
+ 255-259   tag                       <img
+ 255-256   punctuation               <
+ 260-263   attr_name                 src
+ 263-275   attr_value                ="image.jpg"
+ 263-264   punctuation               =
+ 264-265   punctuation               "
+ 274-275   punctuation               "
+ 276-279   attr_name                 alt
+ 279-288   attr_value                ="access"
+ 279-280   punctuation               =
+ 280-281   punctuation               "
+ 287-288   punctuation               "
+ 289-291   punctuation               />
+ 293-297   tag                       <ul>
+ 293-296   tag                       <ul
+ 293-294   punctuation               <
+ 296-297   punctuation               >
+ 299-303   tag                       <li>
+ 299-302   tag                       <li
+ 299-300   punctuation               <
+ 302-303   punctuation               >
+ 314-319   tag                       </li>
+ 314-318   tag                       </li
+ 314-316   punctuation               </
+ 318-319   punctuation               >
+ 321-325   tag                       <li>
+ 321-324   tag                       <li
+ 321-322   punctuation               <
+ 324-325   punctuation               >
+ 336-341   tag                       </li>
+ 336-340   tag                       </li
+ 336-338   punctuation               </
+ 340-341   punctuation               >
+ 342-347   tag                       </ul>
+ 342-346   tag                       </ul
+ 342-344   punctuation               </
+ 346-347   punctuation               >
+ 349-380   tag                       <script type="text/javascript">
+ 349-356   tag                       <script
+ 349-350   punctuation               <
+ 357-361   attr_name                 type
+ 361-379   attr_value                ="text/javascript"
+ 361-362   punctuation               =
+ 362-363   punctuation               "
+ 378-379   punctuation               "
+ 379-380   punctuation               >
+ 380-404   script                    \n\tconst ok = '<style>';\n
+ 380-404   lang_js                   \n\tconst ok = '<style>';\n
+ 382-387   keyword                   const
+ 391-392   operator                  =
+ 393-402   string                    '<style>'
+ 402-403   punctuation               ;
+ 404-413   tag                       </script>
+ 404-412   tag                       </script
+ 404-406   punctuation               </
+ 412-413   punctuation               >
+ 415-438   tag                       <style type="text/css">
+ 415-421   tag                       <style
+ 415-416   punctuation               <
+ 422-426   attr_name                 type
+ 426-437   attr_value                ="text/css"
+ 426-427   punctuation               =
+ 427-428   punctuation               "
+ 436-437   punctuation               "
+ 437-438   punctuation               >
+ 438-482   style                     \n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
+ 438-482   lang_css                  \n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
+ 440-456   selector                  .special::before
+ 457-458   punctuation               {
+ 461-468   property                  content
+ 468-469   punctuation               :
+ 470-477   string                    '< & >'
+ 477-478   punctuation               ;
+ 480-481   punctuation               }
+ 482-490   tag                       </style>
+ 482-489   tag                       </style
+ 482-484   punctuation               </
+ 489-490   punctuation               >
+ 492-540   cdata                     <![CDATA[ if (a < 0) alert("b"); <not-a-tag> ]]>
+
+=== STATS ===
+Total tokens: 151
+Sample length: 541 characters
+
+Token types:
+  punctuation: 75
+  tag: 46
+  attr_name: 9
+  attr_value: 8
+  string: 2
+  doctype: 1
+  comment: 1
+  script: 1
+  lang_js: 1
+  keyword: 1
+  operator: 1
+  style: 1
+  lang_css: 1
+  selector: 1
+  property: 1
+  cdata: 1

@@ -1,4 +1,4 @@
-import type {Add_Grammar, Syntax_Styler, Grammar, Grammar_Token} from '$lib/syntax_styler.js';
+import type {Syntax_Styler, Add_Grammar, Grammar, Grammar_Token} from '$lib/syntax_styler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -14,13 +14,14 @@ export const add_grammar_markup: Add_Grammar = (syntax_styler) => {
 			pattern: /<!--(?:(?!<!--)[\s\S])*?-->/,
 			greedy: true,
 		},
-		prolog: {
+		processing_instruction: {
 			pattern: /<\?[\s\S]+?\?>/,
 			greedy: true,
 		},
 		// https://www.w3.org/TR/xml/#NT-doctypedecl
 		doctype: {
-			pattern: /<!DOCTYPE.*>/i, // vastly simplified compared to the original implementation, but may be lacking in some cases
+			pattern: /<!DOCTYPE[^>]*>/i,
+			greedy: true,
 		},
 		cdata: {
 			pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
@@ -87,8 +88,6 @@ export const add_grammar_markup: Add_Grammar = (syntax_styler) => {
  * @param tag_name - The name of the tag that contains the inlined language. This name will be treated as
  * case insensitive.
  * @param lang - The language key.
- * @example
- * grammar_markup_add_inlined(syntax_styler, 'style', 'css');
  */
 export const grammar_markup_add_inlined = (
 	syntax_styler: Syntax_Styler,
@@ -140,8 +139,6 @@ export const grammar_markup_add_inlined = (
  * @param attr_name - The name of the tag that contains the inlined language. This name will be treated as
  * case insensitive.
  * @param lang - The language key.
- * @example
- * grammar_markup_add_attribute(syntax_styler, 'style', 'css');
  */
 export const grammar_markup_add_attribute = (
 	syntax_styler: Syntax_Styler,

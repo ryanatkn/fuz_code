@@ -2,25 +2,27 @@
 	import Breadcrumb from '@ryanatkn/fuz/Breadcrumb.svelte';
 
 	import Code from '$lib/Code.svelte';
-	import {samples} from '$lib/code_sample_inputs.js';
+	import {samples} from '$lib/samples/all.js';
+	import Footer from '$routes/Footer.svelte';
 </script>
 
-<main class="box w_100">
+<main class="box w_100 py_xl5">
 	<Breadcrumb>🎨</Breadcrumb>
-	<div class="display_flex flex_wrap justify_content_space_around">
-		{#each samples as { content, lang } (lang)}
-			<div>
-				<h2>{lang}</h2>
-				<pre><Code {content} {lang} /></pre>
+	{#each Object.values(samples) as sample (sample.name)}
+		<section>
+			<h2 class="box panel p_md mb_0">{sample.lang}</h2>
+			<div class="display_flex justify_content_center flex_wrap gap_sm py_xl5">
+				<div>
+					<h3>HTML</h3>
+					<Code content={sample.content} lang={sample.lang} mode="html" />
+				</div>
+				<div>
+					<h3>Highlight API</h3>
+					<Code content={sample.content} lang={sample.lang} mode="ranges" />
+				</div>
 			</div>
-		{/each}
-	</div>
+		</section>
+		<hr />
+	{/each}
+	<Footer />
 </main>
-
-<style>
-	main {
-		/* TODO hacky */
-		margin-bottom: var(--space_xl5);
-		padding: var(--space_xl3) 0;
-	}
-</style>

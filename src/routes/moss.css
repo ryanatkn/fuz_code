@@ -2,11 +2,11 @@
 
 /* * 
  * File statistics:
- * - Total files in filer: 262
- * - External dependencies: 234
- * - Internal project files: 28
- * - Files processed (passed filter): 232
- * - Files with CSS classes: 19
+ * - Total files in filer: 285
+ * - External dependencies: 235
+ * - Internal project files: 50
+ * - Files processed (passed filter): 250
+ * - Files with CSS classes: 23
  * - Unique classes found: 41
  */
 
@@ -34,10 +34,29 @@
 	max-width: var(--distance_md);
 }
 
+.width_lg {
+	width: 100%;
+	max-width: var(--distance_lg);
+}
+
 /* A panel is a box embedded into the page, useful for visually isolating content. */
 .panel {
 	border-radius: var(--border_radius_xs);
 	background-color: var(--panel_bg, var(--fg_1));
+}
+
+/* TODO other button variants? */
+/* TODO this is slightly strange that it doesn't use --icon_size */
+/* These are used as modifiers to buttons, and so they use `:where` so they cascade. */
+.icon_button {
+	width: var(--input_height);
+	height: var(--input_height);
+	min-width: var(--input_height);
+	min-height: var(--input_height);
+	flex-shrink: 0;
+	line-height: 1;
+	font-weight: 900;
+	padding: 0;
 }
 
 .chip {
@@ -84,8 +103,12 @@ a.chip {
 .flex_wrap {
 	flex-wrap: wrap;
 }
-.justify_content_space_around {
-	justify-content: space-around;
+.justify_content_center {
+	justify-content: center;
+}
+.font_size_sm {
+	font-size: var(--font_size_sm);
+	--font_size: var(--font_size_sm);
 }
 .font_size_xl2 {
 	font-size: var(--font_size_xl2);
@@ -93,6 +116,10 @@ a.chip {
 }
 .text_align_center {
 	text-align: center;
+}
+.font_weight_400 {
+	font-weight: 400;
+	--font_weight: 400;
 }
 .bg {
 	background-color: var(--bg);
@@ -120,6 +147,9 @@ a.chip {
 .p_lg {
 	padding: var(--space_lg);
 }
+.p_xl2 {
+	padding: var(--space_xl2);
+}
 .px_xl {
 	padding-left: var(--space_xl);
 	padding-right: var(--space_xl);
@@ -128,8 +158,15 @@ a.chip {
 	padding-top: var(--space_sm);
 	padding-bottom: var(--space_sm);
 }
+.py_xl5 {
+	padding-top: var(--space_xl5);
+	padding-bottom: var(--space_xl5);
+}
 .mt_0 {
 	margin-top: 0;
+}
+.mt_md {
+	margin-top: var(--space_md);
 }
 .mt_xl5 {
 	margin-top: var(--space_xl5);
@@ -137,8 +174,21 @@ a.chip {
 .mr_xs {
 	margin-right: var(--space_xs);
 }
+.mb_0 {
+	margin-bottom: 0;
+}
 .mb_lg {
 	margin-bottom: var(--space_lg);
+}
+.mb_xl5 {
+	margin-bottom: var(--space_xl5);
+}
+.mx_auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+.gap_sm {
+	gap: var(--space_sm);
 }
 .gap_xl3 {
 	gap: var(--space_xl3);
