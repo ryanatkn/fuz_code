@@ -1,4 +1,7 @@
-export type Add_Grammar = (syntax_styler: Syntax_Styler) => void;
+import {Syntax_Token, type Syntax_Token_Stream} from './syntax_token.js';
+import {tokenize_syntax} from './tokenize_syntax.js';
+
+export type Add_Syntax_Grammar = (syntax_styler: Syntax_Styler) => void;
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -9,7 +12,7 @@ export type Add_Grammar = (syntax_styler: Syntax_Styler) => void;
  * @see LICENSE
  */
 export class Syntax_Styler {
-	langs: Record<string, Grammar | undefined> = {
+	langs: Record<string, Syntax_Grammar | undefined> = {
 		plaintext: {},
 	};
 
@@ -29,7 +32,7 @@ export class Syntax_Styler {
 	// }
 	// }
 
-	add_lang(id: string, grammar: Grammar, aliases?: Array<string>): void {
+	add_lang(id: string, grammar: Syntax_Grammar, aliases?: Array<string>): void {
 		this.langs[id] = grammar;
 		if (aliases !== undefined) {
 			for (var alias of aliases) {
@@ -41,15 +44,15 @@ export class Syntax_Styler {
 	add_extended_lang(
 		base_id: string,
 		extension_id: string,
-		extension: Grammar,
+		extension: Syntax_Grammar,
 		aliases?: Array<string>,
-	): Grammar {
+	): Syntax_Grammar {
 		var grammar = this.extend_grammar(base_id, extension);
 		this.add_lang(extension_id, grammar, aliases);
 		return grammar;
 	}
 
-	get_lang(id: string): Grammar {
+	get_lang(id: string): Syntax_Grammar {
 		var lang = this.langs[id];
 		if (lang === undefined) {
 			throw Error(`The language "${id}" has no grammar.`);
@@ -81,7 +84,11 @@ export class Syntax_Styler {
 	 * @example
 	 * stylize('var foo = false;', 'ts', custom_grammar);
 	 */
-	stylize(text: string, lang: string, grammar: Grammar | undefined = this.get_lang(lang)): string {
+	stylize(
+		text: string,
+		lang: string,
+		grammar: Syntax_Grammar | undefined = this.get_lang(lang),
+	): string {
 		var ctx: Hook_Before_Tokenize_Callback_Context = {
 			code: text,
 			grammar,
@@ -175,11 +182,11 @@ export class Syntax_Styler {
 	grammar_insert_before(
 		inside: string,
 		before: string,
-		insert: Grammar,
+		insert: Syntax_Grammar,
 		root: Record<string, any> = this.langs,
-	): Grammar {
+	): Syntax_Grammar {
 		var grammar = root[inside];
-		var updated: Grammar = {};
+		var updated: Syntax_Grammar = {};
 
 		for (var token in grammar) {
 			if (token === before) {
@@ -287,7 +294,7 @@ export class Syntax_Styler {
 	 * @param extension - The new tokens to append.
 	 * @returns the new grammar
 	 */
-	extend_grammar(base_id: string, extension: Grammar): Grammar {
+	extend_grammar(base_id: string, extension: Syntax_Grammar): Syntax_Grammar {
 		return {...deep_clone(this.get_lang(base_id)), ...extension};
 	}
 
@@ -326,9 +333,11 @@ export class Syntax_Styler {
 	}
 }
 
-export type Grammar_Value = RegExp | Grammar_Token | Array<Grammar_Value>;
+export type Syntax_Grammar_Value = RegExp | Syntax_Grammar_Token | Array<Syntax_Grammar_Value>;
 
-export type Grammar = Record<string, Grammar_Value> & {rest?: Grammar | undefined};
+export type Syntax_Grammar = Record<string, Syntax_Grammar_Value> & {
+	rest?: Syntax_Grammar | undefined;
+};
 
 /**
  * The expansion of a simple `RegExp` literal to support additional properties.
@@ -340,7 +349,7 @@ export type Grammar = Record<string, Grammar_Value> & {rest?: Grammar | undefine
  * Note: This can cause infinite recursion. Be careful when you embed different languages or even the same language into
  * each another.
  */
-export interface Grammar_Token {
+export interface Syntax_Grammar_Token {
 	/**
 	 * The regular expression of the token.
 	 */
@@ -363,49 +372,8 @@ export interface Grammar_Token {
 	/**
 	 * The nested grammar of this token.
 	 */
-	inside?: Grammar | null;
+	inside?: Syntax_Grammar | null;
 }
-
-/**
- * Accepts a string of text as input and the language definitions to use,
- * and returns an array with the tokenized code.
- *
- * When the language definition includes nested tokens, the function is called recursively on each of these tokens.
- *
- * This method could be useful in other contexts as well, as a very crude parser.
- *
- * @param text - a string with the code to be styled
- * @param grammar - an object containing the tokens to use
- *
- * Usually a language definition like `syntax_styler.get_lang('markup')`.
- *
- * @returns an array of strings and tokens, a token stream
- *
- * @example
- * var code = `var foo = 0;`;
- * var tokens = tokenize_syntax(code, Syntax_Styler.langs.js);
- * for (var token of tokens) {
- *     if (token instanceof Syntax_Token && token.type === 'number') {
- *         console.log(`Found numeric literal: ${token.content}`);
- *     }
- * }
- */
-export const tokenize_syntax = (text: string, grammar: Grammar): Syntax_Token_Stream => {
-	var {rest} = grammar;
-	if (rest) {
-		for (var token in rest) {
-			grammar[token] = rest[token];
-		}
-		grammar.rest = undefined; // preserve shape
-	}
-
-	var token_list = new Linked_List();
-	add_after(token_list, token_list.head, text);
-
-	match_grammar(text, token_list, grammar, token_list.head, 0);
-
-	return to_array(token_list);
-};
 
 const depth_first_search = (
 	o: any,
@@ -429,306 +397,19 @@ const depth_first_search = (
 	}
 };
 
-export class Syntax_Token {
-	/**
-	 * The type of the token.
-	 *
-	 * This is usually the key of a pattern in a `Grammar`.
-	 */
-	type: string;
-
-	/**
-	 * The strings or tokens contained by this token.
-	 *
-	 * This will be a token stream if the pattern matched also defined an `inside` grammar.
-	 */
-	content: string | Syntax_Token_Stream;
-
-	/**
-	 * The alias(es) of the token.
-	 */
-	alias: string | Array<string>;
-
-	length: number;
-
-	constructor(
-		type: string,
-		content: string | Syntax_Token_Stream,
-		alias: string | Array<string>,
-		matched_str: string = '',
-	) {
-		this.type = type;
-		this.content = content;
-		this.alias = alias;
-		this.length = matched_str.length;
-	}
-}
-
-/**
- * A token stream is an array of strings and `Syntax_Token` objects.
- *
- * Syntax token streams have to fulfill a few properties that are assumed by most functions (mostly internal ones) that process
- * them.
- *
- * 1. No adjacent strings.
- * 2. No empty strings.
- *
- *    The only exception here is the token stream that only contains the empty string and nothing else.
- */
-export type Syntax_Token_Stream = Array<string | Syntax_Token>;
-
-const match_pattern = (
-	pattern: RegExp,
-	pos: number,
-	text: string,
-	lookbehind: boolean,
-): RegExpExecArray | null => {
-	pattern.lastIndex = pos;
-	var match = pattern.exec(text);
-	if (match && lookbehind && match[1]) {
-		// change the match to remove the text matched by the lookbehind group
-		var lookbehind_length = match[1].length;
-		match.index += lookbehind_length;
-		match[0] = match[0].substring(lookbehind_length);
-	}
-	return match;
-};
-
-interface Rematch_Options {
-	cause: string;
-	reach: number;
-}
-
-const match_grammar = (
-	text: string,
-	token_list: Linked_List,
-	grammar: any,
-	start_node: Linked_List_Node,
-	start_pos: number,
-	rematch?: Rematch_Options,
-): void => {
-	for (var token in grammar) {
-		var patterns = grammar[token];
-
-		if (!patterns) {
-			continue;
-		}
-
-		patterns = Array.isArray(patterns) ? patterns : [patterns];
-
-		for (var j = 0; j < patterns.length; ++j) {
-			if (rematch && rematch.cause === token + ',' + j) {
-				return;
-			}
-
-			var pattern_obj = patterns[j];
-			var inside = pattern_obj.inside;
-			var lookbehind = !!pattern_obj.lookbehind;
-			var greedy = !!pattern_obj.greedy;
-			var alias = pattern_obj.alias;
-
-			if (greedy && !pattern_obj.pattern.global) {
-				// Without the global flag, lastIndex won't work
-				var flags = pattern_obj.pattern.toString().match(/[imsuy]*$/)[0];
-				pattern_obj.pattern = RegExp(pattern_obj.pattern.source, flags + 'g');
-			}
-
-			var pattern: RegExp = pattern_obj.pattern || pattern_obj;
-
-			for (
-				// iterate the token list and keep track of the current token/string position
-				var current_node = start_node.next, pos = start_pos;
-				current_node !== token_list.tail;
-				pos += current_node!.value!.length, current_node = current_node!.next
-			) {
-				if (rematch && pos >= rematch.reach) {
-					break;
-				}
-
-				var str = current_node!.value;
-
-				if (token_list.length > text.length) {
-					// Something went terribly wrong, ABORT, ABORT!
-					return;
-				}
-
-				if (str instanceof Syntax_Token) {
-					continue;
-				}
-
-				var remove_count = 1;
-				var match;
-
-				if (greedy) {
-					match = match_pattern(pattern, pos, text, lookbehind);
-					if (!match || match.index >= text.length) {
-						break;
-					}
-
-					var from = match.index;
-					var to = match.index + match[0].length;
-					var p = pos;
-
-					// find the node that contains the match
-					p += current_node!.value!.length;
-					while (from >= p) {
-						current_node = current_node!.next;
-						p += current_node!.value!.length;
-					}
-					// adjust pos (and p)
-					p -= current_node!.value!.length;
-					pos = p;
-
-					// the current node is a Token, then the match starts inside another Token, which is invalid
-					if (current_node!.value instanceof Syntax_Token) {
-						continue;
-					}
-
-					// find the last node which is affected by this match
-					for (
-						var k = current_node;
-						k !== token_list.tail && (p < to || typeof k!.value === 'string');
-						k = k!.next
-					) {
-						remove_count++;
-						p += k!.value!.length;
-					}
-					remove_count--;
-
-					// replace with the new match
-					str = text.substring(pos, p);
-					match.index -= pos;
-				} else {
-					match = match_pattern(pattern, 0, str!, lookbehind);
-					if (!match) {
-						continue;
-					}
-				}
-
-				var from = match.index;
-				var match_str = match[0];
-				var before = str!.substring(0, from);
-				var after = str!.substring(from + match_str.length);
-
-				var reach = pos + str!.length;
-				if (rematch && reach > rematch.reach) {
-					rematch.reach = reach;
-				}
-
-				var remove_from = current_node!.prev;
-
-				if (before) {
-					remove_from = add_after(token_list, remove_from!, before);
-					pos += before.length;
-				}
-
-				remove_range(token_list, remove_from!, remove_count);
-
-				var wrapped = new Syntax_Token(
-					token,
-					inside ? tokenize_syntax(match_str, inside) : match_str,
-					alias,
-					match_str,
-				);
-				current_node = add_after(token_list, remove_from!, wrapped);
-
-				if (after) {
-					add_after(token_list, current_node, after);
-				}
-
-				if (remove_count > 1) {
-					// at least one Token object was removed, so we have to do some rematching
-					// this can only happen if the current pattern is greedy
-
-					var nested_rematch: Rematch_Options = {
-						cause: token + ',' + j,
-						reach,
-					};
-					match_grammar(text, token_list, grammar, current_node.prev!, pos, nested_rematch);
-
-					// the reach might have been extended because of the rematching
-					if (rematch && nested_rematch.reach > rematch.reach) {
-						rematch.reach = nested_rematch.reach;
-					}
-				}
-			}
-		}
-	}
-};
-
-class Linked_List<T = string | Syntax_Token> {
-	head: Linked_List_Node<T>;
-	tail: Linked_List_Node<T>;
-	length: number = 0;
-
-	constructor() {
-		this.head = {value: null, prev: null, next: null};
-		this.tail = {value: null, prev: this.head, next: null};
-		this.head.next = this.tail;
-	}
-}
-
-interface Linked_List_Node<T = string | Syntax_Token> {
-	value: T | null;
-	prev: Linked_List_Node<T> | null;
-	next: Linked_List_Node<T> | null;
-}
-
-/**
- * Adds a new node with the given value to the list.
- */
-const add_after = <T>(
-	list: Linked_List<T>,
-	node: Linked_List_Node<T>,
-	value: T,
-): Linked_List_Node<T> => {
-	// assumes that node != list.tail && values.length >= 0
-	var next = node.next!;
-
-	var new_node = {value, prev: node, next};
-	node.next = new_node;
-	next.prev = new_node;
-	list.length++;
-
-	return new_node;
-};
-
-/**
- * Removes `count` nodes after the given node. The given node will not be removed.
- */
-const remove_range = <T>(list: Linked_List<T>, node: Linked_List_Node<T>, count: number) => {
-	var next = node.next;
-	for (var i = 0; i < count && next !== list.tail; i++) {
-		next = next!.next;
-	}
-	node.next = next;
-	next!.prev = node;
-	list.length -= i;
-};
-
-const to_array = <T>(list: Linked_List<T>): Array<T> => {
-	var array = [];
-	var node = list.head.next;
-	while (node !== list.tail) {
-		array.push(node!.value!);
-		node = node!.next;
-	}
-	return array;
-};
-
 export type Hook_Before_Tokenize_Callback = (ctx: Hook_Before_Tokenize_Callback_Context) => void;
 export type Hook_After_Tokenize_Callback = (ctx: Hook_After_Tokenize_Callback_Context) => void;
 export type Hook_Wrap_Callback = (ctx: Hook_Wrap_Callback_Context) => void;
 
 export interface Hook_Before_Tokenize_Callback_Context {
 	code: string;
-	grammar: Grammar;
+	grammar: Syntax_Grammar;
 	lang: string;
 	tokens: undefined;
 }
 export interface Hook_After_Tokenize_Callback_Context {
 	code: string;
-	grammar: Grammar;
+	grammar: Syntax_Grammar;
 	lang: string;
 	tokens: Syntax_Token_Stream;
 }

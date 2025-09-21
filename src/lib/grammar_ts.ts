@@ -1,4 +1,4 @@
-import type {Add_Grammar, Grammar_Token} from '$lib/syntax_styler.js';
+import type {Add_Syntax_Grammar, Syntax_Grammar_Token} from '$lib/syntax_styler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,7 +8,7 @@ import type {Add_Grammar, Grammar_Token} from '$lib/syntax_styler.js';
  *
  * @see LICENSE
  */
-export const add_grammar_ts: Add_Grammar = (syntax_styler) => {
+export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.add_extended_lang('js', 'ts', {
 		class_name: {
 			pattern:
@@ -38,7 +38,7 @@ export const add_grammar_ts: Add_Grammar = (syntax_styler) => {
 	var type_inside = syntax_styler.extend_grammar('ts', {});
 	(type_inside as any).class_name = undefined;
 
-	(grammar_ts.class_name as Grammar_Token).inside = type_inside;
+	(grammar_ts.class_name as Syntax_Grammar_Token).inside = type_inside;
 
 	syntax_styler.grammar_insert_before('ts', 'function', {
 		decorator: {

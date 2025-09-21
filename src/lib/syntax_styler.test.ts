@@ -1,5 +1,6 @@
 import {test, assert, describe} from 'vitest';
-import {Syntax_Styler, tokenize_syntax} from './syntax_styler.js';
+import {Syntax_Styler} from './syntax_styler.js';
+import {tokenize_syntax} from './tokenize_syntax.js';
 import {add_grammar_js} from './grammar_js.js';
 import {add_grammar_ts} from './grammar_ts.js';
 import {add_grammar_css} from './grammar_css.js';

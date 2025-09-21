@@ -12,6 +12,9 @@ The main changes:
 
 - has a minimal and explicit API to generate stylized HTML, and knows nothing about the DOM
 - uses stateless ES modules, instead of globals with side effects and pseudo-module behaviors
+- integrates with the
+  [CSS Custom Highlight API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API)
+  when available
 - has various incompatible changes, so using Prism grammars requires some tweaks
 - smaller (by 7kB minified and 3kB gzipped, ~1/3 less)
 - written in TypeScript
@@ -47,25 +50,30 @@ and Shiki is designed mainly for buildtime usage.
 npm i -D @ryanatkn/fuz_code
 ```
 
-```ts
-import {syntax_styler_global} from '@ryanatkn/fuz_code/syntax_styler_global.js';
-
-syntax_styler_global.stylize('<h1>hello world</h1>', 'svelte');
-```
-
 ```svelte
-<script>
-	import Code from '@ryanatkn/fuz_code/Code.svelte';
+<script lang="ts">
+	import Code from '$lib/Code.svelte';
 </script>
 
-<!-- Auto-detect: uses CSS Highlights if available, else HTML -->
-<Code content={sourceCode} lang="ts" />
+<!-- auto-detects and uses CSS Highlight API when available, defaults to Svelte -->
+<Code content={svelte_code} />
+<!-- select a lang -->
+<Code content={ts_code} lang="ts" />
 
-<!-- Force HTML generation (always works) -->
-<Code content={sourceCode} lang="ts" mode="html" />
+<!-- force specific rendering mode -->
+<Code content={code} mode="html" />
+<Code content={code} mode="ranges" />
+```
 
-<!-- Force CSS Highlights (requires browser support) -->
-<Code content={sourceCode} lang="ts" mode="ranges" />
+```ts
+import {syntax_styler_global} from '$lib/syntax_styler_global.js';
+
+// Direct usage
+const html = syntax_styler_global.stylize(code, 'ts');
+
+// Get raw tokens
+import {tokenize_syntax} from '$lib/tokenize_syntax.js';
+const tokens = tokenize_syntax(code, syntax_styler_global.get_lang('ts'));
 ```
 
 By default the `Code` component automatically uses the

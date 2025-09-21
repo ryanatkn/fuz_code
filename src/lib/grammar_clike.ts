@@ -1,4 +1,4 @@
-import type {Add_Grammar, Grammar} from '$lib/syntax_styler.js';
+import type {Add_Syntax_Grammar, Syntax_Grammar} from '$lib/syntax_styler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -8,7 +8,7 @@ import type {Add_Grammar, Grammar} from '$lib/syntax_styler.js';
  *
  * @see LICENSE
  */
-export const add_grammar_clike: Add_Grammar = (syntax_styler) => {
+export const add_grammar_clike: Add_Syntax_Grammar = (syntax_styler) => {
 	const grammar_clike = {
 		comment: [
 			{
@@ -41,7 +41,7 @@ export const add_grammar_clike: Add_Grammar = (syntax_styler) => {
 		number: /\b0x[\da-f]+\b|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?/i,
 		operator: /[<>]=?|[!=]=?=?|--?|\+\+?|&&?|\|\|?|[?*/~^%]/,
 		punctuation: /[{}[\];(),.:]/,
-	} satisfies Grammar;
+	} satisfies Syntax_Grammar;
 
 	syntax_styler.add_lang('clike', grammar_clike);
 };
