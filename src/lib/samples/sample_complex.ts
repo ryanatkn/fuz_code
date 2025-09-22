@@ -39,8 +39,6 @@ class D {
 	}
 }
 
-export {a, b, c, D};
-
 // comment
 
 /*
@@ -52,6 +50,13 @@ const comment = false;
 /**
  * JSDoc comment
  */
+
+// @ts-expect-error
+import {B, C, d} from 'foo';
+// @ts-expect-error
+import * as A from 'foo2';
+
+export {a, A, b, B, c, C, D};
 
 export interface Some_E {
 	name: string;
