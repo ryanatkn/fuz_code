@@ -97,7 +97,7 @@ export type Some_Type = 1 | 'b' | true;
 class D {
 	d1: string = 'd';
 	d2: number;
-	d3 = $state(false);
+	d3 = $state(null);
 
 	constructor(d2: number) {
 		this.d2 = d2;
@@ -109,14 +109,16 @@ class D {
 
 	instance_method = (): void => {
 		/* ... */
-		this.#private_method();
+		for (const c2 of this.d1) {
+			this.#private_method(a, c2);
+		}
 		// foo
 	};
 
-	#private_method() {
+	#private_method(a2: number, c2: any) {
 		throw new Error(\`\${this.d1} 
 			multiline
-			etc
+			etc \${a2 + c2}
 		\`);
 	}
 

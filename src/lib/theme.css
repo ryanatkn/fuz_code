@@ -1,4 +1,3 @@
-/* Comments, punctuation, and processing */
 .token.comment,
 ::highlight(comment),
 .token.attr_equals,
@@ -34,23 +33,23 @@
 	color: var(--color_a_5);
 }
 
-/* Numbers */
-.token.number,
-::highlight(number) {
-	color: var(--color_e_5);
-}
-
-/* Booleans */
+/* TODO keywords like `throw`/`return`/`export` are color_g */
+.token.keyword,
+::highlight(keyword),
+.token.null,
+::highlight(null),
 .token.boolean,
-::highlight(boolean) {
-	color: var(--color_i_5);
+::highlight(boolean),
+.token.interpolation_punctuation,
+::highlight(interpolation_punctuation) {
+	color: var(--color_a_5);
 }
 
-/* Strings, selectors, and values */
+/* selectors, and values */
+.token.comment,
+::highlight(comment),
 .token.selector,
 ::highlight(selector),
-.token.string,
-::highlight(string),
 .token.attr_value,
 ::highlight(attr_value),
 .token.char,
@@ -62,24 +61,32 @@
 	color: var(--color_b_5);
 }
 
-/* Keywords and at-rules */
+.token.builtin,
+::highlight(builtin),
+.token.class_name,
+::highlight(class_name),
+.token.number,
+::highlight(number) {
+	color: var(--color_j_5);
+}
+
+.token.string,
+::highlight(string),
+.token.template_punctuation,
+::highlight(template_punctuation) {
+	color: var(--color_h_5);
+}
+
+.token.function,
+::highlight(function) {
+	color: var(--color_e_5);
+}
+
 .token.atrule,
 ::highlight(atrule),
 .token.attr_name,
-::highlight(attr_name),
-.token.keyword,
-::highlight(keyword),
-.token.null,
-::highlight(null) {
+::highlight(attr_name) {
 	color: var(--color_f_5);
-}
-
-/* Functions and classes */
-.token.function,
-::highlight(function),
-.token.class_name,
-::highlight(class_name) {
-	color: var(--color_d_5);
 }
 
 /* Regular expressions and variables */
@@ -109,16 +116,7 @@
 /* TODO some of these should probably be used, others are unnecessary */
 
 /* TypeScript/JS specific */
-/* .token.template_string,
-::highlight(template_string) {
-	color: var(--color_b_5);
-}
-
-.token.template_punctuation,
-::highlight(template_punctuation) {
-	color: var(--color_a_5);
-}
-
+/*
 .token.parameter,
 ::highlight(parameter) {
 	color: var(--color_a_5);
@@ -186,10 +184,7 @@
 } */
 
 /* Additional tokens */
-/* .token.interpolation_punctuation,
-::highlight(interpolation_punctuation) {
-	color: var(--color_a_5);
-}
+/*
 
 .token.at,
 ::highlight(at) {
