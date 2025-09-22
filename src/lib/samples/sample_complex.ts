@@ -51,12 +51,12 @@ const comment = false;
  * JSDoc comment
  */
 
-// @ts-expect-error
-import {B, C, d} from 'foo';
-// @ts-expect-error
-import * as A from 'foo2';
+import {sample_langs, type Code_Sample, type Sample_Lang} from '../code_sample.js';
+import * as A from '../code_sample.js';
 
-export {a, A, b, B, c, C, D};
+sample_langs as unknown as Code_Sample as any as Sample_Lang;
+
+export {a, A, b, c, D};
 
 export interface Some_E {
 	name: string;
