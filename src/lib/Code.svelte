@@ -77,9 +77,6 @@
 				return;
 			}
 
-			// Clear existing highlights
-			highlight_manager.clear_element_ranges();
-
 			// Get tokens from syntax styler
 			const tokens = tokenize_syntax(content, grammar || syntax_styler.get_lang(lang));
 
