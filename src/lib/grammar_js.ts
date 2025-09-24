@@ -66,7 +66,8 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 		/(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/;
 
 	syntax_styler.grammar_insert_before('js', 'function', {
-		special_keyword: /\b(?:as|await|break|case|catch|continue|do|else|export|finally|for|from|if|import|return|switch|throw|try|while)\b/,
+		special_keyword:
+			/\b(?:as|await|break|case|catch|continue|do|else|export|finally|for|from|if|import|return|switch|throw|try|while)\b/,
 	});
 
 	syntax_styler.grammar_insert_before('js', 'keyword', {
@@ -128,6 +129,7 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 			},
 			{
 				pattern:
+					// TODO BLOCK fix with special_keyword
 					/((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*)\(\s*|\]\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*\{)/,
 				lookbehind: true,
 				inside: grammar_js,
