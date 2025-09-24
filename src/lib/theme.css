@@ -48,8 +48,6 @@
 
 .token.comment,
 ::highlight(comment),
-.token.selector,
-::highlight(selector),
 .token.attr_value,
 ::highlight(attr_value),
 .token.char,
@@ -77,8 +75,16 @@
 	color: var(--color_h_5);
 }
 
+.token.selector,
+::highlight(selector),
 .token.function,
-::highlight(function) {
+::highlight(function),
+.token.regex,
+::highlight(regex),
+.token.important,
+::highlight(important),
+.token.variable,
+::highlight(variable) {
 	color: var(--color_e_5);
 }
 
@@ -89,13 +95,9 @@
 	color: var(--color_f_5);
 }
 
-.token.regex,
-::highlight(regex),
-.token.important,
-::highlight(important),
-.token.variable,
-::highlight(variable) {
-	color: var(--color_e_5);
+.token.rule,
+::highlight(rule) {
+	color: var(--color_g_5);
 }
 
 .token.important,
