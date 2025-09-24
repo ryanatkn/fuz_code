@@ -48,39 +48,42 @@
  274-275   punctuation               {
  278-294   property                  background-color
  294-295   punctuation               :
- 305-306   punctuation               ;
- 308-309   punctuation               }
- 310-311   punctuation               }
- 313-363   comment                   /* patterns in strings are not falsely detected */
- 364-380   selector                  .content::before
- 381-382   punctuation               {
- 384-391   property                  content
- 391-392   punctuation               :
- 393-423   string                    '</style> /* not a comment */'
- 423-424   punctuation               ;
- 425-426   punctuation               }
- 428-454   selector                  .attr[title='Click: here']
- 455-456   punctuation               {
- 458-474   property                  background-image
- 474-475   punctuation               :
- 476-504   url                       url('data:image/svg+xml...')
- 476-479   function                  url
- 479-480   punctuation               (
- 480-503   string                    'data:image/svg+xml...'
- 503-504   punctuation               )
- 504-505   punctuation               ;
- 506-507   punctuation               }
+ 296-306   function                  light-dark
+ 306-307   punctuation               (
+ 316-317   punctuation               ,
+ 326-327   punctuation               )
+ 327-328   punctuation               ;
+ 330-331   punctuation               }
+ 332-333   punctuation               }
+ 335-351   selector                  .content::before
+ 352-353   punctuation               {
+ 355-362   property                  content
+ 362-363   punctuation               :
+ 364-394   string                    '</style> /* not a comment */'
+ 394-395   punctuation               ;
+ 396-397   punctuation               }
+ 399-425   selector                  .attr[title='Click: here']
+ 426-427   punctuation               {
+ 429-445   property                  background-image
+ 445-446   punctuation               :
+ 447-475   url                       url('data:image/svg+xml...')
+ 447-450   function                  url
+ 450-451   punctuation               (
+ 451-474   string                    'data:image/svg+xml...'
+ 474-475   punctuation               )
+ 475-476   punctuation               ;
+ 477-478   punctuation               }
 
 === STATS ===
-Total tokens: 71
-Sample length: 508 characters
+Total tokens: 74
+Sample length: 479 characters
 
 Token types:
-  punctuation: 44
+  punctuation: 47
   property: 9
   selector: 8
-  comment: 3
-  function: 2
+  function: 3
+  comment: 2
   string: 2
   atrule: 1
   rule: 1

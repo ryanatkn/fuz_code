@@ -31,11 +31,10 @@ div > p {
 
 @media (max-width: 600px) {
 	body {
-		background-color: lightblue;
+		background-color: light-dark(lightblue, darkblue);
 	}
 }
 
-/* patterns in strings are not falsely detected */
 .content::before {
 	content: '</style> /* not a comment */';
 }

@@ -27,15 +27,12 @@
 
 	let c: boolean = $state(true);
 
-	function attachment(param1: string, param2: number) {
-		return (_: HTMLElement) => {
-			console.log(param1, param2);
-		};
-	}
+	const attachment = (_p1: string, _p2: number) => (_: HTMLElement) => {
+		element_ref;
+	};
 
 	let value = $state('');
-	let element_ref: HTMLElement | undefined = undefined;
-	console.log(element_ref);
+	let element_ref: HTMLElement;
 </script>
 
 <h1>hello {HELLO}!</h1>
@@ -138,7 +135,7 @@
 
 	@media (max-width: 600px) {
 		:global(body) {
-			background-color: lightblue;
+			background-color: light-dark(lightblue, darkblue);
 		}
 	}
 
