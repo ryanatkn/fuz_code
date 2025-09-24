@@ -13,15 +13,16 @@
 	color: var(--text_color_5);
 }
 
-/* Namespaces */
 .token.namespace,
 ::highlight(namespace) {
 	color: var(--color_d_5);
 }
 
-/* Properties, tags, and constants */
 .token.property,
-::highlight(property),
+::highlight(property) {
+	color: var(--color_i_5);
+}
+
 .token.tag,
 ::highlight(tag),
 .token.constant,
@@ -45,7 +46,6 @@
 	color: var(--color_a_5);
 }
 
-/* selectors, and values */
 .token.comment,
 ::highlight(comment),
 .token.selector,
@@ -89,7 +89,6 @@
 	color: var(--color_f_5);
 }
 
-/* Regular expressions and variables */
 .token.regex,
 ::highlight(regex),
 .token.important,
@@ -99,7 +98,6 @@
 	color: var(--color_e_5);
 }
 
-/* Font weight modifiers */
 .token.important,
 ::highlight(important),
 .token.bold,
@@ -107,7 +105,6 @@
 	font-weight: bold;
 }
 
-/* Font style modifiers */
 .token.italic,
 ::highlight(italic) {
 	font-style: italic;
