@@ -264,6 +264,14 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 	<li>list item 2</li>
 </ul>
 
+<form action="/submit" method="post">
+	<input type="text" name="username" placeholder="Enter name" />
+	<select name="option" data-role="dropdown">
+		<option value="1">First</option>
+		<option value="2">Second</option>
+	</select>
+</form>
+
 <script type="text/javascript">
 	const ok = '<style>';
 </script>
@@ -293,10 +301,12 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 		thing,
 		bound = $bindable(true),
 		children,
+		onclick,
 	}: {
 		thing: Record<string, any>;
 		bound?: boolean;
 		children: Snippet;
+		onclick?: () => void;
 	} = $props();
 
 	const thing_keys = $derived(Object.keys(thing));
@@ -307,67 +317,21 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 
 	let c: boolean = $state(true);
 
-	export type Some_Type = 1 | 'b' | true;
-
-	class D {
-		d1: string = 'd';
-		d2: number;
-		d3 = $state(false);
-
-		constructor(d2: number) {
-			this.d2 = d2;
-		}
-
-		class_method(): string {
-			return \`Hello, \${this.d1}\`;
-		}
-
-		instance_method = () => {
-			/* ... */
-			this.#private_method();
-			// foo
+	function attachment(param1: string, param2: number) {
+		return (_: HTMLElement) => {
+			console.log(param1, param2);
 		};
-
-		#private_method() {
-			throw new Error(\`\${this.d1} etc\`);
-		}
-
-		protected protected_method() {
-			console.log(new Date(123)); // eslint-disable-line no-console
-		}
 	}
 
-	// comment
-
-	/*
-	other comment
-
-	const comment = false;
-	*/
-
-	/**
-	 * JSDoc comment
-	 */
-
-	export interface Some_E {
-		name: string;
-		age: number;
-	}
-
-	export const some_e: Some_E = {name: 'A. H.', age: 100};
-
-	export function add(x: number, y: number): number {
-		return x + y;
-	}
-
-	export const plus = (a: any, b: any): any => a + b;
+	let value = $state('');
+	let element_ref: HTMLElement;
 </script>
 
 <h1>hello {HELLO}!</h1>
 
 {#each thing_keys as key (key)}
-	{@const value = thing[key]}
-	{value}
+	{@const v = thing[key]}
+	{v}
 {/each}
 
 {#if c}
@@ -378,7 +342,19 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 	</Thing>
 {/if}
 
-<!DOCTYPE html>
+{@html '<strong>raw html</strong>'}
+
+<input bind:value type="text" />
+
+<div bind:this={element_ref} class:active={c} {@attach attachment('param', 42)}>
+	interactive element
+</div>
+
+{@render my_snippet()}
+
+{#snippet my_snippet()}
+	<button {onclick}>click handler</button>
+{/snippet}
 
 <div class="test special" id="unique_id">
 	<p>hello world!</p>
@@ -394,7 +370,6 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 {a}
 {b}
 {bound}
-{D}
 
 <br />
 
@@ -406,6 +381,18 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 	<li>list item 1</li>
 	<li>list item 2</li>
 </ul>
+
+<!-- embedded tags for boundary testing -->
+<div>
+	<script>
+		const inline_js = 'no lang attr';
+	</script>
+	<style>
+		.inline {
+			color: blue;
+		}
+	</style>
+</div>
 
 <style>
 	.some_class {
