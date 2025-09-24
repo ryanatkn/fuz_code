@@ -23,12 +23,8 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 		],
 		keyword: [
 			{
-				pattern: /((?:^|\})\s*)catch\b/,
-				lookbehind: true,
-			},
-			{
 				pattern:
-					/(^|[^.]|\.\.\.\s*)\b(?:as|assert(?=\s*\{)|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally(?=\s*(?:\{|$))|for|from(?=\s*(?:['"]|$))|function|(?:get|set)(?=\s*(?:[#[$\w\xA0-\uFFFF]|$))|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,
+					/(^|[^.]|\.\.\.\s*)\b(?:assert(?=\s*\{)|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|class|const|debugger|default|delete|enum|extends|function|(?:get|set)(?=\s*(?:[#[$\w\xA0-\uFFFF]|$))|implements|in|instanceof|interface|let|new|null|of|package|private|protected|public|static|super|this|typeof|undefined|var|void|with|yield)\b/,
 				lookbehind: true,
 			},
 		],
@@ -68,6 +64,10 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 
 	(grammar_js as any).class_name[0].pattern =
 		/(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/;
+
+	syntax_styler.grammar_insert_before('js', 'function', {
+		special_keyword: /\b(?:as|await|break|case|catch|continue|do|else|export|finally|for|from|if|import|return|switch|throw|try|while)\b/,
+	});
 
 	syntax_styler.grammar_insert_before('js', 'keyword', {
 		regex: {

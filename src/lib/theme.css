@@ -34,7 +34,6 @@
 	color: var(--color_a_5);
 }
 
-/* TODO keywords like `throw`/`return`/`export` are color_g */
 .token.keyword,
 ::highlight(keyword),
 .token.null,
@@ -44,6 +43,11 @@
 .token.interpolation_punctuation,
 ::highlight(interpolation_punctuation) {
 	color: var(--color_a_5);
+}
+
+.token.special_keyword,
+::highlight(special_keyword) {
+	color: var(--color_g_5);
 }
 
 .token.comment,

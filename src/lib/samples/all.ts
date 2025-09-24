@@ -109,7 +109,11 @@ class D {
 
 	instance_method = (): void => {
 		/* ... */
+		let i = 0;
+		while (i < 3) i++;
 		for (const c2 of this.d1) {
+			if (c2 === 'd') continue;
+			if (!c2) break;
 			this.#private_method(a, c2);
 		}
 		// foo
@@ -122,8 +126,21 @@ class D {
 		\`);
 	}
 
-	protected protected_method(): void {
-		console.log(new Date()); // eslint-disable-line no-console
+	protected async protected_method(): Promise<void> {
+		try {
+			await new Promise((resolve) => setTimeout(resolve, 100));
+			if (Math.random() > 0.5) {
+				console.log(new Date()); // eslint-disable-line no-console
+			} else if (Math.random() > 0.2) {
+				console.log('else if branch');
+			} else {
+				console.log('else branch');
+			}
+		} catch (error) {
+			console.error(error);
+		} finally {
+			console.log('finally block');
+		}
 	}
 }
 
