@@ -94,15 +94,31 @@ const c = true;
 
 export type Some_Type = 1 | 'b' | true;
 
-class D {
-	d1: string = 'd';
+declare const class_decorator: any, property_decorator: any, method_decorator: any;
+
+abstract class Base {
+	abstract abstract_method(): void;
+}
+
+@class_decorator
+class D extends Base {
+	readonly d1: string = 'd';
 	d2: number;
 	d3 = $state(null);
 
+	@property_decorator
+	decorated = true;
+
 	constructor(d2: number) {
+		super();
 		this.d2 = d2;
 	}
 
+	abstract_method(): void {
+		// implementation
+	}
+
+	@method_decorator
 	class_method(): string {
 		return \`Hello, \${this.d1}\`;
 	}
@@ -110,20 +126,50 @@ class D {
 	instance_method = (): void => {
 		/* ... */
 		let i = 0;
-		while (i < 3) i++;
+		do {
+			i++;
+		} while (i < 3);
+
 		for (const c2 of this.d1) {
 			if (c2 === 'd') continue;
 			if (!c2) break;
 			this.#private_method(a, c2);
 		}
+
+		switch (this.d1) {
+			case 'a':
+				console.log('case a');
+				break;
+			case 'b':
+			case 'c':
+				console.log('case b or c');
+				break;
+			default:
+				console.log('default');
+		}
+
+		const obj: {has_d1?: boolean; is_d: boolean} = {
+			has_d1: 'd1' in this,
+			is_d: this instanceof D,
+		};
+		delete obj.has_d1;
 		// foo
 	};
 
 	#private_method(a2: number, c2: any) {
-		throw new Error(\`\${this.d1} 
+		throw new Error(\`\${this.d1}
 			multiline
 			etc \${a2 + c2}
 		\`);
+	}
+
+	*generator() {
+		yield 1;
+		yield* [2, 3];
+	}
+
+	async *async_generator() {
+		yield await Promise.resolve(4);
 	}
 
 	protected async protected_method(): Promise<void> {
@@ -136,7 +182,7 @@ class D {
 			} else {
 				console.log('else branch');
 			}
-		} catch (error) {
+		} catch (error: unknown) {
 			console.error(error);
 		} finally {
 			console.log('finally block');
@@ -156,12 +202,12 @@ const comment = false;
  * JSDoc comment
  */
 
-import {sample_langs, type Code_Sample, type Sample_Lang} from '../code_sample.js';
+import {sample_langs, type Sample_Lang} from '../code_sample.js';
 import * as A from '../code_sample.js';
 
-sample_langs as unknown as Code_Sample as any as Sample_Lang;
-
 export {a, A, b, c, D};
+
+sample_langs as unknown as any as Sample_Lang satisfies Sample_Lang;
 
 export interface Some_E {
 	name: string;
