@@ -1,4 +1,5 @@
 import {Syntax_Token, type Syntax_Token_Stream} from './syntax_token.js';
+import {highlight_priorities} from './highlight_priorities.js';
 
 export type Highlight_Mode = 'auto' | 'ranges' | 'html';
 
@@ -53,6 +54,8 @@ export class Highlight_Manager {
 			let highlight = CSS.highlights.get(type);
 			if (!highlight) {
 				highlight = new Highlight();
+				// Set priority based on CSS cascade order (higher = later in CSS = wins)
+				highlight.priority = highlight_priorities[type as keyof typeof highlight_priorities] ?? 0;
 				CSS.highlights.set(type, highlight);
 			}
 

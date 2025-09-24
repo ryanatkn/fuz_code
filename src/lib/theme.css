@@ -1,16 +1,3 @@
-.token.attr_equals,
-::highlight(attr_equals),
-.token.processing_instruction,
-::highlight(processing_instruction),
-.token.doctype,
-::highlight(doctype),
-.token.cdata,
-::highlight(cdata),
-.token.punctuation,
-::highlight(punctuation) {
-	color: var(--text_color_5);
-}
-
 .token.namespace,
 ::highlight(namespace) {
 	color: var(--color_d_5);
@@ -118,6 +105,19 @@
 .token.italic,
 ::highlight(italic) {
 	font-style: italic;
+}
+
+.token.attr_equals,
+::highlight(attr_equals),
+.token.processing_instruction,
+::highlight(processing_instruction),
+.token.doctype,
+::highlight(doctype),
+.token.cdata,
+::highlight(cdata),
+.token.punctuation,
+::highlight(punctuation) {
+	color: var(--text_color_5);
 }
 
 /* TODO some of these should probably be used, others are unnecessary */

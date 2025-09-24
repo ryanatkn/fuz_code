@@ -136,6 +136,17 @@ export const src_json: Src_Json = {
 				{name: 'Highlight_Manager', kind: 'class'},
 			],
 		},
+		'./highlight_priorities.gen.js': {
+			path: 'highlight_priorities.gen.ts',
+			declarations: [{name: 'gen', kind: 'function'}],
+		},
+		'./highlight_priorities.js': {
+			path: 'highlight_priorities.ts',
+			declarations: [
+				{name: 'Highlight_Token_Name', kind: 'type'},
+				{name: 'highlight_priorities', kind: 'variable'},
+			],
+		},
 		'./syntax_styler_global.js': {
 			path: 'syntax_styler_global.ts',
 			declarations: [{name: 'syntax_styler_global', kind: 'variable'}],
