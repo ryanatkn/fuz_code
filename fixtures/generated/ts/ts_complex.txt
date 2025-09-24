@@ -68,6 +68,7 @@
  251-252   template_punctuation      `
  252-253   punctuation               ;
  255-256   punctuation               }
+ 259-274   function_variable         instance_method
  275-276   operator                  =
  277-278   punctuation               (
  278-279   punctuation               )
@@ -333,6 +334,7 @@
 1494-1495  punctuation               }
 1497-1503  special_keyword           export
 1504-1509  keyword                   const
+1510-1514  function_variable         plus
 1515-1516  operator                  =
 1517-1518  punctuation               (
 1519-1520  operator                  :
@@ -393,7 +395,7 @@
 1937-1988  comment                   // const commented = "this string is in a comment";
 
 === STATS ===
-Total tokens: 392
+Total tokens: 394
 Sample length: 1989 characters
 
 Token types:
@@ -414,6 +416,7 @@ Token types:
   regex_delimiter: 4
   template_string: 3
   boolean: 2
+  function_variable: 2
   regex: 2
   regex_source: 2
   regex_flags: 1

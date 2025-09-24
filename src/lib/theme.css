@@ -180,11 +180,7 @@
 ::highlight(property_string) {
 	color: var(--color_a_5);
 }
-
-.token.function_variable,
-::highlight(function_variable) {
-	color: var(--color_d_5);
-} */
+ */
 
 /* Additional tokens */
 /*

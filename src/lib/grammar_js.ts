@@ -103,6 +103,7 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 				regex_flags: /^[a-z]+$/,
 			},
 		},
+		// Arrow function and function expression variable names
 		// This must be declared before keyword because we use "function" inside the look-forward
 		function_variable: {
 			pattern:

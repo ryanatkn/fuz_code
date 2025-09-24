@@ -260,6 +260,7 @@
 1212-1213  punctuation               }
 1216-1222  special_keyword           export
 1223-1228  keyword                   const
+1229-1233  function_variable         plus
 1234-1235  operator                  =
 1236-1237  punctuation               (
 1238-1239  operator                  :
@@ -577,7 +578,7 @@
 2331-2332  punctuation               >
 
 === STATS ===
-Total tokens: 576
+Total tokens: 577
 Sample length: 2333 characters
 
 Token types:
@@ -604,8 +605,8 @@ Token types:
   script: 2
   template_string: 2
   interpolation: 2
+  function_variable: 2
   each: 2
-  function_variable: 1
   decorator: 1
   at: 1
   doctype: 1

@@ -114,11 +114,27 @@ export class Highlight_Manager {
 				range.setStart(text_node, pos);
 				range.setEnd(text_node, end_pos);
 
+				// Add range for the token type
 				const type = token.type;
 				if (!ranges_by_type.has(type)) {
 					ranges_by_type.set(type, []);
 				}
 				ranges_by_type.get(type)!.push(range);
+
+				// Also add range for any aliases
+				if (token.alias) {
+					const aliases = Array.isArray(token.alias) ? token.alias : [token.alias];
+					for (const alias of aliases) {
+						if (!ranges_by_type.has(alias)) {
+							ranges_by_type.set(alias, []);
+						}
+						// Create a new range for each alias (ranges can't be reused)
+						const aliasRange = new Range();
+						aliasRange.setStart(text_node, pos);
+						aliasRange.setEnd(text_node, end_pos);
+						ranges_by_type.get(alias)!.push(aliasRange);
+					}
+				}
 			} catch (e) {
 				throw new Error(`Failed to create range for ${token.type}: ${e}`);
 			}
