@@ -118,7 +118,7 @@ class D extends Base {
 		// implementation
 	}
 
-	@method_decorator
+	@method_decorator('example', {option: true})
 	class_method(): string {
 		return \`Hello, \${this.d1}\`;
 	}

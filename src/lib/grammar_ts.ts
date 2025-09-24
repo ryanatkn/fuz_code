@@ -54,7 +54,10 @@ export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
 					pattern: /^@/,
 					alias: 'operator',
 				},
-				function: /^[\s\S]+/,
+				function: {
+					pattern: /^[\s\S]+/,
+					alias: 'decorator_name',
+				},
 			},
 		},
 		generic_function: {

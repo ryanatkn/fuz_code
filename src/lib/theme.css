@@ -18,11 +18,6 @@
 	color: var(--color_d_5);
 }
 
-.token.property,
-::highlight(property) {
-	color: var(--color_i_5);
-}
-
 .token.tag,
 ::highlight(tag),
 .token.constant,
@@ -90,6 +85,15 @@
 .token.variable,
 ::highlight(variable) {
 	color: var(--color_e_5);
+}
+
+.token.property,
+::highlight(property),
+.token.decorator,
+::highlight(decorator),
+.token.decorator_name,
+::highlight(decorator_name) {
+	color: var(--color_i_5);
 }
 
 .token.atrule,
