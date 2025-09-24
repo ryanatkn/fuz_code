@@ -12,7 +12,7 @@ See [README.md](./README.md).
 ```bash
 gro test                            # Run all tests
 gro test src/fixtures/check.test.ts # Verify fixture generation
-npm run update-generated-fixtures   # Regenerate fixtures
+gro src/fixtures/update             # Regenerate fixtures
 npm run benchmark                   # Run performance benchmarks
 npm run benchmark-compare           # Compare performance with Prism and Shiki
 ```
@@ -168,7 +168,7 @@ Generated fixtures in `src/fixtures/{lang}/`:
 ### Workflow
 
 1. Edit samples in `src/lib/samples/`
-2. Run `npm run update-generated-fixtures` to regenerate
+2. Run `gro src/fixtures/update` to regenerate
 3. Run `gro test src/fixtures/check.test.ts` to verify
 4. Review changes with `git diff src/fixtures/`
 

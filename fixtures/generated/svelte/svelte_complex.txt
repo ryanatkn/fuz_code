@@ -95,7 +95,9 @@
  413-416   string                    'b'
  416-417   punctuation               ;
  420-423   keyword                   let
- 425-426   operator                  :
+ 425-435   type_annotation           : boolean 
+ 425-426   :                         :
+ 426-435   type                       boolean 
  427-434   builtin                   boolean
  435-436   operator                  =
  437-443   function                  $state
@@ -106,6 +108,7 @@
  453-459   special_keyword           export
  460-464   keyword                   type
  465-474   class_name                Some_Type
+ 465-474   type_name                 Some_Type
  475-476   operator                  =
  477-478   number                    1
  479-480   operator                  |
@@ -117,7 +120,9 @@
  501-502   class_name                D
  501-502   constant                  D
  503-504   punctuation               {
- 509-510   operator                  :
+ 509-518   type_annotation           : string 
+ 509-510   :                         :
+ 510-518   type                       string 
  511-517   builtin                   string
  518-519   operator                  =
  520-523   string                    'd'
@@ -183,6 +188,7 @@
  784-789   special_keyword           throw
  790-793   keyword                   new
  794-799   class_name                Error
+ 794-799   type_name                 Error
  799-800   punctuation               (
  800-816   template_string           `${this.d1} etc`
  800-801   template_punctuation      `
@@ -207,6 +213,7 @@
  871-872   punctuation               (
  872-875   keyword                   new
  876-880   class_name                Date
+ 876-880   type_name                 Date
  880-881   punctuation               (
  881-884   number                    123
  884-885   punctuation               )
@@ -221,6 +228,7 @@
 1022-1028  special_keyword           export
 1029-1038  keyword                   interface
 1039-1045  class_name                Some_E
+1039-1045  type_name                 Some_E
 1046-1047  punctuation               {
 1054-1055  operator                  :
 1056-1062  builtin                   string
@@ -231,7 +239,10 @@
 1080-1081  punctuation               }
 1084-1090  special_keyword           export
 1091-1096  keyword                   const
-1103-1104  operator                  :
+1103-1112  type_annotation           : Some_E 
+1103-1104  :                         :
+1104-1112  type                       Some_E 
+1105-1111  type_name                 Some_E
 1112-1113  operator                  =
 1114-1115  punctuation               {
 1119-1120  operator                  :
@@ -269,7 +280,9 @@
 1246-1247  operator                  :
 1248-1251  builtin                   any
 1251-1252  punctuation               )
-1252-1253  operator                  :
+1252-1258  type_annotation           : any 
+1252-1253  :                         :
+1253-1258  type                       any 
 1254-1257  builtin                   any
 1258-1260  operator                  =>
 1263-1264  operator                  +
@@ -578,13 +591,13 @@
 2331-2332  punctuation               >
 
 === STATS ===
-Total tokens: 577
+Total tokens: 590
 Sample length: 2333 characters
 
 Token types:
   punctuation: 270
   tag: 60
-  operator: 49
+  operator: 45
   keyword: 24
   lang_ts: 19
   builtin: 17
@@ -598,8 +611,12 @@ Token types:
   selector: 7
   number: 6
   class_name: 5
+  type_name: 5
   constant: 4
   boolean: 4
+  type_annotation: 4
+  :: 4
+  type: 4
   template_punctuation: 4
   interpolation_punctuation: 4
   script: 2

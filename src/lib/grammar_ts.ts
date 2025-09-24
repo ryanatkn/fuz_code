@@ -41,7 +41,14 @@ export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
 	delete grammar_ts.literal_property;
 
 	// a version of TS specifically for styling types
-	var type_inside = syntax_styler.extend_grammar('ts', {});
+	var type_inside = syntax_styler.extend_grammar('ts', {
+		// Recognize type names in type contexts
+		type_name: {
+			pattern: /\b[A-Z]\w*/,
+			alias: 'class_name',
+		},
+	});
+	// Prevent double-wrapping of class names
 	(type_inside as any).class_name = undefined;
 
 	(grammar_ts.class_name as Syntax_Grammar_Token).inside = type_inside;
@@ -51,6 +58,17 @@ export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
 			pattern: /(\b(?:import|export)\s+)type\b|(\b(?:import|export)\s*\{[^}]*,\s*)type\b/,
 			lookbehind: true,
 			alias: 'special_keyword',
+		},
+		type_annotation: {
+			pattern: /:(?:\s*)((?:[^<>=;,)}\s]|<[^>]*>|\[[^\]]*\]|\s)+)(?=\s*=)/,
+			greedy: true,
+			inside: {
+				':': /^:/,
+				type: {
+					pattern: /.+/,
+					inside: type_inside,
+				},
+			},
 		},
 		decorator: {
 			pattern: /@[$\w\xA0-\uFFFF]+/,

@@ -1,6 +1,6 @@
 const a = 1;
 
-const b = 'b';
+const b: string = 'b';
 
 const c = true;
 
@@ -121,12 +121,15 @@ export {a, A, b, c, D};
 
 sample_langs as unknown as any as Sample_Lang satisfies Sample_Lang;
 
-export interface Some_E {
+export interface Some_E<T = undefined> {
 	name: string;
 	age: number;
+	t?: T;
 }
 
-export const some_e: Some_E = {name: 'A. H.', age: 100};
+const e: {name: string; age: number} = {name: 'A. H.', age: 100};
+const v = [['', e]] as const;
+export const some_e: Map<string, Some_E> = new Map(v);
 
 export function add(x: number, y: number): number {
 	return x + y;
