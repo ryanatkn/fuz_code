@@ -324,7 +324,8 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 	}
 
 	let value = $state('');
-	let element_ref: HTMLElement;
+	let element_ref: HTMLElement | undefined = undefined;
+	console.log(element_ref);
 </script>
 
 <h1>hello {HELLO}!</h1>
