@@ -75,10 +75,6 @@ div > p {
 }
 
 .attr[title='Click: here'] {
-	cursor: pointer;
-}
-
-.background  /* comment*/ {
 	background-image: url('data:image/svg+xml...');
 }
 `,

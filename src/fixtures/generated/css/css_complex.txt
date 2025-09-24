@@ -61,31 +61,25 @@
  425-426   punctuation               }
  428-454   selector                  .attr[title='Click: here']
  455-456   punctuation               {
- 458-464   property                  cursor
- 464-465   punctuation               :
- 473-474   punctuation               ;
- 475-476   punctuation               }
- 491-503   comment                   /* comment*/
- 504-505   punctuation               {
- 507-523   property                  background-image
- 523-524   punctuation               :
- 525-553   url                       url('data:image/svg+xml...')
- 525-528   function                  url
- 528-529   punctuation               (
- 529-552   string                    'data:image/svg+xml...'
- 552-553   punctuation               )
- 553-554   punctuation               ;
- 555-556   punctuation               }
+ 458-474   property                  background-image
+ 474-475   punctuation               :
+ 476-504   url                       url('data:image/svg+xml...')
+ 476-479   function                  url
+ 479-480   punctuation               (
+ 480-503   string                    'data:image/svg+xml...'
+ 503-504   punctuation               )
+ 504-505   punctuation               ;
+ 506-507   punctuation               }
 
 === STATS ===
-Total tokens: 77
-Sample length: 557 characters
+Total tokens: 71
+Sample length: 508 characters
 
 Token types:
-  punctuation: 48
-  property: 10
+  punctuation: 44
+  property: 9
   selector: 8
-  comment: 4
+  comment: 3
   function: 2
   string: 2
   atrule: 1
