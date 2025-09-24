@@ -30,7 +30,7 @@ but there are two optional dependencies:
 - The [default theme](src/lib/theme.css) integrates
   with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference.
   Non-Moss users should import [theme_variables.css](src/lib/theme_variables.css)
-  or otherwise define the variables.
+  or otherwise define those variables.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is much lighter
