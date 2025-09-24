@@ -212,7 +212,7 @@
  927-928   punctuation               ;
  933-938   special_keyword           break
  938-939   punctuation               ;
- 943-950   keyword                   default
+ 943-950   special_keyword           default
  950-951   operator                  :
  956-963   builtin                   console
  963-964   punctuation               .
@@ -288,10 +288,10 @@
 1251-1252  punctuation               (
 1252-1253  punctuation               )
 1254-1255  punctuation               {
-1258-1263  keyword                   yield
+1258-1263  special_keyword           yield
 1264-1265  number                    1
 1265-1266  punctuation               ;
-1269-1274  keyword                   yield
+1269-1274  special_keyword           yield
 1274-1275  operator                  *
 1276-1277  punctuation               [
 1277-1278  number                    2
@@ -305,7 +305,7 @@
 1311-1312  punctuation               (
 1312-1313  punctuation               )
 1314-1315  punctuation               {
-1318-1323  keyword                   yield
+1318-1323  special_keyword           yield
 1324-1329  special_keyword           await
 1330-1337  builtin                   Promise
 1337-1338  punctuation               .
@@ -454,6 +454,7 @@
 2040-2042  special_keyword           as
 2043-2046  builtin                   any
 2047-2049  special_keyword           as
+2062-2071  keyword                   satisfies
 2083-2084  punctuation               ;
 2086-2092  special_keyword           export
 2093-2102  keyword                   interface
@@ -558,14 +559,14 @@
 2712-2763  comment                   // const commented = "this string is in a comment";
 
 === STATS ===
-Total tokens: 557
+Total tokens: 558
 Sample length: 2764 characters
 
 Token types:
   punctuation: 221
   operator: 75
-  keyword: 52
-  special_keyword: 44
+  keyword: 49
+  special_keyword: 48
   builtin: 33
   function: 26
   string: 24

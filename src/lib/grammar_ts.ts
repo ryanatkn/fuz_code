@@ -29,7 +29,7 @@ export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
 
 	// The keywords TypeScript adds to JS
 	(grammar_ts.keyword as any).push(
-		/\b(?:abstract|declare|is|keyof|readonly|require)\b/,
+		/\b(?:abstract|declare|is|keyof|readonly|require|satisfies)\b/,
 		// keywords that have to be followed by an identifier
 		/\b(?:asserts|infer|interface|module|namespace|type)\b(?=\s*(?:[{_$a-zA-Z\xA0-\uFFFF]|$))/,
 		// This is for `import type *, {}`
@@ -47,6 +47,11 @@ export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
 	(grammar_ts.class_name as Syntax_Grammar_Token).inside = type_inside;
 
 	syntax_styler.grammar_insert_before('ts', 'function', {
+		import_type_keyword: {
+			pattern: /(\b(?:import|export)\s+)type\b|(\b(?:import|export)\s*\{[^}]*,\s*)type\b/,
+			lookbehind: true,
+			alias: 'special_keyword',
+		},
 		decorator: {
 			pattern: /@[$\w\xA0-\uFFFF]+/,
 			inside: {

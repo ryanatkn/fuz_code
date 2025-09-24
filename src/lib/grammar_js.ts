@@ -24,7 +24,7 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 		keyword: [
 			{
 				pattern:
-					/(^|[^.]|\.\.\.\s*)\b(?:assert(?=\s*\{)|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|class|const|debugger|default|delete|enum|extends|function|(?:get|set)(?=\s*(?:[#[$\w\xA0-\uFFFF]|$))|implements|in|instanceof|interface|let|new|null|of|package|private|protected|public|static|super|this|typeof|undefined|var|void|with|yield)\b/,
+					/(^|[^.]|\.\.\.\s*)\b(?:assert(?=\s*\{)|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|class|const|debugger|delete|enum|extends|function|(?:get|set)(?=\s*(?:[#[$\w\xA0-\uFFFF]|$))|implements|in|instanceof|interface|let|new|null|of|package|private|protected|public|static|super|this|typeof|undefined|var|void|with)\b/,
 				lookbehind: true,
 			},
 		],
@@ -67,7 +67,7 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 
 	syntax_styler.grammar_insert_before('js', 'function', {
 		special_keyword:
-			/\b(?:as|await|break|case|catch|continue|do|else|export|finally|for|from|if|import|return|switch|throw|try|while)\b/,
+			/\b(?:as|await|break|case|catch|continue|default|do|else|export|finally|for|from|if|import|return|switch|throw|try|while|yield)\b/,
 	});
 
 	syntax_styler.grammar_insert_before('js', 'keyword', {
