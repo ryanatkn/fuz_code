@@ -420,7 +420,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 
 	@media (max-width: 600px) {
 		:global(body) {
-			background-color: lightblue;
+			background-color: light-dark(lightblue, darkblue);
 		}
 	}
 

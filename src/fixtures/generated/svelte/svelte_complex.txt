@@ -492,8 +492,8 @@
 1723-1729  tag                       <style
 1723-1724  punctuation               <
 1729-1730  punctuation               >
-1730-2111  style                     \n\t.some_class {\n\t\tcolor: red;\n\t}\n\n\t.hypen-class {\n\t\tfont-size: 16px;\n\t}\n\n\tp {\n\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t}\n\n\t/* comment */\n\n\t/*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/\n\n\t#unique_id {\n\t\tbackground-color: blue;\n\t}\n\n\tdiv > p {\n\t\tmargin: 10px;\n\t}\n\n\t@media (max-width: 600px) {\n\t\t:global(body) {\n\t\t\tbackground-color: lightblue;\n\t\t}\n\t}\n\n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
-1730-2111  lang_css                  \n\t.some_class {\n\t\tcolor: red;\n\t}\n\n\t.hypen-class {\n\t\tfont-size: 16px;\n\t}\n\n\tp {\n\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t}\n\n\t/* comment */\n\n\t/*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/\n\n\t#unique_id {\n\t\tbackground-color: blue;\n\t}\n\n\tdiv > p {\n\t\tmargin: 10px;\n\t}\n\n\t@media (max-width: 600px) {\n\t\t:global(body) {\n\t\t\tbackground-color: lightblue;\n\t\t}\n\t}\n\n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
+1730-2133  style                     \n\t.some_class {\n\t\tcolor: red;\n\t}\n\n\t.hypen-class {\n\t\tfont-size: 16px;\n\t}\n\n\tp {\n\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t}\n\n\t/* comment */\n\n\t/*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/\n\n\t#unique_id {\n\t\tbackground-color: blue;\n\t}\n\n\tdiv > p {\n\t\tmargin: 10px;\n\t}\n\n\t@media (max-width: 600px) {\n\t\t:global(body) {\n\t\t\tbackground-color: light-dark(lightblue, darkblue);\n\t\t}\n\t}\n\n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
+1730-2133  lang_css                  \n\t.some_class {\n\t\tcolor: red;\n\t}\n\n\t.hypen-class {\n\t\tfont-size: 16px;\n\t}\n\n\tp {\n\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t}\n\n\t/* comment */\n\n\t/*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/\n\n\t#unique_id {\n\t\tbackground-color: blue;\n\t}\n\n\tdiv > p {\n\t\tmargin: 10px;\n\t}\n\n\t@media (max-width: 600px) {\n\t\t:global(body) {\n\t\t\tbackground-color: light-dark(lightblue, darkblue);\n\t\t}\n\t}\n\n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
 1732-1743  selector                  .some_class
 1744-1745  punctuation               {
 1748-1753  property                  color
@@ -543,33 +543,37 @@
 2026-2027  punctuation               {
 2031-2047  property                  background-color
 2047-2048  punctuation               :
-2058-2059  punctuation               ;
-2062-2063  punctuation               }
-2065-2066  punctuation               }
-2069-2085  selector                  .special::before
-2086-2087  punctuation               {
-2090-2097  property                  content
-2097-2098  punctuation               :
-2099-2106  string                    '< & >'
-2106-2107  punctuation               ;
-2109-2110  punctuation               }
-2111-2119  tag                       </style>
-2111-2118  tag                       </style
-2111-2113  punctuation               </
-2118-2119  punctuation               >
+2049-2059  function                  light-dark
+2059-2060  punctuation               (
+2069-2070  punctuation               ,
+2079-2080  punctuation               )
+2080-2081  punctuation               ;
+2084-2085  punctuation               }
+2087-2088  punctuation               }
+2091-2107  selector                  .special::before
+2108-2109  punctuation               {
+2112-2119  property                  content
+2119-2120  punctuation               :
+2121-2128  string                    '< & >'
+2128-2129  punctuation               ;
+2131-2132  punctuation               }
+2133-2141  tag                       </style>
+2133-2140  tag                       </style
+2133-2135  punctuation               </
+2140-2141  punctuation               >
 
 === STATS ===
-Total tokens: 558
-Sample length: 2120 characters
+Total tokens: 562
+Sample length: 2142 characters
 
 Token types:
-  punctuation: 275
+  punctuation: 278
   tag: 86
   operator: 33
   lang_ts: 26
   attr_name: 20
   keyword: 16
-  function: 14
+  function: 15
   attr_value: 12
   property: 9
   special_keyword: 8
