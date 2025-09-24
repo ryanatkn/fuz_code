@@ -1,85 +1,21 @@
 {
   "name": "@ryanatkn/fuz_code",
-  "version": "0.24.0",
+  "version": "0.25.0",
   "modules": {
-    ".": {
-      "path": "index.ts",
+    "./code_sample.js": {
+      "path": "code_sample.ts",
       "declarations": [
         {
-          "name": "syntax_styler",
-          "kind": "variable"
-        }
-      ]
-    },
-    "./package.json": {
-      "path": "package.json",
-      "declarations": [
+          "name": "Code_Sample",
+          "kind": "type"
+        },
         {
-          "name": "default",
-          "kind": "json"
-        }
-      ]
-    },
-    "./code_sample_inputs.js": {
-      "path": "code_sample_inputs.ts",
-      "declarations": [
-        {
-          "name": "sample_json_code",
+          "name": "sample_langs",
           "kind": "variable"
         },
         {
-          "name": "sample_html_code",
-          "kind": "variable"
-        },
-        {
-          "name": "sample_css_code",
-          "kind": "variable"
-        },
-        {
-          "name": "sample_ts_code",
-          "kind": "variable"
-        },
-        {
-          "name": "sample_svelte_code",
-          "kind": "variable"
-        },
-        {
-          "name": "samples",
-          "kind": "variable"
-        }
-      ]
-    },
-    "./code_sample_outputs.js": {
-      "path": "code_sample_outputs.ts",
-      "declarations": [
-        {
-          "name": "styled_json_code",
-          "kind": "variable"
-        },
-        {
-          "name": "styled_html_code",
-          "kind": "variable"
-        },
-        {
-          "name": "styled_css_code",
-          "kind": "variable"
-        },
-        {
-          "name": "styled_ts_code",
-          "kind": "variable"
-        },
-        {
-          "name": "styled_svelte_code",
-          "kind": "variable"
-        }
-      ]
-    },
-    "./Code.svelte": {
-      "path": "Code.svelte",
-      "declarations": [
-        {
-          "name": "default",
-          "kind": "component"
+          "name": "Sample_Lang",
+          "kind": "type"
         }
       ]
     },
@@ -158,11 +94,37 @@
         }
       ]
     },
+    "./highlight_manager.js": {
+      "path": "highlight_manager.ts",
+      "declarations": [
+        {
+          "name": "Highlight_Mode",
+          "kind": "type"
+        },
+        {
+          "name": "supports_css_highlight_api",
+          "kind": "function"
+        },
+        {
+          "name": "Highlight_Manager",
+          "kind": "class"
+        }
+      ]
+    },
+    "./syntax_styler_global.js": {
+      "path": "syntax_styler_global.ts",
+      "declarations": [
+        {
+          "name": "syntax_styler_global",
+          "kind": "variable"
+        }
+      ]
+    },
     "./syntax_styler.js": {
       "path": "syntax_styler.ts",
       "declarations": [
         {
-          "name": "Add_Grammar",
+          "name": "Add_Syntax_Grammar",
           "kind": "type"
         },
         {
@@ -170,27 +132,15 @@
           "kind": "class"
         },
         {
-          "name": "Grammar_Value",
+          "name": "Syntax_Grammar_Value",
           "kind": "type"
         },
         {
-          "name": "Grammar",
+          "name": "Syntax_Grammar",
           "kind": "type"
         },
         {
-          "name": "Grammar_Token",
-          "kind": "type"
-        },
-        {
-          "name": "tokenize_syntax",
-          "kind": "function"
-        },
-        {
-          "name": "Syntax_Token",
-          "kind": "class"
-        },
-        {
-          "name": "Syntax_Token_Stream",
+          "name": "Syntax_Grammar_Token",
           "kind": "type"
         },
         {
@@ -219,8 +169,39 @@
         }
       ]
     },
-    "./theme_standalone.css": {
-      "path": "theme_standalone.css",
+    "./syntax_token.js": {
+      "path": "syntax_token.ts",
+      "declarations": [
+        {
+          "name": "Syntax_Token",
+          "kind": "class"
+        },
+        {
+          "name": "Syntax_Token_Stream",
+          "kind": "type"
+        }
+      ]
+    },
+    "./tokenize_syntax.js": {
+      "path": "tokenize_syntax.ts",
+      "declarations": [
+        {
+          "name": "tokenize_syntax",
+          "kind": "function"
+        }
+      ]
+    },
+    "./Code.svelte": {
+      "path": "Code.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
+    "./theme_variables.css": {
+      "path": "theme_variables.css",
       "declarations": [
         {
           "name": "default",
