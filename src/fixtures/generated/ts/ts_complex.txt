@@ -1,3 +1,36 @@
+=== STATS ===
+Sample length: 2884 characters
+Total tokens: 619
+
+Token types (27 unique):
+  punctuation: 235
+  operator: 83
+  keyword: 54
+  special_keyword: 49
+  builtin: 37
+  function: 26
+  string: 25
+  number: 14
+  class_name: 11
+  comment: 11
+  type_name: 10
+  interpolation_punctuation: 8
+  constant: 7
+  template_punctuation: 6
+  type_annotation: 5
+  :: 5
+  type: 5
+  boolean: 4
+  interpolation: 4
+  regex_delimiter: 4
+  decorator: 3
+  at: 3
+  template_string: 3
+  function_variable: 2
+  regex: 2
+  regex_source: 2
+  regex_flags: 1
+
 === TOKENS ===
    0-5     keyword                   const
    8-9     operator                  =
@@ -618,36 +651,3 @@
 2772-2773  punctuation               ;
 2775-2831  comment                   // string in comment should not be highlighted as string
 2832-2883  comment                   // const commented = "this string is in a comment";
-
-=== STATS ===
-Total tokens: 619
-Sample length: 2884 characters
-
-Token types:
-  punctuation: 235
-  operator: 83
-  keyword: 54
-  special_keyword: 49
-  builtin: 37
-  function: 26
-  string: 25
-  number: 14
-  class_name: 11
-  comment: 11
-  type_name: 10
-  interpolation_punctuation: 8
-  constant: 7
-  template_punctuation: 6
-  type_annotation: 5
-  :: 5
-  type: 5
-  boolean: 4
-  interpolation: 4
-  regex_delimiter: 4
-  decorator: 3
-  at: 3
-  template_string: 3
-  function_variable: 2
-  regex: 2
-  regex_source: 2
-  regex_flags: 1

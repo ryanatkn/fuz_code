@@ -1,3 +1,25 @@
+=== STATS ===
+Sample length: 779 characters
+Total tokens: 232
+
+Token types (16 unique):
+  punctuation: 120
+  tag: 64
+  attr_name: 18
+  attr_value: 17
+  string: 2
+  doctype: 1
+  comment: 1
+  script: 1
+  lang_js: 1
+  keyword: 1
+  operator: 1
+  style: 1
+  lang_css: 1
+  selector: 1
+  property: 1
+  cdata: 1
+
 === TOKENS ===
    0-15    doctype                   <!doctype html>
   17-35    tag                       <div class="test">
@@ -231,25 +253,3 @@
  720-722   punctuation               </
  727-728   punctuation               >
  730-778   cdata                     <![CDATA[ if (a < 0) alert("b"); <not-a-tag> ]]>
-
-=== STATS ===
-Total tokens: 232
-Sample length: 779 characters
-
-Token types:
-  punctuation: 120
-  tag: 64
-  attr_name: 18
-  attr_value: 17
-  string: 2
-  doctype: 1
-  comment: 1
-  script: 1
-  lang_js: 1
-  keyword: 1
-  operator: 1
-  style: 1
-  lang_css: 1
-  selector: 1
-  property: 1
-  cdata: 1

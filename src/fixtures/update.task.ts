@@ -1,7 +1,6 @@
 import type {Task} from '@ryanatkn/gro';
 import {writeFileSync, mkdirSync, rmSync, existsSync} from 'node:fs';
 import {join, resolve} from 'node:path';
-import {format_file} from '@ryanatkn/gro/format_file.js';
 import {
 	discover_samples,
 	process_sample,
@@ -42,12 +41,10 @@ export const task: Task = {
 			const dir = join(generated_fixtures_dir, sample.lang);
 			mkdirSync(dir, {recursive: true});
 
-			// Write JSON file
-			const json_path = get_fixture_path(sample.lang, sample.variant, 'json');
-			const json_content = JSON.stringify(output);
-			const formatted_json = await format_file(json_content, {filepath: json_path}); // eslint-disable-line no-await-in-loop
-			writeFileSync(json_path, formatted_json);
-			console.log(`  → ${json_path}`); // eslint-disable-line no-console
+			// Write HTML file (no formatting needed, already formatted)
+			const html_path = get_fixture_path(sample.lang, sample.variant, 'html');
+			writeFileSync(html_path, output.html);
+			console.log(`  → ${html_path}`); // eslint-disable-line no-console
 
 			// Generate and write debug text file
 			const debug_text = generate_debug_text(output);

@@ -1,3 +1,39 @@
+=== STATS ===
+Sample length: 2142 characters
+Total tokens: 562
+
+Token types (30 unique):
+  punctuation: 278
+  tag: 86
+  operator: 33
+  lang_ts: 26
+  attr_name: 20
+  keyword: 16
+  function: 15
+  attr_value: 12
+  property: 9
+  special_keyword: 8
+  string: 8
+  selector: 8
+  builtin: 6
+  comment: 5
+  number: 4
+  script: 3
+  decorator: 3
+  at: 3
+  namespace: 3
+  constant: 2
+  boolean: 2
+  each: 2
+  style: 2
+  lang_css: 2
+  type_annotation: 1
+  :: 1
+  type: 1
+  function_variable: 1
+  atrule: 1
+  rule: 1
+
 === TOKENS ===
    0-25    tag                       <script lang="ts" module>
    0-7     tag                       <script
@@ -561,39 +597,3 @@
 2133-2140  tag                       </style
 2133-2135  punctuation               </
 2140-2141  punctuation               >
-
-=== STATS ===
-Total tokens: 562
-Sample length: 2142 characters
-
-Token types:
-  punctuation: 278
-  tag: 86
-  operator: 33
-  lang_ts: 26
-  attr_name: 20
-  keyword: 16
-  function: 15
-  attr_value: 12
-  property: 9
-  special_keyword: 8
-  string: 8
-  selector: 8
-  builtin: 6
-  comment: 5
-  number: 4
-  script: 3
-  decorator: 3
-  at: 3
-  namespace: 3
-  constant: 2
-  boolean: 2
-  each: 2
-  style: 2
-  lang_css: 2
-  type_annotation: 1
-  :: 1
-  type: 1
-  function_variable: 1
-  atrule: 1
-  rule: 1

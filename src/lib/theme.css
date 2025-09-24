@@ -47,8 +47,6 @@
 
 .token.comment,
 ::highlight(comment),
-.token.attr_value,
-::highlight(attr_value),
 .token.char,
 ::highlight(char),
 .token.builtin,
@@ -67,6 +65,8 @@
 	color: var(--color_j_5);
 }
 
+.token.attr_value,
+::highlight(attr_value),
 .token.string,
 ::highlight(string),
 .token.template_punctuation,
@@ -87,6 +87,8 @@
 	color: var(--color_e_5);
 }
 
+.token.attr_name,
+::highlight(attr_name),
 .token.property,
 ::highlight(property),
 .token.decorator,
@@ -97,9 +99,7 @@
 }
 
 .token.atrule,
-::highlight(atrule),
-.token.attr_name,
-::highlight(attr_name) {
+::highlight(atrule) {
 	color: var(--color_f_5);
 }
 

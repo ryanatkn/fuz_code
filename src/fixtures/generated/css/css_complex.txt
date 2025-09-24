@@ -1,3 +1,18 @@
+=== STATS ===
+Sample length: 479 characters
+Total tokens: 74
+
+Token types (9 unique):
+  punctuation: 47
+  property: 9
+  selector: 8
+  function: 3
+  comment: 2
+  string: 2
+  atrule: 1
+  rule: 1
+  url: 1
+
 === TOKENS ===
    0-11    selector                  .some_class
   12-13    punctuation               {
@@ -73,18 +88,3 @@
  474-475   punctuation               )
  475-476   punctuation               ;
  477-478   punctuation               }
-
-=== STATS ===
-Total tokens: 74
-Sample length: 479 characters
-
-Token types:
-  punctuation: 47
-  property: 9
-  selector: 8
-  function: 3
-  comment: 2
-  string: 2
-  atrule: 1
-  rule: 1
-  url: 1
