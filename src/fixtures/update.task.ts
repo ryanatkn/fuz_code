@@ -1,6 +1,6 @@
 import type {Task} from '@ryanatkn/gro';
 import {writeFileSync, mkdirSync, rmSync, existsSync} from 'node:fs';
-import {join} from 'node:path';
+import {join, resolve} from 'node:path';
 import {format_file} from '@ryanatkn/gro/format_file.js';
 import {
 	discover_samples,
@@ -20,9 +20,11 @@ export const task: Task = {
 		// Get unique languages to clean directories
 		const languages = new Set(samples.map((s) => s.lang));
 
+		const generated_fixtures_dir = resolve('src/fixtures/generated');
+
 		// Remove existing language directories
 		for (const lang of languages) {
-			const dir = join('fixtures/generated', lang);
+			const dir = join(generated_fixtures_dir, lang);
 			if (existsSync(dir)) {
 				rmSync(dir, {recursive: true, force: true});
 				console.log(`Removed existing directory: ${dir}`); // eslint-disable-line no-console
@@ -37,7 +39,7 @@ export const task: Task = {
 			const output = process_sample(sample);
 
 			// Ensure directory exists
-			const dir = join('fixtures/generated', sample.lang);
+			const dir = join(generated_fixtures_dir, sample.lang);
 			mkdirSync(dir, {recursive: true});
 
 			// Write JSON file

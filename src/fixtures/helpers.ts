@@ -51,7 +51,7 @@ export const discover_samples = (): Array<Sample_Spec> => {
  * Get the fixture path for a given language and variant
  */
 export const get_fixture_path = (lang: string, variant: string, ext: 'json' | 'txt'): string => {
-	return join('fixtures/generated', lang, `${lang}_${variant}.${ext}`);
+	return join('src/fixtures/generated', lang, `${lang}_${variant}.${ext}`);
 };
 
 /**

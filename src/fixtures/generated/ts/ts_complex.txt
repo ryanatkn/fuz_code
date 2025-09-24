@@ -472,156 +472,156 @@
 2091-2092  punctuation               ;
 2094-2100  special_keyword           export
 2101-2110  keyword                   interface
-2111-2132  class_name                Some_E<T = undefined>
+2111-2127  class_name                Some_E<T = null>
 2111-2117  type_name                 Some_E
 2117-2118  operator                  <
 2118-2119  constant                  T
 2120-2121  operator                  =
-2122-2131  keyword                   undefined
-2131-2132  operator                  >
-2133-2134  punctuation               {
-2140-2141  operator                  :
-2142-2148  builtin                   string
-2148-2149  punctuation               ;
-2154-2155  operator                  :
-2156-2162  builtin                   number
-2162-2163  punctuation               ;
-2166-2167  operator                  ?
-2167-2168  operator                  :
-2169-2170  constant                  T
-2170-2171  punctuation               ;
-2172-2173  punctuation               }
-2175-2180  keyword                   const
-2182-2183  operator                  :
-2184-2185  punctuation               {
-2189-2190  operator                  :
-2191-2197  builtin                   string
-2197-2198  punctuation               ;
-2202-2203  operator                  :
-2204-2210  builtin                   number
-2210-2211  punctuation               }
-2212-2213  operator                  =
-2214-2215  punctuation               {
-2219-2220  operator                  :
-2221-2228  string                    'A. H.'
-2228-2229  punctuation               ,
-2233-2234  operator                  :
-2235-2238  number                    100
-2238-2239  punctuation               }
-2239-2240  punctuation               ;
-2241-2246  keyword                   const
-2249-2250  operator                  =
-2251-2252  punctuation               [
-2252-2253  punctuation               [
-2253-2255  string                    ''
-2255-2256  punctuation               ,
-2258-2259  punctuation               ]
-2259-2260  punctuation               ]
-2261-2263  special_keyword           as
-2264-2269  keyword                   const
-2269-2270  punctuation               ;
-2271-2277  special_keyword           export
-2278-2283  keyword                   const
-2290-2312  type_annotation           : Map<string, Some_E> 
-2290-2291  :                         :
-2291-2312  type                       Map<string, Some_E> 
-2292-2295  type_name                 Map
-2295-2296  operator                  <
-2296-2302  builtin                   string
-2302-2303  punctuation               ,
-2304-2310  type_name                 Some_E
-2310-2311  operator                  >
-2312-2313  operator                  =
-2314-2317  keyword                   new
-2318-2321  class_name                Map
-2318-2321  type_name                 Map
-2321-2322  punctuation               (
-2323-2324  punctuation               )
-2324-2325  punctuation               ;
-2327-2333  special_keyword           export
-2334-2342  keyword                   function
-2343-2346  function                  add
-2346-2347  punctuation               (
-2348-2349  operator                  :
-2350-2356  builtin                   number
-2356-2357  punctuation               ,
-2359-2360  operator                  :
-2361-2367  builtin                   number
-2367-2368  punctuation               )
-2368-2369  operator                  :
-2370-2376  builtin                   number
-2377-2378  punctuation               {
-2380-2386  special_keyword           return
-2389-2390  operator                  +
-2392-2393  punctuation               ;
-2394-2395  punctuation               }
-2397-2403  special_keyword           export
-2404-2409  keyword                   const
-2410-2414  function_variable         plus
-2415-2416  operator                  =
-2417-2418  punctuation               (
-2419-2420  operator                  :
-2421-2424  builtin                   any
-2424-2425  punctuation               ,
-2427-2428  operator                  :
-2429-2432  builtin                   any
-2432-2433  punctuation               )
-2433-2439  type_annotation           : any 
-2433-2434  :                         :
-2434-2439  type                       any 
-2435-2438  builtin                   any
-2439-2441  operator                  =>
-2444-2445  operator                  +
-2447-2448  punctuation               ;
-2450-2472  comment                   // boundary test cases
-2473-2479  special_keyword           export
-2480-2485  keyword                   const
-2504-2505  operator                  =
-2506-2535  string                    'const class function string'
-2535-2536  punctuation               ;
-2537-2543  special_keyword           export
-2544-2549  keyword                   const
-2567-2568  operator                  =
-2569-2595  string                    '// this is not a comment'
-2595-2596  punctuation               ;
-2597-2603  special_keyword           export
-2604-2609  keyword                   const
-2629-2630  operator                  =
-2631-2648  template_string           `Value: ${1 + 2}`
-2631-2632  template_punctuation      `
-2632-2639  string                    Value: 
-2639-2647  interpolation             ${1 + 2}
-2639-2641  interpolation_punctuation ${
-2641-2642  number                    1
-2643-2644  operator                  +
-2645-2646  number                    2
-2646-2647  interpolation_punctuation }
-2647-2648  template_punctuation      `
-2648-2649  punctuation               ;
-2651-2683  comment                   // regex that looks like comment
-2684-2690  special_keyword           export
-2691-2696  keyword                   const
-2703-2704  operator                  =
-2705-2714  regex                     /\/\/.*/g
-2705-2706  regex_delimiter           /
-2706-2712  regex_source              \/\/.*
-2712-2713  regex_delimiter           /
-2713-2714  regex_flags               g
-2714-2715  punctuation               ;
-2716-2722  special_keyword           export
-2723-2728  keyword                   const
-2743-2744  operator                  =
-2745-2777  regex                     /^(?:\/\*.*?\*\/|\/\/.*|[^/])+$/
-2745-2746  regex_delimiter           /
-2746-2776  regex_source              ^(?:\/\*.*?\*\/|\/\/.*|[^/])+$
-2776-2777  regex_delimiter           /
-2777-2778  punctuation               ;
-2780-2836  comment                   // string in comment should not be highlighted as string
-2837-2888  comment                   // const commented = "this string is in a comment";
+2122-2126  keyword                   null
+2126-2127  operator                  >
+2128-2129  punctuation               {
+2135-2136  operator                  :
+2137-2143  builtin                   string
+2143-2144  punctuation               ;
+2149-2150  operator                  :
+2151-2157  builtin                   number
+2157-2158  punctuation               ;
+2161-2162  operator                  ?
+2162-2163  operator                  :
+2164-2165  constant                  T
+2165-2166  punctuation               ;
+2167-2168  punctuation               }
+2170-2175  keyword                   const
+2177-2178  operator                  :
+2179-2180  punctuation               {
+2184-2185  operator                  :
+2186-2192  builtin                   string
+2192-2193  punctuation               ;
+2197-2198  operator                  :
+2199-2205  builtin                   number
+2205-2206  punctuation               }
+2207-2208  operator                  =
+2209-2210  punctuation               {
+2214-2215  operator                  :
+2216-2223  string                    'A. H.'
+2223-2224  punctuation               ,
+2228-2229  operator                  :
+2230-2233  number                    100
+2233-2234  punctuation               }
+2234-2235  punctuation               ;
+2236-2241  keyword                   const
+2244-2245  operator                  =
+2246-2247  punctuation               [
+2247-2248  punctuation               [
+2248-2250  string                    ''
+2250-2251  punctuation               ,
+2253-2254  punctuation               ]
+2254-2255  punctuation               ]
+2256-2258  special_keyword           as
+2259-2264  keyword                   const
+2264-2265  punctuation               ;
+2266-2272  special_keyword           export
+2273-2278  keyword                   const
+2285-2307  type_annotation           : Map<string, Some_E> 
+2285-2286  :                         :
+2286-2307  type                       Map<string, Some_E> 
+2287-2290  type_name                 Map
+2290-2291  operator                  <
+2291-2297  builtin                   string
+2297-2298  punctuation               ,
+2299-2305  type_name                 Some_E
+2305-2306  operator                  >
+2307-2308  operator                  =
+2309-2312  keyword                   new
+2313-2316  class_name                Map
+2313-2316  type_name                 Map
+2316-2317  punctuation               (
+2318-2319  punctuation               )
+2319-2320  punctuation               ;
+2322-2328  special_keyword           export
+2329-2337  keyword                   function
+2338-2341  function                  add
+2341-2342  punctuation               (
+2343-2344  operator                  :
+2345-2351  builtin                   number
+2351-2352  punctuation               ,
+2354-2355  operator                  :
+2356-2362  builtin                   number
+2362-2363  punctuation               )
+2363-2364  operator                  :
+2365-2371  builtin                   number
+2372-2373  punctuation               {
+2375-2381  special_keyword           return
+2384-2385  operator                  +
+2387-2388  punctuation               ;
+2389-2390  punctuation               }
+2392-2398  special_keyword           export
+2399-2404  keyword                   const
+2405-2409  function_variable         plus
+2410-2411  operator                  =
+2412-2413  punctuation               (
+2414-2415  operator                  :
+2416-2419  builtin                   any
+2419-2420  punctuation               ,
+2422-2423  operator                  :
+2424-2427  builtin                   any
+2427-2428  punctuation               )
+2428-2434  type_annotation           : any 
+2428-2429  :                         :
+2429-2434  type                       any 
+2430-2433  builtin                   any
+2434-2436  operator                  =>
+2439-2440  operator                  +
+2442-2443  punctuation               ;
+2445-2467  comment                   // boundary test cases
+2468-2474  special_keyword           export
+2475-2480  keyword                   const
+2499-2500  operator                  =
+2501-2530  string                    'const class function string'
+2530-2531  punctuation               ;
+2532-2538  special_keyword           export
+2539-2544  keyword                   const
+2562-2563  operator                  =
+2564-2590  string                    '// this is not a comment'
+2590-2591  punctuation               ;
+2592-2598  special_keyword           export
+2599-2604  keyword                   const
+2624-2625  operator                  =
+2626-2643  template_string           `Value: ${1 + 2}`
+2626-2627  template_punctuation      `
+2627-2634  string                    Value: 
+2634-2642  interpolation             ${1 + 2}
+2634-2636  interpolation_punctuation ${
+2636-2637  number                    1
+2638-2639  operator                  +
+2640-2641  number                    2
+2641-2642  interpolation_punctuation }
+2642-2643  template_punctuation      `
+2643-2644  punctuation               ;
+2646-2678  comment                   // regex that looks like comment
+2679-2685  special_keyword           export
+2686-2691  keyword                   const
+2698-2699  operator                  =
+2700-2709  regex                     /\/\/.*/g
+2700-2701  regex_delimiter           /
+2701-2707  regex_source              \/\/.*
+2707-2708  regex_delimiter           /
+2708-2709  regex_flags               g
+2709-2710  punctuation               ;
+2711-2717  special_keyword           export
+2718-2723  keyword                   const
+2738-2739  operator                  =
+2740-2772  regex                     /^(?:\/\*.*?\*\/|\/\/.*|[^/])+$/
+2740-2741  regex_delimiter           /
+2741-2771  regex_source              ^(?:\/\*.*?\*\/|\/\/.*|[^/])+$
+2771-2772  regex_delimiter           /
+2772-2773  punctuation               ;
+2775-2831  comment                   // string in comment should not be highlighted as string
+2832-2883  comment                   // const commented = "this string is in a comment";
 
 === STATS ===
 Total tokens: 619
-Sample length: 2889 characters
+Sample length: 2884 characters
 
 Token types:
   punctuation: 235

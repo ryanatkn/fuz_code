@@ -209,7 +209,7 @@ export {a, A, b, c, D};
 
 sample_langs as unknown as any as Sample_Lang satisfies Sample_Lang;
 
-export interface Some_E<T = undefined> {
+export interface Some_E<T = null> {
 	name: string;
 	age: number;
 	t?: T;
