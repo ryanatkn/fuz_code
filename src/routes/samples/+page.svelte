@@ -13,11 +13,11 @@
 			<h2 class="box panel p_md mb_0">{sample.lang}</h2>
 			<div class="display_flex justify_content_center flex_wrap gap_sm py_xl5">
 				<div>
-					<h3>HTML</h3>
+					<h3>{sample.lang} html strings</h3>
 					<Code content={sample.content} lang={sample.lang} mode="html" />
 				</div>
 				<div>
-					<h3>Highlight API</h3>
+					<h3>{sample.lang} highlighted ranges</h3>
 					<Code content={sample.content} lang={sample.lang} mode="ranges" />
 				</div>
 			</div>

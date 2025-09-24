@@ -1,5 +1,3 @@
-.token.comment,
-::highlight(comment),
 .token.attr_equals,
 ::highlight(attr_equals),
 .token.processing_instruction,
@@ -67,6 +65,8 @@
 
 .token.attr_value,
 ::highlight(attr_value),
+.token.attr_quote,
+::highlight(attr_quote),
 .token.string,
 ::highlight(string),
 .token.template_punctuation,
@@ -238,7 +238,7 @@
  * Tokens to NOT include:
  * - parameter (deleted in grammar_ts)
  * - color, hexcode, unit (not in grammars)
- * - attr (we use attr_name, attr_value, attr_equals)
+ * - attr (we use attr_name, attr_value, attr_equals, attr_quote)
  * - property_string (doesn't exist)
  * - interpolation (container only, no styling needed)
  */

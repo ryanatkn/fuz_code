@@ -70,7 +70,8 @@ div > p {
 }
 
 .content::before {
-	content: '</style> /* not a comment */';
+	/* prettier-ignore */
+	content: "</style> /* not a comment */";
 }
 
 .attr[title='Click: here'] {

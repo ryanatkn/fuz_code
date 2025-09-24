@@ -1,13 +1,13 @@
 === STATS ===
-Sample length: 479 characters
-Total tokens: 74
+Sample length: 502 characters
+Total tokens: 75
 
 Token types (9 unique):
   punctuation: 47
   property: 9
   selector: 8
   function: 3
-  comment: 2
+  comment: 3
   string: 2
   atrule: 1
   rule: 1
@@ -72,19 +72,20 @@ Token types (9 unique):
  332-333   punctuation               }
  335-351   selector                  .content::before
  352-353   punctuation               {
- 355-362   property                  content
- 362-363   punctuation               :
- 364-394   string                    '</style> /* not a comment */'
- 394-395   punctuation               ;
- 396-397   punctuation               }
- 399-425   selector                  .attr[title='Click: here']
- 426-427   punctuation               {
- 429-445   property                  background-image
- 445-446   punctuation               :
- 447-475   url                       url('data:image/svg+xml...')
- 447-450   function                  url
- 450-451   punctuation               (
- 451-474   string                    'data:image/svg+xml...'
- 474-475   punctuation               )
- 475-476   punctuation               ;
- 477-478   punctuation               }
+ 355-376   comment                   /* prettier-ignore */
+ 378-385   property                  content
+ 385-386   punctuation               :
+ 387-417   string                    "</style> /* not a comment */"
+ 417-418   punctuation               ;
+ 419-420   punctuation               }
+ 422-448   selector                  .attr[title='Click: here']
+ 449-450   punctuation               {
+ 452-468   property                  background-image
+ 468-469   punctuation               :
+ 470-498   url                       url('data:image/svg+xml...')
+ 470-473   function                  url
+ 473-474   punctuation               (
+ 474-497   string                    'data:image/svg+xml...'
+ 497-498   punctuation               )
+ 498-499   punctuation               ;
+ 500-501   punctuation               }
