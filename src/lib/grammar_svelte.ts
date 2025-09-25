@@ -1,7 +1,7 @@
 import type {Add_Syntax_Grammar, Syntax_Grammar_Token, Syntax_Styler} from '$lib/syntax_styler.js';
 import {grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
-const blocks = '(if|else if|await|then|catch|each|html|debug)';
+const blocks = '(if|else if|await|then|catch|each|html|debug|snippet)';
 
 /**
  * Based on `prism-svelte` (https://github.com/pngwn/prism-svelte)
@@ -14,7 +14,21 @@ const blocks = '(if|else if|await|then|catch|each|html|debug)';
 export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.get_lang('ts');
 
+	// TODO double check this is correct
+	grammar_ts.svelte_at_directive = {
+		pattern: /@(?:render|html|const|debug|attach)\b/,
+		alias: 'keyword',
+	};
+
 	const grammar_svelte = syntax_styler.add_extended_lang('markup', 'svelte', {
+		// TODO double check this is correct
+		at_directive: {
+			pattern: /{@(?:render|html|const|debug|attach)\b[^}]*}/,
+			inside: {
+				keyword: /@(?:render|html|const|debug|attach)/,
+				punctuation: /{|}/,
+			},
+		},
 		each: {
 			pattern: /{[#/]each(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*}/,
 			inside: {
@@ -35,17 +49,19 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 						inside: grammar_ts,
 					},
 				],
-				keyword: /[#/]each|as/,
+				special_keyword: /[#/]each/,
+				keyword: /as/,
 				punctuation: /{|}/,
 			},
 		},
 		block: {
 			pattern: new RegExp(
-				'{[#:/@]/s' + blocks + '(?:(?:\\{(?:(?:\\{(?:[^{}])*\\})|(?:[^{}]))*\\})|(?:[^{}]))*}',
+				'{[#:/@]\\s*' + blocks + '(?:(?:\\{(?:(?:\\{(?:[^{}])*\\})|(?:[^{}]))*\\})|(?:[^{}]))*}',
 			),
 			inside: {
 				punctuation: /^{|}$/,
-				keyword: [new RegExp('[#:/@]' + blocks + '( )*'), /as/, /then/],
+				special_keyword: new RegExp('[#:/@]' + blocks),
+				keyword: [/as/, /then/],
 				lang_ts: {
 					pattern: /[\s\S]*/,
 					inside: grammar_ts,

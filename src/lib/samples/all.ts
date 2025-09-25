@@ -330,6 +330,8 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 
 {#if c}
 	<Thing string_prop="a" number_prop={1} />
+{:else if a > 0}
+	bigger
 {:else}
 	<Thing string_prop="b" number_prop={2} onthing={() => (c = !c)}>
 		{@render children()}
