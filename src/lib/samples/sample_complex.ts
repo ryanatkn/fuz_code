@@ -6,19 +6,19 @@ const c = true;
 
 export type Some_Type = 1 | 'b' | true;
 
-declare const class_decorator: any, property_decorator: any, method_decorator: any;
+declare const some_decorator: any;
 
 abstract class Base {
 	abstract abstract_method(): void;
 }
 
-@class_decorator
+@some_decorator
 class D extends Base {
 	readonly d1: string = 'd';
 	d2: number;
 	d3 = $state(null);
 
-	@property_decorator
+	@some_decorator
 	decorated = true;
 
 	constructor(d2: number) {
@@ -30,7 +30,7 @@ class D extends Base {
 		// implementation
 	}
 
-	@method_decorator('example', {option: true})
+	@some_decorator('example', {option: true})
 	class_method(): string {
 		return `Hello, ${this.d1}`;
 	}
@@ -119,7 +119,7 @@ import * as A from '../code_sample.js';
 
 export {a, A, b, c, D};
 
-sample_langs as unknown as any as Sample_Lang satisfies Sample_Lang;
+sample_langs as unknown as Sample_Lang satisfies Sample_Lang;
 
 export interface Some_E<T = null> {
 	name: string;
