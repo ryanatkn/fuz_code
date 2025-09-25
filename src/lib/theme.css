@@ -79,6 +79,11 @@
 	color: var(--color_f_5);
 }
 
+.token.rule,
+::highlight(rule) {
+	color: var(--color_g_5);
+}
+
 .token.attr_name,
 ::highlight(attr_name),
 .token.property,
@@ -88,11 +93,6 @@
 .token.decorator_name,
 ::highlight(decorator_name) {
 	color: var(--color_i_5);
-}
-
-.token.rule,
-::highlight(rule) {
-	color: var(--color_g_5);
 }
 
 .token.important,
