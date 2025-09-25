@@ -27,6 +27,8 @@
 
 	let c: boolean = $state(true);
 
+	const f = (p: any) => p;
+
 	const attachment = (_p1: string, _p2: number) => (el: HTMLElement) => {
 		element_ref !== el;
 	};
@@ -37,14 +39,14 @@
 
 <h1 bind:this={element_ref}>hello {HELLO}!</h1>
 
-{#each thing_keys as [k, { t, u }] (k)}
+{#each thing_keys as [k, { t, u }] (f(k))}
 	{@const v = Math.round(t[k + u])}
 	{v}
 {/each}
 
-{#if c}
+{#if f(c)}
 	<Thing string_prop="a" number_prop={1} />
-{:else if a > 0}
+{:else if f(a > 0)}
 	bigger
 {:else}
 	<Thing string_prop="b" onthing={() => (c = !c)}>
@@ -58,10 +60,10 @@
 
 <span {@attach attachment('param', 42)}>...</span>
 
-{@render my_snippet()}
+{@render my_snippet('p')}
 
-{#snippet my_snippet()}
-	<button {onclick}>click handler</button>
+{#snippet my_snippet(p: string)}
+	<button {onclick}>{p}</button>
 {/snippet}
 
 <p class="some_class hypen-class" id="unique_id">
