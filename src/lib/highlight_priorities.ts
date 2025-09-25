@@ -26,11 +26,11 @@ export type Highlight_Token_Name =
 	| 'regex'
 	| 'important'
 	| 'variable'
+	| 'atrule'
 	| 'attr_name'
 	| 'property'
 	| 'decorator'
 	| 'decorator_name'
-	| 'atrule'
 	| 'rule'
 	| 'bold'
 	| 'italic'
@@ -66,11 +66,11 @@ export const highlight_priorities: Record<Highlight_Token_Name, number> = {
 	regex: 8,
 	important: 8,
 	variable: 8,
-	attr_name: 9,
-	property: 9,
-	decorator: 9,
-	decorator_name: 9,
-	atrule: 10,
+	atrule: 9,
+	attr_name: 10,
+	property: 10,
+	decorator: 10,
+	decorator_name: 10,
 	rule: 11,
 	bold: 12,
 	italic: 13,
