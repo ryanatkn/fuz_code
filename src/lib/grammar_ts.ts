@@ -54,6 +54,11 @@ export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
 	(grammar_ts.class_name as Syntax_Grammar_Token).inside = type_inside;
 
 	syntax_styler.grammar_insert_before('ts', 'function', {
+		type_assertion: {
+			pattern: /(\b(?:as|satisfies)\s+)(?!\s)[_$A-Za-z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*/,
+			lookbehind: true,
+			alias: 'class_name',
+		},
 		import_type_keyword: {
 			pattern: /(\b(?:import|export)\s+)type\b|(\b(?:import|export)\s*\{[^}]*,\s*)type\b/,
 			lookbehind: true,
