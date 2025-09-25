@@ -19,7 +19,7 @@
 		onclick?: () => void;
 	} = $props();
 
-	const thing_keys = $derived(Object.keys(thing));
+	const thing_keys = $derived(Object.entries(thing));
 
 	const a = 1;
 
@@ -27,18 +27,18 @@
 
 	let c: boolean = $state(true);
 
-	const attachment = (_p1: string, _p2: number) => (_: HTMLElement) => {
-		element_ref;
+	const attachment = (_p1: string, _p2: number) => (el: HTMLElement) => {
+		element_ref !== el;
 	};
 
 	let value = $state(thing['']);
 	let element_ref: HTMLElement;
 </script>
 
-<h1>hello {HELLO}!</h1>
+<h1 bind:this={element_ref}>hello {HELLO}!</h1>
 
-{#each thing_keys as key (key)}
-	{@const v = thing[key]}
+{#each thing_keys as [k, { t, u }] (k)}
+	{@const v = Math.round(t[k + u])}
 	{v}
 {/each}
 
@@ -47,18 +47,16 @@
 {:else if a > 0}
 	bigger
 {:else}
-	<Thing string_prop="b" number_prop={2} onthing={() => (c = !c)}>
+	<Thing string_prop="b" onthing={() => (c = !c)}>
 		{@render children()}
 	</Thing>
 {/if}
 
 {@html '<strong>raw html</strong>'}
 
-<input bind:value type="text" />
+<input bind:value type="text" class:active={c} />
 
-<div bind:this={element_ref} class:active={c} {@attach attachment('param', 42)}>
-	interactive element
-</div>
+<span {@attach attachment('param', 42)}>...</span>
 
 {@render my_snippet()}
 
@@ -66,11 +64,7 @@
 	<button {onclick}>click handler</button>
 {/snippet}
 
-<div class="test special" id="unique_id">
-	<p>hello world!</p>
-</div>
-
-<p class="some_class hypen-class">
+<p class="some_class hypen-class" id="unique_id">
 	some <span class="a b c">text</span>
 </p>
 
@@ -129,10 +123,6 @@
 
 	#unique_id {
 		background-color: blue;
-	}
-
-	div > p {
-		margin: 10px;
 	}
 
 	@media (max-width: 600px) {
