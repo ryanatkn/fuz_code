@@ -14,17 +14,16 @@ const blocks = '(if|else if|await|then|catch|each|html|debug|snippet)';
 export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.get_lang('ts');
 
-	// TODO double check this is correct
-	grammar_ts.svelte_at_directive = {
-		pattern: /@(?:render|html|const|debug|attach)\b/,
-		alias: 'keyword',
-	};
 
 	const grammar_svelte = syntax_styler.add_extended_lang('markup', 'svelte', {
-		// TODO double check this is correct
 		at_directive: {
-			pattern: /{@(?:render|html|const|debug|attach)\b[^}]*}/,
+			pattern: /{@(?:render|html|const|debug|attach)\b(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*}/,
 			inside: {
+				lang_ts: {
+					pattern: /(@(?:render|html|const|debug|attach)\s+)[\s\S]*(?=\s*\})/,
+					lookbehind: true,
+					inside: grammar_ts,
+				},
 				keyword: /@(?:render|html|const|debug|attach)/,
 				punctuation: /{|}/,
 			},
