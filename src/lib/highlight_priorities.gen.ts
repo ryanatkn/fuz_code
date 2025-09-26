@@ -1,9 +1,7 @@
 import type {Gen} from '@ryanatkn/gro';
 import {readFileSync} from 'node:fs';
-import {resolve} from 'node:path';
 
-// TODO remove resolve after upgrading gro
-const theme_css_path = resolve('src/lib/theme.css');
+const theme_css_path = 'src/lib/theme.css';
 
 export const gen: Gen = {
 	dependencies: {files: [theme_css_path]},
