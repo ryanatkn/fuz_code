@@ -1,7 +1,7 @@
 import type {Add_Syntax_Grammar, Syntax_Grammar_Token, Syntax_Styler} from '$lib/syntax_styler.js';
 import {grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
-const blocks = '(if|else if|await|then|catch|each|html|debug|snippet)';
+const blocks = '(if|else if|else|await|then|catch|each|html|debug|snippet)';
 
 /**
  * Based on `prism-svelte` (https://github.com/pngwn/prism-svelte)
@@ -39,17 +39,12 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 				special_keyword: /[#/]each/,
 				lang_ts: [
 					{
-						pattern: /(as[\s\S]*)\([\s\S]*\)(?=\s*\})/,
+						pattern: /(#each\s+)[\s\S]+(?=\s+as)/,  // Expression before 'as'
 						lookbehind: true,
 						inside: grammar_ts,
 					},
 					{
-						pattern: /(as[\s]*)[\s\S]*(?=\s*)/,
-						lookbehind: true,
-						inside: grammar_ts,
-					},
-					{
-						pattern: /(#each[\s]*)[\s\S]*(?=as)/,
+						pattern: /(as\s+)[\s\S]+/,  // Everything after 'as' (including key)
 						lookbehind: true,
 						inside: grammar_ts,
 					},

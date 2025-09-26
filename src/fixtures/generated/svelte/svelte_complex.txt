@@ -1,14 +1,14 @@
 === STATS ===
 Sample length: 2168 characters
-Total tokens: 624
+Total tokens: 623
 
 Token types (32 unique):
   punctuation: 295
   tag: 74
-  operator: 38
-  lang_ts: 25
+  operator: 37
   svelte_expression: 24
-  function: 22
+  lang_ts: 23
+  function: 23
   attr_name: 19
   keyword: 19
   special_keyword: 13
@@ -17,8 +17,8 @@ Token types (32 unique):
   capitalized_identifier: 8
   builtin: 8
   property: 8
+  block: 7
   selector: 7
-  block: 6
   comment: 5
   number: 5
   at_directive: 5
@@ -227,7 +227,7 @@ Token types (32 unique):
  740-741   punctuation               {
  741-746   special_keyword           #each
  758-760   keyword                   as
- 761-777   lang_ts                   [k, { t, u }] (f
+ 761-782   lang_ts                   [k, { t, u }] (f(k))}
  761-762   punctuation               [
  763-764   punctuation               ,
  765-766   punctuation               {
@@ -235,7 +235,7 @@ Token types (32 unique):
  772-773   punctuation               }
  773-774   punctuation               ]
  775-776   punctuation               (
- 777-781   lang_ts                   (k))
+ 776-777   function                  f
  777-778   punctuation               (
  779-780   punctuation               )
  780-781   punctuation               )
@@ -314,10 +314,9 @@ Token types (32 unique):
  923-924   punctuation               )
  924-925   punctuation               }
  934-941   svelte_expression         {:else}
+ 934-941   block                     {:else}
  934-935   punctuation               {
- 935-940   lang_ts                   :else
- 935-936   operator                  :
- 936-940   special_keyword           else
+ 935-940   special_keyword           :else
  940-941   punctuation               }
  943-994   tag                       <Thing string_prop="b" onthing={() => (c = f(!c))}>
  943-949   tag                       <Thing
