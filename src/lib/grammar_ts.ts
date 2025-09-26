@@ -1,4 +1,5 @@
 import type {Add_Syntax_Grammar, Syntax_Grammar_Token} from '$lib/syntax_styler.js';
+import {class_keywords} from '$lib/grammar_clike.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -11,8 +12,9 @@ import type {Add_Syntax_Grammar, Syntax_Grammar_Token} from '$lib/syntax_styler.
 export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.add_extended_lang('js', 'ts', {
 		class_name: {
-			pattern:
-				/(\b(?:class|extends|implements|instanceof|interface|new|type)\s+)(?!keyof\b)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?:\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?/,
+			pattern: new RegExp(
+				`(\\b(?:${class_keywords}|type)\\s+)(?!keyof\\b)(?!\\s)[_$a-zA-Z\\xA0-\\uFFFF](?:(?!\\s)[$\\w\\xA0-\\uFFFF])*(?:\\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?`,
+			),
 			lookbehind: true,
 			greedy: true,
 			inside: null, // see below

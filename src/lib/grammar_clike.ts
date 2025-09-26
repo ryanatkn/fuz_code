@@ -1,5 +1,7 @@
 import type {Add_Syntax_Grammar, Syntax_Grammar} from '$lib/syntax_styler.js';
 
+export const class_keywords = 'class|extends|implements|instanceof|interface|new';
+
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
  * by Lea Verou (https://lea.verou.me/)
@@ -27,8 +29,7 @@ export const add_grammar_clike: Add_Syntax_Grammar = (syntax_styler) => {
 			greedy: true,
 		},
 		class_name: {
-			pattern:
-				/(\b(?:class|extends|implements|instanceof|interface|new|trait)\s+|\bcatch\s+\()[\w.\\]+/i,
+			pattern: new RegExp(`(\\b(?:${class_keywords}|trait)\\s+|\\bcatch\\s+\\()[\\w.\\\\]+`, 'i'),
 			lookbehind: true,
 			inside: {
 				punctuation: /[.\\]/,

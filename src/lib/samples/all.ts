@@ -251,7 +251,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 
 <br />
 
-<hr />
+<hr onclick="console.log('hi')" />
 
 <img src="image.jpg" alt="access" />
 
@@ -268,7 +268,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 	</select>
 </form>
 
-<script type="text/javascript">
+<script>
 	const ok = '<style>';
 </script>
 

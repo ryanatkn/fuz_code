@@ -1,10 +1,6 @@
 import {test, assert, describe} from 'vitest';
 import {readFileSync, existsSync} from 'node:fs';
-import {
-	discover_samples,
-	process_sample,
-	get_fixture_path,
-} from './helpers.js';
+import {discover_samples, process_sample, get_fixture_path} from './helpers.js';
 import {sample_langs} from '$lib/code_sample.js';
 
 /**

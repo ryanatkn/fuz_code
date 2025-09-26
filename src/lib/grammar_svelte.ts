@@ -19,7 +19,7 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 		pattern: /^{(@\w+)(\s+[\s\S]*)?}$/,
 		inside: {
 			lang_ts: {
-				pattern: /(@\w+\s+)([\s\S]+)/,  // Fixed: removed incorrect (?=}$)
+				pattern: /(@\w+\s+)([\s\S]+)/, // Fixed: removed incorrect (?=}$)
 				lookbehind: true,
 				inside: grammar_ts,
 			},
@@ -39,12 +39,12 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 				special_keyword: /[#/]each/,
 				lang_ts: [
 					{
-						pattern: /(#each\s+)[\s\S]+(?=\s+as)/,  // Expression before 'as'
+						pattern: /(#each\s+)[\s\S]+(?=\s+as)/, // Expression before 'as'
 						lookbehind: true,
 						inside: grammar_ts,
 					},
 					{
-						pattern: /(as\s+)[\s\S]+/,  // Everything after 'as' (including key)
+						pattern: /(as\s+)[\s\S]+/, // Everything after 'as' (including key)
 						lookbehind: true,
 						inside: grammar_ts,
 					},
@@ -141,6 +141,7 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 	).inside!.entity = grammar_svelte.entity;
 
 	grammar_svelte_add_inlined(syntax_styler, 'style', 'css');
+	// Assume TypeScript for all Svelte script tags (no plain JS)
 	grammar_svelte_add_inlined(syntax_styler, 'script', 'ts');
 };
 

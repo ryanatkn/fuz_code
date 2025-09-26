@@ -95,7 +95,10 @@ export const src_json: Src_Json = {
 		},
 		'./grammar_clike.js': {
 			path: 'grammar_clike.ts',
-			declarations: [{name: 'add_grammar_clike', kind: 'function'}],
+			declarations: [
+				{name: 'class_keywords', kind: 'variable'},
+				{name: 'add_grammar_clike', kind: 'function'},
+			],
 		},
 		'./grammar_css.js': {
 			path: 'grammar_css.ts',
