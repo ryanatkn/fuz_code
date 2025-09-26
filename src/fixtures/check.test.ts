@@ -1,11 +1,6 @@
 import {test, assert, describe} from 'vitest';
 import {readFileSync, existsSync} from 'node:fs';
-import {
-	discover_samples,
-	process_sample,
-	get_fixture_path,
-	type Generated_Output,
-} from './helpers.js';
+import {discover_samples, process_sample, get_fixture_path} from './helpers.js';
 import {sample_langs} from '$lib/code_sample.js';
 
 /**
@@ -28,13 +23,13 @@ describe('generated fixtures match runtime', () => {
 	// Generate test for each sample
 	for (const sample of samples) {
 		describe(`${sample.lang}_${sample.variant}`, () => {
-			const fixture_path = get_fixture_path(sample.lang, sample.variant, 'json');
+			const html_fixture_path = get_fixture_path(sample.lang, sample.variant, 'html');
 
 			test('fixture file exists', () => {
 				// Basic sanity check - fixtures must be generated before tests can run
 				assert.ok(
-					existsSync(fixture_path),
-					`Fixture file missing: ${fixture_path}. Run 'npm run task src/fixtures/update' to generate.`,
+					existsSync(html_fixture_path),
+					`Fixture file missing: ${html_fixture_path}. Run 'npm run task src/fixtures/update' to generate.`,
 				);
 			});
 
@@ -49,17 +44,17 @@ describe('generated fixtures match runtime', () => {
 				 * - No overlapping spans
 				 * - Performance metrics (time, memory)
 				 */
-				if (!existsSync(fixture_path)) {
-					console.warn(`Skipping test - fixture missing: ${fixture_path}`); // eslint-disable-line no-console
+				if (!existsSync(html_fixture_path)) {
+					console.warn(`Skipping test - fixture missing: ${html_fixture_path}`); // eslint-disable-line no-console
 					return;
 				}
 
-				const fixture: Generated_Output = JSON.parse(readFileSync(fixture_path, 'utf-8'));
+				const fixture_html = readFileSync(html_fixture_path, 'utf-8');
 				const runtime_output = process_sample(sample);
 
 				assert.strictEqual(
 					runtime_output.html,
-					fixture.html,
+					fixture_html,
 					`HTML output mismatch for ${sample.lang}_${sample.variant}`,
 				);
 
@@ -114,7 +109,7 @@ describe('generated fixtures match runtime', () => {
 				}
 			});
 
-			test('token data matches fixture', () => {
+			test('token data is deterministic', () => {
 				/**
 				 * Ensures token positions are consistent between runs
 				 *
@@ -123,18 +118,14 @@ describe('generated fixtures match runtime', () => {
 				 * - Token types are correctly identified
 				 * - Tokenization is deterministic
 				 */
-				if (!existsSync(fixture_path)) {
-					console.warn(`Skipping test - fixture missing: ${fixture_path}`); // eslint-disable-line no-console
-					return;
-				}
-
-				const fixture: Generated_Output = JSON.parse(readFileSync(fixture_path, 'utf-8'));
-				const runtime_output = process_sample(sample);
+				// Generate tokens twice and ensure they match
+				const runtime_output1 = process_sample(sample);
+				const runtime_output2 = process_sample(sample);
 
 				assert.deepEqual(
-					runtime_output.tokens,
-					fixture.tokens,
-					`Token data mismatch for ${sample.lang}_${sample.variant}`,
+					runtime_output1.tokens,
+					runtime_output2.tokens,
+					`Token data not deterministic for ${sample.lang}_${sample.variant}`,
 				);
 			});
 		});

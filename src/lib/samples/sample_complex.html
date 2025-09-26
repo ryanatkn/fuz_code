@@ -12,7 +12,7 @@
 
 <br />
 
-<hr />
+<hr onclick="console.log('hi')" />
 
 <img src="image.jpg" alt="access" />
 
@@ -21,7 +21,15 @@
 	<li>list item 2</li>
 </ul>
 
-<script type="text/javascript">
+<form action="/submit" method="post">
+	<input type="text" name="username" placeholder="Enter name" />
+	<select name="option" data-role="dropdown">
+		<option value="1">First</option>
+		<option value="2">Second</option>
+	</select>
+</form>
+
+<script>
 	const ok = '<style>';
 </script>
 

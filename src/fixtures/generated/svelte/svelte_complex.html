@@ -1,0 +1,141 @@
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr_name">lang</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ts<span class="token punctuation">"</span></span> <span class="token attr_name">module</span><span class="token punctuation">></span></span><span class="token script"><span class="token lang_ts">
+	<span class="token special_keyword">export</span> <span class="token keyword">const</span> <span class="token constant">HELLO</span> <span class="token operator">=</span> <span class="token string">'world'</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr_name">lang</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token lang_ts">
+	<span class="token comment">// @ts-expect-error</span>
+	<span class="token special_keyword">import</span> <span class="token capitalized_identifier class_name">Thing</span> <span class="token special_keyword">from</span> <span class="token string">'$lib/Thing.svelte'</span><span class="token punctuation">;</span>
+	<span class="token special_keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span><span class="token capitalized_identifier class_name">Snippet</span><span class="token punctuation">}</span> <span class="token special_keyword">from</span> <span class="token string">'svelte'</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">const</span> <span class="token punctuation">{</span>
+		thing<span class="token punctuation">,</span>
+		bound <span class="token operator">=</span> <span class="token function">$bindable</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		children<span class="token punctuation">,</span>
+		onclick<span class="token punctuation">,</span>
+	<span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+		thing<span class="token operator">:</span> <span class="token capitalized_identifier class_name">Record</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">></span><span class="token punctuation">;</span>
+		bound<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+		children<span class="token operator">:</span> <span class="token capitalized_identifier class_name">Snippet</span><span class="token punctuation">;</span>
+		onclick<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">$props</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">const</span> thing_keys <span class="token operator">=</span> <span class="token function">$derived</span><span class="token punctuation">(</span><span class="token capitalized_identifier class_name">Object</span><span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>thing<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token special_keyword">as</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token string">'b'</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">let</span> c<span class="token type_annotation"><span class="token :">:</span><span class="token type"> <span class="token builtin">boolean</span> </span></span><span class="token operator">=</span> <span class="token function">$state</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">const</span> <span class="token function_variable function">f</span> <span class="token operator">=</span> <span class="token punctuation">(</span>p<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token operator">=></span> p<span class="token punctuation">;</span>
+
+	<span class="token keyword">const</span> <span class="token function_variable function">attachment</span> <span class="token operator">=</span> <span class="token punctuation">(</span>_p1<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> _p2<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+		<span class="token special_keyword">return</span> <span class="token punctuation">(</span>el<span class="token operator">:</span> <span class="token capitalized_identifier class_name">HTMLElement</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+			element_ref <span class="token operator">!==</span> el<span class="token punctuation">;</span>
+		<span class="token punctuation">}</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">let</span> value <span class="token operator">=</span> <span class="token function">$state</span><span class="token punctuation">(</span>thing<span class="token punctuation">[</span><span class="token string">''</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">let</span> element_ref<span class="token operator">:</span> <span class="token capitalized_identifier class_name">HTMLElement</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span> <span class="token attr_name"><span class="token namespace">bind:</span>this=</span><span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts">element_ref</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span>hello <span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts"><span class="token constant">HELLO</span></span><span class="token punctuation">}</span></span>!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+
+<span class="token svelte_expression"><span class="token each"><span class="token punctuation">{</span><span class="token special_keyword">#each</span> thing_keys <span class="token keyword">as</span> <span class="token lang_ts"><span class="token punctuation">[</span>k<span class="token punctuation">,</span> <span class="token punctuation">{</span> t<span class="token punctuation">,</span> u <span class="token punctuation">}</span><span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token function">f</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span></span></span>
+	<span class="token svelte_expression"><span class="token at_directive"><span class="token punctuation">{</span><span class="token at_keyword">@const</span> <span class="token lang_ts">v <span class="token operator">=</span> <span class="token capitalized_identifier class_name">Math</span><span class="token punctuation">.</span><span class="token function">round</span><span class="token punctuation">(</span>t<span class="token punctuation">[</span>k <span class="token operator">+</span> <span class="token function">f</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span></span></span>
+	<span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts"><span class="token function">f</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span></span><span class="token punctuation">}</span></span>
+<span class="token svelte_expression"><span class="token block"><span class="token punctuation">{</span><span class="token special_keyword">/each</span><span class="token punctuation">}</span></span></span>
+
+<span class="token svelte_expression"><span class="token block"><span class="token punctuation">{</span><span class="token special_keyword">#if</span><span class="token lang_ts"> <span class="token function">f</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span></span><span class="token punctuation">}</span></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Thing</span> <span class="token attr_name">string_prop="a</span> <span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts"><span class="token function">f</span><span class="token punctuation">(</span><span class="token string">'s'</span><span class="token punctuation">)</span></span><span class="token punctuation">}</span></span> <span class="token attr_name">b"</span> <span class="token attr_name">number_prop=</span><span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts"><span class="token function">f</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span>
+<span class="token svelte_expression"><span class="token block"><span class="token punctuation">{</span><span class="token special_keyword">:else if</span><span class="token lang_ts"> <span class="token function">f</span><span class="token punctuation">(</span>a <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span></span><span class="token punctuation">}</span></span></span>
+	bigger
+<span class="token svelte_expression"><span class="token block"><span class="token punctuation">{</span><span class="token special_keyword">:else</span><span class="token punctuation">}</span></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Thing</span> <span class="token attr_name">string_prop</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>b<span class="token punctuation">"</span></span> <span class="token attr_name">onthing=</span><span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts"><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>c <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token operator">!</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span></span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span>
+		<span class="token svelte_expression"><span class="token at_directive"><span class="token punctuation">{</span><span class="token at_keyword">@render</span> <span class="token lang_ts"><span class="token function">children</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Thing</span><span class="token punctuation">></span></span>
+<span class="token svelte_expression"><span class="token block"><span class="token punctuation">{</span><span class="token special_keyword">/if</span><span class="token punctuation">}</span></span></span>
+
+<span class="token comment">&lt;!-- eslint-disable-next-line svelte/no-at-html-tags --></span>
+<span class="token svelte_expression"><span class="token at_directive"><span class="token punctuation">{</span><span class="token at_keyword">@html</span> <span class="token lang_ts"><span class="token string">'&lt;strong>raw html&lt;/strong>'</span><span class="token punctuation">}</span></span></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr_name"><span class="token namespace">bind:</span>value</span> <span class="token attr_name">type</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr_name"><span class="token namespace">class:</span>active=</span><span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts">c</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token svelte_expression"><span class="token at_directive"><span class="token punctuation">{</span><span class="token at_keyword">@attach</span> <span class="token lang_ts"><span class="token function">attachment</span><span class="token punctuation">(</span><span class="token string">'param'</span><span class="token punctuation">,</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span></span></span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+
+<span class="token svelte_expression"><span class="token at_directive"><span class="token punctuation">{</span><span class="token at_keyword">@render</span> <span class="token lang_ts"><span class="token function">my_snippet</span><span class="token punctuation">(</span><span class="token string">'p'</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span></span></span>
+
+<span class="token svelte_expression"><span class="token block"><span class="token punctuation">{</span><span class="token special_keyword">#snippet</span><span class="token lang_ts"> <span class="token function">my_snippet</span><span class="token punctuation">(</span>p<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span></span><span class="token punctuation">}</span></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr_name">type</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts">onclick</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts">p</span><span class="token punctuation">}</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token svelte_expression"><span class="token block"><span class="token punctuation">{</span><span class="token special_keyword">/snippet</span><span class="token punctuation">}</span></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr_name">class</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>some_class hypen-class<span class="token punctuation">"</span></span> <span class="token attr_name">id</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>unique_id<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+	some <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr_name">class</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>a b c<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>text<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr_name">type</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr_name">disabled</span><span class="token punctuation">></span></span> click me <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!-- comment &lt;div>a&lt;br /> {b}&lt;/div> --></span>
+<span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts">b<span class="token punctuation">.</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span></span><span class="token punctuation">}</span></span>
+<span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts">bound</span><span class="token punctuation">}</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>hr</span> <span class="token punctuation">/></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr_name">src</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>image.jpg<span class="token punctuation">"</span></span> <span class="token attr_name">alt</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>access<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>list item 1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>list item 2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&lt;!-- embedded tags for boundary testing --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token lang_ts">
+		<span class="token keyword">const</span> inline_js <span class="token operator">=</span> <span class="token string">'no lang attr'</span><span class="token punctuation">;</span>
+	</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token lang_css">
+		<span class="token selector">.inline</span> <span class="token punctuation">{</span>
+			<span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token lang_css">
+	<span class="token selector">.some_class</span> <span class="token punctuation">{</span>
+		<span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token selector">.hypen-class</span> <span class="token punctuation">{</span>
+		<span class="token property">font-size</span><span class="token punctuation">:</span> 16px<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token selector">p</span> <span class="token punctuation">{</span>
+		<span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 0 10px <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0.1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/* comment */</span>
+
+	<span class="token comment">/*
+	multi
+	line
+
+	&lt;comment>
+
+	*/</span>
+
+	<span class="token selector">#unique_id</span> <span class="token punctuation">{</span>
+		<span class="token property">background-color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> 600px<span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+		<span class="token selector">:global(body)</span> <span class="token punctuation">{</span>
+			<span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">light-dark</span><span class="token punctuation">(</span>lightblue<span class="token punctuation">,</span> darkblue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token selector">:global(.escapehatch)::before</span> <span class="token punctuation">{</span>
+		<span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">'&lt; &amp; >'</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>

@@ -1,7 +1,7 @@
 import type {Add_Syntax_Grammar, Syntax_Grammar_Token, Syntax_Styler} from '$lib/syntax_styler.js';
 import {grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
-const blocks = '(if|else if|await|then|catch|each|html|debug)';
+const blocks = '(if|else if|else|await|then|catch|each|html|debug|snippet)';
 
 /**
  * Based on `prism-svelte` (https://github.com/pngwn/prism-svelte)
@@ -14,43 +14,83 @@ const blocks = '(if|else if|await|then|catch|each|html|debug)';
 export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.get_lang('ts');
 
-	const grammar_svelte = syntax_styler.add_extended_lang('markup', 'svelte', {
+	// Define the at_directive pattern once for reuse (matches any @word)
+	const at_directive_pattern = {
+		pattern: /^{(@\w+)(\s+[\s\S]*)?}$/,
+		inside: {
+			lang_ts: {
+				pattern: /(@\w+\s+)([\s\S]+)/, // Fixed: removed incorrect (?=}$)
+				lookbehind: true,
+				inside: grammar_ts,
+			},
+			at_keyword: /@\w+/,
+			punctuation: /[{}]/,
+		},
+	};
+
+	// Full expression patterns for top-level contexts
+	const svelte_expression_inside_full = {
+		// Generic @ directive - matches any @word
+		at_directive: at_directive_pattern,
+		// {#each items as item} with special syntax
 		each: {
-			pattern: /{[#/]each(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*}/,
+			pattern: /^{([#/]each)\s+([\s\S]*)}$/,
 			inside: {
+				special_keyword: /[#/]each/,
 				lang_ts: [
 					{
-						pattern: /(as[\s\S]*)\([\s\S]*\)(?=\s*\})/,
+						pattern: /(#each\s+)[\s\S]+(?=\s+as)/, // Expression before 'as'
 						lookbehind: true,
 						inside: grammar_ts,
 					},
 					{
-						pattern: /(as[\s]*)[\s\S]*(?=\s*)/,
-						lookbehind: true,
-						inside: grammar_ts,
-					},
-					{
-						pattern: /(#each[\s]*)[\s\S]*(?=as)/,
+						pattern: /(as\s+)[\s\S]+/, // Everything after 'as' (including key)
 						lookbehind: true,
 						inside: grammar_ts,
 					},
 				],
-				keyword: /[#/]each|as/,
-				punctuation: /{|}/,
+				keyword: /as/,
+				punctuation: /[{}]/,
 			},
 		},
+		// {#block ...} and {/block}
 		block: {
-			pattern: new RegExp(
-				'{[#:/@]/s' + blocks + '(?:(?:\\{(?:(?:\\{(?:[^{}])*\\})|(?:[^{}]))*\\})|(?:[^{}]))*}',
-			),
+			pattern: new RegExp('^\\{([#:/@]\\s*' + blocks + ')\\s*([\\s\\S]*)\\}$'),
 			inside: {
-				punctuation: /^{|}$/,
-				keyword: [new RegExp('[#:/@]' + blocks + '( )*'), /as/, /then/],
+				special_keyword: new RegExp('[#:/@]' + blocks),
+				keyword: [/as/, /then/],
 				lang_ts: {
-					pattern: /[\s\S]*/,
+					pattern: /[\s\S]+(?=}$)/,
 					inside: grammar_ts,
 				},
+				punctuation: /[{}]/,
 			},
+		},
+		// Default: plain TS expression
+		punctuation: /[{}]/,
+		lang_ts: {
+			pattern: /[\s\S]+/,
+			inside: grammar_ts,
+		},
+	};
+
+	// Simplified patterns for tag contexts (no block directives)
+	const svelte_expression_inside_simple = {
+		// Generic @ directive
+		at_directive: at_directive_pattern,
+		// Default: plain TS expression
+		punctuation: /[{}]/,
+		lang_ts: {
+			pattern: /[\s\S]+/,
+			inside: grammar_ts,
+		},
+	};
+
+	const grammar_svelte = syntax_styler.add_extended_lang('markup', 'svelte', {
+		svelte_expression: {
+			pattern: /\{(?:[^{}]|\{[^}]*\})*\}/,
+			greedy: true,
+			inside: svelte_expression_inside_full,
 		},
 		tag: {
 			pattern:
@@ -64,9 +104,9 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 						namespace: /^[^\s>/:]+:/,
 					},
 				},
-				lang_ts: {
-					pattern: /\{(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*\}/,
-					inside: grammar_ts,
+				svelte_expression: {
+					pattern: /\{(?:[^{}]|\{[^}]*\})*\}/,
+					inside: svelte_expression_inside_simple,
 				},
 				attr_value: {
 					pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/i,
@@ -78,9 +118,9 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 								lookbehind: true,
 							},
 						],
-						lang_ts: {
-							pattern: /{[\s\S]+}/,
-							inside: grammar_ts,
+						svelte_expression: {
+							pattern: /\{(?:[^{}]|\{[^}]*\})*\}/,
+							inside: svelte_expression_inside_simple,
 						},
 					},
 				},
@@ -93,11 +133,6 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 				},
 			},
 		},
-		lang_ts: {
-			pattern: /\{(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*\}/,
-			lookbehind: true,
-			inside: grammar_ts,
-		},
 	});
 
 	// oof lol
@@ -106,6 +141,7 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 	).inside!.entity = grammar_svelte.entity;
 
 	grammar_svelte_add_inlined(syntax_styler, 'style', 'css');
+	// Assume TypeScript for all Svelte script tags (no plain JS)
 	grammar_svelte_add_inlined(syntax_styler, 'script', 'ts');
 };
 

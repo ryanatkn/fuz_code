@@ -112,6 +112,7 @@
 
 <style>
 	.code {
+		/* TODO change when Moss is upgraded to `--bg_1` */
 		background-color: var(--fg_1);
 		border-radius: var(--border_radius_xs);
 		padding: var(--space_xs3) var(--space_xs);

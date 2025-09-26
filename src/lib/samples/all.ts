@@ -65,20 +65,16 @@ div > p {
 
 @media (max-width: 600px) {
 	body {
-		background-color: lightblue;
+		background-color: light-dark(lightblue, darkblue);
 	}
 }
 
-/* patterns in strings are not falsely detected */
 .content::before {
-	content: '</style> /* not a comment */';
+	/* prettier-ignore */
+	content: "</style> /* not a comment */";
 }
 
 .attr[title='Click: here'] {
-	cursor: pointer;
-}
-
-.background  /* comment*/ {
 	background-image: url('data:image/svg+xml...');
 }
 `,
@@ -88,44 +84,109 @@ div > p {
 		lang: 'ts',
 		content: `const a = 1;
 
-const b = 'b';
+const b: string = 'b';
 
 const c = true;
 
 export type Some_Type = 1 | 'b' | true;
 
-class D {
-	d1: string = 'd';
+declare const some_decorator: any;
+
+abstract class Base {
+	abstract abstract_method(): void;
+}
+
+/* eslint-disable no-console */
+
+@some_decorator
+class D extends Base {
+	readonly d1: string = 'd';
 	d2: number;
-	d3 = $state(false);
+	d3 = $state(null);
+
+	@some_decorator
+	decorated = true;
 
 	constructor(d2: number) {
+		super();
 		this.d2 = d2;
 	}
 
+	abstract_method(): void {
+		// implementation
+	}
+
+	@some_decorator('example', {option: true})
 	class_method(): string {
 		return \`Hello, \${this.d1}\`;
 	}
 
 	instance_method = (): void => {
 		/* ... */
-		this.#private_method();
+		let i = 0;
+		do {
+			i++;
+		} while (i < 3);
+
+		for (const c2 of this.d1) {
+			if (c2 === 'd') continue;
+			if (!c2) break;
+			this.#private_method(a, c2);
+		}
+
+		switch (this.d1) {
+			case 'a':
+				console.log('case a');
+				break;
+			case 'b':
+			case 'c':
+				console.log('case b or c');
+				break;
+			default:
+				console.log('default');
+		}
+
+		const obj: {has_d1?: boolean; is_d: boolean} = {
+			has_d1: 'd1' in this,
+			is_d: this instanceof D,
+		};
+		delete obj.has_d1;
 		// foo
 	};
 
-	#private_method() {
-		throw new Error(\`\${this.d1} 
+	#private_method(a2: number, c2: any): void {
+		throw new Error(\`\${this.d1}
 			multiline
-			etc
+			etc \${a2 + c2}
 		\`);
 	}
 
-	protected protected_method(): void {
-		console.log(new Date()); // eslint-disable-line no-console
+	*generator(): Generator<number | Array<number>> {
+		yield 1;
+		yield* [2, 3];
+	}
+
+	async *async_generator(): AsyncGenerator<number> {
+		yield await Promise.resolve(4);
+	}
+
+	protected async protected_method(): Promise<void> {
+		try {
+			await new Promise((resolve) => setTimeout(resolve, 100));
+			if (Math.random() > 0.5) {
+				console.log(new Date());
+			} else if (Math.random() > 0.2) {
+				console.log('else if branch');
+			} else {
+				console.log('else branch');
+			}
+		} catch (error: unknown) {
+			console.error(error);
+		} finally {
+			console.log('finally block');
+		}
 	}
 }
-
-export {a, b, c, D};
 
 // comment
 
@@ -139,12 +200,22 @@ const comment = false;
  * JSDoc comment
  */
 
-export interface Some_E {
+import {sample_langs, type Sample_Lang} from '../code_sample.js';
+import * as A from '../code_sample.js';
+
+export {a, A, b, c, D};
+
+sample_langs as unknown as Sample_Lang satisfies Sample_Lang;
+
+export interface Some_E<T = null> {
 	name: string;
 	age: number;
+	t?: T;
 }
 
-export const some_e: Some_E = {name: 'A. H.', age: 100};
+const e: {name: string; age: number} = {name: 'A. H.', age: 100};
+const v = [['', e]] as const;
+export const some_e: Map<string, Some_E> = new Map(v);
 
 export function add(x: number, y: number): number {
 	return x + y;
@@ -182,7 +253,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 
 <br />
 
-<hr />
+<hr onclick="console.log('hi')" />
 
 <img src="image.jpg" alt="access" />
 
@@ -191,7 +262,15 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 	<li>list item 2</li>
 </ul>
 
-<script type="text/javascript">
+<form action="/submit" method="post">
+	<input type="text" name="username" placeholder="Enter name" />
+	<select name="option" data-role="dropdown">
+		<option value="1">First</option>
+		<option value="2">Second</option>
+	</select>
+</form>
+
+<script>
 	const ok = '<style>';
 </script>
 
@@ -220,108 +299,73 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 		thing,
 		bound = $bindable(true),
 		children,
+		onclick,
 	}: {
 		thing: Record<string, any>;
 		bound?: boolean;
 		children: Snippet;
+		onclick?: () => void;
 	} = $props();
 
-	const thing_keys = $derived(Object.keys(thing));
+	const thing_keys = $derived(Object.entries(thing));
 
-	const a = 1;
+	const a = 1 as number;
 
 	const b = 'b';
 
 	let c: boolean = $state(true);
 
-	export type Some_Type = 1 | 'b' | true;
+	const f = (p: any) => p;
 
-	class D {
-		d1: string = 'd';
-		d2: number;
-		d3 = $state(false);
-
-		constructor(d2: number) {
-			this.d2 = d2;
-		}
-
-		class_method(): string {
-			return \`Hello, \${this.d1}\`;
-		}
-
-		instance_method = () => {
-			/* ... */
-			this.#private_method();
-			// foo
+	const attachment = (_p1: string, _p2: number) => {
+		return (el: HTMLElement) => {
+			element_ref !== el;
 		};
+	};
 
-		#private_method() {
-			throw new Error(\`\${this.d1} etc\`);
-		}
-
-		protected protected_method() {
-			console.log(new Date(123)); // eslint-disable-line no-console
-		}
-	}
-
-	// comment
-
-	/*
-	other comment
-
-	const comment = false;
-	*/
-
-	/**
-	 * JSDoc comment
-	 */
-
-	export interface Some_E {
-		name: string;
-		age: number;
-	}
-
-	export const some_e: Some_E = {name: 'A. H.', age: 100};
-
-	export function add(x: number, y: number): number {
-		return x + y;
-	}
-
-	export const plus = (a: any, b: any): any => a + b;
+	let value = $state(thing['']);
+	let element_ref: HTMLElement;
 </script>
 
-<h1>hello {HELLO}!</h1>
+<h1 bind:this={element_ref}>hello {HELLO}!</h1>
 
-{#each thing_keys as key (key)}
-	{@const value = thing[key]}
-	{value}
+{#each thing_keys as [k, { t, u }] (f(k))}
+	{@const v = Math.round(t[k + f(u)])}
+	{f(v)}
 {/each}
 
-{#if c}
-	<Thing string_prop="a" number_prop={1} />
+{#if f(c)}
+	<Thing string_prop="a {f('s')} b" number_prop={f(1)} />
+{:else if f(a > 0)}
+	bigger
 {:else}
-	<Thing string_prop="b" number_prop={2} onthing={() => (c = !c)}>
+	<Thing string_prop="b" onthing={() => (c = f(!c))}>
 		{@render children()}
 	</Thing>
 {/if}
 
-<!DOCTYPE html>
+<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+{@html '<strong>raw html</strong>'}
 
-<div class="test special" id="unique_id">
-	<p>hello world!</p>
-</div>
+<input bind:value type="text" class:active={c} />
 
-<p class="some_class hypen-class">
+<span {@attach attachment('param', f(42))}>...</span>
+
+{@render my_snippet('p')}
+
+{#snippet my_snippet(p: string)}
+	<button type="button" {onclick}>{p}</button>
+{/snippet}
+
+<p class="some_class hypen-class" id="unique_id">
 	some <span class="a b c">text</span>
 </p>
 
 <button type="button" disabled> click me </button>
 
-<!-- comment <div>a<br /> b</div> -->
-{a}
-{b}
+<!-- comment <div>a<br /> {b}</div> -->
+{b.repeat(2)}
 {bound}
-{D}
 
 <br />
 
@@ -333,6 +377,18 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 	<li>list item 1</li>
 	<li>list item 2</li>
 </ul>
+
+<!-- embedded tags for boundary testing -->
+<div>
+	<script>
+		const inline_js = 'no lang attr';
+	</script>
+	<style>
+		.inline {
+			color: blue;
+		}
+	</style>
+</div>
 
 <style>
 	.some_class {
@@ -361,17 +417,13 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 		background-color: blue;
 	}
 
-	div > p {
-		margin: 10px;
-	}
-
 	@media (max-width: 600px) {
 		:global(body) {
-			background-color: lightblue;
+			background-color: light-dark(lightblue, darkblue);
 		}
 	}
 
-	.special::before {
+	:global(.escapehatch)::before {
 		content: '< & >';
 	}
 </style>

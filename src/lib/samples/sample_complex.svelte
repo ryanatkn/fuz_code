@@ -11,108 +11,73 @@
 		thing,
 		bound = $bindable(true),
 		children,
+		onclick,
 	}: {
 		thing: Record<string, any>;
 		bound?: boolean;
 		children: Snippet;
+		onclick?: () => void;
 	} = $props();
 
-	const thing_keys = $derived(Object.keys(thing));
+	const thing_keys = $derived(Object.entries(thing));
 
-	const a = 1;
+	const a = 1 as number;
 
 	const b = 'b';
 
 	let c: boolean = $state(true);
 
-	export type Some_Type = 1 | 'b' | true;
+	const f = (p: any) => p;
 
-	class D {
-		d1: string = 'd';
-		d2: number;
-		d3 = $state(false);
-
-		constructor(d2: number) {
-			this.d2 = d2;
-		}
-
-		class_method(): string {
-			return `Hello, ${this.d1}`;
-		}
-
-		instance_method = () => {
-			/* ... */
-			this.#private_method();
-			// foo
+	const attachment = (_p1: string, _p2: number) => {
+		return (el: HTMLElement) => {
+			element_ref !== el;
 		};
+	};
 
-		#private_method() {
-			throw new Error(`${this.d1} etc`);
-		}
-
-		protected protected_method() {
-			console.log(new Date(123)); // eslint-disable-line no-console
-		}
-	}
-
-	// comment
-
-	/*
-	other comment
-
-	const comment = false;
-	*/
-
-	/**
-	 * JSDoc comment
-	 */
-
-	export interface Some_E {
-		name: string;
-		age: number;
-	}
-
-	export const some_e: Some_E = {name: 'A. H.', age: 100};
-
-	export function add(x: number, y: number): number {
-		return x + y;
-	}
-
-	export const plus = (a: any, b: any): any => a + b;
+	let value = $state(thing['']);
+	let element_ref: HTMLElement;
 </script>
 
-<h1>hello {HELLO}!</h1>
+<h1 bind:this={element_ref}>hello {HELLO}!</h1>
 
-{#each thing_keys as key (key)}
-	{@const value = thing[key]}
-	{value}
+{#each thing_keys as [k, { t, u }] (f(k))}
+	{@const v = Math.round(t[k + f(u)])}
+	{f(v)}
 {/each}
 
-{#if c}
-	<Thing string_prop="a" number_prop={1} />
+{#if f(c)}
+	<Thing string_prop="a {f('s')} b" number_prop={f(1)} />
+{:else if f(a > 0)}
+	bigger
 {:else}
-	<Thing string_prop="b" number_prop={2} onthing={() => (c = !c)}>
+	<Thing string_prop="b" onthing={() => (c = f(!c))}>
 		{@render children()}
 	</Thing>
 {/if}
 
-<!DOCTYPE html>
+<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+{@html '<strong>raw html</strong>'}
 
-<div class="test special" id="unique_id">
-	<p>hello world!</p>
-</div>
+<input bind:value type="text" class:active={c} />
 
-<p class="some_class hypen-class">
+<span {@attach attachment('param', f(42))}>...</span>
+
+{@render my_snippet('p')}
+
+{#snippet my_snippet(p: string)}
+	<button type="button" {onclick}>{p}</button>
+{/snippet}
+
+<p class="some_class hypen-class" id="unique_id">
 	some <span class="a b c">text</span>
 </p>
 
 <button type="button" disabled> click me </button>
 
-<!-- comment <div>a<br /> b</div> -->
-{a}
-{b}
+<!-- comment <div>a<br /> {b}</div> -->
+{b.repeat(2)}
 {bound}
-{D}
 
 <br />
 
@@ -124,6 +89,18 @@
 	<li>list item 1</li>
 	<li>list item 2</li>
 </ul>
+
+<!-- embedded tags for boundary testing -->
+<div>
+	<script>
+		const inline_js = 'no lang attr';
+	</script>
+	<style>
+		.inline {
+			color: blue;
+		}
+	</style>
+</div>
 
 <style>
 	.some_class {
@@ -152,17 +129,13 @@
 		background-color: blue;
 	}
 
-	div > p {
-		margin: 10px;
-	}
-
 	@media (max-width: 600px) {
 		:global(body) {
-			background-color: lightblue;
+			background-color: light-dark(lightblue, darkblue);
 		}
 	}
 
-	.special::before {
+	:global(.escapehatch)::before {
 		content: '< & >';
 	}
 </style>

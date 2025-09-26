@@ -56,6 +56,7 @@ export const add_grammar_markup: Add_Syntax_Grammar = (syntax_styler) => {
 							{
 								pattern: /^(\s*)["']|["']$/,
 								lookbehind: true,
+								alias: 'attr_quote',
 							},
 						],
 						entity: undefined as any, // see below
@@ -179,7 +180,10 @@ export const grammar_markup_add_attribute = (
 							pattern: /^=/,
 							alias: 'attr_equals',
 						},
-						/"|'/,
+						{
+							pattern: /"|'/,
+							alias: 'attr_quote',
+						},
 					],
 				},
 			},

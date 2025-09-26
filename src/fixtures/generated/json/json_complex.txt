@@ -1,3 +1,16 @@
+=== STATS ===
+Sample length: 327 characters
+Total tokens: 83
+
+Token types (7 unique):
+  punctuation: 37
+  string: 14
+  property: 12
+  operator: 12
+  number: 3
+  boolean: 3
+  null: 2
+
 === TOKENS ===
    0-1     punctuation               {
    3-11    property                  "string"
@@ -82,16 +95,3 @@
  320-321   punctuation               ]
  323-324   punctuation               }
  325-326   punctuation               }
-
-=== STATS ===
-Total tokens: 83
-Sample length: 327 characters
-
-Token types:
-  punctuation: 37
-  string: 14
-  property: 12
-  operator: 12
-  number: 3
-  boolean: 3
-  null: 2

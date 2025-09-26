@@ -1,3 +1,18 @@
+=== STATS ===
+Sample length: 502 characters
+Total tokens: 75
+
+Token types (9 unique):
+  punctuation: 47
+  property: 9
+  selector: 8
+  function: 3
+  comment: 3
+  string: 2
+  atrule: 1
+  rule: 1
+  url: 1
+
 === TOKENS ===
    0-11    selector                  .some_class
   12-13    punctuation               {
@@ -48,46 +63,29 @@
  274-275   punctuation               {
  278-294   property                  background-color
  294-295   punctuation               :
- 305-306   punctuation               ;
- 308-309   punctuation               }
- 310-311   punctuation               }
- 313-363   comment                   /* patterns in strings are not falsely detected */
- 364-380   selector                  .content::before
- 381-382   punctuation               {
- 384-391   property                  content
- 391-392   punctuation               :
- 393-423   string                    '</style> /* not a comment */'
- 423-424   punctuation               ;
- 425-426   punctuation               }
- 428-454   selector                  .attr[title='Click: here']
- 455-456   punctuation               {
- 458-464   property                  cursor
- 464-465   punctuation               :
- 473-474   punctuation               ;
- 475-476   punctuation               }
- 491-503   comment                   /* comment*/
- 504-505   punctuation               {
- 507-523   property                  background-image
- 523-524   punctuation               :
- 525-553   url                       url('data:image/svg+xml...')
- 525-528   function                  url
- 528-529   punctuation               (
- 529-552   string                    'data:image/svg+xml...'
- 552-553   punctuation               )
- 553-554   punctuation               ;
- 555-556   punctuation               }
-
-=== STATS ===
-Total tokens: 77
-Sample length: 557 characters
-
-Token types:
-  punctuation: 48
-  property: 10
-  selector: 8
-  comment: 4
-  function: 2
-  string: 2
-  atrule: 1
-  rule: 1
-  url: 1
+ 296-306   function                  light-dark
+ 306-307   punctuation               (
+ 316-317   punctuation               ,
+ 326-327   punctuation               )
+ 327-328   punctuation               ;
+ 330-331   punctuation               }
+ 332-333   punctuation               }
+ 335-351   selector                  .content::before
+ 352-353   punctuation               {
+ 355-376   comment                   /* prettier-ignore */
+ 378-385   property                  content
+ 385-386   punctuation               :
+ 387-417   string                    "</style> /* not a comment */"
+ 417-418   punctuation               ;
+ 419-420   punctuation               }
+ 422-448   selector                  .attr[title='Click: here']
+ 449-450   punctuation               {
+ 452-468   property                  background-image
+ 468-469   punctuation               :
+ 470-498   url                       url('data:image/svg+xml...')
+ 470-473   function                  url
+ 473-474   punctuation               (
+ 474-497   string                    'data:image/svg+xml...'
+ 497-498   punctuation               )
+ 498-499   punctuation               ;
+ 500-501   punctuation               }

@@ -1,43 +1,108 @@
 const a = 1;
 
-const b = 'b';
+const b: string = 'b';
 
 const c = true;
 
 export type Some_Type = 1 | 'b' | true;
 
-class D {
-	d1: string = 'd';
+declare const some_decorator: any;
+
+abstract class Base {
+	abstract abstract_method(): void;
+}
+
+/* eslint-disable no-console */
+
+@some_decorator
+class D extends Base {
+	readonly d1: string = 'd';
 	d2: number;
-	d3 = $state(false);
+	d3 = $state(null);
+
+	@some_decorator
+	decorated = true;
 
 	constructor(d2: number) {
+		super();
 		this.d2 = d2;
 	}
 
+	abstract_method(): void {
+		// implementation
+	}
+
+	@some_decorator('example', {option: true})
 	class_method(): string {
 		return `Hello, ${this.d1}`;
 	}
 
 	instance_method = (): void => {
 		/* ... */
-		this.#private_method();
+		let i = 0;
+		do {
+			i++;
+		} while (i < 3);
+
+		for (const c2 of this.d1) {
+			if (c2 === 'd') continue;
+			if (!c2) break;
+			this.#private_method(a, c2);
+		}
+
+		switch (this.d1) {
+			case 'a':
+				console.log('case a');
+				break;
+			case 'b':
+			case 'c':
+				console.log('case b or c');
+				break;
+			default:
+				console.log('default');
+		}
+
+		const obj: {has_d1?: boolean; is_d: boolean} = {
+			has_d1: 'd1' in this,
+			is_d: this instanceof D,
+		};
+		delete obj.has_d1;
 		// foo
 	};
 
-	#private_method() {
-		throw new Error(`${this.d1} 
+	#private_method(a2: number, c2: any): void {
+		throw new Error(`${this.d1}
 			multiline
-			etc
+			etc ${a2 + c2}
 		`);
 	}
 
-	protected protected_method(): void {
-		console.log(new Date()); // eslint-disable-line no-console
+	*generator(): Generator<number | Array<number>> {
+		yield 1;
+		yield* [2, 3];
+	}
+
+	async *async_generator(): AsyncGenerator<number> {
+		yield await Promise.resolve(4);
+	}
+
+	protected async protected_method(): Promise<void> {
+		try {
+			await new Promise((resolve) => setTimeout(resolve, 100));
+			if (Math.random() > 0.5) {
+				console.log(new Date());
+			} else if (Math.random() > 0.2) {
+				console.log('else if branch');
+			} else {
+				console.log('else branch');
+			}
+		} catch (error: unknown) {
+			console.error(error);
+		} finally {
+			console.log('finally block');
+		}
 	}
 }
-
-export {a, b, c, D};
 
 // comment
 
@@ -51,12 +116,22 @@ const comment = false;
  * JSDoc comment
  */
 
-export interface Some_E {
+import {sample_langs, type Sample_Lang} from '../code_sample.js';
+import * as A from '../code_sample.js';
+
+export {a, A, b, c, D};
+
+sample_langs as unknown as Sample_Lang satisfies Sample_Lang;
+
+export interface Some_E<T = null> {
 	name: string;
 	age: number;
+	t?: T;
 }
 
-export const some_e: Some_E = {name: 'A. H.', age: 100};
+const e: {name: string; age: number} = {name: 'A. H.', age: 100};
+const v = [['', e]] as const;
+export const some_e: Map<string, Some_E> = new Map(v);
 
 export function add(x: number, y: number): number {
 	return x + y;

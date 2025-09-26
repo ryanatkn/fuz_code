@@ -28,9 +28,9 @@ but there are two optional dependencies:
   based on [`prism-svelte`](https://github.com/pngwn/prism-svelte)
   and a [Svelte component](src/lib/Code.svelte) for convenient usage.
 - The [default theme](src/lib/theme.css) integrates
-  with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference,
-  and [theme_variables.css](src/lib/theme_variables.css)
-  is also included that uses the less-customizable `light-dark()`.
+  with my CSS library [Moss](https://github.com/ryanatkn/moss) for colors that adapt to the user's runtime `color-scheme` preference.
+  Non-Moss users should import [theme_variables.css](src/lib/theme_variables.css)
+  or otherwise define those variables.
 
 Compared to [Shiki](https://github.com/shikijs/shiki),
 this library is much lighter

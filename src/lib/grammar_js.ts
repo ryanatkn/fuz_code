@@ -1,5 +1,6 @@
 import type {Add_Syntax_Grammar} from '$lib/syntax_styler.js';
 import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/grammar_markup.js';
+import {class_keywords} from '$lib/grammar_clike.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -12,6 +13,18 @@ import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/gra
 export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 	const grammar_clike = syntax_styler.get_lang('clike');
 
+	// Main JS keywords (from keyword pattern, excluding those with special lookaheads)
+	const main_keywords =
+		'class|const|debugger|delete|enum|extends|function|implements|in|instanceof|interface|let|new|null|of|package|private|protected|public|static|super|this|typeof|undefined|var|void|with';
+
+	// Keywords that are treated specially (inserted before 'function')
+	const special_keywords =
+		'as|await|break|case|catch|continue|default|do|else|export|finally|for|from|if|import|return|switch|throw|try|while|yield';
+
+	// All JS keywords (for negative lookahead in parameter pattern)
+	// Note: 'assert', 'async', 'get', 'set' have special lookahead requirements in the main keyword pattern
+	const all_js_keywords = `assert|async|${main_keywords}|get|set|${special_keywords}`;
+
 	const grammar_js = syntax_styler.add_extended_lang('clike', 'js', {
 		class_name: [
 			grammar_clike.class_name,
@@ -23,12 +36,9 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 		],
 		keyword: [
 			{
-				pattern: /((?:^|\})\s*)catch\b/,
-				lookbehind: true,
-			},
-			{
-				pattern:
-					/(^|[^.]|\.\.\.\s*)\b(?:as|assert(?=\s*\{)|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally(?=\s*(?:\{|$))|for|from(?=\s*(?:['"]|$))|function|(?:get|set)(?=\s*(?:[#[$\w\xA0-\uFFFF]|$))|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,
+				pattern: new RegExp(
+					`(^|[^.]|\\.\\.\\.\\s*)\\b(?:assert(?=\\s*\\{)|async(?=\\s*(?:function\\b|\\*|\\(|[$\\w\\xA0-\\uFFFF]|$))|${main_keywords}|(?:get|set)(?=\\s*(?:[#[$\\w\\xA0-\\uFFFF]|$)))\\b`,
+				),
 				lookbehind: true,
 			},
 		],
@@ -66,8 +76,13 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 			/--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/,
 	});
 
-	(grammar_js as any).class_name[0].pattern =
-		/(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/;
+	(grammar_js as any).class_name[0].pattern = new RegExp(
+		`(\\b(?:${class_keywords})\\s+)[\\w.\\\\]+`,
+	);
+
+	syntax_styler.grammar_insert_before('js', 'function', {
+		special_keyword: new RegExp(`\\b(?:${special_keywords})\\b`),
+	});
 
 	syntax_styler.grammar_insert_before('js', 'keyword', {
 		regex: {
@@ -102,6 +117,7 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 				regex_flags: /^[a-z]+$/,
 			},
 		},
+		// Arrow function and function expression variable names
 		// This must be declared before keyword because we use "function" inside the look-forward
 		function_variable: {
 			pattern:
@@ -127,13 +143,19 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 				inside: grammar_js,
 			},
 			{
-				pattern:
-					/((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*)\(\s*|\]\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*\{)/,
+				pattern: new RegExp(
+					`((?:\\b|\\s|^)(?!(?:${all_js_keywords})(?![$\\w\\xA0-\\uFFFF]))(?:(?!\\s)[_$a-zA-Z\\xA0-\\uFFFF](?:(?!\\s)[$\\w\\xA0-\\uFFFF])*\\s*)\\(\\s*|\\]\\s*\\(\\s*)(?!\\s)(?:[^()\\s]|\\s+(?![\\s)])|\\([^()]*\\))+(?=\\s*\\)\\s*\\{)`,
+				),
 				lookbehind: true,
 				inside: grammar_js,
 			},
 		],
 		constant: /\b[A-Z](?:[A-Z_]|\dx?)*\b/,
+		// Heuristic: treat capitalized identifiers as class names when not already matched
+		capitalized_identifier: {
+			pattern: /\b[A-Z][\w]*\b/,
+			alias: 'class_name',
+		},
 	});
 
 	syntax_styler.grammar_insert_before('js', 'string', {
@@ -182,12 +204,7 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 
 	grammar_markup_add_inlined(syntax_styler, 'script', 'js');
 
-	// add attribute support for all DOM events.
+	// add attribute support for all DOM events (on* attributes)
 	// https://developer.mozilla.org/en-US/docs/Web/Events#Standard_events
-	grammar_markup_add_attribute(
-		syntax_styler,
-		/on(?:abort|blur|change|click|composition(?:end|start|update)|dblclick|error|focus(?:in|out)?|key(?:down|up)|load|mouse(?:down|enter|leave|move|out|over|up)|reset|resize|scroll|select|slotchange|submit|unload|wheel)/
-			.source,
-		'js',
-	);
+	grammar_markup_add_attribute(syntax_styler, 'on\\w+', 'js');
 };

@@ -50,8 +50,12 @@ export const discover_samples = (): Array<Sample_Spec> => {
 /**
  * Get the fixture path for a given language and variant
  */
-export const get_fixture_path = (lang: string, variant: string, ext: 'json' | 'txt'): string => {
-	return join('fixtures/generated', lang, `${lang}_${variant}.${ext}`);
+export const get_fixture_path = (
+	lang: string,
+	variant: string,
+	ext: 'json' | 'txt' | 'html',
+): string => {
+	return join('src/fixtures/generated', lang, `${lang}_${variant}.${ext}`);
 };
 
 /**
@@ -151,7 +155,22 @@ export const process_sample = (sample: Sample_Spec): Generated_Output => {
 export const generate_debug_text = (output: Generated_Output): string => {
 	const {sample, tokens} = output;
 
-	let debug = '=== TOKENS ===\n';
+	let debug = '=== STATS ===\n';
+	debug += `Sample length: ${sample.content.length} characters\n`;
+	debug += `Total tokens: ${tokens.length}\n`;
+
+	// Count token types
+	const tokenTypes: Record<string, number> = {};
+	for (const token of tokens) {
+		const {type} = token;
+		tokenTypes[type] = (tokenTypes[type] || 0) + 1;
+	}
+	debug += `\nToken types (${Object.keys(tokenTypes).length} unique):\n`;
+	for (const [type, count] of Object.entries(tokenTypes).sort((a, b) => b[1] - a[1])) {
+		debug += `  ${type}: ${count}\n`;
+	}
+
+	debug += '\n=== TOKENS ===\n';
 	// Show all tokens, no elision
 	for (const t of tokens) {
 		const text = sample.content
@@ -163,22 +182,6 @@ export const generate_debug_text = (output: Generated_Output): string => {
 		const end = String(t.end).padEnd(4);
 		const position = `${start}-${end}`;
 		debug += `${position.padEnd(10)} ${t.type.padEnd(25)} ${text}\n`;
-	}
-
-	// Add token statistics
-	debug += '\n=== STATS ===\n';
-	debug += `Total tokens: ${tokens.length}\n`;
-	debug += `Sample length: ${sample.content.length} characters\n`;
-
-	// Count token types
-	const tokenTypes: Record<string, number> = {};
-	for (const token of tokens) {
-		const {type} = token;
-		tokenTypes[type] = (tokenTypes[type] || 0) + 1;
-	}
-	debug += '\nToken types:\n';
-	for (const [type, count] of Object.entries(tokenTypes).sort((a, b) => b[1] - a[1])) {
-		debug += `  ${type}: ${count}\n`;
 	}
 
 	return debug;

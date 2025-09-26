@@ -64,7 +64,10 @@ export const package_json: Package_Json = {
 		printWidth: 100,
 		singleQuote: true,
 		bracketSpacing: false,
-		overrides: [{files: 'package.json', options: {useTabs: false}}],
+		overrides: [
+			{files: 'package.json', options: {useTabs: false}},
+			{files: 'src/fixtures/generated/**', options: {requirePragma: true}},
+		],
 	},
 	sideEffects: ['**/*.css'],
 	files: ['dist', 'src/lib/**/*.ts', '!src/lib/**/*.test.*', '!dist/**/*.test.*'],
@@ -95,7 +98,10 @@ export const src_json: Src_Json = {
 		},
 		'./grammar_clike.js': {
 			path: 'grammar_clike.ts',
-			declarations: [{name: 'add_grammar_clike', kind: 'function'}],
+			declarations: [
+				{name: 'class_keywords', kind: 'variable'},
+				{name: 'add_grammar_clike', kind: 'function'},
+			],
 		},
 		'./grammar_css.js': {
 			path: 'grammar_css.ts',
@@ -134,6 +140,17 @@ export const src_json: Src_Json = {
 				{name: 'Highlight_Mode', kind: 'type'},
 				{name: 'supports_css_highlight_api', kind: 'function'},
 				{name: 'Highlight_Manager', kind: 'class'},
+			],
+		},
+		'./highlight_priorities.gen.js': {
+			path: 'highlight_priorities.gen.ts',
+			declarations: [{name: 'gen', kind: 'variable'}],
+		},
+		'./highlight_priorities.js': {
+			path: 'highlight_priorities.ts',
+			declarations: [
+				{name: 'Highlight_Token_Name', kind: 'type'},
+				{name: 'highlight_priorities', kind: 'variable'},
 			],
 		},
 		'./syntax_styler_global.js': {
