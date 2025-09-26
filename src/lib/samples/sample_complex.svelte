@@ -29,8 +29,10 @@
 
 	const f = (p: any) => p;
 
-	const attachment = (_p1: string, _p2: number) => (el: HTMLElement) => {
-		element_ref !== el;
+	const attachment = (_p1: string, _p2: number) => {
+		return (el: HTMLElement) => {
+			element_ref !== el;
+		};
 	};
 
 	let value = $state(thing['']);
