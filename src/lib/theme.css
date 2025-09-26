@@ -5,10 +5,7 @@
 .token.symbol,
 ::highlight(symbol),
 .token.deleted,
-::highlight(deleted) {
-	color: var(--color_a_5);
-}
-
+::highlight(deleted),
 .token.keyword,
 ::highlight(keyword),
 .token.null,
@@ -69,11 +66,6 @@
 	color: var(--color_f_5);
 }
 
-.token.rule,
-::highlight(rule) {
-	color: var(--color_g_5);
-}
-
 .token.attr_name,
 ::highlight(attr_name),
 .token.property,
@@ -88,7 +80,9 @@
 .token.special_keyword,
 ::highlight(special_keyword),
 .token.namespace,
-::highlight(namespace) {
+::highlight(namespace),
+.token.rule,
+::highlight(rule) {
 	color: var(--color_g_5);
 }
 
@@ -121,126 +115,3 @@
 ::highlight(italic) {
 	font-style: italic;
 }
-
-/* TODO some of these should probably be used, others are unnecessary */
-
-/* TypeScript/JS specific */
-/*
-.token.parameter,
-::highlight(parameter) {
-	color: var(--color_a_5);
-} */
-
-/* Regex-specific tokens */
-/* .token.regex_delimiter,
-::highlight(regex_delimiter) {
-	color: var(--text_color_5);
-}
-
-.token.regex_flags,
-::highlight(regex_flags) {
-	color: var(--color_e_5);
-}
-
-.token.regex_source,
-::highlight(regex_source) {
-	color: var(--color_e_5);
-}
-
-.token.operator,
-::highlight(operator) {
-	color: var(--text_color_5);
-} */
-
-/* CSS specific */
-/* .token.color,
-::highlight(color),
-.token.hexcode,
-::highlight(hexcode) {
-	color: var(--color_e_5);
-}
-
-.token.unit,
-::highlight(unit) {
-	color: var(--color_e_5);
-}
-
-.token.url,
-::highlight(url) {
-	color: var(--color_b_5);
-} */
-
-/* HTML/XML specific */
-/* .token.entity,
-::highlight(entity) {
-	color: var(--color_e_5);
-}
-
-.token.attr,
-::highlight(attr) {
-	color: var(--color_f_5);
-} */
-
-/* JSON specific */
-/* .token.property_string,
-::highlight(property_string) {
-	color: var(--color_a_5);
-}
- */
-
-/* Additional tokens */
-/*
-
-.token.at,
-::highlight(at) {
-	color: var(--color_f_5);
-}
-
-.token.rule,
-::highlight(rule) {
-	color: var(--color_f_5);
-} */
-
-/*
- * TODO: Additional tokens found in current grammars that need .token rules:
- *
- * These tokens exist in the grammars but aren't in theme.css. They should be added
- * with appropriate colors:
- *
- * 11. Template strings (JS)
- *   - .token.template_string / ::highlight(template_string) - same as string: var(--color_b_5)
- *   - .token.template_punctuation / ::highlight(template_punctuation) - same as string: var(--color_b_5)
- *
- * 12. Regex components (JS)
- *   - .token.regex_delimiter / ::highlight(regex_delimiter) - same as punctuation: var(--text_color_5)
- *   - .token.regex_flags / ::highlight(regex_flags) - same as regex: var(--color_e_5)
- *   - .token.regex_source / ::highlight(regex_source) - same as regex: var(--color_e_5)
- *
- * 13. Operators
- *   - .token.operator / ::highlight(operator) - same as punctuation: var(--text_color_5)
- *
- * 14. Function variable (JS)
- *   - .token.function_variable / ::highlight(function_variable) - same as function: var(--color_d_5)
- *
- * 15. Interpolation punctuation (JS template strings)
- *   - .token.interpolation_punctuation / ::highlight(interpolation_punctuation) - same as punctuation: var(--text_color_5)
- *
- * 16. At symbol (TS decorators)
- *   - .token.at / ::highlight(at) - same as operator/punctuation: var(--text_color_5)
- *
- * 17. CSS rule
- *   - .token.rule / ::highlight(rule) - same as atrule: var(--color_f_5)
- *
- * 18. URL (CSS)
- *   - .token.url / ::highlight(url) - same as string: var(--color_b_5)
- *
- * 19. Entity (HTML)
- *   - .token.entity / ::highlight(entity) - same as number: var(--color_e_5)
- *
- * Tokens to NOT include:
- * - parameter (deleted in grammar_ts)
- * - color, hexcode, unit (not in grammars)
- * - attr (we use attr_name, attr_value, attr_equals, attr_quote)
- * - property_string (doesn't exist)
- * - interpolation (container only, no styling needed)
- */
