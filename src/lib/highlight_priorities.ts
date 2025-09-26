@@ -40,7 +40,7 @@ export type Highlight_Token_Name =
 	| 'cdata'
 	| 'punctuation';
 
-export const highlight_priorities: Record<Highlight_Token_Name, number> = {
+export const highlight_priorities: Record<Highlight_Token_Name, number | undefined> = {
 	namespace: 1,
 	tag: 2,
 	constant: 2,
