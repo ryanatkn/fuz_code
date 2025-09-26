@@ -1,5 +1,13 @@
 # @ryanatkn/fuz_code
 
+## 0.26.0
+
+### Minor Changes
+
+- rename `Grammar` to `Syntax_Grammar` ([#13](https://github.com/ryanatkn/fuz_code/pull/13))
+- improve token styles ([#14](https://github.com/ryanatkn/fuz_code/pull/14))
+- factor out `tokenize_syntax` into its own module ([#13](https://github.com/ryanatkn/fuz_code/pull/13))
+
 ## 0.25.0
 
 ### Minor Changes
