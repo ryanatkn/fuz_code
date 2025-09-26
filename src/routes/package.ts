@@ -144,7 +144,7 @@ export const src_json: Src_Json = {
 		},
 		'./highlight_priorities.gen.js': {
 			path: 'highlight_priorities.gen.ts',
-			declarations: [{name: 'gen', kind: 'function'}],
+			declarations: [{name: 'gen', kind: 'variable'}],
 		},
 		'./highlight_priorities.js': {
 			path: 'highlight_priorities.ts',
