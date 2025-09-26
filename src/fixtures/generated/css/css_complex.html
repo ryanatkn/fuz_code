@@ -1,73 +1,45 @@
 <span class="token selector">.some_class</span> <span class="token punctuation">{</span>
-<span class="token property">color</span><span class="token punctuation">:</span> red<span
-	class="token punctuation"
-	>;</span
->
+	<span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token selector">.hypen-class</span> <span class="token punctuation">{</span>
-<span class="token property">font-size</span><span class="token punctuation">:</span> 16px<span
-	class="token punctuation"
-	>;</span
->
+	<span class="token property">font-size</span><span class="token punctuation">:</span> 16px<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token selector">p</span> <span class="token punctuation">{</span>
-<span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 0 10px
-<span class="token function">rgba</span><span class="token punctuation">(</span>0<span
-	class="token punctuation"
-	>,</span
->
-0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0.1<span
-	class="token punctuation"
-	>)</span
-><span class="token punctuation">;</span>
+	<span class="token property">box-shadow</span><span class="token punctuation">:</span> 0 0 10px <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0.1<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token comment">/* comment */</span>
 
-<span class="token comment">/* multi .line { i: 100px &lt;/style> @media*/</span>
+<span class="token comment">/*
+multi
+.line {
+	i: 100px
+
+&lt;/style>
+
+@media*/</span>
 
 <span class="token selector">#id</span> <span class="token punctuation">{</span>
-<span class="token property">background-color</span
-><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+	<span class="token property">background-color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
 <span class="token selector">div > p</span> <span class="token punctuation">{</span>
-<span class="token property">margin</span><span class="token punctuation">:</span> 10px<span
-	class="token punctuation"
-	>;</span
->
+	<span class="token property">margin</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token atrule"
-	><span class="token rule">@media</span> <span class="token punctuation">(</span
-	><span class="token property">max-width</span><span class="token punctuation">:</span> 600px<span
-		class="token punctuation"
-		>)</span
-	></span
->
-<span class="token punctuation">{</span> <span class="token selector">body</span>
-<span class="token punctuation">{</span> <span class="token property">background-color</span
-><span class="token punctuation">:</span> <span class="token function">light-dark</span
-><span class="token punctuation">(</span>lightblue<span class="token punctuation">,</span>
-darkblue<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> 600px<span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+	<span class="token selector">body</span> <span class="token punctuation">{</span>
+		<span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token function">light-dark</span><span class="token punctuation">(</span>lightblue<span class="token punctuation">,</span> darkblue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
 <span class="token selector">.content::before</span> <span class="token punctuation">{</span>
-<span class="token comment">/* prettier-ignore */</span>
-<span class="token property">content</span><span class="token punctuation">:</span>
-<span class="token string">"&lt;/style> /* not a comment */"</span
-><span class="token punctuation">;</span>
+	<span class="token comment">/* prettier-ignore */</span>
+	<span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">"&lt;/style> /* not a comment */"</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token selector">.attr[title='Click: here']</span>
-<span class="token punctuation">{</span> <span class="token property">background-image</span
-><span class="token punctuation">:</span>
-<span class="token url"
-	><span class="token function">url</span><span class="token punctuation">(</span
-	><span class="token string url">'data:image/svg+xml...'</span
-	><span class="token punctuation">)</span></span
-><span class="token punctuation">;</span>
+<span class="token selector">.attr[title='Click: here']</span> <span class="token punctuation">{</span>
+	<span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'data:image/svg+xml...'</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
