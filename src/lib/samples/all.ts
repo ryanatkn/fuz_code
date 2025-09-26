@@ -305,7 +305,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 		onclick?: () => void;
 	} = $props();
 
-	const thing_keys = $derived(Object.keys(thing));
+	const thing_keys = $derived(Object.entries(thing));
 
 	const a = 1;
 
@@ -313,58 +313,53 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 
 	let c: boolean = $state(true);
 
-	const attachment = (_p1: string, _p2: number) => (_: HTMLElement) => {
-		element_ref;
+	const f = (p: any) => p;
+
+	const attachment = (_p1: string, _p2: number) => (el: HTMLElement) => {
+		element_ref !== el;
 	};
 
 	let value = $state(thing['']);
 	let element_ref: HTMLElement;
 </script>
 
-<h1>hello {HELLO}!</h1>
+<h1 bind:this={element_ref}>hello {HELLO}!</h1>
 
-{#each thing_keys as key (key)}
-	{@const v = thing[key]}
-	{v}
+{#each thing_keys as [k, { t, u }] (f(k))}
+	{@const v = Math.round(t[k + f(u)])}
+	{f(v)}
 {/each}
 
-{#if c}
-	<Thing string_prop="a" number_prop={1} />
-{:else if a > 0}
+{#if f(c)}
+	<Thing string_prop="a {f('s')} b" number_prop={f(1)} />
+{:else if f(a > 0)}
 	bigger
 {:else}
-	<Thing string_prop="b" number_prop={2} onthing={() => (c = !c)}>
+	<Thing string_prop="b" onthing={() => (c = f(!c))}>
 		{@render children()}
 	</Thing>
 {/if}
 
 {@html '<strong>raw html</strong>'}
 
-<input bind:value type="text" />
+<input bind:value type="text" class:active={c} />
 
-<div bind:this={element_ref} class:active={c} {@attach attachment('param', 42)}>
-	interactive element
-</div>
+<span {@attach attachment('param', f(42))}>...</span>
 
-{@render my_snippet()}
+{@render my_snippet('p')}
 
-{#snippet my_snippet()}
-	<button {onclick}>click handler</button>
+{#snippet my_snippet(p: string)}
+	<button {onclick}>{p}</button>
 {/snippet}
 
-<div class="test special" id="unique_id">
-	<p>hello world!</p>
-</div>
-
-<p class="some_class hypen-class">
+<p class="some_class hypen-class" id="unique_id">
 	some <span class="a b c">text</span>
 </p>
 
 <button type="button" disabled> click me </button>
 
-<!-- comment <div>a<br /> b</div> -->
-{a}
-{b}
+<!-- comment <div>a<br /> {b}</div> -->
+{b.repeat(2)}
 {bound}
 
 <br />
@@ -417,17 +412,13 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 		background-color: blue;
 	}
 
-	div > p {
-		margin: 10px;
-	}
-
 	@media (max-width: 600px) {
 		:global(body) {
 			background-color: light-dark(lightblue, darkblue);
 		}
 	}
 
-	.special::before {
+	:global(.escapehatch)::before {
 		content: '< & >';
 	}
 </style>

@@ -40,16 +40,16 @@
 <h1 bind:this={element_ref}>hello {HELLO}!</h1>
 
 {#each thing_keys as [k, { t, u }] (f(k))}
-	{@const v = Math.round(t[k + u])}
-	{v}
+	{@const v = Math.round(t[k + f(u)])}
+	{f(v)}
 {/each}
 
 {#if f(c)}
-	<Thing string_prop="a" number_prop={1} />
+	<Thing string_prop="a {f('s')} b" number_prop={f(1)} />
 {:else if f(a > 0)}
 	bigger
 {:else}
-	<Thing string_prop="b" onthing={() => (c = !c)}>
+	<Thing string_prop="b" onthing={() => (c = f(!c))}>
 		{@render children()}
 	</Thing>
 {/if}
@@ -58,7 +58,7 @@
 
 <input bind:value type="text" class:active={c} />
 
-<span {@attach attachment('param', 42)}>...</span>
+<span {@attach attachment('param', f(42))}>...</span>
 
 {@render my_snippet('p')}
 
@@ -72,9 +72,8 @@
 
 <button type="button" disabled> click me </button>
 
-<!-- comment <div>a<br /> b</div> -->
-{a}
-{b}
+<!-- comment <div>a<br /> {b}</div> -->
+{b.repeat(2)}
 {bound}
 
 <br />
@@ -133,7 +132,7 @@
 		}
 	}
 
-	.special::before {
+	:global(.escapehatch)::before {
 		content: '< & >';
 	}
 </style>

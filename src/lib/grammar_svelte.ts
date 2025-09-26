@@ -14,23 +14,29 @@ const blocks = '(if|else if|await|then|catch|each|html|debug|snippet)';
 export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.get_lang('ts');
 
-
-	const grammar_svelte = syntax_styler.add_extended_lang('markup', 'svelte', {
-		at_directive: {
-			pattern: /{@(?:render|html|const|debug|attach)\b(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*}/,
-			inside: {
-				lang_ts: {
-					pattern: /(@(?:render|html|const|debug|attach)\s+)[\s\S]*(?=\s*\})/,
-					lookbehind: true,
-					inside: grammar_ts,
-				},
-				keyword: /@(?:render|html|const|debug|attach)/,
-				punctuation: /{|}/,
+	// Define the at_directive pattern once for reuse (matches any @word)
+	const at_directive_pattern = {
+		pattern: /^{(@\w+)(\s+[\s\S]*)?}$/,
+		inside: {
+			lang_ts: {
+				pattern: /(@\w+\s+)([\s\S]+)/,  // Fixed: removed incorrect (?=}$)
+				lookbehind: true,
+				inside: grammar_ts,
 			},
+			keyword: /@\w+/,
+			punctuation: /[{}]/,
 		},
+	};
+
+	// Full expression patterns for top-level contexts
+	const svelte_expression_inside_full = {
+		// Generic @ directive - matches any @word
+		at_directive: at_directive_pattern,
+		// {#each items as item} with special syntax
 		each: {
-			pattern: /{[#/]each(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*}/,
+			pattern: /^{([#/]each)\s+([\s\S]*)}$/,
 			inside: {
+				special_keyword: /[#/]each/,
 				lang_ts: [
 					{
 						pattern: /(as[\s\S]*)\([\s\S]*\)(?=\s*\})/,
@@ -48,24 +54,48 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 						inside: grammar_ts,
 					},
 				],
-				special_keyword: /[#/]each/,
 				keyword: /as/,
-				punctuation: /{|}/,
+				punctuation: /[{}]/,
 			},
 		},
+		// {#block ...} and {/block}
 		block: {
-			pattern: new RegExp(
-				'{[#:/@]\\s*' + blocks + '(?:(?:\\{(?:(?:\\{(?:[^{}])*\\})|(?:[^{}]))*\\})|(?:[^{}]))*}',
-			),
+			pattern: new RegExp('^\\{([#:/@]\\s*' + blocks + ')\\s*([\\s\\S]*)\\}$'),
 			inside: {
-				punctuation: /^{|}$/,
 				special_keyword: new RegExp('[#:/@]' + blocks),
 				keyword: [/as/, /then/],
 				lang_ts: {
-					pattern: /[\s\S]*/,
+					pattern: /[\s\S]+(?=}$)/,
 					inside: grammar_ts,
 				},
+				punctuation: /[{}]/,
 			},
+		},
+		// Default: plain TS expression
+		punctuation: /[{}]/,
+		lang_ts: {
+			pattern: /[\s\S]+/,
+			inside: grammar_ts,
+		},
+	};
+
+	// Simplified patterns for tag contexts (no block directives)
+	const svelte_expression_inside_simple = {
+		// Generic @ directive
+		at_directive: at_directive_pattern,
+		// Default: plain TS expression
+		punctuation: /[{}]/,
+		lang_ts: {
+			pattern: /[\s\S]+/,
+			inside: grammar_ts,
+		},
+	};
+
+	const grammar_svelte = syntax_styler.add_extended_lang('markup', 'svelte', {
+		svelte_expression: {
+			pattern: /\{(?:[^{}]|\{[^}]*\})*\}/,
+			greedy: true,
+			inside: svelte_expression_inside_full,
 		},
 		tag: {
 			pattern:
@@ -79,9 +109,9 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 						namespace: /^[^\s>/:]+:/,
 					},
 				},
-				lang_ts: {
-					pattern: /\{(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*\}/,
-					inside: grammar_ts,
+				svelte_expression: {
+					pattern: /\{(?:[^{}]|\{[^}]*\})*\}/,
+					inside: svelte_expression_inside_simple,
 				},
 				attr_value: {
 					pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/i,
@@ -93,9 +123,9 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 								lookbehind: true,
 							},
 						],
-						lang_ts: {
-							pattern: /{[\s\S]+}/,
-							inside: grammar_ts,
+						svelte_expression: {
+							pattern: /\{(?:[^{}]|\{[^}]*\})*\}/,
+							inside: svelte_expression_inside_simple,
 						},
 					},
 				},
@@ -107,11 +137,6 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 					},
 				},
 			},
-		},
-		lang_ts: {
-			pattern: /\{(?:(?:\{(?:(?:\{(?:[^{}])*\})|(?:[^{}]))*\})|(?:[^{}]))*\}/,
-			lookbehind: true,
-			inside: grammar_ts,
 		},
 	});
 
