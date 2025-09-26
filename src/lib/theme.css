@@ -95,18 +95,6 @@
 	color: var(--color_i_5);
 }
 
-.token.important,
-::highlight(important),
-.token.bold,
-::highlight(bold) {
-	font-weight: bold;
-}
-
-.token.italic,
-::highlight(italic) {
-	font-style: italic;
-}
-
 .token.attr_equals,
 ::highlight(attr_equals),
 .token.processing_instruction,
@@ -118,6 +106,18 @@
 .token.punctuation,
 ::highlight(punctuation) {
 	color: var(--text_color_5);
+}
+
+.token.important,
+::highlight(important),
+.token.bold,
+::highlight(bold) {
+	font-weight: bold;
+}
+
+.token.italic,
+::highlight(italic) {
+	font-style: italic;
 }
 
 /* TODO some of these should probably be used, others are unnecessary */
