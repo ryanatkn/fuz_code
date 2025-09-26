@@ -12,6 +12,8 @@ abstract class Base {
 	abstract abstract_method(): void;
 }
 
+/* eslint-disable no-console */
+
 @some_decorator
 class D extends Base {
 	readonly d1: string = 'd';
@@ -68,19 +70,19 @@ class D extends Base {
 		// foo
 	};
 
-	#private_method(a2: number, c2: any) {
+	#private_method(a2: number, c2: any): void {
 		throw new Error(`${this.d1}
 			multiline
 			etc ${a2 + c2}
 		`);
 	}
 
-	*generator() {
+	*generator(): Generator<number | Array<number>> {
 		yield 1;
 		yield* [2, 3];
 	}
 
-	async *async_generator() {
+	async *async_generator(): AsyncGenerator<number> {
 		yield await Promise.resolve(4);
 	}
 
@@ -88,7 +90,7 @@ class D extends Base {
 		try {
 			await new Promise((resolve) => setTimeout(resolve, 100));
 			if (Math.random() > 0.5) {
-				console.log(new Date()); // eslint-disable-line no-console
+				console.log(new Date());
 			} else if (Math.random() > 0.2) {
 				console.log('else if branch');
 			} else {

@@ -96,6 +96,8 @@ abstract class Base {
 	abstract abstract_method(): void;
 }
 
+/* eslint-disable no-console */
+
 @some_decorator
 class D extends Base {
 	readonly d1: string = 'd';
@@ -152,19 +154,19 @@ class D extends Base {
 		// foo
 	};
 
-	#private_method(a2: number, c2: any) {
+	#private_method(a2: number, c2: any): void {
 		throw new Error(\`\${this.d1}
 			multiline
 			etc \${a2 + c2}
 		\`);
 	}
 
-	*generator() {
+	*generator(): Generator<number | Array<number>> {
 		yield 1;
 		yield* [2, 3];
 	}
 
-	async *async_generator() {
+	async *async_generator(): AsyncGenerator<number> {
 		yield await Promise.resolve(4);
 	}
 
@@ -172,7 +174,7 @@ class D extends Base {
 		try {
 			await new Promise((resolve) => setTimeout(resolve, 100));
 			if (Math.random() > 0.5) {
-				console.log(new Date()); // eslint-disable-line no-console
+				console.log(new Date());
 			} else if (Math.random() > 0.2) {
 				console.log('else if branch');
 			} else {
@@ -307,7 +309,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 
 	const thing_keys = $derived(Object.entries(thing));
 
-	const a = 1;
+	const a = 1 as number;
 
 	const b = 'b';
 
@@ -340,6 +342,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 	</Thing>
 {/if}
 
+<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 {@html '<strong>raw html</strong>'}
 
 <input bind:value type="text" class:active={c} />
@@ -349,7 +352,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 {@render my_snippet('p')}
 
 {#snippet my_snippet(p: string)}
-	<button {onclick}>{p}</button>
+	<button type="button" {onclick}>{p}</button>
 {/snippet}
 
 <p class="some_class hypen-class" id="unique_id">

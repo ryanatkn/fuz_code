@@ -21,7 +21,7 @@
 
 	const thing_keys = $derived(Object.entries(thing));
 
-	const a = 1;
+	const a = 1 as number;
 
 	const b = 'b';
 
@@ -54,6 +54,7 @@
 	</Thing>
 {/if}
 
+<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 {@html '<strong>raw html</strong>'}
 
 <input bind:value type="text" class:active={c} />
@@ -63,7 +64,7 @@
 {@render my_snippet('p')}
 
 {#snippet my_snippet(p: string)}
-	<button {onclick}>{p}</button>
+	<button type="button" {onclick}>{p}</button>
 {/snippet}
 
 <p class="some_class hypen-class" id="unique_id">

@@ -20,7 +20,7 @@ export const gen: Gen = ({origin_path}) => {
 	for (const block of rule_blocks) {
 		// Find all ::highlight(token_name) declarations in this block
 		const highlight_regex = /::highlight\(([^)]+)\)/g;
-		const tokens_in_block: string[] = [];
+		const tokens_in_block: Array<string> = [];
 		let match;
 
 		while ((match = highlight_regex.exec(block)) !== null) {
@@ -33,7 +33,7 @@ export const gen: Gen = ({origin_path}) => {
 		// Assign the same priority to all tokens in this block
 		if (tokens_in_block.length > 0) {
 			for (const token_name of tokens_in_block) {
-				if (!highlight_priorities.hasOwnProperty(token_name)) {
+				if (!Object.hasOwn(highlight_priorities, token_name)) {
 					highlight_priorities[token_name] = priority;
 				}
 			}
