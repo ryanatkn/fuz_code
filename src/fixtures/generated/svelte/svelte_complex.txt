@@ -2,7 +2,7 @@
 Sample length: 2249 characters
 Total tokens: 631
 
-Token types (32 unique):
+Token types (33 unique):
   punctuation: 298
   tag: 74
   operator: 37
@@ -10,8 +10,8 @@ Token types (32 unique):
   lang_ts: 23
   function: 23
   attr_name: 20
-  keyword: 19
   special_keyword: 14
+  keyword: 14
   attr_value: 11
   string: 11
   builtin: 9
@@ -22,6 +22,7 @@ Token types (32 unique):
   comment: 6
   number: 5
   at_directive: 5
+  at_keyword: 5
   script: 3
   namespace: 3
   constant: 2
@@ -245,7 +246,7 @@ Token types (32 unique):
  794-830   svelte_expression         {@const v = Math.round(t[k + f(u)])}
  794-830   at_directive              {@const v = Math.round(t[k + f(u)])}
  794-795   punctuation               {
- 795-801   keyword                   @const
+ 795-801   at_keyword                @const
  802-830   lang_ts                   v = Math.round(t[k + f(u)])}
  804-805   operator                  =
  806-810   capitalized_identifier    Math
@@ -347,7 +348,7 @@ Token types (32 unique):
 1007-1027  svelte_expression         {@render children()}
 1007-1027  at_directive              {@render children()}
 1007-1008  punctuation               {
-1008-1015  keyword                   @render
+1008-1015  at_keyword                @render
 1016-1027  lang_ts                   children()}
 1016-1024  function                  children
 1024-1025  punctuation               (
@@ -366,7 +367,7 @@ Token types (32 unique):
 1102-1137  svelte_expression         {@html '<strong>raw html</strong>'}
 1102-1137  at_directive              {@html '<strong>raw html</strong>'}
 1102-1103  punctuation               {
-1103-1108  keyword                   @html
+1103-1108  at_keyword                @html
 1109-1137  lang_ts                   '<strong>raw html</strong>'}
 1109-1136  string                    '<strong>raw html</strong>'
 1136-1137  punctuation               }
@@ -393,7 +394,7 @@ Token types (32 unique):
 1196-1232  svelte_expression         {@attach attachment('param', f(42))}
 1196-1232  at_directive              {@attach attachment('param', f(42))}
 1196-1197  punctuation               {
-1197-1204  keyword                   @attach
+1197-1204  at_keyword                @attach
 1205-1232  lang_ts                   attachment('param', f(42))}
 1205-1215  function                  attachment
 1215-1216  punctuation               (
@@ -413,7 +414,7 @@ Token types (32 unique):
 1245-1270  svelte_expression         {@render my_snippet('p')}
 1245-1270  at_directive              {@render my_snippet('p')}
 1245-1246  punctuation               {
-1246-1253  keyword                   @render
+1246-1253  at_keyword                @render
 1254-1270  lang_ts                   my_snippet('p')}
 1254-1264  function                  my_snippet
 1264-1265  punctuation               (

@@ -23,7 +23,7 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 				lookbehind: true,
 				inside: grammar_ts,
 			},
-			keyword: /@\w+/,
+			at_keyword: /@\w+/,
 			punctuation: /[{}]/,
 		},
 	};

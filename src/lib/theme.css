@@ -92,6 +92,11 @@
 	color: var(--color_g_5);
 }
 
+.token.at_keyword,
+::highlight(at_keyword) {
+	color: var(--color_d_5);
+}
+
 .token.attr_equals,
 ::highlight(attr_equals),
 .token.processing_instruction,
