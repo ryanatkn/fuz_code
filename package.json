@@ -83,6 +83,12 @@
         "options": {
           "useTabs": false
         }
+      },
+      {
+        "files": "src/fixtures/generated/**",
+        "options": {
+          "requirePragma": true
+        }
       }
     ]
   },
