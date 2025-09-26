@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz_code",
-  "version": "0.25.0",
+  "version": "0.26.0",
   "modules": {
     "./code_sample.js": {
       "path": "code_sample.ts",
@@ -22,6 +22,10 @@
     "./grammar_clike.js": {
       "path": "grammar_clike.ts",
       "declarations": [
+        {
+          "name": "class_keywords",
+          "kind": "variable"
+        },
         {
           "name": "add_grammar_clike",
           "kind": "function"
@@ -108,6 +112,28 @@
         {
           "name": "Highlight_Manager",
           "kind": "class"
+        }
+      ]
+    },
+    "./highlight_priorities.gen.js": {
+      "path": "highlight_priorities.gen.ts",
+      "declarations": [
+        {
+          "name": "gen",
+          "kind": "variable"
+        }
+      ]
+    },
+    "./highlight_priorities.js": {
+      "path": "highlight_priorities.ts",
+      "declarations": [
+        {
+          "name": "Highlight_Token_Name",
+          "kind": "type"
+        },
+        {
+          "name": "highlight_priorities",
+          "kind": "variable"
         }
       ]
     },

@@ -1,0 +1,395 @@
+const e={json_complex:{name:"json_complex",lang:"json",content:`{
+	"string": "a string",
+	"number": 12345,
+	"boolean": true,
+	"null": null,
+	"empty": "",
+	"escaped": "quote: \\"test\\" and backslash: \\\\",
+	"object": {
+		"array": [1, "b", false],
+		"strings": ["1", "2", "3"],
+		"mixed": ["start", 123, true, "middle", null, "end"],
+		"nested": [["a", "str", ""], {"key": "nested value"}]
+	}
+}
+`},css_complex:{name:"css_complex",lang:"css",content:`.some_class {
+	color: red;
+}
+
+.hypen-class {
+	font-size: 16px;
+}
+
+p {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* comment */
+
+/*
+multi
+.line {
+	i: 100px
+
+</style>
+
+@media*/
+
+#id {
+	background-color: blue;
+}
+
+div > p {
+	margin: 10px;
+}
+
+@media (max-width: 600px) {
+	body {
+		background-color: light-dark(lightblue, darkblue);
+	}
+}
+
+.content::before {
+	/* prettier-ignore */
+	content: "</style> /* not a comment */";
+}
+
+.attr[title='Click: here'] {
+	background-image: url('data:image/svg+xml...');
+}
+`},ts_complex:{name:"ts_complex",lang:"ts",content:`const a = 1;
+
+const b: string = 'b';
+
+const c = true;
+
+export type Some_Type = 1 | 'b' | true;
+
+declare const some_decorator: any;
+
+abstract class Base {
+	abstract abstract_method(): void;
+}
+
+/* eslint-disable no-console */
+
+@some_decorator
+class D extends Base {
+	readonly d1: string = 'd';
+	d2: number;
+	d3 = $state(null);
+
+	@some_decorator
+	decorated = true;
+
+	constructor(d2: number) {
+		super();
+		this.d2 = d2;
+	}
+
+	abstract_method(): void {
+		// implementation
+	}
+
+	@some_decorator('example', {option: true})
+	class_method(): string {
+		return \`Hello, \${this.d1}\`;
+	}
+
+	instance_method = (): void => {
+		/* ... */
+		let i = 0;
+		do {
+			i++;
+		} while (i < 3);
+
+		for (const c2 of this.d1) {
+			if (c2 === 'd') continue;
+			if (!c2) break;
+			this.#private_method(a, c2);
+		}
+
+		switch (this.d1) {
+			case 'a':
+				console.log('case a');
+				break;
+			case 'b':
+			case 'c':
+				console.log('case b or c');
+				break;
+			default:
+				console.log('default');
+		}
+
+		const obj: {has_d1?: boolean; is_d: boolean} = {
+			has_d1: 'd1' in this,
+			is_d: this instanceof D,
+		};
+		delete obj.has_d1;
+		// foo
+	};
+
+	#private_method(a2: number, c2: any): void {
+		throw new Error(\`\${this.d1}
+			multiline
+			etc \${a2 + c2}
+		\`);
+	}
+
+	*generator(): Generator<number | Array<number>> {
+		yield 1;
+		yield* [2, 3];
+	}
+
+	async *async_generator(): AsyncGenerator<number> {
+		yield await Promise.resolve(4);
+	}
+
+	protected async protected_method(): Promise<void> {
+		try {
+			await new Promise((resolve) => setTimeout(resolve, 100));
+			if (Math.random() > 0.5) {
+				console.log(new Date());
+			} else if (Math.random() > 0.2) {
+				console.log('else if branch');
+			} else {
+				console.log('else branch');
+			}
+		} catch (error: unknown) {
+			console.error(error);
+		} finally {
+			console.log('finally block');
+		}
+	}
+}
+
+// comment
+
+/*
+other comment
+
+const comment = false;
+*/
+
+/**
+ * JSDoc comment
+ */
+
+import {sample_langs, type Sample_Lang} from '../code_sample.js';
+import * as A from '../code_sample.js';
+
+export {a, A, b, c, D};
+
+sample_langs as unknown as Sample_Lang satisfies Sample_Lang;
+
+export interface Some_E<T = null> {
+	name: string;
+	age: number;
+	t?: T;
+}
+
+const e: {name: string; age: number} = {name: 'A. H.', age: 100};
+const v = [['', e]] as const;
+export const some_e: Map<string, Some_E> = new Map(v);
+
+export function add(x: number, y: number): number {
+	return x + y;
+}
+
+export const plus = (a: any, b: any): any => a + b;
+
+// boundary test cases
+export const str_with_keywords = 'const class function string';
+export const str_with_comment = '// this is not a comment';
+export const template_with_expr = \`Value: \${1 + 2}\`;
+
+// regex that looks like comment
+export const regex = /\\/\\/.*/g;
+export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
+
+// string in comment should not be highlighted as string
+// const commented = "this string is in a comment";
+`},html_complex:{name:"html_complex",lang:"html",content:`<!doctype html>
+
+<div class="test">
+	<p>hello world!</p>
+</div>
+
+<p class="some_class hypen-class">some <span class="a b c">text</span></p>
+
+<button type="button" disabled>click me</button>
+
+<!-- comment <div>a<br /> b</div> <script> -->
+
+<br />
+
+<hr onclick="console.log('hi')" />
+
+<img src="image.jpg" alt="access" />
+
+<ul>
+	<li>list item 1</li>
+	<li>list item 2</li>
+</ul>
+
+<form action="/submit" method="post">
+	<input type="text" name="username" placeholder="Enter name" />
+	<select name="option" data-role="dropdown">
+		<option value="1">First</option>
+		<option value="2">Second</option>
+	</select>
+</form>
+
+<script>
+	const ok = '<style>';
+<\/script>
+
+<style type="text/css">
+	.special::before {
+		content: '< & >';
+	}
+</style>
+
+<![CDATA[ if (a < 0) alert("b"); <not-a-tag> ]]>
+`},svelte_complex:{name:"svelte_complex",lang:"svelte",content:`<script lang="ts" module>
+	export const HELLO = 'world';
+<\/script>
+
+<script lang="ts">
+	// @ts-expect-error
+	import Thing from '$lib/Thing.svelte';
+	import type {Snippet} from 'svelte';
+
+	const {
+		thing,
+		bound = $bindable(true),
+		children,
+		onclick,
+	}: {
+		thing: Record<string, any>;
+		bound?: boolean;
+		children: Snippet;
+		onclick?: () => void;
+	} = $props();
+
+	const thing_keys = $derived(Object.entries(thing));
+
+	const a = 1 as number;
+
+	const b = 'b';
+
+	let c: boolean = $state(true);
+
+	const f = (p: any) => p;
+
+	const attachment = (_p1: string, _p2: number) => {
+		return (el: HTMLElement) => {
+			element_ref !== el;
+		};
+	};
+
+	let value = $state(thing['']);
+	let element_ref: HTMLElement;
+<\/script>
+
+<h1 bind:this={element_ref}>hello {HELLO}!</h1>
+
+{#each thing_keys as [k, { t, u }] (f(k))}
+	{@const v = Math.round(t[k + f(u)])}
+	{f(v)}
+{/each}
+
+{#if f(c)}
+	<Thing string_prop="a {f('s')} b" number_prop={f(1)} />
+{:else if f(a > 0)}
+	bigger
+{:else}
+	<Thing string_prop="b" onthing={() => (c = f(!c))}>
+		{@render children()}
+	</Thing>
+{/if}
+
+<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+{@html '<strong>raw html</strong>'}
+
+<input bind:value type="text" class:active={c} />
+
+<span {@attach attachment('param', f(42))}>...</span>
+
+{@render my_snippet('p')}
+
+{#snippet my_snippet(p: string)}
+	<button type="button" {onclick}>{p}</button>
+{/snippet}
+
+<p class="some_class hypen-class" id="unique_id">
+	some <span class="a b c">text</span>
+</p>
+
+<button type="button" disabled> click me </button>
+
+<!-- comment <div>a<br /> {b}</div> -->
+{b.repeat(2)}
+{bound}
+
+<br />
+
+<hr />
+
+<img src="image.jpg" alt="access" />
+
+<ul>
+	<li>list item 1</li>
+	<li>list item 2</li>
+</ul>
+
+<!-- embedded tags for boundary testing -->
+<div>
+	<script>
+		const inline_js = 'no lang attr';
+	<\/script>
+	<style>
+		.inline {
+			color: blue;
+		}
+	</style>
+</div>
+
+<style>
+	.some_class {
+		color: red;
+	}
+
+	.hypen-class {
+		font-size: 16px;
+	}
+
+	p {
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	/* comment */
+
+	/*
+	multi
+	line
+
+	<comment>
+
+	*/
+
+	#unique_id {
+		background-color: blue;
+	}
+
+	@media (max-width: 600px) {
+		:global(body) {
+			background-color: light-dark(lightblue, darkblue);
+		}
+	}
+
+	:global(.escapehatch)::before {
+		content: '< & >';
+	}
+</style>
+`}};export{e as s};

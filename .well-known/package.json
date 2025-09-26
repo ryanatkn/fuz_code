@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz_code",
-  "version": "0.25.0",
+  "version": "0.26.0",
   "description": "syntax styling utilities and components for TypeScript, Svelte, SvelteKit",
   "glyph": "🎨",
   "logo": "logo.svg",
@@ -82,6 +82,12 @@
         "files": "package.json",
         "options": {
           "useTabs": false
+        }
+      },
+      {
+        "files": "src/fixtures/generated/**",
+        "options": {
+          "requirePragma": true
         }
       }
     ]
