@@ -12,13 +12,13 @@
 	const pkg = parse_pkg(package_json, src_json);
 </script>
 
-<main class="box w_100">
-	<div class="box width_md">
+<main class="box width_100">
+	<div class="box width_upto_md">
 		<section>
 			<Package_Summary {pkg} />
 		</section>
 		<section>
-			<aside class="width_sm">
+			<aside class="width_upto_sm">
 				⚠️ Docs are a work in progress. This page has usage examples with the optional Svelte
 				component, and the <a href="https://github.com/ryanatkn/fuz_code">readme</a> has TypeScript usage
 				docs.

@@ -12,7 +12,7 @@
 	// TODO standardize
 </script>
 
-<main class="width_md">
+<main class="width_upto_md">
 	<section class="box">
 		<header>
 			<h1 class="mt_xl5">{pkg.repo_name}</h1>
@@ -20,8 +20,8 @@
 		<Breadcrumb>🎨</Breadcrumb>
 	</section>
 	<Community_Links_Panel />
-	<section class="box w_100 mb_lg">
-		<div class="panel p_md width_md">
+	<section class="box width_100 mb_lg">
+		<div class="panel p_md width_upto_md">
 			<Package_Detail {pkg} />
 		</div>
 	</section>
