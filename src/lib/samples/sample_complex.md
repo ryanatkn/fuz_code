@@ -56,7 +56,7 @@ function add(a: number, b: number): number {
 }
 ```
 
-#### TypeScript with alias typescript
+#### TypeScript with alias 'typescript'
 
 ```typescript
 interface User {
@@ -78,7 +78,7 @@ function add(a, b) {
 }
 ```
 
-#### JavaScript with alias javascript
+#### JavaScript with alias 'javascript'
 
 ```javascript
 const multiply = (a, b) => a * b;
@@ -120,7 +120,7 @@ console.log(result);
 <!-- comment -->
 ```
 
-#### HTML with alias markup
+#### HTML with alias 'markup'
 
 ```markup
 <ul>
