@@ -12,7 +12,7 @@ export type Add_Syntax_Grammar = (syntax_styler: Syntax_Styler) => void;
  * @see LICENSE
  */
 export class Syntax_Styler {
-	langs: Record<string, Syntax_Grammar | undefined> = {
+	langs: Record<string, Normalized_Grammar | undefined> = {
 		plaintext: {},
 	};
 
@@ -36,10 +36,12 @@ export class Syntax_Styler {
 		// Normalize grammar once at registration for optimal runtime performance
 		// Use a visited set to handle circular references
 		this.normalize_grammar(grammar, new Set());
-		this.langs[id] = grammar;
+		// After normalization, grammar has the shape of Normalized_Grammar
+		const normalized = grammar as unknown as Normalized_Grammar;
+		this.langs[id] = normalized;
 		if (aliases !== undefined) {
 			for (var alias of aliases) {
-				this.langs[alias] = grammar;
+				this.langs[alias] = normalized;
 			}
 		}
 	}
@@ -49,13 +51,20 @@ export class Syntax_Styler {
 		extension_id: string,
 		extension: Syntax_Grammar,
 		aliases?: Array<string>,
-	): Syntax_Grammar {
+	): Normalized_Grammar {
+		// extend_grammar returns already normalized grammar
 		var grammar = this.extend_grammar(base_id, extension);
-		this.add_lang(extension_id, grammar, aliases);
+		// Store the normalized grammar directly
+		this.langs[extension_id] = grammar;
+		if (aliases !== undefined) {
+			for (var alias of aliases) {
+				this.langs[alias] = grammar;
+			}
+		}
 		return grammar;
 	}
 
-	get_lang(id: string): Syntax_Grammar {
+	get_lang(id: string): Normalized_Grammar {
 		var lang = this.langs[id];
 		if (lang === undefined) {
 			throw Error(`The language "${id}" has no grammar.`);
@@ -187,7 +196,7 @@ export class Syntax_Styler {
 		before: string,
 		insert: Syntax_Grammar,
 		root: Record<string, any> = this.langs,
-	): Syntax_Grammar {
+	): Normalized_Grammar {
 		var grammar = root[inside];
 		var updated: Syntax_Grammar = {};
 
@@ -207,17 +216,19 @@ export class Syntax_Styler {
 		// Normalize the updated grammar to ensure inserted patterns have consistent shape
 		this.normalize_grammar(updated, new Set());
 
+		// After normalization, cast to Normalized_Grammar
+		const normalized = updated as unknown as Normalized_Grammar;
 		var old = root[inside];
-		root[inside] = updated;
+		root[inside] = normalized;
 
 		// Update references in other language definitions
 		depth_first_search(this.langs, (o, key, value) => {
 			if (value === old && key !== inside) {
-				o[key] = updated;
+				o[key] = normalized;
 			}
 		});
 
-		return updated;
+		return normalized;
 	}
 
 	/**
@@ -297,8 +308,13 @@ export class Syntax_Styler {
 	 * @param extension - The new tokens to append.
 	 * @returns the new grammar
 	 */
-	extend_grammar(base_id: string, extension: Syntax_Grammar): Syntax_Grammar {
-		return {...deep_clone(this.get_lang(base_id)), ...extension};
+	extend_grammar(base_id: string, extension: Syntax_Grammar): Normalized_Grammar {
+		// Merge normalized base with un-normalized extension
+		const extended = {...deep_clone(this.get_lang(base_id)), ...extension};
+		// Normalize the extension parts
+		this.normalize_grammar(extended as Syntax_Grammar, new Set());
+		// Return as Normalized_Grammar
+		return extended as unknown as Normalized_Grammar;
 	}
 
 	/**
@@ -326,10 +342,11 @@ export class Syntax_Styler {
 		}
 
 		// Recursively normalize the inside grammar if present
-		let normalized_inside: Syntax_Grammar | null = null;
+		let normalized_inside: Normalized_Grammar | null = null;
 		if (p.inside) {
-			normalized_inside = p.inside;
-			this.normalize_grammar(normalized_inside, visited);
+			this.normalize_grammar(p.inside, visited);
+			// After normalization, cast to Normalized_Grammar
+			normalized_inside = p.inside as unknown as Normalized_Grammar;
 		}
 
 		return {
@@ -479,8 +496,14 @@ export interface Normalized_Grammar_Token {
 	lookbehind: boolean;
 	greedy: boolean;
 	alias: Array<string>;
-	inside: Syntax_Grammar | null;
+	inside: Normalized_Grammar | null;
 }
+
+/**
+ * A grammar after normalization.
+ * All values are arrays of normalized tokens with consistent shapes.
+ */
+export type Normalized_Grammar = Record<string, Array<Normalized_Grammar_Token>>;
 
 const depth_first_search = (
 	o: any,

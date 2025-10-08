@@ -1,428 +1,191 @@
-# Performance Optimization TODO
+# Performance Optimization Progress
 
 ## Executive Summary
 
-This document outlines performance optimizations for the syntax_styler tokenization engine. Analysis has identified **20 distinct optimization opportunities** with an estimated **50-80% total performance improvement**.
+**Goal:** 50-70% total performance improvement through systematic optimization
+**Current Progress:** Phase 1 Complete - Type System & Object Shape Normalization
+**Achieved:** ~2% baseline improvement (5834 → 5949 avg ops/sec)
+**Next Target:** Phase 2 - Remove Redundant Work (~10-15% additional gain)
 
-The primary bottlenecks are:
-1. **Polymorphic object shapes** breaking V8 inline caches (~30-50% impact)
-2. **String concatenation** in HTML generation (~10-20% impact)
-3. **Redundant calculations and type checks** (~10-15% impact)
-4. **Suboptimal iteration patterns** (~5-10% impact)
+### Performance Baseline
+
+```
+Before Phase 1: 5833.93 avg ops/sec
+After Phase 1:  5948.67 avg ops/sec (+2.0%)
+
+Notable improvements:
+- html_complex: +7.6%
+- large:svelte_complex: +12.4%
+- large:html_complex: +16.6%
+```
+
+The initial 2% gain establishes a foundation. Larger gains expected as:
+1. V8 JIT optimizes the now-monomorphic code paths
+2. We stack additional optimizations
+3. We remove redundant calculations and allocations
 
 ---
 
-## Phase 1: Monomorphic Properties 🔴 CRITICAL
+## ✅ Phase 1: Type System & Object Shape Normalization (COMPLETE)
 
-**Expected Impact: 30-50% performance improvement**
+**Status:** ✅ DONE
+**Impact:** 2% baseline, foundation for future gains
+**Commits:** Multiple (normalization, type refactor, test cleanup)
 
-These issues break V8's inline caches and prevent optimization. Fixing these should be the highest priority.
+### What We Fixed
 
-### 1.1 Normalize Syntax_Token.alias to Array
+#### 1. Normalized `alias` Property
+- **Before:** `string | Array<string>` creating polymorphic shapes
+- **After:** Always `Array<string>`, normalized in constructor
+- **Impact:** Removed 3 `Array.isArray()` checks from hot paths
+- **Files:** `syntax_token.ts`, `syntax_styler.ts`, `highlight_manager.ts`
+
+#### 2. Grammar Normalization at Registration
+- **Before:** Grammars had optional properties, runtime normalization
+- **After:** All grammars normalized to consistent shape at `add_lang()`
+- **Changes:**
+  - All pattern properties required: `lookbehind`, `greedy`, `alias`, `inside`
+  - All grammar values stored as `Array<Normalized_Grammar_Token>`
+  - Global flags added during normalization (not runtime)
+  - `grammar.rest` merged during normalization (not tokenization)
+- **Files:** `syntax_styler.ts` (normalize_pattern, normalize_grammar)
+
+#### 3. Fixed `grammar_insert_before` Bug
+- **Critical fix:** Patterns inserted after registration weren't normalized
+- **Impact:** `template_string` and `regex` patterns were broken
+- **Solution:** Added normalization call in `grammar_insert_before()`
+
+#### 4. Type System Refactor
+- **Added:** `Normalized_Grammar` type to distinguish normalized state
+- **Added:** `Normalized_Grammar_Token` with required properties
+- **Benefit:** Type system correctly reflects runtime invariants
+- **Result:** No casts needed in grammar files (clean code)
+
+#### 5. Removed Dead Code
+- **Removed:** Defensive branches checking for "legacy patterns"
+- **Before:** Tests checked for un-normalized patterns "that shouldn't happen"
+- **After:** Code trusts normalization invariant (cleaner, faster)
+
+### Key Learnings
+
+1. **V8 is resilient** - The polymorphic shapes didn't hurt as much as expected
+2. **Foundation matters** - Type system now supports confident refactoring
+3. **Normalization works** - All 53 tests pass, fixtures unchanged
+4. **Bigger gains ahead** - Removed allocations/calculations will show more impact
+
+---
+
+## 🎯 Phase 2: Remove Redundant Work (NEXT - HIGH PRIORITY)
+
+**Status:** 🔜 READY TO START
+**Expected Impact:** 10-15% performance improvement
+**Complexity:** Low - straightforward changes
+**Risk:** Low - well-isolated changes
+
+### 2.1 Use Stored `token.length` Directly ⚡ QUICK WIN
 
 **Problem:**
-- Type: `string | Array<string>` (syntax_token.ts:19)
-- Creates polymorphic inline cache misses
-- Requires runtime `Array.isArray()` checks in 3 hot paths
-
-**Locations:**
-- Definition: `src/lib/syntax_token.ts:19`
-- Constructor: `src/lib/syntax_token.ts:31`
-- Usage checks:
-  - `src/lib/syntax_styler.ts:247-253` (stringify_token)
-  - `src/lib/highlight_manager.ts:129` (highlight_from_syntax_tokens)
-  - `src/lib/tokenize_syntax.ts:76` (pattern read)
+- `highlight_manager.ts:114` calls `this.#get_token_length(token)`
+- Method recursively traverses content to calculate length
+- But `token.length` already has this value from constructor!
 
 **Solution:**
 ```typescript
-// In syntax_token.ts
-alias: Array<string>; // Always an array
-
-constructor(
-    type: string,
-    content: string | Syntax_Token_Stream,
-    alias: string | Array<string> | undefined,
-    matched_str: string = '',
-) {
-    this.type = type;
-    this.content = content;
-    this.alias = alias ? (Array.isArray(alias) ? alias : [alias]) : [];
-    this.length = matched_str.length;
-}
+// highlight_manager.ts:114
+const length = token.length;  // Instead of this.#get_token_length(token)
 ```
 
-**Changes needed:**
-- Update type definition: `alias: Array<string>`
-- Normalize in constructor (single entry point)
-- Remove all `Array.isArray(alias)` checks
-- Update `stringify_token` to use `for (const a of o.alias)`
-- Update `highlight_manager` to remove Array.isArray check
+**Then delete** `#get_token_length()` method (lines 161-175)
 
-**Testing:**
-- All existing tests should pass
-- Verify fixture outputs unchanged
-- Run benchmarks to confirm improvement
+**Expected gain:** 3-5% (eliminates tree traversal in hot path)
 
 ---
 
-### 1.2 Normalize Pattern Objects to Consistent Shape
+### 2.2 Eliminate `encode()` Tree Cloning ⚡ BIG WIN
 
 **Problem:**
-- Pattern objects have optional properties: `lookbehind?`, `greedy?`, `alias?`, `inside?`
-- Creates ~4^4 = 256 possible shapes across grammar definitions
-- V8 creates different hidden classes for each combination
+- `syntax_styler.ts:427-438` - recursively clones entire token tree
+- Only purpose: escape HTML entities (`&`, `<`, nbsp)
+- Creates thousands of intermediate objects
 
-**Locations:**
-- Interface: `src/lib/syntax_styler.ts:352-376` (Syntax_Grammar_Token)
-- Usage: ~35 lookbehind, ~29 greedy, ~62 inside across 8 grammar files
-- Read: `src/lib/tokenize_syntax.ts:73-76`
-
-**Solution:**
-Add normalization function called during grammar registration:
-
+**Current flow:**
 ```typescript
-// In syntax_styler.ts, add private method:
-private normalize_pattern(pattern: RegExp | Syntax_Grammar_Token): Syntax_Grammar_Token {
-    if (pattern instanceof RegExp) {
-        return {
-            pattern,
-            lookbehind: false,
-            greedy: false,
-            alias: [],
-            inside: null,
-        };
-    }
-
-    // Ensure all properties exist with defaults
-    return {
-        pattern: pattern.pattern,
-        lookbehind: pattern.lookbehind ?? false,
-        greedy: pattern.greedy ?? false,
-        alias: pattern.alias ? (Array.isArray(pattern.alias) ? pattern.alias : [pattern.alias]) : [],
-        inside: pattern.inside ?? null,
-    };
-}
-
-// Apply in add_lang, recursively through grammar
-private normalize_grammar(grammar: Syntax_Grammar): void {
-    for (const key in grammar) {
-        if (key === 'rest') continue;
-
-        const value = grammar[key];
-        if (!value) continue;
-
-        const patterns = Array.isArray(value) ? value : [value];
-        grammar[key] = patterns.map(p => this.normalize_pattern(p));
-    }
-
-    if (grammar.rest) {
-        this.normalize_grammar(grammar.rest);
-    }
-}
+tokens → encode(tokens) → stringify_token(encoded_tokens)
+         ^^^^^^^^^^ clones entire tree just to escape 3 characters
 ```
 
-**Changes needed:**
-- Add `normalize_pattern()` and `normalize_grammar()` methods
-- Call `normalize_grammar()` in `add_lang()` before storing
-- Update `Syntax_Grammar_Token` interface to make all properties required
-- Remove default handling in tokenize_syntax.ts:73-76 (just read properties directly)
-- Ensure global flag handling (see 1.3)
+**Solution:** Move escaping into `stringify_token`:
 
-**Testing:**
-- Grammar construction tests
-- All language fixtures should remain identical
-- Benchmark improvement
-
----
-
-### 1.3 Pre-process Grammar.rest and Ensure Global Flags
-
-**Problem:**
-- `grammar.rest` merged at tokenization time (tokenize_syntax.ts:29-35)
-- Mutates grammar shape during hot path
-- RegExp global flag added at runtime (tokenize_syntax.ts:78-82)
-
-**Locations:**
-- Rest merging: `src/lib/tokenize_syntax.ts:29-35`
-- Global flag: `src/lib/tokenize_syntax.ts:78-82`
-
-**Solution:**
-Move both to grammar registration (in normalize_pattern):
-
-```typescript
-private normalize_pattern(pattern: RegExp | Syntax_Grammar_Token): Syntax_Grammar_Token {
-    const p = pattern instanceof RegExp ? { pattern } : pattern;
-
-    // Ensure global flag
-    let regex = p.pattern;
-    if ((p.greedy ?? false) && !regex.global) {
-        const flags = regex.flags;
-        regex = new RegExp(regex.source, flags.includes('g') ? flags : flags + 'g');
-    }
-
-    return {
-        pattern: regex,
-        lookbehind: p.lookbehind ?? false,
-        greedy: p.greedy ?? false,
-        alias: p.alias ? (Array.isArray(p.alias) ? p.alias : [p.alias]) : [],
-        inside: p.inside ?? null,
-    };
-}
-
-private normalize_grammar(grammar: Syntax_Grammar): void {
-    // Merge rest into grammar first
-    if (grammar.rest) {
-        for (const token in grammar.rest) {
-            grammar[token] = grammar.rest[token];
-        }
-        delete grammar.rest;
-    }
-
-    // Then normalize all patterns
-    for (const key in grammar) {
-        const value = grammar[key];
-        if (!value) continue;
-
-        const patterns = Array.isArray(value) ? value : [value];
-        grammar[key] = patterns.map(p => this.normalize_pattern(p));
-    }
-}
-```
-
-**Changes needed:**
-- Add rest merging to `normalize_grammar()`
-- Add global flag handling to `normalize_pattern()`
-- Remove lines 29-35 from tokenize_syntax.ts
-- Remove lines 78-82 from tokenize_syntax.ts
-- Update grammar type to not have `rest?` property (or mark as internal)
-
-**Testing:**
-- Verify all grammars normalize correctly
-- Test greedy patterns work correctly
-- Fixtures unchanged
-
----
-
-### 1.4 Normalize Pattern Values to Arrays
-
-**Problem:**
-- Grammar values can be `RegExp | Syntax_Grammar_Token | Array<...>`
-- Wrapped in array every tokenization (tokenize_syntax.ts:65)
-
-**Location:**
-- `src/lib/tokenize_syntax.ts:65`
-
-**Solution:**
-Normalize in `normalize_grammar()`:
-
-```typescript
-private normalize_grammar(grammar: Syntax_Grammar): void {
-    // ... rest handling ...
-
-    for (const key in grammar) {
-        if (key === 'rest') continue;
-        const value = grammar[key];
-        if (!value) {
-            grammar[key] = [];
-            continue;
-        }
-
-        // Always store as array of normalized patterns
-        const patterns = Array.isArray(value) ? value : [value];
-        grammar[key] = patterns.map(p => this.normalize_pattern(p));
-    }
-}
-```
-
-**Changes needed:**
-- Store all grammar values as arrays
-- Update `Syntax_Grammar` type: `Record<string, Array<Syntax_Grammar_Token>>`
-- Remove line 65 from tokenize_syntax.ts (now always array)
-
-**Testing:**
-- Grammar with single pattern
-- Grammar with array of patterns
-- Fixtures unchanged
-
----
-
-### 1.5 Fix Encoded Token Shape Inconsistency
-
-**Problem:**
-- `encode()` creates Syntax_Token without matched_str parameter
-- Results in tokens with `length: 0` (different shape)
-- Only used for HTML generation, not ranges
-
-**Location:**
-- `src/lib/syntax_styler.ts:427-438`
-
-**Solution:**
-Pass matched_str or calculate length consistently:
-
-```typescript
-const encode = (tokens: any): any => {
-    if (tokens instanceof Syntax_Token) {
-        // Preserve length by calculating from content or passing through
-        const encoded_content = encode(tokens.content);
-        const length = typeof encoded_content === 'string'
-            ? encoded_content.length
-            : tokens.length;
-        const result = new Syntax_Token(tokens.type, encoded_content, tokens.alias);
-        result.length = length;
-        return result;
-    } else if (Array.isArray(tokens)) {
-        return tokens.map(encode);
-    } else {
-        return tokens
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/\u00a0/g, ' ');
-    }
-};
-```
-
-**Alternative:** Make encode only handle content, not full token reconstruction.
-
-**Changes needed:**
-- Update encode function to maintain consistent token shape
-- Consider if encode is needed at all (could escape during stringify)
-
-**Testing:**
-- HTML output unchanged
-- Token shapes consistent
-
----
-
-### 1.6 Fix Linked_List_Node Polymorphism
-
-**Problem:**
-- Nodes have `value: T | null` for sentinel nodes
-- Creates different hidden classes
-
-**Location:**
-- `src/lib/tokenize_syntax.ts:207-223`
-
-**Solution Option 1:** Consistent initialization
-```typescript
-class Linked_List<T = string | Syntax_Token> {
-    head: Linked_List_Node<T>;
-    tail: Linked_List_Node<T>;
-    length: number = 0;
-
-    constructor() {
-        // Use empty string as sentinel value instead of null
-        this.head = {value: '' as T, prev: null, next: null};
-        this.tail = {value: '' as T, prev: null, next: null};
-        this.head.next = this.tail;
-        this.tail.prev = this.head;
-    }
-}
-```
-
-**Solution Option 2:** Separate sentinel type (more complex)
-
-**Changes needed:**
-- Choose solution approach
-- Update node creation to be consistent
-- Update null checks if using sentinel values
-
-**Testing:**
-- Tokenization still works correctly
-- No impact on output
-
----
-
-### 1.7 Fix Hook Context Shape Mutation
-
-**Problem:**
-- Context object changes shape from `tokens: undefined` to `tokens: Syntax_Token_Stream`
-- V8 sees two different shapes
-
-**Location:**
-- `src/lib/syntax_styler.ts:92-103`
-
-**Solution Option 1:** Initialize with empty array
-```typescript
-var ctx: Hook_Before_Tokenize_Callback_Context = {
-    code: text,
-    grammar,
-    lang,
-    tokens: [] as any, // Will be populated
-};
-this.run_hook_before_tokenize(ctx);
-ctx.tokens = tokenize_syntax(ctx.code, ctx.grammar);
-```
-
-**Solution Option 2:** Use proper type transition
-```typescript
-const before_ctx: Hook_Before_Tokenize_Callback_Context = { code: text, grammar, lang, tokens: undefined };
-this.run_hook_before_tokenize(before_ctx);
-const after_ctx: Hook_After_Tokenize_Callback_Context = {
-    ...before_ctx,
-    tokens: tokenize_syntax(before_ctx.code, before_ctx.grammar),
-};
-```
-
-**Changes needed:**
-- Update context creation
-- Ensure type safety
-- Consider if before_tokenize hook needs to be able to modify tokens
-
-**Testing:**
-- Hook system still works
-- No shape changes
-
----
-
-## Phase 2: String Operations ⚡ HIGH IMPACT
-
-**Expected Impact: 10-20% performance improvement**
-
-### 2.1 Replace String Concatenation in stringify_token
-
-**Problem:**
-- Uses `s += this.stringify_token(e, lang)` in loop
-- Creates many intermediate string objects
-- O(n²) complexity in worst case
-
-**Location:**
-- `src/lib/syntax_styler.ts:231-234`
-
-**Solution:**
 ```typescript
 stringify_token(o: string | Syntax_Token | Syntax_Token_Stream, lang: string): string {
     if (typeof o === 'string') {
-        return o;
+        // Escape here instead of pre-processing
+        return o.replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/\u00a0/g, ' ');
     }
-    if (Array.isArray(o)) {
-        const parts: Array<string> = [];
-        for (const e of o) {
-            parts.push(this.stringify_token(e, lang));
-        }
-        return parts.join('');
-    }
-    // ... rest of function
+    // ... rest unchanged
 }
 ```
 
-**Changes needed:**
-- Replace `s += ...` with array collection
-- Use `parts.join('')` at the end
+**Then:**
+1. Remove `encode()` function entirely
+2. Change `stylize()` to: `return this.stringify_token(tokens, lang);`
+3. Delete lines 427-438
 
-**Testing:**
-- HTML output identical
-- Benchmark string-heavy content
+**Expected gain:** 5-8% (eliminates entire tree traversal + allocation)
 
 ---
 
-### 2.2 Optimize HTML Attribute Building
+### 2.3 Remove Remaining `Array.isArray()` Checks
+
+**Status:** Mostly done, but verify:
+- `tokenize_syntax.ts` - should not check if pattern values are arrays (always are)
+- Any grammar introspection code
+
+**Expected gain:** 1-2% (micro-optimization, but removes branches)
+
+---
+
+## 🚀 Phase 3: String Concatenation (AFTER PHASE 2)
+
+**Status:** 📋 PLANNED
+**Expected Impact:** 8-15% performance improvement
+**Complexity:** Low-Medium
+**Risk:** Low - output must remain identical
+
+### 3.1 Fix `stringify_token` String Building
 
 **Problem:**
-- `attributes += ' ' + name + '="' + ...` in loop
-- String concatenation overhead
+```typescript
+// syntax_styler.ts:231-234 - O(n²) worst case
+for (const e of o) {
+    s += this.stringify_token(e, lang);  // Creates new string each iteration
+}
+```
 
-**Location:**
-- `src/lib/syntax_styler.ts:259-260`
+**Solution:**
+```typescript
+const parts: Array<string> = [];
+for (const e of o) {
+    parts.push(this.stringify_token(e, lang));
+}
+return parts.join('');  // Single allocation
+```
+
+**Expected gain:** 8-12% for code-heavy content
+
+---
+
+### 3.2 Optimize Attribute Building
+
+**Problem:**
+```typescript
+// syntax_styler.ts:259-260
+for (const name in ctx.attributes) {
+    attributes += ' ' + name + '="' + ...;  // String concatenation in loop
+}
+```
 
 **Solution:**
 ```typescript
@@ -434,399 +197,316 @@ for (const name in ctx.attributes) {
 const attributes = attr_parts.join('');
 ```
 
-**Changes needed:**
-- Use array and join
-- Minor - low frequency, but good practice
-
-**Testing:**
-- HTML output unchanged
+**Expected gain:** 1-2% (low frequency, but good practice)
 
 ---
 
-### 2.3 Optimize HTML Element Building
+### 3.3 Use Template Literal for HTML Element
 
 **Problem:**
-- String concatenation for final HTML (lines 263-274)
-
-**Location:**
-- `src/lib/syntax_styler.ts:263-274`
+```typescript
+// syntax_styler.ts:263-274 - verbose string building
+return '<' + ctx.tag + ' class="' + ctx.classes.join(' ') + '"' + attributes + '>' +
+       ctx.content + '</' + ctx.tag + '>';
+```
 
 **Solution:**
 ```typescript
 return `<${ctx.tag} class="${ctx.classes.join(' ')}"${attributes}>${ctx.content}</${ctx.tag}>`;
 ```
 
-**Changes needed:**
-- Use template literal
-- Minimal gain but cleaner
-
-**Testing:**
-- HTML output unchanged
+**Expected gain:** <1% (clarity win, minimal perf impact)
 
 ---
 
-## Phase 3: Redundant Work 📊 MEDIUM IMPACT
+## 📊 Phase 4: Advanced Optimizations (PROFILE-GUIDED)
 
-**Expected Impact: 5-10% performance improvement**
+**Status:** 🔬 INVESTIGATE AFTER PHASE 3
+**Approach:** Profile first, optimize what's actually slow
 
-### 3.1 Use Stored token.length
-
-**Problem:**
-- `#get_token_length()` recalculates length by traversing content
-- token.length already stores this value (calculated in constructor)
-
-**Location:**
-- `src/lib/highlight_manager.ts:159-173` (unused private method)
-- Called from: `src/lib/highlight_manager.ts:112`
-
-**Solution:**
-```typescript
-// In #create_all_ranges method:
-const length = token.length; // Instead of this.#get_token_length(token)
-const end_pos = pos + length;
-```
-
-**Changes needed:**
-- Replace `this.#get_token_length(token)` with `token.length`
-- Remove `#get_token_length()` method entirely
-
-**Testing:**
-- Range highlighting works correctly
-- Positions match exactly (they should, since matched_str.length === token.length)
-
----
-
-### 3.2 Remove Array.isArray Checks After Normalization
-
-**Problem:**
-- After normalizing alias to always be array, these checks are redundant
-- Adds branching overhead
+### 4.1 Replace `for...in` Loops
 
 **Locations:**
-- `src/lib/syntax_styler.ts:249` (alias check)
-- `src/lib/highlight_manager.ts:129` (alias check)
-- Others will be removed by grammar normalization
+- `tokenize_syntax.ts:51` - grammar iteration
+- `syntax_styler.ts:194, 203` - grammar_insert_before
+- Others in deep_clone, depth_first_search
 
-**Solution:**
-Remove checks and treat as always array:
-
+**Change:**
 ```typescript
-// In syntax_styler.ts stringify_token:
-const aliases = o.alias; // Already normalized to array
-for (const alias of aliases) {
-    ctx.classes.push(alias);
+// Before
+for (const token in grammar) {
+    const patterns = grammar[token];
 }
 
-// In highlight_manager.ts:
-for (const alias of token.alias) { // Already normalized to array
-    // ...
-}
-```
-
-**Changes needed:**
-- Remove conditional checks
-- Direct iteration
-
-**Testing:**
-- Aliases work correctly
-- Multiple aliases
-- Single alias (now in array)
-- No alias (empty array)
-
----
-
-### 3.3 Replace for...in with Object.keys/entries
-
-**Problem:**
-- `for...in` is slower than `Object.keys()` or `for...of Object.entries()`
-- Enumerates prototype chain (not an issue here, but slower)
-
-**Locations:**
-- `src/lib/tokenize_syntax.ts:31` - grammar.rest (will be removed)
-- `src/lib/tokenize_syntax.ts:58` - grammar iteration
-- `src/lib/syntax_styler.ts:191, 193` - grammar_insert_before
-- `src/lib/syntax_styler.ts:259` - attributes
-- `src/lib/syntax_styler.ts:383, 476` - deep operations
-
-**Solution:**
-```typescript
-// tokenize_syntax.ts:58
-for (const token of Object.keys(grammar)) {
-    const patterns = grammar[token]; // Now always array after normalization
-    // ...
-}
-
-// Or with entries:
+// After
 for (const [token, patterns] of Object.entries(grammar)) {
-    // ...
+    // Faster, cleaner
 }
 ```
 
-**Changes needed:**
-- Replace 7 for...in loops
-- Use Object.keys() or Object.entries()
-- May need to handle non-own properties if any (unlikely)
-
-**Testing:**
-- Grammar processing works
-- No missed patterns
-- Benchmarks show improvement
+**When:** Only if profiling shows `for...in` is bottleneck
+**Expected gain:** 2-5% (depends on grammar complexity)
 
 ---
 
-## Phase 4: Advanced Optimizations 🎯 LOW-MEDIUM IMPACT
-
-**Expected Impact: 5-15% performance improvement (profile-dependent)**
-
-### 4.1 Optimize or Replace encode()
+### 4.2 Fix Hook Context Shape Mutation
 
 **Problem:**
-- Recursively clones entire token tree just to escape HTML entities
-- Creates many intermediate objects
-
-**Location:**
-- `src/lib/syntax_styler.ts:427-438`
-- Called from: `src/lib/syntax_styler.ts:104`
-
-**Solution Option 1:** Escape during stringify
 ```typescript
-// In stringify_token, when handling string:
-if (typeof o === 'string') {
-    return o.replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/\u00a0/g, ' ');
-}
+// syntax_styler.ts:92-103
+var ctx = {code, grammar, lang, tokens: undefined};  // Shape 1
+this.run_hook_before_tokenize(ctx);
+ctx.tokens = tokenize_syntax(...);  // Shape 2 (V8 sees different shape)
 ```
-
-**Solution Option 2:** In-place marking (more complex)
-
-**Changes needed:**
-- Integrate escaping into stringify_token
-- Remove encode() call and function
-- Careful testing of HTML output
-
-**Testing:**
-- HTML entity escaping works
-- Nested content escaped
-- Special characters handled
-
----
-
-### 4.2 Consider Object Pooling for Nodes
-
-**Problem:**
-- Linked list creates many node objects
-- GC overhead
-
-**Location:**
-- `src/lib/tokenize_syntax.ts:236` (add_after)
 
 **Solution:**
-Implement object pool:
-
 ```typescript
-class Node_Pool<T> {
-    private pool: Array<Linked_List_Node<T>> = [];
-
-    acquire(value: T, prev: Linked_List_Node<T>, next: Linked_List_Node<T>): Linked_List_Node<T> {
-        const node = this.pool.pop();
-        if (node) {
-            node.value = value;
-            node.prev = prev;
-            node.next = next;
-            return node;
-        }
-        return {value, prev, next};
-    }
-
-    release(node: Linked_List_Node<T>): void {
-        node.value = null;
-        node.prev = null;
-        node.next = null;
-        this.pool.push(node);
-    }
-}
+const before_ctx = {code, grammar, lang};
+this.run_hook_before_tokenize(before_ctx);
+const after_ctx = {
+    ...before_ctx,
+    tokens: tokenize_syntax(before_ctx.code, before_ctx.grammar),
+};
 ```
 
-**Changes needed:**
-- Add Node_Pool class
-- Use in Linked_List
-- Release nodes when done
-
-**When to do this:**
-- **Profile first** - only if node allocation shows up in profiles
-- May not be worth the complexity
-- Modern GC is very good at short-lived objects
-
-**Testing:**
-- Memory usage
-- Performance benchmarks
-- No leaks
+**When:** Only if profiling shows hook context is hot
+**Expected gain:** <1% (low frequency code path)
 
 ---
 
-### 4.3 Consider Linked List Alternative
+### 4.3 Fix Linked List Sentinel Nodes
 
 **Problem:**
-- Linked list has pointer-chasing overhead
-- Poor cache locality
-
-**Location:**
-- `src/lib/tokenize_syntax.ts:207-255`
-
-**Solution:**
-Could use dynamic array with sparse removal marking:
-
 ```typescript
-class Token_Array {
-    items: Array<string | Syntax_Token | null>;
-    // Mark removed items as null, compact at end
-}
+// tokenize_syntax.ts:213-214
+this.head = {value: null, prev: null, next: null};  // Different shape than
+this.tail = {value: null, prev: this.head, next: null};  // regular nodes
 ```
 
-**When to do this:**
-- Only if profiling shows linked list traversal is bottleneck
-- Significant refactoring required
-- Benefit unclear - removal operations are important
-
-**Decision:** Defer until after other optimizations
-
----
-
-### 4.4 Optimize Range Creation for Aliases
-
-**Problem:**
-- Creates duplicate Range objects for each alias
-- Necessary due to API (can't add same range to multiple highlights)
-
-**Location:**
-- `src/lib/highlight_manager.ts:128-140`
-
 **Solution:**
-Can't avoid without API changes, but could optimize:
-- Batch Range creation
-- Use typed arrays for positions, create ranges lazily
-- Probably not worth complexity
+```typescript
+this.head = {value: '' as T, prev: null, next: null};  // Same shape as data nodes
+this.tail = {value: '' as T, prev: this.head, next: null};
+```
 
-**Decision:** Accept as necessary cost of CSS Highlights API
-
----
-
-## Implementation Order
-
-1. **Week 1: Core Monomorphic Properties**
-   - 1.1 Normalize alias ✅ High impact, low risk
-   - 1.2-1.4 Grammar normalization ✅ High impact, moderate complexity
-   - Testing: Full fixture validation
-
-2. **Week 2: String Operations**
-   - 2.1-2.3 String concatenation fixes ✅ High impact, low risk
-   - Testing: HTML output validation, benchmarks
-
-3. **Week 3: Cleanup and Optimization**
-   - 1.5-1.7 Remaining shape issues ✅ Medium impact
-   - 3.1-3.3 Remove redundant work ✅ Medium impact
-   - Testing: Full test suite, benchmarks
-
-4. **Week 4: Validation and Advanced**
-   - Performance benchmarking
-   - Profile-guided optimization
-   - 4.1 encode() optimization if warranted
-   - 4.2-4.4 Advanced optimizations if needed
+**When:** Only if profiling shows linked list node creation is hot
+**Expected gain:** 1-2% (node creation is frequent but small objects)
 
 ---
 
-## Benchmarking Plan
+### 4.4 Object Pooling for Nodes
 
-After each phase, run:
+**Consideration:** Pool `Linked_List_Node` objects to reduce GC pressure
+
+**Decision:** Profile first - modern GC handles short-lived objects well
+**Risk:** Added complexity, memory overhead
+**When:** Only if profiling shows excessive GC time
+
+---
+
+### 4.5 Consider Linked List Alternative
+
+**Consideration:** Use dynamic array instead of linked list
+
+**Analysis:**
+- **Pros:** Better cache locality, faster iteration
+- **Cons:** Removal is harder (current use case needs removal)
+- **Decision:** Defer - removal operations are important for tokenization
+
+---
+
+## 📈 Performance Tracking
+
+### Current Benchmarks (After Phase 1)
+
+| Sample | Ops/sec | Mean Time (ms) |
+|--------|---------|----------------|
+| json_complex | 28865 | 0.036 |
+| css_complex | 27777 | 0.037 |
+| ts_complex | 1901 | 0.530 |
+| html_complex | 8205 | 0.125 |
+| svelte_complex | 2202 | 0.467 |
+| md_complex | 1859 | 0.566 |
+| large:json_complex | 244 | 4.26 |
+| large:css_complex | 248 | 4.14 |
+| large:ts_complex | 5.73 | 179.7 |
+| large:html_complex | 56.1 | 18.6 |
+| large:svelte_complex | 13.4 | 76.4 |
+| large:md_complex | 7.64 | 132.2 |
+
+**Average:** 5948.67 ops/sec
+
+### Performance Goals
+
+```
+Phase 1 (Done):     5834 → 5949 ops/sec  (+2%)   ✅
+Phase 2 (Next):     5949 → 6700 ops/sec  (+13%)  🎯
+Phase 3 (After):    6700 → 7800 ops/sec  (+16%)  📋
+Phase 4 (Future):   7800 → 9000 ops/sec  (+15%)  🔬
+────────────────────────────────────────────────
+Total Target:       5834 → 9000 ops/sec  (+54%)  🎯
+```
+
+### How to Benchmark
 
 ```bash
 npm run benchmark              # Internal performance
 npm run benchmark-compare      # vs Prism/Shiki
+gro test                       # Verify correctness
 ```
 
-Track metrics:
-- **Ops/sec** - primary metric
-- **Mean time** - for large content
-- **Memory usage** - ensure no increase
-- **GC pressure** - watch for allocation spikes
-
-Target improvements:
-- Phase 1: +30-50% ops/sec
-- Phase 2: +10-20% additional
-- Phase 3: +5-10% additional
-- Total: +50-80% vs baseline
+**Track:**
+- Ops/sec (primary metric)
+- Mean time for large content
+- Memory usage (should not increase)
+- All 53 tests must pass
 
 ---
 
-## Testing Strategy
+## 🎯 Implementation Plan
 
-For each change:
+### Week 1: Phase 2 - Remove Redundant Work
+- [ ] 2.1: Use `token.length` directly (1 hour)
+  - Change line 114 in highlight_manager.ts
+  - Delete `#get_token_length()` method
+  - Run tests
+- [ ] 2.2: Eliminate `encode()` (3-4 hours)
+  - Move escaping to stringify_token
+  - Remove encode() function
+  - Test HTML output thoroughly
+  - Run benchmarks
+- [ ] 2.3: Audit for remaining Array.isArray (1 hour)
+  - Search codebase
+  - Remove unnecessary checks
+  - Run tests
 
-1. **Unit tests** - All existing tests pass
-2. **Fixture tests** - `gro test src/fixtures/check.test.ts`
-3. **Visual inspection** - `git diff src/fixtures/` for unexpected changes
-4. **Benchmarks** - Measure improvement
-5. **Integration** - Test in real usage (Code.svelte component)
+**Milestone:** +10-15% improvement, all tests pass
 
-Critical invariants:
+---
+
+### Week 2: Phase 3 - String Concatenation
+- [ ] 3.1: Fix stringify_token (2 hours)
+  - Replace += loop with array.join()
+  - Test HTML output
+  - Benchmark
+- [ ] 3.2: Fix attribute building (1 hour)
+  - Use array.join()
+  - Test
+- [ ] 3.3: Template literal for elements (30 min)
+  - Simplify HTML generation
+  - Test
+
+**Milestone:** +8-15% additional improvement
+
+---
+
+### Week 3: Profile & Evaluate Phase 4
+- [ ] Run production profiling
+- [ ] Identify actual bottlenecks
+- [ ] Implement only what profiles show
+- [ ] Final benchmark run
+- [ ] Document results
+
+**Milestone:** Total 50-70% improvement
+
+---
+
+## 🧪 Testing Strategy
+
+**For each change:**
+
+1. ✅ **Unit tests** - All 53 tests pass
+2. ✅ **Fixture tests** - `gro test src/fixtures/check.test.ts`
+3. ✅ **Visual diff** - `git diff src/fixtures/` (should be empty)
+4. ✅ **Benchmarks** - Measure before/after
+5. ✅ **Integration** - Test in Code.svelte component
+
+**Critical invariants:**
 - HTML output identical (for same input)
 - Token structure identical
-- All language features work
+- Position tracking accurate
 - No memory leaks
 
 ---
 
-## Risk Assessment
+## 🎓 Lessons Learned
 
-**Low Risk:**
-- String concatenation fixes (2.1-2.3)
-- Using stored token.length (3.1)
-- for...in replacement (3.3)
+### From Phase 1
 
-**Medium Risk:**
-- Grammar normalization (1.2-1.4) - extensive changes but well-contained
-- Alias normalization (1.1) - impacts multiple files but straightforward
+1. **Type systems matter** - `Normalized_Grammar` type made refactoring safe
+2. **Test early, test often** - Found `grammar_insert_before` bug via tests
+3. **Dead code exists** - Found defensive branches for impossible states
+4. **V8 is robust** - Didn't hurt as much as feared, but still worth fixing
+5. **Foundation pays off** - Clean types enable confident future changes
 
-**Higher Risk:**
-- Linked list shape changes (1.6) - core data structure
-- encode() removal (4.1) - HTML generation path
-- Object pooling (4.2) - adds complexity
+### General Principles
 
-**Mitigation:**
-- Comprehensive testing at each step
-- Feature flags for risky changes
-- Rollback plan (git branches)
-- Profile before and after
+1. **Profile before optimizing** - Measure, don't guess
+2. **One change at a time** - Isolate impact
+3. **Trust your types** - If types say it's normalized, it is
+4. **Remove, don't add** - Deletion often faster than clever code
+5. **Allocations matter** - `encode()` tree cloning is expensive
 
 ---
 
-## Success Criteria
+## 📋 Quick Reference
 
-✅ **Performance:** 50-80% improvement in benchmark ops/sec
-✅ **Correctness:** All 200+ fixture tests pass
-✅ **Compatibility:** HTML output identical for all test cases
-✅ **Stability:** No memory leaks, no crashes
-✅ **Maintainability:** Code remains readable and well-documented
+### Files by Phase
+
+**Phase 1 (Done):**
+- `src/lib/syntax_styler.ts` - Core normalization
+- `src/lib/syntax_token.ts` - Alias normalization
+- `src/lib/tokenize_syntax.ts` - Runtime checks removed
+- `src/lib/highlight_manager.ts` - Array.isArray removed
+- `src/lib/grammar_*.ts` - Post-normalization mutations (kept as-is)
+
+**Phase 2 (Next):**
+- `src/lib/highlight_manager.ts` - Use token.length
+- `src/lib/syntax_styler.ts` - Remove encode()
+
+**Phase 3 (After):**
+- `src/lib/syntax_styler.ts` - String concatenation
+
+### Commands
+
+```bash
+# Run tests
+gro test
+gro test src/fixtures/check.test.ts
+
+# Benchmark
+npm run benchmark
+npm run benchmark-compare
+
+# Check fixtures
+git diff src/fixtures/
+
+# Update fixtures (if needed)
+gro src/fixtures/update
+```
 
 ---
 
-## Notes
+## 🎯 Success Criteria
 
-- All line numbers accurate as of current HEAD
-- Estimated impacts are based on common V8 optimization patterns
-- Actual results will vary by content type and size
-- Profile-guided optimization recommended after Phase 3
-- Some optimizations may interact (e.g., grammar normalization enables other optimizations)
+- ✅ **Phase 1:** 2% baseline improvement, clean type system
+- 🎯 **Phase 2:** 10-15% additional improvement
+- 📋 **Phase 3:** 8-15% additional improvement
+- 🔬 **Phase 4:** 5-10% additional improvement (profile-guided)
+- **Total:** 50-70% improvement vs original baseline
+- **Quality:** All tests pass, HTML output identical
+- **Maintainability:** Code cleaner than before
 
 ---
 
-## Quick Reference: File Impact Summary
+## 📝 Notes
 
-- `src/lib/syntax_token.ts` - Phase 1.1 (alias normalization)
-- `src/lib/tokenize_syntax.ts` - Phases 1.2-1.4, 1.6, 3.3
-- `src/lib/syntax_styler.ts` - Phases 1.2-1.5, 1.7, 2.1-2.3, 3.2-3.3, 4.1
-- `src/lib/highlight_manager.ts` - Phases 1.1, 3.1, 3.2
-- All grammar files - Phase 1.2 (automated normalization)
+- Line numbers accurate as of Phase 1 completion
+- Estimated impacts based on common optimization patterns
+- Actual results vary by content type and size
+- Modern V8 already does many optimizations
+- Biggest gains often from removing work, not clever algorithms
+- Type safety enables confident refactoring
 
-Total estimated changes: ~15-20 files, ~200-300 lines modified
+**Last Updated:** After Phase 1 completion
+**Next Review:** After Phase 2 completion

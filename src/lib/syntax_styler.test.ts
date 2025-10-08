@@ -76,56 +76,26 @@ describe('grammar mutation behavior', () => {
 				if (visited.has(obj)) return;
 				visited.add(obj);
 
+				// After normalization, all grammar values are arrays of Normalized_Grammar_Token
 				for (const key in obj) {
 					const val = obj[key];
-					// After normalization, grammar values are arrays of patterns
-					if (Array.isArray(val)) {
-						// Check each pattern in the array
-						val.forEach((item, index) => {
-							if (
-								item &&
-								typeof item === 'object' &&
-								item.greedy &&
-								item.pattern instanceof RegExp
-							) {
-								patterns.push({
-									path: `${path}${key}[${index}]`,
-									pattern: item.pattern,
-									source: item.pattern.source,
-									flags: item.pattern.flags,
-								});
-							}
-							// Recurse into inside if present
-							if (item && item.inside && !visited.has(item.inside)) {
-								find_greedy(item.inside, `${path}${key}[${index}].inside.`);
-							}
-						});
-					} else if (
-						val &&
-						typeof val === 'object' &&
-						val.greedy &&
-						val.pattern instanceof RegExp
-					) {
-						// Legacy: direct pattern object (shouldn't happen after normalization)
-						patterns.push({
-							path: path + key,
-							pattern: val.pattern,
-							source: val.pattern.source,
-							flags: val.pattern.flags,
-						});
-					} else if (
-						val &&
-						typeof val === 'object' &&
-						!(val instanceof RegExp) &&
-						!Array.isArray(val) &&
-						!visited.has(val)
-					) {
-						// Recurse into nested objects
-						if (key !== 'rest' && key !== 'inside') {
-							// Avoid circular refs
-							find_greedy(val, path + key + '.');
+					if (!Array.isArray(val)) continue;
+
+					// Each value is an array of normalized tokens
+					val.forEach((item, index) => {
+						if (item && typeof item === 'object' && item.greedy && item.pattern instanceof RegExp) {
+							patterns.push({
+								path: `${path}${key}[${index}]`,
+								pattern: item.pattern,
+								source: item.pattern.source,
+								flags: item.pattern.flags,
+							});
 						}
-					}
+						// Recurse into inside if present
+						if (item && item.inside && !visited.has(item.inside)) {
+							find_greedy(item.inside, `${path}${key}[${index}].inside.`);
+						}
+					});
 				}
 			};
 
