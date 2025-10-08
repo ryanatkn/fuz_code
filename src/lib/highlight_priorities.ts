@@ -24,7 +24,6 @@ export type Highlight_Token_Name =
 	| 'token_builtin'
 	| 'token_class_name'
 	| 'token_number'
-	| 'token_url'
 	| 'token_attr_value'
 	| 'token_attr_quote'
 	| 'token_string'
@@ -49,6 +48,7 @@ export type Highlight_Token_Name =
 	| 'token_namespace'
 	| 'token_rule'
 	| 'token_at_keyword'
+	| 'token_url'
 	| 'token_strikethrough'
 	| 'token_bold'
 	| 'token_italic';
@@ -77,7 +77,6 @@ export const highlight_priorities: Record<Highlight_Token_Name, number | undefin
 	token_builtin: 4,
 	token_class_name: 4,
 	token_number: 4,
-	token_url: 4,
 	token_attr_value: 5,
 	token_attr_quote: 5,
 	token_string: 5,
@@ -102,6 +101,7 @@ export const highlight_priorities: Record<Highlight_Token_Name, number | undefin
 	token_namespace: 10,
 	token_rule: 10,
 	token_at_keyword: 11,
+	token_url: 11,
 	token_strikethrough: 13,
 	token_bold: 14,
 	token_italic: 15,
