@@ -67,23 +67,18 @@ interface User {
 const user: User = {name: 'Alice', age: 30};
 ```
 
-### JavaScript
+### JS
 
 ```js
-const greeting = 'Hello, world!';
-const count = 42;
-
 function add(a, b) {
 	return a + b;
 }
 ```
 
-#### JavaScript with alias 'javascript'
+#### JS with alias 'javascript'
 
 ```javascript
-const multiply = (a, b) => a * b;
-const result = multiply(5, 3);
-console.log(result);
+const fifteen = multiply(5, 3);
 ```
 
 ### CSS
@@ -91,19 +86,7 @@ console.log(result);
 ```css
 .container {
 	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-#unique {
-	background-color: #f0f0f0;
-	border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 600px) {
-	body {
-		font-size: 14px;
-	}
+	font-size: 14px;
 }
 ```
 
@@ -133,11 +116,7 @@ console.log(result);
 
 ```json
 {
-	"name": "fuz_code",
-	"version": "1.0.0",
-	"dependencies": {
-		"example": "^1.2.3"
-	},
+	"key": "value",
 	"array": [1, 2, 3, true, false, null]
 }
 ```
