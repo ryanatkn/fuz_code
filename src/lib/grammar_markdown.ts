@@ -162,7 +162,10 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 			blockquote: {
 				pattern: /^>\s*.+$/m,
 				inside: {
-					punctuation: /^>/,
+					punctuation: {
+						pattern: /^>/,
+						alias: 'blockquote_punctuation',
+					},
 				},
 			},
 

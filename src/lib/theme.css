@@ -28,7 +28,9 @@
 .token_heading,
 ::highlight(token_heading),
 .token_heading_punctuation,
-::highlight(token_heading_punctuation) {
+::highlight(token_heading_punctuation),
+.token_tag_punctuation,
+::highlight(token_tag_punctuation) {
 	color: var(--color_a_5);
 }
 
@@ -41,7 +43,9 @@
 .token_inserted,
 ::highlight(token_inserted),
 .token_blockquote,
-::highlight(token_blockquote) {
+::highlight(token_blockquote),
+.token_blockquote_punctuation,
+::highlight(token_blockquote_punctuation) {
 	color: var(--color_b_5);
 }
 

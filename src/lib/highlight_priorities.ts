@@ -15,11 +15,13 @@ export type Highlight_Token_Name =
 	| 'token_interpolation_punctuation'
 	| 'token_heading'
 	| 'token_heading_punctuation'
+	| 'token_tag_punctuation'
 	| 'token_comment'
 	| 'token_char'
 	| 'token_builtin'
 	| 'token_inserted'
 	| 'token_blockquote'
+	| 'token_blockquote_punctuation'
 	| 'token_class_name'
 	| 'token_number'
 	| 'token_attr_value'
@@ -66,11 +68,13 @@ export const highlight_priorities: Record<Highlight_Token_Name, number | undefin
 	token_interpolation_punctuation: 2,
 	token_heading: 2,
 	token_heading_punctuation: 2,
+	token_tag_punctuation: 2,
 	token_comment: 3,
 	token_char: 3,
 	token_builtin: 3,
 	token_inserted: 3,
 	token_blockquote: 3,
+	token_blockquote_punctuation: 3,
 	token_class_name: 4,
 	token_number: 4,
 	token_attr_value: 5,
