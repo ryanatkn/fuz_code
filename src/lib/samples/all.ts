@@ -629,6 +629,35 @@ Empty fence above.
 Plain text for unknown language.
 \`\`\`
 
+Nested fence (4 backticks):
+
+\`\`\`\`md
+\`four\` fences
+\`\`\`css
+body { color: red; }
+\`\`\`
+\`\`\`\`
+
+Deeply nested (5 backticks):
+
+\`\`\`\`\`md
+with \`five\` fences
+\`\`\`\`md
+with \`four\` fences
+\`\`\`html
+<style>
+	body { color: red; }
+</style>
+\`\`\`
+ending \`four\`
+\`\`\`\`
+another \`four\`
+\`\`\`\`ts
+const a = '5';
+\`\`\`\`
+ending \`five\`
+\`\`\`\`\`
+
 ## HTML Support
 
 Since Markdown extends HTML, raw HTML is also styled:

@@ -194,6 +194,35 @@ Empty fence above.
 Plain text for unknown language.
 <span class="token code_fence punctuation">```</span></span>
 
+Nested fence (4 backticks):
+
+<span class="token fenced_code_4tick_md"><span class="token code_fence punctuation">````md</span><span class="token lang_md">
+<span class="token inline_code code"><span class="token punctuation">`</span>four<span class="token punctuation">`</span></span> fences
+<span class="token fenced_code_css"><span class="token code_fence punctuation">```css</span><span class="token lang_css">
+<span class="token selector">body</span> <span class="token punctuation">{</span> <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</span><span class="token code_fence punctuation">```</span></span>
+</span><span class="token code_fence punctuation">````</span></span>
+
+Deeply nested (5 backticks):
+
+<span class="token fenced_code_5tick_md"><span class="token code_fence punctuation">`````md</span><span class="token lang_md">
+with <span class="token inline_code code"><span class="token punctuation">`</span>five<span class="token punctuation">`</span></span> fences
+<span class="token fenced_code_4tick_md"><span class="token code_fence punctuation">````md</span><span class="token lang_md">
+with <span class="token inline_code code"><span class="token punctuation">`</span>four<span class="token punctuation">`</span></span> fences
+<span class="token fenced_code_html"><span class="token code_fence punctuation">```html</span><span class="token lang_markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token lang_css">
+	<span class="token selector">body</span> <span class="token punctuation">{</span> <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+</span><span class="token code_fence punctuation">```</span></span>
+ending <span class="token inline_code code"><span class="token punctuation">`</span>four<span class="token punctuation">`</span></span>
+</span><span class="token code_fence punctuation">````</span></span>
+another <span class="token inline_code code"><span class="token punctuation">`</span>four<span class="token punctuation">`</span></span>
+<span class="token fenced_code_4tick_ts"><span class="token code_fence punctuation">````ts</span><span class="token lang_ts">
+<span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token string">'5'</span><span class="token punctuation">;</span>
+</span><span class="token code_fence punctuation">````</span></span>
+ending <span class="token inline_code code"><span class="token punctuation">`</span>five<span class="token punctuation">`</span></span>
+</span><span class="token code_fence punctuation">`````</span></span>
+
 <span class="token heading"><span class="token punctuation">##</span> HTML Support</span>
 
 Since Markdown extends HTML, raw HTML is also styled:
