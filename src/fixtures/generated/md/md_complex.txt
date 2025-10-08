@@ -1,0 +1,567 @@
+=== STATS ===
+Sample length: 2716 characters
+Total tokens: 504
+
+Token types (56 unique):
+  punctuation: 215
+  tag: 56
+  code_fence: 33
+  heading: 22
+  operator: 19
+  keyword: 10
+  list: 9
+  inline_code: 7
+  content: 7
+  lang_ts: 7
+  number: 7
+  attr_name: 7
+  bold: 6
+  italic: 6
+  builtin: 6
+  attr_value: 5
+  function: 4
+  string: 4
+  property: 4
+  blockquote: 3
+  fenced_code_ts: 3
+  fenced_code_js: 3
+  lang_js: 3
+  lang_css: 3
+  selector: 3
+  fenced_code_html: 3
+  lang_markup: 3
+  strikethrough: 2
+  link: 2
+  link_text_wrapper: 2
+  link_text: 2
+  url_wrapper: 2
+  url: 2
+  special_keyword: 2
+  capitalized_identifier: 2
+  type_annotation: 2
+  :: 2
+  type: 2
+  string_property: 2
+  boolean: 2
+  svelte_expression: 2
+  style: 2
+  fenced_code: 2
+  lang_md: 2
+  class_name: 1
+  parameter: 1
+  fenced_code_css: 1
+  doctype: 1
+  comment: 1
+  fenced_code_svelte: 1
+  lang_svelte: 1
+  script: 1
+  function_variable: 1
+  fenced_code_5tick_md: 1
+  fenced_code_4tick_md: 1
+  fenced_code_4tick_ts: 1
+
+=== TOKENS ===
+   0-11    heading                   # Heading 1
+   0-1     punctuation               #
+  13-25    heading                   ## Heading 2
+  13-15    punctuation               ##
+  27-40    heading                   ### Heading 3
+  27-30    punctuation               ###
+  42-56    heading                   #### Heading 4
+  42-46    punctuation               ####
+  58-73    heading                   ##### Heading 5
+  58-63    punctuation               #####
+  75-91    heading                   ###### Heading 6
+  75-81    punctuation               ######
+  93-113   heading                   ## Inline formatting
+  93-95    punctuation               ##
+ 123-136   bold                      **bold text**
+ 123-125   punctuation               **
+ 134-136   punctuation               **
+ 154-167   bold                      __bold text__
+ 154-156   punctuation               __
+ 165-167   punctuation               __
+ 178-191   italic                    _italic text_
+ 178-179   punctuation               _
+ 190-191   punctuation               _
+ 209-222   italic                    *italic text*
+ 209-210   punctuation               *
+ 221-222   punctuation               *
+ 233-255   strikethrough             ~~strikethrough text~~
+ 233-235   punctuation               ~~
+ 253-255   punctuation               ~~
+ 266-279   inline_code               `inline code`
+ 266-267   punctuation               `
+ 267-278   content                   inline code
+ 278-279   punctuation               `
+ 307-345   link                      [link to example](https://example.com)
+ 307-324   link_text_wrapper         [link to example]
+ 307-308   punctuation               [
+ 308-323   link_text                 link to example
+ 323-324   punctuation               ]
+ 324-345   url_wrapper               (https://example.com)
+ 324-325   punctuation               (
+ 325-344   url                       https://example.com
+ 344-345   punctuation               )
+ 356-364   heading                   ## Lists
+ 356-358   punctuation               ##
+ 364-379   list                      \n\n- list item 1
+ 364-367   punctuation               \n\n-
+ 379-393   list                      \n- list item 2
+ 379-381   punctuation               \n-
+ 393-407   list                      \n- list item 3
+ 393-395   punctuation               \n-
+ 407-434   list                      \n\n* alternative list item 1
+ 407-410   punctuation               \n\n*
+ 434-460   list                      \n* alternative list item 2
+ 434-436   punctuation               \n*
+ 460-485   list                      \n  - indented list item 1
+ 460-464   punctuation               \n  -
+ 485-510   list                      \n  - indented list item 2
+ 485-489   punctuation               \n  -
+ 510-535   list                      \n    - Deeply nested item
+ 510-516   punctuation               \n    -
+ 535-556   list                      \n\n  - after a newline
+ 535-540   punctuation               \n\n  -
+ 558-572   heading                   ## Blockquotes
+ 558-560   punctuation               ##
+ 574-597   blockquote                > This is a blockquote.
+ 574-575   punctuation               >
+ 598-627   blockquote                > It can span multiple lines.
+ 598-599   punctuation               >
+ 629-677   blockquote                > Another blockquote with **bold** and _italic_.
+ 629-630   punctuation               >
+ 679-700   heading                   ## Fenced Code Blocks
+ 679-681   punctuation               ##
+ 702-716   heading                   ### TypeScript
+ 702-705   punctuation               ###
+ 718-789   fenced_code_ts            ```ts\nfunction add(a: number, b: number): number {\n\treturn a + b;\n}\n```
+ 718-723   code_fence                ```ts
+ 723-786   lang_ts                   \nfunction add(a: number, b: number): number {\n\treturn a + b;\n}\n
+ 724-732   keyword                   function
+ 733-736   function                  add
+ 736-737   punctuation               (
+ 738-739   operator                  :
+ 740-746   builtin                   number
+ 746-747   punctuation               ,
+ 749-750   operator                  :
+ 751-757   builtin                   number
+ 757-758   punctuation               )
+ 758-759   operator                  :
+ 760-766   builtin                   number
+ 767-768   punctuation               {
+ 770-776   special_keyword           return
+ 779-780   operator                  +
+ 782-783   punctuation               ;
+ 784-785   punctuation               }
+ 786-789   code_fence                ```
+ 791-830   heading                   #### TypeScript with alias 'typescript'
+ 791-795   punctuation               ####
+ 832-943   fenced_code_ts            ```typescript\ninterface User {\n\tname: string;\n\tage: number;\n}\n\nconst user: User = {name: 'Alice', age: 30};\n```
+ 832-845   code_fence                ```typescript
+ 845-940   lang_ts                   \ninterface User {\n\tname: string;\n\tage: number;\n}\n\nconst user: User = {name: 'Alice', age: 30};\n
+ 846-855   keyword                   interface
+ 856-860   class_name                User
+ 856-860   capitalized_identifier    User
+ 861-862   punctuation               {
+ 868-869   operator                  :
+ 870-876   builtin                   string
+ 876-877   punctuation               ;
+ 882-883   operator                  :
+ 884-890   builtin                   number
+ 890-891   punctuation               ;
+ 892-893   punctuation               }
+ 895-900   keyword                   const
+ 905-912   type_annotation           : User 
+ 905-906   :                         :
+ 906-912   type                       User 
+ 907-911   capitalized_identifier    User
+ 912-913   operator                  =
+ 914-915   punctuation               {
+ 919-920   operator                  :
+ 921-928   string                    'Alice'
+ 928-929   punctuation               ,
+ 933-934   operator                  :
+ 935-937   number                    30
+ 937-938   punctuation               }
+ 938-939   punctuation               ;
+ 940-943   code_fence                ```
+ 945-951   heading                   ### JS
+ 945-948   punctuation               ###
+ 953-1000  fenced_code_js            ```js\nfunction add(a, b) {\n\treturn a + b;\n}\n```
+ 953-958   code_fence                ```js
+ 958-997   lang_js                   \nfunction add(a, b) {\n\treturn a + b;\n}\n
+ 959-967   keyword                   function
+ 968-971   function                  add
+ 971-972   punctuation               (
+ 972-976   parameter                 a, b
+ 973-974   punctuation               ,
+ 976-977   punctuation               )
+ 978-979   punctuation               {
+ 981-987   special_keyword           return
+ 990-991   operator                  +
+ 993-994   punctuation               ;
+ 995-996   punctuation               }
+ 997-1000  code_fence                ```
+1002-1033  heading                   #### JS with alias 'javascript'
+1002-1006  punctuation               ####
+1035-1084  fenced_code_js            ```javascript\nconst fifteen = multiply(5, 3);\n```
+1035-1048  code_fence                ```javascript
+1048-1081  lang_js                   \nconst fifteen = multiply(5, 3);\n
+1049-1054  keyword                   const
+1063-1064  operator                  =
+1065-1073  function                  multiply
+1073-1074  punctuation               (
+1074-1075  number                    5
+1075-1076  punctuation               ,
+1077-1078  number                    3
+1078-1079  punctuation               )
+1079-1080  punctuation               ;
+1081-1084  code_fence                ```
+1086-1093  heading                   ### CSS
+1086-1089  punctuation               ###
+1095-1154  fenced_code_css           ```css\n.container {\n\tdisplay: flex;\n\tfont-size: 14px;\n}\n```
+1095-1101  code_fence                ```css
+1101-1151  lang_css                  \n.container {\n\tdisplay: flex;\n\tfont-size: 14px;\n}\n
+1102-1112  selector                  .container
+1113-1114  punctuation               {
+1116-1123  property                  display
+1123-1124  punctuation               :
+1129-1130  punctuation               ;
+1132-1141  property                  font-size
+1141-1142  punctuation               :
+1147-1148  punctuation               ;
+1149-1150  punctuation               }
+1151-1154  code_fence                ```
+1156-1164  heading                   ### HTML
+1156-1159  punctuation               ###
+1166-1308  fenced_code_html          ```html\n<!doctype html>\n<div class="test">\n\t<p>hello world!</p>\n</div>\n\n<button type="button" disabled>click me</button>\n\n<!-- comment -->\n```
+1166-1173  code_fence                ```html
+1173-1305  lang_markup               \n<!doctype html>\n<div class="test">\n\t<p>hello world!</p>\n</div>\n\n<button type="button" disabled>click me</button>\n\n<!-- comment -->\n
+1174-1189  doctype                   <!doctype html>
+1190-1208  tag                       <div class="test">
+1190-1194  tag                       <div
+1190-1191  punctuation               <
+1195-1200  attr_name                 class
+1200-1207  attr_value                ="test"
+1200-1201  punctuation               =
+1201-1202  punctuation               "
+1206-1207  punctuation               "
+1207-1208  punctuation               >
+1210-1213  tag                       <p>
+1210-1212  tag                       <p
+1210-1211  punctuation               <
+1212-1213  punctuation               >
+1225-1229  tag                       </p>
+1225-1228  tag                       </p
+1225-1227  punctuation               </
+1228-1229  punctuation               >
+1230-1236  tag                       </div>
+1230-1235  tag                       </div
+1230-1232  punctuation               </
+1235-1236  punctuation               >
+1238-1269  tag                       <button type="button" disabled>
+1238-1245  tag                       <button
+1238-1239  punctuation               <
+1246-1250  attr_name                 type
+1250-1259  attr_value                ="button"
+1250-1251  punctuation               =
+1251-1252  punctuation               "
+1258-1259  punctuation               "
+1260-1268  attr_name                 disabled
+1268-1269  punctuation               >
+1277-1286  tag                       </button>
+1277-1285  tag                       </button
+1277-1279  punctuation               </
+1285-1286  punctuation               >
+1288-1304  comment                   <!-- comment -->
+1305-1308  code_fence                ```
+1310-1339  heading                   #### HTML with alias 'markup'
+1310-1314  punctuation               ####
+1341-1389  fenced_code_html          ```markup\n<ul>\n\t<li>a</li>\n\t<li>b</li>\n</ul>\n```
+1341-1350  code_fence                ```markup
+1350-1386  lang_markup               \n<ul>\n\t<li>a</li>\n\t<li>b</li>\n</ul>\n
+1351-1355  tag                       <ul>
+1351-1354  tag                       <ul
+1351-1352  punctuation               <
+1354-1355  punctuation               >
+1357-1361  tag                       <li>
+1357-1360  tag                       <li
+1357-1358  punctuation               <
+1360-1361  punctuation               >
+1362-1367  tag                       </li>
+1362-1366  tag                       </li
+1362-1364  punctuation               </
+1366-1367  punctuation               >
+1369-1373  tag                       <li>
+1369-1372  tag                       <li
+1369-1370  punctuation               <
+1372-1373  punctuation               >
+1374-1379  tag                       </li>
+1374-1378  tag                       </li
+1374-1376  punctuation               </
+1378-1379  punctuation               >
+1380-1385  tag                       </ul>
+1380-1384  tag                       </ul
+1380-1382  punctuation               </
+1384-1385  punctuation               >
+1386-1389  code_fence                ```
+1391-1399  heading                   ### JSON
+1391-1394  punctuation               ###
+1401-1472  fenced_code_js            ```json\n{\n\t"key": "value",\n\t"array": [1, 2, 3, true, false, null]\n}\n```
+1401-1408  code_fence                ```json
+1408-1469  lang_js                   \n{\n\t"key": "value",\n\t"array": [1, 2, 3, true, false, null]\n}\n
+1409-1410  punctuation               {
+1412-1417  string_property           "key"
+1417-1418  operator                  :
+1419-1426  string                    "value"
+1426-1427  punctuation               ,
+1429-1436  string_property           "array"
+1436-1437  operator                  :
+1438-1439  punctuation               [
+1439-1440  number                    1
+1440-1441  punctuation               ,
+1442-1443  number                    2
+1443-1444  punctuation               ,
+1445-1446  number                    3
+1446-1447  punctuation               ,
+1448-1452  boolean                   true
+1452-1453  punctuation               ,
+1454-1459  boolean                   false
+1459-1460  punctuation               ,
+1461-1465  keyword                   null
+1465-1466  punctuation               ]
+1467-1468  punctuation               }
+1469-1472  code_fence                ```
+1474-1484  heading                   ### Svelte
+1474-1477  punctuation               ###
+1486-1716  fenced_code_svelte        ```svelte\n<script lang="ts">\n\tlet count: number = $state(0);\n\tconst increment = () => count++;\n</script>\n\n<button type="button" onclick={increment}>\n\tCount: {count}\n</button>\n\n<style>\n\tbutton {\n\t\tpadding: 8px 16px;\n\t}\n</style>\n```
+1486-1495  code_fence                ```svelte
+1495-1713  lang_svelte               \n<script lang="ts">\n\tlet count: number = $state(0);\n\tconst increment = () => count++;\n</script>\n\n<button type="button" onclick={increment}>\n\tCount: {count}\n</button>\n\n<style>\n\tbutton {\n\t\tpadding: 8px 16px;\n\t}\n</style>\n
+1496-1514  tag                       <script lang="ts">
+1496-1503  tag                       <script
+1496-1497  punctuation               <
+1504-1508  attr_name                 lang
+1508-1513  attr_value                ="ts"
+1508-1509  punctuation               =
+1509-1510  punctuation               "
+1512-1513  punctuation               "
+1513-1514  punctuation               >
+1514-1581  script                    \n\tlet count: number = $state(0);\n\tconst increment = () => count++;\n
+1514-1581  lang_ts                   \n\tlet count: number = $state(0);\n\tconst increment = () => count++;\n
+1516-1519  keyword                   let
+1525-1534  type_annotation           : number 
+1525-1526  :                         :
+1526-1534  type                       number 
+1527-1533  builtin                   number
+1534-1535  operator                  =
+1536-1542  function                  $state
+1542-1543  punctuation               (
+1543-1544  number                    0
+1544-1545  punctuation               )
+1545-1546  punctuation               ;
+1548-1553  keyword                   const
+1554-1563  function_variable         increment
+1564-1565  operator                  =
+1566-1567  punctuation               (
+1567-1568  punctuation               )
+1569-1571  operator                  =>
+1577-1579  operator                  ++
+1579-1580  punctuation               ;
+1581-1590  tag                       </script>
+1581-1589  tag                       </script
+1581-1583  punctuation               </
+1589-1590  punctuation               >
+1592-1634  tag                       <button type="button" onclick={increment}>
+1592-1599  tag                       <button
+1592-1593  punctuation               <
+1600-1604  attr_name                 type
+1604-1613  attr_value                ="button"
+1604-1605  punctuation               =
+1605-1606  punctuation               "
+1612-1613  punctuation               "
+1614-1622  attr_name                 onclick=
+1622-1633  svelte_expression         {increment}
+1622-1623  punctuation               {
+1623-1632  lang_ts                   increment
+1632-1633  punctuation               }
+1633-1634  punctuation               >
+1643-1650  svelte_expression         {count}
+1643-1644  punctuation               {
+1644-1649  lang_ts                   count
+1649-1650  punctuation               }
+1651-1660  tag                       </button>
+1651-1659  tag                       </button
+1651-1653  punctuation               </
+1659-1660  punctuation               >
+1662-1669  tag                       <style>
+1662-1668  tag                       <style
+1662-1663  punctuation               <
+1668-1669  punctuation               >
+1669-1704  style                     \n\tbutton {\n\t\tpadding: 8px 16px;\n\t}\n
+1669-1704  lang_css                  \n\tbutton {\n\t\tpadding: 8px 16px;\n\t}\n
+1671-1677  selector                  button
+1678-1679  punctuation               {
+1682-1689  property                  padding
+1689-1690  punctuation               :
+1699-1700  punctuation               ;
+1702-1703  punctuation               }
+1704-1712  tag                       </style>
+1704-1711  tag                       </style
+1704-1706  punctuation               </
+1711-1712  punctuation               >
+1713-1716  code_fence                ```
+1718-1738  heading                   ### Unknown Language
+1718-1721  punctuation               ###
+1740-1815  fenced_code               ```python\ndef hello(name):\n    print(f"Hello, {name}!")\n\nhello("world")\n```
+1740-1749  code_fence                ```python
+1812-1815  code_fence                ```
+1817-1830  heading                   ## Edge Cases
+1817-1819  punctuation               ##
+1832-1840  bold                      **bold**
+1832-1834  punctuation               **
+1838-1840  punctuation               **
+1845-1853  bold                      **bold**
+1845-1847  punctuation               **
+1851-1853  punctuation               **
+1873-1881  italic                    _italic_
+1873-1874  punctuation               _
+1880-1881  punctuation               _
+1886-1894  italic                    _italic_
+1886-1887  punctuation               _
+1893-1894  punctuation               _
+1914-1922  bold                      **bold**
+1914-1916  punctuation               **
+1920-1922  punctuation               **
+1928-1936  italic                    _italic_
+1928-1929  punctuation               _
+1935-1936  punctuation               _
+1941-1958  strikethrough             ~~strikethrough~~
+1941-1943  punctuation               ~~
+1956-1958  punctuation               ~~
+1971-1977  inline_code               `code`
+1971-1972  punctuation               `
+1972-1976  content                   code
+1976-1977  punctuation               `
+1979-1987  bold                      **bold**
+1979-1981  punctuation               **
+1985-1987  punctuation               **
+1989-1997  italic                    _italic_
+1989-1990  punctuation               _
+1996-1997  punctuation               _
+2000-2029  link                      [a link](https://example.com)
+2000-2008  link_text_wrapper         [a link]
+2000-2001  punctuation               [
+2001-2007  link_text                 a link
+2007-2008  punctuation               ]
+2008-2029  url_wrapper               (https://example.com)
+2008-2009  punctuation               (
+2009-2028  url                       https://example.com
+2028-2029  punctuation               )
+2161-2257  fenced_code               ```\n\nEmpty fence above.\n\n```unknownlang\nPlain text for unknown language.\nconst variable = 2;\n```
+2161-2164  code_fence                ```
+2186-2200  code_fence                ```unknownlang
+2254-2257  code_fence                ```
+2284-2468  fenced_code_5tick_md      `````md\nwith `five` fences\n````md\nwith `four` fences\n```html\n<style>\n\tbody { color: red; }\n</style>\n```\nending `four`\n````\nanother `four`\n````ts\nconst a = '5';\n````\nending `five`\n`````
+2284-2291  code_fence                `````md
+2291-2463  lang_md                   \nwith `five` fences\n````md\nwith `four` fences\n```html\n<style>\n\tbody { color: red; }\n</style>\n```\nending `four`\n````\nanother `four`\n````ts\nconst a = '5';\n````\nending `five`\n
+2297-2303  inline_code               `five`
+2297-2298  punctuation               `
+2298-2302  content                   five
+2302-2303  punctuation               `
+2311-2406  fenced_code_4tick_md      ````md\nwith `four` fences\n```html\n<style>\n\tbody { color: red; }\n</style>\n```\nending `four`\n````
+2311-2317  code_fence                ````md
+2317-2402  lang_md                   \nwith `four` fences\n```html\n<style>\n\tbody { color: red; }\n</style>\n```\nending `four`\n
+2323-2329  inline_code               `four`
+2323-2324  punctuation               `
+2324-2328  content                   four
+2328-2329  punctuation               `
+2337-2387  fenced_code_html          ```html\n<style>\n\tbody { color: red; }\n</style>\n```
+2337-2344  code_fence                ```html
+2344-2384  lang_markup               \n<style>\n\tbody { color: red; }\n</style>\n
+2345-2352  tag                       <style>
+2345-2351  tag                       <style
+2345-2346  punctuation               <
+2351-2352  punctuation               >
+2352-2375  style                     \n\tbody { color: red; }\n
+2352-2375  lang_css                  \n\tbody { color: red; }\n
+2354-2358  selector                  body
+2359-2360  punctuation               {
+2361-2366  property                  color
+2366-2367  punctuation               :
+2371-2372  punctuation               ;
+2373-2374  punctuation               }
+2375-2383  tag                       </style>
+2375-2382  tag                       </style
+2375-2377  punctuation               </
+2382-2383  punctuation               >
+2384-2387  code_fence                ```
+2395-2401  inline_code               `four`
+2395-2396  punctuation               `
+2396-2400  content                   four
+2400-2401  punctuation               `
+2402-2406  code_fence                ````
+2415-2421  inline_code               `four`
+2415-2416  punctuation               `
+2416-2420  content                   four
+2420-2421  punctuation               `
+2422-2448  fenced_code_4tick_ts      ````ts\nconst a = '5';\n````
+2422-2428  code_fence                ````ts
+2428-2444  lang_ts                   \nconst a = '5';\n
+2429-2434  keyword                   const
+2437-2438  operator                  =
+2439-2442  string                    '5'
+2442-2443  punctuation               ;
+2444-2448  code_fence                ````
+2456-2462  inline_code               `five`
+2456-2457  punctuation               `
+2457-2461  content                   five
+2461-2462  punctuation               `
+2463-2468  code_fence                `````
+2470-2485  heading                   ## HTML Support
+2470-2472  punctuation               ##
+2542-2565  tag                       <div class="container">
+2542-2546  tag                       <div
+2542-2543  punctuation               <
+2547-2552  attr_name                 class
+2552-2564  attr_value                ="container"
+2552-2553  punctuation               =
+2553-2554  punctuation               "
+2563-2564  punctuation               "
+2564-2565  punctuation               >
+2567-2570  tag                       <p>
+2567-2569  tag                       <p
+2567-2568  punctuation               <
+2569-2570  punctuation               >
+2583-2591  tag                       <strong>
+2583-2590  tag                       <strong
+2583-2584  punctuation               <
+2590-2591  punctuation               >
+2597-2606  tag                       </strong>
+2597-2605  tag                       </strong
+2597-2599  punctuation               </
+2605-2606  punctuation               >
+2617-2621  tag                       </p>
+2617-2620  tag                       </p
+2617-2619  punctuation               </
+2620-2621  punctuation               >
+2622-2628  tag                       </div>
+2622-2627  tag                       </div
+2622-2624  punctuation               </
+2627-2628  punctuation               >
+2658-2663  tag                       <div>
+2658-2662  tag                       <div
+2658-2659  punctuation               <
+2662-2663  punctuation               >
+2665-2707  fenced_code_ts            ```ts\nconst example = 'embedded code';\n```
+2665-2670  code_fence                ```ts
+2670-2704  lang_ts                   \nconst example = 'embedded code';\n
+2671-2676  keyword                   const
+2685-2686  operator                  =
+2687-2702  string                    'embedded code'
+2702-2703  punctuation               ;
+2704-2707  code_fence                ```
+2709-2715  tag                       </div>
+2709-2714  tag                       </div
+2709-2711  punctuation               </
+2714-2715  punctuation               >

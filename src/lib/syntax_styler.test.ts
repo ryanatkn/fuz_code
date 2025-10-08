@@ -380,7 +380,7 @@ describe('lastIndex and position management', () => {
 		const result = syntax_styler.stylize(code, 'js');
 
 		// All strings should be tokenized regardless of position
-		const string_count = (result.match(/<span class="token string">/g) || []).length;
+		const string_count = (result.match(/<span class="token_string">/g) || []).length;
 		assert.equal(string_count, 4, 'Should tokenize all 4 strings');
 	});
 });
@@ -533,7 +533,7 @@ describe('tokenization consistency', () => {
 		const result = syntax_styler.stylize(code, 'js');
 
 		// All strings should be tokenized
-		const string_count = (result.match(/<span class="token string">/g) || []).length;
+		const string_count = (result.match(/<span class="token_string">/g) || []).length;
 		assert.equal(string_count, 8, 'Should tokenize all 8 strings');
 	});
 

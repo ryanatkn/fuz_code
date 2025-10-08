@@ -100,7 +100,10 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 				tag: {
 					pattern: /^<\/?[^\s>/]+/i,
 					inside: {
-						punctuation: /^<\/?/,
+						punctuation: {
+							pattern: /^<\/?/,
+							alias: 'tag_punctuation',
+						},
 						namespace: /^[^\s>/:]+:/,
 					},
 				},
@@ -112,10 +115,14 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 					pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/i,
 					inside: {
 						punctuation: [
-							/^=/,
+							{
+								pattern: /^=/,
+								alias: 'attr_equals',
+							},
 							{
 								pattern: /^(\s*)["']|["']$/,
 								lookbehind: true,
+								alias: 'attr_quote',
 							},
 						],
 						svelte_expression: {
@@ -124,7 +131,10 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 						},
 					},
 				},
-				punctuation: /\/?>/,
+				punctuation: {
+					pattern: /\/?>/,
+					alias: 'tag_punctuation',
+				},
 				attr_name: {
 					pattern: /[^\s>/]+/,
 					inside: {

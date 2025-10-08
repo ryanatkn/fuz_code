@@ -7,7 +7,7 @@ import {sample_langs} from '$lib/code_sample.js';
 export const gen: Gen = ({origin_path}) => {
 	// Discover all sample files dynamically
 	const sample_files = search_fs('src/lib/samples', {
-		file_filter: (path) => /sample_[^/]+\.(ts|css|html|json|svelte)$/.test(path),
+		file_filter: (path) => /sample_[^/]+\.(ts|css|html|json|svelte|md)$/.test(path),
 	});
 
 	// Create flat structure with lang_variant keys

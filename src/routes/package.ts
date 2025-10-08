@@ -38,7 +38,7 @@ export const package_json: Package_Json = {
 		'@ryanatkn/belt': '^0.34.1',
 		'@ryanatkn/eslint-config': '^0.8.0',
 		'@ryanatkn/fuz': '^0.147.0',
-		'@ryanatkn/gro': '^0.167.1',
+		'@ryanatkn/gro': '^0.168.0',
 		'@ryanatkn/moss': '^0.36.0',
 		'@sveltejs/adapter-static': '^3.0.9',
 		'@sveltejs/kit': '^2.37.1',
@@ -66,7 +66,10 @@ export const package_json: Package_Json = {
 		bracketSpacing: false,
 		overrides: [
 			{files: 'package.json', options: {useTabs: false}},
-			{files: 'src/fixtures/generated/**', options: {requirePragma: true}},
+			{
+				files: ['src/fixtures/generated/**', 'src/lib/samples/sample_*.*'],
+				options: {requirePragma: true},
+			},
 		],
 	},
 	sideEffects: ['**/*.css'],
@@ -114,6 +117,10 @@ export const src_json: Src_Json = {
 		'./grammar_json.js': {
 			path: 'grammar_json.ts',
 			declarations: [{name: 'add_grammar_json', kind: 'function'}],
+		},
+		'./grammar_markdown.js': {
+			path: 'grammar_markdown.ts',
+			declarations: [{name: 'add_grammar_markdown', kind: 'function'}],
 		},
 		'./grammar_markup.js': {
 			path: 'grammar_markup.ts',

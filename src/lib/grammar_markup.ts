@@ -40,7 +40,10 @@ export const add_grammar_markup: Add_Syntax_Grammar = (syntax_styler) => {
 				tag: {
 					pattern: /^<\/?[^\s>/]+/,
 					inside: {
-						punctuation: /^<\/?/,
+						punctuation: {
+							pattern: /^<\/?/,
+							alias: 'tag_punctuation',
+						},
 						namespace: /^[^\s>/:]+:/,
 					},
 				},
@@ -62,7 +65,10 @@ export const add_grammar_markup: Add_Syntax_Grammar = (syntax_styler) => {
 						entity: undefined as any, // see below
 					},
 				},
-				punctuation: /\/?>/,
+				punctuation: {
+					pattern: /\/?>/,
+					alias: 'tag_punctuation',
+				},
 				attr_name: {
 					pattern: /[^\s>/]+/,
 					inside: {
