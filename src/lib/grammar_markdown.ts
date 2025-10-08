@@ -138,7 +138,7 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 
 			// Links [text](url)
 			link: {
-				pattern: /\[[^\[\]\n\r]+\]\([^\)\n\r]+\)/,
+				pattern: /\[[^[\]\n\r]+\]\([^)\n\r]+\)/,
 				inside: {
 					link_text: {
 						pattern: /^\[[^\]]+\]/,
@@ -147,7 +147,7 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 						},
 					},
 					url: {
-						pattern: /\([^\)]+\)$/,
+						pattern: /\([^)]+\)$/,
 						inside: {
 							punctuation: /^\(|\)$/,
 						},
