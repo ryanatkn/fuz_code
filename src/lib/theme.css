@@ -1,5 +1,3 @@
-.token.attr_equals,
-::highlight(attr_equals),
 .token.processing_instruction,
 ::highlight(processing_instruction),
 .token.doctype,
@@ -63,8 +61,16 @@
 .token.template_punctuation,
 ::highlight(template_punctuation),
 .token.inline_code,
-::highlight(inline_code) {
+::highlight(inline_code),
+.token.code_punctuation,
+::highlight(code_punctuation) {
 	color: var(--color_h_5);
+}
+
+/* attr_equals must be after attr_value */
+.token.attr_equals,
+::highlight(attr_equals) {
+	color: var(--text_color_5);
 }
 
 .token.selector,
@@ -77,8 +83,12 @@
 ::highlight(important),
 .token.variable,
 ::highlight(variable),
+.token.link_text_wrapper,
+::highlight(link_text_wrapper),
 .token.link_text,
-::highlight(link_text) {
+::highlight(link_text),
+.token.link_punctuation,
+::highlight(link_punctuation) {
 	color: var(--color_e_5);
 }
 

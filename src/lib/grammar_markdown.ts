@@ -177,16 +177,23 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 			link: {
 				pattern: /\[[^[\]\n\r]+\]\([^)\n\r]+\)/,
 				inside: {
-					link_text: {
+					link_text_wrapper: {
 						pattern: /^\[[^\]]+\]/,
 						inside: {
-							punctuation: /^\[|\]$/,
+							punctuation: {
+								pattern: /^\[|\]$/,
+								alias: 'link_punctuation',
+							},
+							link_text: /[^\[\]]+/,
 						},
 					},
 					url_wrapper: {
 						pattern: /\([^)]+\)$/,
 						inside: {
-							punctuation: /^\(|\)$/,
+							punctuation: {
+								pattern: /^\(|\)$/,
+								alias: 'link_punctuation',
+							},
 							url: /[^()]+/,
 						},
 					},
@@ -198,7 +205,11 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 				pattern: /`[^`\n\r]+`/,
 				alias: 'code',
 				inside: {
-					punctuation: /^`|`$/,
+					punctuation: {
+						pattern: /^`|`$/,
+						alias: 'code_punctuation',
+					},
+					content: /[^`]+/,
 				},
 			},
 

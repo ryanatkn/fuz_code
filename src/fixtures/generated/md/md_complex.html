@@ -18,9 +18,9 @@ This is <span class="token italic"><span class="token punctuation">_</span>itali
 
 This is <span class="token strikethrough"><span class="token punctuation">~~</span>strikethrough text<span class="token punctuation">~~</span></span>.
 
-This is <span class="token inline_code code"><span class="token punctuation">`</span>inline code<span class="token punctuation">`</span></span> with backticks.
+This is <span class="token inline_code code"><span class="token punctuation code_punctuation">`</span><span class="token content">inline code</span><span class="token punctuation code_punctuation">`</span></span> with backticks.
 
-This is a <span class="token link"><span class="token link_text"><span class="token punctuation">[</span>link to example<span class="token punctuation">]</span></span><span class="token url_wrapper"><span class="token punctuation">(</span><span class="token url">https://example.com</span><span class="token punctuation">)</span></span></span> in text.
+This is a <span class="token link"><span class="token link_text_wrapper"><span class="token punctuation link_punctuation">[</span><span class="token link_text">link to example</span><span class="token punctuation link_punctuation">]</span></span><span class="token url_wrapper"><span class="token punctuation link_punctuation">(</span><span class="token url">https://example.com</span><span class="token punctuation link_punctuation">)</span></span></span> in text.
 
 <span class="token heading"><span class="token punctuation">##</span> Lists</span><span class="token list"><span class="token punctuation">
 
@@ -178,13 +178,13 @@ hello("world")
 
 <span class="token bold"><span class="token punctuation">**</span>bold<span class="token punctuation">**</span></span> with <span class="token italic"><span class="token punctuation">_</span>italic<span class="token punctuation">_</span></span> and <span class="token strikethrough"><span class="token punctuation">~~</span>strikethrough<span class="token punctuation">~~</span></span> all mixed.
 
-A sentence with <span class="token inline_code code"><span class="token punctuation">`</span>code<span class="token punctuation">`</span></span>, <span class="token bold"><span class="token punctuation">**</span>bold<span class="token punctuation">**</span></span>, <span class="token italic"><span class="token punctuation">_</span>italic<span class="token punctuation">_</span></span>, and <span class="token link"><span class="token link_text"><span class="token punctuation">[</span>a link<span class="token punctuation">]</span></span><span class="token url_wrapper"><span class="token punctuation">(</span><span class="token url">https://example.com</span><span class="token punctuation">)</span></span></span>.
+A sentence with <span class="token inline_code code"><span class="token punctuation code_punctuation">`</span><span class="token content">code</span><span class="token punctuation code_punctuation">`</span></span>, <span class="token bold"><span class="token punctuation">**</span>bold<span class="token punctuation">**</span></span>, <span class="token italic"><span class="token punctuation">_</span>italic<span class="token punctuation">_</span></span>, and <span class="token link"><span class="token link_text_wrapper"><span class="token punctuation link_punctuation">[</span><span class="token link_text">a link</span><span class="token punctuation link_punctuation">]</span></span><span class="token url_wrapper"><span class="token punctuation link_punctuation">(</span><span class="token url">https://example.com</span><span class="token punctuation link_punctuation">)</span></span></span>.
 
 Not bold: ** spaces around **, ** spaces around **.
 
 Not italic: _ spaces around _, _ spaces around _.
 
-Not code: <span class="token inline_code code"><span class="token punctuation">`</span>multiline<span class="token punctuation">`</span></span>.
+Not code: <span class="token inline_code code"><span class="token punctuation code_punctuation">`</span><span class="token content">multiline</span><span class="token punctuation code_punctuation">`</span></span>.
 
 <span class="token fenced_code"><span class="token code_fence punctuation">```</span>
 
@@ -197,21 +197,21 @@ Plain text for unknown language.
 Nested fences (3 to 5):
 
 <span class="token fenced_code_5tick_md"><span class="token code_fence punctuation">`````md</span><span class="token lang_md">
-with <span class="token inline_code code"><span class="token punctuation">`</span>five<span class="token punctuation">`</span></span> fences
+with <span class="token inline_code code"><span class="token punctuation code_punctuation">`</span><span class="token content">five</span><span class="token punctuation code_punctuation">`</span></span> fences
 <span class="token fenced_code_4tick_md"><span class="token code_fence punctuation">````md</span><span class="token lang_md">
-with <span class="token inline_code code"><span class="token punctuation">`</span>four<span class="token punctuation">`</span></span> fences
+with <span class="token inline_code code"><span class="token punctuation code_punctuation">`</span><span class="token content">four</span><span class="token punctuation code_punctuation">`</span></span> fences
 <span class="token fenced_code_html"><span class="token code_fence punctuation">```html</span><span class="token lang_markup">
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token lang_css">
 	<span class="token selector">body</span> <span class="token punctuation">{</span> <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span> <span class="token punctuation">}</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
 </span><span class="token code_fence punctuation">```</span></span>
-ending <span class="token inline_code code"><span class="token punctuation">`</span>four<span class="token punctuation">`</span></span>
+ending <span class="token inline_code code"><span class="token punctuation code_punctuation">`</span><span class="token content">four</span><span class="token punctuation code_punctuation">`</span></span>
 </span><span class="token code_fence punctuation">````</span></span>
-another <span class="token inline_code code"><span class="token punctuation">`</span>four<span class="token punctuation">`</span></span>
+another <span class="token inline_code code"><span class="token punctuation code_punctuation">`</span><span class="token content">four</span><span class="token punctuation code_punctuation">`</span></span>
 <span class="token fenced_code_4tick_ts"><span class="token code_fence punctuation">````ts</span><span class="token lang_ts">
 <span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token string">'5'</span><span class="token punctuation">;</span>
 </span><span class="token code_fence punctuation">````</span></span>
-ending <span class="token inline_code code"><span class="token punctuation">`</span>five<span class="token punctuation">`</span></span>
+ending <span class="token inline_code code"><span class="token punctuation code_punctuation">`</span><span class="token content">five</span><span class="token punctuation code_punctuation">`</span></span>
 </span><span class="token code_fence punctuation">`````</span></span>
 
 <span class="token heading"><span class="token punctuation">##</span> HTML Support</span>

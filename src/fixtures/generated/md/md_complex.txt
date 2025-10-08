@@ -1,8 +1,8 @@
 === STATS ===
 Sample length: 3167 characters
-Total tokens: 581
+Total tokens: 591
 
-Token types (56 unique):
+Token types (58 unique):
   punctuation: 255
   tag: 56
   code_fence: 33
@@ -13,6 +13,7 @@ Token types (56 unique):
   number: 9
   property: 9
   inline_code: 8
+  content: 8
   builtin: 8
   string: 8
   lang_ts: 7
@@ -35,6 +36,7 @@ Token types (56 unique):
   lang_markup: 3
   strikethrough: 2
   link: 2
+  link_text_wrapper: 2
   link_text: 2
   url_wrapper: 2
   url: 2
@@ -92,10 +94,12 @@ Token types (56 unique):
  253-255   punctuation               ~~
  266-279   inline_code               `inline code`
  266-267   punctuation               `
+ 267-278   content                   inline code
  278-279   punctuation               `
  307-345   link                      [link to example](https://example.com)
- 307-324   link_text                 [link to example]
+ 307-324   link_text_wrapper         [link to example]
  307-308   punctuation               [
+ 308-323   link_text                 link to example
  323-324   punctuation               ]
  324-345   url_wrapper               (https://example.com)
  324-325   punctuation               (
@@ -522,6 +526,7 @@ Token types (56 unique):
 2409-2411  punctuation               ~~
 2440-2446  inline_code               `code`
 2440-2441  punctuation               `
+2441-2445  content                   code
 2445-2446  punctuation               `
 2448-2456  bold                      **bold**
 2448-2450  punctuation               **
@@ -530,8 +535,9 @@ Token types (56 unique):
 2458-2459  punctuation               _
 2465-2466  punctuation               _
 2472-2501  link                      [a link](https://example.com)
-2472-2480  link_text                 [a link]
+2472-2480  link_text_wrapper         [a link]
 2472-2473  punctuation               [
+2473-2479  link_text                 a link
 2479-2480  punctuation               ]
 2480-2501  url_wrapper               (https://example.com)
 2480-2481  punctuation               (
@@ -539,6 +545,7 @@ Token types (56 unique):
 2500-2501  punctuation               )
 2618-2629  inline_code               `multiline`
 2618-2619  punctuation               `
+2619-2628  content                   multiline
 2628-2629  punctuation               `
 2632-2708  fenced_code               ```\n\nEmpty fence above.\n\n```unknownlang\nPlain text for unknown language.\n```
 2632-2635  code_fence                ```
@@ -549,12 +556,14 @@ Token types (56 unique):
 2742-2914  lang_md                   \nwith `five` fences\n````md\nwith `four` fences\n```html\n<style>\n\tbody { color: red; }\n</style>\n```\nending `four`\n````\nanother `four`\n````ts\nconst a = '5';\n````\nending `five`\n
 2748-2754  inline_code               `five`
 2748-2749  punctuation               `
+2749-2753  content                   five
 2753-2754  punctuation               `
 2762-2857  fenced_code_4tick_md      ````md\nwith `four` fences\n```html\n<style>\n\tbody { color: red; }\n</style>\n```\nending `four`\n````
 2762-2768  code_fence                ````md
 2768-2853  lang_md                   \nwith `four` fences\n```html\n<style>\n\tbody { color: red; }\n</style>\n```\nending `four`\n
 2774-2780  inline_code               `four`
 2774-2775  punctuation               `
+2775-2779  content                   four
 2779-2780  punctuation               `
 2788-2838  fenced_code_html          ```html\n<style>\n\tbody { color: red; }\n</style>\n```
 2788-2795  code_fence                ```html
@@ -578,10 +587,12 @@ Token types (56 unique):
 2835-2838  code_fence                ```
 2846-2852  inline_code               `four`
 2846-2847  punctuation               `
+2847-2851  content                   four
 2851-2852  punctuation               `
 2853-2857  code_fence                ````
 2866-2872  inline_code               `four`
 2866-2867  punctuation               `
+2867-2871  content                   four
 2871-2872  punctuation               `
 2873-2899  fenced_code_4tick_ts      ````ts\nconst a = '5';\n````
 2873-2879  code_fence                ````ts
@@ -593,6 +604,7 @@ Token types (56 unique):
 2895-2899  code_fence                ````
 2907-2913  inline_code               `five`
 2907-2908  punctuation               `
+2908-2912  content                   five
 2912-2913  punctuation               `
 2914-2919  code_fence                `````
 2921-2936  heading                   ## HTML Support
