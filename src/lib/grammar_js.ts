@@ -29,55 +29,55 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 		'clike',
 		'js',
 		{
-		class_name: [
-			grammar_clike.class_name,
-			{
-				pattern:
-					/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:constructor|prototype))/,
-				lookbehind: true,
-			},
-		],
-		keyword: [
-			{
-				pattern: new RegExp(
-					`(^|[^.]|\\.\\.\\.\\s*)\\b(?:assert(?=\\s*\\{)|async(?=\\s*(?:function\\b|\\*|\\(|[$\\w\\xA0-\\uFFFF]|$))|${main_keywords}|(?:get|set)(?=\\s*(?:[#[$\\w\\xA0-\\uFFFF]|$)))\\b`,
+			class_name: [
+				grammar_clike.class_name,
+				{
+					pattern:
+						/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:constructor|prototype))/,
+					lookbehind: true,
+				},
+			],
+			keyword: [
+				{
+					pattern: new RegExp(
+						`(^|[^.]|\\.\\.\\.\\s*)\\b(?:assert(?=\\s*\\{)|async(?=\\s*(?:function\\b|\\*|\\(|[$\\w\\xA0-\\uFFFF]|$))|${main_keywords}|(?:get|set)(?=\\s*(?:[#[$\\w\\xA0-\\uFFFF]|$)))\\b`,
+					),
+					lookbehind: true,
+				},
+			],
+			// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
+			function:
+				/#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
+			number: {
+				pattern: RegExp(
+					/(^|[^\w$])/.source +
+						'(?:' +
+						// constant
+						(/NaN|Infinity/.source +
+							'|' +
+							// binary integer
+							/0[bB][01]+(?:_[01]+)*n?/.source +
+							'|' +
+							// octal integer
+							/0[oO][0-7]+(?:_[0-7]+)*n?/.source +
+							'|' +
+							// hexadecimal integer
+							/0[xX][\dA-Fa-f]+(?:_[\dA-Fa-f]+)*n?/.source +
+							'|' +
+							// decimal bigint
+							/\d+(?:_\d+)*n/.source +
+							'|' +
+							// decimal number (integer or float) but no bigint
+							/(?:\d+(?:_\d+)*(?:\.(?:\d+(?:_\d+)*)?)?|\.\d+(?:_\d+)*)(?:[Ee][+-]?\d+(?:_\d+)*)?/
+								.source) +
+						')' +
+						/(?![\w$])/.source,
 				),
 				lookbehind: true,
 			},
-		],
-		// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
-		function:
-			/#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
-		number: {
-			pattern: RegExp(
-				/(^|[^\w$])/.source +
-					'(?:' +
-					// constant
-					(/NaN|Infinity/.source +
-						'|' +
-						// binary integer
-						/0[bB][01]+(?:_[01]+)*n?/.source +
-						'|' +
-						// octal integer
-						/0[oO][0-7]+(?:_[0-7]+)*n?/.source +
-						'|' +
-						// hexadecimal integer
-						/0[xX][\dA-Fa-f]+(?:_[\dA-Fa-f]+)*n?/.source +
-						'|' +
-						// decimal bigint
-						/\d+(?:_\d+)*n/.source +
-						'|' +
-						// decimal number (integer or float) but no bigint
-						/(?:\d+(?:_\d+)*(?:\.(?:\d+(?:_\d+)*)?)?|\.\d+(?:_\d+)*)(?:[Ee][+-]?\d+(?:_\d+)*)?/
-							.source) +
-					')' +
-					/(?![\w$])/.source,
-			),
-			lookbehind: true,
+			operator:
+				/--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/,
 		},
-		operator:
-			/--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/,
-	},
 		['javascript'],
 	);
 
