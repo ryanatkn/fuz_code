@@ -1,8 +1,8 @@
 === STATS ===
 Sample length: 2988 characters
-Total tokens: 521
+Total tokens: 525
 
-Token types (49 unique):
+Token types (51 unique):
   punctuation: 234
   tag: 52
   operator: 28
@@ -35,7 +35,9 @@ Token types (49 unique):
   link_text: 2
   url: 2
   special_keyword: 2
-  type_name: 2
+  capitalized_identifier: 2
+  parameter: 2
+  function_variable: 2
   lang_css: 2
   fenced_code_html: 2
   lang_markup: 2
@@ -168,7 +170,7 @@ Token types (49 unique):
  948-1043  lang_ts                   \ninterface User {\n\tname: string;\n\tage: number;\n}\n\nconst user: User = {name: 'Alice', age: 30};\n
  949-958   keyword                   interface
  959-963   class_name                User
- 959-963   type_name                 User
+ 959-963   capitalized_identifier    User
  964-965   punctuation               {
  971-972   operator                  :
  973-979   builtin                   string
@@ -181,7 +183,7 @@ Token types (49 unique):
 1008-1015  type_annotation           : User 
 1008-1009  :                         :
 1009-1015  type                       User 
-1010-1014  type_name                 User
+1010-1014  capitalized_identifier    User
 1015-1016  operator                  =
 1017-1018  punctuation               {
 1022-1023  operator                  :
@@ -208,6 +210,7 @@ Token types (49 unique):
 1123-1131  keyword                   function
 1132-1135  function                  add
 1135-1136  punctuation               (
+1136-1140  parameter                 a, b
 1137-1138  punctuation               ,
 1140-1141  punctuation               )
 1142-1143  punctuation               {
@@ -222,8 +225,10 @@ Token types (49 unique):
 1205-1218  code_fence                ```javascript
 1218-1305  lang_js                   \nconst multiply = (a, b) => a * b;\nconst result = multiply(5, 3);\nconsole.log(result);\n
 1219-1224  keyword                   const
+1225-1233  function_variable         multiply
 1234-1235  operator                  =
 1236-1237  punctuation               (
+1237-1241  parameter                 a, b
 1238-1239  punctuation               ,
 1241-1242  punctuation               )
 1243-1245  operator                  =>
@@ -431,6 +436,7 @@ Token types (49 unique):
 2027-2028  punctuation               )
 2028-2029  punctuation               ;
 2031-2036  keyword                   const
+2037-2046  function_variable         increment
 2047-2048  operator                  =
 2049-2050  punctuation               (
 2050-2051  punctuation               )

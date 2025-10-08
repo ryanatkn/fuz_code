@@ -77,7 +77,9 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 		},
 		operator:
 			/--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/,
-	});
+	},
+		['javascript'],
+	);
 
 	(grammar_js as any).class_name[0].pattern = new RegExp(
 		`(\\b(?:${class_keywords})\\s+)[\\w.\\\\]+`,
@@ -159,9 +161,7 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 			pattern: /\b[A-Z][\w]*\b/,
 			alias: 'class_name',
 		},
-	},
-		['javascript'],
-	);
+	});
 
 	syntax_styler.grammar_insert_before('js', 'string', {
 		hashbang: {

@@ -1,29 +1,35 @@
 === STATS ===
 Sample length: 2885 characters
-Total tokens: 642
+Total tokens: 632
 
-Token types (21 unique):
-  punctuation: 240
-  operator: 114
+Token types (27 unique):
+  punctuation: 233
+  operator: 90
   keyword: 56
   special_keyword: 48
-  builtin: 38
+  builtin: 34
   function: 26
   string: 25
+  capitalized_identifier: 20
   number: 14
-  type_name: 13
   class_name: 11
   comment: 11
   interpolation_punctuation: 8
+  constant: 7
   template_punctuation: 6
   type_annotation: 5
   :: 5
   type: 5
   boolean: 4
   interpolation: 4
+  regex_delimiter: 4
   decorator: 3
   at: 3
   template_string: 3
+  function_variable: 2
+  regex: 2
+  regex_source: 2
+  regex_flags: 1
 
 === TOKENS ===
    0-5     keyword                   const
@@ -45,7 +51,7 @@ Token types (21 unique):
   55-61    special_keyword           export
   62-66    keyword                   type
   67-76    class_name                Some_Type
-  67-76    type_name                 Some_Type
+  67-76    capitalized_identifier    Some_Type
   77-78    operator                  =
   79-80    number                    1
   81-82    operator                  |
@@ -61,7 +67,7 @@ Token types (21 unique):
  132-140   keyword                   abstract
  141-146   keyword                   class
  147-151   class_name                Base
- 147-151   type_name                 Base
+ 147-151   capitalized_identifier    Base
  152-153   punctuation               {
  155-163   keyword                   abstract
  164-179   function                  abstract_method
@@ -77,10 +83,10 @@ Token types (21 unique):
  226-240   function                  some_decorator
  241-246   keyword                   class
  247-248   class_name                D
- 247-248   type_name                 D
+ 247-248   constant                  D
  249-256   keyword                   extends
  257-261   class_name                Base
- 257-261   type_name                 Base
+ 257-261   capitalized_identifier    Base
  262-263   punctuation               {
  265-273   keyword                   readonly
  276-285   type_annotation           : string 
@@ -157,6 +163,7 @@ Token types (21 unique):
  569-570   template_punctuation      `
  570-571   punctuation               ;
  573-574   punctuation               }
+ 577-592   function_variable         instance_method
  593-594   operator                  =
  595-596   punctuation               (
  596-597   punctuation               )
@@ -275,7 +282,7 @@ Token types (21 unique):
 1055-1059  keyword                   this
 1060-1070  keyword                   instanceof
 1071-1072  class_name                D
-1071-1072  type_name                 D
+1071-1072  constant                  D
 1072-1073  punctuation               ,
 1076-1077  punctuation               }
 1077-1078  punctuation               ;
@@ -299,7 +306,7 @@ Token types (21 unique):
 1162-1167  special_keyword           throw
 1168-1171  keyword                   new
 1172-1177  class_name                Error
-1172-1177  type_name                 Error
+1172-1177  capitalized_identifier    Error
 1177-1178  punctuation               (
 1178-1224  template_string           `${this.d1}\n\t\t\tmultiline\n\t\t\tetc ${a2 + c2}\n\t\t`
 1178-1179  template_punctuation      `
@@ -323,10 +330,11 @@ Token types (21 unique):
 1242-1243  punctuation               (
 1243-1244  punctuation               )
 1244-1245  operator                  :
+1246-1255  capitalized_identifier    Generator
 1255-1256  operator                  <
 1256-1262  builtin                   number
 1263-1264  operator                  |
-1265-1270  builtin                   Array
+1265-1270  capitalized_identifier    Array
 1270-1271  operator                  <
 1271-1277  builtin                   number
 1277-1279  operator                  >>
@@ -349,13 +357,14 @@ Token types (21 unique):
 1337-1338  punctuation               (
 1338-1339  punctuation               )
 1339-1340  operator                  :
+1341-1355  capitalized_identifier    AsyncGenerator
 1355-1356  operator                  <
 1356-1362  builtin                   number
 1362-1363  operator                  >
 1364-1365  punctuation               {
 1368-1373  special_keyword           yield
 1374-1379  special_keyword           await
-1380-1387  builtin                   Promise
+1380-1387  capitalized_identifier    Promise
 1387-1388  punctuation               .
 1388-1395  function                  resolve
 1395-1396  punctuation               (
@@ -369,7 +378,7 @@ Token types (21 unique):
 1437-1438  punctuation               (
 1438-1439  punctuation               )
 1439-1440  operator                  :
-1441-1448  builtin                   Promise
+1441-1448  capitalized_identifier    Promise
 1448-1449  operator                  <
 1449-1453  keyword                   void
 1453-1454  operator                  >
@@ -379,7 +388,7 @@ Token types (21 unique):
 1468-1473  special_keyword           await
 1474-1477  keyword                   new
 1478-1485  class_name                Promise
-1478-1485  builtin                   Promise
+1478-1485  capitalized_identifier    Promise
 1485-1486  punctuation               (
 1486-1487  punctuation               (
 1494-1495  punctuation               )
@@ -393,6 +402,7 @@ Token types (21 unique):
 1524-1525  punctuation               ;
 1529-1531  special_keyword           if
 1532-1533  punctuation               (
+1533-1537  capitalized_identifier    Math
 1537-1538  punctuation               .
 1538-1544  function                  random
 1544-1545  punctuation               (
@@ -407,7 +417,7 @@ Token types (21 unique):
 1571-1572  punctuation               (
 1572-1575  keyword                   new
 1576-1580  class_name                Date
-1576-1580  type_name                 Date
+1576-1580  capitalized_identifier    Date
 1580-1581  punctuation               (
 1581-1582  punctuation               )
 1582-1583  punctuation               )
@@ -416,6 +426,7 @@ Token types (21 unique):
 1590-1594  special_keyword           else
 1595-1597  special_keyword           if
 1598-1599  punctuation               (
+1599-1603  capitalized_identifier    Math
 1603-1604  punctuation               .
 1604-1610  function                  random
 1610-1611  punctuation               (
@@ -476,7 +487,7 @@ Token types (21 unique):
 1920-1921  punctuation               ,
 1922-1926  keyword                   type
 1927-1938  class_name                Sample_Lang
-1927-1938  type_name                 Sample_Lang
+1927-1938  capitalized_identifier    Sample_Lang
 1938-1939  punctuation               }
 1940-1944  special_keyword           from
 1945-1964  string                    '../code_sample.js'
@@ -484,28 +495,33 @@ Token types (21 unique):
 1966-1972  special_keyword           import
 1973-1974  operator                  *
 1975-1977  special_keyword           as
+1978-1979  constant                  A
 1980-1984  special_keyword           from
 1985-2004  string                    '../code_sample.js'
 2004-2005  punctuation               ;
 2007-2013  special_keyword           export
 2014-2015  punctuation               {
 2016-2017  punctuation               ,
+2018-2019  constant                  A
 2019-2020  punctuation               ,
 2022-2023  punctuation               ,
 2025-2026  punctuation               ,
+2027-2028  constant                  D
 2028-2029  punctuation               }
 2029-2030  punctuation               ;
 2045-2047  special_keyword           as
 2048-2055  builtin                   unknown
 2056-2058  special_keyword           as
+2059-2070  capitalized_identifier    Sample_Lang
 2071-2080  keyword                   satisfies
+2081-2092  capitalized_identifier    Sample_Lang
 2092-2093  punctuation               ;
 2095-2101  special_keyword           export
 2102-2111  keyword                   interface
 2112-2128  class_name                Some_E<T = null>
-2112-2118  type_name                 Some_E
+2112-2118  capitalized_identifier    Some_E
 2118-2119  operator                  <
-2119-2120  type_name                 T
+2119-2120  constant                  T
 2121-2122  operator                  =
 2123-2127  keyword                   null
 2127-2128  operator                  >
@@ -518,6 +534,7 @@ Token types (21 unique):
 2158-2159  punctuation               ;
 2162-2163  operator                  ?
 2163-2164  operator                  :
+2165-2166  constant                  T
 2166-2167  punctuation               ;
 2168-2169  punctuation               }
 2171-2176  keyword                   const
@@ -554,16 +571,16 @@ Token types (21 unique):
 2286-2308  type_annotation           : Map<string, Some_E> 
 2286-2287  :                         :
 2287-2308  type                       Map<string, Some_E> 
-2288-2291  type_name                 Map
+2288-2291  capitalized_identifier    Map
 2291-2292  operator                  <
 2292-2298  builtin                   string
 2298-2299  punctuation               ,
-2300-2306  type_name                 Some_E
+2300-2306  capitalized_identifier    Some_E
 2306-2307  operator                  >
 2308-2309  operator                  =
 2310-2313  keyword                   new
 2314-2317  class_name                Map
-2314-2317  type_name                 Map
+2314-2317  capitalized_identifier    Map
 2317-2318  punctuation               (
 2319-2320  punctuation               )
 2320-2321  punctuation               ;
@@ -586,6 +603,7 @@ Token types (21 unique):
 2390-2391  punctuation               }
 2393-2399  special_keyword           export
 2400-2405  keyword                   const
+2406-2410  function_variable         plus
 2411-2412  operator                  =
 2413-2414  punctuation               (
 2415-2416  operator                  :
@@ -630,41 +648,19 @@ Token types (21 unique):
 2680-2686  special_keyword           export
 2687-2692  keyword                   const
 2699-2700  operator                  =
-2701-2702  operator                  /
-2703-2704  operator                  /
-2705-2706  operator                  /
-2706-2707  punctuation               .
-2707-2708  operator                  *
-2708-2709  operator                  /
+2701-2710  regex                     /\/\/.*/g
+2701-2702  regex_delimiter           /
+2702-2708  regex_source              \/\/.*
+2708-2709  regex_delimiter           /
+2709-2710  regex_flags               g
 2710-2711  punctuation               ;
 2712-2718  special_keyword           export
 2719-2724  keyword                   const
 2739-2740  operator                  =
-2741-2742  operator                  /
-2742-2743  operator                  ^
-2743-2744  punctuation               (
-2744-2745  operator                  ?
-2745-2746  operator                  :
-2747-2748  operator                  /
-2749-2750  operator                  *
-2750-2751  punctuation               .
-2751-2752  operator                  *
-2752-2753  operator                  ?
-2754-2755  operator                  *
-2756-2757  operator                  /
-2757-2758  operator                  |
-2759-2760  operator                  /
-2761-2762  operator                  /
-2762-2763  punctuation               .
-2763-2764  operator                  *
-2764-2765  operator                  |
-2765-2766  punctuation               [
-2766-2767  operator                  ^
-2767-2768  operator                  /
-2768-2769  punctuation               ]
-2769-2770  punctuation               )
-2770-2771  operator                  +
-2772-2773  operator                  /
+2741-2773  regex                     /^(?:\/\*.*?\*\/|\/\/.*|[^/])+$/
+2741-2742  regex_delimiter           /
+2742-2772  regex_source              ^(?:\/\*.*?\*\/|\/\/.*|[^/])+$
+2772-2773  regex_delimiter           /
 2773-2774  punctuation               ;
 2776-2832  comment                   // string in comment should not be highlighted as string
 2833-2884  comment                   // const commented = "this string is in a comment";

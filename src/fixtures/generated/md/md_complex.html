@@ -59,12 +59,12 @@ This is a <span class="token link"><span class="token link_text"><span class="to
 <span class="token heading"><span class="token punctuation">####</span> TypeScript with alias typescript</span>
 
 <span class="token fenced_code_ts"><span class="token code_fence punctuation">```typescript</span><span class="token lang_ts">
-<span class="token keyword">interface</span> <span class="token class_name"><span class="token type_name class_name">User</span></span> <span class="token punctuation">{</span>
+<span class="token keyword">interface</span> <span class="token class_name"><span class="token capitalized_identifier class_name">User</span></span> <span class="token punctuation">{</span>
 	name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 	age<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">const</span> user<span class="token type_annotation"><span class="token :">:</span><span class="token type"> <span class="token type_name class_name">User</span> </span></span><span class="token operator">=</span> <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token string">'Alice'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">30</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> user<span class="token type_annotation"><span class="token :">:</span><span class="token type"> <span class="token capitalized_identifier class_name">User</span> </span></span><span class="token operator">=</span> <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token string">'Alice'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">30</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 </span><span class="token code_fence punctuation">```</span></span>
 
 <span class="token heading"><span class="token punctuation">###</span> JavaScript</span>
@@ -73,7 +73,7 @@ This is a <span class="token link"><span class="token link_text"><span class="to
 <span class="token keyword">const</span> greeting <span class="token operator">=</span> <span class="token string">'Hello, world!'</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
 
-<span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	<span class="token special_keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </span><span class="token code_fence punctuation">```</span></span>
@@ -81,7 +81,7 @@ This is a <span class="token link"><span class="token link_text"><span class="to
 <span class="token heading"><span class="token punctuation">####</span> JavaScript with alias javascript</span>
 
 <span class="token fenced_code_js"><span class="token code_fence punctuation">```javascript</span><span class="token lang_js">
-<span class="token keyword">const</span> multiply <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=></span> a <span class="token operator">*</span> b<span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function_variable function">multiply</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=></span> a <span class="token operator">*</span> b<span class="token punctuation">;</span>
 <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token function">multiply</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </span><span class="token code_fence punctuation">```</span></span>
@@ -147,7 +147,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token fenced_code_svelte"><span class="token code_fence punctuation">```svelte</span><span class="token lang_svelte">
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr_name">lang</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token lang_ts">
 	<span class="token keyword">let</span> count<span class="token type_annotation"><span class="token :">:</span><span class="token type"> <span class="token builtin">number</span> </span></span><span class="token operator">=</span> <span class="token function">$state</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">const</span> increment <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> count<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token keyword">const</span> <span class="token function_variable function">increment</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> count<span class="token operator">++</span><span class="token punctuation">;</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr_name">type</span><span class="token attr_value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr_name">onclick=</span><span class="token svelte_expression"><span class="token punctuation">{</span><span class="token lang_ts">increment</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span>
