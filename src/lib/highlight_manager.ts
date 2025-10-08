@@ -56,7 +56,8 @@ export class Highlight_Manager {
 			if (!highlight) {
 				highlight = new Highlight();
 				// Set priority based on CSS cascade order (higher = later in CSS = wins)
-				highlight.priority = highlight_priorities[prefixed_type as keyof typeof highlight_priorities] ?? 0;
+				highlight.priority =
+					highlight_priorities[prefixed_type as keyof typeof highlight_priorities] ?? 0;
 				CSS.highlights.set(prefixed_type, highlight);
 			}
 
