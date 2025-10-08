@@ -1,9 +1,9 @@
 import type {Add_Syntax_Grammar, Syntax_Grammar} from '$lib/syntax_styler.js';
 
 /**
- * Markdown grammar extending markup
+ * Markdown grammar extending markup.
  * Supports: headings, fenced code blocks, lists, blockquotes,
- * bold, italic, strikethrough, inline code, and links
+ * bold, italic, strikethrough, inline code, and links.
  */
 export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 	syntax_styler.add_extended_lang(
