@@ -173,6 +173,7 @@ export const src_json: Src_Json = {
 				{name: 'Syntax_Grammar', kind: 'type'},
 				{name: 'Syntax_Grammar_Token', kind: 'type'},
 				{name: 'Normalized_Grammar_Token', kind: 'type'},
+				{name: 'Normalized_Grammar', kind: 'type'},
 				{name: 'Hook_Before_Tokenize_Callback', kind: 'type'},
 				{name: 'Hook_After_Tokenize_Callback', kind: 'type'},
 				{name: 'Hook_Wrap_Callback', kind: 'type'},

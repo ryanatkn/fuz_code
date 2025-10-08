@@ -310,7 +310,7 @@ export class Syntax_Styler {
 	 */
 	extend_grammar(base_id: string, extension: Syntax_Grammar): Normalized_Grammar {
 		// Merge normalized base with un-normalized extension
-		const extended = {...deep_clone(this.get_lang(base_id)), ...extension};
+		const extended = {...structuredClone(this.get_lang(base_id)), ...extension};
 		// Normalize the extension parts
 		this.normalize_grammar(extended as Syntax_Grammar, new Set());
 		// Return as Normalized_Grammar
@@ -572,43 +572,3 @@ const encode = (tokens: any): any => {
  */
 const ID = Symbol('id');
 const id_of = (obj: any): number => (obj[ID] ??= ++unique_id);
-
-/**
- * Creates a deep clone of the given object.
- *
- * The main intended use of this function is to clone language definitions.
- */
-const deep_clone = <T>(o: T, visited: Map<number, any> = new Map()): T => {
-	var clone: any, id, v;
-	if (Array.isArray(o)) {
-		id = id_of(o as any);
-		v = visited.get(id);
-		if (v) {
-			return v;
-		}
-		clone = [];
-		visited.set(id, clone);
-
-		for (var i = 0; i < (o as any).length; i++) {
-			clone[i] = deep_clone((o as any)[i], visited);
-		}
-
-		return clone;
-	} else if (o && typeof o === 'object' && !(o instanceof RegExp)) {
-		id = id_of(o as any);
-		v = visited.get(id);
-		if (v) {
-			return v;
-		}
-		clone = {};
-		visited.set(id, clone);
-
-		for (var key in o) {
-			clone[key] = deep_clone(o[key], visited);
-		}
-
-		return clone;
-	} else {
-		return o;
-	}
-};

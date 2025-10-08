@@ -1,4 +1,4 @@
-import type {Add_Syntax_Grammar, Syntax_Grammar_Token} from '$lib/syntax_styler.js';
+import type {Add_Syntax_Grammar} from '$lib/syntax_styler.js';
 import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 import {class_keywords} from '$lib/grammar_clike.js';
 
