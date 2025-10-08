@@ -7,7 +7,9 @@
 .token.cdata,
 ::highlight(cdata),
 .token.punctuation,
-::highlight(punctuation) {
+::highlight(punctuation),
+.token.list,
+::highlight(list) {
 	color: var(--text_color_5);
 }
 

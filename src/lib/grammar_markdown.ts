@@ -207,5 +207,7 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 				punctuation: /^~~|~~$/,
 			},
 		},
-	} satisfies Syntax_Grammar);
+	} satisfies Syntax_Grammar,
+		['markdown'],
+	);
 };

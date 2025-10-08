@@ -6,6 +6,7 @@ export type Highlight_Token_Name =
 	| 'doctype'
 	| 'cdata'
 	| 'punctuation'
+	| 'list'
 	| 'tag'
 	| 'constant'
 	| 'symbol'
@@ -53,6 +54,7 @@ export const highlight_priorities: Record<Highlight_Token_Name, number | undefin
 	doctype: 1,
 	cdata: 1,
 	punctuation: 1,
+	list: 1,
 	tag: 2,
 	constant: 2,
 	symbol: 2,
