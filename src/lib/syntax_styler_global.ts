@@ -6,6 +6,7 @@ import {add_grammar_js} from '$lib/grammar_js.js';
 import {add_grammar_ts} from '$lib/grammar_ts.js';
 import {add_grammar_svelte} from '$lib/grammar_svelte.js';
 import {add_grammar_json} from '$lib/grammar_json.js';
+import {add_grammar_markdown} from '$lib/grammar_markdown.js';
 
 export const syntax_styler_global = new Syntax_Styler();
 
@@ -16,3 +17,4 @@ add_grammar_js(syntax_styler_global);
 add_grammar_ts(syntax_styler_global);
 add_grammar_svelte(syntax_styler_global);
 add_grammar_json(syntax_styler_global);
+add_grammar_markdown(syntax_styler_global);

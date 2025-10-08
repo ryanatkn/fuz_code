@@ -1,3 +1,16 @@
+.token.attr_equals,
+::highlight(attr_equals),
+.token.processing_instruction,
+::highlight(processing_instruction),
+.token.doctype,
+::highlight(doctype),
+.token.cdata,
+::highlight(cdata),
+.token.punctuation,
+::highlight(punctuation) {
+	color: var(--text_color_5);
+}
+
 .token.tag,
 ::highlight(tag),
 .token.constant,
@@ -13,7 +26,9 @@
 .token.boolean,
 ::highlight(boolean),
 .token.interpolation_punctuation,
-::highlight(interpolation_punctuation) {
+::highlight(interpolation_punctuation),
+.token.heading,
+::highlight(heading) {
 	color: var(--color_a_5);
 }
 
@@ -24,7 +39,9 @@
 .token.builtin,
 ::highlight(builtin),
 .token.inserted,
-::highlight(inserted) {
+::highlight(inserted),
+.token.blockquote,
+::highlight(blockquote) {
 	color: var(--color_b_5);
 }
 
@@ -44,7 +61,9 @@
 .token.string,
 ::highlight(string),
 .token.template_punctuation,
-::highlight(template_punctuation) {
+::highlight(template_punctuation),
+.token.inline_code,
+::highlight(inline_code) {
 	color: var(--color_h_5);
 }
 
@@ -57,7 +76,9 @@
 .token.important,
 ::highlight(important),
 .token.variable,
-::highlight(variable) {
+::highlight(variable),
+.token.link_text,
+::highlight(link_text) {
 	color: var(--color_e_5);
 }
 
@@ -91,18 +112,24 @@
 	color: var(--color_d_5);
 }
 
-.token.attr_equals,
-::highlight(attr_equals),
-.token.processing_instruction,
-::highlight(processing_instruction),
-.token.doctype,
-::highlight(doctype),
-.token.cdata,
-::highlight(cdata),
-.token.punctuation,
-::highlight(punctuation) {
-	color: var(--text_color_5);
+.token.url,
+::highlight(url) {
+	text-decoration: underline;
 }
+
+.token.strikethrough,
+::highlight(strikethrough) {
+	text-decoration: line-through;
+}
+
+/*
+
+Note: CSS Highlights API doesn't support font-weight or font-style,
+so bold/italic will only work with HTML mode, not range mode.
+
+@see https://github.com/w3c/csswg-drafts/issues/8355
+
+*/
 
 .token.important,
 ::highlight(important),

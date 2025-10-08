@@ -25,7 +25,10 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 	// Note: 'assert', 'async', 'get', 'set' have special lookahead requirements in the main keyword pattern
 	const all_js_keywords = `assert|async|${main_keywords}|get|set|${special_keywords}`;
 
-	const grammar_js = syntax_styler.add_extended_lang('clike', 'js', {
+	const grammar_js = syntax_styler.add_extended_lang(
+		'clike',
+		'js',
+		{
 		class_name: [
 			grammar_clike.class_name,
 			{
@@ -156,7 +159,9 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 			pattern: /\b[A-Z][\w]*\b/,
 			alias: 'class_name',
 		},
-	});
+	},
+		['javascript'],
+	);
 
 	syntax_styler.grammar_insert_before('js', 'string', {
 		hashbang: {

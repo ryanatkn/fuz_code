@@ -1,8 +1,8 @@
 === STATS ===
 Sample length: 2266 characters
-Total tokens: 635
+Total tokens: 623
 
-Token types (33 unique):
+Token types (30 unique):
   punctuation: 301
   tag: 74
   operator: 37
@@ -15,7 +15,6 @@ Token types (33 unique):
   attr_value: 11
   string: 11
   builtin: 9
-  capitalized_identifier: 8
   property: 8
   block: 7
   selector: 7
@@ -25,9 +24,7 @@ Token types (33 unique):
   at_keyword: 5
   script: 3
   namespace: 3
-  constant: 2
   boolean: 2
-  function_variable: 2
   style: 2
   lang_css: 2
   type_annotation: 1
@@ -52,7 +49,6 @@ Token types (33 unique):
   25-57    lang_ts                   \n\texport const HELLO = 'world';\n
   27-33    special_keyword           export
   34-39    keyword                   const
-  40-45    constant                  HELLO
   46-47    operator                  =
   48-55    string                    'world'
   55-56    punctuation               ;
@@ -73,14 +69,12 @@ Token types (33 unique):
   86-707   lang_ts                   \n\t// @ts-expect-error\n\timport Thing from '$lib/Thing.svelte';\n\timport type {Snippet} from 'svelte';\n\n\tconst {\n\t\tthing,\n\t\tbound = $bindable(true),\n\t\tchildren,\n\t\tonclick,\n\t}: {\n\t\tthing: Record<string, any>;\n\t\tbound?: boolean;\n\t\tchildren: Snippet;\n\t\tonclick?: () => void;\n\t} = $props();\n\n\tconst thing_keys = $derived(Object.entries(thing));\n\n\tconst a = 1 as number;\n\n\tconst b = 'b';\n\n\tlet c: boolean = $state(true);\n\n\tconst f = (p: any) => p;\n\n\tconst attachment = (_p1: string, _p2: number) => {\n\t\treturn (el: HTMLElement) => {\n\t\t\telement_ref !== el;\n\t\t};\n\t};\n\n\tlet value = $state(thing['']);\n\tlet element_ref: HTMLElement;\n
   88-107   comment                   // @ts-expect-error
  109-115   special_keyword           import
- 116-121   capitalized_identifier    Thing
  122-126   special_keyword           from
  127-146   string                    '$lib/Thing.svelte'
  146-147   punctuation               ;
  149-155   special_keyword           import
  156-160   keyword                   type
  161-162   punctuation               {
- 162-169   capitalized_identifier    Snippet
  169-170   punctuation               }
  171-175   special_keyword           from
  176-184   string                    'svelte'
@@ -100,7 +94,6 @@ Token types (33 unique):
  257-258   operator                  :
  259-260   punctuation               {
  268-269   operator                  :
- 270-276   capitalized_identifier    Record
  276-277   operator                  <
  277-283   builtin                   string
  283-284   punctuation               ,
@@ -112,7 +105,6 @@ Token types (33 unique):
  301-308   builtin                   boolean
  308-309   punctuation               ;
  320-321   operator                  :
- 322-329   capitalized_identifier    Snippet
  329-330   punctuation               ;
  340-341   operator                  ?
  341-342   operator                  :
@@ -131,7 +123,6 @@ Token types (33 unique):
  389-390   operator                  =
  391-399   function                  $derived
  399-400   punctuation               (
- 400-406   capitalized_identifier    Object
  406-407   punctuation               .
  407-414   function                  entries
  414-415   punctuation               (
@@ -160,7 +151,6 @@ Token types (33 unique):
  496-497   punctuation               )
  497-498   punctuation               ;
  501-506   keyword                   const
- 507-508   function_variable         f
  509-510   operator                  =
  511-512   punctuation               (
  513-514   operator                  :
@@ -169,7 +159,6 @@ Token types (33 unique):
  520-522   operator                  =>
  524-525   punctuation               ;
  528-533   keyword                   const
- 534-544   function_variable         attachment
  545-546   operator                  =
  547-548   punctuation               (
  551-552   operator                  :
@@ -183,7 +172,6 @@ Token types (33 unique):
  581-587   special_keyword           return
  588-589   punctuation               (
  591-592   operator                  :
- 593-604   capitalized_identifier    HTMLElement
  604-605   punctuation               )
  606-608   operator                  =>
  609-610   punctuation               {
@@ -204,7 +192,6 @@ Token types (33 unique):
  674-675   punctuation               ;
  677-680   keyword                   let
  692-693   operator                  :
- 694-705   capitalized_identifier    HTMLElement
  705-706   punctuation               ;
  707-716   tag                       </script>
  707-715   tag                       </script
@@ -223,7 +210,6 @@ Token types (33 unique):
  752-759   svelte_expression         {HELLO}
  752-753   punctuation               {
  753-758   lang_ts                   HELLO
- 753-758   constant                  HELLO
  758-759   punctuation               }
  760-765   tag                       </h1>
  760-764   tag                       </h1
@@ -253,7 +239,6 @@ Token types (33 unique):
  812-818   at_keyword                @const
  819-847   lang_ts                   v = Math.round(t[k + f(u)])}
  821-822   operator                  =
- 823-827   capitalized_identifier    Math
  827-828   punctuation               .
  828-833   function                  round
  833-834   punctuation               (

@@ -10,7 +10,10 @@ import {class_keywords} from '$lib/grammar_clike.js';
  * @see LICENSE
  */
 export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
-	const grammar_ts = syntax_styler.add_extended_lang('js', 'ts', {
+	const grammar_ts = syntax_styler.add_extended_lang(
+		'js',
+		'ts',
+		{
 		class_name: {
 			pattern: new RegExp(
 				`(\\b(?:${class_keywords}|type)\\s+)(?!keyof\\b)(?!\\s)[_$a-zA-Z\\xA0-\\uFFFF](?:(?!\\s)[$\\w\\xA0-\\uFFFF])*(?:\\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?`,
@@ -27,7 +30,9 @@ export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
 				/#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)(?:\s*:\s*(?:(?!=>).)+)?\s*=>|(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*=>)))/,
 			alias: 'function',
 		},
-	});
+	},
+		['typescript'],
+	);
 
 	// The keywords TypeScript adds to JS
 	(grammar_ts.keyword as any).push(

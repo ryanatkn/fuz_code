@@ -23,7 +23,7 @@ export interface Generated_Output {
  */
 export const discover_samples = (): Array<Sample_Spec> => {
 	const sample_files = search_fs('src/lib/samples', {
-		file_filter: (path) => /sample_[^/]+\.(ts|css|html|json|svelte)$/.test(path),
+		file_filter: (path) => /sample_[^/]+\.(ts|css|html|json|svelte|md)$/.test(path),
 	});
 
 	const samples: Array<Sample_Spec> = [];

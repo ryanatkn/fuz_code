@@ -96,6 +96,18 @@ import '@ryanatkn/fuz_code/theme_variables.css'; // also this if not using Moss"
 	</div>
 </section>
 <section>
+	<h3>Markdown support</h3>
+	<p>
+		<Tome_Link name="Code" /> supports Markdown with <code>lang="md"</code>:
+	</p>
+	<div class="mb_lg">
+		<Code content={`<Code lang="md" content="# hello **world**" />`} />
+	</div>
+	<div>
+		<Code lang="md" content={`# hello **world**`} />
+	</div>
+</section>
+<section>
 	<h3>Fallback to no styling</h3>
 	<p>
 		Passing <code>lang={'{'}null}</code> disables syntax styling:

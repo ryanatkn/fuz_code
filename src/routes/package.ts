@@ -115,6 +115,10 @@ export const src_json: Src_Json = {
 			path: 'grammar_json.ts',
 			declarations: [{name: 'add_grammar_json', kind: 'function'}],
 		},
+		'./grammar_markdown.js': {
+			path: 'grammar_markdown.ts',
+			declarations: [{name: 'add_grammar_markdown', kind: 'function'}],
+		},
 		'./grammar_markup.js': {
 			path: 'grammar_markup.ts',
 			declarations: [
