@@ -447,9 +447,9 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 
 ## Inline Formatting
 
-This is **bold text** and this is also __bold text__.
+This is **bold text** and this is also **bold text**.
 
-This is *italic text* and this is also _italic text_.
+This is _italic text_ and this is also _italic text_.
 
 This is ~~strikethrough text~~.
 
@@ -459,12 +459,12 @@ This is a [link to example](https://example.com) in text.
 
 ## Lists
 
-* list item 1
-* list item 2
-* list item 3
+- list item 1
+- list item 2
+- list item 3
 
-- alternative list item 1
-- alternative list item 2
+* alternative list item 1
+* alternative list item 2
   - indented list item 1
   - indented list item 2
     - Deeply nested item
@@ -476,7 +476,7 @@ This is a [link to example](https://example.com) in text.
 > This is a blockquote.
 > It can span multiple lines.
 
-> Another blockquote with **bold** and *italic*.
+> Another blockquote with **bold** and _italic_.
 
 ## Fenced Code Blocks
 
@@ -607,29 +607,27 @@ hello("world")
 
 ## Edge Cases
 
-**bold** and __bold__ in the same line.
+**bold** and **bold** in the same line.
 
-*italic* and _italic_ in the same line.
+_italic_ and _italic_ in the same line.
 
-**bold** with *italic* and ~~strikethrough~~ all mixed.
+**bold** with _italic_ and ~~strikethrough~~ all mixed.
 
-A sentence with \`code\`, **bold**, *italic*, and [a link](https://example.com).
+A sentence with \`code\`, **bold**, _italic_, and [a link](https://example.com).
 
-Not bold: ** spaces around **, __ spaces around __.
+Not bold: ** spaces around **, ** spaces around **.
 
-Not italic: * spaces around *, _ spaces around _.
+Not italic: _ spaces around _, _ spaces around _.
 
-Not code: \`
-multiline
-\`.
+Not code: \`multiline\`.
 
-\`\`\`
+\`\`\`\`
 
 Empty fence above.
 
 \`\`\`unknownlang
 Plain text for unknown language.
-\`\`\`
+\`\`\`\`
 
 ## HTML Support
 

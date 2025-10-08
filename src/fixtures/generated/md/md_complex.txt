@@ -1,39 +1,39 @@
 === STATS ===
 Sample length: 2988 characters
-Total tokens: 525
+Total tokens: 487
 
 Token types (51 unique):
-  punctuation: 234
-  tag: 52
-  operator: 28
+  punctuation: 217
+  tag: 38
+  operator: 27
   code_fence: 25
-  heading: 22
-  keyword: 14
+  heading: 21
+  keyword: 13
   list: 9
   number: 9
   builtin: 8
   property: 8
-  string: 7
-  attr_name: 7
   bold: 6
   italic: 6
-  lang_ts: 6
+  string: 6
   function: 6
-  attr_value: 5
+  attr_name: 6
+  lang_ts: 5
   string_property: 5
   type_annotation: 4
   :: 4
   type: 4
   selector: 4
+  attr_value: 4
+  inline_code: 3
   blockquote: 3
-  fenced_code_ts: 3
   fenced_code_js: 3
   lang_js: 3
   strikethrough: 2
-  inline_code: 2
   link: 2
   link_text: 2
   url: 2
+  fenced_code_ts: 2
   special_keyword: 2
   capitalized_identifier: 2
   parameter: 2
@@ -73,12 +73,12 @@ Token types (51 unique):
  159-172   bold                      **bold text**
  159-161   punctuation               **
  170-172   punctuation               **
- 190-203   bold                      __bold text__
- 190-192   punctuation               __
- 201-203   punctuation               __
- 214-227   italic                    *italic text*
- 214-215   punctuation               *
- 226-227   punctuation               *
+ 190-203   bold                      **bold text**
+ 190-192   punctuation               **
+ 201-203   punctuation               **
+ 214-227   italic                    _italic text_
+ 214-215   punctuation               _
+ 226-227   punctuation               _
  245-258   italic                    _italic text_
  245-246   punctuation               _
  257-258   punctuation               _
@@ -97,16 +97,16 @@ Token types (51 unique):
  380-381   punctuation               )
  392-400   heading                   ## Lists
  392-394   punctuation               ##
- 400-415   list                      \n\n* list item 1
- 400-403   punctuation               \n\n*
- 415-429   list                      \n* list item 2
- 415-417   punctuation               \n*
- 429-443   list                      \n* list item 3
- 429-431   punctuation               \n*
- 443-470   list                      \n\n- alternative list item 1
- 443-446   punctuation               \n\n-
- 470-496   list                      \n- alternative list item 2
- 470-472   punctuation               \n-
+ 400-415   list                      \n\n- list item 1
+ 400-403   punctuation               \n\n-
+ 415-429   list                      \n- list item 2
+ 415-417   punctuation               \n-
+ 429-443   list                      \n- list item 3
+ 429-431   punctuation               \n-
+ 443-470   list                      \n\n* alternative list item 1
+ 443-446   punctuation               \n\n*
+ 470-496   list                      \n* alternative list item 2
+ 470-472   punctuation               \n*
  496-521   list                      \n  - indented list item 1
  496-500   punctuation               \n  -
  521-546   list                      \n  - indented list item 2
@@ -121,7 +121,7 @@ Token types (51 unique):
  610-611   punctuation               >
  634-663   blockquote                > It can span multiple lines.
  634-635   punctuation               >
- 665-713   blockquote                > Another blockquote with **bold** and *italic*.
+ 665-713   blockquote                > Another blockquote with **bold** and _italic_.
  665-666   punctuation               >
  715-736   heading                   ## Fenced Code Blocks
  715-717   punctuation               ##
@@ -496,21 +496,21 @@ Token types (51 unique):
 2315-2323  bold                      **bold**
 2315-2317  punctuation               **
 2321-2323  punctuation               **
-2328-2336  bold                      __bold__
-2328-2330  punctuation               __
-2334-2336  punctuation               __
-2356-2364  italic                    *italic*
-2356-2357  punctuation               *
-2363-2364  punctuation               *
+2328-2336  bold                      **bold**
+2328-2330  punctuation               **
+2334-2336  punctuation               **
+2356-2364  italic                    _italic_
+2356-2357  punctuation               _
+2363-2364  punctuation               _
 2369-2377  italic                    _italic_
 2369-2370  punctuation               _
 2376-2377  punctuation               _
 2397-2405  bold                      **bold**
 2397-2399  punctuation               **
 2403-2405  punctuation               **
-2411-2419  italic                    *italic*
-2411-2412  punctuation               *
-2418-2419  punctuation               *
+2411-2419  italic                    _italic_
+2411-2412  punctuation               _
+2418-2419  punctuation               _
 2424-2441  strikethrough             ~~strikethrough~~
 2424-2426  punctuation               ~~
 2439-2441  punctuation               ~~
@@ -520,9 +520,9 @@ Token types (51 unique):
 2478-2486  bold                      **bold**
 2478-2480  punctuation               **
 2484-2486  punctuation               **
-2488-2496  italic                    *italic*
-2488-2489  punctuation               *
-2495-2496  punctuation               *
+2488-2496  italic                    _italic_
+2488-2489  punctuation               _
+2495-2496  punctuation               _
 2502-2531  link                      [a link](https://example.com)
 2502-2510  link_text                 [a link]
 2502-2503  punctuation               [
@@ -530,52 +530,14 @@ Token types (51 unique):
 2510-2531  url                       (https://example.com)
 2510-2511  punctuation               (
 2530-2531  punctuation               )
-2664-2740  fenced_code               ```\n\nEmpty fence above.\n\n```unknownlang\nPlain text for unknown language.\n```
-2664-2667  code_fence                ```
-2689-2703  code_fence                ```unknownlang
-2737-2740  code_fence                ```
-2742-2757  heading                   ## HTML Support
-2742-2744  punctuation               ##
-2814-2837  tag                       <div class="container">
-2814-2818  tag                       <div
-2814-2815  punctuation               <
-2819-2824  attr_name                 class
-2824-2836  attr_value                ="container"
-2824-2825  punctuation               =
-2825-2826  punctuation               "
-2835-2836  punctuation               "
-2836-2837  punctuation               >
-2839-2842  tag                       <p>
-2839-2841  tag                       <p
-2839-2840  punctuation               <
-2841-2842  punctuation               >
-2855-2863  tag                       <strong>
-2855-2862  tag                       <strong
-2855-2856  punctuation               <
-2862-2863  punctuation               >
-2869-2878  tag                       </strong>
-2869-2877  tag                       </strong
-2869-2871  punctuation               </
-2877-2878  punctuation               >
-2889-2893  tag                       </p>
-2889-2892  tag                       </p
-2889-2891  punctuation               </
-2892-2893  punctuation               >
-2894-2900  tag                       </div>
-2894-2899  tag                       </div
-2894-2896  punctuation               </
-2899-2900  punctuation               >
-2930-2935  tag                       <div>
-2930-2934  tag                       <div
-2930-2931  punctuation               <
-2934-2935  punctuation               >
-2937-2979  fenced_code_ts            ```ts\nconst example = 'embedded code';\n```
+2648-2659  inline_code               `multiline`
+2648-2649  punctuation               `
+2658-2659  punctuation               `
+2662-2979  fenced_code               ````\n\nEmpty fence above.\n\n```unknownlang\nPlain text for unknown language.\n````\n\n## HTML Support\n\nSince Markdown extends HTML, raw HTML is also styled:\n\n<div class="container">\n\t<p>This HTML is <strong>styled</strong> correctly!</p>\n</div>\n\nHTML can wrap code blocks:\n\n<div>\n\n```ts\nconst example = 'embedded code';\n```
+2662-2666  code_fence                ````
+2688-2702  code_fence                ```unknownlang
+2736-2740  code_fence                ````
 2937-2942  code_fence                ```ts
-2942-2976  lang_ts                   \nconst example = 'embedded code';\n
-2943-2948  keyword                   const
-2957-2958  operator                  =
-2959-2974  string                    'embedded code'
-2974-2975  punctuation               ;
 2976-2979  code_fence                ```
 2981-2987  tag                       </div>
 2981-2986  tag                       </div
