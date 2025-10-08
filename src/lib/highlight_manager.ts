@@ -1,4 +1,4 @@
-import {Syntax_Token, type Syntax_Token_Stream} from './syntax_token.js';
+import type {Syntax_Token_Stream} from './syntax_token.js';
 import {highlight_priorities} from './highlight_priorities.js';
 
 export type Highlight_Mode = 'auto' | 'ranges' | 'html';
@@ -111,7 +111,7 @@ export class Highlight_Manager {
 				continue;
 			}
 
-			const length = this.#get_token_length(token);
+			const length = token.length;
 			const end_pos = pos + length;
 
 			try {
@@ -150,24 +150,5 @@ export class Highlight_Manager {
 		}
 
 		return pos;
-	}
-
-	/**
-	 * Calculate the total text length of a token
-	 */
-	#get_token_length(token: Syntax_Token): number {
-		if (typeof token.content === 'string') {
-			return token.content.length;
-		}
-
-		let length = 0;
-		for (const item of token.content) {
-			if (typeof item === 'string') {
-				length += item.length;
-			} else {
-				length += this.#get_token_length(item);
-			}
-		}
-		return length;
 	}
 }

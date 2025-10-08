@@ -108,12 +108,10 @@ export class Syntax_Styler {
 			tokens: undefined,
 		};
 		this.run_hook_before_tokenize(ctx);
-		(ctx as any as Hook_After_Tokenize_Callback_Context).tokens = tokenize_syntax(
-			ctx.code,
-			ctx.grammar,
-		);
-		this.run_hook_after_tokenize(ctx as any as Hook_After_Tokenize_Callback_Context);
-		return this.stringify_token(encode(ctx.tokens), ctx.lang);
+		const c = ctx as any as Hook_After_Tokenize_Callback_Context;
+		c.tokens = tokenize_syntax(c.code, c.grammar);
+		this.run_hook_after_tokenize(c);
+		return this.stringify_token(c.tokens, c.lang);
 	}
 
 	/**
@@ -242,7 +240,10 @@ export class Syntax_Styler {
 	 */
 	stringify_token(o: string | Syntax_Token | Syntax_Token_Stream, lang: string): string {
 		if (typeof o === 'string') {
-			return o;
+			return o
+				.replace(/&/g, '&amp;')
+				.replace(/</g, '&lt;')
+				.replace(/\u00a0/g, ' ');
 		}
 		if (Array.isArray(o)) {
 			var s = '';
@@ -553,19 +554,6 @@ export interface Hook_Wrap_Callback_Context {
 }
 
 var unique_id = 0;
-
-const encode = (tokens: any): any => {
-	if (tokens instanceof Syntax_Token) {
-		return new Syntax_Token(tokens.type, encode(tokens.content), tokens.alias);
-	} else if (Array.isArray(tokens)) {
-		return tokens.map(encode);
-	} else {
-		return tokens
-			.replace(/&/g, '&amp;')
-			.replace(/</g, '&lt;')
-			.replace(/\u00a0/g, ' ');
-	}
-};
 
 /**
  * Returns a unique number for the given object. Later calls will still return the same number.
