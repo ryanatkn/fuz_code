@@ -1,16 +1,26 @@
 import type {
 	Add_Syntax_Grammar,
-	Syntax_Grammar,
 	Syntax_Grammar_Token,
+	Syntax_Grammar_Value,
 	Syntax_Styler,
 } from '$lib/syntax_styler.js';
+
+interface Lang_Definition {
+	aliases: Array<string>;
+	id: string;
+}
+
+interface Fence_Type {
+	backticks: string;
+	suffix: string;
+}
 
 /**
  * Helper to create fenced code block pattern for a language
  */
 const create_fence_pattern = (
 	backticks: string,
-	aliases: string[],
+	aliases: Array<string>,
 	lang_id: string,
 	syntax_styler: Syntax_Styler,
 ): Syntax_Grammar_Token => {
@@ -41,10 +51,7 @@ const create_fence_pattern = (
  * Helper to create catch-all fence pattern (unknown languages)
  */
 const create_catchall_fence = (backticks: string): Syntax_Grammar_Token => {
-	const pattern = new RegExp(
-		`^${backticks}[^\\n\\r]*(?:\\r?\\n|\\r)[\\s\\S]*?^${backticks}$`,
-		'm',
-	);
+	const pattern = new RegExp(`^${backticks}[^\\n\\r]*(?:\\r?\\n|\\r)[\\s\\S]*?^${backticks}$`, 'm');
 	const code_fence_pattern = new RegExp(`^${backticks}[^\\n\\r]*|^${backticks}$`, 'm');
 
 	return {
@@ -89,7 +96,7 @@ const create_md_placeholder = (backticks: string): Syntax_Grammar_Token => {
  */
 export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 	// Language definitions with aliases
-	const langs = [
+	const langs: Array<Lang_Definition> = [
 		{aliases: ['ts', 'typescript'], id: 'ts'},
 		{aliases: ['js', 'javascript'], id: 'js'},
 		{aliases: ['css'], id: 'css'},
@@ -99,14 +106,14 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 	];
 
 	// Fence types: higher counts first (for proper precedence in tokenization)
-	const fence_types = [
+	const fence_types: Array<Fence_Type> = [
 		{backticks: '`````', suffix: '5tick'},
 		{backticks: '````', suffix: '4tick'},
 		{backticks: '```', suffix: ''},
 	];
 
 	// Build grammar dynamically
-	const grammar: Syntax_Grammar = {};
+	const grammar: Record<string, Syntax_Grammar_Value> = {};
 	const md_self_refs: Array<string> = []; // Track md patterns for later self-reference
 
 	// Generate fence patterns for each type
@@ -237,7 +244,7 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 					punctuation: /^~~|~~$/,
 				},
 			},
-		} satisfies Syntax_Grammar,
+		},
 		['markdown'],
 	);
 

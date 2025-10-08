@@ -629,16 +629,7 @@ Empty fence above.
 Plain text for unknown language.
 \`\`\`
 
-Nested fence (4 backticks):
-
-\`\`\`\`md
-\`four\` fences
-\`\`\`css
-body { color: red; }
-\`\`\`
-\`\`\`\`
-
-Deeply nested (5 backticks):
+Nested fences (3 to 5):
 
 \`\`\`\`\`md
 with \`five\` fences
