@@ -183,10 +183,11 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 							punctuation: /^\[|\]$/,
 						},
 					},
-					url: {
+					url_wrapper: {
 						pattern: /\([^)]+\)$/,
 						inside: {
 							punctuation: /^\(|\)$/,
+							url: /[^()]+/,
 						},
 					},
 				},

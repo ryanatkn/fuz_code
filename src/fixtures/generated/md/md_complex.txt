@@ -1,8 +1,8 @@
 === STATS ===
 Sample length: 3167 characters
-Total tokens: 579
+Total tokens: 581
 
-Token types (55 unique):
+Token types (56 unique):
   punctuation: 255
   tag: 56
   code_fence: 33
@@ -36,6 +36,7 @@ Token types (55 unique):
   strikethrough: 2
   link: 2
   link_text: 2
+  url_wrapper: 2
   url: 2
   special_keyword: 2
   capitalized_identifier: 2
@@ -96,8 +97,9 @@ Token types (55 unique):
  307-324   link_text                 [link to example]
  307-308   punctuation               [
  323-324   punctuation               ]
- 324-345   url                       (https://example.com)
+ 324-345   url_wrapper               (https://example.com)
  324-325   punctuation               (
+ 325-344   url                       https://example.com
  344-345   punctuation               )
  356-364   heading                   ## Lists
  356-358   punctuation               ##
@@ -531,8 +533,9 @@ Token types (55 unique):
 2472-2480  link_text                 [a link]
 2472-2473  punctuation               [
 2479-2480  punctuation               ]
-2480-2501  url                       (https://example.com)
+2480-2501  url_wrapper               (https://example.com)
 2480-2481  punctuation               (
+2481-2500  url                       https://example.com
 2500-2501  punctuation               )
 2618-2629  inline_code               `multiline`
 2618-2619  punctuation               `
