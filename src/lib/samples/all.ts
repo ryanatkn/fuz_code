@@ -433,23 +433,23 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 	md_complex: {
 		name: 'md_complex',
 		lang: 'md',
-		content: `# Heading Level 1
+		content: `# Heading 1
 
-## Heading Level 2
+## Heading 2
 
-### Heading Level 3
+### Heading 3
 
-#### Heading Level 4
+#### Heading 4
 
-##### Heading Level 5
+##### Heading 5
 
-###### Heading Level 6
+###### Heading 6
 
-## Inline Formatting
+## Inline formatting
 
-This is **bold text** and this is also **bold text**.
+This is **bold text** and this is also __bold text__.
 
-This is _italic text_ and this is also _italic text_.
+This is _italic text_ and this is also *italic text*.
 
 This is ~~strikethrough text~~.
 

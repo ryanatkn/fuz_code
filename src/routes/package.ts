@@ -66,7 +66,10 @@ export const package_json: Package_Json = {
 		bracketSpacing: false,
 		overrides: [
 			{files: 'package.json', options: {useTabs: false}},
-			{files: 'src/fixtures/generated/**', options: {requirePragma: true}},
+			{
+				files: ['src/fixtures/generated/**', 'src/lib/samples/sample_*.*'],
+				options: {requirePragma: true},
+			},
 		],
 	},
 	sideEffects: ['**/*.css'],

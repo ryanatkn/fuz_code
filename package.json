@@ -85,7 +85,10 @@
         }
       },
       {
-        "files": "src/fixtures/generated/**",
+        "files": [
+          "src/fixtures/generated/**",
+          "src/lib/samples/sample_*.*"
+        ],
         "options": {
           "requirePragma": true
         }
