@@ -38,8 +38,6 @@
 ::highlight(token_comment),
 .token_char,
 ::highlight(token_char),
-.token_builtin,
-::highlight(token_builtin),
 .token_inserted,
 ::highlight(token_inserted),
 .token_blockquote,
@@ -54,7 +52,9 @@
 .token_class_name,
 ::highlight(token_class_name),
 .token_number,
-::highlight(token_number) {
+::highlight(token_number),
+.token_url,
+::highlight(token_url) {
 	color: var(--color_j_5);
 }
 
@@ -88,13 +88,7 @@
 .token_important,
 ::highlight(token_important),
 .token_variable,
-::highlight(token_variable),
-.token_link_text_wrapper,
-::highlight(token_link_text_wrapper),
-.token_link_text,
-::highlight(token_link_text),
-.token_link_punctuation,
-::highlight(token_link_punctuation) {
+::highlight(token_variable) {
 	color: var(--color_e_5);
 }
 
@@ -110,7 +104,13 @@
 .token_decorator,
 ::highlight(token_decorator),
 .token_decorator_name,
-::highlight(token_decorator_name) {
+::highlight(token_decorator_name),
+.token_link_text_wrapper,
+::highlight(token_link_text_wrapper),
+.token_link_text,
+::highlight(token_link_text),
+.token_link_punctuation,
+::highlight(token_link_punctuation) {
 	color: var(--color_i_5);
 }
 

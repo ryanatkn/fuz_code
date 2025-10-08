@@ -48,9 +48,6 @@ This is a [link to example](https://example.com) in text.
 ### TypeScript
 
 ```ts
-const greeting: string = 'Hello, world!';
-const count: number = 42;
-
 function add(a: number, b: number): number {
 	return a + b;
 }
@@ -107,8 +104,8 @@ const fifteen = multiply(5, 3);
 
 ```markup
 <ul>
-	<li>list item 1</li>
-	<li>list item 2</li>
+	<li>a</li>
+	<li>b</li>
 </ul>
 ```
 

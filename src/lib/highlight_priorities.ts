@@ -18,12 +18,13 @@ export type Highlight_Token_Name =
 	| 'token_tag_punctuation'
 	| 'token_comment'
 	| 'token_char'
-	| 'token_builtin'
 	| 'token_inserted'
 	| 'token_blockquote'
 	| 'token_blockquote_punctuation'
+	| 'token_builtin'
 	| 'token_class_name'
 	| 'token_number'
+	| 'token_url'
 	| 'token_attr_value'
 	| 'token_attr_quote'
 	| 'token_string'
@@ -36,19 +37,18 @@ export type Highlight_Token_Name =
 	| 'token_regex'
 	| 'token_important'
 	| 'token_variable'
-	| 'token_link_text_wrapper'
-	| 'token_link_text'
-	| 'token_link_punctuation'
 	| 'token_atrule'
 	| 'token_attr_name'
 	| 'token_property'
 	| 'token_decorator'
 	| 'token_decorator_name'
+	| 'token_link_text_wrapper'
+	| 'token_link_text'
+	| 'token_link_punctuation'
 	| 'token_special_keyword'
 	| 'token_namespace'
 	| 'token_rule'
 	| 'token_at_keyword'
-	| 'token_url'
 	| 'token_strikethrough'
 	| 'token_bold'
 	| 'token_italic';
@@ -71,12 +71,13 @@ export const highlight_priorities: Record<Highlight_Token_Name, number | undefin
 	token_tag_punctuation: 2,
 	token_comment: 3,
 	token_char: 3,
-	token_builtin: 3,
 	token_inserted: 3,
 	token_blockquote: 3,
 	token_blockquote_punctuation: 3,
+	token_builtin: 4,
 	token_class_name: 4,
 	token_number: 4,
+	token_url: 4,
 	token_attr_value: 5,
 	token_attr_quote: 5,
 	token_string: 5,
@@ -89,19 +90,18 @@ export const highlight_priorities: Record<Highlight_Token_Name, number | undefin
 	token_regex: 7,
 	token_important: 7,
 	token_variable: 7,
-	token_link_text_wrapper: 7,
-	token_link_text: 7,
-	token_link_punctuation: 7,
 	token_atrule: 8,
 	token_attr_name: 9,
 	token_property: 9,
 	token_decorator: 9,
 	token_decorator_name: 9,
+	token_link_text_wrapper: 9,
+	token_link_text: 9,
+	token_link_punctuation: 9,
 	token_special_keyword: 10,
 	token_namespace: 10,
 	token_rule: 10,
 	token_at_keyword: 11,
-	token_url: 12,
 	token_strikethrough: 13,
 	token_bold: 14,
 	token_italic: 15,
