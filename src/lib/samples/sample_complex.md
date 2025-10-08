@@ -184,7 +184,8 @@ Not bold: ** spaces around **, ** spaces around **.
 
 Not italic: _ spaces around _, _ spaces around _.
 
-Not code: `multiline`.
+Not code: `
+multiline`.
 
 ```
 
