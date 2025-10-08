@@ -1,39 +1,39 @@
 === STATS ===
-Sample length: 2958 characters
-Total tokens: 487
+Sample length: 2956 characters
+Total tokens: 528
 
 Token types (51 unique):
-  punctuation: 217
-  tag: 38
-  operator: 27
+  punctuation: 236
+  tag: 52
+  operator: 28
   code_fence: 25
-  heading: 21
-  keyword: 13
+  heading: 22
+  keyword: 14
   list: 9
   number: 9
   builtin: 8
   property: 8
+  string: 7
+  attr_name: 7
   bold: 6
   italic: 6
-  string: 6
+  lang_ts: 6
   function: 6
-  attr_name: 6
-  lang_ts: 5
+  attr_value: 5
   string_property: 5
   type_annotation: 4
   :: 4
   type: 4
   selector: 4
-  attr_value: 4
   inline_code: 3
   blockquote: 3
+  fenced_code_ts: 3
   fenced_code_js: 3
   lang_js: 3
   strikethrough: 2
   link: 2
   link_text: 2
   url: 2
-  fenced_code_ts: 2
   special_keyword: 2
   capitalized_identifier: 2
   parameter: 2
@@ -533,13 +533,54 @@ Token types (51 unique):
 2618-2629  inline_code               `multiline`
 2618-2619  punctuation               `
 2628-2629  punctuation               `
-2632-2949  fenced_code               ````\n\nEmpty fence above.\n\n```unknownlang\nPlain text for unknown language.\n````\n\n## HTML Support\n\nSince Markdown extends HTML, raw HTML is also styled:\n\n<div class="container">\n\t<p>This HTML is <strong>styled</strong> correctly!</p>\n</div>\n\nHTML can wrap code blocks:\n\n<div>\n\n```ts\nconst example = 'embedded code';\n```
-2632-2636  code_fence                ````
-2658-2672  code_fence                ```unknownlang
-2706-2710  code_fence                ````
-2907-2912  code_fence                ```ts
-2946-2949  code_fence                ```
-2951-2957  tag                       </div>
-2951-2956  tag                       </div
-2951-2953  punctuation               </
-2956-2957  punctuation               >
+2632-2708  fenced_code               ```\n\nEmpty fence above.\n\n```unknownlang\nPlain text for unknown language.\n```
+2632-2635  code_fence                ```
+2657-2671  code_fence                ```unknownlang
+2705-2708  code_fence                ```
+2710-2725  heading                   ## HTML Support
+2710-2712  punctuation               ##
+2782-2805  tag                       <div class="container">
+2782-2786  tag                       <div
+2782-2783  punctuation               <
+2787-2792  attr_name                 class
+2792-2804  attr_value                ="container"
+2792-2793  punctuation               =
+2793-2794  punctuation               "
+2803-2804  punctuation               "
+2804-2805  punctuation               >
+2807-2810  tag                       <p>
+2807-2809  tag                       <p
+2807-2808  punctuation               <
+2809-2810  punctuation               >
+2823-2831  tag                       <strong>
+2823-2830  tag                       <strong
+2823-2824  punctuation               <
+2830-2831  punctuation               >
+2837-2846  tag                       </strong>
+2837-2845  tag                       </strong
+2837-2839  punctuation               </
+2845-2846  punctuation               >
+2857-2861  tag                       </p>
+2857-2860  tag                       </p
+2857-2859  punctuation               </
+2860-2861  punctuation               >
+2862-2868  tag                       </div>
+2862-2867  tag                       </div
+2862-2864  punctuation               </
+2867-2868  punctuation               >
+2898-2903  tag                       <div>
+2898-2902  tag                       <div
+2898-2899  punctuation               <
+2902-2903  punctuation               >
+2905-2947  fenced_code_ts            ```ts\nconst example = 'embedded code';\n```
+2905-2910  code_fence                ```ts
+2910-2944  lang_ts                   \nconst example = 'embedded code';\n
+2911-2916  keyword                   const
+2925-2926  operator                  =
+2927-2942  string                    'embedded code'
+2942-2943  punctuation               ;
+2944-2947  code_fence                ```
+2949-2955  tag                       </div>
+2949-2954  tag                       </div
+2949-2951  punctuation               </
+2954-2955  punctuation               >

@@ -186,28 +186,28 @@ Not italic: _ spaces around _, _ spaces around _.
 
 Not code: <span class="token inline_code code"><span class="token punctuation">`</span>multiline<span class="token punctuation">`</span></span>.
 
-<span class="token fenced_code"><span class="token code_fence punctuation">````</span>
+<span class="token fenced_code"><span class="token code_fence punctuation">```</span>
 
 Empty fence above.
 
 <span class="token code_fence punctuation">```unknownlang</span>
 Plain text for unknown language.
-<span class="token code_fence punctuation">````</span>
+<span class="token code_fence punctuation">```</span></span>
 
-## HTML Support
+<span class="token heading"><span class="token punctuation">##</span> HTML Support</span>
 
 Since Markdown extends HTML, raw HTML is also styled:
 
-&lt;div class="container">
-	&lt;p>This HTML is &lt;strong>styled&lt;/strong> correctly!&lt;/p>
-&lt;/div>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr_name">class</span><span class="token attr_value"><span class="token punctuation attr_equals">=</span><span class="token punctuation attr_quote">"</span>container<span class="token punctuation attr_quote">"</span></span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>This HTML is <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">></span></span>styled<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">></span></span> correctly!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 
 HTML can wrap code blocks:
 
-&lt;div>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
 
-<span class="token code_fence punctuation">```ts</span>
-const example = 'embedded code';
-<span class="token code_fence punctuation">```</span></span>
+<span class="token fenced_code_ts"><span class="token code_fence punctuation">```ts</span><span class="token lang_ts">
+<span class="token keyword">const</span> example <span class="token operator">=</span> <span class="token string">'embedded code'</span><span class="token punctuation">;</span>
+</span><span class="token code_fence punctuation">```</span></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>

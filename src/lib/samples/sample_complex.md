@@ -186,13 +186,13 @@ Not italic: _ spaces around _, _ spaces around _.
 
 Not code: `multiline`.
 
-````
+```
 
 Empty fence above.
 
 ```unknownlang
 Plain text for unknown language.
-````
+```
 
 ## HTML Support
 
