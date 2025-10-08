@@ -47,16 +47,17 @@ export class Highlight_Manager {
 
 		// Apply highlights
 		for (const [type, ranges] of ranges_by_type) {
+			const prefixed_type = `token_${type}`;
 			// Track ranges for this element
-			this.element_ranges.set(type, ranges);
+			this.element_ranges.set(prefixed_type, ranges);
 
 			// Get or create the shared highlight
-			let highlight = CSS.highlights.get(type);
+			let highlight = CSS.highlights.get(prefixed_type);
 			if (!highlight) {
 				highlight = new Highlight();
 				// Set priority based on CSS cascade order (higher = later in CSS = wins)
-				highlight.priority = highlight_priorities[type as keyof typeof highlight_priorities] ?? 0;
-				CSS.highlights.set(type, highlight);
+				highlight.priority = highlight_priorities[prefixed_type as keyof typeof highlight_priorities] ?? 0;
+				CSS.highlights.set(prefixed_type, highlight);
 			}
 
 			// Add all ranges to the highlight

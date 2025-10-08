@@ -239,7 +239,7 @@ export class Syntax_Styler {
 			type: o.type,
 			content: this.stringify_token(o.content, lang),
 			tag: 'span',
-			classes: ['token', o.type],
+			classes: [`token_${o.type}`],
 			attributes: {},
 			lang,
 		};
@@ -247,9 +247,9 @@ export class Syntax_Styler {
 		var aliases = o.alias;
 		if (aliases) {
 			if (Array.isArray(aliases)) {
-				ctx.classes.push(...aliases);
+				ctx.classes.push(...aliases.map((a) => `token_${a}`));
 			} else {
-				ctx.classes.push(aliases);
+				ctx.classes.push(`token_${aliases}`);
 			}
 		}
 
