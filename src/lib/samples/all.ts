@@ -589,7 +589,7 @@ _italic_ and _italic_ in the same line.
 
 **bold** with _italic_ and ~~strikethrough~~ all mixed.
 
-A sentence with \`code\`, **bold**, _italic_, and [a link](https://example.com).
+\`code\`, **bold**, _italic_ + [a link](https://example.com).
 
 Not bold: ** spaces around **, ** spaces around **.
 
