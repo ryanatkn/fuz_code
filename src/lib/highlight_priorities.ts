@@ -14,6 +14,7 @@ export type Highlight_Token_Name =
 	| 'boolean'
 	| 'interpolation_punctuation'
 	| 'heading'
+	| 'heading_punctuation'
 	| 'comment'
 	| 'char'
 	| 'builtin'
@@ -64,6 +65,7 @@ export const highlight_priorities: Record<Highlight_Token_Name, number | undefin
 	boolean: 2,
 	interpolation_punctuation: 2,
 	heading: 2,
+	heading_punctuation: 2,
 	comment: 3,
 	char: 3,
 	builtin: 3,

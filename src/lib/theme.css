@@ -26,7 +26,9 @@
 .token.interpolation_punctuation,
 ::highlight(interpolation_punctuation),
 .token.heading,
-::highlight(heading) {
+::highlight(heading),
+.token.heading_punctuation,
+::highlight(heading_punctuation) {
 	color: var(--color_a_5);
 }
 

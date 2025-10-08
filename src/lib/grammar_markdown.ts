@@ -151,7 +151,10 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 			heading: {
 				pattern: /^#{1,6}\s+.+$/m,
 				inside: {
-					punctuation: /^#{1,6}/,
+					punctuation: {
+						pattern: /^#{1,6}/,
+						alias: 'heading_punctuation',
+					},
 				},
 			},
 
@@ -184,7 +187,7 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 								pattern: /^\[|\]$/,
 								alias: 'link_punctuation',
 							},
-							link_text: /[^\[\]]+/,
+							link_text: /[^[\]]+/,
 						},
 					},
 					url_wrapper: {
