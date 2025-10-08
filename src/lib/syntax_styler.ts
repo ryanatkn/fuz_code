@@ -33,6 +33,9 @@ export class Syntax_Styler {
 	// }
 
 	add_lang(id: string, grammar: Syntax_Grammar, aliases?: Array<string>): void {
+		// Normalize grammar once at registration for optimal runtime performance
+		// Use a visited set to handle circular references
+		this.normalize_grammar(grammar, new Set());
 		this.langs[id] = grammar;
 		if (aliases !== undefined) {
 			for (var alias of aliases) {
@@ -201,6 +204,9 @@ export class Syntax_Styler {
 			}
 		}
 
+		// Normalize the updated grammar to ensure inserted patterns have consistent shape
+		this.normalize_grammar(updated, new Set());
+
 		var old = root[inside];
 		root[inside] = updated;
 
@@ -245,12 +251,9 @@ export class Syntax_Styler {
 		};
 
 		var aliases = o.alias;
-		if (aliases) {
-			if (Array.isArray(aliases)) {
-				ctx.classes.push(...aliases.map((a) => `token_${a}`));
-			} else {
-				ctx.classes.push(`token_${aliases}`);
-			}
+		// alias is always an array after normalization
+		for (const a of aliases) {
+			ctx.classes.push(`token_${a}`);
 		}
 
 		this.run_hook_wrap(ctx);
@@ -298,6 +301,92 @@ export class Syntax_Styler {
 		return {...deep_clone(this.get_lang(base_id)), ...extension};
 	}
 
+	/**
+	 * Normalize a single pattern to have consistent shape.
+	 * This ensures all patterns have the same object shape for V8 optimization.
+	 */
+	private normalize_pattern(
+		pattern: RegExp | Syntax_Grammar_Token,
+		visited: Set<number>,
+	): Normalized_Grammar_Token {
+		const p = pattern instanceof RegExp ? {pattern} : pattern;
+
+		let regex = p.pattern;
+
+		// Add global flag if greedy and not already present
+		if ((p.greedy ?? false) && !regex.global) {
+			const flags = regex.flags;
+			regex = new RegExp(regex.source, flags.includes('g') ? flags : flags + 'g');
+		}
+
+		// Normalize alias to always be an array
+		let normalized_alias: Array<string> = [];
+		if (p.alias) {
+			normalized_alias = Array.isArray(p.alias) ? p.alias : [p.alias];
+		}
+
+		// Recursively normalize the inside grammar if present
+		let normalized_inside: Syntax_Grammar | null = null;
+		if (p.inside) {
+			normalized_inside = p.inside;
+			this.normalize_grammar(normalized_inside, visited);
+		}
+
+		return {
+			pattern: regex,
+			lookbehind: p.lookbehind ?? false,
+			greedy: p.greedy ?? false,
+			alias: normalized_alias,
+			inside: normalized_inside,
+		};
+	}
+
+	/**
+	 * Normalize a grammar to have consistent object shapes.
+	 * This performs several optimizations:
+	 * 1. Merges `rest` property into main grammar
+	 * 2. Ensures all pattern values are arrays
+	 * 3. Normalizes all pattern objects to have consistent shapes
+	 * 4. Adds global flag to greedy patterns
+	 *
+	 * This is called once at registration time to avoid runtime overhead.
+	 * @param visited - Set of grammar object IDs already normalized (for circular references)
+	 */
+	private normalize_grammar(grammar: Syntax_Grammar, visited: Set<number>): void {
+		// Check if we've already normalized this grammar (circular reference)
+		const grammar_id = id_of(grammar);
+		if (visited.has(grammar_id)) {
+			return;
+		}
+		visited.add(grammar_id);
+
+		// Step 1: Merge rest into grammar first
+		if (grammar.rest) {
+			for (const token in grammar.rest) {
+				if (!grammar[token]) {
+					// Don't overwrite existing tokens
+					grammar[token] = grammar.rest[token];
+				}
+			}
+			delete grammar.rest;
+		}
+
+		// Step 2: Normalize all patterns
+		for (const key in grammar) {
+			if (key === 'rest') continue;
+
+			const value = grammar[key];
+			if (!value) {
+				grammar[key] = [];
+				continue;
+			}
+
+			// Always store as array of normalized patterns
+			const patterns = Array.isArray(value) ? value : [value];
+			grammar[key] = patterns.map((p) => this.normalize_pattern(p, visited)) as any;
+		}
+	}
+
 	// TODO add some builtins
 	plugins: Record<string, any> = {};
 
@@ -333,9 +422,12 @@ export class Syntax_Styler {
 	}
 }
 
-export type Syntax_Grammar_Value = RegExp | Syntax_Grammar_Token | Array<Syntax_Grammar_Value>;
+export type Syntax_Grammar_Value =
+	| RegExp
+	| Syntax_Grammar_Token
+	| Array<RegExp | Syntax_Grammar_Token>;
 
-export type Syntax_Grammar = Record<string, Syntax_Grammar_Value> & {
+export type Syntax_Grammar = Record<string, Syntax_Grammar_Value | undefined> & {
 	rest?: Syntax_Grammar | undefined;
 };
 
@@ -348,6 +440,9 @@ export type Syntax_Grammar = Record<string, Syntax_Grammar_Value> & {
  *
  * Note: This can cause infinite recursion. Be careful when you embed different languages or even the same language into
  * each another.
+ *
+ * Note: Grammar authors can use optional properties, but they will be normalized
+ * to required properties at registration time for optimal performance.
  */
 export interface Syntax_Grammar_Token {
 	/**
@@ -373,6 +468,18 @@ export interface Syntax_Grammar_Token {
 	 * The nested grammar of this token.
 	 */
 	inside?: Syntax_Grammar | null;
+}
+
+/**
+ * Normalized grammar token with all properties required.
+ * This is the internal representation after normalization.
+ */
+export interface Normalized_Grammar_Token {
+	pattern: RegExp;
+	lookbehind: boolean;
+	greedy: boolean;
+	alias: Array<string>;
+	inside: Syntax_Grammar | null;
 }
 
 const depth_first_search = (

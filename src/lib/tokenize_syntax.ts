@@ -26,14 +26,7 @@ import {Syntax_Token, type Syntax_Token_Stream} from './syntax_token.js';
  * }
  */
 export const tokenize_syntax = (text: string, grammar: Syntax_Grammar): Syntax_Token_Stream => {
-	var {rest} = grammar;
-	if (rest) {
-		for (var token in rest) {
-			grammar[token] = rest[token];
-		}
-		grammar.rest = undefined; // preserve shape
-	}
-
+	// Grammar is already normalized (rest merged, patterns in arrays, etc.)
 	var token_list = new Linked_List();
 	add_after(token_list, token_list.head, text);
 
@@ -56,13 +49,12 @@ const match_grammar = (
 	rematch?: Rematch_Options,
 ): void => {
 	for (var token in grammar) {
+		// Grammar is normalized: patterns is always an array of normalized objects
 		var patterns = grammar[token];
 
 		if (!patterns) {
 			continue;
 		}
-
-		patterns = Array.isArray(patterns) ? patterns : [patterns];
 
 		for (var j = 0; j < patterns.length; ++j) {
 			if (rematch && rematch.cause === token + ',' + j) {
@@ -70,18 +62,14 @@ const match_grammar = (
 			}
 
 			var pattern_obj = patterns[j];
+			// All properties are guaranteed to be present after normalization
 			var inside = pattern_obj.inside;
-			var lookbehind = !!pattern_obj.lookbehind;
-			var greedy = !!pattern_obj.greedy;
+			var lookbehind = pattern_obj.lookbehind;
+			var greedy = pattern_obj.greedy;
 			var alias = pattern_obj.alias;
 
-			if (greedy && !pattern_obj.pattern.global) {
-				// Without the global flag, lastIndex won't work
-				var flags = pattern_obj.pattern.toString().match(/[imsuy]*$/)[0];
-				pattern_obj.pattern = RegExp(pattern_obj.pattern.source, flags + 'g');
-			}
-
-			var pattern: RegExp = pattern_obj.pattern || pattern_obj;
+			// Pattern already has global flag if greedy (added during normalization)
+			var pattern: RegExp = pattern_obj.pattern;
 
 			for (
 				// iterate the token list and keep track of the current token/string position

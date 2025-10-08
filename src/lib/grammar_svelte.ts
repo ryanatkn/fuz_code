@@ -1,4 +1,4 @@
-import type {Add_Syntax_Grammar, Syntax_Grammar_Token, Syntax_Styler} from '$lib/syntax_styler.js';
+import type {Add_Syntax_Grammar, Syntax_Styler} from '$lib/syntax_styler.js';
 import {grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
 const blocks = '(if|else if|else|await|then|catch|each|html|debug|snippet)';
@@ -146,9 +146,10 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 	});
 
 	// oof lol
-	(
-		(grammar_svelte.tag as Syntax_Grammar_Token).inside!.attr_value as Syntax_Grammar_Token
-	).inside!.entity = grammar_svelte.entity;
+	// After normalization, grammar.tag is an array of Normalized_Grammar_Token
+	const tag_patterns = grammar_svelte.tag as any;
+	const tag_inside = tag_patterns[0].inside;
+	(tag_inside.attr_value as any)[0].inside.entity = grammar_svelte.entity;
 
 	grammar_svelte_add_inlined(syntax_styler, 'style', 'css');
 	// Assume TypeScript for all Svelte script tags (no plain JS)

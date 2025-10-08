@@ -157,10 +157,12 @@ export const grammar_markup_add_attribute = (
 	attr_name: string,
 	lang: string,
 ): void => {
-	(
-		(syntax_styler.get_lang('markup').tag as Syntax_Grammar_Token).inside!
-			.special_attr as Array<Syntax_Grammar_Token>
-	).push({
+	// After normalization, grammar.tag is an array of Normalized_Grammar_Token
+	const markup_grammar = syntax_styler.get_lang('markup');
+	const tag_patterns = markup_grammar.tag as any;
+	const tag_inside = tag_patterns[0].inside;
+
+	(tag_inside.special_attr as Array<Syntax_Grammar_Token>).push({
 		pattern: RegExp(
 			/(^|["'\s])/.source +
 				'(?:' +

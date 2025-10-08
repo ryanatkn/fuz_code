@@ -1,4 +1,4 @@
-import type {Add_Syntax_Grammar} from '$lib/syntax_styler.js';
+import type {Add_Syntax_Grammar, Syntax_Grammar_Token} from '$lib/syntax_styler.js';
 import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 import {class_keywords} from '$lib/grammar_clike.js';
 
@@ -30,7 +30,7 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 		'js',
 		{
 			class_name: [
-				grammar_clike.class_name,
+				...((grammar_clike.class_name as Array<RegExp | Syntax_Grammar_Token> | undefined) || []),
 				{
 					pattern:
 						/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:constructor|prototype))/,
