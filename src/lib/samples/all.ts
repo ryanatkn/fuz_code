@@ -607,6 +607,7 @@ Empty fence above.
 
 \`\`\`unknownlang
 Plain text for unknown language.
+const variable = 2;
 \`\`\`
 
 Nested fences (3 to 5):
