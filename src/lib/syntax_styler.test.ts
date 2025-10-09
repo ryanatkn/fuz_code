@@ -70,7 +70,7 @@ describe('grammar mutation behavior', () => {
 			const patterns: Array<{path: string; pattern: RegExp; source: string; flags: string}> = [];
 
 			// Recursively find greedy patterns
-			const visited = new Set<any>();
+			const visited = new Set();
 			const find_greedy = (obj: any, path = ''): void => {
 				// Prevent circular references
 				if (visited.has(obj)) return;
@@ -92,7 +92,7 @@ describe('grammar mutation behavior', () => {
 							});
 						}
 						// Recurse into inside if present
-						if (item && item.inside && !visited.has(item.inside)) {
+						if (item?.inside && !visited.has(item.inside)) {
 							find_greedy(item.inside, `${path}${key}[${index}].inside.`);
 						}
 					});

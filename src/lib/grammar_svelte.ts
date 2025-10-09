@@ -149,7 +149,7 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 	// After normalization, grammar.tag is an array of Normalized_Grammar_Token
 	const tag_patterns = grammar_svelte.tag as any;
 	const tag_inside = tag_patterns[0].inside;
-	(tag_inside.attr_value as any)[0].inside.entity = grammar_svelte.entity;
+	tag_inside.attr_value[0].inside.entity = grammar_svelte.entity;
 
 	grammar_svelte_add_inlined(syntax_styler, 'style', 'css');
 	// Assume TypeScript for all Svelte script tags (no plain JS)
