@@ -46,18 +46,14 @@
 
 	const is_language_supported = $derived(lang !== null && syntax_styler.langs[lang] !== undefined);
 
-	// Generate HTML markup for non-range mode
+	// Determine if we should use plain text rendering (no syntax highlighting)
+	// Both use_ranges and use_plaintext render content directly (no {@html})
+	const use_plaintext = $derived(lang === null || !is_language_supported);
+
+	// Generate HTML markup for syntax highlighting in non-range mode
 	const html_content = $derived.by(() => {
-		if (use_ranges || !content) return '';
-
-		// If lang is null, disable syntax highlighting
-		if (lang === null) {
-			return content;
-		}
-
-		if (!is_language_supported) {
-			console.error('unsupported language', lang); // eslint-disable-line no-console
-			return content;
+		if (use_ranges || !content || use_plaintext || !lang) {
+			return '';
 		}
 
 		return syntax_styler.stylize(content, lang, grammar);
@@ -104,7 +100,7 @@
 	><code {...code_attrs} bind:this={code_element}
 		>{#if use_ranges && children}{@render children(
 				content,
-			)}{:else if use_ranges}{content}{:else if children}{@render children(
+			)}{:else if use_ranges || use_plaintext}{content}{:else if children}{@render children(
 				html_content,
 			)}{:else}{@html html_content}{/if}</code
 	></svelte:element
