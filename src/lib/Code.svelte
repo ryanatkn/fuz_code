@@ -44,41 +44,29 @@
 
 	const tag = $derived(inline ? 'span' : 'pre');
 
-	const is_language_supported = $derived(lang !== null && syntax_styler.langs[lang] !== undefined);
+	const language_supported = $derived(lang !== null && !!syntax_styler.langs[lang]);
 
-	// Generate HTML markup for non-range mode
+	const highlighting_disabled = $derived(lang === null || !language_supported);
+
+	// Generate HTML markup for syntax highlighting in non-range mode
 	const html_content = $derived.by(() => {
-		if (use_ranges || !content) return '';
-
-		// If lang is null, disable syntax highlighting
-		if (lang === null) {
-			return content;
+		if (use_ranges || !content || highlighting_disabled) {
+			return '';
 		}
 
-		if (!is_language_supported) {
-			console.error('unsupported language', lang); // eslint-disable-line no-console
-			return content;
-		}
-
-		return syntax_styler.stylize(content, lang, grammar);
+		return syntax_styler.stylize(content, lang!, grammar); // ! is safe bc of the `highlighting_disabled` calculation
 	});
 
 	// Apply highlights for range mode
 	if (highlight_manager) {
 		$effect(() => {
-			if (!code_element || !content || !use_ranges) {
-				highlight_manager.clear_element_ranges();
-				return;
-			}
-
-			// If lang is null or unsupported, no highlighting needed
-			if (lang === null || !is_language_supported) {
+			if (!code_element || !content || !use_ranges || highlighting_disabled) {
 				highlight_manager.clear_element_ranges();
 				return;
 			}
 
 			// Get tokens from syntax styler
-			const tokens = tokenize_syntax(content, grammar || syntax_styler.get_lang(lang));
+			const tokens = tokenize_syntax(content, grammar || syntax_styler.get_lang(lang!)); // ! is safe bc of the `highlighting_disabled` calculation
 
 			// Apply highlights
 			highlight_manager.highlight_from_syntax_tokens(code_element, tokens);
@@ -90,7 +78,7 @@
 	});
 
 	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
-	// TODO @many @html making me nervous
+	// TODO @html making me nervous
 	/* eslint-disable svelte/no-at-html-tags */
 </script>
 
@@ -104,7 +92,7 @@
 	><code {...code_attrs} bind:this={code_element}
 		>{#if use_ranges && children}{@render children(
 				content,
-			)}{:else if use_ranges}{content}{:else if children}{@render children(
+			)}{:else if use_ranges || highlighting_disabled}{content}{:else if children}{@render children(
 				html_content,
 			)}{:else}{@html html_content}{/if}</code
 	></svelte:element
@@ -119,7 +107,7 @@
 	}
 	code {
 		background-color: unset;
-		/* the default `code` padding displays incorrectly wrapping the styled code */
+		/* the default `code` padding incorrectly wraps the styled code */
 		padding: 0;
 	}
 	.inline {
