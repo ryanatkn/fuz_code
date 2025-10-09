@@ -44,7 +44,7 @@
 
 	const tag = $derived(inline ? 'span' : 'pre');
 
-	const language_supported = $derived(lang !== null && syntax_styler.langs[lang] !== undefined);
+	const language_supported = $derived(lang !== null && !!syntax_styler.langs[lang]);
 
 	const highlighting_disabled = $derived(lang === null || !language_supported);
 
