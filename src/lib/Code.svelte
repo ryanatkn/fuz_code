@@ -107,7 +107,7 @@
 	}
 	code {
 		background-color: unset;
-		/* the default `code` padding displays incorrectly wrapping the styled code */
+		/* the default `code` padding incorrectly wraps the styled code */
 		padding: 0;
 	}
 	.inline {
