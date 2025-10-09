@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.27.0
+
+### Minor Changes
+
+- add markdown support ([#16](https://github.com/ryanatkn/fuz_code/pull/16))
+
 ## 0.26.0
 
 ### Minor Changes
