@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.27.1
+
+### Patch Changes
+
+- fix plaintext rendering ([#18](https://github.com/ryanatkn/fuz_code/pull/18)) ([b7bbb2b](https://github.com/ryanatkn/fuz_code/commit/b7bbb2b))
+
 ## 0.27.0
 
 ### Minor Changes
