@@ -273,6 +273,17 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 		inside: syntax_styler.get_lang('md'),
 	};
 	for (const key of md_self_refs) {
-		(grammar_md[key] as Syntax_Grammar_Token).inside!.lang_md = lang_md_inside;
+		// After normalization, grammar values are arrays of Normalized_Grammar_Token
+		// We need to add lang_md as a normalized array
+		const patterns = grammar_md[key] as any;
+		// Manually normalize the lang_md pattern we're adding
+		const normalized_lang_md = {
+			pattern: lang_md_inside.pattern,
+			lookbehind: false,
+			greedy: false,
+			alias: [],
+			inside: lang_md_inside.inside,
+		};
+		patterns[0].inside.lang_md = [normalized_lang_md];
 	}
 };

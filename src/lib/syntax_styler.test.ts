@@ -33,8 +33,9 @@ describe('grammar mutation behavior', () => {
 		const before_flags = new Map();
 		for (const lang of ['js', 'ts', 'css']) {
 			const grammar = syntax_styler.get_lang(lang);
-			if ((grammar.string as any)?.pattern) {
-				before_flags.set(lang, (grammar.string as any).pattern.flags);
+			// After normalization, grammar values are arrays
+			if ((grammar.string as any)?.[0]?.pattern) {
+				before_flags.set(lang, (grammar.string as any)[0].pattern.flags);
 			}
 		}
 
@@ -46,7 +47,7 @@ describe('grammar mutation behavior', () => {
 		// Verify mutation happened (documenting expected behavior)
 		for (const lang of before_flags.keys()) {
 			const grammar = syntax_styler.get_lang(lang);
-			const new_flags = (grammar.string as any).pattern.flags;
+			const new_flags = (grammar.string as any)[0].pattern.flags;
 			assert.ok(
 				new_flags.includes('g'),
 				`${lang} string pattern should have global flag after use`,
@@ -69,28 +70,32 @@ describe('grammar mutation behavior', () => {
 			const patterns: Array<{path: string; pattern: RegExp; source: string; flags: string}> = [];
 
 			// Recursively find greedy patterns
+			const visited = new Set();
 			const find_greedy = (obj: any, path = ''): void => {
+				// Prevent circular references
+				if (visited.has(obj)) return;
+				visited.add(obj);
+
+				// After normalization, all grammar values are arrays of Normalized_Grammar_Token
 				for (const key in obj) {
 					const val = obj[key];
-					if (val && typeof val === 'object' && val.greedy && val.pattern instanceof RegExp) {
-						patterns.push({
-							path: path + key,
-							pattern: val.pattern,
-							source: val.pattern.source,
-							flags: val.pattern.flags,
-						});
-					} else if (
-						val &&
-						typeof val === 'object' &&
-						!(val instanceof RegExp) &&
-						!Array.isArray(val)
-					) {
-						// Don't recurse into arrays or regex objects
-						if (key !== 'rest' && key !== 'inside') {
-							// Avoid circular refs
-							find_greedy(val, path + key + '.');
+					if (!Array.isArray(val)) continue;
+
+					// Each value is an array of normalized tokens
+					val.forEach((item, index) => {
+						if (item && typeof item === 'object' && item.greedy && item.pattern instanceof RegExp) {
+							patterns.push({
+								path: `${path}${key}[${index}]`,
+								pattern: item.pattern,
+								source: item.pattern.source,
+								flags: item.pattern.flags,
+							});
 						}
-					}
+						// Recurse into inside if present
+						if (item?.inside && !visited.has(item.inside)) {
+							find_greedy(item.inside, `${path}${key}[${index}].inside.`);
+						}
+					});
 				}
 			};
 
@@ -389,51 +394,63 @@ describe('pattern flag edge cases', () => {
 	test('patterns with existing global flag not double-processed', () => {
 		const syntax_styler = new Syntax_Styler();
 
+		// Store the original patterns BEFORE registration
+		const patterns_before = {
+			already_global: /test/g, // Already has g flag
+			case_insensitive: /test/i, // Has i flag but not g
+			multi_flag: /test/gim, // Multiple flags including g
+		};
+
 		// Add a test grammar with patterns that already have flags
 		syntax_styler.add_lang('test', {
 			already_global: {
-				pattern: /test/g, // Already has g flag
+				pattern: patterns_before.already_global,
 				greedy: true,
 			},
 			case_insensitive: {
-				pattern: /test/i, // Has i flag but not g
+				pattern: patterns_before.case_insensitive,
 				greedy: true,
 			},
 			multi_flag: {
-				pattern: /test/gim, // Multiple flags including g
+				pattern: patterns_before.multi_flag,
 				greedy: true,
 			},
 		});
 
 		const grammar = syntax_styler.get_lang('test');
-		const original_global = (grammar.already_global as any).pattern;
-		const original_insensitive = (grammar.case_insensitive as any).pattern;
-		const original_multi = (grammar.multi_flag as any).pattern;
+		// After normalization, grammar values are arrays and patterns have been normalized
 
-		syntax_styler.stylize('test TEST tEsT', 'test');
-
-		// Patterns with g flag should remain the same object (no mutation needed)
+		// Patterns that already had g flag should keep the same RegExp instance
 		assert.equal(
-			(grammar.already_global as any).pattern,
-			original_global,
+			(grammar.already_global as any)[0].pattern,
+			patterns_before.already_global,
 			'Already global pattern should not be replaced',
 		);
 		assert.equal(
-			(grammar.multi_flag as any).pattern,
-			original_multi,
+			(grammar.multi_flag as any)[0].pattern,
+			patterns_before.multi_flag,
 			'Multi-flag pattern should not be replaced',
 		);
 
-		// Pattern without g WILL be mutated (expected behavior now)
+		// Pattern without g gets a new RegExp with g added during normalization
 		assert.notEqual(
-			(grammar.case_insensitive as any).pattern,
-			original_insensitive,
-			'Pattern without g gets replaced with global version',
+			(grammar.case_insensitive as any)[0].pattern,
+			patterns_before.case_insensitive,
+			'Pattern without g gets replaced with global version during normalization',
 		);
 		assert.equal(
-			(grammar.case_insensitive as any).pattern.flags,
+			(grammar.case_insensitive as any)[0].pattern.flags,
 			'gi', // Now has both flags
 			'Pattern gains global flag',
+		);
+
+		// After tokenization, patterns remain unchanged (no runtime mutation)
+		syntax_styler.stylize('test TEST tEsT', 'test');
+
+		assert.equal(
+			(grammar.already_global as any)[0].pattern,
+			patterns_before.already_global,
+			'Pattern unchanged after tokenization',
 		);
 	});
 
@@ -471,27 +488,39 @@ describe('multiple Syntax_Styler instances', () => {
 		const grammar1 = styler1.get_lang('js');
 		const grammar2 = styler2.get_lang('js');
 
-		// Store original patterns
-		const pattern1_original = (grammar1.string as any).pattern;
-		const pattern2_original = (grammar2.string as any).pattern;
+		// Store patterns after normalization (grammar values are arrays)
+		const pattern1 = (grammar1.string as any)[0].pattern;
+		const pattern2 = (grammar2.string as any)[0].pattern;
 
 		// Patterns should be different objects (each instance has its own)
-		assert.notEqual(
-			pattern1_original,
-			pattern2_original,
-			'Each instance has separate pattern objects',
-		);
+		assert.notEqual(pattern1, pattern2, 'Each instance has separate pattern objects');
+
+		// Verify both patterns already have the global flag from normalization
+		assert.ok(pattern1.flags.includes('g'), 'styler1 pattern has g flag from normalization');
+		assert.ok(pattern2.flags.includes('g'), 'styler2 pattern has g flag from normalization');
 
 		// Tokenizing with one shouldn't affect the other
 		styler1.stylize('"test"', 'js');
+		styler2.stylize('"test"', 'js');
 
-		// Mutation is expected for styler1
-		assert.notEqual((grammar1.string as any).pattern, pattern1_original, 'styler1 pattern mutated');
-		assert.equal((grammar1.string as any).pattern.flags, 'g', 'styler1 pattern has g flag');
+		// Patterns remain unchanged after tokenization (no runtime mutation)
+		assert.equal(
+			(grammar1.string as any)[0].pattern,
+			pattern1,
+			'styler1 pattern unchanged after tokenization',
+		);
+		assert.equal(
+			(grammar2.string as any)[0].pattern,
+			pattern2,
+			'styler2 pattern unchanged after tokenization',
+		);
 
-		// But styler2 should still be untouched (instance isolation)
-		assert.equal((grammar2.string as any).pattern, pattern2_original, 'styler2 pattern unchanged');
-		assert.equal((grammar2.string as any).pattern.flags, '', 'styler2 pattern has no flags');
+		// Each instance still has its own pattern object
+		assert.notEqual(
+			(grammar1.string as any)[0].pattern,
+			(grammar2.string as any)[0].pattern,
+			'Instances remain independent',
+		);
 	});
 });
 

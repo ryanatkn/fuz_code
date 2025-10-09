@@ -15,20 +15,22 @@ export class Syntax_Token {
 
 	/**
 	 * The alias(es) of the token.
+	 * Always an array, even if empty or single value.
 	 */
-	alias: string | Array<string>;
+	alias: Array<string>;
 
 	length: number;
 
 	constructor(
 		type: string,
 		content: string | Syntax_Token_Stream,
-		alias: string | Array<string>,
+		alias: string | Array<string> | undefined,
 		matched_str: string = '',
 	) {
 		this.type = type;
 		this.content = content;
-		this.alias = alias;
+		// Normalize alias to always be an array
+		this.alias = alias ? (Array.isArray(alias) ? alias : [alias]) : [];
 		this.length = matched_str.length;
 	}
 }

@@ -1,4 +1,4 @@
-import type {Add_Syntax_Grammar, Syntax_Grammar_Token} from '$lib/syntax_styler.js';
+import type {Add_Syntax_Grammar} from '$lib/syntax_styler.js';
 import {class_keywords} from '$lib/grammar_clike.js';
 
 /**
@@ -58,7 +58,8 @@ export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
 	// Prevent double-wrapping of class names
 	(type_inside as any).class_name = undefined;
 
-	(grammar_ts.class_name as Syntax_Grammar_Token).inside = type_inside;
+	// After normalization, grammar_ts.class_name is an array
+	(grammar_ts.class_name as any)[0].inside = type_inside;
 
 	syntax_styler.grammar_insert_before('ts', 'function', {
 		type_assertion: {
