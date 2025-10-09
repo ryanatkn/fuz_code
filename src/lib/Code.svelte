@@ -52,29 +52,23 @@
 
 	// Generate HTML markup for syntax highlighting in non-range mode
 	const html_content = $derived.by(() => {
-		if (use_ranges || !content || use_plaintext || !lang) {
+		if (use_ranges || !content || use_plaintext) {
 			return '';
 		}
 
-		return syntax_styler.stylize(content, lang, grammar);
+		return syntax_styler.stylize(content, lang!, grammar); // ! is safe bc of the `use_plaintext` calculation
 	});
 
 	// Apply highlights for range mode
 	if (highlight_manager) {
 		$effect(() => {
-			if (!code_element || !content || !use_ranges) {
-				highlight_manager.clear_element_ranges();
-				return;
-			}
-
-			// If lang is null or unsupported, no highlighting needed
-			if (lang === null || !is_language_supported) {
+			if (!code_element || !content || !use_ranges || use_plaintext) {
 				highlight_manager.clear_element_ranges();
 				return;
 			}
 
 			// Get tokens from syntax styler
-			const tokens = tokenize_syntax(content, grammar || syntax_styler.get_lang(lang));
+			const tokens = tokenize_syntax(content, grammar || syntax_styler.get_lang(lang!)); // ! is safe bc of the `use_plaintext` calculation
 
 			// Apply highlights
 			highlight_manager.highlight_from_syntax_tokens(code_element, tokens);
