@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz_code",
-  "version": "0.26.0",
+  "version": "0.27.0",
   "modules": {
     "./code_sample.js": {
       "path": "code_sample.ts",
@@ -55,6 +55,15 @@
       "declarations": [
         {
           "name": "add_grammar_json",
+          "kind": "function"
+        }
+      ]
+    },
+    "./grammar_markdown.js": {
+      "path": "grammar_markdown.ts",
+      "declarations": [
+        {
+          "name": "add_grammar_markdown",
           "kind": "function"
         }
       ]
@@ -167,6 +176,14 @@
         },
         {
           "name": "Syntax_Grammar_Token",
+          "kind": "type"
+        },
+        {
+          "name": "Normalized_Grammar_Token",
+          "kind": "type"
+        },
+        {
+          "name": "Normalized_Grammar",
           "kind": "type"
         },
         {
