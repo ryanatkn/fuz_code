@@ -1,4 +1,4 @@
-// Type definitions for benchmarking system
+import type {Implementation_Name} from './benchmark_fixtures.js';
 
 export interface Benchmark_Component_Props {
 	content: string;
@@ -89,5 +89,5 @@ export interface Progress_Callbacks {
 export interface Benchmark_State {
 	results: Array<Benchmark_Result>;
 	warnings: Array<string>;
-	summary: Record<string, Summary_Stats> | null;
+	summary: Record<Implementation_Name, Summary_Stats> | null;
 }

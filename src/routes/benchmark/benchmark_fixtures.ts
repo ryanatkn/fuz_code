@@ -34,6 +34,9 @@ export const pre_generate_large_contents = (
 	return large_contents;
 };
 
+export const implementation_names = ['html', 'ranges'] as const;
+export type Implementation_Name = (typeof implementation_names)[number];
+
 export const implementations: Array<Benchmarked_Implementation> = [
 	{name: 'html', component: Code, mode: 'html'},
 	{name: 'ranges', component: Code, mode: 'ranges'},

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Copy_To_Clipboard from '@ryanatkn/fuz/Copy_To_Clipboard.svelte';
+
 	import {fmt} from './benchmark_stats.js';
 	import {RESULT_COLUMNS, results_to_markdown} from './benchmark_results.js';
 	import type {Benchmark_Result, Summary_Stats} from './benchmark_types.js';
@@ -46,7 +47,7 @@
 						<strong>{fmt(stats.avg_cv * 100, 1)}%</strong>
 						<span>CV</span>
 					</div>
-					{#if impl !== 'syntax_html' && stats.improvement !== undefined}
+					{#if impl !== 'html' && stats.improvement !== undefined}
 						<div>
 							<strong class:positive={stats.improvement > 0} class:negative={stats.improvement < 0}>
 								{stats.improvement > 0 ? '+' : ''}{fmt(stats.improvement, 1)}%
