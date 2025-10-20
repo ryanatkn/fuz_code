@@ -31,7 +31,7 @@ export const package_json: Package_Json = {
 	},
 	type: 'module',
 	engines: {node: '>=22.15'},
-	peerDependencies: {'@ryanatkn/moss': '*', svelte: '^5'},
+	peerDependencies: {'@ryanatkn/belt': '^0.35.1', '@ryanatkn/moss': '^0.36.2', svelte: '^5'},
 	peerDependenciesMeta: {'@ryanatkn/moss': {optional: true}, svelte: {optional: true}},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
