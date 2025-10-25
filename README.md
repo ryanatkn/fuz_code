@@ -110,6 +110,7 @@ Enabled by default in `syntax_styler_global`:
 
 - [`markup`](src/lib/grammar_markup.ts) (html, xml, etc)
 - [`svelte`](src/lib/grammar_svelte.ts)
+- [`markdown`](src/lib/grammar_markdown.ts)
 - [`ts`](src/lib/grammar_ts.ts)
 - [`css`](src/lib/grammar_css.ts)
 - [`js`](src/lib/grammar_js.ts)

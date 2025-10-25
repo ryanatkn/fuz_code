@@ -43,6 +43,6 @@ export const implementations: Array<Benchmarked_Implementation> = [
 	{name: 'ranges', component: Code_Highlight, mode: 'ranges'},
 ];
 
-// Languages to test (excluding Svelte for now)
-export const languages = ['ts', 'css', 'html', 'json', 'svelte'] as const;
+// Languages to test
+export const languages = ['ts', 'css', 'html', 'json', 'svelte', 'md'] as const;
 export type Language = (typeof languages)[number];

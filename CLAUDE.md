@@ -39,6 +39,7 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 - `src/lib/grammar_markup.ts` - HTML/XML markup
 - `src/lib/grammar_json.ts` - JSON data
 - `src/lib/grammar_svelte.ts` - Svelte components
+- `src/lib/grammar_markdown.ts` - Markdown
 - `src/lib/grammar_clike.ts` - Base for C-like languages
 
 #### Components
@@ -86,6 +87,7 @@ The generated HTML uses CSS classes like `.token_keyword`, `.token_string`, etc.
 - `html` - HTML/XML
 - `json` - JSON
 - `svelte` - Svelte components
+- `md` - Markdown
 
 ## API Reference
 
