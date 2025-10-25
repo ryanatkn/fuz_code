@@ -1,6 +1,6 @@
 {
   "name": "@ryanatkn/fuz_code",
-  "version": "0.27.1",
+  "version": "0.28.0",
   "modules": {
     "./code_sample.js": {
       "path": "code_sample.ts",
@@ -234,12 +234,30 @@
         }
       ]
     },
+    "./Code_Highlight.svelte": {
+      "path": "Code_Highlight.svelte",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "component"
+        }
+      ]
+    },
     "./Code.svelte": {
       "path": "Code.svelte",
       "declarations": [
         {
           "name": "default",
           "kind": "component"
+        }
+      ]
+    },
+    "./theme_highlight.css": {
+      "path": "theme_highlight.css",
+      "declarations": [
+        {
+          "name": "default",
+          "kind": "css"
         }
       ]
     },
