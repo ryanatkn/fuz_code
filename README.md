@@ -137,7 +137,7 @@ For browsers that support the
 fuz_code provides an experimental component that can use native browser highlighting
 as an alternative to HTML generation.
 
-This feature is experimental, browser support is limited, 
+This feature is experimental, browser support is limited,
 and there can be subtle differences because some CSS like bold/italics are not supported.
 (nor are font sizes and other layout-affecting styles, in case your theme uses those)
 The standard `Code.svelte` component
