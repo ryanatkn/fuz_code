@@ -130,16 +130,17 @@ Docs are a work in progress:
 
 Please open issues if you need any help.
 
-## Experimental Features
-
-### CSS Custom Highlight API Support
+## Experimental highlight support
 
 For browsers that support the
 [CSS Custom Highlight API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API),
 fuz_code provides an experimental component that can use native browser highlighting
 as an alternative to HTML generation.
 
-This feature is experimental and browser support is limited. The standard `Code.svelte` component
+This feature is experimental, browser support is limited, 
+and there can be subtle differences because some CSS like bold/italics are not supported.
+(nor are font sizes and other layout-affecting styles, in case your theme uses those)
+The standard `Code.svelte` component
 using HTML generation is recommended for most use cases.
 
 ```svelte
@@ -158,9 +159,8 @@ using HTML generation is recommended for most use cases.
 When using the experimental highlight component, import the corresponding theme:
 
 ```ts
-// Instead of theme.css, use:
+// instead of theme.css, import theme_highlight.css in +layout.svelte:
 import '@ryanatkn/fuz_code/theme_highlight.css';
-import '@ryanatkn/fuz_code/theme_variables.css'; // if not using Moss
 ```
 
 Experimental modules:
@@ -172,17 +172,6 @@ Experimental modules:
   and [`Range`](https://developer.mozilla.org/en-US/docs/Web/API/Range) APIs
 - [@ryanatkn/fuz_code/theme_highlight.css](src/lib/theme_highlight.css) -
   theme with `::highlight()` pseudo-elements for CSS Custom Highlight API
-
-## Todo
-
-- lazy load the builtin grammars in `Code.svelte`
-- improve the default theme colors
-- add more themes
-- add a Vite plugin to do syntax styling at build-time for static cases
-- add a worker helper module
-- add some useful plugins, flesh out the API (start with line emphasis)
-- improve the TypeScript grammar to tokenize types
-- improve the grammars in subtle ways
 
 ## License [🐦](https://wikipedia.org/wiki/Free_and_open-source_software)
 
