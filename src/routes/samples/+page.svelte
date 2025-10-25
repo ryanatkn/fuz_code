@@ -26,9 +26,10 @@
 	<section class="box">
 		<h2 class="text_align_center">Experimental: CSS Custom Highlight API</h2>
 		<aside class="box panel p_md mb_xl3 width_md">
-			⚠️ <strong>Experimental:</strong> The comparison below shows both HTML mode and CSS Custom Highlight API mode.
-			The Highlight API has limited browser support and is not recommended for production use.
-			The standard <code>Code.svelte</code> component (shown above) uses HTML generation and is recommended for all use cases.
+			⚠️ <strong>Experimental:</strong> The comparison below shows both HTML mode and CSS Custom
+			Highlight API mode. The Highlight API has limited browser support and is not recommended for
+			production use. The standard <code>Code.svelte</code> component (shown above) uses HTML generation
+			and is recommended for all use cases.
 		</aside>
 		{#each Object.values(samples) as sample (sample.name)}
 			<div class="mb_xl3">
