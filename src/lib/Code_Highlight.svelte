@@ -1,12 +1,23 @@
+<script lang="ts" module>
+	const supports_ranges = supports_css_highlight_api();
+</script>
+
 <script lang="ts">
-	import type {Snippet} from 'svelte';
+	import {onDestroy, type Snippet} from 'svelte';
 
 	import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 	import type {Syntax_Styler, Syntax_Grammar} from '$lib/syntax_styler.js';
+	import {tokenize_syntax} from '$lib/tokenize_syntax.js';
+	import {
+		Highlight_Manager,
+		supports_css_highlight_api,
+		type Highlight_Mode,
+	} from '$lib/highlight_manager.js';
 
 	const {
 		content,
 		lang = 'svelte',
+		mode = 'auto',
 		pre_attrs,
 		code_attrs,
 		grammar,
@@ -16,6 +27,7 @@
 	}: {
 		content: string;
 		lang?: string | null;
+		mode?: Highlight_Mode;
 		pre_attrs?: any;
 		code_attrs?: any;
 		grammar?: Syntax_Grammar | undefined;
@@ -24,19 +36,45 @@
 		children?: Snippet<[markup: string]>;
 	} = $props();
 
+	let code_element: HTMLElement | undefined = $state();
+
+	const highlight_manager = supports_ranges ? new Highlight_Manager() : null;
+
+	const use_ranges = $derived(supports_ranges && (mode === 'ranges' || mode === 'auto'));
+
 	const tag = $derived(inline ? 'span' : 'pre');
 
 	const language_supported = $derived(lang !== null && !!syntax_styler.langs[lang]);
 
 	const highlighting_disabled = $derived(lang === null || !language_supported);
 
-	// Generate HTML markup for syntax highlighting
+	// Generate HTML markup for syntax highlighting in non-range mode
 	const html_content = $derived.by(() => {
-		if (!content || highlighting_disabled) {
+		if (use_ranges || !content || highlighting_disabled) {
 			return '';
 		}
 
 		return syntax_styler.stylize(content, lang!, grammar); // ! is safe bc of the `highlighting_disabled` calculation
+	});
+
+	// Apply highlights for range mode
+	if (highlight_manager) {
+		$effect(() => {
+			if (!code_element || !content || !use_ranges || highlighting_disabled) {
+				highlight_manager.clear_element_ranges();
+				return;
+			}
+
+			// Get tokens from syntax styler
+			const tokens = tokenize_syntax(content, grammar || syntax_styler.get_lang(lang!)); // ! is safe bc of the `highlighting_disabled` calculation
+
+			// Apply highlights
+			highlight_manager.highlight_from_syntax_tokens(code_element, tokens);
+		});
+	}
+
+	onDestroy(() => {
+		highlight_manager?.destroy();
 	});
 
 	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
@@ -51,8 +89,10 @@
 	class:inline
 	class:pre={inline}
 	data-lang={lang}
-	><code {...code_attrs}
-		>{#if highlighting_disabled}{content}{:else if children}{@render children(
+	><code {...code_attrs} bind:this={code_element}
+		>{#if use_ranges && children}{@render children(
+				content,
+			)}{:else if use_ranges || highlighting_disabled}{content}{:else if children}{@render children(
 				html_content,
 			)}{:else}{@html html_content}{/if}</code
 	></svelte:element

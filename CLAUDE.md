@@ -1,7 +1,6 @@
 # fuz_code - Syntax Highlighter
 
-A performance-focused fork of PrismJS for syntax highlighting,
-optimized for runtime use with optional CSS Custom Highlight API support.
+A modernized fork of PrismJS optimized for runtime syntax highlighting.
 
 ## Usage
 
@@ -21,12 +20,9 @@ npm run benchmark-compare           # Compare performance with Prism and Shiki
 
 ### Core System
 
-**Syntax Styler** - A PrismJS fork with two rendering modes:
+**Syntax Styler** - A PrismJS fork focused on HTML generation with CSS classes.
 
-1. **HTML Mode** - Traditional token-based HTML generation with CSS classes
-2. **Range Mode** - CSS Custom Highlight API for native browser highlighting
-
-The system uses regex-based tokenization inherited from PrismJS, maintaining compatibility with existing language definitions while adding position tracking for range highlighting.
+The system uses regex-based tokenization inherited from PrismJS, maintaining compatibility with existing language definitions. The primary use case is generating HTML with syntax highlighting at runtime.
 
 ### Key Components
 
@@ -34,7 +30,7 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 
 - `src/lib/syntax_styler.ts` - Core tokenization engine with linked list processing
 - `src/lib/syntax_styler_global.ts` - Pre-configured global instance
-- `tokenize_syntax()` from `src/lib/syntax_styler.ts` - Main tokenization function
+- `tokenize_syntax()` from `src/lib/tokenize_syntax.ts` - Main tokenization function
 
 #### Language Definitions
 
@@ -45,18 +41,13 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 - `src/lib/grammar_svelte.ts` - Svelte components
 - `src/lib/grammar_clike.ts` - Base for C-like languages
 
-#### Range Highlighting
-
-- `src/lib/highlight_manager.ts` - Direct tree traversal for range creation
-- `src/lib/Highlight_Manager` - Manages CSS Custom Highlights per element
-
 #### Components
 
-- `src/lib/Code.svelte` - Hybrid component supporting both HTML and range modes with auto-detection
+- `src/lib/Code.svelte` - Main component for syntax highlighting with HTML generation
 
 #### Themes
 
-- `src/lib/theme.css` - Traditional CSS classes for HTML mode (requires Moss or theme_variables.css)
+- `src/lib/theme.css` - CSS classes for HTML mode (requires Moss or theme_variables.css)
 - `src/lib/theme_variables.css` - CSS variable definitions for non-Moss users
 
 ## How It Works
@@ -74,32 +65,18 @@ interface Syntax_Token {
 }
 ```
 
-### Range Creation
+### HTML Generation
 
-For CSS Custom Highlights, ranges are created directly from the token tree during a single traversal:
+The syntax styler processes the token tree and generates HTML with CSS classes:
 
 ```typescript
-// Generate tokens from syntax styler
-const tokens = tokenize_syntax(code, grammar);
-// Highlight manager creates ranges directly from the token tree
-highlight_manager.highlight_from_syntax_tokens(element, tokens);
+import {syntax_styler_global} from '$lib/syntax_styler_global.js';
+
+// Generate HTML with syntax highlighting
+const html = syntax_styler_global.stylize(code, 'ts');
 ```
 
-### CSS Custom Highlights
-
-When supported, the browser's native highlighting is used:
-
-```JS
-// Create ranges for each token
-const range = new Range();
-range.setStart(textNode, token.start);
-range.setEnd(textNode, token.end);
-
-// Add to CSS Highlight
-const highlight = CSS.highlights.get(token.type) || new Highlight();
-highlight.add(range);
-CSS.highlights.set(token.type, highlight);
-```
+The generated HTML uses CSS classes like `.token_keyword`, `.token_string`, etc., which are styled by `theme.css`.
 
 ## Supported Languages
 
@@ -135,23 +112,6 @@ import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 const html = syntax_styler_global.stylize(code, 'ts');
 ```
 
-### Highlight_Manager
-
-Manages CSS Custom Highlights for an element:
-
-```typescript
-const manager = new Highlight_Manager();
-
-// Apply highlights from tokens
-manager.highlight_from_syntax_tokens(element, tokens);
-
-// Clear highlights
-manager.clear_element_ranges();
-
-// Clean up
-manager.destroy();
-```
-
 ## Testing
 
 ### Sample Files
@@ -171,6 +131,49 @@ Generated fixtures in `src/fixtures/{lang}/`:
 2. Run `gro src/fixtures/update` to regenerate
 3. Run `gro test src/fixtures/check.test.ts` to verify
 4. Review changes with `git diff src/fixtures/`
+
+## Experimental Features
+
+### CSS Custom Highlight API Support
+
+An experimental alternative component (`Code_Highlight.svelte`) is available that supports the CSS Custom Highlight API
+for browsers that implement it. This is not recommended for general use due to limited browser support.
+
+**Components:**
+- `src/lib/Code_Highlight.svelte` - Hybrid component supporting both HTML and range modes with auto-detection
+- `src/lib/highlight_manager.ts` - Manages CSS Custom Highlights per element
+
+**Theme:**
+- `src/lib/theme_highlight.css` - CSS with both `.token_*` classes and `::highlight()` pseudo-elements
+
+#### Range Highlighting Implementation
+
+For CSS Custom Highlights, ranges are created directly from the token tree:
+
+```typescript
+// Generate tokens from syntax styler
+const tokens = tokenize_syntax(code, grammar);
+// Highlight manager creates ranges directly from the token tree
+highlight_manager.highlight_from_syntax_tokens(element, tokens);
+```
+
+#### Highlight_Manager API
+
+```typescript
+const manager = new Highlight_Manager();
+
+// Apply highlights from tokens
+manager.highlight_from_syntax_tokens(element, tokens);
+
+// Clear highlights
+manager.clear_element_ranges();
+
+// Clean up
+manager.destroy();
+```
+
+**Note:** The CSS Custom Highlight API has limitations (e.g., no font-weight or font-style support)
+and is not widely supported across browsers. Use the standard `Code.svelte` component for production use.
 
 ## Performance
 
@@ -193,9 +196,8 @@ Results show relative performance (% of fastest) for each language and content s
 
 ### Optimization Notes
 
-- **HTML Mode**: Proven PrismJS approach, good for SSR
-- **Range Mode**: Native browser highlighting, better for large documents
-- **Auto Mode**: Best of both worlds, progressive enhancement
+- **HTML Mode** (standard): Proven PrismJS approach, works everywhere, good for SSR
+- **Range Mode** (experimental): Native browser highlighting available in `Code_Highlight.svelte`, limited browser support
 
 ## Color Variables
 
@@ -216,7 +218,7 @@ Theme uses CSS variables from Moss:
 1. **Maintain PrismJS compatibility** - Language definitions should work with upstream
 2. **Test with fixtures** - All changes must pass fixture tests
 3. **No automated commits** - Manual review required
-4. **Support both modes** - Features should work in HTML and range modes
+4. **Focus on HTML mode** - Primary development focus is HTML generation
 5. **Follow patterns** - Use existing language definitions as templates
 
 ## Demo Pages

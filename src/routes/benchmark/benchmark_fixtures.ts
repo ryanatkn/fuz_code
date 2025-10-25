@@ -1,4 +1,5 @@
 import Code from '$lib/Code.svelte';
+import Code_Highlight from '$lib/Code_Highlight.svelte';
 import type {Benchmarked_Implementation} from './benchmark_types.js';
 import type {Code_Sample} from '$lib/code_sample.js';
 
@@ -38,8 +39,8 @@ export const implementation_names = ['html', 'ranges'] as const;
 export type Implementation_Name = (typeof implementation_names)[number];
 
 export const implementations: Array<Benchmarked_Implementation> = [
-	{name: 'html', component: Code, mode: 'html'},
-	{name: 'ranges', component: Code, mode: 'ranges'},
+	{name: 'html', component: Code, mode: null},
+	{name: 'ranges', component: Code_Highlight, mode: 'ranges'},
 ];
 
 // Languages to test (excluding Svelte for now)

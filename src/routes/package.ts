@@ -193,7 +193,15 @@ export const src_json: Src_Json = {
 			path: 'tokenize_syntax.ts',
 			declarations: [{name: 'tokenize_syntax', kind: 'function'}],
 		},
+		'./Code_Highlight.svelte': {
+			path: 'Code_Highlight.svelte',
+			declarations: [{name: 'default', kind: 'component'}],
+		},
 		'./Code.svelte': {path: 'Code.svelte', declarations: [{name: 'default', kind: 'component'}]},
+		'./theme_highlight.css': {
+			path: 'theme_highlight.css',
+			declarations: [{name: 'default', kind: 'css'}],
+		},
 		'./theme_variables.css': {
 			path: 'theme_variables.css',
 			declarations: [{name: 'default', kind: 'css'}],
