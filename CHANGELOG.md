@@ -1,5 +1,12 @@
 # @ryanatkn/fuz_code
 
+## 0.28.0
+
+### Minor Changes
+
+- update peer deps ([8fae69f](https://github.com/ryanatkn/fuz_code/commit/8fae69f))
+- demote highlight API to experimental ([#19](https://github.com/ryanatkn/fuz_code/pull/19))
+
 ## 0.27.1
 
 ### Patch Changes
