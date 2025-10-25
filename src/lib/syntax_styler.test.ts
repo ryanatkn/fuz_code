@@ -7,6 +7,7 @@ import {add_grammar_css} from './grammar_css.js';
 import {add_grammar_markup} from './grammar_markup.js';
 import {add_grammar_json} from './grammar_json.js';
 import {add_grammar_svelte} from './grammar_svelte.js';
+import {add_grammar_markdown} from './grammar_markdown.js';
 import {add_grammar_clike} from './grammar_clike.js';
 import {syntax_styler_global} from './syntax_styler_global.js';
 import {samples} from './samples/all.js';
@@ -22,6 +23,7 @@ const create_styler_with_grammars = (): Syntax_Styler => {
 	add_grammar_ts(s);
 	add_grammar_json(s);
 	add_grammar_svelte(s);
+	add_grammar_markdown(s);
 	return s;
 };
 
@@ -63,7 +65,7 @@ describe('grammar mutation behavior', () => {
 			string,
 			Array<{path: string; pattern: RegExp; source: string; flags: string}>
 		> = new Map();
-		const languages = ['js', 'ts', 'css', 'html', 'json', 'svelte'];
+		const languages = ['js', 'ts', 'css', 'html', 'json', 'svelte', 'md'];
 
 		for (const lang of languages) {
 			const grammar = syntax_styler.get_lang(lang);

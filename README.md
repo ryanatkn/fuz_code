@@ -12,9 +12,6 @@ The main changes:
 
 - has a minimal and explicit API to generate stylized HTML, and knows nothing about the DOM
 - uses stateless ES modules, instead of globals with side effects and pseudo-module behaviors
-- integrates with the
-  [CSS Custom Highlight API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API)
-  when available
 - has various incompatible changes, so using Prism grammars requires some tweaks
 - smaller (by 7kB minified and 3kB gzipped, ~1/3 less)
 - written in TypeScript
@@ -52,34 +49,25 @@ npm i -D @ryanatkn/fuz_code
 
 ```svelte
 <script lang="ts">
-	import Code from '$lib/Code.svelte';
+	import Code from '@ryanatkn/fuz_code/Code.svelte';
 </script>
 
-<!-- auto-detects and uses CSS Highlight API when available, defaults to Svelte -->
+<!-- defaults to Svelte -->
 <Code content={svelte_code} />
 <!-- select a lang -->
 <Code content={ts_code} lang="ts" />
-
-<!-- force specific rendering mode -->
-<Code content={code} mode="html" />
-<Code content={code} mode="ranges" />
 ```
 
 ```ts
-import {syntax_styler_global} from '$lib/syntax_styler_global.js';
+import {syntax_styler_global} from '@ryanatkn/fuz_code/syntax_styler_global.js';
 
-// Direct usage
+// Generate HTML with syntax highlighting
 const html = syntax_styler_global.stylize(code, 'ts');
 
-// Get raw tokens
-import {tokenize_syntax} from '$lib/tokenize_syntax.js';
+// Get raw tokens for custom processing
+import {tokenize_syntax} from '@ryanatkn/fuz_code/tokenize_syntax.js';
 const tokens = tokenize_syntax(code, syntax_styler_global.get_lang('ts'));
 ```
-
-By default the `Code` component automatically uses the
-[CSS Custom Highlight API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API)
-when available for improved performance,
-falling back to HTML generation for non-browser runtimes and older browsers.
 
 Themes are just CSS files, so they work with any JS framework.
 
@@ -112,11 +100,7 @@ import '@ryanatkn/fuz_code/theme_variables.css';
 - [@ryanatkn/fuz_code/theme_variables.css](src/lib/theme_variables.css) -
   CSS variables for non-Moss users
 - [@ryanatkn/fuz_code/Code.svelte](src/lib/Code.svelte) -
-  Svelte component supporting both HTML generation and native browser highlights
-- [@ryanatkn/fuz_code/highlight_manager.js](src/lib/highlight_manager.ts) -
-  uses the browser [`Highlight`](https://developer.mozilla.org/en-US/docs/Web/API/Highlight)
-  and [`Range`](https://developer.mozilla.org/en-US/docs/Web/API/Range) APIs
-  as a faster alternative to generating spans with classes
+  Svelte component for syntax highlighting with HTML generation
 
 I encourage you to poke around [`src/lib`](src/lib) if you're interested in using fuz_code.
 
@@ -126,6 +110,7 @@ Enabled by default in `syntax_styler_global`:
 
 - [`markup`](src/lib/grammar_markup.ts) (html, xml, etc)
 - [`svelte`](src/lib/grammar_svelte.ts)
+- [`markdown`](src/lib/grammar_markdown.ts)
 - [`ts`](src/lib/grammar_ts.ts)
 - [`css`](src/lib/grammar_css.ts)
 - [`js`](src/lib/grammar_js.ts)
@@ -145,17 +130,48 @@ Docs are a work in progress:
 
 Please open issues if you need any help.
 
-## Todo
+## Experimental highlight support
 
-- add builtin grammars for `markdown` and `regexp`
-- lazy load the builtin grammars in `Code.svelte`
-- improve the default theme colors
-- add more themes
-- add a Vite plugin to do syntax styling at build-time for static cases
-- add a worker helper module
-- add some useful plugins, flesh out the API (start with line emphasis)
-- improve the TypeScript grammar to tokenize types
-- improve the grammars in subtle ways
+For browsers that support the
+[CSS Custom Highlight API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API),
+fuz_code provides an experimental component that can use native browser highlighting
+as an alternative to HTML generation.
+
+This feature is experimental, browser support is limited,
+and there can be subtle differences because some CSS like bold/italics are not supported.
+(nor are font sizes and other layout-affecting styles, in case your theme uses those)
+The standard `Code.svelte` component
+using HTML generation is recommended for most use cases.
+
+```svelte
+<script lang="ts">
+	import Code_Highlight from '@ryanatkn/fuz_code/Code_Highlight.svelte';
+</script>
+
+<!-- auto-detect and use CSS Highlight API when available -->
+<Code_Highlight content={code} mode="auto" />
+<!-- force HTML mode -->
+<Code_Highlight content={code} mode="html" />
+<!-- force ranges mode (requires browser support) -->
+<Code_Highlight content={code} mode="ranges" />
+```
+
+When using the experimental highlight component, import the corresponding theme:
+
+```ts
+// instead of theme.css, import theme_highlight.css in +layout.svelte:
+import '@ryanatkn/fuz_code/theme_highlight.css';
+```
+
+Experimental modules:
+
+- [@ryanatkn/fuz_code/Code_Highlight.svelte](src/lib/Code_Highlight.svelte) -
+  component supporting both HTML generation and CSS Custom Highlight API
+- [@ryanatkn/fuz_code/highlight_manager.js](src/lib/highlight_manager.ts) -
+  manages browser [`Highlight`](https://developer.mozilla.org/en-US/docs/Web/API/Highlight)
+  and [`Range`](https://developer.mozilla.org/en-US/docs/Web/API/Range) APIs
+- [@ryanatkn/fuz_code/theme_highlight.css](src/lib/theme_highlight.css) -
+  theme with `::highlight()` pseudo-elements for CSS Custom Highlight API
 
 ## License [🐦](https://wikipedia.org/wiki/Free_and_open-source_software)
 

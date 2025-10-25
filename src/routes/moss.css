@@ -122,6 +122,9 @@ a.chip {
 .width_100 {
 	width: 100%;
 }
+.width_md {
+	width: var(--space_md);
+}
 .height_100 {
 	height: 100%;
 }
@@ -161,8 +164,14 @@ a.chip {
 .mb_0 {
 	margin-bottom: 0;
 }
+.mb_xs {
+	margin-bottom: var(--space_xs);
+}
 .mb_lg {
 	margin-bottom: var(--space_lg);
+}
+.mb_xl3 {
+	margin-bottom: var(--space_xl3);
 }
 .mb_xl5 {
 	margin-bottom: var(--space_xl5);
@@ -170,6 +179,10 @@ a.chip {
 .mx_auto {
 	margin-left: auto;
 	margin-right: auto;
+}
+.my_xl5 {
+	margin-top: var(--space_xl5);
+	margin-bottom: var(--space_xl5);
 }
 .gap_sm {
 	gap: var(--space_sm);
