@@ -1,16 +1,17 @@
 import {test, assert, describe} from 'vitest';
-import {Syntax_Styler} from './syntax_styler.js';
-import {tokenize_syntax} from './tokenize_syntax.js';
-import {add_grammar_js} from './grammar_js.js';
-import {add_grammar_ts} from './grammar_ts.js';
-import {add_grammar_css} from './grammar_css.js';
-import {add_grammar_markup} from './grammar_markup.js';
-import {add_grammar_json} from './grammar_json.js';
-import {add_grammar_svelte} from './grammar_svelte.js';
-import {add_grammar_markdown} from './grammar_markdown.js';
-import {add_grammar_clike} from './grammar_clike.js';
-import {syntax_styler_global} from './syntax_styler_global.js';
-import {samples} from './samples/all.js';
+
+import {Syntax_Styler} from '$lib/syntax_styler.js';
+import {tokenize_syntax} from '$lib/tokenize_syntax.js';
+import {add_grammar_js} from '$lib/grammar_js.js';
+import {add_grammar_ts} from '$lib/grammar_ts.js';
+import {add_grammar_css} from '$lib/grammar_css.js';
+import {add_grammar_markup} from '$lib/grammar_markup.js';
+import {add_grammar_json} from '$lib/grammar_json.js';
+import {add_grammar_svelte} from '$lib/grammar_svelte.js';
+import {add_grammar_markdown} from '$lib/grammar_markdown.js';
+import {add_grammar_clike} from '$lib/grammar_clike.js';
+import {syntax_styler_global} from '$lib/syntax_styler_global.js';
+import {samples} from '$lib/samples/all.js';
 
 // Helper to create a properly initialized syntax styler
 const create_styler_with_grammars = (): Syntax_Styler => {
