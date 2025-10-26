@@ -126,21 +126,12 @@
 	// DEV-only validation warnings
 	if (DEV) {
 		$effect(() => {
-			// Warn if lang is unsupported and no custom grammar provided
 			if (lang && !language_supported && !grammar) {
+				const langs = Object.keys(syntax_styler.langs).join(', ');
 				// eslint-disable-next-line no-console
 				console.error(
 					`[Code_Highlight] Language "${lang}" is not supported and no custom grammar provided. ` +
-						`Highlighting disabled. Supported languages: ${Object.keys(syntax_styler.langs).join(', ')}`,
-				);
-			}
-
-			// Warn if custom grammar provided but lang is still default value
-			if (grammar && lang === 'svelte') {
-				// eslint-disable-next-line no-console
-				console.error(
-					`[Code_Highlight] Custom grammar provided but lang is default ("svelte"). ` +
-						`Consider setting lang to match your custom grammar for accurate data-lang attribute.`,
+						`Highlighting disabled. Supported: ${langs}`,
 				);
 			}
 		});
