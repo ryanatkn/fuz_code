@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.29.0
+
+### Minor Changes
+
+- rename `Syntax_Grammar_Raw` from `Syntax_Grammar` and `Syntax_Grammar` from `Normalized_Syntax_Grammar` ([#20](https://github.com/ryanatkn/fuz_code/pull/20))
+
 ## 0.28.0
 
 ### Minor Changes
