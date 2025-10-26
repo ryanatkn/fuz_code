@@ -80,9 +80,7 @@
 
 	const language_supported = $derived(lang !== null && !!syntax_styler.langs[lang]);
 
-	const highlighting_disabled = $derived(
-		lang === null || (!language_supported && !grammar),
-	);
+	const highlighting_disabled = $derived(lang === null || (!language_supported && !grammar));
 
 	// DEV-only validation warnings
 	if (DEV) {
