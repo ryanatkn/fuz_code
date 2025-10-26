@@ -6,7 +6,7 @@ import type {Src_Json} from '@ryanatkn/belt/src_json.js';
 export const package_json: Package_Json = {
 	name: '@ryanatkn/fuz_code',
 	version: '0.28.0',
-	description: 'syntax styling utilities and components for TypeScript, Svelte, SvelteKit',
+	description: 'syntax styling utilities and components for TypeScript, Svelte, and Markdown',
 	glyph: '🎨',
 	logo: 'logo.svg',
 	logo_alt: 'a friendly pink spider facing you',

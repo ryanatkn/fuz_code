@@ -1,4 +1,6 @@
 <script lang="ts">
+	import '$lib/theme_highlight.css';
+
 	import Breadcrumb from '@ryanatkn/fuz/Breadcrumb.svelte';
 
 	import Code from '$lib/Code.svelte';
@@ -9,10 +11,20 @@
 
 <main class="box width_100 py_xl5">
 	<Breadcrumb>🎨</Breadcrumb>
-	<h1 class="text_align_center">Syntax Highlighting Samples</h1>
 
 	<section class="box mb_xl5">
-		<h2 class="text_align_center">Standard (HTML Mode)</h2>
+		<h2 class="text_align_center">HTML rendering (default)</h2>
+		<aside
+			class="panel p_md mb_xl3 width_upto_md
+		"
+		>
+			<p>
+				These samples use the normal <Code
+					inline
+					content="<Code content=&quot;...&quot; lang=&quot;...&quot;>"
+				/> with HTML rendering. See below for the experimental Highlight API.
+			</p>
+		</aside>
 		{#each Object.values(samples) as sample (sample.name)}
 			<div class="mb_xl3">
 				<h3 class="box panel p_md mb_xs">{sample.lang}</h3>
@@ -24,27 +36,45 @@
 	<hr class="my_xl5" />
 
 	<section class="box">
-		<h2 class="text_align_center">Experimental: CSS Custom Highlight API</h2>
-		<aside class="box panel p_md mb_xl3 width_md">
-			⚠️ <strong>Experimental:</strong> The comparison below shows both HTML mode and CSS Custom
-			Highlight API mode. The Highlight API has limited browser support and is not recommended for
-			production use. The standard <code>Code.svelte</code> component (shown above) uses HTML generation
-			and is recommended for all use cases.
+		<h2 class="text_align_center">experimental: CSS Custom Highlight API</h2>
+		<aside
+			class="panel p_md mb_xl3 width_upto_md
+		"
+		>
+			<p>
+				⚠️ <strong>Experimental:</strong> the comparison below uses
+				<code>Code_Highlight.svelte</code> instead of <code>Code.svelte</code>
+				with both HTML mode and
+				<a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API"
+					>CSS Custom Highlight API</a
+				>.
+			</p>
+			<p>
+				A limitation: layout-affecting styles do not work, even for monospaced fonts:
+				<a href="https://github.com/w3c/csswg-drafts/issues/8355"
+					>github.com/w3c/csswg-drafts/issues/8355</a
+				>
+			</p>
+			<p>
+				The Highlight API has limited browser support as of October 2025 and is not recommended for
+				production use yet. Note <code>theme_highlight.css</code> is required instead of
+				<code>theme.css</code>.
+			</p>
 		</aside>
 		{#each Object.values(samples) as sample (sample.name)}
-			<div class="mb_xl3">
-				<h3 class="box panel p_md mb_0">{sample.lang}</h3>
+			<section>
+				<h2 class="box panel p_md mb_0">{sample.lang}</h2>
 				<div class="display_flex justify_content_center flex_wrap_wrap gap_sm py_xl5">
 					<div>
-						<h4>{sample.lang} HTML mode</h4>
+						<h3>{sample.lang} html strings</h3>
 						<Code_Highlight content={sample.content} lang={sample.lang} mode="html" />
 					</div>
 					<div>
-						<h4>{sample.lang} ranges mode</h4>
+						<h3>{sample.lang} highlighted ranges</h3>
 						<Code_Highlight content={sample.content} lang={sample.lang} mode="ranges" />
 					</div>
 				</div>
-			</div>
+			</section>
 			<hr />
 		{/each}
 	</section>

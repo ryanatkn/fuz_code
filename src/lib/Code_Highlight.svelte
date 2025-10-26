@@ -1,8 +1,11 @@
-<script lang="ts" module>
-	const supports_ranges = supports_css_highlight_api();
-</script>
-
 <script lang="ts">
+	/**
+	 * Uses the CSS Custom Highlight API when available --
+	 * https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API
+	 *
+	 * Requires importing theme_highlight.css instead of theme.css.
+	 */
+
 	import {onDestroy, type Snippet} from 'svelte';
 
 	import {syntax_styler_global} from '$lib/syntax_styler_global.js';
@@ -37,6 +40,8 @@
 	} = $props();
 
 	let code_element: HTMLElement | undefined = $state();
+
+	const supports_ranges = supports_css_highlight_api();
 
 	const highlight_manager = supports_ranges ? new Highlight_Manager() : null;
 
