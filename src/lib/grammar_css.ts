@@ -1,4 +1,4 @@
-import type {Add_Syntax_Grammar, Syntax_Grammar} from '$lib/syntax_styler.js';
+import type {Add_Syntax_Grammar, Syntax_Grammar_Raw} from '$lib/syntax_styler.js';
 import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/grammar_markup.js';
 
 var string = /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/;
@@ -35,7 +35,7 @@ export const add_grammar_css: Add_Syntax_Grammar = (syntax_styler) => {
 					pattern: /(^|[^\w-])(?:and|not|only|or)(?![\w-])/,
 					lookbehind: true,
 				},
-			} as Syntax_Grammar, // see `rest` below
+			} as Syntax_Grammar_Raw, // see `rest` below
 		},
 		url: {
 			// https://drafts.csswg.org/css-values-3/#urls
@@ -73,7 +73,7 @@ export const add_grammar_css: Add_Syntax_Grammar = (syntax_styler) => {
 			lookbehind: true,
 		},
 		punctuation: /[(){};:,]/,
-	} satisfies Syntax_Grammar;
+	} satisfies Syntax_Grammar_Raw;
 
 	grammar_css.atrule.inside.rest = grammar_css;
 

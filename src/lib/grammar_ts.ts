@@ -59,7 +59,7 @@ export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
 	(type_inside as any).class_name = undefined;
 
 	// After normalization, grammar_ts.class_name is an array
-	(grammar_ts.class_name as any)[0].inside = type_inside;
+	grammar_ts.class_name![0]!.inside = type_inside;
 
 	syntax_styler.grammar_insert_before('ts', 'function', {
 		type_assertion: {

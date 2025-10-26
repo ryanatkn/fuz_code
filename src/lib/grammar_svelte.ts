@@ -146,7 +146,7 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 	});
 
 	// oof lol
-	// After normalization, grammar.tag is an array of Normalized_Grammar_Token
+	// After normalization, grammar.tag is an array of Syntax_Grammar_Token
 	const tag_patterns = grammar_svelte.tag as any;
 	const tag_inside = tag_patterns[0].inside;
 	tag_inside.attr_value[0].inside.entity = grammar_svelte.entity;

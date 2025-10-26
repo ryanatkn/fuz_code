@@ -1,4 +1,4 @@
-import type {Add_Syntax_Grammar, Syntax_Grammar} from '$lib/syntax_styler.js';
+import type {Add_Syntax_Grammar, Syntax_Grammar_Raw} from '$lib/syntax_styler.js';
 
 export const class_keywords = 'class|extends|implements|instanceof|interface|new';
 
@@ -42,7 +42,7 @@ export const add_grammar_clike: Add_Syntax_Grammar = (syntax_styler) => {
 		number: /\b0x[\da-f]+\b|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?/i,
 		operator: /[<>]=?|[!=]=?=?|--?|\+\+?|&&?|\|\|?|[?*/~^%]/,
 		punctuation: /[{}[\];(),.:]/,
-	} satisfies Syntax_Grammar;
+	} satisfies Syntax_Grammar_Raw;
 
 	syntax_styler.add_lang('clike', grammar_clike);
 };

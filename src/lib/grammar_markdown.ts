@@ -1,7 +1,7 @@
 import type {
 	Add_Syntax_Grammar,
-	Syntax_Grammar_Token,
-	Syntax_Grammar_Value,
+	Syntax_Grammar_Token_Raw,
+	Syntax_Grammar_Value_Raw,
 	Syntax_Styler,
 } from '$lib/syntax_styler.js';
 
@@ -23,7 +23,7 @@ const create_fence_pattern = (
 	aliases: Array<string>,
 	lang_id: string,
 	syntax_styler: Syntax_Styler,
-): Syntax_Grammar_Token => {
+): Syntax_Grammar_Token_Raw => {
 	const aliases_pattern = aliases.join('|');
 	const pattern = new RegExp(
 		`^${backticks}(?:${aliases_pattern})[^\\n\\r]*(?:\\r?\\n|\\r)[\\s\\S]*?^${backticks}$`,
@@ -50,7 +50,7 @@ const create_fence_pattern = (
 /**
  * Helper to create catch-all fence pattern (unknown languages)
  */
-const create_catchall_fence = (backticks: string): Syntax_Grammar_Token => {
+const create_catchall_fence = (backticks: string): Syntax_Grammar_Token_Raw => {
 	const pattern = new RegExp(`^${backticks}[^\\n\\r]*(?:\\r?\\n|\\r)[\\s\\S]*?^${backticks}$`, 'm');
 	const code_fence_pattern = new RegExp(`^${backticks}[^\\n\\r]*|^${backticks}$`, 'm');
 
@@ -69,7 +69,7 @@ const create_catchall_fence = (backticks: string): Syntax_Grammar_Token => {
 /**
  * Helper to create md self-reference placeholder pattern
  */
-const create_md_placeholder = (backticks: string): Syntax_Grammar_Token => {
+const create_md_placeholder = (backticks: string): Syntax_Grammar_Token_Raw => {
 	const pattern = new RegExp(
 		`^${backticks}(?:md|markdown)[^\\n\\r]*(?:\\r?\\n|\\r)[\\s\\S]*?^${backticks}$`,
 		'm',
@@ -113,7 +113,7 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 	];
 
 	// Build grammar dynamically
-	const grammar: Record<string, Syntax_Grammar_Value> = {};
+	const grammar: Record<string, Syntax_Grammar_Value_Raw> = {};
 	const md_self_refs: Array<string> = []; // Track md patterns for later self-reference
 
 	// Generate fence patterns for each type
@@ -273,17 +273,17 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 		inside: syntax_styler.get_lang('md'),
 	};
 	for (const key of md_self_refs) {
-		// After normalization, grammar values are arrays of Normalized_Grammar_Token
+		// After normalization, grammar values are arrays of Syntax_Grammar_Token
 		// We need to add lang_md as a normalized array
-		const patterns = grammar_md[key] as any;
+		const patterns = grammar_md[key]!;
 		// Manually normalize the lang_md pattern we're adding
-		const normalized_lang_md = {
+		const lang_md_token = {
 			pattern: lang_md_inside.pattern,
 			lookbehind: false,
 			greedy: false,
 			alias: [],
 			inside: lang_md_inside.inside,
 		};
-		patterns[0].inside.lang_md = [normalized_lang_md];
+		patterns[0]!.inside!.lang_md = [lang_md_token];
 	}
 };

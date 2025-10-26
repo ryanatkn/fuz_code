@@ -12,7 +12,7 @@ export type Add_Syntax_Grammar = (syntax_styler: Syntax_Styler) => void;
  * @see LICENSE
  */
 export class Syntax_Styler {
-	langs: Record<string, Normalized_Grammar | undefined> = {
+	langs: Record<string, Syntax_Grammar | undefined> = {
 		plaintext: {},
 	};
 
@@ -32,12 +32,12 @@ export class Syntax_Styler {
 	// }
 	// }
 
-	add_lang(id: string, grammar: Syntax_Grammar, aliases?: Array<string>): void {
+	add_lang(id: string, grammar: Syntax_Grammar_Raw, aliases?: Array<string>): void {
 		// Normalize grammar once at registration for optimal runtime performance
 		// Use a visited set to handle circular references
 		this.normalize_grammar(grammar, new Set());
-		// After normalization, grammar has the shape of Normalized_Grammar
-		const normalized = grammar as unknown as Normalized_Grammar;
+		// After normalization, grammar has the shape of Syntax_Grammar
+		const normalized = grammar as unknown as Syntax_Grammar;
 		this.langs[id] = normalized;
 		if (aliases !== undefined) {
 			for (var alias of aliases) {
@@ -49,9 +49,9 @@ export class Syntax_Styler {
 	add_extended_lang(
 		base_id: string,
 		extension_id: string,
-		extension: Syntax_Grammar,
+		extension: Syntax_Grammar_Raw,
 		aliases?: Array<string>,
-	): Normalized_Grammar {
+	): Syntax_Grammar {
 		// extend_grammar returns already normalized grammar
 		var grammar = this.extend_grammar(base_id, extension);
 		// Store the normalized grammar directly
@@ -64,7 +64,7 @@ export class Syntax_Styler {
 		return grammar;
 	}
 
-	get_lang(id: string): Normalized_Grammar {
+	get_lang(id: string): Syntax_Grammar {
 		var lang = this.langs[id];
 		if (lang === undefined) {
 			throw Error(`The language "${id}" has no grammar.`);
@@ -192,11 +192,11 @@ export class Syntax_Styler {
 	grammar_insert_before(
 		inside: string,
 		before: string,
-		insert: Syntax_Grammar,
+		insert: Syntax_Grammar_Raw,
 		root: Record<string, any> = this.langs,
-	): Normalized_Grammar {
+	): Syntax_Grammar {
 		var grammar = root[inside];
-		var updated: Syntax_Grammar = {};
+		var updated: Syntax_Grammar_Raw = {};
 
 		for (var token in grammar) {
 			if (token === before) {
@@ -214,8 +214,8 @@ export class Syntax_Styler {
 		// Normalize the updated grammar to ensure inserted patterns have consistent shape
 		this.normalize_grammar(updated, new Set());
 
-		// After normalization, cast to Normalized_Grammar
-		const normalized = updated as unknown as Normalized_Grammar;
+		// After normalization, cast to Syntax_Grammar
+		const normalized = updated as unknown as Syntax_Grammar;
 		var old = root[inside];
 		root[inside] = normalized;
 
@@ -309,13 +309,13 @@ export class Syntax_Styler {
 	 * @param extension - The new tokens to append.
 	 * @returns the new grammar
 	 */
-	extend_grammar(base_id: string, extension: Syntax_Grammar): Normalized_Grammar {
+	extend_grammar(base_id: string, extension: Syntax_Grammar_Raw): Syntax_Grammar {
 		// Merge normalized base with un-normalized extension
 		const extended = {...structuredClone(this.get_lang(base_id)), ...extension};
 		// Normalize the extension parts
-		this.normalize_grammar(extended as Syntax_Grammar, new Set());
-		// Return as Normalized_Grammar
-		return extended as unknown as Normalized_Grammar;
+		this.normalize_grammar(extended as Syntax_Grammar_Raw, new Set());
+		// Return as Syntax_Grammar
+		return extended as unknown as Syntax_Grammar;
 	}
 
 	/**
@@ -323,9 +323,9 @@ export class Syntax_Styler {
 	 * This ensures all patterns have the same object shape for V8 optimization.
 	 */
 	private normalize_pattern(
-		pattern: RegExp | Syntax_Grammar_Token,
+		pattern: RegExp | Syntax_Grammar_Token_Raw,
 		visited: Set<number>,
-	): Normalized_Grammar_Token {
+	): Syntax_Grammar_Token {
 		const p = pattern instanceof RegExp ? {pattern} : pattern;
 
 		let regex = p.pattern;
@@ -343,11 +343,11 @@ export class Syntax_Styler {
 		}
 
 		// Recursively normalize the inside grammar if present
-		let normalized_inside: Normalized_Grammar | null = null;
+		let normalized_inside: Syntax_Grammar | null = null;
 		if (p.inside) {
 			this.normalize_grammar(p.inside, visited);
-			// After normalization, cast to Normalized_Grammar
-			normalized_inside = p.inside as unknown as Normalized_Grammar;
+			// After normalization, cast to Syntax_Grammar
+			normalized_inside = p.inside as unknown as Syntax_Grammar;
 		}
 
 		return {
@@ -370,7 +370,7 @@ export class Syntax_Styler {
 	 * This is called once at registration time to avoid runtime overhead.
 	 * @param visited - Set of grammar object IDs already normalized (for circular references)
 	 */
-	private normalize_grammar(grammar: Syntax_Grammar, visited: Set<number>): void {
+	private normalize_grammar(grammar: Syntax_Grammar_Raw, visited: Set<number>): void {
 		// Check if we've already normalized this grammar (circular reference)
 		const grammar_id = id_of(grammar);
 		if (visited.has(grammar_id)) {
@@ -401,7 +401,7 @@ export class Syntax_Styler {
 
 			// Always store as array of normalized patterns
 			const patterns = Array.isArray(value) ? value : [value];
-			grammar[key] = patterns.map((p) => this.normalize_pattern(p, visited)) as any;
+			grammar[key] = patterns.map((p) => this.normalize_pattern(p, visited));
 		}
 	}
 
@@ -440,13 +440,13 @@ export class Syntax_Styler {
 	}
 }
 
-export type Syntax_Grammar_Value =
+export type Syntax_Grammar_Value_Raw =
 	| RegExp
-	| Syntax_Grammar_Token
-	| Array<RegExp | Syntax_Grammar_Token>;
+	| Syntax_Grammar_Token_Raw
+	| Array<RegExp | Syntax_Grammar_Token_Raw>;
 
-export type Syntax_Grammar = Record<string, Syntax_Grammar_Value | undefined> & {
-	rest?: Syntax_Grammar | undefined;
+export type Syntax_Grammar_Raw = Record<string, Syntax_Grammar_Value_Raw | undefined> & {
+	rest?: Syntax_Grammar_Raw | undefined;
 };
 
 /**
@@ -462,7 +462,7 @@ export type Syntax_Grammar = Record<string, Syntax_Grammar_Value | undefined> & 
  * Note: Grammar authors can use optional properties, but they will be normalized
  * to required properties at registration time for optimal performance.
  */
-export interface Syntax_Grammar_Token {
+export interface Syntax_Grammar_Token_Raw {
 	/**
 	 * The regular expression of the token.
 	 */
@@ -485,26 +485,26 @@ export interface Syntax_Grammar_Token {
 	/**
 	 * The nested grammar of this token.
 	 */
-	inside?: Syntax_Grammar | null;
+	inside?: Syntax_Grammar_Raw | null;
 }
 
 /**
- * Normalized grammar token with all properties required.
- * This is the internal representation after normalization.
+ * Grammar token with all properties required.
+ * This is the normalized representation used at runtime.
  */
-export interface Normalized_Grammar_Token {
+export interface Syntax_Grammar_Token {
 	pattern: RegExp;
 	lookbehind: boolean;
 	greedy: boolean;
 	alias: Array<string>;
-	inside: Normalized_Grammar | null;
+	inside: Syntax_Grammar | null;
 }
 
 /**
  * A grammar after normalization.
  * All values are arrays of normalized tokens with consistent shapes.
  */
-export type Normalized_Grammar = Record<string, Array<Normalized_Grammar_Token>>;
+export type Syntax_Grammar = Record<string, Array<Syntax_Grammar_Token>>;
 
 const depth_first_search = (
 	o: any,

@@ -167,8 +167,8 @@ describe('range creation', () => {
 		assert.ok(manager.element_ranges.has('token_keyword'));
 		const ranges = manager.element_ranges.get('token_keyword')!;
 		assert.equal(ranges.length, 1);
-		assert.equal(ranges[0].startOffset, 0);
-		assert.equal(ranges[0].endOffset, 7);
+		assert.equal(ranges[0]!.startOffset, 0);
+		assert.equal(ranges[0]!.endOffset, 7);
 	});
 
 	test('creates ranges for nested tokens', () => {
@@ -244,8 +244,8 @@ describe('range creation', () => {
 
 		// Verify positions
 		const level4_ranges = manager.element_ranges.get('token_level4')!;
-		assert.equal(level4_ranges[0].startOffset, 0);
-		assert.equal(level4_ranges[0].endOffset, 1);
+		assert.equal(level4_ranges[0]!.startOffset, 0);
+		assert.equal(level4_ranges[0]!.endOffset, 1);
 	});
 
 	test('creates ranges for mixed nested content (strings and tokens)', () => {
@@ -274,12 +274,12 @@ describe('range creation', () => {
 		const part2_ranges = manager.element_ranges.get('token_part2')!;
 		const part3_ranges = manager.element_ranges.get('token_part3')!;
 
-		assert.equal(part1_ranges[0].startOffset, 0);
-		assert.equal(part1_ranges[0].endOffset, 1);
-		assert.equal(part2_ranges[0].startOffset, 2);
-		assert.equal(part2_ranges[0].endOffset, 3);
-		assert.equal(part3_ranges[0].startOffset, 4);
-		assert.equal(part3_ranges[0].endOffset, 5);
+		assert.equal(part1_ranges[0]!.startOffset, 0);
+		assert.equal(part1_ranges[0]!.endOffset, 1);
+		assert.equal(part2_ranges[0]!.startOffset, 2);
+		assert.equal(part2_ranges[0]!.endOffset, 3);
+		assert.equal(part3_ranges[0]!.startOffset, 4);
+		assert.equal(part3_ranges[0]!.endOffset, 5);
 	});
 
 	test('creates separate ranges for aliases', () => {
@@ -377,12 +377,12 @@ describe('position tracking', () => {
 		const ranges_b = manager.element_ranges.get('token_b')!;
 		const ranges_c = manager.element_ranges.get('token_c')!;
 
-		assert.equal(ranges_a[0].startOffset, 0);
-		assert.equal(ranges_a[0].endOffset, 1);
-		assert.equal(ranges_b[0].startOffset, 2);
-		assert.equal(ranges_b[0].endOffset, 3);
-		assert.equal(ranges_c[0].startOffset, 4);
-		assert.equal(ranges_c[0].endOffset, 5);
+		assert.equal(ranges_a[0]!.startOffset, 0);
+		assert.equal(ranges_a[0]!.endOffset, 1);
+		assert.equal(ranges_b[0]!.startOffset, 2);
+		assert.equal(ranges_b[0]!.endOffset, 3);
+		assert.equal(ranges_c[0]!.startOffset, 4);
+		assert.equal(ranges_c[0]!.endOffset, 5);
 	});
 
 	test('correctly tracks positions through nested tokens', () => {
@@ -407,44 +407,38 @@ describe('position tracking', () => {
 		const inner1_ranges = manager.element_ranges.get('token_inner1')!;
 		const inner2_ranges = manager.element_ranges.get('token_inner2')!;
 
-		assert.equal(outer_ranges[0].startOffset, 0);
-		assert.equal(outer_ranges[0].endOffset, 3);
-		assert.equal(inner1_ranges[0].startOffset, 0);
-		assert.equal(inner1_ranges[0].endOffset, 1);
-		assert.equal(inner2_ranges[0].startOffset, 1);
-		assert.equal(inner2_ranges[0].endOffset, 3);
+		assert.equal(outer_ranges[0]!.startOffset, 0);
+		assert.equal(outer_ranges[0]!.endOffset, 3);
+		assert.equal(inner1_ranges[0]!.startOffset, 0);
+		assert.equal(inner1_ranges[0]!.endOffset, 1);
+		assert.equal(inner2_ranges[0]!.startOffset, 1);
+		assert.equal(inner2_ranges[0]!.endOffset, 3);
 	});
 
 	test('handles token at position 0 (start boundary)', () => {
 		const manager = new Highlight_Manager();
 		const element = create_code_element('abc');
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token('start', 'a', undefined, 'a'),
-			'bc',
-		];
+		const tokens: Syntax_Token_Stream = [new Syntax_Token('start', 'a', undefined, 'a'), 'bc'];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 
 		const ranges = manager.element_ranges.get('token_start')!;
-		assert.equal(ranges[0].startOffset, 0);
-		assert.equal(ranges[0].endOffset, 1);
+		assert.equal(ranges[0]!.startOffset, 0);
+		assert.equal(ranges[0]!.endOffset, 1);
 	});
 
 	test('handles token at end of text (end boundary)', () => {
 		const manager = new Highlight_Manager();
 		const element = create_code_element('abc');
 
-		const tokens: Syntax_Token_Stream = [
-			'ab',
-			new Syntax_Token('end', 'c', undefined, 'c'),
-		];
+		const tokens: Syntax_Token_Stream = ['ab', new Syntax_Token('end', 'c', undefined, 'c')];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 
 		const ranges = manager.element_ranges.get('token_end')!;
-		assert.equal(ranges[0].startOffset, 2);
-		assert.equal(ranges[0].endOffset, 3);
+		assert.equal(ranges[0]!.startOffset, 2);
+		assert.equal(ranges[0]!.endOffset, 3);
 	});
 
 	test('validates nested content length matches parent token', () => {
@@ -533,10 +527,10 @@ describe('error handling', () => {
 		const number_ranges = manager.element_ranges.get('token_number')!;
 
 		// Emoji takes 2 code units, so number starts at position 5 (2 + 3)
-		assert.equal(variable_ranges[0].startOffset, 0);
-		assert.equal(variable_ranges[0].endOffset, 2);
-		assert.equal(number_ranges[0].startOffset, 5);
-		assert.equal(number_ranges[0].endOffset, 6);
+		assert.equal(variable_ranges[0]!.startOffset, 0);
+		assert.equal(variable_ranges[0]!.endOffset, 2);
+		assert.equal(number_ranges[0]!.startOffset, 5);
+		assert.equal(number_ranges[0]!.endOffset, 6);
 	});
 
 	test('wraps range creation errors with context', () => {

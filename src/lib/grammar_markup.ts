@@ -1,8 +1,9 @@
 import type {
 	Syntax_Styler,
 	Add_Syntax_Grammar,
-	Syntax_Grammar,
+	Syntax_Grammar_Raw,
 	Syntax_Grammar_Token,
+	Syntax_Grammar,
 } from '$lib/syntax_styler.js';
 
 /**
@@ -84,7 +85,7 @@ export const add_grammar_markup: Add_Syntax_Grammar = (syntax_styler) => {
 			},
 			/&#x?[\da-f]{1,8};/i,
 		],
-	} satisfies Syntax_Grammar;
+	} satisfies Syntax_Grammar_Raw;
 
 	grammar_markup.tag.inside.attr_value.inside.entity = grammar_markup.entity;
 
@@ -157,12 +158,12 @@ export const grammar_markup_add_attribute = (
 	attr_name: string,
 	lang: string,
 ): void => {
-	// After normalization, grammar.tag is an array of Normalized_Grammar_Token
+	// After normalization, grammar.tag is an array of Syntax_Grammar_Token
 	const markup_grammar = syntax_styler.get_lang('markup');
-	const tag_patterns = markup_grammar.tag as any;
-	const tag_inside = tag_patterns[0].inside;
+	const tag_patterns = markup_grammar.tag;
+	const tag_inside = tag_patterns![0]!.inside!;
 
-	(tag_inside.special_attr as Array<Syntax_Grammar_Token>).push({
+	tag_inside.special_attr!.push({
 		pattern: RegExp(
 			/(^|["'\s])/.source +
 				'(?:' +
@@ -172,29 +173,53 @@ export const grammar_markup_add_attribute = (
 			'i',
 		),
 		lookbehind: true,
+		greedy: false,
+		alias: [],
 		inside: {
-			attr_name: /^[^\s=]+/,
-			attr_value: {
-				pattern: /=[\s\S]+/,
-				inside: {
-					value: {
-						pattern: /(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,
-						lookbehind: true,
-						alias: [lang, 'lang_' + lang], // TODO remove this alias?
-						inside: syntax_styler.get_lang(lang),
-					},
-					punctuation: [
-						{
-							pattern: /^=/,
-							alias: 'attr_equals',
-						},
-						{
-							pattern: /"|'/,
-							alias: 'attr_quote',
-						},
-					],
+			attr_name: [
+				{
+					pattern: /^[^\s=]+/,
+					lookbehind: false,
+					greedy: false,
+					alias: [],
+					inside: null,
 				},
-			},
-		},
-	});
+			],
+			attr_value: [
+				{
+					pattern: /=[\s\S]+/,
+					lookbehind: false,
+					greedy: false,
+					alias: [],
+					inside: {
+						value: [
+							{
+								pattern: /(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,
+								lookbehind: true,
+								greedy: false,
+								alias: [lang, 'lang_' + lang], // TODO remove this alias?
+								inside: syntax_styler.get_lang(lang),
+							},
+						],
+						punctuation: [
+							{
+								pattern: /^=/,
+								lookbehind: false,
+								greedy: false,
+								alias: ['attr_equals'],
+								inside: null,
+							},
+							{
+								pattern: /"|'/,
+								lookbehind: false,
+								greedy: false,
+								alias: ['attr_quote'],
+								inside: null,
+							},
+						],
+					} as Syntax_Grammar,
+				},
+			],
+		} as Syntax_Grammar,
+	} satisfies Syntax_Grammar_Token);
 };
