@@ -20,7 +20,8 @@
 		>
 			<p>
 				These samples use the normal <code>Code</code> component, which renders using HTML. See
-				below for the experimental <code>Code_Highlight</code> that uses the Highlight API.
+				<a href="#experimental">below</a> for the experimental <code>Code_Highlight</code> that uses
+				the Highlight API.
 			</p>
 		</aside>
 		{#each Object.values(samples) as sample (sample.name)}
@@ -33,7 +34,7 @@
 
 	<hr class="my_xl5" />
 
-	<section class="box">
+	<section class="box" id="experimental">
 		<h2 class="text_align_center">CSS Custom Highlight API (experimental)</h2>
 		<aside
 			class="panel p_md mb_xl3 width_upto_md
