@@ -43,7 +43,15 @@ export class Highlight_Manager {
 		this.clear_element_ranges();
 
 		const ranges_by_type: Map<string, Array<Range>> = new Map();
-		this.#create_all_ranges(tokens, text_node, ranges_by_type, 0);
+		const final_pos = this.#create_all_ranges(tokens, text_node, ranges_by_type, 0);
+
+		// Validate that token positions matched text node length
+		const text_length = text_node.textContent?.length ?? 0;
+		if (final_pos !== text_length) {
+			throw new Error(
+				`Token stream length mismatch: tokens covered ${final_pos} chars but text node has ${text_length} chars`,
+			);
+		}
 
 		// Apply highlights
 		for (const [type, ranges] of ranges_by_type) {
@@ -103,6 +111,7 @@ export class Highlight_Manager {
 		ranges_by_type: Map<string, Array<Range>>,
 		offset: number,
 	): number {
+		const text_length = text_node.textContent?.length ?? 0;
 		let pos = offset;
 
 		for (const token of tokens) {
@@ -113,6 +122,13 @@ export class Highlight_Manager {
 
 			const length = token.length;
 			const end_pos = pos + length;
+
+			// Validate positions are within text node bounds before creating ranges
+			if (end_pos > text_length) {
+				throw new Error(
+					`Token ${token.type} extends beyond text node: position ${end_pos} > length ${text_length}`,
+				);
+			}
 
 			try {
 				const range = new Range();
@@ -132,10 +148,10 @@ export class Highlight_Manager {
 						ranges_by_type.set(alias, []);
 					}
 					// Create a new range for each alias (ranges can't be reused)
-					const aliasRange = new Range();
-					aliasRange.setStart(text_node, pos);
-					aliasRange.setEnd(text_node, end_pos);
-					ranges_by_type.get(alias)!.push(aliasRange);
+					const alias_range = new Range();
+					alias_range.setStart(text_node, pos);
+					alias_range.setEnd(text_node, end_pos);
+					ranges_by_type.get(alias)!.push(alias_range);
 				}
 			} catch (e) {
 				throw new Error(`Failed to create range for ${token.type}: ${e}`);
@@ -143,10 +159,22 @@ export class Highlight_Manager {
 
 			// Process nested tokens
 			if (Array.isArray(token.content)) {
-				this.#create_all_ranges(token.content, text_node, ranges_by_type, pos);
+				const actual_end_pos = this.#create_all_ranges(
+					token.content,
+					text_node,
+					ranges_by_type,
+					pos,
+				);
+				// Validate that nested tokens match the parent token's claimed length
+				if (actual_end_pos !== end_pos) {
+					throw new Error(
+						`Token ${token.type} length mismatch: claimed ${length} chars (${pos}-${end_pos}) but nested content covered ${actual_end_pos - pos} chars (${pos}-${actual_end_pos})`,
+					);
+				}
+				pos = actual_end_pos;
+			} else {
+				pos = end_pos;
 			}
-
-			pos = end_pos;
 		}
 
 		return pos;
