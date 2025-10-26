@@ -73,28 +73,49 @@ export class Syntax_Styler {
 	}
 
 	/**
-	 * Accepts a string of text as input
-	 * and the language definitions to use,
-	 * and returns a string with the HTML produced.
+	 * Generates HTML with syntax highlighting from source code.
 	 *
-	 * The following hooks will be run:
-	 * 1. `before_tokenize`
-	 * 2. `after_tokenize`
-	 * 3. `wrap`: on each `Syntax_Token`
+	 * **Process:**
+	 * 1. Runs `before_tokenize` hook
+	 * 2. Tokenizes code using the provided or looked-up grammar
+	 * 3. Runs `after_tokenize` hook
+	 * 4. Runs `wrap` hook on each token
+	 * 5. Converts tokens to HTML with CSS classes
 	 *
-	 * @param text - A string with the code to be styled.
-	 * @param lang - The name of the language definition passed to `grammar`.
-	 * @param grammar - An object containing the tokens to use.
+	 * **Parameter Relationship:**
+	 * - `lang` is ALWAYS required for hook context and identification
+	 * - `grammar` is optional; when undefined, automatically looks up via `this.get_lang(lang)`
+	 * - When both are provided, `grammar` is used for tokenization, `lang` for metadata
 	 *
-	 * Usually a language definition like `syntax_styler.get_lang('markup')`.
+	 * **Use cases:**
+	 * - Standard usage: `stylize(code, 'ts')` - uses registered TypeScript grammar
+	 * - Custom grammar: `stylize(code, 'ts', customGrammar)` - uses custom grammar but keeps 'ts' label
+	 * - Extended grammar: `stylize(code, 'custom', this.extend_grammar('ts', extension))` - new language variant
 	 *
-	 * @returns the styled HTML
+	 * @param text - The source code to syntax highlight.
+	 * @param lang - Language identifier (e.g., 'ts', 'css', 'html'). Used for:
+	 *   - Grammar lookup when `grammar` is undefined
+	 *   - Hook context (`lang` field passed to hooks)
+	 *   - Language identification in output
+	 * @param grammar - Optional custom grammar object. When undefined, automatically
+	 *   looks up the grammar via `this.get_lang(lang)`. Provide this to use a custom
+	 *   or modified grammar instead of the registered one.
+	 *
+	 * @returns HTML string with syntax highlighting using CSS classes (`.token_*`)
 	 *
 	 * @example
+	 * // Standard usage - uses registered grammar
 	 * stylize('var foo = true;', 'ts');
 	 *
 	 * @example
-	 * stylize('var foo = false;', 'ts', custom_grammar);
+	 * // Custom grammar - overrides registered grammar
+	 * const customGrammar = { keyword: [...], string: [...] };
+	 * stylize('var foo = false;', 'ts', customGrammar);
+	 *
+	 * @example
+	 * // Extended grammar - builds on existing grammar
+	 * const extended = this.extend_grammar('ts', { customToken: [...] });
+	 * stylize('var foo = 42;', 'ts-extended', extended);
 	 */
 	stylize(
 		text: string,

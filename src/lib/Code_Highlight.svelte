@@ -7,6 +7,7 @@
 	 */
 
 	import {onDestroy, type Snippet} from 'svelte';
+	import {DEV} from 'esm-env';
 
 	import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 	import type {Syntax_Styler, Syntax_Grammar} from '$lib/syntax_styler.js';
@@ -28,14 +29,81 @@
 		syntax_styler = syntax_styler_global,
 		children,
 	}: {
+		/** The source code to syntax highlight. */
 		content: string;
+		/**
+		 * Language identifier (e.g., 'ts', 'css', 'html', 'json', 'svelte', 'md').
+		 *
+		 * **Purpose:**
+		 * - When `grammar` is not provided, used to look up the grammar via `syntax_styler.get_lang(lang)`
+		 * - Used for metadata: sets the `data-lang` attribute and determines `language_supported`
+		 *
+		 * **Special values:**
+		 * - `null` - Explicitly disables syntax highlighting (content rendered as plain text)
+		 * - `undefined` - Falls back to default ('svelte')
+		 *
+		 * **Relationship with `grammar`:**
+		 * - If both `lang` and `grammar` are provided, `grammar` takes precedence for tokenization
+		 * - However, `lang` is still used for the `data-lang` attribute and language detection
+		 *
+		 * @default 'svelte'
+		 */
 		lang?: string | null;
+		/**
+		 * Highlighting mode for this component.
+		 *
+		 * **Options:**
+		 * - `'auto'` - Uses CSS Custom Highlight API if supported, falls back to HTML mode
+		 * - `'ranges'` - Forces CSS Custom Highlight API (requires browser support)
+		 * - `'html'` - Forces HTML generation with CSS classes
+		 *
+		 * **Note:** CSS Custom Highlight API has limitations and limited browser support.
+		 * Requires importing `theme_highlight.css` instead of `theme.css`.
+		 *
+		 * @default 'auto'
+		 */
 		mode?: Highlight_Mode;
+		/** Additional attributes to apply to the outer `<pre>` or `<span>` element. */
 		pre_attrs?: any;
+		/** Additional attributes to apply to the inner `<code>` element. */
 		code_attrs?: any;
+		/**
+		 * Optional custom grammar object for syntax tokenization.
+		 *
+		 * **When to use:**
+		 * - To provide a custom language definition not registered in `syntax_styler.langs`
+		 * - To use a modified/extended version of an existing grammar
+		 * - For one-off grammar variations without registering globally
+		 *
+		 * **Behavior:**
+		 * - When provided, this grammar is used for tokenization instead of looking up via `lang`
+		 * - Enables highlighting even if `lang` is not in the registry (useful for custom languages)
+		 * - The `lang` parameter is still used for metadata (data-lang attribute)
+		 * - When undefined, the grammar is automatically looked up:
+		 *   - In HTML mode: via `syntax_styler.get_lang(lang)` (automatic fallback in `stylize()`)
+		 *   - In range mode: via `grammar || syntax_styler.get_lang(lang)` (explicit fallback)
+		 *
+		 * @default undefined (uses grammar from `syntax_styler.langs[lang]`)
+		 */
 		grammar?: Syntax_Grammar | undefined;
+		/**
+		 * Whether to render inline code (uses `<span>`) or block code (uses `<pre>`).
+		 *
+		 * @default false
+		 */
 		inline?: boolean;
+		/**
+		 * Custom Syntax_Styler instance to use for highlighting.
+		 * Allows using a different styler with custom grammars or configuration.
+		 *
+		 * @default syntax_styler_global
+		 */
 		syntax_styler?: Syntax_Styler;
+		/**
+		 * Optional snippet to customize how the highlighted markup is rendered.
+		 * - In HTML mode: receives the generated HTML string
+		 * - In range mode: receives the plain text content
+		 */
 		children?: Snippet<[markup: string]>;
 	} = $props();
 
@@ -51,7 +119,32 @@
 
 	const language_supported = $derived(lang !== null && !!syntax_styler.langs[lang]);
 
-	const highlighting_disabled = $derived(lang === null || !language_supported);
+	const highlighting_disabled = $derived(
+		lang === null || (!language_supported && !grammar),
+	);
+
+	// DEV-only validation warnings
+	if (DEV) {
+		$effect(() => {
+			// Warn if lang is unsupported and no custom grammar provided
+			if (lang && !language_supported && !grammar) {
+				// eslint-disable-next-line no-console
+				console.error(
+					`[Code_Highlight] Language "${lang}" is not supported and no custom grammar provided. ` +
+						`Highlighting disabled. Supported languages: ${Object.keys(syntax_styler.langs).join(', ')}`,
+				);
+			}
+
+			// Warn if custom grammar provided but lang is still default value
+			if (grammar && lang === 'svelte') {
+				// eslint-disable-next-line no-console
+				console.error(
+					`[Code_Highlight] Custom grammar provided but lang is default ("svelte"). ` +
+						`Consider setting lang to match your custom grammar for accurate data-lang attribute.`,
+				);
+			}
+		});
+	}
 
 	// Generate HTML markup for syntax highlighting in non-range mode
 	const html_content = $derived.by(() => {
