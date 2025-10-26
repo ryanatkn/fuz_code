@@ -19,10 +19,8 @@
 		"
 		>
 			<p>
-				These samples use the normal <Code
-					inline
-					content="<Code content=&quot;...&quot; lang=&quot;...&quot;>"
-				/> with HTML rendering. See below for the experimental Highlight API.
+				These samples use the normal <code>Code</code> component, which renders using HTML. See
+				below for the experimental <code>Code_Highlight</code> that uses the Highlight API.
 			</p>
 		</aside>
 		{#each Object.values(samples) as sample (sample.name)}
@@ -36,7 +34,7 @@
 	<hr class="my_xl5" />
 
 	<section class="box">
-		<h2 class="text_align_center">experimental: CSS Custom Highlight API</h2>
+		<h2 class="text_align_center">CSS Custom Highlight API (experimental)</h2>
 		<aside
 			class="panel p_md mb_xl3 width_upto_md
 		"
@@ -50,7 +48,8 @@
 				>.
 			</p>
 			<p>
-				A limitation: layout-affecting styles do not work, even for monospaced fonts:
+				A limitation: layout-affecting styles like font weight do not work, even for monospaced
+				fonts:
 				<a href="https://github.com/w3c/csswg-drafts/issues/8355"
 					>github.com/w3c/csswg-drafts/issues/8355</a
 				>
