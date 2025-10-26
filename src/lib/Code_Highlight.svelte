@@ -41,6 +41,8 @@
 
 	let code_element: HTMLElement | undefined = $state();
 
+	// TODO BLOCK Normalized_Grammar is the `get_lang` result but grammar is Syntax_Grammar
+
 	const supports_ranges = supports_css_highlight_api();
 
 	const highlight_manager = supports_ranges ? new Highlight_Manager() : null;

@@ -43,7 +43,7 @@ interface Rematch_Options {
 const match_grammar = (
 	text: string,
 	token_list: Linked_List,
-	grammar: any,
+	grammar: any, // TODO BLOCK Syntax_Grammar or Normalized_Grammar? see `tokenize_syntax` too
 	start_node: Linked_List_Node,
 	start_pos: number,
 	rematch?: Rematch_Options,
