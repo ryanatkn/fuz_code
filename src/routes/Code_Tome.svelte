@@ -1,4 +1,6 @@
 <script lang="ts">
+	import {resolve} from '$app/paths';
+
 	// import Tome from '@ryanatkn/fuz/Tome.svelte';
 	// import Docs_Item from '@ryanatkn/fuz/Docs_Item.svelte';
 	// import Tome_Link from '@ryanatkn/fuz/Tome_Link.svelte';
@@ -39,8 +41,9 @@ import '@ryanatkn/fuz_code/theme.css'; // add this"
 <section>
 	<h3>Dependencies</h3>
 	<p>
-		By default fuz_code depends on my CSS framework <a href="https://moss.ryanatkn.com">Moss</a>. If
-		you're not using it, import <code>theme_variables.css</code>:
+		By default fuz_code depends on my CSS framework <a href="https://moss.ryanatkn.com">Moss</a> to
+		provide color-schema-aware color variables. If you're not using it, import
+		<code>theme_variables.css</code> or bring your own:
 	</p>
 	<Code
 		lang="ts"
@@ -50,11 +53,19 @@ import '@ryanatkn/fuz_code/theme_variables.css'; // also this if not using Moss"
 	/>
 </section>
 <section>
-	<aside>
-		⚠️ Performing syntax styling at runtime like this is often wasteful. The plan is to provide a
-		Vite plugin to optimize static cases. For now you can use <code>lang={'{'}null}</code> with pre-highligted
+	<h3>Caveats</h3>
+	<p>
+		The <code>Code</code> component generates HTML with CSS classes for text highlighting. It also
+		includes experimental support for the CSS Custom Highlight API with <code>Code_Highlight</code>,
+		see the
+		<a href={resolve('/samples')}>samples</a>
+		for more.
+	</p>
+	<p>
+		Performing syntax styling at runtime like this is often wasteful. The plan is to provide a Vite
+		plugin to optimize static cases. For now you can use <code>lang={'{'}null}</code> with pre-highligted
 		HTML.
-	</aside>
+	</p>
 </section>
 <section>
 	<h3>Svelte support</h3>
@@ -98,13 +109,14 @@ import '@ryanatkn/fuz_code/theme_variables.css'; // also this if not using Moss"
 <section>
 	<h3>Markdown support</h3>
 	<p>
-		<Tome_Link name="Code" /> supports Markdown with <code>lang="md"</code>:
+		<Tome_Link name="Code" /> supports Markdown with <code>lang="md"</code>, and fenced blocks for
+		all languages:
 	</p>
 	<div class="mb_lg">
-		<Code content={`<Code lang="md" content="# hello **world**" />`} />
+		<Code content={`<Code lang="md" content="# hello \`world\` ..." />`} />
 	</div>
 	<div>
-		<Code lang="md" content={`# hello **world**`} />
+		<Code lang="md" content={`# hello \`world\`\n\n\`\`\`ts\n\tconst a = 1;\n\`\`\``} />
 	</div>
 </section>
 <section>

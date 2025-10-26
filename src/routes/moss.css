@@ -122,9 +122,6 @@ a.chip {
 .width_100 {
 	width: 100%;
 }
-.width_md {
-	width: var(--space_md);
-}
 .height_100 {
 	height: 100%;
 }
@@ -154,6 +151,9 @@ a.chip {
 }
 .mt_md {
 	margin-top: var(--space_md);
+}
+.mt_lg {
+	margin-top: var(--space_lg);
 }
 .mt_xl5 {
 	margin-top: var(--space_xl5);

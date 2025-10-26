@@ -26,7 +26,7 @@ export const gen: Gen = {
 			let match;
 
 			while ((match = highlight_regex.exec(block)) !== null) {
-				const token_name = match[1];
+				const token_name = match[1]!;
 				if (!tokens_in_block.includes(token_name)) {
 					tokens_in_block.push(token_name);
 				}

@@ -30,7 +30,7 @@ export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
 		'js',
 		{
 			class_name: [
-				...grammar_clike.class_name,
+				...grammar_clike.class_name!,
 				{
 					pattern:
 						/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:constructor|prototype))/,

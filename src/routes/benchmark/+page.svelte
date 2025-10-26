@@ -88,35 +88,39 @@
 	</p>
 
 	<section class="panel p_lg">
-		<h2 class="mt_0">config</h2>
-		<label>
-			iterations:
-			<input type="number" bind:value={config.iterations} min="10" disabled={running} />
-		</label>
+		<form>
+			<fieldset>
+				<legend>config</legend>
+				<label>
+					<div class="title">iterations</div>
+					<input type="number" bind:value={config.iterations} min="10" disabled={running} />
+				</label>
 
-		<label>
-			content multiplier:
-			<input type="number" bind:value={config.content_multiplier} min="50" disabled={running} />
-		</label>
+				<label>
+					<div class="title">content multiplier</div>
+					<input type="number" bind:value={config.content_multiplier} min="50" disabled={running} />
+				</label>
 
-		<label>
-			warmup runs:
-			<input type="number" bind:value={config.warmup_count} min="3" disabled={running} />
-		</label>
+				<label>
+					<div class="title">warmup runs</div>
+					<input type="number" bind:value={config.warmup_count} min="3" disabled={running} />
+				</label>
 
-		<label>
-			cooldown (ms):
-			<input type="number" bind:value={config.cooldown_ms} min="10" disabled={running} />
-		</label>
+				<label>
+					<div class="title">cooldown (ms)</div>
+					<input type="number" bind:value={config.cooldown_ms} min="10" disabled={running} />
+				</label>
+			</fieldset>
 
-		<button type="button" onclick={run_benchmarks} disabled={running}>
-			{running ? 'running...' : 'run benchmarks'}
-		</button>
-		{#if running}
-			<button type="button" onclick={stop_benchmarks} style:margin-left="1rem">
-				stop benchmark
+			<button type="button" onclick={run_benchmarks} disabled={running}>
+				{running ? 'running...' : 'run benchmarks'}
 			</button>
-		{/if}
+			{#if running}
+				<button type="button" class="mt_lg" onclick={stop_benchmarks} style:margin-left="1rem">
+					stop benchmark
+				</button>
+			{/if}
+		</form>
 	</section>
 
 	{#if running}

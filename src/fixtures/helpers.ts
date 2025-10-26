@@ -33,7 +33,8 @@ export const discover_samples = (): Array<Sample_Spec> => {
 		const match = /sample_([^.]+)\.(.+)$/.exec(filename);
 		if (!match) continue;
 
-		const [, variant, lang] = match;
+		const variant = match[1]!;
+		const lang = match[2]!;
 		const content = readFileSync(file.id, 'utf-8');
 
 		samples.push({

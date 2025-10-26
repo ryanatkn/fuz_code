@@ -1,4 +1,4 @@
-import type {Add_Syntax_Grammar, Syntax_Grammar} from '$lib/syntax_styler.js';
+import type {Add_Syntax_Grammar, Syntax_Grammar_Raw} from '$lib/syntax_styler.js';
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -32,7 +32,7 @@ export const add_grammar_json: Add_Syntax_Grammar = (syntax_styler) => {
 			pattern: /\bnull\b/,
 			alias: 'keyword',
 		},
-	} satisfies Syntax_Grammar;
+	} satisfies Syntax_Grammar_Raw;
 
 	syntax_styler.add_lang('json', grammar_json);
 };

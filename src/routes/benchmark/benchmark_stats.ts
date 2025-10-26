@@ -27,8 +27,8 @@ const MIN_SAMPLE_SIZE = 3;
 const calculate_median = (sorted_array: Array<number>): number => {
 	const mid = Math.floor(sorted_array.length / 2);
 	return sorted_array.length % 2 === 0
-		? (sorted_array[mid - 1] + sorted_array[mid]) / 2
-		: sorted_array[mid];
+		? (sorted_array[mid - 1]! + sorted_array[mid]!) / 2
+		: sorted_array[mid]!;
 };
 
 // Outlier detection using MAD (Median Absolute Deviation) method
@@ -51,8 +51,8 @@ export const detect_outliers = (
 	const mad = calculate_median(sorted_deviations);
 
 	if (mad === 0) {
-		const q1 = sorted[Math.floor(sorted.length * QUARTILE_Q1)];
-		const q3 = sorted[Math.floor(sorted.length * QUARTILE_Q3)];
+		const q1 = sorted[Math.floor(sorted.length * QUARTILE_Q1)]!;
+		const q3 = sorted[Math.floor(sorted.length * QUARTILE_Q3)]!;
 		const iqr = q3 - q1;
 
 		if (iqr === 0) {
@@ -117,9 +117,9 @@ export const detect_outliers = (
 
 			for (let i = 0; i < with_distances.length; i++) {
 				if (i < keep_count) {
-					cleaned_times.push(with_distances[i].time);
+					cleaned_times.push(with_distances[i]!.time);
 				} else {
-					outliers.push(with_distances[i].time);
+					outliers.push(with_distances[i]!.time);
 				}
 			}
 		}
@@ -175,10 +175,10 @@ export const analyze_results = (data: Measurement_Data): Benchmark_Stats => {
 		cleaned_times.reduce((sum, val) => sum + (val - mean) ** 2, 0) / cleaned_times.length;
 	const std_dev = Math.sqrt(variance);
 
-	const min = final_sorted[0];
-	const max = final_sorted[final_sorted.length - 1];
-	const p95 = final_sorted[Math.floor(final_sorted.length * PERCENTILE_95)];
-	const p99 = final_sorted[Math.floor(final_sorted.length * PERCENTILE_99)];
+	const min = final_sorted[0]!;
+	const max = final_sorted[final_sorted.length - 1]!;
+	const p95 = final_sorted[Math.floor(final_sorted.length * PERCENTILE_95)]!;
+	const p99 = final_sorted[Math.floor(final_sorted.length * PERCENTILE_99)]!;
 
 	const cv = std_dev / mean;
 
@@ -226,7 +226,7 @@ export const calculate_summary = (
 		if (!(by_impl as Record<string, Array<Benchmark_Result> | undefined>)[result.implementation]) {
 			by_impl[result.implementation] = [];
 		}
-		by_impl[result.implementation].push(result);
+		by_impl[result.implementation]!.push(result);
 	}
 
 	const summary: Record<string, Summary_Stats> = {};
@@ -248,10 +248,10 @@ export const calculate_summary = (
 	}
 
 	// Calculate relative performance (only if baseline exists)
-	const baseline_mean = summary.html.avg_mean;
+	const baseline_mean = summary.html!.avg_mean;
 	for (const impl of Object.keys(summary)) {
-		summary[impl].relative_speed = baseline_mean / summary[impl].avg_mean;
-		summary[impl].improvement = (summary[impl].relative_speed - 1) * 100;
+		summary[impl]!.relative_speed = baseline_mean / summary[impl]!.avg_mean;
+		summary[impl]!.improvement = (summary[impl]!.relative_speed - 1) * 100;
 	}
 
 	return summary;

@@ -25,7 +25,7 @@ export const gen: Gen = ({origin_path}) => {
 		samples.push({
 			key: `${lang}_${variant}`,
 			name: `${lang}_${variant}`,
-			lang,
+			lang: lang!,
 			content: escape_string(content),
 		});
 	}

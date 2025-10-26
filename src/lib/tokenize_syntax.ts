@@ -43,7 +43,7 @@ interface Rematch_Options {
 const match_grammar = (
 	text: string,
 	token_list: Linked_List,
-	grammar: any,
+	grammar: Syntax_Grammar,
 	start_node: Linked_List_Node,
 	start_pos: number,
 	rematch?: Rematch_Options,
@@ -61,7 +61,7 @@ const match_grammar = (
 				return;
 			}
 
-			var pattern_obj = patterns[j];
+			var pattern_obj = patterns[j]!;
 			// All properties are guaranteed to be present after normalization
 			var inside = pattern_obj.inside;
 			var lookbehind = pattern_obj.lookbehind;

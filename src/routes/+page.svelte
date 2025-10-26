@@ -13,11 +13,11 @@
 </script>
 
 <main class="box width_100">
-	<div class="box width_upto_md">
-		<section>
+	<div class="width_upto_md">
+		<section class="box">
 			<Package_Summary {pkg} />
 		</section>
-		<section>
+		<section class="box">
 			<aside class="width_upto_sm">
 				⚠️ Docs are a work in progress. This page has usage examples with the optional Svelte
 				component, and the <a href="https://github.com/ryanatkn/fuz_code">readme</a> has TypeScript usage
