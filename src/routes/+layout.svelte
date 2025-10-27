@@ -3,6 +3,7 @@
 	import '@ryanatkn/moss/theme.css';
 	import '$lib/theme.css';
 	import '$routes/moss.css';
+	import '$routes/style.css';
 
 	import Themed from '@ryanatkn/fuz/Themed.svelte';
 	import type {Snippet} from 'svelte';

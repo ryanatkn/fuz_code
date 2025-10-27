@@ -9,13 +9,15 @@
 	import Footer from '$routes/Footer.svelte';
 </script>
 
-<main class="box width_100 py_xl5">
-	<Breadcrumb>🎨</Breadcrumb>
+<main class="width_upto_lg mx_auto py_xl5">
+	<header class="box">
+		<Breadcrumb>🎨</Breadcrumb>
+	</header>
 
-	<section class="box mb_xl5">
+	<section class="mb_xl5">
 		<h2 class="text_align_center">HTML rendering (default)</h2>
 		<aside
-			class="panel p_md mb_xl3 width_upto_md
+			class="panel p_md mb_xl3 width_upto_md mx_auto
 		"
 		>
 			<p>
@@ -25,8 +27,8 @@
 			</p>
 		</aside>
 		{#each Object.values(samples) as sample (sample.name)}
-			<div class="mb_xl3">
-				<h3 class="box panel p_md mb_xs">{sample.lang}</h3>
+			<div class="box mb_xl3">
+				<h3 class="panel p_md mb_xs width_100 box">{sample.lang}</h3>
 				<Code content={sample.content} lang={sample.lang} />
 			</div>
 		{/each}
@@ -34,10 +36,10 @@
 
 	<hr class="my_xl5" />
 
-	<section class="box" id="experimental">
+	<section id="experimental">
 		<h2 class="text_align_center">CSS Custom Highlight API (experimental)</h2>
 		<aside
-			class="panel p_md mb_xl3 width_upto_md
+			class="panel p_md mb_xl3 width_upto_md mx_auto
 		"
 		>
 			<p>
@@ -63,13 +65,13 @@
 		</aside>
 		{#each Object.values(samples) as sample (sample.name)}
 			<section>
-				<h2 class="box panel p_md mb_0">{sample.lang}</h2>
+				<h2 class="panel p_md mb_0 box">{sample.lang}</h2>
 				<div class="display_flex justify_content_center flex_wrap_wrap gap_sm py_xl5">
-					<div>
+					<div class="constrain_width">
 						<h3>{sample.lang} html strings</h3>
 						<Code_Highlight content={sample.content} lang={sample.lang} mode="html" />
 					</div>
-					<div>
+					<div class="constrain_width">
 						<h3>{sample.lang} highlighted ranges</h3>
 						<Code_Highlight content={sample.content} lang={sample.lang} mode="ranges" />
 					</div>

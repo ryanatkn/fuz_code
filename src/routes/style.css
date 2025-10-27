@@ -1,0 +1,5 @@
+/* TODO upstream to moss? */
+.constrain_width {
+	min-width: 0;
+	max-width: 100%;
+}
