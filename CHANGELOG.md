@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.30.0
+
+### Minor Changes
+
+- upgrade @ryanatkn/belt ([11b7cd8](https://github.com/ryanatkn/fuz_code/commit/11b7cd8))
+
 ## 0.29.0
 
 ### Minor Changes
