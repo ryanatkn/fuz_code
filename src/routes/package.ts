@@ -31,15 +31,15 @@ export const package_json: Package_Json = {
 	},
 	type: 'module',
 	engines: {node: '>=22.15'},
-	peerDependencies: {'@ryanatkn/belt': '^0.35.1', '@ryanatkn/moss': '^0.36.2', svelte: '^5'},
+	peerDependencies: {'@ryanatkn/belt': '^0.36.0', '@ryanatkn/moss': '^0.36.2', svelte: '^5'},
 	peerDependenciesMeta: {'@ryanatkn/moss': {optional: true}, svelte: {optional: true}},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
-		'@ryanatkn/belt': '^0.34.1',
+		'@ryanatkn/belt': '^0.36.0',
 		'@ryanatkn/eslint-config': '^0.8.0',
 		'@ryanatkn/fuz': '^0.147.0',
-		'@ryanatkn/gro': '^0.168.0',
-		'@ryanatkn/moss': '^0.36.0',
+		'@ryanatkn/gro': '^0.171.0',
+		'@ryanatkn/moss': '^0.36.3',
 		'@sveltejs/adapter-static': '^3.0.9',
 		'@sveltejs/kit': '^2.37.1',
 		'@sveltejs/package': '^2.5.0',
@@ -77,6 +77,7 @@ export const package_json: Package_Json = {
 	exports: {
 		'./package.json': './package.json',
 		'./*.js': {types: './dist/*.d.ts', default: './dist/*.js'},
+		'./*.ts': {types: './dist/*.d.ts', default: './dist/*.js'},
 		'./*.svelte': {
 			types: './dist/*.svelte.d.ts',
 			svelte: './dist/*.svelte',
