@@ -1,38 +1,38 @@
 === STATS ===
-Sample length: 2266 characters
-Total tokens: 635
+Sample length: 2345 characters
+Total tokens: 662
 
 Token types (33 unique):
-  punctuation: 301
-  tag: 74
-  operator: 37
-  svelte_expression: 24
-  lang_ts: 23
-  function: 23
+  punctuation: 313
+  tag: 78
+  operator: 38
+  svelte_expression: 25
+  lang_ts: 24
+  function: 24
   attr_name: 20
   special_keyword: 15
   keyword: 14
   attr_value: 11
   string: 11
-  builtin: 9
+  builtin: 10
   capitalized_identifier: 8
   property: 8
+  comment: 7
   block: 7
   selector: 7
-  comment: 6
+  at_directive: 6
+  at_keyword: 6
   number: 5
-  at_directive: 5
-  at_keyword: 5
   script: 3
   namespace: 3
   constant: 2
   boolean: 2
+  type_annotation: 2
+  :: 2
+  type: 2
   function_variable: 2
   style: 2
   lang_css: 2
-  type_annotation: 1
-  :: 1
-  type: 1
   each: 1
   atrule: 1
   rule: 1
@@ -69,8 +69,8 @@ Token types (33 unique):
   81-82    punctuation               "
   84-85    punctuation               "
   85-86    punctuation               >
-  86-707   script                    \n\t// @ts-expect-error\n\timport Thing from '$lib/Thing.svelte';\n\timport type {Snippet} from 'svelte';\n\n\tconst {\n\t\tthing,\n\t\tbound = $bindable(true),\n\t\tchildren,\n\t\tonclick,\n\t}: {\n\t\tthing: Record<string, any>;\n\t\tbound?: boolean;\n\t\tchildren: Snippet;\n\t\tonclick?: () => void;\n\t} = $props();\n\n\tconst thing_keys = $derived(Object.entries(thing));\n\n\tconst a = 1 as number;\n\n\tconst b = 'b';\n\n\tlet c: boolean = $state(true);\n\n\tconst f = (p: any) => p;\n\n\tconst attachment = (_p1: string, _p2: number) => {\n\t\treturn (el: HTMLElement) => {\n\t\t\telement_ref !== el;\n\t\t};\n\t};\n\n\tlet value = $state(thing['']);\n\tlet element_ref: HTMLElement;\n
-  86-707   lang_ts                   \n\t// @ts-expect-error\n\timport Thing from '$lib/Thing.svelte';\n\timport type {Snippet} from 'svelte';\n\n\tconst {\n\t\tthing,\n\t\tbound = $bindable(true),\n\t\tchildren,\n\t\tonclick,\n\t}: {\n\t\tthing: Record<string, any>;\n\t\tbound?: boolean;\n\t\tchildren: Snippet;\n\t\tonclick?: () => void;\n\t} = $props();\n\n\tconst thing_keys = $derived(Object.entries(thing));\n\n\tconst a = 1 as number;\n\n\tconst b = 'b';\n\n\tlet c: boolean = $state(true);\n\n\tconst f = (p: any) => p;\n\n\tconst attachment = (_p1: string, _p2: number) => {\n\t\treturn (el: HTMLElement) => {\n\t\t\telement_ref !== el;\n\t\t};\n\t};\n\n\tlet value = $state(thing['']);\n\tlet element_ref: HTMLElement;\n
+  86-712   script                    \n\t// @ts-expect-error\n\timport Thing from '$lib/Thing.svelte';\n\timport type {Snippet} from 'svelte';\n\n\tconst {\n\t\tthing,\n\t\tbound = $bindable(true),\n\t\tchildren,\n\t\tonclick,\n\t}: {\n\t\tthing: Record<string, any>;\n\t\tbound?: boolean;\n\t\tchildren: Snippet;\n\t\tonclick?: () => void;\n\t} = $props();\n\n\tconst thing_keys = $derived(Object.entries(thing));\n\n\tconst a = 1 as number;\n\n\tconst b = 'b';\n\n\tlet c: boolean = $state(true);\n\n\tconst f = (p: any): any => p;\n\n\tconst attachment = (_p1: string, _p2: number) => {\n\t\treturn (el: HTMLElement) => {\n\t\t\telement_ref !== el;\n\t\t};\n\t};\n\n\tlet value = $state(thing['']);\n\tlet element_ref: HTMLElement;\n
+  86-712   lang_ts                   \n\t// @ts-expect-error\n\timport Thing from '$lib/Thing.svelte';\n\timport type {Snippet} from 'svelte';\n\n\tconst {\n\t\tthing,\n\t\tbound = $bindable(true),\n\t\tchildren,\n\t\tonclick,\n\t}: {\n\t\tthing: Record<string, any>;\n\t\tbound?: boolean;\n\t\tchildren: Snippet;\n\t\tonclick?: () => void;\n\t} = $props();\n\n\tconst thing_keys = $derived(Object.entries(thing));\n\n\tconst a = 1 as number;\n\n\tconst b = 'b';\n\n\tlet c: boolean = $state(true);\n\n\tconst f = (p: any): any => p;\n\n\tconst attachment = (_p1: string, _p2: number) => {\n\t\treturn (el: HTMLElement) => {\n\t\t\telement_ref !== el;\n\t\t};\n\t};\n\n\tlet value = $state(thing['']);\n\tlet element_ref: HTMLElement;\n
   88-107   comment                   // @ts-expect-error
  109-115   special_keyword           import
  116-121   capitalized_identifier    Thing
@@ -166,510 +166,537 @@ Token types (33 unique):
  513-514   operator                  :
  515-518   builtin                   any
  518-519   punctuation               )
- 520-522   operator                  =>
- 524-525   punctuation               ;
- 528-533   keyword                   const
- 534-544   function_variable         attachment
- 545-546   operator                  =
- 547-548   punctuation               (
- 551-552   operator                  :
- 553-559   builtin                   string
- 559-560   punctuation               ,
- 564-565   operator                  :
- 566-572   builtin                   number
- 572-573   punctuation               )
- 574-576   operator                  =>
- 577-578   punctuation               {
- 581-587   special_keyword           return
- 588-589   punctuation               (
- 591-592   operator                  :
- 593-604   capitalized_identifier    HTMLElement
- 604-605   punctuation               )
- 606-608   operator                  =>
- 609-610   punctuation               {
- 626-629   operator                  !==
- 632-633   punctuation               ;
- 636-637   punctuation               }
+ 519-525   type_annotation           : any 
+ 519-520   :                         :
+ 520-525   type                       any 
+ 521-524   builtin                   any
+ 525-527   operator                  =>
+ 529-530   punctuation               ;
+ 533-538   keyword                   const
+ 539-549   function_variable         attachment
+ 550-551   operator                  =
+ 552-553   punctuation               (
+ 556-557   operator                  :
+ 558-564   builtin                   string
+ 564-565   punctuation               ,
+ 569-570   operator                  :
+ 571-577   builtin                   number
+ 577-578   punctuation               )
+ 579-581   operator                  =>
+ 582-583   punctuation               {
+ 586-592   special_keyword           return
+ 593-594   punctuation               (
+ 596-597   operator                  :
+ 598-609   capitalized_identifier    HTMLElement
+ 609-610   punctuation               )
+ 611-613   operator                  =>
+ 614-615   punctuation               {
+ 631-634   operator                  !==
  637-638   punctuation               ;
- 640-641   punctuation               }
- 641-642   punctuation               ;
- 645-648   keyword                   let
- 655-656   operator                  =
- 657-663   function                  $state
- 663-664   punctuation               (
- 669-670   punctuation               [
- 670-672   string                    ''
- 672-673   punctuation               ]
- 673-674   punctuation               )
- 674-675   punctuation               ;
- 677-680   keyword                   let
- 692-693   operator                  :
- 694-705   capitalized_identifier    HTMLElement
- 705-706   punctuation               ;
- 707-716   tag                       </script>
- 707-715   tag                       </script
- 707-709   punctuation               </
- 715-716   punctuation               >
- 718-746   tag                       <h1 bind:this={element_ref}>
- 718-721   tag                       <h1
- 718-719   punctuation               <
- 722-732   attr_name                 bind:this=
- 722-727   namespace                 bind:
- 732-745   svelte_expression         {element_ref}
- 732-733   punctuation               {
- 733-744   lang_ts                   element_ref
- 744-745   punctuation               }
- 745-746   punctuation               >
- 752-759   svelte_expression         {HELLO}
- 752-753   punctuation               {
- 753-758   lang_ts                   HELLO
- 753-758   constant                  HELLO
- 758-759   punctuation               }
- 760-765   tag                       </h1>
- 760-764   tag                       </h1
- 760-762   punctuation               </
- 764-765   punctuation               >
- 767-809   svelte_expression         {#each thing_keys as [k, { t, u }] (f(k))}
- 767-809   each                      {#each thing_keys as [k, { t, u }] (f(k))}
- 767-768   punctuation               {
- 768-773   special_keyword           #each
- 785-787   keyword                   as
- 788-809   lang_ts                   [k, { t, u }] (f(k))}
- 788-789   punctuation               [
- 790-791   punctuation               ,
- 792-793   punctuation               {
+ 641-642   punctuation               }
+ 642-643   punctuation               ;
+ 645-646   punctuation               }
+ 646-647   punctuation               ;
+ 650-653   keyword                   let
+ 660-661   operator                  =
+ 662-668   function                  $state
+ 668-669   punctuation               (
+ 674-675   punctuation               [
+ 675-677   string                    ''
+ 677-678   punctuation               ]
+ 678-679   punctuation               )
+ 679-680   punctuation               ;
+ 682-685   keyword                   let
+ 697-698   operator                  :
+ 699-710   capitalized_identifier    HTMLElement
+ 710-711   punctuation               ;
+ 712-721   tag                       </script>
+ 712-720   tag                       </script
+ 712-714   punctuation               </
+ 720-721   punctuation               >
+ 723-751   tag                       <h1 bind:this={element_ref}>
+ 723-726   tag                       <h1
+ 723-724   punctuation               <
+ 727-737   attr_name                 bind:this=
+ 727-732   namespace                 bind:
+ 737-750   svelte_expression         {element_ref}
+ 737-738   punctuation               {
+ 738-749   lang_ts                   element_ref
+ 749-750   punctuation               }
+ 750-751   punctuation               >
+ 757-764   svelte_expression         {HELLO}
+ 757-758   punctuation               {
+ 758-763   lang_ts                   HELLO
+ 758-763   constant                  HELLO
+ 763-764   punctuation               }
+ 765-770   tag                       </h1>
+ 765-769   tag                       </h1
+ 765-767   punctuation               </
+ 769-770   punctuation               >
+ 772-814   svelte_expression         {#each thing_keys as [k, { t, u }] (f(k))}
+ 772-814   each                      {#each thing_keys as [k, { t, u }] (f(k))}
+ 772-773   punctuation               {
+ 773-778   special_keyword           #each
+ 790-792   keyword                   as
+ 793-814   lang_ts                   [k, { t, u }] (f(k))}
+ 793-794   punctuation               [
  795-796   punctuation               ,
- 799-800   punctuation               }
- 800-801   punctuation               ]
- 802-803   punctuation               (
- 803-804   function                  f
- 804-805   punctuation               (
- 806-807   punctuation               )
- 807-808   punctuation               )
- 808-809   punctuation               }
- 811-847   svelte_expression         {@const v = Math.round(t[k + f(u)])}
- 811-847   at_directive              {@const v = Math.round(t[k + f(u)])}
- 811-812   punctuation               {
- 812-818   at_keyword                @const
- 819-847   lang_ts                   v = Math.round(t[k + f(u)])}
- 821-822   operator                  =
- 823-827   capitalized_identifier    Math
- 827-828   punctuation               .
- 828-833   function                  round
- 833-834   punctuation               (
- 835-836   punctuation               [
- 838-839   operator                  +
- 840-841   function                  f
- 841-842   punctuation               (
- 843-844   punctuation               )
- 844-845   punctuation               ]
- 845-846   punctuation               )
- 846-847   punctuation               }
- 849-855   svelte_expression         {f(v)}
- 849-850   punctuation               {
- 850-854   lang_ts                   f(v)
- 850-851   function                  f
- 851-852   punctuation               (
- 853-854   punctuation               )
- 854-855   punctuation               }
- 856-863   svelte_expression         {/each}
- 856-863   block                     {/each}
- 856-857   punctuation               {
- 857-862   special_keyword           /each
- 862-863   punctuation               }
- 865-875   svelte_expression         {#if f(c)}
- 865-875   block                     {#if f(c)}
- 865-866   punctuation               {
- 866-869   special_keyword           #if
- 869-874   lang_ts                    f(c)
- 870-871   function                  f
- 871-872   punctuation               (
- 873-874   punctuation               )
- 874-875   punctuation               }
- 877-932   tag                       <Thing string_prop="a {f('s')} b" number_prop={f(1)} />
- 877-883   tag                       <Thing
- 877-878   punctuation               <
- 884-898   attr_name                 string_prop="a
- 899-907   svelte_expression         {f('s')}
- 899-900   punctuation               {
- 900-906   lang_ts                   f('s')
- 900-901   function                  f
- 901-902   punctuation               (
- 902-905   string                    's'
- 905-906   punctuation               )
- 906-907   punctuation               }
- 908-910   attr_name                 b"
- 911-923   attr_name                 number_prop=
- 923-929   svelte_expression         {f(1)}
- 923-924   punctuation               {
- 924-928   lang_ts                   f(1)
- 924-925   function                  f
- 925-926   punctuation               (
- 926-927   number                    1
- 927-928   punctuation               )
- 928-929   punctuation               }
- 930-932   punctuation               />
- 933-952   svelte_expression         {:else if f(a > 0)}
- 933-952   block                     {:else if f(a > 0)}
- 933-934   punctuation               {
- 934-942   special_keyword           :else if
- 942-951   lang_ts                    f(a > 0)
- 943-944   function                  f
- 944-945   punctuation               (
- 947-948   operator                  >
- 949-950   number                    0
- 950-951   punctuation               )
- 951-952   punctuation               }
- 961-968   svelte_expression         {:else}
- 961-968   block                     {:else}
- 961-962   punctuation               {
- 962-967   special_keyword           :else
- 967-968   punctuation               }
- 970-1021  tag                       <Thing string_prop="b" onthing={() => (c = f(!c))}>
- 970-976   tag                       <Thing
- 970-971   punctuation               <
- 977-988   attr_name                 string_prop
- 988-992   attr_value                ="b"
- 988-989   punctuation               =
- 989-990   punctuation               "
- 991-992   punctuation               "
- 993-1001  attr_name                 onthing=
-1001-1020  svelte_expression         {() => (c = f(!c))}
-1001-1002  punctuation               {
-1002-1019  lang_ts                   () => (c = f(!c))
-1002-1003  punctuation               (
-1003-1004  punctuation               )
-1005-1007  operator                  =>
-1008-1009  punctuation               (
-1011-1012  operator                  =
-1013-1014  function                  f
-1014-1015  punctuation               (
-1015-1016  operator                  !
-1017-1018  punctuation               )
-1018-1019  punctuation               )
-1019-1020  punctuation               }
-1020-1021  punctuation               >
-1024-1044  svelte_expression         {@render children()}
-1024-1044  at_directive              {@render children()}
-1024-1025  punctuation               {
-1025-1032  at_keyword                @render
-1033-1044  lang_ts                   children()}
-1033-1041  function                  children
-1041-1042  punctuation               (
-1042-1043  punctuation               )
-1043-1044  punctuation               }
-1046-1054  tag                       </Thing>
-1046-1053  tag                       </Thing
-1046-1048  punctuation               </
-1053-1054  punctuation               >
-1055-1060  svelte_expression         {/if}
-1055-1060  block                     {/if}
-1055-1056  punctuation               {
-1056-1059  special_keyword           /if
-1059-1060  punctuation               }
-1062-1118  comment                   <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-1119-1154  svelte_expression         {@html '<strong>raw html</strong>'}
-1119-1154  at_directive              {@html '<strong>raw html</strong>'}
-1119-1120  punctuation               {
-1120-1125  at_keyword                @html
-1126-1154  lang_ts                   '<strong>raw html</strong>'}
-1126-1153  string                    '<strong>raw html</strong>'
-1153-1154  punctuation               }
-1156-1205  tag                       <input bind:value type="text" class:active={c} />
-1156-1162  tag                       <input
-1156-1157  punctuation               <
-1163-1173  attr_name                 bind:value
-1163-1168  namespace                 bind:
-1174-1178  attr_name                 type
-1178-1185  attr_value                ="text"
-1178-1179  punctuation               =
-1179-1180  punctuation               "
+ 797-798   punctuation               {
+ 800-801   punctuation               ,
+ 804-805   punctuation               }
+ 805-806   punctuation               ]
+ 807-808   punctuation               (
+ 808-809   function                  f
+ 809-810   punctuation               (
+ 811-812   punctuation               )
+ 812-813   punctuation               )
+ 813-814   punctuation               }
+ 816-852   svelte_expression         {@const v = Math.round(t[k + f(u)])}
+ 816-852   at_directive              {@const v = Math.round(t[k + f(u)])}
+ 816-817   punctuation               {
+ 817-823   at_keyword                @const
+ 824-852   lang_ts                   v = Math.round(t[k + f(u)])}
+ 826-827   operator                  =
+ 828-832   capitalized_identifier    Math
+ 832-833   punctuation               .
+ 833-838   function                  round
+ 838-839   punctuation               (
+ 840-841   punctuation               [
+ 843-844   operator                  +
+ 845-846   function                  f
+ 846-847   punctuation               (
+ 848-849   punctuation               )
+ 849-850   punctuation               ]
+ 850-851   punctuation               )
+ 851-852   punctuation               }
+ 854-860   svelte_expression         {f(v)}
+ 854-855   punctuation               {
+ 855-859   lang_ts                   f(v)
+ 855-856   function                  f
+ 856-857   punctuation               (
+ 858-859   punctuation               )
+ 859-860   punctuation               }
+ 861-868   svelte_expression         {/each}
+ 861-868   block                     {/each}
+ 861-862   punctuation               {
+ 862-867   special_keyword           /each
+ 867-868   punctuation               }
+ 870-880   svelte_expression         {#if f(c)}
+ 870-880   block                     {#if f(c)}
+ 870-871   punctuation               {
+ 871-874   special_keyword           #if
+ 874-879   lang_ts                    f(c)
+ 875-876   function                  f
+ 876-877   punctuation               (
+ 878-879   punctuation               )
+ 879-880   punctuation               }
+ 882-937   tag                       <Thing string_prop="a {f('s')} b" number_prop={f(1)} />
+ 882-888   tag                       <Thing
+ 882-883   punctuation               <
+ 889-903   attr_name                 string_prop="a
+ 904-912   svelte_expression         {f('s')}
+ 904-905   punctuation               {
+ 905-911   lang_ts                   f('s')
+ 905-906   function                  f
+ 906-907   punctuation               (
+ 907-910   string                    's'
+ 910-911   punctuation               )
+ 911-912   punctuation               }
+ 913-915   attr_name                 b"
+ 916-928   attr_name                 number_prop=
+ 928-934   svelte_expression         {f(1)}
+ 928-929   punctuation               {
+ 929-933   lang_ts                   f(1)
+ 929-930   function                  f
+ 930-931   punctuation               (
+ 931-932   number                    1
+ 932-933   punctuation               )
+ 933-934   punctuation               }
+ 935-937   punctuation               />
+ 938-957   svelte_expression         {:else if f(a > 0)}
+ 938-957   block                     {:else if f(a > 0)}
+ 938-939   punctuation               {
+ 939-947   special_keyword           :else if
+ 947-956   lang_ts                    f(a > 0)
+ 948-949   function                  f
+ 949-950   punctuation               (
+ 952-953   operator                  >
+ 954-955   number                    0
+ 955-956   punctuation               )
+ 956-957   punctuation               }
+ 966-973   svelte_expression         {:else}
+ 966-973   block                     {:else}
+ 966-967   punctuation               {
+ 967-972   special_keyword           :else
+ 972-973   punctuation               }
+ 975-1026  tag                       <Thing string_prop="b" onthing={() => (c = f(!c))}>
+ 975-981   tag                       <Thing
+ 975-976   punctuation               <
+ 982-993   attr_name                 string_prop
+ 993-997   attr_value                ="b"
+ 993-994   punctuation               =
+ 994-995   punctuation               "
+ 996-997   punctuation               "
+ 998-1006  attr_name                 onthing=
+1006-1025  svelte_expression         {() => (c = f(!c))}
+1006-1007  punctuation               {
+1007-1024  lang_ts                   () => (c = f(!c))
+1007-1008  punctuation               (
+1008-1009  punctuation               )
+1010-1012  operator                  =>
+1013-1014  punctuation               (
+1016-1017  operator                  =
+1018-1019  function                  f
+1019-1020  punctuation               (
+1020-1021  operator                  !
+1022-1023  punctuation               )
+1023-1024  punctuation               )
+1024-1025  punctuation               }
+1025-1026  punctuation               >
+1029-1049  svelte_expression         {@render children()}
+1029-1049  at_directive              {@render children()}
+1029-1030  punctuation               {
+1030-1037  at_keyword                @render
+1038-1049  lang_ts                   children()}
+1038-1046  function                  children
+1046-1047  punctuation               (
+1047-1048  punctuation               )
+1048-1049  punctuation               }
+1051-1059  tag                       </Thing>
+1051-1058  tag                       </Thing
+1051-1053  punctuation               </
+1058-1059  punctuation               >
+1060-1065  svelte_expression         {/if}
+1060-1065  block                     {/if}
+1060-1061  punctuation               {
+1061-1064  special_keyword           /if
+1064-1065  punctuation               }
+1067-1123  comment                   <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+1124-1159  svelte_expression         {@html '<strong>raw html</strong>'}
+1124-1159  at_directive              {@html '<strong>raw html</strong>'}
+1124-1125  punctuation               {
+1125-1130  at_keyword                @html
+1131-1159  lang_ts                   '<strong>raw html</strong>'}
+1131-1158  string                    '<strong>raw html</strong>'
+1158-1159  punctuation               }
+1161-1210  tag                       <input bind:value type="text" class:active={c} />
+1161-1167  tag                       <input
+1161-1162  punctuation               <
+1168-1178  attr_name                 bind:value
+1168-1173  namespace                 bind:
+1179-1183  attr_name                 type
+1183-1190  attr_value                ="text"
+1183-1184  punctuation               =
 1184-1185  punctuation               "
-1186-1199  attr_name                 class:active=
-1186-1192  namespace                 class:
-1199-1202  svelte_expression         {c}
-1199-1200  punctuation               {
-1200-1201  lang_ts                   c
-1201-1202  punctuation               }
-1203-1205  punctuation               />
-1207-1250  tag                       <span {@attach attachment('param', f(42))}>
-1207-1212  tag                       <span
-1207-1208  punctuation               <
-1213-1249  svelte_expression         {@attach attachment('param', f(42))}
-1213-1249  at_directive              {@attach attachment('param', f(42))}
-1213-1214  punctuation               {
-1214-1221  at_keyword                @attach
-1222-1249  lang_ts                   attachment('param', f(42))}
-1222-1232  function                  attachment
-1232-1233  punctuation               (
-1233-1240  string                    'param'
-1240-1241  punctuation               ,
-1242-1243  function                  f
-1243-1244  punctuation               (
-1244-1246  number                    42
-1246-1247  punctuation               )
-1247-1248  punctuation               )
-1248-1249  punctuation               }
-1249-1250  punctuation               >
-1253-1260  tag                       </span>
-1253-1259  tag                       </span
-1253-1255  punctuation               </
-1259-1260  punctuation               >
-1262-1287  svelte_expression         {@render my_snippet('p')}
-1262-1287  at_directive              {@render my_snippet('p')}
-1262-1263  punctuation               {
-1263-1270  at_keyword                @render
-1271-1287  lang_ts                   my_snippet('p')}
-1271-1281  function                  my_snippet
-1281-1282  punctuation               (
-1282-1285  string                    'p'
-1285-1286  punctuation               )
-1286-1287  punctuation               }
-1289-1321  svelte_expression         {#snippet my_snippet(p: string)}
-1289-1321  block                     {#snippet my_snippet(p: string)}
+1189-1190  punctuation               "
+1191-1204  attr_name                 class:active=
+1191-1197  namespace                 class:
+1204-1207  svelte_expression         {c}
+1204-1205  punctuation               {
+1205-1206  lang_ts                   c
+1206-1207  punctuation               }
+1208-1210  punctuation               />
+1212-1255  tag                       <span {@attach attachment('param', f(42))}>
+1212-1217  tag                       <span
+1212-1213  punctuation               <
+1218-1254  svelte_expression         {@attach attachment('param', f(42))}
+1218-1254  at_directive              {@attach attachment('param', f(42))}
+1218-1219  punctuation               {
+1219-1226  at_keyword                @attach
+1227-1254  lang_ts                   attachment('param', f(42))}
+1227-1237  function                  attachment
+1237-1238  punctuation               (
+1238-1245  string                    'param'
+1245-1246  punctuation               ,
+1247-1248  function                  f
+1248-1249  punctuation               (
+1249-1251  number                    42
+1251-1252  punctuation               )
+1252-1253  punctuation               )
+1253-1254  punctuation               }
+1254-1255  punctuation               >
+1258-1265  tag                       </span>
+1258-1264  tag                       </span
+1258-1260  punctuation               </
+1264-1265  punctuation               >
+1267-1323  tag                       <div {@attach f(() => {\n\t// function attachment arg\n})}>
+1267-1271  tag                       <div
+1267-1268  punctuation               <
+1272-1322  svelte_expression         {@attach f(() => {\n\t// function attachment arg\n})}
+1272-1322  at_directive              {@attach f(() => {\n\t// function attachment arg\n})}
+1272-1273  punctuation               {
+1273-1280  at_keyword                @attach
+1281-1322  lang_ts                   f(() => {\n\t// function attachment arg\n})}
+1281-1282  function                  f
+1282-1283  punctuation               (
+1283-1284  punctuation               (
+1284-1285  punctuation               )
+1286-1288  operator                  =>
 1289-1290  punctuation               {
-1290-1298  special_keyword           #snippet
-1298-1320  lang_ts                    my_snippet(p: string)
-1299-1309  function                  my_snippet
-1309-1310  punctuation               (
-1311-1312  operator                  :
-1313-1319  builtin                   string
-1319-1320  punctuation               )
-1320-1321  punctuation               }
-1323-1355  tag                       <button type="button" {onclick}>
-1323-1330  tag                       <button
-1323-1324  punctuation               <
-1331-1335  attr_name                 type
-1335-1344  attr_value                ="button"
-1335-1336  punctuation               =
-1336-1337  punctuation               "
-1343-1344  punctuation               "
-1345-1354  svelte_expression         {onclick}
-1345-1346  punctuation               {
-1346-1353  lang_ts                   onclick
-1353-1354  punctuation               }
-1354-1355  punctuation               >
-1355-1358  svelte_expression         {p}
-1355-1356  punctuation               {
-1356-1357  lang_ts                   p
-1357-1358  punctuation               }
-1358-1367  tag                       </button>
-1358-1366  tag                       </button
-1358-1360  punctuation               </
-1366-1367  punctuation               >
-1368-1378  svelte_expression         {/snippet}
-1368-1378  block                     {/snippet}
+1292-1318  comment                   // function attachment arg
+1319-1320  punctuation               }
+1320-1321  punctuation               )
+1321-1322  punctuation               }
+1322-1323  punctuation               >
+1333-1339  tag                       </div>
+1333-1338  tag                       </div
+1333-1335  punctuation               </
+1338-1339  punctuation               >
+1341-1366  svelte_expression         {@render my_snippet('p')}
+1341-1366  at_directive              {@render my_snippet('p')}
+1341-1342  punctuation               {
+1342-1349  at_keyword                @render
+1350-1366  lang_ts                   my_snippet('p')}
+1350-1360  function                  my_snippet
+1360-1361  punctuation               (
+1361-1364  string                    'p'
+1364-1365  punctuation               )
+1365-1366  punctuation               }
+1368-1400  svelte_expression         {#snippet my_snippet(p: string)}
+1368-1400  block                     {#snippet my_snippet(p: string)}
 1368-1369  punctuation               {
-1369-1377  special_keyword           /snippet
-1377-1378  punctuation               }
-1380-1429  tag                       <p class="some_class hypen-class" id="unique_id">
-1380-1382  tag                       <p
-1380-1381  punctuation               <
-1383-1388  attr_name                 class
-1388-1413  attr_value                ="some_class hypen-class"
-1388-1389  punctuation               =
-1389-1390  punctuation               "
-1412-1413  punctuation               "
-1414-1416  attr_name                 id
-1416-1428  attr_value                ="unique_id"
-1416-1417  punctuation               =
-1417-1418  punctuation               "
-1427-1428  punctuation               "
-1428-1429  punctuation               >
-1436-1456  tag                       <span class="a b c">
-1436-1441  tag                       <span
-1436-1437  punctuation               <
-1442-1447  attr_name                 class
-1447-1455  attr_value                ="a b c"
-1447-1448  punctuation               =
-1448-1449  punctuation               "
-1454-1455  punctuation               "
-1455-1456  punctuation               >
-1460-1467  tag                       </span>
-1460-1466  tag                       </span
-1460-1462  punctuation               </
-1466-1467  punctuation               >
-1468-1472  tag                       </p>
-1468-1471  tag                       </p
-1468-1470  punctuation               </
-1471-1472  punctuation               >
-1474-1505  tag                       <button type="button" disabled>
-1474-1481  tag                       <button
-1474-1475  punctuation               <
-1482-1486  attr_name                 type
-1486-1495  attr_value                ="button"
-1486-1487  punctuation               =
-1487-1488  punctuation               "
-1494-1495  punctuation               "
-1496-1504  attr_name                 disabled
-1504-1505  punctuation               >
-1515-1524  tag                       </button>
-1515-1523  tag                       </button
-1515-1517  punctuation               </
-1523-1524  punctuation               >
-1526-1565  comment                   <!-- comment <div>a<br /> {b}</div> -->
-1566-1579  svelte_expression         {b.repeat(2)}
-1566-1567  punctuation               {
-1567-1578  lang_ts                   b.repeat(2)
-1568-1569  punctuation               .
-1569-1575  function                  repeat
-1575-1576  punctuation               (
-1576-1577  number                    2
-1577-1578  punctuation               )
-1578-1579  punctuation               }
-1580-1587  svelte_expression         {bound}
-1580-1581  punctuation               {
-1581-1586  lang_ts                   bound
-1586-1587  punctuation               }
-1589-1595  tag                       <br />
-1589-1592  tag                       <br
-1589-1590  punctuation               <
-1593-1595  punctuation               />
-1597-1603  tag                       <hr />
-1597-1600  tag                       <hr
-1597-1598  punctuation               <
-1601-1603  punctuation               />
-1605-1641  tag                       <img src="image.jpg" alt="access" />
-1605-1609  tag                       <img
-1605-1606  punctuation               <
-1610-1613  attr_name                 src
-1613-1625  attr_value                ="image.jpg"
-1613-1614  punctuation               =
-1614-1615  punctuation               "
-1624-1625  punctuation               "
-1626-1629  attr_name                 alt
-1629-1638  attr_value                ="access"
-1629-1630  punctuation               =
-1630-1631  punctuation               "
-1637-1638  punctuation               "
-1639-1641  punctuation               />
-1643-1647  tag                       <ul>
-1643-1646  tag                       <ul
-1643-1644  punctuation               <
-1646-1647  punctuation               >
-1649-1653  tag                       <li>
-1649-1652  tag                       <li
-1649-1650  punctuation               <
-1652-1653  punctuation               >
-1664-1669  tag                       </li>
-1664-1668  tag                       </li
-1664-1666  punctuation               </
-1668-1669  punctuation               >
-1671-1675  tag                       <li>
-1671-1674  tag                       <li
-1671-1672  punctuation               <
-1674-1675  punctuation               >
-1686-1691  tag                       </li>
-1686-1690  tag                       </li
-1686-1688  punctuation               </
-1690-1691  punctuation               >
-1692-1697  tag                       </ul>
-1692-1696  tag                       </ul
-1692-1694  punctuation               </
-1696-1697  punctuation               >
-1699-1742  comment                   <!-- embedded tags for boundary testing -->
-1743-1748  tag                       <div>
-1743-1747  tag                       <div
-1743-1744  punctuation               <
+1369-1377  special_keyword           #snippet
+1377-1399  lang_ts                    my_snippet(p: string)
+1378-1388  function                  my_snippet
+1388-1389  punctuation               (
+1390-1391  operator                  :
+1392-1398  builtin                   string
+1398-1399  punctuation               )
+1399-1400  punctuation               }
+1402-1434  tag                       <button type="button" {onclick}>
+1402-1409  tag                       <button
+1402-1403  punctuation               <
+1410-1414  attr_name                 type
+1414-1423  attr_value                ="button"
+1414-1415  punctuation               =
+1415-1416  punctuation               "
+1422-1423  punctuation               "
+1424-1433  svelte_expression         {onclick}
+1424-1425  punctuation               {
+1425-1432  lang_ts                   onclick
+1432-1433  punctuation               }
+1433-1434  punctuation               >
+1434-1437  svelte_expression         {p}
+1434-1435  punctuation               {
+1435-1436  lang_ts                   p
+1436-1437  punctuation               }
+1437-1446  tag                       </button>
+1437-1445  tag                       </button
+1437-1439  punctuation               </
+1445-1446  punctuation               >
+1447-1457  svelte_expression         {/snippet}
+1447-1457  block                     {/snippet}
+1447-1448  punctuation               {
+1448-1456  special_keyword           /snippet
+1456-1457  punctuation               }
+1459-1508  tag                       <p class="some_class hypen-class" id="unique_id">
+1459-1461  tag                       <p
+1459-1460  punctuation               <
+1462-1467  attr_name                 class
+1467-1492  attr_value                ="some_class hypen-class"
+1467-1468  punctuation               =
+1468-1469  punctuation               "
+1491-1492  punctuation               "
+1493-1495  attr_name                 id
+1495-1507  attr_value                ="unique_id"
+1495-1496  punctuation               =
+1496-1497  punctuation               "
+1506-1507  punctuation               "
+1507-1508  punctuation               >
+1515-1535  tag                       <span class="a b c">
+1515-1520  tag                       <span
+1515-1516  punctuation               <
+1521-1526  attr_name                 class
+1526-1534  attr_value                ="a b c"
+1526-1527  punctuation               =
+1527-1528  punctuation               "
+1533-1534  punctuation               "
+1534-1535  punctuation               >
+1539-1546  tag                       </span>
+1539-1545  tag                       </span
+1539-1541  punctuation               </
+1545-1546  punctuation               >
+1547-1551  tag                       </p>
+1547-1550  tag                       </p
+1547-1549  punctuation               </
+1550-1551  punctuation               >
+1553-1584  tag                       <button type="button" disabled>
+1553-1560  tag                       <button
+1553-1554  punctuation               <
+1561-1565  attr_name                 type
+1565-1574  attr_value                ="button"
+1565-1566  punctuation               =
+1566-1567  punctuation               "
+1573-1574  punctuation               "
+1575-1583  attr_name                 disabled
+1583-1584  punctuation               >
+1594-1603  tag                       </button>
+1594-1602  tag                       </button
+1594-1596  punctuation               </
+1602-1603  punctuation               >
+1605-1644  comment                   <!-- comment <div>a<br /> {b}</div> -->
+1645-1658  svelte_expression         {b.repeat(2)}
+1645-1646  punctuation               {
+1646-1657  lang_ts                   b.repeat(2)
+1647-1648  punctuation               .
+1648-1654  function                  repeat
+1654-1655  punctuation               (
+1655-1656  number                    2
+1656-1657  punctuation               )
+1657-1658  punctuation               }
+1659-1666  svelte_expression         {bound}
+1659-1660  punctuation               {
+1660-1665  lang_ts                   bound
+1665-1666  punctuation               }
+1668-1674  tag                       <br />
+1668-1671  tag                       <br
+1668-1669  punctuation               <
+1672-1674  punctuation               />
+1676-1682  tag                       <hr />
+1676-1679  tag                       <hr
+1676-1677  punctuation               <
+1680-1682  punctuation               />
+1684-1720  tag                       <img src="image.jpg" alt="access" />
+1684-1688  tag                       <img
+1684-1685  punctuation               <
+1689-1692  attr_name                 src
+1692-1704  attr_value                ="image.jpg"
+1692-1693  punctuation               =
+1693-1694  punctuation               "
+1703-1704  punctuation               "
+1705-1708  attr_name                 alt
+1708-1717  attr_value                ="access"
+1708-1709  punctuation               =
+1709-1710  punctuation               "
+1716-1717  punctuation               "
+1718-1720  punctuation               />
+1722-1726  tag                       <ul>
+1722-1725  tag                       <ul
+1722-1723  punctuation               <
+1725-1726  punctuation               >
+1728-1732  tag                       <li>
+1728-1731  tag                       <li
+1728-1729  punctuation               <
+1731-1732  punctuation               >
+1743-1748  tag                       </li>
+1743-1747  tag                       </li
+1743-1745  punctuation               </
 1747-1748  punctuation               >
-1750-1758  tag                       <script>
-1750-1757  tag                       <script
+1750-1754  tag                       <li>
+1750-1753  tag                       <li
 1750-1751  punctuation               <
-1757-1758  punctuation               >
-1758-1796  script                    \n\t\tconst inline_js = 'no lang attr';\n\t
-1758-1796  lang_ts                   \n\t\tconst inline_js = 'no lang attr';\n\t
-1761-1766  keyword                   const
-1777-1778  operator                  =
-1779-1793  string                    'no lang attr'
-1793-1794  punctuation               ;
-1796-1805  tag                       </script>
-1796-1804  tag                       </script
-1796-1798  punctuation               </
-1804-1805  punctuation               >
-1807-1814  tag                       <style>
-1807-1813  tag                       <style
-1807-1808  punctuation               <
-1813-1814  punctuation               >
-1814-1848  style                     \n\t\t.inline {\n\t\t\tcolor: blue;\n\t\t}\n\t
-1814-1848  lang_css                  \n\t\t.inline {\n\t\t\tcolor: blue;\n\t\t}\n\t
-1817-1824  selector                  .inline
-1825-1826  punctuation               {
-1830-1835  property                  color
-1835-1836  punctuation               :
-1841-1842  punctuation               ;
-1845-1846  punctuation               }
-1848-1856  tag                       </style>
-1848-1855  tag                       </style
-1848-1850  punctuation               </
-1855-1856  punctuation               >
-1857-1863  tag                       </div>
-1857-1862  tag                       </div
-1857-1859  punctuation               </
-1862-1863  punctuation               >
-1865-1872  tag                       <style>
-1865-1871  tag                       <style
-1865-1866  punctuation               <
-1871-1872  punctuation               >
-1872-2257  style                     \n\t.some_class {\n\t\tcolor: red;\n\t}\n\n\t.hypen-class {\n\t\tfont-size: 16px;\n\t}\n\n\tp {\n\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t}\n\n\t/* comment */\n\n\t/*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/\n\n\t#unique_id {\n\t\tbackground-color: blue;\n\t}\n\n\t@media (max-width: 600px) {\n\t\t:global(body) {\n\t\t\tbackground-color: light-dark(lightblue, darkblue);\n\t\t}\n\t}\n\n\t:global(.escapehatch)::before {\n\t\tcontent: '< & >';\n\t}\n
-1872-2257  lang_css                  \n\t.some_class {\n\t\tcolor: red;\n\t}\n\n\t.hypen-class {\n\t\tfont-size: 16px;\n\t}\n\n\tp {\n\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t}\n\n\t/* comment */\n\n\t/*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/\n\n\t#unique_id {\n\t\tbackground-color: blue;\n\t}\n\n\t@media (max-width: 600px) {\n\t\t:global(body) {\n\t\t\tbackground-color: light-dark(lightblue, darkblue);\n\t\t}\n\t}\n\n\t:global(.escapehatch)::before {\n\t\tcontent: '< & >';\n\t}\n
-1874-1885  selector                  .some_class
-1886-1887  punctuation               {
-1890-1895  property                  color
-1895-1896  punctuation               :
-1900-1901  punctuation               ;
-1903-1904  punctuation               }
-1907-1919  selector                  .hypen-class
-1920-1921  punctuation               {
-1924-1933  property                  font-size
-1933-1934  punctuation               :
-1939-1940  punctuation               ;
-1942-1943  punctuation               }
-1946-1947  selector                  p
-1948-1949  punctuation               {
-1952-1962  property                  box-shadow
-1962-1963  punctuation               :
-1973-1977  function                  rgba
-1977-1978  punctuation               (
-1979-1980  punctuation               ,
-1982-1983  punctuation               ,
-1985-1986  punctuation               ,
-1990-1991  punctuation               )
-1991-1992  punctuation               ;
-1994-1995  punctuation               }
-1998-2011  comment                   /* comment */
-2014-2046  comment                   /*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/
-2049-2059  selector                  #unique_id
-2060-2061  punctuation               {
-2064-2080  property                  background-color
-2080-2081  punctuation               :
-2086-2087  punctuation               ;
-2089-2090  punctuation               }
-2093-2118  atrule                    @media (max-width: 600px)
-2093-2099  rule                      @media
-2100-2101  punctuation               (
-2101-2110  property                  max-width
-2110-2111  punctuation               :
-2117-2118  punctuation               )
-2119-2120  punctuation               {
-2123-2136  selector                  :global(body)
-2137-2138  punctuation               {
-2142-2158  property                  background-color
-2158-2159  punctuation               :
-2160-2170  function                  light-dark
-2170-2171  punctuation               (
-2180-2181  punctuation               ,
-2190-2191  punctuation               )
-2191-2192  punctuation               ;
-2195-2196  punctuation               }
-2198-2199  punctuation               }
-2202-2231  selector                  :global(.escapehatch)::before
-2232-2233  punctuation               {
-2236-2243  property                  content
-2243-2244  punctuation               :
-2245-2252  string                    '< & >'
-2252-2253  punctuation               ;
-2255-2256  punctuation               }
-2257-2265  tag                       </style>
-2257-2264  tag                       </style
-2257-2259  punctuation               </
-2264-2265  punctuation               >
+1753-1754  punctuation               >
+1765-1770  tag                       </li>
+1765-1769  tag                       </li
+1765-1767  punctuation               </
+1769-1770  punctuation               >
+1771-1776  tag                       </ul>
+1771-1775  tag                       </ul
+1771-1773  punctuation               </
+1775-1776  punctuation               >
+1778-1821  comment                   <!-- embedded tags for boundary testing -->
+1822-1827  tag                       <div>
+1822-1826  tag                       <div
+1822-1823  punctuation               <
+1826-1827  punctuation               >
+1829-1837  tag                       <script>
+1829-1836  tag                       <script
+1829-1830  punctuation               <
+1836-1837  punctuation               >
+1837-1875  script                    \n\t\tconst inline_js = 'no lang attr';\n\t
+1837-1875  lang_ts                   \n\t\tconst inline_js = 'no lang attr';\n\t
+1840-1845  keyword                   const
+1856-1857  operator                  =
+1858-1872  string                    'no lang attr'
+1872-1873  punctuation               ;
+1875-1884  tag                       </script>
+1875-1883  tag                       </script
+1875-1877  punctuation               </
+1883-1884  punctuation               >
+1886-1893  tag                       <style>
+1886-1892  tag                       <style
+1886-1887  punctuation               <
+1892-1893  punctuation               >
+1893-1927  style                     \n\t\t.inline {\n\t\t\tcolor: blue;\n\t\t}\n\t
+1893-1927  lang_css                  \n\t\t.inline {\n\t\t\tcolor: blue;\n\t\t}\n\t
+1896-1903  selector                  .inline
+1904-1905  punctuation               {
+1909-1914  property                  color
+1914-1915  punctuation               :
+1920-1921  punctuation               ;
+1924-1925  punctuation               }
+1927-1935  tag                       </style>
+1927-1934  tag                       </style
+1927-1929  punctuation               </
+1934-1935  punctuation               >
+1936-1942  tag                       </div>
+1936-1941  tag                       </div
+1936-1938  punctuation               </
+1941-1942  punctuation               >
+1944-1951  tag                       <style>
+1944-1950  tag                       <style
+1944-1945  punctuation               <
+1950-1951  punctuation               >
+1951-2336  style                     \n\t.some_class {\n\t\tcolor: red;\n\t}\n\n\t.hypen-class {\n\t\tfont-size: 16px;\n\t}\n\n\tp {\n\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t}\n\n\t/* comment */\n\n\t/*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/\n\n\t#unique_id {\n\t\tbackground-color: blue;\n\t}\n\n\t@media (max-width: 600px) {\n\t\t:global(body) {\n\t\t\tbackground-color: light-dark(lightblue, darkblue);\n\t\t}\n\t}\n\n\t:global(.escapehatch)::before {\n\t\tcontent: '< & >';\n\t}\n
+1951-2336  lang_css                  \n\t.some_class {\n\t\tcolor: red;\n\t}\n\n\t.hypen-class {\n\t\tfont-size: 16px;\n\t}\n\n\tp {\n\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t}\n\n\t/* comment */\n\n\t/*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/\n\n\t#unique_id {\n\t\tbackground-color: blue;\n\t}\n\n\t@media (max-width: 600px) {\n\t\t:global(body) {\n\t\t\tbackground-color: light-dark(lightblue, darkblue);\n\t\t}\n\t}\n\n\t:global(.escapehatch)::before {\n\t\tcontent: '< & >';\n\t}\n
+1953-1964  selector                  .some_class
+1965-1966  punctuation               {
+1969-1974  property                  color
+1974-1975  punctuation               :
+1979-1980  punctuation               ;
+1982-1983  punctuation               }
+1986-1998  selector                  .hypen-class
+1999-2000  punctuation               {
+2003-2012  property                  font-size
+2012-2013  punctuation               :
+2018-2019  punctuation               ;
+2021-2022  punctuation               }
+2025-2026  selector                  p
+2027-2028  punctuation               {
+2031-2041  property                  box-shadow
+2041-2042  punctuation               :
+2052-2056  function                  rgba
+2056-2057  punctuation               (
+2058-2059  punctuation               ,
+2061-2062  punctuation               ,
+2064-2065  punctuation               ,
+2069-2070  punctuation               )
+2070-2071  punctuation               ;
+2073-2074  punctuation               }
+2077-2090  comment                   /* comment */
+2093-2125  comment                   /*\n\tmulti\n\tline\n\n\t<comment>\n\n\t*/
+2128-2138  selector                  #unique_id
+2139-2140  punctuation               {
+2143-2159  property                  background-color
+2159-2160  punctuation               :
+2165-2166  punctuation               ;
+2168-2169  punctuation               }
+2172-2197  atrule                    @media (max-width: 600px)
+2172-2178  rule                      @media
+2179-2180  punctuation               (
+2180-2189  property                  max-width
+2189-2190  punctuation               :
+2196-2197  punctuation               )
+2198-2199  punctuation               {
+2202-2215  selector                  :global(body)
+2216-2217  punctuation               {
+2221-2237  property                  background-color
+2237-2238  punctuation               :
+2239-2249  function                  light-dark
+2249-2250  punctuation               (
+2259-2260  punctuation               ,
+2269-2270  punctuation               )
+2270-2271  punctuation               ;
+2274-2275  punctuation               }
+2277-2278  punctuation               }
+2281-2310  selector                  :global(.escapehatch)::before
+2311-2312  punctuation               {
+2315-2322  property                  content
+2322-2323  punctuation               :
+2324-2331  string                    '< & >'
+2331-2332  punctuation               ;
+2334-2335  punctuation               }
+2336-2344  tag                       </style>
+2336-2343  tag                       </style
+2336-2338  punctuation               </
+2343-2344  punctuation               >
