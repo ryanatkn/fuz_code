@@ -316,7 +316,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 
 	let c: boolean = $state(true);
 
-	const f = (p: any) => p;
+	const f = (p: any): any => p;
 
 	const attachment = (_p1: string, _p2: number) => {
 		return (el: HTMLElement) => {
@@ -352,10 +352,10 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 
 <span {@attach attachment('param', f(42))}>...</span>
 
-<div {@attach intersect(() => ({intersecting}) => {
-  console.log(intersecting ? 'entered' : 'left');
+<div {@attach f(() => {
+	// function in attachment
 })}>
-  scroll me into view
+	complex
 </div>
 
 {@render my_snippet('p')}
