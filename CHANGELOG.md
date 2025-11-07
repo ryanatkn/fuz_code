@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.30.1
+
+### Patch Changes
+
+- support functions with braces in attachments ([#21](https://github.com/ryanatkn/fuz_code/pull/21))
+
 ## 0.30.0
 
 ### Minor Changes
