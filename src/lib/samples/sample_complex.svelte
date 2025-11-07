@@ -63,6 +63,12 @@
 
 <span {@attach attachment('param', f(42))}>...</span>
 
+<div {@attach intersect(() => ({intersecting}) => {
+  console.log(intersecting ? 'entered' : 'left');
+})}>
+  scroll me into view
+</div>
+
 {@render my_snippet('p')}
 
 {#snippet my_snippet(p: string)}
