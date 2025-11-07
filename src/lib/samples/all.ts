@@ -353,7 +353,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 <span {@attach attachment('param', f(42))}>...</span>
 
 <div {@attach f(() => {
-	// function in attachment
+	// function attachment arg
 })}>
 	complex
 </div>
