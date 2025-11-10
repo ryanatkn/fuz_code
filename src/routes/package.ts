@@ -27,7 +27,7 @@ export const package_json: Package_Json = {
 		deploy: 'gro deploy',
 		benchmark: 'gro run benchmark/run_benchmarks.ts',
 		'benchmark-compare': 'gro run benchmark/compare/run_compare.ts',
-		'update-generated-fixtures': 'gro src/fixtures/update',
+		'update-generated-fixtures': 'gro src/test/fixtures/update',
 	},
 	type: 'module',
 	engines: {node: '>=22.15'},
@@ -67,7 +67,7 @@ export const package_json: Package_Json = {
 		overrides: [
 			{files: 'package.json', options: {useTabs: false}},
 			{
-				files: ['src/fixtures/generated/**', 'src/lib/samples/sample_*.*'],
+				files: ['src/test/fixtures/generated/**', 'src/lib/samples/sample_*.*'],
 				options: {requirePragma: true},
 			},
 		],

@@ -10,8 +10,8 @@ See [README.md](./README.md).
 
 ```bash
 gro test                            # Run all tests
-gro test src/fixtures/check.test.ts # Verify fixture generation
-gro src/fixtures/update             # Regenerate fixtures
+gro test src/test/fixtures/check.test.ts # Verify fixture generation
+gro src/test/fixtures/update             # Regenerate fixtures
 npm run benchmark                   # Run performance benchmarks
 npm run benchmark-compare           # Compare performance with Prism and Shiki
 ```
@@ -122,7 +122,7 @@ Test samples in `src/lib/samples/sample_*.{lang}` are the source of truth.
 
 ### Fixtures
 
-Generated fixtures in `src/fixtures/{lang}/`:
+Generated fixtures in `src/test/fixtures/{lang}/`:
 
 - `{lang}_{variant}.json` - Token data and HTML output
 - `{lang}_{variant}.txt` - Human-readable debug output
@@ -130,9 +130,9 @@ Generated fixtures in `src/fixtures/{lang}/`:
 ### Workflow
 
 1. Edit samples in `src/lib/samples/`
-2. Run `gro src/fixtures/update` to regenerate
-3. Run `gro test src/fixtures/check.test.ts` to verify
-4. Review changes with `git diff src/fixtures/`
+2. Run `gro src/test/fixtures/update` to regenerate
+3. Run `gro test src/test/fixtures/check.test.ts` to verify
+4. Review changes with `git diff src/test/fixtures/`
 
 ## Experimental Features
 

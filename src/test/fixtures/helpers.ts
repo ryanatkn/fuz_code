@@ -56,7 +56,7 @@ export const get_fixture_path = (
 	variant: string,
 	ext: 'json' | 'txt' | 'html',
 ): string => {
-	return join('src/fixtures/generated', lang, `${lang}_${variant}.${ext}`);
+	return join('src/test/fixtures/generated', lang, `${lang}_${variant}.${ext}`);
 };
 
 /**
