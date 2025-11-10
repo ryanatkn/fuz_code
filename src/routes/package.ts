@@ -27,7 +27,7 @@ export const package_json: Package_Json = {
 		deploy: 'gro deploy',
 		benchmark: 'gro run benchmark/run_benchmarks.ts',
 		'benchmark-compare': 'gro run benchmark/compare/run_compare.ts',
-		'update-generated-fixtures': 'gro src/fixtures/update',
+		'update-generated-fixtures': 'gro src/test/fixtures/update',
 	},
 	type: 'module',
 	engines: {node: '>=22.15'},
@@ -36,7 +36,7 @@ export const package_json: Package_Json = {
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
 		'@ryanatkn/belt': '^0.36.0',
-		'@ryanatkn/eslint-config': '^0.8.0',
+		'@ryanatkn/eslint-config': '^0.8.1',
 		'@ryanatkn/fuz': '^0.147.0',
 		'@ryanatkn/gro': '^0.171.0',
 		'@ryanatkn/moss': '^0.36.3',
@@ -67,7 +67,7 @@ export const package_json: Package_Json = {
 		overrides: [
 			{files: 'package.json', options: {useTabs: false}},
 			{
-				files: ['src/fixtures/generated/**', 'src/lib/samples/sample_*.*'],
+				files: ['src/test/fixtures/generated/**', 'src/lib/samples/sample_*.*'],
 				options: {requirePragma: true},
 			},
 		],

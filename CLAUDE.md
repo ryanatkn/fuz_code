@@ -9,11 +9,11 @@ See [README.md](./README.md).
 ## Commands
 
 ```bash
-gro test                            # Run all tests
-gro test src/fixtures/check.test.ts # Verify fixture generation
-gro src/fixtures/update             # Regenerate fixtures
-npm run benchmark                   # Run performance benchmarks
-npm run benchmark-compare           # Compare performance with Prism and Shiki
+gro test                            # run all tests
+gro test src/test/fixtures/check    # verify fixture generation
+gro src/test/fixtures/update        # regenerate fixtures
+npm run benchmark                   # run performance benchmarks
+npm run benchmark-compare           # compare performance with Prism and Shiki
 ```
 
 ## Architecture
@@ -59,10 +59,10 @@ Syntax styler creates a hierarchical token tree where tokens can contain nested 
 
 ```typescript
 interface Syntax_Token {
-	type: string; // Token type (e.g., 'keyword', 'string')
-	content: string | Syntax_Token_Stream; // Text or nested tokens
+	type: string; // token type (e.g., 'keyword', 'string')
+	content: string | Syntax_Token_Stream; // text or nested tokens
 	alias: string | Array<string>; // CSS class aliases
-	length: number; // Token text length
+	length: number; // token text length
 }
 ```
 
@@ -122,7 +122,7 @@ Test samples in `src/lib/samples/sample_*.{lang}` are the source of truth.
 
 ### Fixtures
 
-Generated fixtures in `src/fixtures/{lang}/`:
+Generated fixtures in `src/test/fixtures/{lang}/`:
 
 - `{lang}_{variant}.json` - Token data and HTML output
 - `{lang}_{variant}.txt` - Human-readable debug output
@@ -130,9 +130,9 @@ Generated fixtures in `src/fixtures/{lang}/`:
 ### Workflow
 
 1. Edit samples in `src/lib/samples/`
-2. Run `gro src/fixtures/update` to regenerate
-3. Run `gro test src/fixtures/check.test.ts` to verify
-4. Review changes with `git diff src/fixtures/`
+2. Run `gro src/test/fixtures/update` to regenerate
+3. Run `gro test src/test/fixtures/check` to verify
+4. Review changes with `git diff src/test/fixtures/`
 
 ## Experimental Features
 
@@ -182,8 +182,8 @@ and is not widely supported across browsers. Use the standard `Code.svelte` comp
 ### Benchmarking
 
 ```bash
-npm run benchmark           # Internal performance benchmark
-npm run benchmark-compare   # Compare with Prism and Shiki
+npm run benchmark           # internal performance benchmark
+npm run benchmark-compare   # compare with Prism and Shiki
 ```
 
 **Internal benchmark** tests fuz_code performance across all sample files with small and large (100x) content.

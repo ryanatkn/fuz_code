@@ -19,7 +19,7 @@ export const task: Task = {
 		// Get unique languages to clean directories
 		const languages = new Set(samples.map((s) => s.lang));
 
-		const generated_fixtures_dir = resolve('src/fixtures/generated');
+		const generated_fixtures_dir = resolve('src/test/fixtures/generated');
 
 		// Remove existing language directories
 		for (const lang of languages) {
