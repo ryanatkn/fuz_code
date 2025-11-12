@@ -8,6 +8,7 @@
 
 	import {onDestroy, type Snippet} from 'svelte';
 	import {DEV} from 'esm-env';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 	import type {Syntax_Styler, Syntax_Grammar} from '$lib/syntax_styler.js';
@@ -22,13 +23,13 @@
 		content,
 		lang = 'svelte',
 		mode = 'auto',
-		pre_attrs,
-		code_attrs,
 		grammar,
 		inline = false,
+		wrap = false,
 		syntax_styler = syntax_styler_global,
 		children,
-	}: {
+		...rest
+	}: SvelteHTMLElements['code'] & {
 		/** The source code to syntax highlight. */
 		content: string;
 		/**
@@ -63,10 +64,6 @@
 		 * @default 'auto'
 		 */
 		mode?: Highlight_Mode;
-		/** Additional attributes to apply to the outer `<pre>` or `<span>` element. */
-		pre_attrs?: any;
-		/** Additional attributes to apply to the inner `<code>` element. */
-		code_attrs?: any;
 		/**
 		 * Optional custom grammar object for syntax tokenization.
 		 *
@@ -93,6 +90,20 @@
 		 */
 		inline?: boolean;
 		/**
+		 * Whether to wrap long lines in block code.
+		 * Sets `white-space: pre-wrap` instead of `white-space: pre`.
+		 *
+		 * **Behavior:**
+		 * - Wraps at whitespace (spaces, newlines)
+		 * - Long tokens without spaces (URLs, hashes) will still scroll horizontally
+		 * - Default `false` provides traditional code block behavior
+		 *
+		 * Only affects block code (ignored for inline mode).
+		 *
+		 * @default false
+		 */
+		wrap?: boolean;
+		/**
 		 * Custom Syntax_Styler instance to use for highlighting.
 		 * Allows using a different styler with custom grammars or configuration.
 		 *
@@ -114,8 +125,6 @@
 	const highlight_manager = supports_ranges ? new Highlight_Manager() : null;
 
 	const use_ranges = $derived(supports_ranges && (mode === 'ranges' || mode === 'auto'));
-
-	const tag = $derived(inline ? 'span' : 'pre');
 
 	const language_supported = $derived(lang !== null && !!syntax_styler.langs[lang]);
 
@@ -164,43 +173,34 @@
 		highlight_manager?.destroy();
 	});
 
-	// TODO BLOCK bring up to speed with Code
-
 	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
 	// TODO @html making me nervous
-	/* eslint-disable svelte/no-at-html-tags */
 </script>
 
-<svelte:element
-	this={tag}
-	{...pre_attrs}
-	class:code={true}
-	class:inline
-	class:pre={inline}
-	data-lang={lang}
-	><code {...code_attrs} bind:this={code_element}
-		>{#if use_ranges && children}{@render children(
-				content,
-			)}{:else if use_ranges || highlighting_disabled}{content}{:else if children}{@render children(
-				html_content,
-			)}{:else}{@html html_content}{/if}</code
-	></svelte:element
+<!-- eslint-disable svelte/no-at-html-tags -->
+
+<code {...rest} class:inline class:wrap data-lang={lang} bind:this={code_element}
+	>{#if use_ranges && children}{@render children(
+			content,
+		)}{:else if use_ranges || highlighting_disabled}{content}{:else if children}{@render children(
+			html_content,
+		)}{:else}{@html html_content}{/if}</code
 >
 
 <style>
-	.code {
-		/* TODO change when Moss is upgraded to `--bg_1` */
-		background-color: var(--fg_1);
-		border-radius: var(--border_radius_xs);
+	/* inline code inherits Moss defaults: pre-wrap, inline-block, baseline alignment */
+
+	code:not(.inline) {
+		/* block code: traditional no-wrap, horizontal scroll */
+		white-space: pre;
 		padding: var(--space_xs3) var(--space_xs);
+		display: block;
+		overflow: auto;
+		max-width: 100%;
 	}
-	code {
-		background-color: unset;
-		/* the default `code` padding incorrectly wraps the styled code */
-		padding: 0;
-	}
-	.inline {
-		display: inline-block;
-		vertical-align: bottom;
+
+	code.wrap:not(.inline) {
+		/* unset what we set above, otherwise rely on Moss base styles */
+		white-space: pre-wrap;
 	}
 </style>
