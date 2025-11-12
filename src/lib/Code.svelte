@@ -101,30 +101,11 @@
 
 	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
 	// TODO @html making me nervous
-
-	// TODO BLOCK `white-space: pre` customization how?
-	// TODO BLOCK keep padding override? only for non-inline?
-	// TODO BLOCK think through with the .pre class from Moss (maybe change it?)
-	// .pre {
-	// 	font-family: var(--font_family_mono);
-	// 	color: var(--text_color, var(--text_color_3));
-	// 	overflow: auto;
-	// 	max-width: 100%;
-	// }
-	// .pre > code {
-	// 	font-size: var(
-	// 		--font_size_sm
-	// 	); /* TODO @many use a var? maybe computed from generic `--font_size`? */
-	// 	font-weight: 500;
-	// }
-	// .pre:not(.inline) > code {
-	// 	display: block;
-	// }
 </script>
 
 <!-- eslint-disable svelte/no-at-html-tags -->
 
-<code {...rest} class:inline class:pre={inline} data-lang={lang}
+<code {...rest} class:inline data-lang={lang}
 	>{#if highlighting_disabled}{content}{:else if children}{@render children(
 			html_content,
 		)}{:else}{@html html_content}{/if}</code
@@ -133,8 +114,15 @@
 <style>
 	code {
 		white-space: pre;
-		padding: var(--space_xs3) var(--space_xs);
 	}
+
+	code:not(.inline) {
+		padding: var(--space_xs3) var(--space_xs);
+		display: block;
+		overflow: auto;
+		max-width: 100%;
+	}
+
 	.inline {
 		display: inline-block;
 		vertical-align: bottom;
