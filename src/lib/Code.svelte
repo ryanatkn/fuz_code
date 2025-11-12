@@ -101,7 +101,6 @@
 
 	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
 	// TODO @html making me nervous
-	/* eslint-disable svelte/no-at-html-tags */
 
 	// TODO BLOCK `white-space: pre` customization how?
 	// TODO BLOCK keep padding override? only for non-inline?
@@ -122,6 +121,8 @@
 	// 	display: block;
 	// }
 </script>
+
+<!-- eslint-disable svelte/no-at-html-tags -->
 
 <code {...rest} class:inline class:pre={inline} data-lang={lang}
 	>{#if highlighting_disabled}{content}{:else if children}{@render children(
