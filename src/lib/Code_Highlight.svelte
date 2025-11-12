@@ -164,6 +164,8 @@
 		highlight_manager?.destroy();
 	});
 
+	// TODO BLOCK bring up to speed with Code
+
 	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
 	// TODO @html making me nervous
 	/* eslint-disable svelte/no-at-html-tags */
