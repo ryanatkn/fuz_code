@@ -1,12 +1,12 @@
 === STATS ===
-Sample length: 784 characters
-Total tokens: 239
+Sample length: 733 characters
+Total tokens: 229
 
 Token types (19 unique):
-  punctuation: 123
+  punctuation: 117
   tag: 64
-  attr_name: 18
-  attr_value: 17
+  attr_name: 16
+  attr_value: 15
   string: 3
   doctype: 1
   comment: 1
@@ -55,211 +55,201 @@ Token types (19 unique):
   74-75    punctuation               "
   97-98    punctuation               "
   98-99    punctuation               >
- 104-124   tag                       <span class="a b c">
- 104-109   tag                       <span
- 104-105   punctuation               <
- 110-115   attr_name                 class
- 115-123   attr_value                ="a b c"
- 115-116   punctuation               =
- 116-117   punctuation               "
- 122-123   punctuation               "
- 123-124   punctuation               >
- 128-135   tag                       </span>
- 128-134   tag                       </span
- 128-130   punctuation               </
- 134-135   punctuation               >
- 135-139   tag                       </p>
- 135-138   tag                       </p
- 135-137   punctuation               </
- 138-139   punctuation               >
- 141-172   tag                       <button type="button" disabled>
- 141-148   tag                       <button
- 141-142   punctuation               <
- 149-153   attr_name                 type
- 153-162   attr_value                ="button"
- 153-154   punctuation               =
- 154-155   punctuation               "
- 161-162   punctuation               "
- 163-171   attr_name                 disabled
- 171-172   punctuation               >
- 180-189   tag                       </button>
- 180-188   tag                       </button
- 180-182   punctuation               </
- 188-189   punctuation               >
- 191-237   comment                   <!-- comment <div>a<br /> b</div> <script> -->
- 239-245   tag                       <br />
- 239-242   tag                       <br
- 239-240   punctuation               <
- 243-245   punctuation               />
- 247-281   tag                       <hr onclick="console.log('hi')" />
- 247-250   tag                       <hr
- 247-248   punctuation               <
- 251-278   special_attr              onclick="console.log('hi')"
- 251-258   attr_name                 onclick
- 258-278   attr_value                ="console.log('hi')"
- 258-259   punctuation               =
- 259-260   punctuation               "
- 260-277   value                     console.log('hi')
- 267-268   punctuation               .
- 268-271   function                  log
- 271-272   punctuation               (
- 272-276   string                    'hi'
- 276-277   punctuation               )
- 277-278   punctuation               "
- 279-281   punctuation               />
- 283-319   tag                       <img src="image.jpg" alt="access" />
- 283-287   tag                       <img
- 283-284   punctuation               <
- 288-291   attr_name                 src
- 291-303   attr_value                ="image.jpg"
- 291-292   punctuation               =
- 292-293   punctuation               "
- 302-303   punctuation               "
- 304-307   attr_name                 alt
- 307-316   attr_value                ="access"
- 307-308   punctuation               =
- 308-309   punctuation               "
- 315-316   punctuation               "
- 317-319   punctuation               />
- 321-325   tag                       <ul>
- 321-324   tag                       <ul
- 321-322   punctuation               <
- 324-325   punctuation               >
- 327-331   tag                       <li>
- 327-330   tag                       <li
- 327-328   punctuation               <
- 330-331   punctuation               >
- 342-347   tag                       </li>
- 342-346   tag                       </li
- 342-344   punctuation               </
- 346-347   punctuation               >
- 349-353   tag                       <li>
- 349-352   tag                       <li
- 349-350   punctuation               <
- 352-353   punctuation               >
- 364-369   tag                       </li>
- 364-368   tag                       </li
- 364-366   punctuation               </
- 368-369   punctuation               >
- 370-375   tag                       </ul>
- 370-374   tag                       </ul
- 370-372   punctuation               </
- 374-375   punctuation               >
- 377-414   tag                       <form action="/submit" method="post">
- 377-382   tag                       <form
- 377-378   punctuation               <
- 383-389   attr_name                 action
- 389-399   attr_value                ="/submit"
- 389-390   punctuation               =
- 390-391   punctuation               "
- 398-399   punctuation               "
- 400-406   attr_name                 method
- 406-413   attr_value                ="post"
- 406-407   punctuation               =
+ 101-104   tag                       <b>
+ 101-103   tag                       <b
+ 101-102   punctuation               <
+ 103-104   punctuation               >
+ 105-109   tag                       </b>
+ 105-108   tag                       </b
+ 105-107   punctuation               </
+ 108-109   punctuation               >
+ 109-113   tag                       </p>
+ 109-112   tag                       </p
+ 109-111   punctuation               </
+ 112-113   punctuation               >
+ 115-146   tag                       <button type="button" disabled>
+ 115-122   tag                       <button
+ 115-116   punctuation               <
+ 123-127   attr_name                 type
+ 127-136   attr_value                ="button"
+ 127-128   punctuation               =
+ 128-129   punctuation               "
+ 135-136   punctuation               "
+ 137-145   attr_name                 disabled
+ 145-146   punctuation               >
+ 154-163   tag                       </button>
+ 154-162   tag                       </button
+ 154-156   punctuation               </
+ 162-163   punctuation               >
+ 165-211   comment                   <!-- comment <div>a<br /> b</div> <script> -->
+ 213-219   tag                       <br />
+ 213-216   tag                       <br
+ 213-214   punctuation               <
+ 217-219   punctuation               />
+ 221-255   tag                       <hr onclick="console.log('hi')" />
+ 221-224   tag                       <hr
+ 221-222   punctuation               <
+ 225-252   special_attr              onclick="console.log('hi')"
+ 225-232   attr_name                 onclick
+ 232-252   attr_value                ="console.log('hi')"
+ 232-233   punctuation               =
+ 233-234   punctuation               "
+ 234-251   value                     console.log('hi')
+ 241-242   punctuation               .
+ 242-245   function                  log
+ 245-246   punctuation               (
+ 246-250   string                    'hi'
+ 250-251   punctuation               )
+ 251-252   punctuation               "
+ 253-255   punctuation               />
+ 257-293   tag                       <img src="image.jpg" alt="access" />
+ 257-261   tag                       <img
+ 257-258   punctuation               <
+ 262-265   attr_name                 src
+ 265-277   attr_value                ="image.jpg"
+ 265-266   punctuation               =
+ 266-267   punctuation               "
+ 276-277   punctuation               "
+ 278-281   attr_name                 alt
+ 281-290   attr_value                ="access"
+ 281-282   punctuation               =
+ 282-283   punctuation               "
+ 289-290   punctuation               "
+ 291-293   punctuation               />
+ 295-299   tag                       <ul>
+ 295-298   tag                       <ul
+ 295-296   punctuation               <
+ 298-299   punctuation               >
+ 301-305   tag                       <li>
+ 301-304   tag                       <li
+ 301-302   punctuation               <
+ 304-305   punctuation               >
+ 316-321   tag                       </li>
+ 316-320   tag                       </li
+ 316-318   punctuation               </
+ 320-321   punctuation               >
+ 323-327   tag                       <li>
+ 323-326   tag                       <li
+ 323-324   punctuation               <
+ 326-327   punctuation               >
+ 338-343   tag                       </li>
+ 338-342   tag                       </li
+ 338-340   punctuation               </
+ 342-343   punctuation               >
+ 344-349   tag                       </ul>
+ 344-348   tag                       </ul
+ 344-346   punctuation               </
+ 348-349   punctuation               >
+ 351-388   tag                       <form action="/submit" method="post">
+ 351-356   tag                       <form
+ 351-352   punctuation               <
+ 357-363   attr_name                 action
+ 363-373   attr_value                ="/submit"
+ 363-364   punctuation               =
+ 364-365   punctuation               "
+ 372-373   punctuation               "
+ 374-380   attr_name                 method
+ 380-387   attr_value                ="post"
+ 380-381   punctuation               =
+ 381-382   punctuation               "
+ 386-387   punctuation               "
+ 387-388   punctuation               >
+ 390-427   tag                       <input type="text" name="username" />
+ 390-396   tag                       <input
+ 390-391   punctuation               <
+ 397-401   attr_name                 type
+ 401-408   attr_value                ="text"
+ 401-402   punctuation               =
+ 402-403   punctuation               "
  407-408   punctuation               "
- 412-413   punctuation               "
- 413-414   punctuation               >
- 416-478   tag                       <input type="text" name="username" placeholder="Enter name" />
- 416-422   tag                       <input
- 416-417   punctuation               <
- 423-427   attr_name                 type
- 427-434   attr_value                ="text"
- 427-428   punctuation               =
- 428-429   punctuation               "
- 433-434   punctuation               "
- 435-439   attr_name                 name
- 439-450   attr_value                ="username"
- 439-440   punctuation               =
- 440-441   punctuation               "
+ 409-413   attr_name                 name
+ 413-424   attr_value                ="username"
+ 413-414   punctuation               =
+ 414-415   punctuation               "
+ 423-424   punctuation               "
+ 425-427   punctuation               />
+ 429-472   tag                       <select name="option" data-role="dropdown">
+ 429-436   tag                       <select
+ 429-430   punctuation               <
+ 437-441   attr_name                 name
+ 441-450   attr_value                ="option"
+ 441-442   punctuation               =
+ 442-443   punctuation               "
  449-450   punctuation               "
- 451-462   attr_name                 placeholder
- 462-475   attr_value                ="Enter name"
- 462-463   punctuation               =
- 463-464   punctuation               "
- 474-475   punctuation               "
- 476-478   punctuation               />
- 480-523   tag                       <select name="option" data-role="dropdown">
- 480-487   tag                       <select
- 480-481   punctuation               <
- 488-492   attr_name                 name
- 492-501   attr_value                ="option"
- 492-493   punctuation               =
- 493-494   punctuation               "
- 500-501   punctuation               "
- 502-511   attr_name                 data-role
- 511-522   attr_value                ="dropdown"
- 511-512   punctuation               =
- 512-513   punctuation               "
- 521-522   punctuation               "
- 522-523   punctuation               >
- 526-544   tag                       <option value="1">
- 526-533   tag                       <option
- 526-527   punctuation               <
- 534-539   attr_name                 value
- 539-543   attr_value                ="1"
- 539-540   punctuation               =
- 540-541   punctuation               "
- 542-543   punctuation               "
- 543-544   punctuation               >
- 549-558   tag                       </option>
- 549-557   tag                       </option
- 549-551   punctuation               </
- 557-558   punctuation               >
- 561-579   tag                       <option value="2">
- 561-568   tag                       <option
- 561-562   punctuation               <
- 569-574   attr_name                 value
- 574-578   attr_value                ="2"
- 574-575   punctuation               =
- 575-576   punctuation               "
- 577-578   punctuation               "
- 578-579   punctuation               >
- 585-594   tag                       </option>
- 585-593   tag                       </option
- 585-587   punctuation               </
- 593-594   punctuation               >
- 596-605   tag                       </select>
- 596-604   tag                       </select
+ 451-460   attr_name                 data-role
+ 460-471   attr_value                ="dropdown"
+ 460-461   punctuation               =
+ 461-462   punctuation               "
+ 470-471   punctuation               "
+ 471-472   punctuation               >
+ 475-493   tag                       <option value="1">
+ 475-482   tag                       <option
+ 475-476   punctuation               <
+ 483-488   attr_name                 value
+ 488-492   attr_value                ="1"
+ 488-489   punctuation               =
+ 489-490   punctuation               "
+ 491-492   punctuation               "
+ 492-493   punctuation               >
+ 498-507   tag                       </option>
+ 498-506   tag                       </option
+ 498-500   punctuation               </
+ 506-507   punctuation               >
+ 510-528   tag                       <option value="2">
+ 510-517   tag                       <option
+ 510-511   punctuation               <
+ 518-523   attr_name                 value
+ 523-527   attr_value                ="2"
+ 523-524   punctuation               =
+ 524-525   punctuation               "
+ 526-527   punctuation               "
+ 527-528   punctuation               >
+ 534-543   tag                       </option>
+ 534-542   tag                       </option
+ 534-536   punctuation               </
+ 542-543   punctuation               >
+ 545-554   tag                       </select>
+ 545-553   tag                       </select
+ 545-547   punctuation               </
+ 553-554   punctuation               >
+ 555-562   tag                       </form>
+ 555-561   tag                       </form
+ 555-557   punctuation               </
+ 561-562   punctuation               >
+ 564-572   tag                       <script>
+ 564-571   tag                       <script
+ 564-565   punctuation               <
+ 571-572   punctuation               >
+ 572-596   script                    \n\tconst ok = '<style>';\n
+ 572-596   lang_js                   \n\tconst ok = '<style>';\n
+ 574-579   keyword                   const
+ 583-584   operator                  =
+ 585-594   string                    '<style>'
+ 594-595   punctuation               ;
+ 596-605   tag                       </script>
+ 596-604   tag                       </script
  596-598   punctuation               </
  604-605   punctuation               >
- 606-613   tag                       </form>
- 606-612   tag                       </form
- 606-608   punctuation               </
- 612-613   punctuation               >
- 615-623   tag                       <script>
- 615-622   tag                       <script
- 615-616   punctuation               <
- 622-623   punctuation               >
- 623-647   script                    \n\tconst ok = '<style>';\n
- 623-647   lang_js                   \n\tconst ok = '<style>';\n
- 625-630   keyword                   const
- 634-635   operator                  =
- 636-645   string                    '<style>'
- 645-646   punctuation               ;
- 647-656   tag                       </script>
- 647-655   tag                       </script
- 647-649   punctuation               </
- 655-656   punctuation               >
- 658-681   tag                       <style type="text/css">
- 658-664   tag                       <style
- 658-659   punctuation               <
- 665-669   attr_name                 type
- 669-680   attr_value                ="text/css"
- 669-670   punctuation               =
- 670-671   punctuation               "
- 679-680   punctuation               "
- 680-681   punctuation               >
- 681-725   style                     \n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
- 681-725   lang_css                  \n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
- 683-699   selector                  .special::before
- 700-701   punctuation               {
- 704-711   property                  content
- 711-712   punctuation               :
- 713-720   string                    '< & >'
- 720-721   punctuation               ;
- 723-724   punctuation               }
- 725-733   tag                       </style>
- 725-732   tag                       </style
- 725-727   punctuation               </
- 732-733   punctuation               >
- 735-783   cdata                     <![CDATA[ if (a < 0) alert("b"); <not-a-tag> ]]>
+ 607-630   tag                       <style type="text/css">
+ 607-613   tag                       <style
+ 607-608   punctuation               <
+ 614-618   attr_name                 type
+ 618-629   attr_value                ="text/css"
+ 618-619   punctuation               =
+ 619-620   punctuation               "
+ 628-629   punctuation               "
+ 629-630   punctuation               >
+ 630-674   style                     \n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
+ 630-674   lang_css                  \n\t.special::before {\n\t\tcontent: '< & >';\n\t}\n
+ 632-648   selector                  .special::before
+ 649-650   punctuation               {
+ 653-660   property                  content
+ 660-661   punctuation               :
+ 662-669   string                    '< & >'
+ 669-670   punctuation               ;
+ 672-673   punctuation               }
+ 674-682   tag                       </style>
+ 674-681   tag                       </style
+ 674-676   punctuation               </
+ 681-682   punctuation               >
+ 684-732   cdata                     <![CDATA[ if (a < 0) alert("b"); <not-a-tag> ]]>

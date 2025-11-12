@@ -1,10 +1,12 @@
+import type {SvelteHTMLElements} from 'svelte/elements';
+
 import type {Implementation_Name} from './benchmark_fixtures.js';
 
-export interface Benchmark_Component_Props {
+export type Benchmark_Component_Props = SvelteHTMLElements['code'] & {
 	content: string;
 	lang: string;
 	mode?: 'html' | 'ranges' | 'auto';
-}
+};
 
 export interface Benchmark_Config {
 	iterations: number;

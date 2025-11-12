@@ -246,7 +246,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 	<p>hello world!</p>
 </div>
 
-<p class="some_class hypen-class">some <span class="a b c">text</span></p>
+<p class="some_class hypen-class">a <b>b</b></p>
 
 <button type="button" disabled>click me</button>
 
@@ -264,7 +264,7 @@ export const complex_regex = /^(?:\\/\\*.*?\\*\\/|\\/\\/.*|[^/])+$/;
 </ul>
 
 <form action="/submit" method="post">
-	<input type="text" name="username" placeholder="Enter name" />
+	<input type="text" name="username" />
 	<select name="option" data-role="dropdown">
 		<option value="1">First</option>
 		<option value="2">Second</option>
