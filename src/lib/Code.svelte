@@ -136,7 +136,6 @@
 		display: block;
 		overflow: auto;
 		max-width: 100%;
-		font-size: var(--font_size_sm);
 	}
 
 	code.wrap:not(.inline) {
