@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type {Snippet} from 'svelte';
 	import {DEV} from 'esm-env';
+	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 	import type {Syntax_Styler, Syntax_Grammar} from '$lib/syntax_styler.js';
@@ -8,13 +9,12 @@
 	const {
 		content,
 		lang = 'svelte',
-		pre_attrs,
-		code_attrs,
 		grammar,
 		inline = false,
 		syntax_styler = syntax_styler_global,
 		children,
-	}: {
+		...rest
+	}: SvelteHTMLElements['code'] & {
 		/** The source code to syntax highlight. */
 		content: string;
 		/**
@@ -35,10 +35,6 @@
 		 * @default 'svelte'
 		 */
 		lang?: string | null;
-		/** Additional attributes to apply to the outer `<pre>` or `<span>` element. */
-		pre_attrs?: any;
-		/** Additional attributes to apply to the inner `<code>` element. */
-		code_attrs?: any;
 		/**
 		 * Optional custom grammar object for syntax tokenization.
 		 *
@@ -76,8 +72,6 @@
 		children?: Snippet<[markup: string]>;
 	} = $props();
 
-	const tag = $derived(inline ? 'span' : 'pre');
-
 	const language_supported = $derived(lang !== null && !!syntax_styler.langs[lang]);
 
 	const highlighting_disabled = $derived(lang === null || (!language_supported && !grammar));
@@ -108,33 +102,21 @@
 	// TODO do syntax styling at compile-time in the normal case, and don't import these at runtime
 	// TODO @html making me nervous
 	/* eslint-disable svelte/no-at-html-tags */
+
+	// TODO BLOCK `white-space: pre` customization how?
+	// TODO BLOCK keep padding override? only for non-inline?
 </script>
 
-<svelte:element
-	this={tag}
-	{...pre_attrs}
-	class:code={true}
-	class:inline
-	class:pre={inline}
-	data-lang={lang}
-	><code {...code_attrs}
-		>{#if highlighting_disabled}{content}{:else if children}{@render children(
-				html_content,
-			)}{:else}{@html html_content}{/if}</code
-	></svelte:element
+<code {...rest} class:code={true} class:inline class:pre={inline} data-lang={lang}
+	>{#if highlighting_disabled}{content}{:else if children}{@render children(
+			html_content,
+		)}{:else}{@html html_content}{/if}</code
 >
 
 <style>
-	.code {
-		/* TODO change when Moss is upgraded to `--bg_1` */
-		background-color: var(--fg_1);
-		border-radius: var(--border_radius_xs);
-		padding: var(--space_xs3) var(--space_xs);
-	}
 	code {
-		background-color: unset;
-		/* the default `code` padding incorrectly wraps the styled code */
-		padding: 0;
+		white-space: pre;
+		padding: var(--space_xs3) var(--space_xs);
 	}
 	.inline {
 		display: inline-block;
