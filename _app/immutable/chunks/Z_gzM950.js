@@ -1,0 +1,1 @@
+import{b as r,r as s}from"./BVVrrhfd.js";const a=(t,n)=>!n||!t.startsWith(n)?t:t.substring(n.length),i=(t,n)=>!n||!t.endsWith(n)?t:t.substring(0,t.length-n.length),h=(t,n)=>t.endsWith(n)?t:t+n;function f(t,n){return r+s(t,n)}export{i as a,h as e,f as r,a as s};
