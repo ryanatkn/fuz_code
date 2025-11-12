@@ -1,5 +1,12 @@
 # @ryanatkn/fuz_code
 
+## 0.31.0
+
+### Minor Changes
+
+- upgrade moss dep ([#23](https://github.com/ryanatkn/fuz_code/pull/23))
+- remove the wrapper element to `Code` ([#23](https://github.com/ryanatkn/fuz_code/pull/23))
+
 ## 0.30.1
 
 ### Patch Changes
