@@ -127,10 +127,10 @@
 >
 
 <style>
-	/* Inline code inherits Moss defaults: pre-wrap, inline-block, baseline alignment */
+	/* inline code inherits Moss defaults: pre-wrap, inline-block, baseline alignment */
 
 	code:not(.inline) {
-		/* Block code: traditional no-wrap, horizontal scroll */
+		/* block code: traditional no-wrap, horizontal scroll */
 		white-space: pre;
 		padding: var(--space_xs3) var(--space_xs);
 		display: block;
@@ -139,6 +139,7 @@
 	}
 
 	code.wrap:not(.inline) {
+		/* unset what we set above, otherwise rely on Moss base styles */
 		white-space: pre-wrap;
 	}
 </style>
