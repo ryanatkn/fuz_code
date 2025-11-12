@@ -11,6 +11,7 @@
 		lang = 'svelte',
 		grammar,
 		inline = false,
+		wrap = false,
 		syntax_styler = syntax_styler_global,
 		children,
 		...rest
@@ -59,6 +60,20 @@
 		 */
 		inline?: boolean;
 		/**
+		 * Whether to wrap long lines in block code.
+		 * Sets `white-space: pre-wrap` instead of `white-space: pre`.
+		 *
+		 * **Behavior:**
+		 * - Wraps at whitespace (spaces, newlines)
+		 * - Long tokens without spaces (URLs, hashes) will still scroll horizontally
+		 * - Default `false` provides traditional code block behavior
+		 *
+		 * Only affects block code (ignored for inline mode).
+		 *
+		 * @default false
+		 */
+		wrap?: boolean;
+		/**
 		 * Custom Syntax_Styler instance to use for highlighting.
 		 * Allows using a different styler with custom grammars or configuration.
 		 *
@@ -105,26 +120,26 @@
 
 <!-- eslint-disable svelte/no-at-html-tags -->
 
-<code {...rest} class:inline data-lang={lang}
+<code {...rest} class:inline class:wrap data-lang={lang}
 	>{#if highlighting_disabled}{content}{:else if children}{@render children(
 			html_content,
 		)}{:else}{@html html_content}{/if}</code
 >
 
 <style>
-	code {
-		white-space: pre;
-	}
+	/* Inline code inherits Moss defaults: pre-wrap, inline-block, baseline alignment */
 
 	code:not(.inline) {
+		/* Block code: traditional no-wrap, horizontal scroll */
+		white-space: pre;
 		padding: var(--space_xs3) var(--space_xs);
 		display: block;
 		overflow: auto;
 		max-width: 100%;
+		font-size: var(--font_size_sm);
 	}
 
-	.inline {
-		display: inline-block;
-		vertical-align: bottom;
+	code.wrap:not(.inline) {
+		white-space: pre-wrap;
 	}
 </style>
