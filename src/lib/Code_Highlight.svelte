@@ -76,15 +76,14 @@
 		 * - When provided, this grammar is used for tokenization instead of looking up via `lang`
 		 * - Enables highlighting even if `lang` is not in the registry (useful for custom languages)
 		 * - The `lang` parameter is still used for metadata (data-lang attribute)
-		 * - When undefined, the grammar is automatically looked up:
-		 *   - In HTML mode: via `syntax_styler.get_lang(lang)` (automatic fallback in `stylize()`)
-		 *   - In range mode: via `grammar || syntax_styler.get_lang(lang)` (explicit fallback)
+		 * - When undefined, the grammar is automatically looked up via `syntax_styler.get_lang(lang)`
 		 *
 		 * @default undefined (uses grammar from `syntax_styler.langs[lang]`)
 		 */
 		grammar?: Syntax_Grammar | undefined;
 		/**
-		 * Whether to render inline code (uses `<span>`) or block code (uses `<pre>`).
+		 * Whether to render as inline code or block code.
+		 * Controls display via CSS classes.
 		 *
 		 * @default false
 		 */

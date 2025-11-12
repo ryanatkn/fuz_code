@@ -54,7 +54,8 @@
 		 */
 		grammar?: Syntax_Grammar | undefined;
 		/**
-		 * Whether to render inline code (uses `<span>`) or block code (uses `<pre>`).
+		 * Whether to render as inline code or block code.
+		 * Controls display via CSS classes.
 		 *
 		 * @default false
 		 */
