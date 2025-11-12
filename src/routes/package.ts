@@ -31,7 +31,7 @@ export const package_json: Package_Json = {
 	},
 	type: 'module',
 	engines: {node: '>=22.15'},
-	peerDependencies: {'@ryanatkn/belt': '^0.36.0', '@ryanatkn/moss': '^0.36.2', svelte: '^5'},
+	peerDependencies: {'@ryanatkn/belt': '^0.36.0', '@ryanatkn/moss': '^0.37.0', svelte: '^5'},
 	peerDependenciesMeta: {'@ryanatkn/moss': {optional: true}, svelte: {optional: true}},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
@@ -39,7 +39,7 @@ export const package_json: Package_Json = {
 		'@ryanatkn/eslint-config': '^0.8.1',
 		'@ryanatkn/fuz': '^0.147.0',
 		'@ryanatkn/gro': '^0.171.0',
-		'@ryanatkn/moss': '^0.36.3',
+		'@ryanatkn/moss': '^0.37.0',
 		'@sveltejs/adapter-static': '^3.0.9',
 		'@sveltejs/kit': '^2.37.1',
 		'@sveltejs/package': '^2.5.0',
