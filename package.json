@@ -84,15 +84,6 @@
         "options": {
           "useTabs": false
         }
-      },
-      {
-        "files": [
-          "src/test/fixtures/generated/**",
-          "src/lib/samples/sample_*.*"
-        ],
-        "options": {
-          "requirePragma": true
-        }
       }
     ]
   },
