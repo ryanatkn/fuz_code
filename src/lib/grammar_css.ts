@@ -1,5 +1,5 @@
-import type {Add_Syntax_Grammar, Syntax_Grammar_Raw} from '$lib/syntax_styler.js';
-import {grammar_markup_add_attribute, grammar_markup_add_inlined} from '$lib/grammar_markup.js';
+import type {Add_Syntax_Grammar, Syntax_Grammar_Raw} from './syntax_styler.js';
+import {grammar_markup_add_attribute, grammar_markup_add_inlined} from './grammar_markup.js';
 
 var string = /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/;
 

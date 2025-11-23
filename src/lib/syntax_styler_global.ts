@@ -1,12 +1,12 @@
-import {Syntax_Styler} from '$lib/syntax_styler.js';
-import {add_grammar_markup} from '$lib/grammar_markup.js';
-import {add_grammar_css} from '$lib/grammar_css.js';
-import {add_grammar_clike} from '$lib/grammar_clike.js';
-import {add_grammar_js} from '$lib/grammar_js.js';
-import {add_grammar_ts} from '$lib/grammar_ts.js';
-import {add_grammar_svelte} from '$lib/grammar_svelte.js';
-import {add_grammar_json} from '$lib/grammar_json.js';
-import {add_grammar_markdown} from '$lib/grammar_markdown.js';
+import {Syntax_Styler} from './syntax_styler.js';
+import {add_grammar_markup} from './grammar_markup.js';
+import {add_grammar_css} from './grammar_css.js';
+import {add_grammar_clike} from './grammar_clike.js';
+import {add_grammar_js} from './grammar_js.js';
+import {add_grammar_ts} from './grammar_ts.js';
+import {add_grammar_svelte} from './grammar_svelte.js';
+import {add_grammar_json} from './grammar_json.js';
+import {add_grammar_markdown} from './grammar_markdown.js';
 
 export const syntax_styler_global = new Syntax_Styler();
 

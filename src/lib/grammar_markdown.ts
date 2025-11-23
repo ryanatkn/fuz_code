@@ -3,7 +3,7 @@ import type {
 	Syntax_Grammar_Token_Raw,
 	Syntax_Grammar_Value_Raw,
 	Syntax_Styler,
-} from '$lib/syntax_styler.js';
+} from './syntax_styler.js';
 
 interface Lang_Definition {
 	aliases: Array<string>;

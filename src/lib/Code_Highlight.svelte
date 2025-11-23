@@ -10,14 +10,14 @@
 	import {DEV} from 'esm-env';
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
-	import {syntax_styler_global} from '$lib/syntax_styler_global.js';
-	import type {Syntax_Styler, Syntax_Grammar} from '$lib/syntax_styler.js';
-	import {tokenize_syntax} from '$lib/tokenize_syntax.js';
+	import {syntax_styler_global} from './syntax_styler_global.js';
+	import type {Syntax_Styler, Syntax_Grammar} from './syntax_styler.js';
+	import {tokenize_syntax} from './tokenize_syntax.js';
 	import {
 		Highlight_Manager,
 		supports_css_highlight_api,
 		type Highlight_Mode,
-	} from '$lib/highlight_manager.js';
+	} from './highlight_manager.js';
 
 	const {
 		content,

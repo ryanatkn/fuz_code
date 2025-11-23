@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	// @ts-expect-error
-	import Thing from '$lib/Thing.svelte';
+	import Thing from './Thing.svelte';
 	import type {Snippet} from 'svelte';
 
 	const {
