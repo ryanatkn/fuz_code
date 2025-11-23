@@ -2,7 +2,7 @@
 // Do not edit directly - regenerated on build
 
 import type {Package_Json} from '@ryanatkn/belt/package_json.js';
-import type {Src_Json} from '@ryanatkn/fuz/src_json.js';
+import type {Src_Json} from '@ryanatkn/belt/src_json.js';
 
 export const package_json: Package_Json = {
 	name: '@ryanatkn/fuz_code',
@@ -39,7 +39,7 @@ export const package_json: Package_Json = {
 		node: '>=22.15',
 	},
 	peerDependencies: {
-		'@ryanatkn/moss': '>=0.37.0',
+		'@ryanatkn/moss': '>=0.38.0',
 		svelte: '^5',
 	},
 	peerDependenciesMeta: {
@@ -54,9 +54,9 @@ export const package_json: Package_Json = {
 		'@changesets/changelog-git': '^0.2.1',
 		'@ryanatkn/belt': '^0.38.0',
 		'@ryanatkn/eslint-config': '^0.9.0',
-		'@ryanatkn/fuz': '^0.156.0',
-		'@ryanatkn/gro': '^0.174.1',
-		'@ryanatkn/moss': '^0.37.0',
+		'@ryanatkn/fuz': '^0.158.0',
+		'@ryanatkn/gro': '^0.174.2',
+		'@ryanatkn/moss': '^0.38.0',
 		'@sveltejs/adapter-static': '^3.0.9',
 		'@sveltejs/kit': '^2.37.1',
 		'@sveltejs/package': '^2.5.0',
