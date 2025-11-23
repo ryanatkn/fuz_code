@@ -39,7 +39,7 @@ export const package_json: Package_Json = {
 		node: '>=22.15',
 	},
 	peerDependencies: {
-		'@ryanatkn/moss': '^0.37.0',
+		'@ryanatkn/moss': '>=0.37.0',
 		svelte: '^5',
 	},
 	peerDependenciesMeta: {
