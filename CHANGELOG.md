@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.33.0
+
+### Minor Changes
+
+- remove belt peer dep ([15311c3](https://github.com/ryanatkn/fuz_code/commit/15311c3))
+
 ## 0.32.0
 
 ### Minor Changes
