@@ -1,5 +1,12 @@
 # @ryanatkn/fuz_code
 
+## 0.34.0
+
+### Minor Changes
+
+- upgrade moss ([a072701](https://github.com/ryanatkn/fuz_code/commit/a072701))
+- use >= for ecosystem peer deps ([eab995a](https://github.com/ryanatkn/fuz_code/commit/eab995a))
+
 ## 0.33.0
 
 ### Minor Changes
