@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {samples as all_samples} from '$lib/samples/all.js';
+	import {samples as all_samples} from '../../test/fixtures/samples/all.js';
 	import Benchmark_Results from './Benchmark_Results.svelte';
 	import Benchmark_Harness from './Benchmark_Harness.svelte';
 	import {run_all_benchmarks} from './benchmark_runner.js';

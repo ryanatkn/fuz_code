@@ -5,7 +5,7 @@
 
 	import Code from '$lib/Code.svelte';
 	import Code_Highlight from '$lib/Code_Highlight.svelte';
-	import {samples} from '$lib/samples/all.js';
+	import {samples} from '../../test/fixtures/samples/all.js';
 	import Footer from '$routes/Footer.svelte';
 </script>
 

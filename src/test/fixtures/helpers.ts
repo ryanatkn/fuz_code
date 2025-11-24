@@ -19,10 +19,10 @@ export interface Generated_Output {
 }
 
 /**
- * Discover all sample files in src/lib/samples
+ * Discover all sample files in src/test/fixtures/samples
  */
 export const discover_samples = (): Array<Sample_Spec> => {
-	const sample_files = search_fs('src/lib/samples', {
+	const sample_files = search_fs('src/test/fixtures/samples', {
 		file_filter: (path) => /sample_[^/]+\.(ts|css|html|json|svelte|md)$/.test(path),
 	});
 

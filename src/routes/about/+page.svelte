@@ -1,16 +1,11 @@
 <script lang="ts">
-	// TODO add docs
-	// import Package_Detail from '@ryanatkn/fuz/Package_Detail.svelte';
-	import {Pkg} from '@ryanatkn/fuz/pkg.svelte.js';
+	import Package_Detail from '@ryanatkn/fuz/Package_Detail.svelte';
+	import {pkg_context} from '@ryanatkn/fuz/pkg.svelte.js';
 	import Docs_Footer from '@ryanatkn/fuz/Docs_Footer.svelte';
 	import Ecosystem_Links_Panel from '@ryanatkn/fuz/Ecosystem_Links_Panel.svelte';
 	import Breadcrumb from '@ryanatkn/fuz/Breadcrumb.svelte';
 
-	import {package_json, src_json} from '$routes/package.js';
-
-	const pkg = new Pkg(package_json, src_json);
-
-	// TODO standardize
+	const pkg = pkg_context.get();
 </script>
 
 <main class="width_upto_md">
@@ -18,18 +13,18 @@
 		<header>
 			<h1 class="mt_xl5">{pkg.repo_name}</h1>
 		</header>
-		<Breadcrumb>🎨</Breadcrumb>
+		<Breadcrumb>{pkg.package_json.glyph}</Breadcrumb>
 	</section>
-	<Ecosystem_Links_Panel />
-	<!-- <section class="box width_100 mb_lg">
+	<section class="box width_100 mb_lg">
 		<div class="panel p_md width_upto_md">
 			<Package_Detail {pkg} />
 		</div>
-	</section> -->
+	</section>
+	<Ecosystem_Links_Panel />
 	<section class="box">
 		<Docs_Footer {pkg}>
 			<div class="mb_lg">
-				<Breadcrumb>🎨</Breadcrumb>
+				<Breadcrumb>{pkg.package_json.glyph}</Breadcrumb>
 			</div>
 		</Docs_Footer>
 	</section>

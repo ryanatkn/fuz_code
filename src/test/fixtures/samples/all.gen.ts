@@ -3,12 +3,12 @@ import {readFileSync} from 'node:fs';
 import {search_fs} from '@ryanatkn/gro/search_fs.js';
 import {basename} from 'node:path';
 
-import {sample_langs} from '../code_sample.js';
+import {sample_langs} from '../../../lib/code_sample.js';
 
 /** @nodocs */
 export const gen: Gen = ({origin_path}) => {
 	// Discover all sample files dynamically
-	const sample_files = search_fs('src/lib/samples', {
+	const sample_files = search_fs('src/test/fixtures/samples', {
 		file_filter: (path) => /sample_[^/]+\.(ts|css|html|json|svelte|md)$/.test(path),
 	});
 
@@ -61,7 +61,7 @@ export const gen: Gen = ({origin_path}) => {
 
 	return `${banner}
 
-		import {sample_langs, type Code_Sample} from '../code_sample.js';
+		import {sample_langs, type Code_Sample} from '../../../lib/code_sample.js';
 
 		export type Sample_Key = ${type_keys};
 

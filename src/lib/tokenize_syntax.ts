@@ -57,7 +57,7 @@ const match_grammar = (
 		}
 
 		for (var j = 0; j < patterns.length; ++j) {
-			if (rematch && rematch.cause === token + ',' + j) {
+			if (rematch?.cause === token + ',' + j) {
 				return;
 			}
 

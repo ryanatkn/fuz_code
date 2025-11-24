@@ -118,7 +118,7 @@ const html = syntax_styler_global.stylize(code, 'ts');
 
 ### Sample Files
 
-Test samples in `src/lib/samples/sample_*.{lang}` are the source of truth.
+Test samples in `src/test/fixtures/samples/sample_*.{lang}` are the source of truth.
 
 ### Fixtures
 
@@ -129,7 +129,7 @@ Generated fixtures in `src/test/fixtures/{lang}/`:
 
 ### Workflow
 
-1. Edit samples in `src/lib/samples/`
+1. Edit samples in `src/test/fixtures/samples/`
 2. Run `gro src/test/fixtures/update` to regenerate
 3. Run `gro test src/test/fixtures/check` to verify
 4. Review changes with `git diff src/test/fixtures/`
@@ -243,5 +243,5 @@ The position calculation happens during range creation. If positions are wrong:
 1. Create `src/lib/grammar_{lang}.ts`
 2. Define grammar patterns (see existing languages)
 3. Register in `syntax_styler_global.ts`
-4. Add samples in `src/lib/samples/sample_{variant}.{lang}`
+4. Add samples in `src/test/fixtures/samples/sample_{variant}.{lang}`
 5. Generate fixtures and test
