@@ -10,8 +10,6 @@
 	const pkg = pkg_context.get();
 </script>
 
-<Docs_Content {tomes} {pkg}>
-	{#snippet repo_name()}
-		<h1 class="mb_sm">fuz_code</h1>
-	{/snippet}
-</Docs_Content>
+<div class="pt_xl3">
+	<Docs_Content {tomes} {pkg}></Docs_Content>
+</div>

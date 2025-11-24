@@ -14,7 +14,7 @@
 
 <main class="box width_100">
 	<div class="width_upto_md">
-		<section class="box">
+		<section class="box" style:padding-top="var(--docs_primary_nav_height, 60px)">
 			<Package_Summary {pkg} />
 		</section>
 		<section class="box">
