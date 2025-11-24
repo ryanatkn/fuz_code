@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.35.0
+
+### Minor Changes
+
+- unpublish samples ([#24](https://github.com/ryanatkn/fuz_code/pull/24))
+
 ## 0.34.0
 
 ### Minor Changes
