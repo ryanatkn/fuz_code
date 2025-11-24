@@ -6,13 +6,19 @@
 	import '$routes/style.css';
 
 	import Themed from '@ryanatkn/fuz/Themed.svelte';
+	import {Pkg, pkg_context} from '@ryanatkn/fuz/pkg.svelte.js';
 	import type {Snippet} from 'svelte';
+
+	import {package_json, src_json} from '$routes/package.js';
 
 	const {
 		children,
 	}: {
 		children: Snippet;
 	} = $props();
+
+	const pkg = new Pkg(package_json, src_json);
+	pkg_context.set(pkg);
 </script>
 
 <svelte:head>

@@ -1,15 +1,15 @@
 <script lang="ts">
 	import Package_Summary from '@ryanatkn/fuz/Package_Summary.svelte';
 	import Docs_Footer from '@ryanatkn/fuz/Docs_Footer.svelte';
-	import {Pkg} from '@ryanatkn/fuz/pkg.svelte.js';
+	import Card from '@ryanatkn/fuz/Card.svelte';
+	import {pkg_context} from '@ryanatkn/fuz/pkg.svelte.js';
 	import {resolve} from '$app/paths';
 
 	import Code_Tome from '$routes/Code_Tome.svelte';
-	import {package_json, src_json} from '$routes/package.js';
 
 	// import '$lib/benchmark.js';
 
-	const pkg = new Pkg(package_json, src_json);
+	const pkg = pkg_context.get();
 </script>
 
 <main class="box width_100">
@@ -18,11 +18,7 @@
 			<Package_Summary {pkg} />
 		</section>
 		<section class="box">
-			<aside class="width_upto_sm">
-				⚠️ Docs are a work in progress. This page has usage examples with the optional Svelte
-				component, and the <a href="https://github.com/ryanatkn/fuz_code">readme</a> has TypeScript usage
-				docs.
-			</aside>
+			<Card href={resolve('/docs')}>docs{#snippet icon()}{pkg.package_json.glyph}{/snippet}</Card>
 		</section>
 		<section class="box gap_xl3 font_size_xl2">
 			<div class="panel box p_lg gap_sm">
