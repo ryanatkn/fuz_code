@@ -111,10 +111,6 @@
       "svelte": "./dist/*.svelte",
       "default": "./dist/*.svelte"
     },
-    "./*.json": {
-      "types": "./dist/*.json.d.ts",
-      "default": "./dist/*.json"
-    },
     "./*.css": {
       "default": "./dist/*.css"
     }

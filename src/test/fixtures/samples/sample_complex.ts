@@ -116,8 +116,8 @@ const comment = false;
  * JSDoc comment
  */
 
-import {sample_langs, type Sample_Lang} from '../code_sample.js';
-import * as A from '../code_sample.js';
+import {sample_langs, type Sample_Lang} from '../../../lib/code_sample.js';
+import * as A from '../../../lib/code_sample.js';
 
 export {a, A, b, c, D};
 

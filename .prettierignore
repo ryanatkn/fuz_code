@@ -1,2 +1,2 @@
 src/test/fixtures/generated/**
-src/lib/samples/sample_*.*
+src/test/fixtures/samples/sample_*.*
