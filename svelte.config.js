@@ -11,7 +11,10 @@ export default {
 	kit: {
 		adapter: adapter(),
 		paths: {relative: false}, // use root-absolute paths for SSR path comparison: https://kit.svelte.dev/docs/configuration#paths
-		alias: {$routes: 'src/routes'},
+		alias: {
+			$routes: 'src/routes',
+			'@ryanatkn/fuz_code': 'src/lib',
+		},
 		csp: {
 			directives: create_csp_directives({
 				trusted_sources: csp_trusted_sources_of_ryanatkn,
