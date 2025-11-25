@@ -48,7 +48,7 @@
 
 ### Minor Changes
 
-- rename `Syntax_Grammar_Raw` from `Syntax_Grammar` and `Syntax_Grammar` from `Normalized_Syntax_Grammar` ([#20](https://github.com/ryanatkn/fuz_code/pull/20))
+- rename `SyntaxGrammarRaw` from `SyntaxGrammar` and `SyntaxGrammar` from `NormalizedSyntaxGrammar` ([#20](https://github.com/ryanatkn/fuz_code/pull/20))
 
 ## 0.28.0
 
@@ -73,7 +73,7 @@
 
 ### Minor Changes
 
-- rename `Grammar` to `Syntax_Grammar` ([#13](https://github.com/ryanatkn/fuz_code/pull/13))
+- rename `Grammar` to `SyntaxGrammar` ([#13](https://github.com/ryanatkn/fuz_code/pull/13))
 - improve token styles ([#14](https://github.com/ryanatkn/fuz_code/pull/14))
 - factor out `tokenize_syntax` into its own module ([#13](https://github.com/ryanatkn/fuz_code/pull/13))
 

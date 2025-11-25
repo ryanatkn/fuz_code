@@ -1,16 +1,16 @@
 import {test, assert, describe, beforeEach, afterEach} from 'vitest';
-import {Highlight_Manager, supports_css_highlight_api} from '$lib/highlight_manager.js';
-import {Syntax_Token, type Syntax_Token_Stream} from '$lib/syntax_token.js';
+import {HighlightManager, supports_css_highlight_api} from '$lib/highlight_manager.js';
+import {SyntaxToken, type SyntaxTokenStream} from '$lib/syntax_token.js';
 import {
 	setup_mock_highlight_api,
 	restore_globals,
 	create_code_element,
 	create_code_element_with_comment,
-	type Saved_Globals,
+	type SavedGlobals,
 } from './highlight_test_helpers.js';
 
 /**
- * Test suite for Highlight_Manager
+ * Test suite for HighlightManager
  *
  * Tests organized by domain:
  * - Initialization and API detection
@@ -20,7 +20,7 @@ import {
  * - Edge cases and error conditions
  */
 
-let saved_globals: Saved_Globals;
+let saved_globals: SavedGlobals;
 
 beforeEach(() => {
 	saved_globals = setup_mock_highlight_api();
@@ -68,24 +68,24 @@ describe('initialization', () => {
 		const saved_css = (globalThis as any).CSS;
 		delete (globalThis as any).CSS;
 
-		assert.throws(() => new Highlight_Manager(), /CSS Highlights API not supported/);
+		assert.throws(() => new HighlightManager(), /CSS Highlights API not supported/);
 
 		(globalThis as any).CSS = saved_css;
 	});
 
 	test('constructor initializes with empty element_ranges map', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		assert.equal(manager.element_ranges.size, 0);
 	});
 });
 
 describe('DOM element handling', () => {
 	test('throws if element has no text node', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = {
 			childNodes: [], // No children
 		} as unknown as Element;
-		const tokens: Syntax_Token_Stream = [];
+		const tokens: SyntaxTokenStream = [];
 
 		assert.throws(
 			() => manager.highlight_from_syntax_tokens(element, tokens),
@@ -94,11 +94,11 @@ describe('DOM element handling', () => {
 	});
 
 	test('finds text node as first child', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('const x = 1;');
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token('keyword', 'const', undefined, 'const'),
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken('keyword', 'const', undefined, 'const'),
 			' x = 1;',
 		];
 
@@ -107,11 +107,11 @@ describe('DOM element handling', () => {
 	});
 
 	test('finds text node after comment nodes', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element_with_comment('const x = 1;');
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token('keyword', 'const', undefined, 'const'),
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken('keyword', 'const', undefined, 'const'),
 			' x = 1;',
 		];
 
@@ -120,10 +120,10 @@ describe('DOM element handling', () => {
 	});
 
 	test('handles empty text node', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('');
 
-		const tokens: Syntax_Token_Stream = [];
+		const tokens: SyntaxTokenStream = [];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 		assert.equal(manager.element_ranges.size, 0);
@@ -132,15 +132,15 @@ describe('DOM element handling', () => {
 
 describe('range creation', () => {
 	test('creates ranges for simple token stream', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('const x = 1;');
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token('keyword', 'const', undefined, 'const'),
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken('keyword', 'const', undefined, 'const'),
 			' ',
-			new Syntax_Token('variable', 'x', undefined, 'x'),
+			new SyntaxToken('variable', 'x', undefined, 'x'),
 			' = ',
-			new Syntax_Token('number', '1', undefined, '1'),
+			new SyntaxToken('number', '1', undefined, '1'),
 			';',
 		];
 
@@ -154,12 +154,12 @@ describe('range creation', () => {
 	});
 
 	test('creates ranges for token with string content', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('keyword');
 
 		// Token where content is a string (not nested array)
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token('keyword', 'keyword', undefined, 'keyword'),
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken('keyword', 'keyword', undefined, 'keyword'),
 		];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
@@ -172,26 +172,26 @@ describe('range creation', () => {
 	});
 
 	test('creates ranges for nested tokens', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('`hello ${name}`');
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token(
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken(
 				'template_string',
 				[
-					new Syntax_Token('punctuation', '`', undefined, '`'),
+					new SyntaxToken('punctuation', '`', undefined, '`'),
 					'hello ',
-					new Syntax_Token(
+					new SyntaxToken(
 						'interpolation',
 						[
-							new Syntax_Token('punctuation', '${', undefined, '${'),
-							new Syntax_Token('variable', 'name', undefined, 'name'),
-							new Syntax_Token('punctuation', '}', undefined, '}'),
+							new SyntaxToken('punctuation', '${', undefined, '${'),
+							new SyntaxToken('variable', 'name', undefined, 'name'),
+							new SyntaxToken('punctuation', '}', undefined, '}'),
 						],
 						undefined,
 						'${name}',
 					),
-					new Syntax_Token('punctuation', '`', undefined, '`'),
+					new SyntaxToken('punctuation', '`', undefined, '`'),
 				],
 				undefined,
 				'`hello ${name}`',
@@ -208,19 +208,19 @@ describe('range creation', () => {
 	});
 
 	test('creates ranges for deeply nested tokens (4 levels)', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('abcd');
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token(
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken(
 				'level1',
 				[
-					new Syntax_Token(
+					new SyntaxToken(
 						'level2',
 						[
-							new Syntax_Token(
+							new SyntaxToken(
 								'level3',
-								[new Syntax_Token('level4', 'a', undefined, 'a'), 'bcd'],
+								[new SyntaxToken('level4', 'a', undefined, 'a'), 'bcd'],
 								undefined,
 								'abcd',
 							),
@@ -249,18 +249,18 @@ describe('range creation', () => {
 	});
 
 	test('creates ranges for mixed nested content (strings and tokens)', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('a-b-c');
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token(
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken(
 				'outer',
 				[
-					new Syntax_Token('part1', 'a', undefined, 'a'),
+					new SyntaxToken('part1', 'a', undefined, 'a'),
 					'-',
-					new Syntax_Token('part2', 'b', undefined, 'b'),
+					new SyntaxToken('part2', 'b', undefined, 'b'),
 					'-',
-					new Syntax_Token('part3', 'c', undefined, 'c'),
+					new SyntaxToken('part3', 'c', undefined, 'c'),
 				],
 				undefined,
 				'a-b-c',
@@ -283,11 +283,11 @@ describe('range creation', () => {
 	});
 
 	test('creates separate ranges for aliases', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('function');
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token('keyword', 'function', ['reserved', 'special_keyword'], 'function'),
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken('keyword', 'function', ['reserved', 'special_keyword'], 'function'),
 		];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
@@ -304,10 +304,10 @@ describe('range creation', () => {
 	});
 
 	test('handles token stream with only strings', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('plain text');
 
-		const tokens: Syntax_Token_Stream = ['plain text'];
+		const tokens: SyntaxTokenStream = ['plain text'];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 
@@ -316,10 +316,10 @@ describe('range creation', () => {
 	});
 
 	test('adds ranges to global CSS.highlights registry', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('const');
 
-		const tokens: Syntax_Token_Stream = [new Syntax_Token('keyword', 'const', undefined, 'const')];
+		const tokens: SyntaxTokenStream = [new SyntaxToken('keyword', 'const', undefined, 'const')];
 
 		assert.equal(CSS.highlights.size, 0);
 
@@ -331,10 +331,10 @@ describe('range creation', () => {
 	});
 
 	test('prefixes token types with "token_"', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('test');
 
-		const tokens: Syntax_Token_Stream = [new Syntax_Token('mytype', 'test', undefined, 'test')];
+		const tokens: SyntaxTokenStream = [new SyntaxToken('mytype', 'test', undefined, 'test')];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 
@@ -344,10 +344,10 @@ describe('range creation', () => {
 	});
 
 	test('sets highlight priority from highlight_priorities', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('const');
 
-		const tokens: Syntax_Token_Stream = [new Syntax_Token('keyword', 'const', undefined, 'const')];
+		const tokens: SyntaxTokenStream = [new SyntaxToken('keyword', 'const', undefined, 'const')];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 
@@ -359,15 +359,15 @@ describe('range creation', () => {
 
 describe('position tracking', () => {
 	test('correctly tracks positions through simple tokens', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('a b c');
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token('a', 'a', undefined, 'a'), // pos 0-1
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken('a', 'a', undefined, 'a'), // pos 0-1
 			' ', // pos 1-2
-			new Syntax_Token('b', 'b', undefined, 'b'), // pos 2-3
+			new SyntaxToken('b', 'b', undefined, 'b'), // pos 2-3
 			' ', // pos 3-4
-			new Syntax_Token('c', 'c', undefined, 'c'), // pos 4-5
+			new SyntaxToken('c', 'c', undefined, 'c'), // pos 4-5
 		];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
@@ -386,15 +386,15 @@ describe('position tracking', () => {
 	});
 
 	test('correctly tracks positions through nested tokens', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('abc');
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token(
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken(
 				'outer',
 				[
-					new Syntax_Token('inner1', 'a', undefined, 'a'), // pos 0-1
-					new Syntax_Token('inner2', 'bc', undefined, 'bc'), // pos 1-3
+					new SyntaxToken('inner1', 'a', undefined, 'a'), // pos 0-1
+					new SyntaxToken('inner2', 'bc', undefined, 'bc'), // pos 1-3
 				],
 				undefined,
 				'abc',
@@ -416,10 +416,10 @@ describe('position tracking', () => {
 	});
 
 	test('handles token at position 0 (start boundary)', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('abc');
 
-		const tokens: Syntax_Token_Stream = [new Syntax_Token('start', 'a', undefined, 'a'), 'bc'];
+		const tokens: SyntaxTokenStream = [new SyntaxToken('start', 'a', undefined, 'a'), 'bc'];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 
@@ -429,10 +429,10 @@ describe('position tracking', () => {
 	});
 
 	test('handles token at end of text (end boundary)', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('abc');
 
-		const tokens: Syntax_Token_Stream = ['ab', new Syntax_Token('end', 'c', undefined, 'c')];
+		const tokens: SyntaxTokenStream = ['ab', new SyntaxToken('end', 'c', undefined, 'c')];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 
@@ -442,16 +442,16 @@ describe('position tracking', () => {
 	});
 
 	test('validates nested content length matches parent token', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('abc');
 
 		// Token with mismatched lengths: outer claims 3 chars but nested content only has 2
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token(
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken(
 				'outer',
 				[
-					new Syntax_Token('inner1', 'a', undefined, 'a'), // 1 char
-					new Syntax_Token('inner2', 'b', undefined, 'b'), // 1 char
+					new SyntaxToken('inner1', 'a', undefined, 'a'), // 1 char
+					new SyntaxToken('inner2', 'b', undefined, 'b'), // 1 char
 					// Nested tokens total: 2 chars
 				],
 				undefined,
@@ -470,12 +470,12 @@ describe('position tracking', () => {
 
 describe('error handling', () => {
 	test('validates token position does not exceed text node length', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('abc'); // 3 characters
 
 		// Token claims to be longer than the text
-		const bad_token = new Syntax_Token('bad', 'abcd', undefined, 'abcd'); // 4 chars
-		const tokens: Syntax_Token_Stream = [bad_token];
+		const bad_token = new SyntaxToken('bad', 'abcd', undefined, 'abcd'); // 4 chars
+		const tokens: SyntaxTokenStream = [bad_token];
 
 		// Validates bounds before creating range
 		assert.throws(
@@ -485,12 +485,12 @@ describe('error handling', () => {
 	});
 
 	test('validates token stream matches text content length', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('abc'); // 3 characters
 
 		// Tokens only cover 2 characters
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token('keyword', 'ab', undefined, 'ab'),
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken('keyword', 'ab', undefined, 'ab'),
 			// Missing 'c'
 		];
 
@@ -502,17 +502,17 @@ describe('error handling', () => {
 	});
 
 	test('handles emoji and multi-byte characters', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const emoji = '🎨';
 		const element = create_code_element(`${emoji} = 1;`);
 
 		// JavaScript string length vs DOM position
 		assert.equal(emoji.length, 2); // UTF-16 code units
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token('variable', emoji, undefined, emoji),
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken('variable', emoji, undefined, emoji),
 			' = ',
-			new Syntax_Token('number', '1', undefined, '1'),
+			new SyntaxToken('number', '1', undefined, '1'),
 			';',
 		];
 
@@ -534,12 +534,12 @@ describe('error handling', () => {
 	});
 
 	test('wraps range creation errors with context', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('x');
 
 		// Create token with invalid position
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token('bad', 'xy', undefined, 'xy'), // Extends beyond text
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken('bad', 'xy', undefined, 'xy'), // Extends beyond text
 		];
 
 		try {
@@ -555,11 +555,11 @@ describe('error handling', () => {
 
 describe('lifecycle management', () => {
 	test('clear_element_ranges removes ranges from CSS.highlights', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('const x;');
 
-		const tokens: Syntax_Token_Stream = [
-			new Syntax_Token('keyword', 'const', undefined, 'const'),
+		const tokens: SyntaxTokenStream = [
+			new SyntaxToken('keyword', 'const', undefined, 'const'),
 			' x;',
 		];
 
@@ -571,13 +571,13 @@ describe('lifecycle management', () => {
 	});
 
 	test('clear_element_ranges only removes own ranges from shared highlights', () => {
-		const manager1 = new Highlight_Manager();
-		const manager2 = new Highlight_Manager();
+		const manager1 = new HighlightManager();
+		const manager2 = new HighlightManager();
 
 		const element1 = create_code_element('const');
 		const element2 = create_code_element('const');
 
-		const tokens: Syntax_Token_Stream = [new Syntax_Token('keyword', 'const', undefined, 'const')];
+		const tokens: SyntaxTokenStream = [new SyntaxToken('keyword', 'const', undefined, 'const')];
 
 		manager1.highlight_from_syntax_tokens(element1, tokens);
 		manager2.highlight_from_syntax_tokens(element2, tokens);
@@ -591,10 +591,10 @@ describe('lifecycle management', () => {
 	});
 
 	test('clear_element_ranges throws if highlight unexpectedly missing', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('const');
 
-		const tokens: Syntax_Token_Stream = [new Syntax_Token('keyword', 'const', undefined, 'const')];
+		const tokens: SyntaxTokenStream = [new SyntaxToken('keyword', 'const', undefined, 'const')];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 
@@ -608,10 +608,10 @@ describe('lifecycle management', () => {
 	});
 
 	test('clear_element_ranges deletes highlight when last range removed', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('const');
 
-		const tokens: Syntax_Token_Stream = [new Syntax_Token('keyword', 'const', undefined, 'const')];
+		const tokens: SyntaxTokenStream = [new SyntaxToken('keyword', 'const', undefined, 'const')];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 		assert.ok(CSS.highlights.has('token_keyword'));
@@ -622,7 +622,7 @@ describe('lifecycle management', () => {
 	});
 
 	test('clear_element_ranges can be called multiple times safely', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 
 		manager.clear_element_ranges();
 		manager.clear_element_ranges();
@@ -631,10 +631,10 @@ describe('lifecycle management', () => {
 	});
 
 	test('destroy calls clear_element_ranges', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('const');
 
-		const tokens: Syntax_Token_Stream = [new Syntax_Token('keyword', 'const', undefined, 'const')];
+		const tokens: SyntaxTokenStream = [new SyntaxToken('keyword', 'const', undefined, 'const')];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 		assert.equal(manager.element_ranges.size, 1);
@@ -645,12 +645,12 @@ describe('lifecycle management', () => {
 	});
 
 	test('highlight_from_syntax_tokens clears previous highlights', () => {
-		const manager = new Highlight_Manager();
+		const manager = new HighlightManager();
 		const element = create_code_element('const');
 
-		const tokens1: Syntax_Token_Stream = [new Syntax_Token('keyword', 'const', undefined, 'const')];
-		const tokens2: Syntax_Token_Stream = [
-			new Syntax_Token('variable', 'const', undefined, 'const'),
+		const tokens1: SyntaxTokenStream = [new SyntaxToken('keyword', 'const', undefined, 'const')];
+		const tokens2: SyntaxTokenStream = [
+			new SyntaxToken('variable', 'const', undefined, 'const'),
 		];
 
 		manager.highlight_from_syntax_tokens(element, tokens1);
@@ -667,17 +667,17 @@ describe('lifecycle management', () => {
 
 describe('multiple managers', () => {
 	test('multiple managers share global CSS.highlights registry', () => {
-		const manager1 = new Highlight_Manager();
-		const manager2 = new Highlight_Manager();
+		const manager1 = new HighlightManager();
+		const manager2 = new HighlightManager();
 
 		const element1 = create_code_element('const');
 		const element2 = create_code_element('let');
 
 		manager1.highlight_from_syntax_tokens(element1, [
-			new Syntax_Token('keyword', 'const', undefined, 'const'),
+			new SyntaxToken('keyword', 'const', undefined, 'const'),
 		]);
 		manager2.highlight_from_syntax_tokens(element2, [
-			new Syntax_Token('keyword', 'let', undefined, 'let'),
+			new SyntaxToken('keyword', 'let', undefined, 'let'),
 		]);
 
 		// Both contribute to same global highlight
@@ -686,17 +686,17 @@ describe('multiple managers', () => {
 	});
 
 	test('managers maintain independent element_ranges', () => {
-		const manager1 = new Highlight_Manager();
-		const manager2 = new Highlight_Manager();
+		const manager1 = new HighlightManager();
+		const manager2 = new HighlightManager();
 
 		const element1 = create_code_element('const');
 		const element2 = create_code_element('let');
 
 		manager1.highlight_from_syntax_tokens(element1, [
-			new Syntax_Token('keyword', 'const', undefined, 'const'),
+			new SyntaxToken('keyword', 'const', undefined, 'const'),
 		]);
 		manager2.highlight_from_syntax_tokens(element2, [
-			new Syntax_Token('keyword', 'let', undefined, 'let'),
+			new SyntaxToken('keyword', 'let', undefined, 'let'),
 		]);
 
 		// Each has their own range

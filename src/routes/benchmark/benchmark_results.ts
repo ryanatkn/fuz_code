@@ -1,17 +1,17 @@
 import {fmt} from './benchmark_stats.js';
-import type {Benchmark_Result} from './benchmark_types.js';
+import type {BenchmarkResult} from './benchmark_types.js';
 
 /**
  * Column definitions for benchmark results table
  */
-export interface Result_Column {
+export interface ResultColumn {
 	header: string;
-	key: keyof Benchmark_Result;
-	format: (value: any, result: Benchmark_Result) => string;
-	class?: (value: any, result: Benchmark_Result) => string;
+	key: keyof BenchmarkResult;
+	format: (value: any, result: BenchmarkResult) => string;
+	class?: (value: any, result: BenchmarkResult) => string;
 }
 
-export const RESULT_COLUMNS: Array<Result_Column> = [
+export const RESULT_COLUMNS: Array<ResultColumn> = [
 	{
 		header: 'Language',
 		key: 'language',
@@ -76,7 +76,7 @@ export const RESULT_COLUMNS: Array<Result_Column> = [
 /**
  * Convert benchmark results to a markdown table
  */
-export const results_to_markdown = (results: Array<Benchmark_Result>): string => {
+export const results_to_markdown = (results: Array<BenchmarkResult>): string => {
 	if (results.length === 0) return '';
 
 	// Header

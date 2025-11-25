@@ -11,12 +11,12 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	import {syntax_styler_global} from './syntax_styler_global.js';
-	import type {Syntax_Styler, Syntax_Grammar} from './syntax_styler.js';
+	import type {SyntaxStyler, SyntaxGrammar} from './syntax_styler.js';
 	import {tokenize_syntax} from './tokenize_syntax.js';
 	import {
-		Highlight_Manager,
+		HighlightManager,
 		supports_css_highlight_api,
-		type Highlight_Mode,
+		type HighlightMode,
 	} from './highlight_manager.js';
 
 	const {
@@ -63,7 +63,7 @@
 		 *
 		 * @default 'auto'
 		 */
-		mode?: Highlight_Mode;
+		mode?: HighlightMode;
 		/**
 		 * Optional custom grammar object for syntax tokenization.
 		 *
@@ -80,7 +80,7 @@
 		 *
 		 * @default undefined (uses grammar from `syntax_styler.langs[lang]`)
 		 */
-		grammar?: Syntax_Grammar | undefined;
+		grammar?: SyntaxGrammar | undefined;
 		/**
 		 * Whether to render as inline code or block code.
 		 * Controls display via CSS classes.
@@ -103,12 +103,12 @@
 		 */
 		wrap?: boolean;
 		/**
-		 * Custom Syntax_Styler instance to use for highlighting.
+		 * Custom SyntaxStyler instance to use for highlighting.
 		 * Allows using a different styler with custom grammars or configuration.
 		 *
 		 * @default syntax_styler_global
 		 */
-		syntax_styler?: Syntax_Styler;
+		syntax_styler?: SyntaxStyler;
 		/**
 		 * Optional snippet to customize how the highlighted markup is rendered.
 		 * - In HTML mode: receives the generated HTML string
@@ -121,7 +121,7 @@
 
 	const supports_ranges = supports_css_highlight_api();
 
-	const highlight_manager = supports_ranges ? new Highlight_Manager() : null;
+	const highlight_manager = supports_ranges ? new HighlightManager() : null;
 
 	const use_ranges = $derived(supports_ranges && (mode === 'ranges' || mode === 'auto'));
 
@@ -136,7 +136,7 @@
 				const langs = Object.keys(syntax_styler.langs).join(', ');
 				// eslint-disable-next-line no-console
 				console.error(
-					`[Code_Highlight] Language "${lang}" is not supported and no custom grammar provided. ` +
+					`[CodeHighlight] Language "${lang}" is not supported and no custom grammar provided. ` +
 						`Highlighting disabled. Supported: ${langs}`,
 				);
 			}

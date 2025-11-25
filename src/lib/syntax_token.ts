@@ -1,4 +1,4 @@
-export class Syntax_Token {
+export class SyntaxToken {
 	/**
 	 * The type of the token.
 	 *
@@ -11,7 +11,7 @@ export class Syntax_Token {
 	 *
 	 * This will be a token stream if the pattern matched also defined an `inside` grammar.
 	 */
-	content: string | Syntax_Token_Stream;
+	content: string | SyntaxTokenStream;
 
 	/**
 	 * The alias(es) of the token.
@@ -23,7 +23,7 @@ export class Syntax_Token {
 
 	constructor(
 		type: string,
-		content: string | Syntax_Token_Stream,
+		content: string | SyntaxTokenStream,
 		alias: string | Array<string> | undefined,
 		matched_str: string = '',
 	) {
@@ -36,7 +36,7 @@ export class Syntax_Token {
 }
 
 /**
- * A token stream is an array of strings and `Syntax_Token` objects.
+ * A token stream is an array of strings and `SyntaxToken` objects.
  *
  * Syntax token streams have to fulfill a few properties that are assumed by most functions (mostly internal ones) that process
  * them.
@@ -46,4 +46,4 @@ export class Syntax_Token {
  *
  *    The only exception here is the token stream that only contains the empty string and nothing else.
  */
-export type Syntax_Token_Stream = Array<string | Syntax_Token>;
+export type SyntaxTokenStream = Array<string | SyntaxToken>;

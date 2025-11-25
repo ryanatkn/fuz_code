@@ -3,17 +3,17 @@ import {search_fs} from '@ryanatkn/gro/search_fs.js';
 import {basename, join, relative} from 'node:path';
 import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 import {tokenize_syntax} from '$lib/tokenize_syntax.js';
-import {type Syntax_Token_Stream, Syntax_Token} from '$lib/syntax_token.js';
+import {type SyntaxTokenStream, SyntaxToken} from '$lib/syntax_token.js';
 
-export interface Sample_Spec {
+export interface SampleSpec {
 	lang: string;
 	variant: string;
 	content: string;
 	filepath: string;
 }
 
-export interface Generated_Output {
-	sample: Sample_Spec;
+export interface GeneratedOutput {
+	sample: SampleSpec;
 	tokens: Array<any>;
 	html: string;
 }
@@ -21,12 +21,12 @@ export interface Generated_Output {
 /**
  * Discover all sample files in src/test/fixtures/samples
  */
-export const discover_samples = (): Array<Sample_Spec> => {
+export const discover_samples = (): Array<SampleSpec> => {
 	const sample_files = search_fs('src/test/fixtures/samples', {
 		file_filter: (path) => /sample_[^/]+\.(ts|css|html|json|svelte|md)$/.test(path),
 	});
 
-	const samples: Array<Sample_Spec> = [];
+	const samples: Array<SampleSpec> = [];
 
 	for (const file of sample_files) {
 		const filename = basename(file.id);
@@ -62,7 +62,7 @@ export const get_fixture_path = (
 /**
  * Generate syntax HTML output for a sample
  */
-export const generate_syntax_output = (sample: Sample_Spec): string => {
+export const generate_syntax_output = (sample: SampleSpec): string => {
 	return syntax_styler_global.stylize(sample.content, sample.lang);
 };
 
@@ -70,7 +70,7 @@ export const generate_syntax_output = (sample: Sample_Spec): string => {
  * Extract all tokens with positions for fixture generation
  */
 const extract_all_tokens = (
-	tokens: Syntax_Token_Stream,
+	tokens: SyntaxTokenStream,
 	offset: number = 0,
 ): Array<{type: string; start: number; end: number}> => {
 	const result: Array<{type: string; start: number; end: number}> = [];
@@ -80,7 +80,7 @@ const extract_all_tokens = (
 		if (typeof token === 'string') {
 			// Plain text, advance position
 			pos += token.length;
-		} else if (token instanceof Syntax_Token) {
+		} else if (token instanceof SyntaxToken) {
 			const start = pos;
 			const length = get_token_length(token);
 			const end = start + length;
@@ -108,7 +108,7 @@ const extract_all_tokens = (
 /**
  * Calculate the total text length of a token
  */
-const get_token_length = (token: Syntax_Token): number => {
+const get_token_length = (token: SyntaxToken): number => {
 	if (typeof token.content === 'string') {
 		return token.content.length;
 	}
@@ -127,7 +127,7 @@ const get_token_length = (token: Syntax_Token): number => {
 /**
  * Generate token data from syntax styler
  */
-export const generate_token_data = (sample: Sample_Spec): Array<any> => {
+export const generate_token_data = (sample: SampleSpec): Array<any> => {
 	// Get tokens from syntax styler and extract all with positions
 	const grammar = syntax_styler_global.get_lang(sample.lang);
 	const tokens = tokenize_syntax(sample.content, grammar);
@@ -139,7 +139,7 @@ export const generate_token_data = (sample: Sample_Spec): Array<any> => {
 /**
  * Process a sample to generate all outputs
  */
-export const process_sample = (sample: Sample_Spec): Generated_Output => {
+export const process_sample = (sample: SampleSpec): GeneratedOutput => {
 	const html = generate_syntax_output(sample);
 	const tokens = generate_token_data(sample);
 
@@ -153,7 +153,7 @@ export const process_sample = (sample: Sample_Spec): Generated_Output => {
 /**
  * Generate debug text output for a sample
  */
-export const generate_debug_text = (output: Generated_Output): string => {
+export const generate_debug_text = (output: GeneratedOutput): string => {
 	const {sample, tokens} = output;
 
 	let debug = '=== STATS ===\n';

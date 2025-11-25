@@ -58,9 +58,9 @@ export const gen: Gen = {
 		return `
 			${banner}
 
-			export type Highlight_Token_Name = ${token_names};
+			export type HighlightTokenName = ${token_names};
 
-			export const highlight_priorities: Record<Highlight_Token_Name, number | undefined> = {
+			export const highlight_priorities: Record<HighlightTokenName, number | undefined> = {
 			${priority_entries},
 			} as const;
 

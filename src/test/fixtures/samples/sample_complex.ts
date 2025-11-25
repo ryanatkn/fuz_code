@@ -4,7 +4,7 @@ const b: string = 'b';
 
 const c = true;
 
-export type Some_Type = 1 | 'b' | true;
+export type SomeType = 1 | 'b' | true;
 
 declare const some_decorator: any;
 
@@ -116,14 +116,14 @@ const comment = false;
  * JSDoc comment
  */
 
-import {sample_langs, type Sample_Lang} from '../../../lib/code_sample.js';
+import {sample_langs, type SampleLang} from '../../../lib/code_sample.js';
 import * as A from '../../../lib/code_sample.js';
 
 export {a, A, b, c, D};
 
-sample_langs as unknown as Sample_Lang satisfies Sample_Lang;
+sample_langs as unknown as SampleLang satisfies SampleLang;
 
-export interface Some_E<T = null> {
+export interface SomeE<T = null> {
 	name: string;
 	age: number;
 	t?: T;
@@ -131,7 +131,7 @@ export interface Some_E<T = null> {
 
 const e: {name: string; age: number} = {name: 'A. H.', age: 100};
 const v = [['', e]] as const;
-export const some_e: Map<string, Some_E> = new Map(v);
+export const some_e: Map<string, SomeE> = new Map(v);
 
 export function add(x: number, y: number): number {
 	return x + y;

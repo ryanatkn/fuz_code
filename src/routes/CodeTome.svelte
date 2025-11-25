@@ -2,24 +2,24 @@
 	import {resolve} from '$app/paths';
 
 	// import Tome from '@ryanatkn/fuz/Tome.svelte';
-	// import Docs_Item from '@ryanatkn/fuz/Docs_Item.svelte';
-	// import Tome_Link from '@ryanatkn/fuz/Tome_Link.svelte';
-	import Tome_Link from '$routes/Tome_Link.svelte';
+	// import DocsItem from '@ryanatkn/fuz/DocsItem.svelte';
+	// import TomeLink from '@ryanatkn/fuz/TomeLink.svelte';
+	import TomeLink from '$routes/TomeLink.svelte';
 	import Code from '$lib/Code.svelte';
 
-	// TODO what convention? `Docs_Tome`? Maybe just `Tome`? `/tomes`? both? what other options?
+	// TODO what convention? `DocsTome`? Maybe just `Tome`? `/tomes`? both? what other options?
 
 	// const LIBRARY_ITEM_NAME = 'Code';
 </script>
 
 <!-- eslint-disable svelte/no-useless-mustaches -->
 
-<!-- <Docs_Item name={LIBRARY_ITEM_NAME}> -->
+<!-- <DocsItem name={LIBRARY_ITEM_NAME}> -->
 <section>
 	<h2 class="mt_0">Usage</h2>
 	<p>
 		The
-		<Tome_Link name="Code" />
+		<TomeLink name="Code" />
 		Svelte component supports syntax styling originally based on
 		<a href="https://github.com/PrismJS/prism">Prism</a> by
 		<a href="https://lea.verou.me/">Lea Verou</a>.
@@ -30,7 +30,7 @@
 		content="// +layout.svelte
 import '@ryanatkn/fuz_code/theme.css'; // add this"
 	/>
-	<p>then use <Tome_Link name="Code" />:</p>
+	<p>then use <TomeLink name="Code" />:</p>
 	<Code
 		content={'<' +
 			`script>\n\t// Something.svelte\n\timport Code from '@ryanatkn/fuz_code/Code.svelte';\n</script>\n\n<Code content="<header>hello world</header>" />`}
@@ -56,7 +56,7 @@ import '@ryanatkn/fuz_code/theme_variables.css'; // also this if not using Moss"
 	<h3>Caveats</h3>
 	<p>
 		The <code>Code</code> component generates HTML with CSS classes for text highlighting. It also
-		includes experimental support for the CSS Custom Highlight API with <code>Code_Highlight</code>,
+		includes experimental support for the CSS Custom Highlight API with <code>CodeHighlight</code>,
 		see the
 		<a href={resolve('/samples')}>samples</a>
 		for more.
@@ -70,7 +70,7 @@ import '@ryanatkn/fuz_code/theme_variables.css'; // also this if not using Moss"
 <section>
 	<h3>Svelte support</h3>
 	<p>
-		<Tome_Link name="Code" /> styles
+		<TomeLink name="Code" /> styles
 		<a href="https://svelte.dev/">Svelte</a>
 		by default, originally based on
 		<a href="https://github.com/pngwn/prism-svelte"><code>prism-svelte</code></a>
@@ -97,7 +97,7 @@ import '@ryanatkn/fuz_code/theme_variables.css'; // also this if not using Moss"
 <section>
 	<h3>TypeScript support</h3>
 	<p>
-		<Tome_Link name="Code" /> supports TypeScript with <code>lang="ts"</code>:
+		<TomeLink name="Code" /> supports TypeScript with <code>lang="ts"</code>:
 	</p>
 	<div class="mb_lg">
 		<Code content={`<Code lang="ts" content="export type A<T> = ('b' | 3) & T;" />`} />
@@ -109,7 +109,7 @@ import '@ryanatkn/fuz_code/theme_variables.css'; // also this if not using Moss"
 <section>
 	<h3>Markdown support</h3>
 	<p>
-		<Tome_Link name="Code" /> supports Markdown with <code>lang="md"</code>, and fenced blocks for
+		<TomeLink name="Code" /> supports Markdown with <code>lang="md"</code>, and fenced blocks for
 		all languages:
 	</p>
 	<div class="mb_lg">
@@ -132,7 +132,7 @@ import '@ryanatkn/fuz_code/theme_variables.css'; // also this if not using Moss"
 <section>
 	<h3>Layout</h3>
 	<p>
-		<Tome_Link name="Code" /> is a block by default:
+		<TomeLink name="Code" /> is a block by default:
 	</p>
 	<div>ab<Code content="c" /></div>
 	<Code content={'<div>ab<Code content="c" /></div>'} />

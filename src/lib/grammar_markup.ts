@@ -1,9 +1,9 @@
 import type {
-	Syntax_Styler,
-	Add_Syntax_Grammar,
-	Syntax_Grammar_Raw,
-	Syntax_Grammar_Token,
-	Syntax_Grammar,
+	SyntaxStyler,
+	AddSyntaxGrammar,
+	SyntaxGrammarRaw,
+	SyntaxGrammarToken,
+	SyntaxGrammar,
 } from './syntax_styler.js';
 
 /**
@@ -14,7 +14,7 @@ import type {
  *
  * @see LICENSE
  */
-export const add_grammar_markup: Add_Syntax_Grammar = (syntax_styler) => {
+export const add_grammar_markup: AddSyntaxGrammar = (syntax_styler) => {
 	const grammar_markup = {
 		comment: {
 			pattern: /<!--(?:(?!<!--)[\s\S])*?-->/,
@@ -85,7 +85,7 @@ export const add_grammar_markup: Add_Syntax_Grammar = (syntax_styler) => {
 			},
 			/&#x?[\da-f]{1,8};/i,
 		],
-	} satisfies Syntax_Grammar_Raw;
+	} satisfies SyntaxGrammarRaw;
 
 	grammar_markup.tag.inside.attr_value.inside.entity = grammar_markup.entity;
 
@@ -103,7 +103,7 @@ export const add_grammar_markup: Add_Syntax_Grammar = (syntax_styler) => {
  * @param lang - The language key.
  */
 export const grammar_markup_add_inlined = (
-	syntax_styler: Syntax_Styler,
+	syntax_styler: SyntaxStyler,
 	tag_name: string,
 	lang: string,
 	inside_lang = 'markup',
@@ -154,11 +154,11 @@ export const grammar_markup_add_inlined = (
  * @param lang - The language key.
  */
 export const grammar_markup_add_attribute = (
-	syntax_styler: Syntax_Styler,
+	syntax_styler: SyntaxStyler,
 	attr_name: string,
 	lang: string,
 ): void => {
-	// After normalization, grammar.tag is an array of Syntax_Grammar_Token
+	// After normalization, grammar.tag is an array of SyntaxGrammarToken
 	const markup_grammar = syntax_styler.get_lang('markup');
 	const tag_patterns = markup_grammar.tag;
 	const tag_inside = tag_patterns![0]!.inside!;
@@ -217,9 +217,9 @@ export const grammar_markup_add_attribute = (
 								inside: null,
 							},
 						],
-					} as Syntax_Grammar,
+					} as SyntaxGrammar,
 				},
 			],
-		} as Syntax_Grammar,
-	} satisfies Syntax_Grammar_Token);
+		} as SyntaxGrammar,
+	} satisfies SyntaxGrammarToken);
 };

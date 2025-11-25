@@ -4,7 +4,7 @@
 	import type {SvelteHTMLElements} from 'svelte/elements';
 
 	import {syntax_styler_global} from './syntax_styler_global.js';
-	import type {Syntax_Styler, Syntax_Grammar} from './syntax_styler.js';
+	import type {SyntaxStyler, SyntaxGrammar} from './syntax_styler.js';
 
 	const {
 		content,
@@ -52,7 +52,7 @@
 		 *
 		 * @default undefined (uses grammar from `syntax_styler.langs[lang]`)
 		 */
-		grammar?: Syntax_Grammar | undefined;
+		grammar?: SyntaxGrammar | undefined;
 		/**
 		 * Whether to render as inline code or block code.
 		 * Controls display via CSS classes.
@@ -75,12 +75,12 @@
 		 */
 		wrap?: boolean;
 		/**
-		 * Custom Syntax_Styler instance to use for highlighting.
+		 * Custom SyntaxStyler instance to use for highlighting.
 		 * Allows using a different styler with custom grammars or configuration.
 		 *
 		 * @default syntax_styler_global
 		 */
-		syntax_styler?: Syntax_Styler;
+		syntax_styler?: SyntaxStyler;
 		/**
 		 * Optional snippet to customize how the highlighted markup is rendered.
 		 * Receives the generated HTML string as a parameter.

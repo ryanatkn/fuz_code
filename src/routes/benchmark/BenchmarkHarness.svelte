@@ -1,16 +1,16 @@
 <script lang="ts">
 	import {tick, type Component} from 'svelte';
 
-	import type {Benchmark_Component_Props} from './benchmark_types.js';
-	import Benchmark_Instance from './Benchmark_Instance.svelte';
+	import type {BenchmarkComponentProps} from './benchmark_types.js';
+	import BenchmarkInstance from './BenchmarkInstance.svelte';
 	import {ensure_paint} from './benchmark_dom.js';
 
 	/* eslint-disable no-console */
 
 	const RENDER_TIMEOUT_MS = 10000;
 
-	let current_component: Component<Benchmark_Component_Props> | null = $state(null);
-	let current_props: Benchmark_Component_Props | null = $state(null);
+	let current_component: Component<BenchmarkComponentProps> | null = $state(null);
+	let current_props: BenchmarkComponentProps | null = $state(null);
 	let render_resolver: (() => void) | null = null;
 	let iteration_key = $state(0);
 	const handle_render_complete = () => {
@@ -22,8 +22,8 @@
 
 	let active_timeout_id: ReturnType<typeof setTimeout> | undefined;
 	export const run_iteration = async (
-		component: Component<Benchmark_Component_Props>,
-		props: Benchmark_Component_Props,
+		component: Component<BenchmarkComponentProps>,
+		props: BenchmarkComponentProps,
 	): Promise<number> => {
 		iteration_key++;
 
@@ -82,8 +82,8 @@
 
 {#if current_component && current_props}
 	{#key iteration_key}
-		<Benchmark_Instance
-			Benchmarked_Component={current_component}
+		<BenchmarkInstance
+			BenchmarkedComponent={current_component}
 			props={current_props}
 			on_render_complete={handle_render_complete}
 		/>

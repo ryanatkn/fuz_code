@@ -1,14 +1,14 @@
 import type {
-	Benchmarked_Implementation,
-	Measurement_Data,
-	Benchmark_Config,
-	Benchmark_Result,
-	Progress_Callbacks,
-	Benchmark_State,
-	Benchmark_Harness_Controller,
-	Benchmark_Component_Props,
+	BenchmarkedImplementation,
+	MeasurementData,
+	BenchmarkConfig,
+	BenchmarkResult,
+	ProgressCallbacks,
+	BenchmarkState,
+	BenchmarkHarnessController,
+	BenchmarkComponentProps,
 } from './benchmark_types.js';
-import type {Code_Sample} from '$lib/code_sample.js';
+import type {CodeSample} from '$lib/code_sample.js';
 import {inter_test_cooldown} from './benchmark_dom.js';
 import {
 	check_system_stability,
@@ -29,15 +29,15 @@ const HIGH_OUTLIER_RATIO = 0.2;
 
 // Warmup phase using harness with large content
 export const warmup_phase = async (
-	impl: Benchmarked_Implementation,
+	impl: BenchmarkedImplementation,
 	content: string,
 	lang: string,
 	warmup_count: number,
 	cooldown_ms: number,
-	harness: Benchmark_Harness_Controller,
+	harness: BenchmarkHarnessController,
 ): Promise<void> => {
 	for (let i = 0; i < warmup_count; i++) {
-		const props: Benchmark_Component_Props = {content, lang};
+		const props: BenchmarkComponentProps = {content, lang};
 		if (impl.mode !== null) {
 			props.mode = impl.mode;
 		}
@@ -50,15 +50,15 @@ export const warmup_phase = async (
 
 // Run measurements for a single implementation using harness with large content
 export const measurement_phase = async (
-	impl: Benchmarked_Implementation,
+	impl: BenchmarkedImplementation,
 	content: string,
 	lang: string,
-	config: Benchmark_Config,
+	config: BenchmarkConfig,
 	recent_timings: Array<number>,
-	harness: Benchmark_Harness_Controller,
+	harness: BenchmarkHarnessController,
 	on_progress?: () => void,
 	should_stop?: () => boolean,
-): Promise<Measurement_Data> => {
+): Promise<MeasurementData> => {
 	const times: Array<number> = [];
 	const stability_checks = [];
 	const timestamps = [];
@@ -84,7 +84,7 @@ export const measurement_phase = async (
 			await extended_cooldown(reason);
 		}
 
-		const props: Benchmark_Component_Props = {content, lang};
+		const props: BenchmarkComponentProps = {content, lang};
 		if (impl.mode !== null) {
 			props.mode = impl.mode;
 		}
@@ -138,16 +138,16 @@ export const measurement_phase = async (
 
 // Run complete benchmark suite
 export const run_all_benchmarks = async (
-	samples: Record<string, Code_Sample>,
-	config: Benchmark_Config,
-	harness: Benchmark_Harness_Controller,
-	callbacks?: Progress_Callbacks,
-	custom_implementations?: Array<Benchmarked_Implementation>,
+	samples: Record<string, CodeSample>,
+	config: BenchmarkConfig,
+	harness: BenchmarkHarnessController,
+	callbacks?: ProgressCallbacks,
+	custom_implementations?: Array<BenchmarkedImplementation>,
 	custom_languages?: Array<string>,
-): Promise<Benchmark_State> => {
+): Promise<BenchmarkState> => {
 	const impls = custom_implementations || implementations;
 	const langs = custom_languages || languages;
-	const results: Array<Benchmark_Result> = [];
+	const results: Array<BenchmarkResult> = [];
 	const warnings: Array<string> = [];
 	const recent_timings: Array<number> = [];
 

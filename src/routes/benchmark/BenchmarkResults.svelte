@@ -1,17 +1,17 @@
 <script lang="ts">
-	import Copy_To_Clipboard from '@ryanatkn/fuz/Copy_To_Clipboard.svelte';
+	import CopyToClipboard from '@ryanatkn/fuz/CopyToClipboard.svelte';
 
 	import {fmt} from './benchmark_stats.js';
 	import {RESULT_COLUMNS, results_to_markdown} from './benchmark_results.js';
-	import type {Benchmark_Result, Summary_Stats} from './benchmark_types.js';
+	import type {BenchmarkResult, SummaryStats} from './benchmark_types.js';
 
 	const {
 		results = [],
 		summary = null,
 		warnings = [],
 	}: {
-		results: Array<Benchmark_Result>;
-		summary: Record<string, Summary_Stats> | null;
+		results: Array<BenchmarkResult>;
+		summary: Record<string, SummaryStats> | null;
 		warnings: Array<string>;
 	} = $props();
 </script>
@@ -86,9 +86,9 @@
 		</table>
 
 		<div class="mt_md">
-			<Copy_To_Clipboard text={results_to_markdown(results)}>
+			<CopyToClipboard text={results_to_markdown(results)}>
 				copy results as markdown
-			</Copy_To_Clipboard>
+			</CopyToClipboard>
 		</div>
 
 		<div>

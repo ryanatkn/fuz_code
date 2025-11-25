@@ -37,7 +37,7 @@ const WARMUP_ITERATIONS = 20; //  20
 const LARGE_CONTENT_MULTIPLIER = 100; //  100
 const MIN_ITERATIONS = 3; // Tiny minimum samples cause of Shiki's pathological cases with TS
 
-export interface Comparison_Result {
+export interface ComparisonResult {
 	implementation: string;
 	language: string;
 	ops_per_sec: number;
@@ -111,7 +111,7 @@ const getSampleContent = (lang: SupportedLanguage, large = false) => {
 
 export const run_comparison_benchmark = async (
 	filter?: string,
-): Promise<Array<Comparison_Result>> => {
+): Promise<Array<ComparisonResult>> => {
 	const bench = new Bench({
 		time: BENCHMARK_TIME,
 		warmupTime: WARMUP_TIME,
@@ -187,7 +187,7 @@ export const run_comparison_benchmark = async (
 	await bench.run();
 
 	// Process results
-	const results: Array<Comparison_Result> = [];
+	const results: Array<ComparisonResult> = [];
 
 	for (const task of bench.tasks) {
 		if (task.result) {
@@ -250,7 +250,7 @@ export const run_comparison_benchmark = async (
 	return results;
 };
 
-export const format_comparison_results = (results: Array<Comparison_Result>): string => {
+export const format_comparison_results = (results: Array<ComparisonResult>): string => {
 	const lines: Array<string> = [
 		'# Syntax Highlighting Performance Comparison',
 		'',
@@ -263,7 +263,7 @@ export const format_comparison_results = (results: Array<Comparison_Result>): st
 	];
 
 	// Group results by language+operation+size to find fastest in each group
-	const grouped: Map<string, Array<Comparison_Result>> = new Map();
+	const grouped: Map<string, Array<ComparisonResult>> = new Map();
 	for (const result of results) {
 		const key = `${result.language}_${result.operation}_${result.content_size}`;
 		const group = grouped.get(key) || [];

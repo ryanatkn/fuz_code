@@ -10,14 +10,14 @@ const WARMUP_TIME = 1000;
 const WARMUP_ITERATIONS = 50;
 const LARGE_CONTENT_MULTIPLIER = 100;
 
-export interface Benchmark_Result {
+export interface BenchmarkResult {
 	name: string;
 	ops_per_sec: number;
 	mean_time: number;
 	samples: number;
 }
 
-export const run_benchmark = async (filter?: string): Promise<Array<Benchmark_Result>> => {
+export const run_benchmark = async (filter?: string): Promise<Array<BenchmarkResult>> => {
 	const bench = new Bench({
 		time: BENCHMARK_TIME,
 		warmupTime: WARMUP_TIME,
@@ -58,7 +58,7 @@ export const run_benchmark = async (filter?: string): Promise<Array<Benchmark_Re
 
 	await bench.run();
 
-	const results: Array<Benchmark_Result> = [];
+	const results: Array<BenchmarkResult> = [];
 
 	for (const task of bench.tasks) {
 		if (task.result) {
@@ -74,7 +74,7 @@ export const run_benchmark = async (filter?: string): Promise<Array<Benchmark_Re
 	return results;
 };
 
-export const format_benchmark_results = (results: Array<Benchmark_Result>): string => {
+export const format_benchmark_results = (results: Array<BenchmarkResult>): string => {
 	const lines: Array<string> = [
 		'## Benchmark Results',
 		'',

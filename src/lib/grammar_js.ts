@@ -1,4 +1,4 @@
-import type {Add_Syntax_Grammar} from './syntax_styler.js';
+import type {AddSyntaxGrammar} from './syntax_styler.js';
 import {grammar_markup_add_attribute, grammar_markup_add_inlined} from './grammar_markup.js';
 import {class_keywords} from './grammar_clike.js';
 
@@ -10,7 +10,7 @@ import {class_keywords} from './grammar_clike.js';
  *
  * @see LICENSE
  */
-export const add_grammar_js: Add_Syntax_Grammar = (syntax_styler) => {
+export const add_grammar_js: AddSyntaxGrammar = (syntax_styler) => {
 	const grammar_clike = syntax_styler.get_lang('clike');
 
 	// Main JS keywords (from keyword pattern, excluding those with special lookaheads)

@@ -1,4 +1,4 @@
-export interface Code_Sample {
+export interface CodeSample {
 	name: string;
 	lang: string;
 	content: string;
@@ -7,4 +7,4 @@ export interface Code_Sample {
 // Languages ordered from simple to complex
 export const sample_langs = ['json', 'css', 'ts', 'html', 'svelte', 'md'] as const;
 
-export type Sample_Lang = (typeof sample_langs)[number];
+export type SampleLang = (typeof sample_langs)[number];

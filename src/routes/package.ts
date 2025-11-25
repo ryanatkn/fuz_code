@@ -39,7 +39,7 @@ export const package_json: Package_Json = {
 		node: '>=22.15',
 	},
 	peerDependencies: {
-		'@ryanatkn/moss': '>=0.38.0',
+		'@ryanatkn/moss': '>=0.39.0',
 		svelte: '^5',
 	},
 	peerDependenciesMeta: {
@@ -52,11 +52,11 @@ export const package_json: Package_Json = {
 	},
 	devDependencies: {
 		'@changesets/changelog-git': '^0.2.1',
-		'@ryanatkn/belt': '^0.38.2',
+		'@ryanatkn/belt': '^0.39.0',
 		'@ryanatkn/eslint-config': '^0.9.0',
-		'@ryanatkn/fuz': '^0.161.1',
-		'@ryanatkn/gro': '^0.175.0',
-		'@ryanatkn/moss': '^0.38.0',
+		'@ryanatkn/fuz': '^0.161.2',
+		'@ryanatkn/gro': '^0.177.0',
+		'@ryanatkn/moss': '^0.39.0',
 		'@sveltejs/adapter-static': '^3.0.10',
 		'@sveltejs/kit': '^2.49.0',
 		'@sveltejs/package': '^2.5.6',
@@ -118,81 +118,13 @@ export const src_json: Src_Json = {
 	version: '0.35.0',
 	modules: [
 		{
-			path: 'Code_Highlight.svelte',
-			identifiers: [
-				{
-					name: 'Code_Highlight',
-					kind: 'component',
-					props: [
-						{
-							name: 'content',
-							type: 'string',
-							optional: false,
-							description: 'The source code to syntax highlight.',
-						},
-						{
-							name: 'lang',
-							type: 'string | null',
-							optional: true,
-							description:
-								"Language identifier (e.g., 'ts', 'css', 'html', 'json', 'svelte', 'md').\n\n**Purpose:**\n- When `grammar` is not provided, used to look up the grammar via `syntax_styler.get_lang(lang)`\n- Used for metadata: sets the `data-lang` attribute and determines `language_supported`\n\n**Special values:**\n- `null` - Explicitly disables syntax highlighting (content rendered as plain text)\n- `undefined` - Falls back to default ('svelte')\n\n**Relationship with `grammar`:**\n- If both `lang` and `grammar` are provided, `grammar` takes precedence for tokenization\n- However, `lang` is still used for the `data-lang` attribute and language detection",
-						},
-						{
-							name: 'mode',
-							type: 'Highlight_Mode',
-							optional: true,
-							description:
-								"Highlighting mode for this component.\n\n**Options:**\n- `'auto'` - Uses CSS Custom Highlight API if supported, falls back to HTML mode\n- `'ranges'` - Forces CSS Custom Highlight API (requires browser support)\n- `'html'` - Forces HTML generation with CSS classes\n\n**Note:** CSS Custom Highlight API has limitations and limited browser support.\nRequires importing `theme_highlight.css` instead of `theme.css`.",
-						},
-						{
-							name: 'grammar',
-							type: 'Syntax_Grammar | undefined',
-							optional: true,
-							description:
-								'Optional custom grammar object for syntax tokenization.\n\n**When to use:**\n- To provide a custom language definition not registered in `syntax_styler.langs`\n- To use a modified/extended version of an existing grammar\n- For one-off grammar variations without registering globally\n\n**Behavior:**\n- When provided, this grammar is used for tokenization instead of looking up via `lang`\n- Enables highlighting even if `lang` is not in the registry (useful for custom languages)\n- The `lang` parameter is still used for metadata (data-lang attribute)\n- When undefined, the grammar is automatically looked up via `syntax_styler.get_lang(lang)`',
-						},
-						{
-							name: 'inline',
-							type: 'boolean',
-							optional: true,
-							description:
-								'Whether to render as inline code or block code.\nControls display via CSS classes.',
-						},
-						{
-							name: 'wrap',
-							type: 'boolean',
-							optional: true,
-							description:
-								'Whether to wrap long lines in block code.\nSets `white-space: pre-wrap` instead of `white-space: pre`.\n\n**Behavior:**\n- Wraps at whitespace (spaces, newlines)\n- Long tokens without spaces (URLs, hashes) will still scroll horizontally\n- Default `false` provides traditional code block behavior\n\nOnly affects block code (ignored for inline mode).',
-						},
-						{
-							name: 'syntax_styler',
-							type: 'Syntax_Styler',
-							optional: true,
-							description:
-								'Custom Syntax_Styler instance to use for highlighting.\nAllows using a different styler with custom grammars or configuration.',
-						},
-						{
-							name: 'children',
-							type: 'Snippet<[markup: string]>',
-							optional: true,
-							description:
-								'Optional snippet to customize how the highlighted markup is rendered.\n- In HTML mode: receives the generated HTML string\n- In range mode: receives the plain text content',
-						},
-					],
-					source_line: 1,
-				},
-			],
-			dependencies: ['highlight_manager.ts', 'syntax_styler_global.ts', 'tokenize_syntax.ts'],
-		},
-		{
 			path: 'code_sample.ts',
 			identifiers: [
 				{
-					name: 'Code_Sample',
+					name: 'CodeSample',
 					kind: 'type',
 					source_line: 1,
-					type_signature: 'Code_Sample',
+					type_signature: 'CodeSample',
 					properties: [
 						{
 							name: 'name',
@@ -218,7 +150,7 @@ export const src_json: Src_Json = {
 					type_signature: 'readonly ["json", "css", "ts", "html", "svelte", "md"]',
 				},
 				{
-					name: 'Sample_Lang',
+					name: 'SampleLang',
 					kind: 'type',
 					source_line: 10,
 					type_signature: '"json" | "css" | "ts" | "html" | "svelte" | "md"',
@@ -247,7 +179,7 @@ export const src_json: Src_Json = {
 						},
 						{
 							name: 'grammar',
-							type: 'Syntax_Grammar | undefined',
+							type: 'SyntaxGrammar | undefined',
 							optional: true,
 							description:
 								'Optional custom grammar object for syntax tokenization.\n\n**When to use:**\n- To provide a custom language definition not registered in `syntax_styler.langs`\n- To use a modified/extended version of an existing grammar\n- For one-off grammar variations without registering globally\n\n**Behavior:**\n- When provided, this grammar is used for tokenization instead of looking up via `lang`\n- Enables highlighting even if `lang` is not in the registry (useful for custom languages)\n- The `lang` parameter is still used for metadata (data-lang attribute)\n- When undefined, the grammar is automatically looked up via `syntax_styler.get_lang(lang)`',
@@ -268,10 +200,10 @@ export const src_json: Src_Json = {
 						},
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: true,
 							description:
-								'Custom Syntax_Styler instance to use for highlighting.\nAllows using a different styler with custom grammars or configuration.',
+								'Custom SyntaxStyler instance to use for highlighting.\nAllows using a different styler with custom grammars or configuration.',
 						},
 						{
 							name: 'children',
@@ -285,6 +217,74 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['syntax_styler_global.ts'],
+		},
+		{
+			path: 'CodeHighlight.svelte',
+			identifiers: [
+				{
+					name: 'CodeHighlight',
+					kind: 'component',
+					props: [
+						{
+							name: 'content',
+							type: 'string',
+							optional: false,
+							description: 'The source code to syntax highlight.',
+						},
+						{
+							name: 'lang',
+							type: 'string | null',
+							optional: true,
+							description:
+								"Language identifier (e.g., 'ts', 'css', 'html', 'json', 'svelte', 'md').\n\n**Purpose:**\n- When `grammar` is not provided, used to look up the grammar via `syntax_styler.get_lang(lang)`\n- Used for metadata: sets the `data-lang` attribute and determines `language_supported`\n\n**Special values:**\n- `null` - Explicitly disables syntax highlighting (content rendered as plain text)\n- `undefined` - Falls back to default ('svelte')\n\n**Relationship with `grammar`:**\n- If both `lang` and `grammar` are provided, `grammar` takes precedence for tokenization\n- However, `lang` is still used for the `data-lang` attribute and language detection",
+						},
+						{
+							name: 'mode',
+							type: 'HighlightMode',
+							optional: true,
+							description:
+								"Highlighting mode for this component.\n\n**Options:**\n- `'auto'` - Uses CSS Custom Highlight API if supported, falls back to HTML mode\n- `'ranges'` - Forces CSS Custom Highlight API (requires browser support)\n- `'html'` - Forces HTML generation with CSS classes\n\n**Note:** CSS Custom Highlight API has limitations and limited browser support.\nRequires importing `theme_highlight.css` instead of `theme.css`.",
+						},
+						{
+							name: 'grammar',
+							type: 'SyntaxGrammar | undefined',
+							optional: true,
+							description:
+								'Optional custom grammar object for syntax tokenization.\n\n**When to use:**\n- To provide a custom language definition not registered in `syntax_styler.langs`\n- To use a modified/extended version of an existing grammar\n- For one-off grammar variations without registering globally\n\n**Behavior:**\n- When provided, this grammar is used for tokenization instead of looking up via `lang`\n- Enables highlighting even if `lang` is not in the registry (useful for custom languages)\n- The `lang` parameter is still used for metadata (data-lang attribute)\n- When undefined, the grammar is automatically looked up via `syntax_styler.get_lang(lang)`',
+						},
+						{
+							name: 'inline',
+							type: 'boolean',
+							optional: true,
+							description:
+								'Whether to render as inline code or block code.\nControls display via CSS classes.',
+						},
+						{
+							name: 'wrap',
+							type: 'boolean',
+							optional: true,
+							description:
+								'Whether to wrap long lines in block code.\nSets `white-space: pre-wrap` instead of `white-space: pre`.\n\n**Behavior:**\n- Wraps at whitespace (spaces, newlines)\n- Long tokens without spaces (URLs, hashes) will still scroll horizontally\n- Default `false` provides traditional code block behavior\n\nOnly affects block code (ignored for inline mode).',
+						},
+						{
+							name: 'syntax_styler',
+							type: 'SyntaxStyler',
+							optional: true,
+							description:
+								'Custom SyntaxStyler instance to use for highlighting.\nAllows using a different styler with custom grammars or configuration.',
+						},
+						{
+							name: 'children',
+							type: 'Snippet<[markup: string]>',
+							optional: true,
+							description:
+								'Optional snippet to customize how the highlighted markup is rendered.\n- In HTML mode: receives the generated HTML string\n- In range mode: receives the plain text content',
+						},
+					],
+					source_line: 1,
+				},
+			],
+			dependencies: ['highlight_manager.ts', 'syntax_styler_global.ts', 'tokenize_syntax.ts'],
 		},
 		{
 			path: 'grammar_clike.ts',
@@ -302,12 +302,12 @@ export const src_json: Src_Json = {
 						'Based on Prism (https://github.com/PrismJS/prism)\nby Lea Verou (https://lea.verou.me/)\n\nMIT license',
 					see_also: ['`LICENSE`'],
 					source_line: 13,
-					type_signature: '(syntax_styler: Syntax_Styler): void',
+					type_signature: '(syntax_styler: SyntaxStyler): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: false,
 						},
 					],
@@ -325,12 +325,12 @@ export const src_json: Src_Json = {
 						'Based on Prism (https://github.com/PrismJS/prism)\nby Lea Verou (https://lea.verou.me/)\n\nMIT license',
 					see_also: ['`LICENSE`'],
 					source_line: 14,
-					type_signature: '(syntax_styler: Syntax_Styler): void',
+					type_signature: '(syntax_styler: SyntaxStyler): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: false,
 						},
 					],
@@ -349,12 +349,12 @@ export const src_json: Src_Json = {
 						'Based on Prism (https://github.com/PrismJS/prism)\nby Lea Verou (https://lea.verou.me/)\n\nMIT license',
 					see_also: ['`LICENSE`'],
 					source_line: 13,
-					type_signature: '(syntax_styler: Syntax_Styler): void',
+					type_signature: '(syntax_styler: SyntaxStyler): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: false,
 						},
 					],
@@ -373,12 +373,12 @@ export const src_json: Src_Json = {
 						'Based on Prism (https://github.com/PrismJS/prism)\nby Lea Verou (https://lea.verou.me/)\n\nMIT license',
 					see_also: ['`LICENSE`'],
 					source_line: 11,
-					type_signature: '(syntax_styler: Syntax_Styler): void',
+					type_signature: '(syntax_styler: SyntaxStyler): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: false,
 						},
 					],
@@ -395,12 +395,12 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Markdown grammar extending markup.\nSupports: headings, fenced code blocks (3/4/5 backticks with nesting), lists, blockquotes,\nbold, italic, strikethrough, inline code, and links.',
 					source_line: 97,
-					type_signature: '(syntax_styler: Syntax_Styler): void',
+					type_signature: '(syntax_styler: SyntaxStyler): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: false,
 						},
 					],
@@ -418,12 +418,12 @@ export const src_json: Src_Json = {
 						'Based on Prism (https://github.com/PrismJS/prism)\nby Lea Verou (https://lea.verou.me/)\n\nMIT license',
 					see_also: ['`LICENSE`'],
 					source_line: 17,
-					type_signature: '(syntax_styler: Syntax_Styler): void',
+					type_signature: '(syntax_styler: SyntaxStyler): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: false,
 						},
 					],
@@ -435,12 +435,12 @@ export const src_json: Src_Json = {
 						'Adds an inlined language to markup.\n\nAn example of an inlined language is CSS with `<style>` tags.',
 					source_line: 105,
 					type_signature:
-						'(syntax_styler: Syntax_Styler, tag_name: string, lang: string, inside_lang?: string): void',
+						'(syntax_styler: SyntaxStyler, tag_name: string, lang: string, inside_lang?: string): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: false,
 						},
 						{
@@ -470,12 +470,12 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Adds an pattern to style languages embedded in HTML attributes.\n\nAn example of an inlined language is CSS with `style` attributes.',
 					source_line: 156,
-					type_signature: '(syntax_styler: Syntax_Styler, attr_name: string, lang: string): void',
+					type_signature: '(syntax_styler: SyntaxStyler, attr_name: string, lang: string): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: false,
 						},
 						{
@@ -511,12 +511,12 @@ export const src_json: Src_Json = {
 						'Based on `prism-svelte` (https://github.com/pngwn/prism-svelte)\nby pngwn (https://github.com/pngwn)\n\nMIT license',
 					see_also: ['`LICENSE`'],
 					source_line: 14,
-					type_signature: '(syntax_styler: Syntax_Styler): void',
+					type_signature: '(syntax_styler: SyntaxStyler): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: false,
 						},
 					],
@@ -525,12 +525,12 @@ export const src_json: Src_Json = {
 					name: 'grammar_svelte_add_inlined',
 					kind: 'function',
 					source_line: 159,
-					type_signature: '(syntax_styler: Syntax_Styler, tag_name: string, lang: string): void',
+					type_signature: '(syntax_styler: SyntaxStyler, tag_name: string, lang: string): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: false,
 						},
 						{
@@ -559,12 +559,12 @@ export const src_json: Src_Json = {
 						'Based on Prism (https://github.com/PrismJS/prism)\nby Lea Verou (https://lea.verou.me/)\n\nMIT license',
 					see_also: ['`LICENSE`'],
 					source_line: 12,
-					type_signature: '(syntax_styler: Syntax_Styler): void',
+					type_signature: '(syntax_styler: SyntaxStyler): void',
 					return_type: 'void',
 					parameters: [
 						{
 							name: 'syntax_styler',
-							type: 'Syntax_Styler',
+							type: 'SyntaxStyler',
 							optional: false,
 						},
 					],
@@ -577,10 +577,10 @@ export const src_json: Src_Json = {
 			path: 'highlight_manager.ts',
 			identifiers: [
 				{
-					name: 'Highlight_Mode',
+					name: 'HighlightMode',
 					kind: 'type',
 					source_line: 4,
-					type_signature: 'Highlight_Mode',
+					type_signature: 'HighlightMode',
 				},
 				{
 					name: 'supports_css_highlight_api',
@@ -592,7 +592,7 @@ export const src_json: Src_Json = {
 					parameters: [],
 				},
 				{
-					name: 'Highlight_Manager',
+					name: 'HighlightManager',
 					kind: 'class',
 					doc_comment:
 						'Manages highlights for a single element.\nTracks ranges per element and only removes its own ranges when clearing.',
@@ -606,14 +606,14 @@ export const src_json: Src_Json = {
 						{
 							name: 'constructor',
 							kind: 'constructor',
-							type_signature: '(): Highlight_Manager',
+							type_signature: '(): HighlightManager',
 							parameters: [],
 						},
 						{
 							name: 'highlight_from_syntax_tokens',
 							kind: 'function',
 							doc_comment: 'Highlight from syntax styler token stream.',
-							type_signature: '(element: Element, tokens: Syntax_Token_Stream): void',
+							type_signature: '(element: Element, tokens: SyntaxTokenStream): void',
 							return_type: 'void',
 							parameters: [
 								{
@@ -623,7 +623,7 @@ export const src_json: Src_Json = {
 								},
 								{
 									name: 'tokens',
-									type: 'Syntax_Token_Stream',
+									type: 'SyntaxTokenStream',
 									optional: false,
 								},
 							],
@@ -647,7 +647,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['highlight_priorities.ts'],
-			dependents: ['Code_Highlight.svelte'],
+			dependents: ['CodeHighlight.svelte'],
 		},
 		{
 			path: 'highlight_priorities.gen.ts',
@@ -664,16 +664,16 @@ export const src_json: Src_Json = {
 			path: 'highlight_priorities.ts',
 			identifiers: [
 				{
-					name: 'Highlight_Token_Name',
+					name: 'HighlightTokenName',
 					kind: 'type',
 					source_line: 3,
-					type_signature: 'Highlight_Token_Name',
+					type_signature: 'HighlightTokenName',
 				},
 				{
 					name: 'highlight_priorities',
 					kind: 'variable',
 					source_line: 56,
-					type_signature: 'Record<Highlight_Token_Name, number | undefined>',
+					type_signature: 'Record<HighlightTokenName, number | undefined>',
 				},
 			],
 			dependents: ['highlight_manager.ts'],
@@ -685,7 +685,7 @@ export const src_json: Src_Json = {
 					name: 'syntax_styler_global',
 					kind: 'variable',
 					source_line: 11,
-					type_signature: 'Syntax_Styler',
+					type_signature: 'SyntaxStyler',
 				},
 			],
 			dependencies: [
@@ -699,19 +699,19 @@ export const src_json: Src_Json = {
 				'grammar_ts.ts',
 				'syntax_styler.ts',
 			],
-			dependents: ['Code.svelte', 'Code_Highlight.svelte'],
+			dependents: ['Code.svelte', 'CodeHighlight.svelte'],
 		},
 		{
 			path: 'syntax_styler.ts',
 			identifiers: [
 				{
-					name: 'Add_Syntax_Grammar',
+					name: 'AddSyntaxGrammar',
 					kind: 'type',
 					source_line: 4,
-					type_signature: 'Add_Syntax_Grammar',
+					type_signature: 'AddSyntaxGrammar',
 				},
 				{
-					name: 'Syntax_Styler',
+					name: 'SyntaxStyler',
 					kind: 'class',
 					doc_comment:
 						'Based on Prism (https://github.com/PrismJS/prism)\nby Lea Verou (https://lea.verou.me/)\n\nMIT license',
@@ -721,13 +721,13 @@ export const src_json: Src_Json = {
 						{
 							name: 'langs',
 							kind: 'variable',
-							type_signature: 'Record<string, Syntax_Grammar | undefined>',
+							type_signature: 'Record<string, SyntaxGrammar | undefined>',
 						},
 						{
 							name: 'add_lang',
 							kind: 'function',
 							type_signature:
-								'(id: string, grammar: Syntax_Grammar_Raw, aliases?: string[] | undefined): void',
+								'(id: string, grammar: SyntaxGrammarRaw, aliases?: string[] | undefined): void',
 							return_type: 'void',
 							parameters: [
 								{
@@ -737,7 +737,7 @@ export const src_json: Src_Json = {
 								},
 								{
 									name: 'grammar',
-									type: 'Syntax_Grammar_Raw',
+									type: 'SyntaxGrammarRaw',
 									optional: false,
 								},
 								{
@@ -751,8 +751,8 @@ export const src_json: Src_Json = {
 							name: 'add_extended_lang',
 							kind: 'function',
 							type_signature:
-								'(base_id: string, extension_id: string, extension: Syntax_Grammar_Raw, aliases?: string[] | undefined): Syntax_Grammar',
-							return_type: 'Syntax_Grammar',
+								'(base_id: string, extension_id: string, extension: SyntaxGrammarRaw, aliases?: string[] | undefined): SyntaxGrammar',
+							return_type: 'SyntaxGrammar',
 							parameters: [
 								{
 									name: 'base_id',
@@ -766,7 +766,7 @@ export const src_json: Src_Json = {
 								},
 								{
 									name: 'extension',
-									type: 'Syntax_Grammar_Raw',
+									type: 'SyntaxGrammarRaw',
 									optional: false,
 								},
 								{
@@ -779,8 +779,8 @@ export const src_json: Src_Json = {
 						{
 							name: 'get_lang',
 							kind: 'function',
-							type_signature: '(id: string): Syntax_Grammar',
-							return_type: 'Syntax_Grammar',
+							type_signature: '(id: string): SyntaxGrammar',
+							return_type: 'SyntaxGrammar',
 							parameters: [
 								{
 									name: 'id',
@@ -795,7 +795,7 @@ export const src_json: Src_Json = {
 							doc_comment:
 								"Generates HTML with syntax highlighting from source code.\n\n**Process:**\n1. Runs `before_tokenize` hook\n2. Tokenizes code using the provided or looked-up grammar\n3. Runs `after_tokenize` hook\n4. Runs `wrap` hook on each token\n5. Converts tokens to HTML with CSS classes\n\n**Parameter Relationship:**\n- `lang` is ALWAYS required for hook context and identification\n- `grammar` is optional; when undefined, automatically looks up via `this.get_lang(lang)`\n- When both are provided, `grammar` is used for tokenization, `lang` for metadata\n\n**Use cases:**\n- Standard usage: `stylize(code, 'ts')` - uses registered TypeScript grammar\n- Custom grammar: `stylize(code, 'ts', customGrammar)` - uses custom grammar but keeps 'ts' label\n- Extended grammar: `stylize(code, 'custom', this.extend_grammar('ts', extension))` - new language variant",
 							type_signature:
-								'(text: string, lang: string, grammar?: Syntax_Grammar | undefined): string',
+								'(text: string, lang: string, grammar?: SyntaxGrammar | undefined): string',
 							return_type: 'string',
 							return_description:
 								'HTML string with syntax highlighting using CSS classes (`.token_*`)',
@@ -815,7 +815,7 @@ export const src_json: Src_Json = {
 								},
 								{
 									name: 'grammar',
-									type: 'Syntax_Grammar | undefined',
+									type: 'SyntaxGrammar | undefined',
 									optional: false,
 									description:
 										'- Optional custom grammar object. When undefined, automatically\nlooks up the grammar via `this.get_lang(lang)`. Provide this to use a custom\nor modified grammar instead of the registered one.',
@@ -829,8 +829,8 @@ export const src_json: Src_Json = {
 							doc_comment:
 								"Inserts tokens _before_ another token in a language definition or any other grammar.\n\n## Usage\n\nThis helper method makes it easy to modify existing languages. For example, the CSS language definition\nnot only defines CSS styling for CSS documents, but also needs to define styling for CSS embedded\nin HTML through `<style>` elements. To do this, it needs to modify `syntax_styler.get_lang('markup')` and add the\nappropriate tokens. However, `syntax_styler.get_lang('markup')` is a regular JS object literal, so if you do\nthis:\n\n```js\nsyntax_styler.get_lang('markup').style = {\n    // token\n};\n```\n\nthen the `style` token will be added (and processed) at the end. `insert_before` allows you to insert tokens\nbefore existing tokens. For the CSS example above, you would use it like this:\n\n```js\ngrammar_insert_before('markup', 'cdata', {\n    'style': {\n        // token\n    }\n});\n```\n\n## Special cases\n\nIf the grammars of `inside` and `insert` have tokens with the same name, the tokens in `inside`'s grammar\nwill be ignored.\n\nThis behavior can be used to insert tokens after `before`:\n\n```js\ngrammar_insert_before('markup', 'comment', {\n    'comment': syntax_styler.get_lang('markup').comment,\n    // tokens after 'comment'\n});\n```\n\n## Limitations\n\nThe main problem `insert_before` has to solve is iteration order. Since ES2015, the iteration order for object\nproperties is guaranteed to be the insertion order (except for integer keys) but some browsers behave\ndifferently when keys are deleted and re-inserted. So `insert_before` can't be implemented by temporarily\ndeleting properties which is necessary to insert at arbitrary positions.\n\nTo solve this problem, `insert_before` doesn't actually insert the given tokens into the target object.\nInstead, it will create a new object and replace all references to the target object with the new one. This\ncan be done without temporarily deleting properties, so the iteration order is well-defined.\n\nHowever, only references that can be reached from `syntax_styler.langs` or `insert` will be replaced. I.e. if\nyou hold the target object in a variable, then the value of the variable will not change.\n\n```js\nvar oldMarkup = syntax_styler.get_lang('markup');\nvar newMarkup = grammar_insert_before('markup', 'comment', { ... });\n\nassert(oldMarkup !== syntax_styler.get_lang('markup'));\nassert(newMarkup === syntax_styler.get_lang('markup'));\n```",
 							type_signature:
-								'(inside: string, before: string, insert: Syntax_Grammar_Raw, root?: Record<string, any>): Syntax_Grammar',
-							return_type: 'Syntax_Grammar',
+								'(inside: string, before: string, insert: SyntaxGrammarRaw, root?: Record<string, any>): SyntaxGrammar',
+							return_type: 'SyntaxGrammar',
 							return_description: 'the new grammar object',
 							parameters: [
 								{
@@ -848,7 +848,7 @@ export const src_json: Src_Json = {
 								},
 								{
 									name: 'insert',
-									type: 'Syntax_Grammar_Raw',
+									type: 'SyntaxGrammarRaw',
 									optional: false,
 									description: '- An object containing the key-value pairs to be inserted.',
 								},
@@ -866,15 +866,14 @@ export const src_json: Src_Json = {
 							name: 'stringify_token',
 							kind: 'function',
 							doc_comment:
-								'Converts the given token or token stream to an HTML representation.\n\nRuns the `wrap` hook on each `Syntax_Token`.',
-							type_signature:
-								'(o: string | Syntax_Token_Stream | Syntax_Token, lang: string): string',
+								'Converts the given token or token stream to an HTML representation.\n\nRuns the `wrap` hook on each `SyntaxToken`.',
+							type_signature: '(o: string | SyntaxTokenStream | SyntaxToken, lang: string): string',
 							return_type: 'string',
 							return_description: 'The HTML representation of the token or token stream.',
 							parameters: [
 								{
 									name: 'o',
-									type: 'string | Syntax_Token_Stream | Syntax_Token',
+									type: 'string | SyntaxTokenStream | SyntaxToken',
 									optional: false,
 									description: '- The token or token stream to be converted.',
 								},
@@ -891,8 +890,8 @@ export const src_json: Src_Json = {
 							kind: 'function',
 							doc_comment:
 								"Creates a deep copy of the language with the given id and appends the given tokens.\n\nIf a token in `extension` also appears in the copied language, then the existing token in the copied language\nwill be overwritten at its original position.\n\n## Best practices\n\nSince the position of overwriting tokens (token in `extension` that overwrite tokens in the copied language)\ndoesn't matter, they can technically be in any order. However, this can be confusing to others that trying to\nunderstand the language definition because, normally, the order of tokens matters in the grammars.\n\nTherefore, it is encouraged to order overwriting tokens according to the positions of the overwritten tokens.\nFurthermore, all non-overwriting tokens should be placed after the overwriting ones.",
-							type_signature: '(base_id: string, extension: Syntax_Grammar_Raw): Syntax_Grammar',
-							return_type: 'Syntax_Grammar',
+							type_signature: '(base_id: string, extension: SyntaxGrammarRaw): SyntaxGrammar',
+							return_type: 'SyntaxGrammar',
 							return_description: 'the new grammar',
 							parameters: [
 								{
@@ -904,7 +903,7 @@ export const src_json: Src_Json = {
 								},
 								{
 									name: 'extension',
-									type: 'Syntax_Grammar_Raw',
+									type: 'SyntaxGrammarRaw',
 									optional: false,
 									description: '- The new tokens to append.',
 								},
@@ -917,12 +916,12 @@ export const src_json: Src_Json = {
 							doc_comment:
 								'Normalize a single pattern to have consistent shape.\nThis ensures all patterns have the same object shape for V8 optimization.',
 							type_signature:
-								'(pattern: RegExp | Syntax_Grammar_Token_Raw, visited: Set<number>): Syntax_Grammar_Token',
-							return_type: 'Syntax_Grammar_Token',
+								'(pattern: RegExp | SyntaxGrammarTokenRaw, visited: Set<number>): SyntaxGrammarToken',
+							return_type: 'SyntaxGrammarToken',
 							parameters: [
 								{
 									name: 'pattern',
-									type: 'RegExp | Syntax_Grammar_Token_Raw',
+									type: 'RegExp | SyntaxGrammarTokenRaw',
 									optional: false,
 								},
 								{
@@ -938,12 +937,12 @@ export const src_json: Src_Json = {
 							modifiers: ['private'],
 							doc_comment:
 								'Normalize a grammar to have consistent object shapes.\nThis performs several optimizations:\n1. Merges `rest` property into main grammar\n2. Ensures all pattern values are arrays\n3. Normalizes all pattern objects to have consistent shapes\n4. Adds global flag to greedy patterns\n\nThis is called once at registration time to avoid runtime overhead.',
-							type_signature: '(grammar: Syntax_Grammar_Raw, visited: Set<number>): void',
+							type_signature: '(grammar: SyntaxGrammarRaw, visited: Set<number>): void',
 							return_type: 'void',
 							parameters: [
 								{
 									name: 'grammar',
-									type: 'Syntax_Grammar_Raw',
+									type: 'SyntaxGrammarRaw',
 									optional: false,
 								},
 								{
@@ -963,27 +962,27 @@ export const src_json: Src_Json = {
 						{
 							name: 'hooks_before_tokenize',
 							kind: 'variable',
-							type_signature: 'Array<Hook_Before_Tokenize_Callback>',
+							type_signature: 'Array<HookBeforeTokenizeCallback>',
 						},
 						{
 							name: 'hooks_after_tokenize',
 							kind: 'variable',
-							type_signature: 'Array<Hook_After_Tokenize_Callback>',
+							type_signature: 'Array<HookAfterTokenizeCallback>',
 						},
 						{
 							name: 'hooks_wrap',
 							kind: 'variable',
-							type_signature: 'Array<Hook_Wrap_Callback>',
+							type_signature: 'Array<HookWrapCallback>',
 						},
 						{
 							name: 'add_hook_before_tokenize',
 							kind: 'function',
-							type_signature: '(cb: Hook_Before_Tokenize_Callback): void',
+							type_signature: '(cb: HookBeforeTokenizeCallback): void',
 							return_type: 'void',
 							parameters: [
 								{
 									name: 'cb',
-									type: 'Hook_Before_Tokenize_Callback',
+									type: 'HookBeforeTokenizeCallback',
 									optional: false,
 								},
 							],
@@ -991,12 +990,12 @@ export const src_json: Src_Json = {
 						{
 							name: 'add_hook_after_tokenize',
 							kind: 'function',
-							type_signature: '(cb: Hook_After_Tokenize_Callback): void',
+							type_signature: '(cb: HookAfterTokenizeCallback): void',
 							return_type: 'void',
 							parameters: [
 								{
 									name: 'cb',
-									type: 'Hook_After_Tokenize_Callback',
+									type: 'HookAfterTokenizeCallback',
 									optional: false,
 								},
 							],
@@ -1004,12 +1003,12 @@ export const src_json: Src_Json = {
 						{
 							name: 'add_hook_wrap',
 							kind: 'function',
-							type_signature: '(cb: Hook_Wrap_Callback): void',
+							type_signature: '(cb: HookWrapCallback): void',
 							return_type: 'void',
 							parameters: [
 								{
 									name: 'cb',
-									type: 'Hook_Wrap_Callback',
+									type: 'HookWrapCallback',
 									optional: false,
 								},
 							],
@@ -1017,12 +1016,12 @@ export const src_json: Src_Json = {
 						{
 							name: 'run_hook_before_tokenize',
 							kind: 'function',
-							type_signature: '(ctx: Hook_Before_Tokenize_Callback_Context): void',
+							type_signature: '(ctx: HookBeforeTokenizeCallbackContext): void',
 							return_type: 'void',
 							parameters: [
 								{
 									name: 'ctx',
-									type: 'Hook_Before_Tokenize_Callback_Context',
+									type: 'HookBeforeTokenizeCallbackContext',
 									optional: false,
 								},
 							],
@@ -1030,12 +1029,12 @@ export const src_json: Src_Json = {
 						{
 							name: 'run_hook_after_tokenize',
 							kind: 'function',
-							type_signature: '(ctx: Hook_After_Tokenize_Callback_Context): void',
+							type_signature: '(ctx: HookAfterTokenizeCallbackContext): void',
 							return_type: 'void',
 							parameters: [
 								{
 									name: 'ctx',
-									type: 'Hook_After_Tokenize_Callback_Context',
+									type: 'HookAfterTokenizeCallbackContext',
 									optional: false,
 								},
 							],
@@ -1043,12 +1042,12 @@ export const src_json: Src_Json = {
 						{
 							name: 'run_hook_wrap',
 							kind: 'function',
-							type_signature: '(ctx: Hook_Wrap_Callback_Context): void',
+							type_signature: '(ctx: HookWrapCallbackContext): void',
 							return_type: 'void',
 							parameters: [
 								{
 									name: 'ctx',
-									type: 'Hook_Wrap_Callback_Context',
+									type: 'HookWrapCallbackContext',
 									optional: false,
 								},
 							],
@@ -1056,24 +1055,24 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'Syntax_Grammar_Value_Raw',
+					name: 'SyntaxGrammarValueRaw',
 					kind: 'type',
 					source_line: 464,
-					type_signature: 'Syntax_Grammar_Value_Raw',
+					type_signature: 'SyntaxGrammarValueRaw',
 				},
 				{
-					name: 'Syntax_Grammar_Raw',
+					name: 'SyntaxGrammarRaw',
 					kind: 'type',
 					source_line: 469,
-					type_signature: 'Syntax_Grammar_Raw',
+					type_signature: 'SyntaxGrammarRaw',
 				},
 				{
-					name: 'Syntax_Grammar_Token_Raw',
+					name: 'SyntaxGrammarTokenRaw',
 					kind: 'type',
 					doc_comment:
 						'The expansion of a simple `RegExp` literal to support additional properties.\n\nThe `inside` grammar will be used to tokenize the text value of each token of this kind.\n\nThis can be used to make nested and even recursive language definitions.\n\nNote: This can cause infinite recursion. Be careful when you embed different languages or even the same language into\neach another.\n\nNote: Grammar authors can use optional properties, but they will be normalized\nto required properties at registration time for optimal performance.',
 					source_line: 486,
-					type_signature: 'Syntax_Grammar_Token_Raw',
+					type_signature: 'SyntaxGrammarTokenRaw',
 					properties: [
 						{
 							name: 'pattern',
@@ -1103,18 +1102,18 @@ export const src_json: Src_Json = {
 						{
 							name: 'inside',
 							kind: 'variable',
-							type_signature: 'Syntax_Grammar_Raw | null',
+							type_signature: 'SyntaxGrammarRaw | null',
 							doc_comment: 'The nested grammar of this token.',
 						},
 					],
 				},
 				{
-					name: 'Syntax_Grammar_Token',
+					name: 'SyntaxGrammarToken',
 					kind: 'type',
 					doc_comment:
 						'Grammar token with all properties required.\nThis is the normalized representation used at runtime.',
 					source_line: 516,
-					type_signature: 'Syntax_Grammar_Token',
+					type_signature: 'SyntaxGrammarToken',
 					properties: [
 						{
 							name: 'pattern',
@@ -1139,41 +1138,41 @@ export const src_json: Src_Json = {
 						{
 							name: 'inside',
 							kind: 'variable',
-							type_signature: 'Syntax_Grammar | null',
+							type_signature: 'SyntaxGrammar | null',
 						},
 					],
 				},
 				{
-					name: 'Syntax_Grammar',
+					name: 'SyntaxGrammar',
 					kind: 'type',
 					doc_comment:
 						'A grammar after normalization.\nAll values are arrays of normalized tokens with consistent shapes.',
 					source_line: 528,
-					type_signature: 'Syntax_Grammar',
+					type_signature: 'SyntaxGrammar',
 				},
 				{
-					name: 'Hook_Before_Tokenize_Callback',
+					name: 'HookBeforeTokenizeCallback',
 					kind: 'type',
 					source_line: 552,
-					type_signature: 'Hook_Before_Tokenize_Callback',
+					type_signature: 'HookBeforeTokenizeCallback',
 				},
 				{
-					name: 'Hook_After_Tokenize_Callback',
+					name: 'HookAfterTokenizeCallback',
 					kind: 'type',
 					source_line: 553,
-					type_signature: 'Hook_After_Tokenize_Callback',
+					type_signature: 'HookAfterTokenizeCallback',
 				},
 				{
-					name: 'Hook_Wrap_Callback',
+					name: 'HookWrapCallback',
 					kind: 'type',
 					source_line: 554,
-					type_signature: 'Hook_Wrap_Callback',
+					type_signature: 'HookWrapCallback',
 				},
 				{
-					name: 'Hook_Before_Tokenize_Callback_Context',
+					name: 'HookBeforeTokenizeCallbackContext',
 					kind: 'type',
 					source_line: 556,
-					type_signature: 'Hook_Before_Tokenize_Callback_Context',
+					type_signature: 'HookBeforeTokenizeCallbackContext',
 					properties: [
 						{
 							name: 'code',
@@ -1183,7 +1182,7 @@ export const src_json: Src_Json = {
 						{
 							name: 'grammar',
 							kind: 'variable',
-							type_signature: 'Syntax_Grammar',
+							type_signature: 'SyntaxGrammar',
 						},
 						{
 							name: 'lang',
@@ -1198,10 +1197,10 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'Hook_After_Tokenize_Callback_Context',
+					name: 'HookAfterTokenizeCallbackContext',
 					kind: 'type',
 					source_line: 562,
-					type_signature: 'Hook_After_Tokenize_Callback_Context',
+					type_signature: 'HookAfterTokenizeCallbackContext',
 					properties: [
 						{
 							name: 'code',
@@ -1211,7 +1210,7 @@ export const src_json: Src_Json = {
 						{
 							name: 'grammar',
 							kind: 'variable',
-							type_signature: 'Syntax_Grammar',
+							type_signature: 'SyntaxGrammar',
 						},
 						{
 							name: 'lang',
@@ -1221,15 +1220,15 @@ export const src_json: Src_Json = {
 						{
 							name: 'tokens',
 							kind: 'variable',
-							type_signature: 'Syntax_Token_Stream',
+							type_signature: 'SyntaxTokenStream',
 						},
 					],
 				},
 				{
-					name: 'Hook_Wrap_Callback_Context',
+					name: 'HookWrapCallbackContext',
 					kind: 'type',
 					source_line: 568,
-					type_signature: 'Hook_Wrap_Callback_Context',
+					type_signature: 'HookWrapCallbackContext',
 					properties: [
 						{
 							name: 'type',
@@ -1271,7 +1270,7 @@ export const src_json: Src_Json = {
 			path: 'syntax_token.ts',
 			identifiers: [
 				{
-					name: 'Syntax_Token',
+					name: 'SyntaxToken',
 					kind: 'class',
 					source_line: 1,
 					members: [
@@ -1287,7 +1286,7 @@ export const src_json: Src_Json = {
 							kind: 'variable',
 							doc_comment:
 								'The strings or tokens contained by this token.\n\nThis will be a token stream if the pattern matched also defined an `inside` grammar.',
-							type_signature: 'string | Syntax_Token_Stream',
+							type_signature: 'string | SyntaxTokenStream',
 						},
 						{
 							name: 'alias',
@@ -1305,7 +1304,7 @@ export const src_json: Src_Json = {
 							name: 'constructor',
 							kind: 'constructor',
 							type_signature:
-								'(type: string, content: string | Syntax_Token_Stream, alias: string | string[] | undefined, matched_str?: string): Syntax_Token',
+								'(type: string, content: string | SyntaxTokenStream, alias: string | string[] | undefined, matched_str?: string): SyntaxToken',
 							parameters: [
 								{
 									name: 'type',
@@ -1314,7 +1313,7 @@ export const src_json: Src_Json = {
 								},
 								{
 									name: 'content',
-									type: 'string | Syntax_Token_Stream',
+									type: 'string | SyntaxTokenStream',
 									optional: false,
 								},
 								{
@@ -1333,12 +1332,12 @@ export const src_json: Src_Json = {
 					],
 				},
 				{
-					name: 'Syntax_Token_Stream',
+					name: 'SyntaxTokenStream',
 					kind: 'type',
 					doc_comment:
-						'A token stream is an array of strings and `Syntax_Token` objects.\n\nSyntax token streams have to fulfill a few properties that are assumed by most functions (mostly internal ones) that process\nthem.\n\n1. No adjacent strings.\n2. No empty strings.\n\n   The only exception here is the token stream that only contains the empty string and nothing else.',
+						'A token stream is an array of strings and `SyntaxToken` objects.\n\nSyntax token streams have to fulfill a few properties that are assumed by most functions (mostly internal ones) that process\nthem.\n\n1. No adjacent strings.\n2. No empty strings.\n\n   The only exception here is the token stream that only contains the empty string and nothing else.',
 					source_line: 49,
-					type_signature: 'Syntax_Token_Stream',
+					type_signature: 'SyntaxTokenStream',
 				},
 			],
 			dependents: ['syntax_styler.ts', 'tokenize_syntax.ts'],
@@ -1352,11 +1351,11 @@ export const src_json: Src_Json = {
 					doc_comment:
 						'Accepts a string of text as input and the language definitions to use,\nand returns an array with the tokenized code.\n\nWhen the language definition includes nested tokens, the function is called recursively on each of these tokens.\n\nThis method could be useful in other contexts as well, as a very crude parser.',
 					examples: [
-						"var code = `var foo = 0;`;\nvar tokens = tokenize_syntax(code, Syntax_Styler.langs.js);\nfor (var token of tokens) {\n    if (token instanceof Syntax_Token && token.type === 'number') {\n        console.log(`Found numeric literal: ${token.content}`);\n    }\n}",
+						"var code = `var foo = 0;`;\nvar tokens = tokenize_syntax(code, SyntaxStyler.langs.js);\nfor (var token of tokens) {\n    if (token instanceof SyntaxToken && token.type === 'number') {\n        console.log(`Found numeric literal: ${token.content}`);\n    }\n}",
 					],
 					source_line: 28,
-					type_signature: '(text: string, grammar: Syntax_Grammar): Syntax_Token_Stream',
-					return_type: 'Syntax_Token_Stream',
+					type_signature: '(text: string, grammar: SyntaxGrammar): SyntaxTokenStream',
+					return_type: 'SyntaxTokenStream',
 					return_description: 'an array of strings and tokens, a token stream',
 					parameters: [
 						{
@@ -1367,7 +1366,7 @@ export const src_json: Src_Json = {
 						},
 						{
 							name: 'grammar',
-							type: 'Syntax_Grammar',
+							type: 'SyntaxGrammar',
 							optional: false,
 							description:
 								"- an object containing the tokens to use\n\nUsually a language definition like `syntax_styler.get_lang('markup')`.",
@@ -1376,7 +1375,7 @@ export const src_json: Src_Json = {
 				},
 			],
 			dependencies: ['syntax_token.ts'],
-			dependents: ['Code_Highlight.svelte', 'syntax_styler.ts'],
+			dependents: ['CodeHighlight.svelte', 'syntax_styler.ts'],
 		},
 	],
 };

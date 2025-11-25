@@ -1,7 +1,7 @@
-import type {Syntax_Token_Stream} from './syntax_token.js';
+import type {SyntaxTokenStream} from './syntax_token.js';
 import {highlight_priorities} from './highlight_priorities.js';
 
-export type Highlight_Mode = 'auto' | 'ranges' | 'html';
+export type HighlightMode = 'auto' | 'ranges' | 'html';
 
 /**
  * Check for CSS Highlights API support.
@@ -13,7 +13,7 @@ export const supports_css_highlight_api = (): boolean =>
  * Manages highlights for a single element.
  * Tracks ranges per element and only removes its own ranges when clearing.
  */
-export class Highlight_Manager {
+export class HighlightManager {
 	element_ranges: Map<string, Array<Range>>;
 
 	constructor() {
@@ -26,7 +26,7 @@ export class Highlight_Manager {
 	/**
 	 * Highlight from syntax styler token stream.
 	 */
-	highlight_from_syntax_tokens(element: Element, tokens: Syntax_Token_Stream): void {
+	highlight_from_syntax_tokens(element: Element, tokens: SyntaxTokenStream): void {
 		// Find the text node (it might not be firstChild due to Svelte comment nodes)
 		let text_node: Node | null = null;
 		for (const node of element.childNodes) {
@@ -106,7 +106,7 @@ export class Highlight_Manager {
 	 * Create ranges for all tokens in the tree.
 	 */
 	#create_all_ranges(
-		tokens: Syntax_Token_Stream,
+		tokens: SyntaxTokenStream,
 		text_node: Node,
 		ranges_by_type: Map<string, Array<Range>>,
 		offset: number,

@@ -1,4 +1,4 @@
-import {Syntax_Styler} from './syntax_styler.js';
+import {SyntaxStyler} from './syntax_styler.js';
 import {add_grammar_markup} from './grammar_markup.js';
 import {add_grammar_css} from './grammar_css.js';
 import {add_grammar_clike} from './grammar_clike.js';
@@ -8,7 +8,7 @@ import {add_grammar_svelte} from './grammar_svelte.js';
 import {add_grammar_json} from './grammar_json.js';
 import {add_grammar_markdown} from './grammar_markdown.js';
 
-export const syntax_styler_global = new Syntax_Styler();
+export const syntax_styler_global = new SyntaxStyler();
 
 add_grammar_markup(syntax_styler_global);
 add_grammar_css(syntax_styler_global);

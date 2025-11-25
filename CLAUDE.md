@@ -58,9 +58,9 @@ The system uses regex-based tokenization inherited from PrismJS, maintaining com
 Syntax styler creates a hierarchical token tree where tokens can contain nested tokens:
 
 ```typescript
-interface Syntax_Token {
+interface SyntaxToken {
 	type: string; // token type (e.g., 'keyword', 'string')
-	content: string | Syntax_Token_Stream; // text or nested tokens
+	content: string | SyntaxTokenStream; // text or nested tokens
 	alias: string | Array<string>; // CSS class aliases
 	length: number; // token text length
 }
@@ -91,10 +91,10 @@ The generated HTML uses CSS classes like `.token_keyword`, `.token_string`, etc.
 
 ## API Reference
 
-### Syntax_Styler
+### SyntaxStyler
 
 ```typescript
-class Syntax_Styler {
+class SyntaxStyler {
 	// Generate HTML with syntax highlighting
 	stylize(text: string, lang: string): string;
 
@@ -138,11 +138,11 @@ Generated fixtures in `src/test/fixtures/{lang}/`:
 
 ### CSS Custom Highlight API Support
 
-An experimental alternative component (`Code_Highlight.svelte`) is available that supports the CSS Custom Highlight API
+An experimental alternative component (`CodeHighlight.svelte`) is available that supports the CSS Custom Highlight API
 for browsers that implement it. This is not recommended for general use due to limited browser support.
 
 **Components:**
-- `src/lib/Code_Highlight.svelte` - Hybrid component supporting both HTML and range modes with auto-detection
+- `src/lib/CodeHighlight.svelte` - Hybrid component supporting both HTML and range modes with auto-detection
 - `src/lib/highlight_manager.ts` - Manages CSS Custom Highlights per element
 
 **Theme:**
@@ -159,10 +159,10 @@ const tokens = tokenize_syntax(code, grammar);
 highlight_manager.highlight_from_syntax_tokens(element, tokens);
 ```
 
-#### Highlight_Manager API
+#### HighlightManager API
 
 ```typescript
-const manager = new Highlight_Manager();
+const manager = new HighlightManager();
 
 // Apply highlights from tokens
 manager.highlight_from_syntax_tokens(element, tokens);
@@ -199,7 +199,7 @@ Results show relative performance (% of fastest) for each language and content s
 ### Optimization Notes
 
 - **HTML Mode** (standard): Proven PrismJS approach, works everywhere, good for SSR
-- **Range Mode** (experimental): Native browser highlighting available in `Code_Highlight.svelte`, limited browser support
+- **Range Mode** (experimental): Native browser highlighting available in `CodeHighlight.svelte`, limited browser support
 
 ## Color Variables
 

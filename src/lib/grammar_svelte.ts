@@ -1,4 +1,4 @@
-import type {Add_Syntax_Grammar, Syntax_Styler} from './syntax_styler.js';
+import type {AddSyntaxGrammar, SyntaxStyler} from './syntax_styler.js';
 import {grammar_markup_add_inlined} from './grammar_markup.js';
 
 const blocks = '(if|else if|else|await|then|catch|each|html|debug|snippet)';
@@ -11,7 +11,7 @@ const blocks = '(if|else if|else|await|then|catch|each|html|debug|snippet)';
  *
  * @see LICENSE
  */
-export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
+export const add_grammar_svelte: AddSyntaxGrammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.get_lang('ts');
 
 	// Define the at_directive pattern once for reuse (matches any @word)
@@ -146,7 +146,7 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 	});
 
 	// oof lol
-	// After normalization, grammar.tag is an array of Syntax_Grammar_Token
+	// After normalization, grammar.tag is an array of SyntaxGrammarToken
 	const tag_patterns = grammar_svelte.tag as any;
 	const tag_inside = tag_patterns[0].inside;
 	tag_inside.attr_value[0].inside.entity = grammar_svelte.entity;
@@ -157,7 +157,7 @@ export const add_grammar_svelte: Add_Syntax_Grammar = (syntax_styler) => {
 };
 
 export const grammar_svelte_add_inlined = (
-	syntax_styler: Syntax_Styler,
+	syntax_styler: SyntaxStyler,
 	tag_name: string,
 	lang: string,
 ): void => {

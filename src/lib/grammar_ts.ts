@@ -1,4 +1,4 @@
-import type {Add_Syntax_Grammar} from './syntax_styler.js';
+import type {AddSyntaxGrammar} from './syntax_styler.js';
 import {class_keywords} from './grammar_clike.js';
 
 /**
@@ -9,7 +9,7 @@ import {class_keywords} from './grammar_clike.js';
  *
  * @see LICENSE
  */
-export const add_grammar_ts: Add_Syntax_Grammar = (syntax_styler) => {
+export const add_grammar_ts: AddSyntaxGrammar = (syntax_styler) => {
 	const grammar_ts = syntax_styler.add_extended_lang(
 		'js',
 		'ts',
