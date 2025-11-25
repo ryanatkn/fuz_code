@@ -1,5 +1,11 @@
 # @ryanatkn/fuz_code
 
+## 0.36.0
+
+### Minor Changes
+
+- rename `PascalCase` from `Upper_Snake_Case` (lol) ([#25](https://github.com/ryanatkn/fuz_code/pull/25))
+
 ## 0.35.0
 
 ### Minor Changes
