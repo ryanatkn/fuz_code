@@ -158,9 +158,7 @@ describe('range creation', () => {
 		const element = create_code_element('keyword');
 
 		// Token where content is a string (not nested array)
-		const tokens: SyntaxTokenStream = [
-			new SyntaxToken('keyword', 'keyword', undefined, 'keyword'),
-		];
+		const tokens: SyntaxTokenStream = [new SyntaxToken('keyword', 'keyword', undefined, 'keyword')];
 
 		manager.highlight_from_syntax_tokens(element, tokens);
 
@@ -649,9 +647,7 @@ describe('lifecycle management', () => {
 		const element = create_code_element('const');
 
 		const tokens1: SyntaxTokenStream = [new SyntaxToken('keyword', 'const', undefined, 'const')];
-		const tokens2: SyntaxTokenStream = [
-			new SyntaxToken('variable', 'const', undefined, 'const'),
-		];
+		const tokens2: SyntaxTokenStream = [new SyntaxToken('variable', 'const', undefined, 'const')];
 
 		manager.highlight_from_syntax_tokens(element, tokens1);
 		assert.ok(manager.element_ranges.has('token_keyword'));

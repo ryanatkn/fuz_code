@@ -22,8 +22,8 @@
 		>
 			<p>
 				These samples use the normal <code>Code</code> component, which renders using HTML. See
-				<a href="#experimental">below</a> for the experimental <code>CodeHighlight</code> that uses
-				the Highlight API.
+				<a href="#experimental">below</a> for the experimental <code>CodeHighlight</code> that uses the
+				Highlight API.
 			</p>
 		</aside>
 		{#each Object.values(samples) as sample (sample.name)}
