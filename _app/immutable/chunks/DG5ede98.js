@@ -1,0 +1,1 @@
+import{b as r,r as s}from"./CDKJMXcS.js";const a="";function i(...t){return r+a+s(t[0],t[1])}const h=(t,n)=>!n||!t.startsWith(n)?t:t.substring(n.length),f=(t,n)=>!n||!t.endsWith(n)?t:t.substring(0,t.length-n.length),_=(t,n)=>t.startsWith(n)?t:n+t,b=(t,n)=>t.endsWith(n)?t:t+n;export{h as a,_ as b,b as e,i as r,f as s};
