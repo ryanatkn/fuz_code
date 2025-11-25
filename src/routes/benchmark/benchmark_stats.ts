@@ -1,10 +1,10 @@
 // Statistical analysis functions for benchmark results
 
 import type {
-	Benchmark_Result,
-	Benchmark_Stats,
-	Measurement_Data,
-	Summary_Stats,
+	BenchmarkResult,
+	BenchmarkStats,
+	MeasurementData,
+	SummaryStats,
 } from './benchmark_types.js';
 
 // Statistical constants
@@ -129,7 +129,7 @@ export const detect_outliers = (
 };
 
 // Statistical analysis
-export const analyze_results = (data: Measurement_Data): Benchmark_Stats => {
+export const analyze_results = (data: MeasurementData): BenchmarkStats => {
 	// Filter out invalid values (failed iterations)
 	const valid_times: Array<number> = [];
 	let failed_count = 0;
@@ -217,19 +217,19 @@ export const analyze_results = (data: Measurement_Data): Benchmark_Stats => {
 
 // Calculate summary across all tests
 export const calculate_summary = (
-	results: Array<Benchmark_Result>,
-): Record<string, Summary_Stats> => {
-	const by_impl: Record<string, Array<Benchmark_Result>> = {};
+	results: Array<BenchmarkResult>,
+): Record<string, SummaryStats> => {
+	const by_impl: Record<string, Array<BenchmarkResult>> = {};
 
 	// Group results by implementation
 	for (const result of results) {
-		if (!(by_impl as Record<string, Array<Benchmark_Result> | undefined>)[result.implementation]) {
+		if (!(by_impl as Record<string, Array<BenchmarkResult> | undefined>)[result.implementation]) {
 			by_impl[result.implementation] = [];
 		}
 		by_impl[result.implementation]!.push(result);
 	}
 
-	const summary: Record<string, Summary_Stats> = {};
+	const summary: Record<string, SummaryStats> = {};
 
 	// Calculate averages for each implementation
 	for (const [impl, impl_results] of Object.entries(by_impl)) {
@@ -259,7 +259,7 @@ export const calculate_summary = (
 
 // Check for high variance
 export const check_high_variance = (
-	results: Array<Benchmark_Result>,
+	results: Array<BenchmarkResult>,
 	threshold = 0.15,
 ): Array<string> => {
 	const warnings: Array<string> = [];

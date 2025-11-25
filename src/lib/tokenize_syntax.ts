@@ -1,5 +1,5 @@
-import type {Syntax_Grammar} from './syntax_styler.js';
-import {Syntax_Token, type Syntax_Token_Stream} from './syntax_token.js';
+import type {SyntaxGrammar} from './syntax_styler.js';
+import {SyntaxToken, type SyntaxTokenStream} from './syntax_token.js';
 
 /**
  * Accepts a string of text as input and the language definitions to use,
@@ -18,16 +18,16 @@ import {Syntax_Token, type Syntax_Token_Stream} from './syntax_token.js';
  *
  * @example
  * var code = `var foo = 0;`;
- * var tokens = tokenize_syntax(code, Syntax_Styler.langs.js);
+ * var tokens = tokenize_syntax(code, SyntaxStyler.langs.js);
  * for (var token of tokens) {
- *     if (token instanceof Syntax_Token && token.type === 'number') {
+ *     if (token instanceof SyntaxToken && token.type === 'number') {
  *         console.log(`Found numeric literal: ${token.content}`);
  *     }
  * }
  */
-export const tokenize_syntax = (text: string, grammar: Syntax_Grammar): Syntax_Token_Stream => {
+export const tokenize_syntax = (text: string, grammar: SyntaxGrammar): SyntaxTokenStream => {
 	// Grammar is already normalized (rest merged, patterns in arrays, etc.)
-	var token_list = new Linked_List();
+	var token_list = new LinkedList();
 	add_after(token_list, token_list.head, text);
 
 	match_grammar(text, token_list, grammar, token_list.head, 0);
@@ -35,18 +35,18 @@ export const tokenize_syntax = (text: string, grammar: Syntax_Grammar): Syntax_T
 	return to_array(token_list);
 };
 
-interface Rematch_Options {
+interface RematchOptions {
 	cause: string;
 	reach: number;
 }
 
 const match_grammar = (
 	text: string,
-	token_list: Linked_List,
-	grammar: Syntax_Grammar,
-	start_node: Linked_List_Node,
+	token_list: LinkedList,
+	grammar: SyntaxGrammar,
+	start_node: LinkedListNode,
 	start_pos: number,
-	rematch?: Rematch_Options,
+	rematch?: RematchOptions,
 ): void => {
 	for (var token in grammar) {
 		// Grammar is normalized: patterns is always an array of normalized objects
@@ -88,7 +88,7 @@ const match_grammar = (
 					return;
 				}
 
-				if (str instanceof Syntax_Token) {
+				if (str instanceof SyntaxToken) {
 					continue;
 				}
 
@@ -116,7 +116,7 @@ const match_grammar = (
 					pos = p;
 
 					// the current node is a Token, then the match starts inside another Token, which is invalid
-					if (current_node!.value instanceof Syntax_Token) {
+					if (current_node!.value instanceof SyntaxToken) {
 						continue;
 					}
 
@@ -160,7 +160,7 @@ const match_grammar = (
 
 				remove_range(token_list, remove_from!, remove_count);
 
-				var wrapped = new Syntax_Token(
+				var wrapped = new SyntaxToken(
 					token,
 					inside ? tokenize_syntax(match_str, inside) : match_str,
 					alias,
@@ -176,7 +176,7 @@ const match_grammar = (
 					// at least one Token object was removed, so we have to do some rematching
 					// this can only happen if the current pattern is greedy
 
-					var nested_rematch: Rematch_Options = {
+					var nested_rematch: RematchOptions = {
 						cause: token + ',' + j,
 						reach,
 					};
@@ -192,9 +192,9 @@ const match_grammar = (
 	}
 };
 
-class Linked_List<T = string | Syntax_Token> {
-	head: Linked_List_Node<T>;
-	tail: Linked_List_Node<T>;
+class LinkedList<T = string | SyntaxToken> {
+	head: LinkedListNode<T>;
+	tail: LinkedListNode<T>;
 	length: number = 0;
 
 	constructor() {
@@ -204,20 +204,20 @@ class Linked_List<T = string | Syntax_Token> {
 	}
 }
 
-interface Linked_List_Node<T = string | Syntax_Token> {
+interface LinkedListNode<T = string | SyntaxToken> {
 	value: T | null;
-	prev: Linked_List_Node<T> | null;
-	next: Linked_List_Node<T> | null;
+	prev: LinkedListNode<T> | null;
+	next: LinkedListNode<T> | null;
 }
 
 /**
  * Adds a new node with the given value to the list.
  */
 const add_after = <T>(
-	list: Linked_List<T>,
-	node: Linked_List_Node<T>,
+	list: LinkedList<T>,
+	node: LinkedListNode<T>,
 	value: T,
-): Linked_List_Node<T> => {
+): LinkedListNode<T> => {
 	// assumes that node != list.tail && values.length >= 0
 	var next = node.next!;
 
@@ -232,7 +232,7 @@ const add_after = <T>(
 /**
  * Removes `count` nodes after the given node. The given node will not be removed.
  */
-const remove_range = <T>(list: Linked_List<T>, node: Linked_List_Node<T>, count: number) => {
+const remove_range = <T>(list: LinkedList<T>, node: LinkedListNode<T>, count: number) => {
 	var next = node.next;
 	for (var i = 0; i < count && next !== list.tail; i++) {
 		next = next!.next;
@@ -242,7 +242,7 @@ const remove_range = <T>(list: Linked_List<T>, node: Linked_List_Node<T>, count:
 	list.length -= i;
 };
 
-const to_array = <T>(list: Linked_List<T>): Array<T> => {
+const to_array = <T>(list: LinkedList<T>): Array<T> => {
 	var array = [];
 	var node = list.head.next;
 	while (node !== list.tail) {

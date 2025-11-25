@@ -1,14 +1,14 @@
 import type {SvelteHTMLElements} from 'svelte/elements';
 
-import type {Implementation_Name} from './benchmark_fixtures.js';
+import type {ImplementationName} from './benchmark_fixtures.js';
 
-export type Benchmark_Component_Props = SvelteHTMLElements['code'] & {
+export type BenchmarkComponentProps = SvelteHTMLElements['code'] & {
 	content: string;
 	lang: string;
 	mode?: 'html' | 'ranges' | 'auto';
 };
 
-export interface Benchmark_Config {
+export interface BenchmarkConfig {
 	iterations: number;
 	warmup_count: number;
 	cooldown_ms: number;
@@ -17,26 +17,26 @@ export interface Benchmark_Config {
 
 import type {Component} from 'svelte';
 
-export interface Benchmarked_Implementation {
+export interface BenchmarkedImplementation {
 	name: string;
-	component: Component<Benchmark_Component_Props>;
+	component: Component<BenchmarkComponentProps>;
 	mode: 'html' | 'ranges' | 'auto' | null;
 }
 
-export interface Stability_Check {
+export interface StabilityCheck {
 	is_stable: boolean;
 	lag: number;
 	memory_pressure?: number;
 	jitter: number;
 }
 
-export interface Measurement_Data {
+export interface MeasurementData {
 	times: Array<number>;
-	stability_checks: Array<Stability_Check>;
+	stability_checks: Array<StabilityCheck>;
 	timestamps: Array<number>;
 }
 
-export interface Benchmark_Stats {
+export interface BenchmarkStats {
 	mean: number;
 	median: number;
 	std_dev: number;
@@ -56,12 +56,12 @@ export interface Benchmark_Stats {
 	failed_iterations: number;
 }
 
-export interface Benchmark_Result extends Benchmark_Stats {
+export interface BenchmarkResult extends BenchmarkStats {
 	implementation: string;
 	language: string;
 }
 
-export interface Summary_Stats {
+export interface SummaryStats {
 	avg_mean: number;
 	avg_ops: number;
 	avg_cv: number;
@@ -71,16 +71,16 @@ export interface Summary_Stats {
 }
 
 // Benchmark harness controller interface
-export interface Benchmark_Harness_Controller {
+export interface BenchmarkHarnessController {
 	run_iteration: (
-		component: Component<Benchmark_Component_Props>,
-		props: Benchmark_Component_Props,
+		component: Component<BenchmarkComponentProps>,
+		props: BenchmarkComponentProps,
 	) => Promise<number>;
 	cleanup: () => Promise<void>;
 }
 
 // Progress tracking callbacks
-export interface Progress_Callbacks {
+export interface ProgressCallbacks {
 	on_progress?: (current: number, total: number) => void;
 	on_test_start?: (test: string) => void;
 	on_test_complete?: () => void;
@@ -88,8 +88,8 @@ export interface Progress_Callbacks {
 }
 
 // Benchmark runner state
-export interface Benchmark_State {
-	results: Array<Benchmark_Result>;
+export interface BenchmarkState {
+	results: Array<BenchmarkResult>;
 	warnings: Array<string>;
-	summary: Record<Implementation_Name, Summary_Stats> | null;
+	summary: Record<ImplementationName, SummaryStats> | null;
 }

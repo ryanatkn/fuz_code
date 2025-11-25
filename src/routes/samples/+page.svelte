@@ -4,7 +4,7 @@
 	import Breadcrumb from '@ryanatkn/fuz/Breadcrumb.svelte';
 
 	import Code from '$lib/Code.svelte';
-	import Code_Highlight from '$lib/Code_Highlight.svelte';
+	import CodeHighlight from '$lib/CodeHighlight.svelte';
 	import {samples} from '../../test/fixtures/samples/all.js';
 	import Footer from '$routes/Footer.svelte';
 </script>
@@ -22,7 +22,7 @@
 		>
 			<p>
 				These samples use the normal <code>Code</code> component, which renders using HTML. See
-				<a href="#experimental">below</a> for the experimental <code>Code_Highlight</code> that uses
+				<a href="#experimental">below</a> for the experimental <code>CodeHighlight</code> that uses
 				the Highlight API.
 			</p>
 		</aside>
@@ -44,7 +44,7 @@
 		>
 			<p>
 				⚠️ <strong>Experimental:</strong> the comparison below uses
-				<code>Code_Highlight.svelte</code> instead of <code>Code.svelte</code>
+				<code>CodeHighlight.svelte</code> instead of <code>Code.svelte</code>
 				with both HTML mode and
 				<a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS_Custom_Highlight_API"
 					>CSS Custom Highlight API</a
@@ -69,11 +69,11 @@
 				<div class="display_flex justify_content_center flex_wrap_wrap gap_sm py_xl5">
 					<div class="constrain_width">
 						<h3>{sample.lang} html strings</h3>
-						<Code_Highlight content={sample.content} lang={sample.lang} mode="html" />
+						<CodeHighlight content={sample.content} lang={sample.lang} mode="html" />
 					</div>
 					<div class="constrain_width">
 						<h3>{sample.lang} highlighted ranges</h3>
-						<Code_Highlight content={sample.content} lang={sample.lang} mode="ranges" />
+						<CodeHighlight content={sample.content} lang={sample.lang} mode="ranges" />
 					</div>
 				</div>
 			</section>

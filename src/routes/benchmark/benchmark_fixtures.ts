@@ -1,20 +1,20 @@
 import Code from '$lib/Code.svelte';
-import Code_Highlight from '$lib/Code_Highlight.svelte';
-import type {Benchmarked_Implementation} from './benchmark_types.js';
-import type {Code_Sample} from '$lib/code_sample.js';
+import CodeHighlight from '$lib/CodeHighlight.svelte';
+import type {BenchmarkedImplementation} from './benchmark_types.js';
+import type {CodeSample} from '$lib/code_sample.js';
 
 /* eslint-disable no-console */
 
 // Find appropriate sample for a language
 export const find_sample = (
-	samples: Record<string, Code_Sample>,
+	samples: Record<string, CodeSample>,
 	lang: string,
-): Code_Sample | undefined =>
+): CodeSample | undefined =>
 	Object.values(samples).find((s) => s.lang === lang && s.name.includes('complex'));
 
 // Simple pre-generation using content.repeat()
 export const pre_generate_large_contents = (
-	samples: Record<string, Code_Sample>,
+	samples: Record<string, CodeSample>,
 	langs: ReadonlyArray<string>,
 	multiplier: number,
 ): Map<string, string> => {
@@ -36,11 +36,11 @@ export const pre_generate_large_contents = (
 };
 
 export const implementation_names = ['html', 'ranges'] as const;
-export type Implementation_Name = (typeof implementation_names)[number];
+export type ImplementationName = (typeof implementation_names)[number];
 
-export const implementations: Array<Benchmarked_Implementation> = [
+export const implementations: Array<BenchmarkedImplementation> = [
 	{name: 'html', component: Code, mode: null},
-	{name: 'ranges', component: Code_Highlight, mode: 'ranges'},
+	{name: 'ranges', component: CodeHighlight, mode: 'ranges'},
 ];
 
 // Languages to test

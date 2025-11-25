@@ -1,6 +1,6 @@
 import {test, assert, describe} from 'vitest';
 
-import {Syntax_Styler} from '$lib/syntax_styler.js';
+import {SyntaxStyler} from '$lib/syntax_styler.js';
 import {tokenize_syntax} from '$lib/tokenize_syntax.js';
 import {add_grammar_js} from '$lib/grammar_js.js';
 import {add_grammar_ts} from '$lib/grammar_ts.js';
@@ -14,8 +14,8 @@ import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 import {samples} from './fixtures/samples/all.js';
 
 // Helper to create a properly initialized syntax styler
-const create_styler_with_grammars = (): Syntax_Styler => {
-	const s = new Syntax_Styler();
+const create_styler_with_grammars = (): SyntaxStyler => {
+	const s = new SyntaxStyler();
 	// Load in dependency order
 	add_grammar_markup(s);
 	add_grammar_clike(s);
@@ -79,7 +79,7 @@ describe('grammar mutation behavior', () => {
 				if (visited.has(obj)) return;
 				visited.add(obj);
 
-				// After normalization, all grammar values are arrays of Syntax_Grammar_Token
+				// After normalization, all grammar values are arrays of SyntaxGrammarToken
 				for (const key in obj) {
 					const val = obj[key];
 					if (!Array.isArray(val)) continue;
@@ -395,7 +395,7 @@ describe('lastIndex and position management', () => {
 
 describe('pattern flag edge cases', () => {
 	test('patterns with existing global flag not double-processed', () => {
-		const syntax_styler = new Syntax_Styler();
+		const syntax_styler = new SyntaxStyler();
 
 		// Store the original patterns BEFORE registration
 		const patterns_before = {
@@ -474,10 +474,10 @@ describe('pattern flag edge cases', () => {
 	});
 });
 
-describe('multiple Syntax_Styler instances', () => {
+describe('multiple SyntaxStyler instances', () => {
 	test('separate instances have independent grammars', () => {
-		const styler1 = new Syntax_Styler();
-		const styler2 = new Syntax_Styler();
+		const styler1 = new SyntaxStyler();
+		const styler2 = new SyntaxStyler();
 
 		// Load grammars into both
 		add_grammar_markup(styler1);

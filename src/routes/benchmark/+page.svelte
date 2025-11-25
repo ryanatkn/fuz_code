@@ -1,10 +1,10 @@
 <script lang="ts">
 	import {samples as all_samples} from '../../test/fixtures/samples/all.js';
-	import Benchmark_Results from './Benchmark_Results.svelte';
-	import Benchmark_Harness from './Benchmark_Harness.svelte';
+	import BenchmarkResults from './BenchmarkResults.svelte';
+	import BenchmarkHarness from './BenchmarkHarness.svelte';
 	import {run_all_benchmarks} from './benchmark_runner.js';
 	import {implementations, languages} from './benchmark_fixtures.js';
-	import type {Benchmark_Config, Benchmark_State} from './benchmark_types.js';
+	import type {BenchmarkConfig, BenchmarkState} from './benchmark_types.js';
 
 	/* eslint-disable no-console */
 
@@ -12,7 +12,7 @@
 	// `chromium --js-flags="--expose-gc"`
 
 	// Configuration
-	const config: Benchmark_Config = $state({
+	const config: BenchmarkConfig = $state({
 		iterations: 10,
 		warmup_count: 3,
 		cooldown_ms: 100,
@@ -27,10 +27,10 @@
 	let should_stop = $state(false);
 
 	// Results state
-	let benchmark_state: Benchmark_State | null = $state.raw(null);
+	let benchmark_state: BenchmarkState | null = $state.raw(null);
 
 	// Harness component reference
-	let harness: Benchmark_Harness | undefined;
+	let harness: BenchmarkHarness | undefined;
 
 	// Run benchmark suite
 	const run_benchmarks = async () => {
@@ -135,7 +135,7 @@
 	{/if}
 
 	{#if benchmark_state}
-		<Benchmark_Results
+		<BenchmarkResults
 			results={benchmark_state.results}
 			summary={benchmark_state.summary}
 			warnings={benchmark_state.warnings}
@@ -145,4 +145,4 @@
 	<hr />
 </div>
 
-<Benchmark_Harness bind:this={harness} />
+<BenchmarkHarness bind:this={harness} />

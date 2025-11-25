@@ -1,17 +1,17 @@
 /**
- * Test helpers for Highlight_Manager tests
+ * Test helpers for HighlightManager tests
  *
  * Provides utilities for mocking the CSS Custom Highlight API and creating
  * test DOM elements in a jsdom environment.
  */
 
 // Mock implementation of CSS Custom Highlight API
-export class Mock_Highlight extends Set<Range> {
+export class MockHighlight extends Set<Range> {
 	priority = 0;
 }
 
 // Mock Range class with bounds validation
-export class Mock_Range {
+export class MockRange {
 	start_container: Node | null = null;
 	start_offset = 0;
 	end_container: Node | null = null;
@@ -51,7 +51,7 @@ export class Mock_Range {
 }
 
 // Store for original globals
-export interface Saved_Globals {
+export interface SavedGlobals {
 	css: any;
 	highlight: any;
 	range: any;
@@ -61,8 +61,8 @@ export interface Saved_Globals {
 /**
  * Setup CSS Highlight API mocks in global scope
  */
-export function setup_mock_highlight_api(): Saved_Globals {
-	const saved: Saved_Globals = {
+export function setup_mock_highlight_api(): SavedGlobals {
+	const saved: SavedGlobals = {
 		css: (globalThis as any).CSS,
 		highlight: (globalThis as any).Highlight,
 		range: (globalThis as any).Range,
@@ -71,10 +71,10 @@ export function setup_mock_highlight_api(): Saved_Globals {
 
 	// Mock CSS Highlight API
 	(globalThis as any).CSS = {
-		highlights: new Map<string, Mock_Highlight>(),
+		highlights: new Map<string, MockHighlight>(),
 	};
-	(globalThis as any).Highlight = Mock_Highlight;
-	(globalThis as any).Range = Mock_Range;
+	(globalThis as any).Highlight = MockHighlight;
+	(globalThis as any).Range = MockRange;
 
 	// Mock Node with TEXT_NODE constant
 	(globalThis as any).Node = {
@@ -89,7 +89,7 @@ export function setup_mock_highlight_api(): Saved_Globals {
 /**
  * Restore original globals
  */
-export function restore_globals(saved: Saved_Globals): void {
+export function restore_globals(saved: SavedGlobals): void {
 	(globalThis as any).CSS = saved.css;
 	(globalThis as any).Highlight = saved.highlight;
 	(globalThis as any).Range = saved.range;

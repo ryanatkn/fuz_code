@@ -1,17 +1,17 @@
 <script lang="ts">
 	import {onMount, type Component} from 'svelte';
 
-	import type {Benchmark_Component_Props} from './benchmark_types.js';
+	import type {BenchmarkComponentProps} from './benchmark_types.js';
 	import {ensure_paint} from './benchmark_dom.js';
 
 	interface Props {
-		Benchmarked_Component: Component<Benchmark_Component_Props> | null;
-		props: Benchmark_Component_Props | null;
+		BenchmarkedComponent: Component<BenchmarkComponentProps> | null;
+		props: BenchmarkComponentProps | null;
 		on_render_complete?: () => void;
 	}
 
 	const {
-		Benchmarked_Component = null,
+		BenchmarkedComponent = null,
 		props = null,
 		on_render_complete = () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
 	}: Props = $props();
@@ -37,7 +37,7 @@
 </script>
 
 <div bind:this={container_el}>
-	{#if Benchmarked_Component && props}
-		<Benchmarked_Component {...props} />
+	{#if BenchmarkedComponent && props}
+		<BenchmarkedComponent {...props} />
 	{/if}
 </div>

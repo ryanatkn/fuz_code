@@ -145,15 +145,15 @@ using HTML generation is recommended for most use cases.
 
 ```svelte
 <script lang="ts">
-	import Code_Highlight from '@ryanatkn/fuz_code/Code_Highlight.svelte';
+	import CodeHighlight from '@ryanatkn/fuz_code/CodeHighlight.svelte';
 </script>
 
 <!-- auto-detect and use CSS Highlight API when available -->
-<Code_Highlight content={code} mode="auto" />
+<CodeHighlight content={code} mode="auto" />
 <!-- force HTML mode -->
-<Code_Highlight content={code} mode="html" />
+<CodeHighlight content={code} mode="html" />
 <!-- force ranges mode (requires browser support) -->
-<Code_Highlight content={code} mode="ranges" />
+<CodeHighlight content={code} mode="ranges" />
 ```
 
 When using the experimental highlight component, import the corresponding theme:
@@ -165,7 +165,7 @@ import '@ryanatkn/fuz_code/theme_highlight.css';
 
 Experimental modules:
 
-- [@ryanatkn/fuz_code/Code_Highlight.svelte](src/lib/Code_Highlight.svelte) -
+- [@ryanatkn/fuz_code/CodeHighlight.svelte](src/lib/CodeHighlight.svelte) -
   component supporting both HTML generation and CSS Custom Highlight API
 - [@ryanatkn/fuz_code/highlight_manager.js](src/lib/highlight_manager.ts) -
   manages browser [`Highlight`](https://developer.mozilla.org/en-US/docs/Web/API/Highlight)

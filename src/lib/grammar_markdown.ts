@@ -1,16 +1,16 @@
 import type {
-	Add_Syntax_Grammar,
-	Syntax_Grammar_Token_Raw,
-	Syntax_Grammar_Value_Raw,
-	Syntax_Styler,
+	AddSyntaxGrammar,
+	SyntaxGrammarTokenRaw,
+	SyntaxGrammarValueRaw,
+	SyntaxStyler,
 } from './syntax_styler.js';
 
-interface Lang_Definition {
+interface LangDefinition {
 	aliases: Array<string>;
 	id: string;
 }
 
-interface Fence_Type {
+interface FenceType {
 	backticks: string;
 	suffix: string;
 }
@@ -22,8 +22,8 @@ const create_fence_pattern = (
 	backticks: string,
 	aliases: Array<string>,
 	lang_id: string,
-	syntax_styler: Syntax_Styler,
-): Syntax_Grammar_Token_Raw => {
+	syntax_styler: SyntaxStyler,
+): SyntaxGrammarTokenRaw => {
 	const aliases_pattern = aliases.join('|');
 	const pattern = new RegExp(
 		`^${backticks}(?:${aliases_pattern})[^\\n\\r]*(?:\\r?\\n|\\r)[\\s\\S]*?^${backticks}$`,
@@ -50,7 +50,7 @@ const create_fence_pattern = (
 /**
  * Helper to create catch-all fence pattern (unknown languages)
  */
-const create_catchall_fence = (backticks: string): Syntax_Grammar_Token_Raw => {
+const create_catchall_fence = (backticks: string): SyntaxGrammarTokenRaw => {
 	const pattern = new RegExp(`^${backticks}[^\\n\\r]*(?:\\r?\\n|\\r)[\\s\\S]*?^${backticks}$`, 'm');
 	const code_fence_pattern = new RegExp(`^${backticks}[^\\n\\r]*|^${backticks}$`, 'm');
 
@@ -69,7 +69,7 @@ const create_catchall_fence = (backticks: string): Syntax_Grammar_Token_Raw => {
 /**
  * Helper to create md self-reference placeholder pattern
  */
-const create_md_placeholder = (backticks: string): Syntax_Grammar_Token_Raw => {
+const create_md_placeholder = (backticks: string): SyntaxGrammarTokenRaw => {
 	const pattern = new RegExp(
 		`^${backticks}(?:md|markdown)[^\\n\\r]*(?:\\r?\\n|\\r)[\\s\\S]*?^${backticks}$`,
 		'm',
@@ -94,9 +94,9 @@ const create_md_placeholder = (backticks: string): Syntax_Grammar_Token_Raw => {
  * Supports: headings, fenced code blocks (3/4/5 backticks with nesting), lists, blockquotes,
  * bold, italic, strikethrough, inline code, and links.
  */
-export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
+export const add_grammar_markdown: AddSyntaxGrammar = (syntax_styler) => {
 	// Language definitions with aliases
-	const langs: Array<Lang_Definition> = [
+	const langs: Array<LangDefinition> = [
 		{aliases: ['ts', 'typescript'], id: 'ts'},
 		{aliases: ['js', 'javascript'], id: 'js'},
 		{aliases: ['css'], id: 'css'},
@@ -106,14 +106,14 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 	];
 
 	// Fence types: higher counts first (for proper precedence in tokenization)
-	const fence_types: Array<Fence_Type> = [
+	const fence_types: Array<FenceType> = [
 		{backticks: '`````', suffix: '5tick'},
 		{backticks: '````', suffix: '4tick'},
 		{backticks: '```', suffix: ''},
 	];
 
 	// Build grammar dynamically
-	const grammar: Record<string, Syntax_Grammar_Value_Raw> = {};
+	const grammar: Record<string, SyntaxGrammarValueRaw> = {};
 	const md_self_refs: Array<string> = []; // Track md patterns for later self-reference
 
 	// Generate fence patterns for each type
@@ -273,7 +273,7 @@ export const add_grammar_markdown: Add_Syntax_Grammar = (syntax_styler) => {
 		inside: syntax_styler.get_lang('md'),
 	};
 	for (const key of md_self_refs) {
-		// After normalization, grammar values are arrays of Syntax_Grammar_Token
+		// After normalization, grammar values are arrays of SyntaxGrammarToken
 		// We need to add lang_md as a normalized array
 		const patterns = grammar_md[key]!;
 		// Manually normalize the lang_md pattern we're adding

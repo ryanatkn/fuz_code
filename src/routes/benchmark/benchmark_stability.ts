@@ -1,4 +1,4 @@
-import type {Stability_Check} from './benchmark_types.js';
+import type {StabilityCheck} from './benchmark_types.js';
 const MIN_SAMPLES_FOR_JITTER = 5;
 const RECENT_SAMPLE_COUNT = 10;
 const MAX_ACCEPTABLE_LAG_MS = 5;
@@ -23,7 +23,7 @@ export const calculate_timing_jitter = (recent_timings: Array<number>): number =
 };
 export const check_system_stability = async (
 	recent_timings: Array<number>,
-): Promise<Stability_Check> => {
+): Promise<StabilityCheck> => {
 	const lag_start = performance.now();
 	await new Promise((resolve) => setTimeout(resolve, 0));
 	const lag = performance.now() - lag_start;
@@ -44,7 +44,7 @@ export const check_system_stability = async (
 
 	return {is_stable, lag, memory_pressure, jitter};
 };
-export const get_instability_reason = (stability: Stability_Check): string => {
+export const get_instability_reason = (stability: StabilityCheck): string => {
 	if (stability.lag > MAX_ACCEPTABLE_LAG_MS) return 'high_lag';
 	if (stability.jitter > MAX_JITTER_RATIO) return 'high_jitter';
 	if (stability.memory_pressure && stability.memory_pressure > MAX_MEMORY_PRESSURE)

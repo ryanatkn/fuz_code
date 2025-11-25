@@ -6,7 +6,7 @@
 		name: string;
 		extension?: string; // TODO shouldn't be a thing
 	} = $props();
-	// TODO confusing overlap with @ryanatkn/fuz/Tome_Link.svelte
+	// TODO confusing overlap with @ryanatkn/fuz/TomeLink.svelte
 </script>
 
 <code

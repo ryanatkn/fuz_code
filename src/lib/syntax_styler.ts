@@ -1,7 +1,7 @@
-import {Syntax_Token, type Syntax_Token_Stream} from './syntax_token.js';
+import {SyntaxToken, type SyntaxTokenStream} from './syntax_token.js';
 import {tokenize_syntax} from './tokenize_syntax.js';
 
-export type Add_Syntax_Grammar = (syntax_styler: Syntax_Styler) => void;
+export type AddSyntaxGrammar = (syntax_styler: SyntaxStyler) => void;
 
 /**
  * Based on Prism (https://github.com/PrismJS/prism)
@@ -11,18 +11,18 @@ export type Add_Syntax_Grammar = (syntax_styler: Syntax_Styler) => void;
  *
  * @see LICENSE
  */
-export class Syntax_Styler {
-	langs: Record<string, Syntax_Grammar | undefined> = {
+export class SyntaxStyler {
+	langs: Record<string, SyntaxGrammar | undefined> = {
 		plaintext: {},
 	};
 
 	// constructor() {
 	// TODO this API? problem is the grammars rely on mutating existing grammars in the `syntax_styler`,
 	// so for now adding grammars will remain inherently stateful
-	// export interface Syntax_Styler_Options {
-	// 	grammars?: Add_Grammar[];
+	// export interface SyntaxStylerOptions {
+	// 	grammars?: AddGrammar[];
 	// }
-	// options: Syntax_Styler_Options = {}
+	// options: SyntaxStylerOptions = {}
 	// const {grammars} = options;
 	// if (grammars) {
 	// 	for (const add_grammar of grammars) {
@@ -32,12 +32,12 @@ export class Syntax_Styler {
 	// }
 	// }
 
-	add_lang(id: string, grammar: Syntax_Grammar_Raw, aliases?: Array<string>): void {
+	add_lang(id: string, grammar: SyntaxGrammarRaw, aliases?: Array<string>): void {
 		// Normalize grammar once at registration for optimal runtime performance
 		// Use a visited set to handle circular references
 		this.normalize_grammar(grammar, new Set());
-		// After normalization, grammar has the shape of Syntax_Grammar
-		const normalized = grammar as unknown as Syntax_Grammar;
+		// After normalization, grammar has the shape of SyntaxGrammar
+		const normalized = grammar as unknown as SyntaxGrammar;
 		this.langs[id] = normalized;
 		if (aliases !== undefined) {
 			for (var alias of aliases) {
@@ -49,9 +49,9 @@ export class Syntax_Styler {
 	add_extended_lang(
 		base_id: string,
 		extension_id: string,
-		extension: Syntax_Grammar_Raw,
+		extension: SyntaxGrammarRaw,
 		aliases?: Array<string>,
-	): Syntax_Grammar {
+	): SyntaxGrammar {
 		// extend_grammar returns already normalized grammar
 		var grammar = this.extend_grammar(base_id, extension);
 		// Store the normalized grammar directly
@@ -64,7 +64,7 @@ export class Syntax_Styler {
 		return grammar;
 	}
 
-	get_lang(id: string): Syntax_Grammar {
+	get_lang(id: string): SyntaxGrammar {
 		var lang = this.langs[id];
 		if (lang === undefined) {
 			throw Error(`The language "${id}" has no grammar.`);
@@ -120,16 +120,16 @@ export class Syntax_Styler {
 	stylize(
 		text: string,
 		lang: string,
-		grammar: Syntax_Grammar | undefined = this.get_lang(lang),
+		grammar: SyntaxGrammar | undefined = this.get_lang(lang),
 	): string {
-		var ctx: Hook_Before_Tokenize_Callback_Context = {
+		var ctx: HookBeforeTokenizeCallbackContext = {
 			code: text,
 			grammar,
 			lang,
 			tokens: undefined,
 		};
 		this.run_hook_before_tokenize(ctx);
-		const c = ctx as any as Hook_After_Tokenize_Callback_Context;
+		const c = ctx as any as HookAfterTokenizeCallbackContext;
 		c.tokens = tokenize_syntax(c.code, c.grammar);
 		this.run_hook_after_tokenize(c);
 		return this.stringify_token(c.tokens, c.lang);
@@ -213,11 +213,11 @@ export class Syntax_Styler {
 	grammar_insert_before(
 		inside: string,
 		before: string,
-		insert: Syntax_Grammar_Raw,
+		insert: SyntaxGrammarRaw,
 		root: Record<string, any> = this.langs,
-	): Syntax_Grammar {
+	): SyntaxGrammar {
 		var grammar = root[inside];
-		var updated: Syntax_Grammar_Raw = {};
+		var updated: SyntaxGrammarRaw = {};
 
 		for (var token in grammar) {
 			if (token === before) {
@@ -235,8 +235,8 @@ export class Syntax_Styler {
 		// Normalize the updated grammar to ensure inserted patterns have consistent shape
 		this.normalize_grammar(updated, new Set());
 
-		// After normalization, cast to Syntax_Grammar
-		const normalized = updated as unknown as Syntax_Grammar;
+		// After normalization, cast to SyntaxGrammar
+		const normalized = updated as unknown as SyntaxGrammar;
 		var old = root[inside];
 		root[inside] = normalized;
 
@@ -253,13 +253,13 @@ export class Syntax_Styler {
 	/**
 	 * Converts the given token or token stream to an HTML representation.
 	 *
-	 * Runs the `wrap` hook on each `Syntax_Token`.
+	 * Runs the `wrap` hook on each `SyntaxToken`.
 	 *
 	 * @param o - The token or token stream to be converted.
 	 * @param lang - The name of current language.
 	 * @returns The HTML representation of the token or token stream.
 	 */
-	stringify_token(o: string | Syntax_Token | Syntax_Token_Stream, lang: string): string {
+	stringify_token(o: string | SyntaxToken | SyntaxTokenStream, lang: string): string {
 		if (typeof o === 'string') {
 			return o
 				.replace(/&/g, '&amp;')
@@ -274,7 +274,7 @@ export class Syntax_Styler {
 			return s;
 		}
 
-		var ctx: Hook_Wrap_Callback_Context = {
+		var ctx: HookWrapCallbackContext = {
 			type: o.type,
 			content: this.stringify_token(o.content, lang),
 			tag: 'span',
@@ -330,13 +330,13 @@ export class Syntax_Styler {
 	 * @param extension - The new tokens to append.
 	 * @returns the new grammar
 	 */
-	extend_grammar(base_id: string, extension: Syntax_Grammar_Raw): Syntax_Grammar {
+	extend_grammar(base_id: string, extension: SyntaxGrammarRaw): SyntaxGrammar {
 		// Merge normalized base with un-normalized extension
 		const extended = {...structuredClone(this.get_lang(base_id)), ...extension};
 		// Normalize the extension parts
-		this.normalize_grammar(extended as Syntax_Grammar_Raw, new Set());
-		// Return as Syntax_Grammar
-		return extended as unknown as Syntax_Grammar;
+		this.normalize_grammar(extended as SyntaxGrammarRaw, new Set());
+		// Return as SyntaxGrammar
+		return extended as unknown as SyntaxGrammar;
 	}
 
 	/**
@@ -344,9 +344,9 @@ export class Syntax_Styler {
 	 * This ensures all patterns have the same object shape for V8 optimization.
 	 */
 	private normalize_pattern(
-		pattern: RegExp | Syntax_Grammar_Token_Raw,
+		pattern: RegExp | SyntaxGrammarTokenRaw,
 		visited: Set<number>,
-	): Syntax_Grammar_Token {
+	): SyntaxGrammarToken {
 		const p = pattern instanceof RegExp ? {pattern} : pattern;
 
 		let regex = p.pattern;
@@ -364,11 +364,11 @@ export class Syntax_Styler {
 		}
 
 		// Recursively normalize the inside grammar if present
-		let normalized_inside: Syntax_Grammar | null = null;
+		let normalized_inside: SyntaxGrammar | null = null;
 		if (p.inside) {
 			this.normalize_grammar(p.inside, visited);
-			// After normalization, cast to Syntax_Grammar
-			normalized_inside = p.inside as unknown as Syntax_Grammar;
+			// After normalization, cast to SyntaxGrammar
+			normalized_inside = p.inside as unknown as SyntaxGrammar;
 		}
 
 		return {
@@ -391,7 +391,7 @@ export class Syntax_Styler {
 	 * This is called once at registration time to avoid runtime overhead.
 	 * @param visited - Set of grammar object IDs already normalized (for circular references)
 	 */
-	private normalize_grammar(grammar: Syntax_Grammar_Raw, visited: Set<number>): void {
+	private normalize_grammar(grammar: SyntaxGrammarRaw, visited: Set<number>): void {
 		// Check if we've already normalized this grammar (circular reference)
 		const grammar_id = id_of(grammar);
 		if (visited.has(grammar_id)) {
@@ -430,44 +430,44 @@ export class Syntax_Styler {
 	plugins: Record<string, any> = {};
 
 	// TODO maybe extend/compose an event listener?
-	hooks_before_tokenize: Array<Hook_Before_Tokenize_Callback> = [];
-	hooks_after_tokenize: Array<Hook_After_Tokenize_Callback> = [];
-	hooks_wrap: Array<Hook_Wrap_Callback> = [];
+	hooks_before_tokenize: Array<HookBeforeTokenizeCallback> = [];
+	hooks_after_tokenize: Array<HookAfterTokenizeCallback> = [];
+	hooks_wrap: Array<HookWrapCallback> = [];
 
-	add_hook_before_tokenize(cb: Hook_Before_Tokenize_Callback): void {
+	add_hook_before_tokenize(cb: HookBeforeTokenizeCallback): void {
 		this.hooks_before_tokenize.push(cb);
 	}
-	add_hook_after_tokenize(cb: Hook_After_Tokenize_Callback): void {
+	add_hook_after_tokenize(cb: HookAfterTokenizeCallback): void {
 		this.hooks_after_tokenize.push(cb);
 	}
-	add_hook_wrap(cb: Hook_Wrap_Callback): void {
+	add_hook_wrap(cb: HookWrapCallback): void {
 		this.hooks_wrap.push(cb);
 	}
 
-	run_hook_before_tokenize(ctx: Hook_Before_Tokenize_Callback_Context): void {
+	run_hook_before_tokenize(ctx: HookBeforeTokenizeCallbackContext): void {
 		for (var cb of this.hooks_before_tokenize) {
 			cb(ctx);
 		}
 	}
-	run_hook_after_tokenize(ctx: Hook_After_Tokenize_Callback_Context): void {
+	run_hook_after_tokenize(ctx: HookAfterTokenizeCallbackContext): void {
 		for (var cb of this.hooks_after_tokenize) {
 			cb(ctx);
 		}
 	}
-	run_hook_wrap(ctx: Hook_Wrap_Callback_Context): void {
+	run_hook_wrap(ctx: HookWrapCallbackContext): void {
 		for (var cb of this.hooks_wrap) {
 			cb(ctx);
 		}
 	}
 }
 
-export type Syntax_Grammar_Value_Raw =
+export type SyntaxGrammarValueRaw =
 	| RegExp
-	| Syntax_Grammar_Token_Raw
-	| Array<RegExp | Syntax_Grammar_Token_Raw>;
+	| SyntaxGrammarTokenRaw
+	| Array<RegExp | SyntaxGrammarTokenRaw>;
 
-export type Syntax_Grammar_Raw = Record<string, Syntax_Grammar_Value_Raw | undefined> & {
-	rest?: Syntax_Grammar_Raw | undefined;
+export type SyntaxGrammarRaw = Record<string, SyntaxGrammarValueRaw | undefined> & {
+	rest?: SyntaxGrammarRaw | undefined;
 };
 
 /**
@@ -483,7 +483,7 @@ export type Syntax_Grammar_Raw = Record<string, Syntax_Grammar_Value_Raw | undef
  * Note: Grammar authors can use optional properties, but they will be normalized
  * to required properties at registration time for optimal performance.
  */
-export interface Syntax_Grammar_Token_Raw {
+export interface SyntaxGrammarTokenRaw {
 	/**
 	 * The regular expression of the token.
 	 */
@@ -506,26 +506,26 @@ export interface Syntax_Grammar_Token_Raw {
 	/**
 	 * The nested grammar of this token.
 	 */
-	inside?: Syntax_Grammar_Raw | null;
+	inside?: SyntaxGrammarRaw | null;
 }
 
 /**
  * Grammar token with all properties required.
  * This is the normalized representation used at runtime.
  */
-export interface Syntax_Grammar_Token {
+export interface SyntaxGrammarToken {
 	pattern: RegExp;
 	lookbehind: boolean;
 	greedy: boolean;
 	alias: Array<string>;
-	inside: Syntax_Grammar | null;
+	inside: SyntaxGrammar | null;
 }
 
 /**
  * A grammar after normalization.
  * All values are arrays of normalized tokens with consistent shapes.
  */
-export type Syntax_Grammar = Record<string, Array<Syntax_Grammar_Token>>;
+export type SyntaxGrammar = Record<string, Array<SyntaxGrammarToken>>;
 
 const depth_first_search = (
 	o: any,
@@ -549,23 +549,23 @@ const depth_first_search = (
 	}
 };
 
-export type Hook_Before_Tokenize_Callback = (ctx: Hook_Before_Tokenize_Callback_Context) => void;
-export type Hook_After_Tokenize_Callback = (ctx: Hook_After_Tokenize_Callback_Context) => void;
-export type Hook_Wrap_Callback = (ctx: Hook_Wrap_Callback_Context) => void;
+export type HookBeforeTokenizeCallback = (ctx: HookBeforeTokenizeCallbackContext) => void;
+export type HookAfterTokenizeCallback = (ctx: HookAfterTokenizeCallbackContext) => void;
+export type HookWrapCallback = (ctx: HookWrapCallbackContext) => void;
 
-export interface Hook_Before_Tokenize_Callback_Context {
+export interface HookBeforeTokenizeCallbackContext {
 	code: string;
-	grammar: Syntax_Grammar;
+	grammar: SyntaxGrammar;
 	lang: string;
 	tokens: undefined;
 }
-export interface Hook_After_Tokenize_Callback_Context {
+export interface HookAfterTokenizeCallbackContext {
 	code: string;
-	grammar: Syntax_Grammar;
+	grammar: SyntaxGrammar;
 	lang: string;
-	tokens: Syntax_Token_Stream;
+	tokens: SyntaxTokenStream;
 }
-export interface Hook_Wrap_Callback_Context {
+export interface HookWrapCallbackContext {
 	type: string;
 	content: string;
 	tag: string;

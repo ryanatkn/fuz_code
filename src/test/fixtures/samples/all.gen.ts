@@ -61,11 +61,11 @@ export const gen: Gen = ({origin_path}) => {
 
 	return `${banner}
 
-		import {sample_langs, type Code_Sample} from '../../../lib/code_sample.js';
+		import {sample_langs, type CodeSample} from '../../../lib/code_sample.js';
 
-		export type Sample_Key = ${type_keys};
+		export type SampleKey = ${type_keys};
 
-		export const samples: Record<Sample_Key, Code_Sample> = {
+		export const samples: Record<SampleKey, CodeSample> = {
 		${sample_entries},
 		};
 
