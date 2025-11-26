@@ -18,7 +18,9 @@
 			<LibrarySummary {library} />
 		</section>
 		<section class="box">
-			<Card href={resolve('/docs')}>docs{#snippet icon()}{library.package_json.glyph}{/snippet}</Card>
+			<Card href={resolve('/docs')}
+				>docs{#snippet icon()}{library.package_json.glyph}{/snippet}</Card
+			>
 		</section>
 		<section class="box gap_xl3 font_size_xl2">
 			<div class="panel box p_lg gap_sm">
