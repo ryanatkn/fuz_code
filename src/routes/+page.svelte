@@ -1,24 +1,24 @@
 <script lang="ts">
-	import PackageSummary from '@ryanatkn/fuz/PackageSummary.svelte';
+	import LibrarySummary from '@ryanatkn/fuz/LibrarySummary.svelte';
 	import DocsFooter from '@ryanatkn/fuz/DocsFooter.svelte';
 	import Card from '@ryanatkn/fuz/Card.svelte';
-	import {pkg_context} from '@ryanatkn/fuz/pkg.svelte.js';
+	import {library_context} from '@ryanatkn/fuz/library.svelte.js';
 	import {resolve} from '$app/paths';
 
 	import CodeTome from '$routes/CodeTome.svelte';
 
 	// import '$lib/benchmark.js';
 
-	const pkg = pkg_context.get();
+	const library = library_context.get();
 </script>
 
 <main class="box width_100">
 	<div class="width_upto_md">
 		<section class="box" style:padding-top="var(--docs_primary_nav_height, 60px)">
-			<PackageSummary {pkg} />
+			<LibrarySummary {library} />
 		</section>
 		<section class="box">
-			<Card href={resolve('/docs')}>docs{#snippet icon()}{pkg.package_json.glyph}{/snippet}</Card>
+			<Card href={resolve('/docs')}>docs{#snippet icon()}{library.package_json.glyph}{/snippet}</Card>
 		</section>
 		<section class="box gap_xl3 font_size_xl2">
 			<div class="panel box p_lg gap_sm">
@@ -34,7 +34,7 @@
 			</div>
 		</section>
 		<section>
-			<DocsFooter {pkg} root_url="https://www.fuz.dev/" />
+			<DocsFooter {library} root_url="https://www.fuz.dev/" />
 		</section>
 	</div>
 </main>
