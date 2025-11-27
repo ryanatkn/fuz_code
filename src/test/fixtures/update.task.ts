@@ -14,7 +14,7 @@ export const task: Task = {
 		await invoke_task('gen');
 
 		// Discover all sample files
-		const samples = discover_samples();
+		const samples = await discover_samples();
 
 		// Get unique languages to clean directories
 		const languages = new Set(samples.map((s) => s.lang));

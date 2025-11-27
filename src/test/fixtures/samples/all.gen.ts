@@ -1,14 +1,14 @@
 import type {Gen} from '@ryanatkn/gro';
 import {readFileSync} from 'node:fs';
-import {search_fs} from '@ryanatkn/gro/search_fs.js';
+import {fs_search} from '@ryanatkn/belt/fs.js';
 import {basename} from 'node:path';
 
 import {sample_langs} from '../../../lib/code_sample.js';
 
 /** @nodocs */
-export const gen: Gen = ({origin_path}) => {
+export const gen: Gen = async ({origin_path}) => {
 	// Discover all sample files dynamically
-	const sample_files = search_fs('src/test/fixtures/samples', {
+	const sample_files = await fs_search('src/test/fixtures/samples', {
 		file_filter: (path) => /sample_[^/]+\.(ts|css|html|json|svelte|md)$/.test(path),
 	});
 

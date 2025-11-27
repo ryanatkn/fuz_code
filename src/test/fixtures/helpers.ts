@@ -1,5 +1,5 @@
 import {readFileSync} from 'node:fs';
-import {search_fs} from '@ryanatkn/gro/search_fs.js';
+import {fs_search} from '@ryanatkn/belt/fs.js';
 import {basename, join, relative} from 'node:path';
 import {syntax_styler_global} from '$lib/syntax_styler_global.js';
 import {tokenize_syntax} from '$lib/tokenize_syntax.js';
@@ -21,8 +21,8 @@ export interface GeneratedOutput {
 /**
  * Discover all sample files in src/test/fixtures/samples
  */
-export const discover_samples = (): Array<SampleSpec> => {
-	const sample_files = search_fs('src/test/fixtures/samples', {
+export const discover_samples = async (): Promise<Array<SampleSpec>> => {
+	const sample_files = await fs_search('src/test/fixtures/samples', {
 		file_filter: (path) => /sample_[^/]+\.(ts|css|html|json|svelte|md)$/.test(path),
 	});
 

@@ -51,7 +51,7 @@ export const library_json: LibraryJson = {
 		},
 		devDependencies: {
 			'@changesets/changelog-git': '^0.2.1',
-			'@ryanatkn/belt': '^0.40.0',
+			'@ryanatkn/belt': '^0.41.1',
 			'@ryanatkn/eslint-config': '^0.9.0',
 			'@ryanatkn/fuz': '^0.165.0',
 			'@ryanatkn/gro': '^0.179.0',

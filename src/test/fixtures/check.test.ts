@@ -16,9 +16,9 @@ import {sample_langs} from '$lib/code_sample.js';
  * - All expected tokens are present
  */
 
-describe('generated fixtures match runtime', () => {
+describe('generated fixtures match runtime', async () => {
 	// Discover all sample files using helper
-	const samples = discover_samples();
+	const samples = await discover_samples();
 
 	// Generate test for each sample
 	for (const sample of samples) {
@@ -133,10 +133,10 @@ describe('generated fixtures match runtime', () => {
 });
 
 describe('all expected languages are tested', () => {
-	test('sample files exist for all supported languages', () => {
+	test('sample files exist for all supported languages', async () => {
 		const found_languages: Set<string> = new Set();
 
-		const samples = discover_samples();
+		const samples = await discover_samples();
 		for (const sample of samples) {
 			found_languages.add(sample.lang);
 		}
